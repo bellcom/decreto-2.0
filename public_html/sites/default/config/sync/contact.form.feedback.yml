@@ -1,0 +1,12 @@
+uuid: fda5b861-3dd8-4e3d-9b00-cd0833f01710
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: c4zaT5cyPxuTXI6JOWt3qRtMvICT9tHB6d9a5VG-CmQ
+id: feedback
+label: 'Website feedback'
+recipients:
+  - admin@decreto.dk
+reply: ''
+weight: 0

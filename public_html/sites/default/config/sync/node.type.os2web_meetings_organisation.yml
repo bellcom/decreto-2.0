@@ -1,0 +1,18 @@
+uuid: 811a3632-8f8d-4cda-b027-39d63c665e86
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Organisation
+type: os2web_meetings_organisation
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

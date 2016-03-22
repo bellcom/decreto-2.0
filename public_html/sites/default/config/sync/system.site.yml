@@ -1,0 +1,14 @@
+uuid: d164c7b8-3cb9-4f65-b313-193b4da5e6b7
+name: Dectero
+mail: admin@decreto.dk
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
