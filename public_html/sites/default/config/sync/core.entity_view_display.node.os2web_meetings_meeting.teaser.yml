@@ -1,0 +1,17 @@
+uuid: b1763acd-fe18-4706-b900-0083fc9077ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.os2web_meetings_meeting
+  module:
+    - user
+id: node.os2web_meetings_meeting.teaser
+targetEntityType: node
+bundle: os2web_meetings_meeting
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden: {  }

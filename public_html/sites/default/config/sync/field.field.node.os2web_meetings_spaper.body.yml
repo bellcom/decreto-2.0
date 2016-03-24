@@ -1,0 +1,22 @@
+uuid: c37c1867-3018-4c4a-9700-e979192ec493
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.os2web_meetings_spaper
+  module:
+    - text
+id: node.os2web_meetings_spaper.body
+field_name: body
+entity_type: node
+bundle: os2web_meetings_spaper
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

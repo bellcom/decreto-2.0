@@ -1,0 +1,43 @@
+uuid: 57d08e09-1ca9-4cd4-8400-fdad0c1b02ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.os2web_meetings_tax_location.field_os2web_meetings_com_org
+    - taxonomy.vocabulary.os2web_meetings_tax_location
+  module:
+    - path
+    - text
+id: taxonomy_term.os2web_meetings_tax_location.default
+targetEntityType: taxonomy_term
+bundle: os2web_meetings_tax_location
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_os2web_meetings_com_org:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  name:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

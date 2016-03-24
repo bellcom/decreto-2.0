@@ -1,0 +1,22 @@
+uuid: f49e29da-bf10-4ae7-9e00-ee76b2de2e1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.os2web_meetings_bpa
+  module:
+    - text
+id: node.os2web_meetings_bpa.body
+field_name: body
+entity_type: node
+bundle: os2web_meetings_bpa
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -1,0 +1,24 @@
+uuid: a06d7101-309b-488b-ad09-091509d31a67
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_end_date
+    - node.type.os2web_meetings_meeting
+  module:
+    - datetime
+id: node.os2web_meetings_meeting.field_os2web_meetings_end_date
+field_name: field_os2web_meetings_end_date
+entity_type: node
+bundle: os2web_meetings_meeting
+label: 'End date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

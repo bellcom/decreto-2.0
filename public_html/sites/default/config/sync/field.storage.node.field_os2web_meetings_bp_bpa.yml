@@ -1,0 +1,19 @@
+uuid: 9488abbd-2db5-4a11-8f1d-29d2421b3a65
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_os2web_meetings_bp_bpa
+field_name: field_os2web_meetings_bp_bpa
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

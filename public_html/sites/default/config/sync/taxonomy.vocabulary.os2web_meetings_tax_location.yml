@@ -1,0 +1,9 @@
+uuid: b59a9643-27ef-4405-8b00-f98e391cae07
+langcode: en
+status: true
+dependencies: {  }
+name: Location
+vid: os2web_meetings_tax_location
+description: ''
+hierarchy: 0
+weight: 0

@@ -1,0 +1,83 @@
+uuid: 736d3a48-e7a4-4bfb-8f06-6a02f01b9859
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_committee
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_end_date
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_full_doc
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_full_doc_c
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_id
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_location
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_meeting_bp
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_start_date
+    - node.type.os2web_meetings_meeting
+  module:
+    - datetime
+    - file
+    - user
+id: node.os2web_meetings_meeting.default
+targetEntityType: node
+bundle: os2web_meetings_meeting
+mode: default
+content:
+  field_os2web_meetings_committee:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_os2web_meetings_end_date:
+    weight: 110
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_os2web_meetings_full_doc:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_os2web_meetings_full_doc_c:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_os2web_meetings_id:
+    weight: 101
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+  field_os2web_meetings_location:
+    weight: 108
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_os2web_meetings_meeting_bp:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_os2web_meetings_start_date:
+    weight: 102
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  links:
+    weight: 100
+hidden: {  }

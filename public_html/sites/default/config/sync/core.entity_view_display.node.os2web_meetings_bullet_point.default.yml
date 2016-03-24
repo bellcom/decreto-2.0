@@ -1,0 +1,43 @@
+uuid: 8d9ec69a-ca00-4970-a800-ea4abf12c2a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_bpa
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_closed
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_id
+    - node.type.os2web_meetings_bullet_point
+  module:
+    - user
+id: node.os2web_meetings_bullet_point.default
+targetEntityType: node
+bundle: os2web_meetings_bullet_point
+mode: default
+content:
+  field_os2web_meetings_bp_bpa:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_os2web_meetings_bp_closed:
+    weight: 102
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+  field_os2web_meetings_bp_id:
+    weight: 105
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+  links:
+    weight: 100
+hidden: {  }

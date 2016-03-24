@@ -1,0 +1,27 @@
+uuid: d77a6d14-e31a-4d01-a200-0a91df2aaa5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_full_doc_c
+    - node.type.os2web_meetings_meeting
+  module:
+    - file
+id: node.os2web_meetings_meeting.field_os2web_meetings_full_doc_c
+field_name: field_os2web_meetings_full_doc_c
+entity_type: node
+bundle: os2web_meetings_meeting
+label: 'Full doc closed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'pdf doc docx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

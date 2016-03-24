@@ -1,8 +1,10 @@
-uuid: 03f7f222-8ceb-409e-8e13-19a709e04dd2
+uuid: 9ed15987-a091-4f21-8508-8a175757a663
 langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_os2web_user_com
+    - field.field.user.user.field_os2web_user_org
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -15,6 +17,20 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  field_os2web_user_com:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_os2web_user_org:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
   member_for:
     weight: 5
   user_picture:

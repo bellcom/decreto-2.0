@@ -1,0 +1,23 @@
+uuid: b32ce42d-db62-498f-9e09-9a88011564c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_bpa
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_closed
+    - field.field.node.os2web_meetings_bullet_point.field_os2web_meetings_bp_id
+    - node.type.os2web_meetings_bullet_point
+  module:
+    - user
+id: node.os2web_meetings_bullet_point.teaser
+targetEntityType: node
+bundle: os2web_meetings_bullet_point
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_os2web_meetings_bp_bpa: true
+  field_os2web_meetings_bp_closed: true
+  field_os2web_meetings_bp_id: true
