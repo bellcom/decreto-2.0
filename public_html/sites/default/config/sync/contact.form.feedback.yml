@@ -1,4 +1,4 @@
-uuid: fda5b861-3dd8-4e3d-9b00-cd0833f01710
+uuid: 1bf842f5-85ce-4736-8608-0853e5007662
 langcode: en
 status: true
 dependencies: {  }
@@ -7,6 +7,6 @@ _core:
 id: feedback
 label: 'Website feedback'
 recipients:
-  - admin@decreto.dk
+  - stan@bellcom.dk
 reply: ''
 weight: 0
