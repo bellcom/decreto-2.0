@@ -2,3 +2,4 @@ logs
 sessions
 tmp
 sites/default/files
+/nbproject/private/

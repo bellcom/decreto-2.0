@@ -1,0 +1,19 @@
+<?php
+/**
+ * @file
+ * Functions to support theming in the Decreto theme.
+ */
+
+//use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function decreto_theme_preprocess_page(&$variables) {
+ $variables['user_is_logged_in'] = FALSE;
+ $current_user = \Drupal::currentUser();
+  if ($current_user->id() != 0) {
+    $variables['user_is_logged_in'] = TRUE;
+    $variables['company_name'] = 'TEST company';
+  }
+}
