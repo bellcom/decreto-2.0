@@ -23,4 +23,5 @@ content:
     third_party_settings: {  }
   links:
     weight: 100
-hidden: {  }
+hidden:
+  field_os2web_meetings_sp_bp: true

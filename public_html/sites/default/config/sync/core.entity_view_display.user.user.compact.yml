@@ -25,4 +25,6 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_os2web_user_com: true
+  field_os2web_user_org: true
   member_for: true
