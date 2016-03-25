@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.os2web_meetings_meeting.body
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_committee
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_end_date
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_full_doc
@@ -10,82 +11,81 @@ dependencies:
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_id
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_location
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_meeting_bp
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_partic
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_start_date
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_type
     - node.type.os2web_meetings_meeting
   module:
     - datetime
-    - file
     - options
+    - text
     - user
 id: node.os2web_meetings_meeting.default
 targetEntityType: node
 bundle: os2web_meetings_meeting
 mode: default
 content:
-  field_os2web_meetings_committee:
-    weight: 107
+  body:
+    weight: 7
     label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_os2web_meetings_committee:
+    weight: 2
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
   field_os2web_meetings_end_date:
-    weight: 110
-    label: above
+    weight: 4
+    label: inline
     settings:
       format_type: medium
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
-  field_os2web_meetings_full_doc:
-    weight: 104
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: file_default
-  field_os2web_meetings_full_doc_c:
-    weight: 105
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: file_default
-  field_os2web_meetings_id:
-    weight: 101
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
   field_os2web_meetings_location:
-    weight: 108
-    label: above
+    weight: 5
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
   field_os2web_meetings_meeting_bp:
-    weight: 109
-    label: above
+    type: entity_reference_entity_view
+    weight: 8
+    label: hidden
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
-  field_os2web_meetings_start_date:
-    weight: 102
+  field_os2web_meetings_partic:
+    weight: 6
     label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_os2web_meetings_start_date:
+    weight: 3
+    label: inline
     settings:
       format_type: medium
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
   field_os2web_meetings_type:
-    weight: 111
-    label: above
+    weight: 1
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
   links:
-    weight: 100
-hidden: {  }
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_os2web_meetings_full_doc: true
+  field_os2web_meetings_full_doc_c: true
+  field_os2web_meetings_id: true

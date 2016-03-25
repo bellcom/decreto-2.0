@@ -1,0 +1,19 @@
+uuid: 47854b54-aff2-4dec-af05-5d00a58cbf2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_partic
+    - node.type.os2web_meetings_meeting
+id: node.os2web_meetings_meeting.field_os2web_meetings_partic
+field_name: field_os2web_meetings_partic
+entity_type: node
+bundle: os2web_meetings_meeting
+label: Participants
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

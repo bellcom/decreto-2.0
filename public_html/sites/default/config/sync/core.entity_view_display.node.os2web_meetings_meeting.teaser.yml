@@ -4,6 +4,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.os2web_meetings_meeting.body
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_committee
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_end_date
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_full_doc
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_full_doc_c
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_id
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_location
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_meeting_bp
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_partic
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_start_date
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_type
     - node.type.os2web_meetings_meeting
   module:
     - user
@@ -15,6 +26,7 @@ content:
   links:
     weight: 100
 hidden:
+  body: true
   field_os2web_meetings_committee: true
   field_os2web_meetings_end_date: true
   field_os2web_meetings_full_doc: true
@@ -22,4 +34,6 @@ hidden:
   field_os2web_meetings_id: true
   field_os2web_meetings_location: true
   field_os2web_meetings_meeting_bp: true
+  field_os2web_meetings_partic: true
   field_os2web_meetings_start_date: true
+  field_os2web_meetings_type: true
