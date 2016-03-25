@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_location
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_meeting_bp
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_start_date
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_type
     - node.type.os2web_meetings_meeting
   module:
     - datetime
@@ -78,6 +79,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+  field_os2web_meetings_type:
+    weight: 41
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   path:
     type: path
     weight: 30

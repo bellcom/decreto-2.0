@@ -11,10 +11,12 @@ dependencies:
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_location
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_meeting_bp
     - field.field.node.os2web_meetings_meeting.field_os2web_meetings_start_date
+    - field.field.node.os2web_meetings_meeting.field_os2web_meetings_type
     - node.type.os2web_meetings_meeting
   module:
     - datetime
     - file
+    - options
     - user
 id: node.os2web_meetings_meeting.default
 targetEntityType: node
@@ -78,6 +80,12 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+  field_os2web_meetings_type:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
   links:
     weight: 100
 hidden: {  }
