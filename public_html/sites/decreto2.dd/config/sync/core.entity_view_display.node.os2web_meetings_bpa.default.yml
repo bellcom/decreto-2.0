@@ -1,0 +1,48 @@
+uuid: 31ed0102-b181-4dd0-8607-7f455bf49860
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2web_meetings_bpa.body
+    - field.field.node.os2web_meetings_bpa.field_os2web_meetings_bpa_file
+    - field.field.node.os2web_meetings_bpa.field_os2web_meetings_bpa_html
+    - field.field.node.os2web_meetings_bpa.field_os2web_meetings_bpa_id
+    - node.type.os2web_meetings_bpa
+  module:
+    - file
+    - text
+    - user
+id: node.os2web_meetings_bpa.default
+targetEntityType: node
+bundle: os2web_meetings_bpa
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_os2web_meetings_bpa_file:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_os2web_meetings_bpa_html:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_os2web_meetings_bpa_id:
+    weight: 102
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+  links:
+    weight: 100
+hidden: {  }

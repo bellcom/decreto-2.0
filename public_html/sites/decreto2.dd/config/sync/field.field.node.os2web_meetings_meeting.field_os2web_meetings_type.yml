@@ -1,0 +1,21 @@
+uuid: ae1e03c4-fe04-43c4-b240-643b289c3886
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_type
+    - node.type.os2web_meetings_meeting
+  module:
+    - options
+id: node.os2web_meetings_meeting.field_os2web_meetings_type
+field_name: field_os2web_meetings_type
+entity_type: node
+bundle: os2web_meetings_meeting
+label: Type
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

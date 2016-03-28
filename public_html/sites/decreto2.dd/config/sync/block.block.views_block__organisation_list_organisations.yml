@@ -1,0 +1,24 @@
+uuid: 917eaa42-7be3-4e06-a200-e857542b65d3
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.organisation_list
+  module:
+    - views
+  theme:
+    - decreto_theme
+id: views_block__organisation_list_organisations
+theme: decreto_theme
+region: '-1'
+weight: -5
+provider: null
+plugin: 'views_block:organisation_list-organisations'
+settings:
+  id: 'views_block:organisation_list-organisations'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility: {  }

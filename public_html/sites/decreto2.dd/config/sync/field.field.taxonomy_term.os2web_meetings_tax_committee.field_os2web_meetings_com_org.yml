@@ -1,0 +1,26 @@
+uuid: 0761b46d-f308-4595-9b07-7be07af7ba39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_os2web_meetings_com_org
+    - node.type.os2web_meetings_organisation
+    - taxonomy.vocabulary.os2web_meetings_tax_committee
+id: taxonomy_term.os2web_meetings_tax_committee.field_os2web_meetings_com_org
+field_name: field_os2web_meetings_com_org
+entity_type: taxonomy_term
+bundle: os2web_meetings_tax_committee
+label: Organisation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      os2web_meetings_organisation: os2web_meetings_organisation
+    sort:
+      field: _none
+field_type: entity_reference

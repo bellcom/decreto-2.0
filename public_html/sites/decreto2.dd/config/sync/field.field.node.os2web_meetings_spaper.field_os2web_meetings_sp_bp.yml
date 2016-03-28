@@ -1,0 +1,26 @@
+uuid: 459abd33-4e2d-4656-bd00-b1786a189202
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_sp_bp
+    - node.type.os2web_meetings_bullet_point
+    - node.type.os2web_meetings_spaper
+id: node.os2web_meetings_spaper.field_os2web_meetings_sp_bp
+field_name: field_os2web_meetings_sp_bp
+entity_type: node
+bundle: os2web_meetings_spaper
+label: 'Bullet point'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      os2web_meetings_bullet_point: os2web_meetings_bullet_point
+    sort:
+      field: _none
+field_type: entity_reference

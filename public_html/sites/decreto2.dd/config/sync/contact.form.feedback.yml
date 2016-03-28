@@ -1,0 +1,12 @@
+uuid: 1bf842f5-85ce-4736-8608-0853e5007662
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: c4zaT5cyPxuTXI6JOWt3qRtMvICT9tHB6d9a5VG-CmQ
+id: feedback
+label: 'Website feedback'
+recipients:
+  - stan@bellcom.dk
+reply: ''
+weight: 0

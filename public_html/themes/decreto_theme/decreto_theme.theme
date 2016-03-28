@@ -3,7 +3,7 @@
  * @file
  * Functions to support theming in the Decreto theme.
  */
-
+use Drupal\Core\Menu\MenuTreeParameters;
 //use Drupal\Core\Template\Attribute;
 
 /**
@@ -13,7 +13,52 @@ function decreto_theme_preprocess_page(&$variables) {
  $variables['user_is_logged_in'] = FALSE;
  $current_user = \Drupal::currentUser();
   if ($current_user->id() != 0) {
-    $variables['user_is_logged_in'] = TRUE;
-    $variables['company_name'] = 'TEST company';
+    $variables['user_is_logged_in'] = TRUE;   
+    $variables['current_user']['name'] = $current_user->getUsername();
+    $variables['current_user']['id'] = $current_user->id();
   }
+  
+  $form = \Drupal::formBuilder()->getForm('Drupal\search\Form\SearchBlockForm');
+  $variables['search_from'] = drupal_render($form);
+ 
+  $user_org = views_embed_view('organisation_list', 'organisations');
+  $variables["user_organisations"] = drupal_render($user_org);
+   
+  $variables["main_menu"] = _decreto_theme_menu_render('main', 'decreto_main_menu_template');
 }
+
+function decreto_theme_theme() {
+  return array(
+    'decreto_main_menu_template' => array(      
+      'variables' => array(
+        'items' => NULL,
+      ),
+      
+      'template' => 'decreto-main-menu-template',
+    ),
+  );
+}
+
+ /**
+   * Provides function to programmatically rendering a menu
+   *
+   * @param String $menu_name
+   *        Machine name of menu to render
+   * @param String $menu_theme 
+   *       Menu template
+   */
+
+function _decreto_theme_menu_render($menu_name, $theme=NULL){
+  $menu_tree_parameters = new MenuTreeParameters();
+  $tree = \Drupal::menuTree()->load($menu_name, $menu_tree_parameters);
+  $tree_array = \Drupal::menuTree()->build($tree);
+  
+  if (isset($theme))
+     $tree_array['#theme'] = $theme;
+  
+  $menu = drupal_render($tree_array);
+
+  return $menu;
+}
+
+

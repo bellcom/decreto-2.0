@@ -1,0 +1,22 @@
+uuid: 0736bc30-4420-440a-9f00-dd6341b2a46c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - decreto_theme
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: decreto_theme_content
+theme: decreto_theme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

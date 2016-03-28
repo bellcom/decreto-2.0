@@ -1,0 +1,27 @@
+uuid: f919dd95-7854-40b9-a600-bde8cca42bd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_meetings_bp_bpa
+    - node.type.os2web_meetings_bpa
+    - node.type.os2web_meetings_bullet_point
+id: node.os2web_meetings_bullet_point.field_os2web_meetings_bp_bpa
+field_name: field_os2web_meetings_bp_bpa
+entity_type: node
+bundle: os2web_meetings_bullet_point
+label: 'Bullet point attachments'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      os2web_meetings_bpa: os2web_meetings_bpa
+    sort:
+      field: title
+      direction: ASC
+field_type: entity_reference

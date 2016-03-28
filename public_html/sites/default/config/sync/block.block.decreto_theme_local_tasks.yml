@@ -1,0 +1,22 @@
+uuid: 1ad3ce32-de15-4a79-9e2f-4703624438ac
+langcode: en
+status: false
+dependencies:
+  theme:
+    - decreto_theme
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: decreto_theme_local_tasks
+theme: decreto_theme
+region: '-1'
+weight: 4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

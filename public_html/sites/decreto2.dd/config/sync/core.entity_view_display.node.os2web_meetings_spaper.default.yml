@@ -1,0 +1,32 @@
+uuid: e48b30e8-cf2b-4134-8b00-ab45dca6240b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.os2web_meetings_spaper.body
+    - field.field.node.os2web_meetings_spaper.field_os2web_meetings_sp_bp
+    - node.type.os2web_meetings_spaper
+  module:
+    - text
+    - user
+id: node.os2web_meetings_spaper.default
+targetEntityType: node
+bundle: os2web_meetings_spaper
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_os2web_meetings_sp_bp:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 100
+hidden: {  }
