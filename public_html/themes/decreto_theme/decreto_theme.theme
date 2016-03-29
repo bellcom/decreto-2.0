@@ -41,6 +41,7 @@ function decreto_theme_theme() {
   );
 }
 
+
  /**
    * Provides function to programmatically rendering a menu
    *
