@@ -29,6 +29,7 @@
     position: absolute;
     padding-left:0;
     display:none;
+   z-index: 999;
 }
 .user-menu ul.user-sub-menu li{
     display: block;
