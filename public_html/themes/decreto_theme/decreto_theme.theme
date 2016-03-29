@@ -25,6 +25,8 @@ function decreto_theme_preprocess_page(&$variables) {
   $variables["user_organisations"] = drupal_render($user_org);
    
   $variables["main_menu"] = _decreto_theme_menu_render('main', 'decreto_main_menu_template');
+  $variables['page']['sidebar_first']['user_organisations'] = array('#markup' =>  $variables["user_organisations"]);
+  $variables['page']['sidebar_first']["main_menu"] = array('#markup' =>  _decreto_theme_menu_render('main', 'decreto_main_menu_template'));
 }
 
 function decreto_theme_theme() {

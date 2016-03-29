@@ -101,7 +101,7 @@
 {% block main %}
 <div role="main" class="main-container {{ container }} js-quickedit-main-content">
     <div class="row" role="top">
-        <div class="col-sm-3 left-sidebar" role="logo">
+        <div class="col-sm-3 sidebar-first" role="logo">
             <!-- Begin - logo -->
             <a class="header-logo" href="#" data-scroll-to="#banner" data-toggle="tooltip" data-placement="bottom" title="Gå til toppen af siden"></a>
             <!-- End - logo -->
@@ -129,25 +129,13 @@
            <li> <span class="glyphicon  glyphicon-envelope user-notification-button" aria-hidden="true" ></span></li>
            </ul>
         
-    </div>  
+         </div>  
     </div>    
-    <div class="row">  
-        <div class="col-sm-3 left-sidebar"> 
-            <div id="main_menu">
-                <div>
-                    {{ user_organisations }}
-                </div>
-                <div>
-                   {{ main_menu }}
-               </div> 
-                <span id="main_menu_toggle_button" class="glyphicon  glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span>
-           </div>     
-        </div>
-        <div class="col-sm-9 content">  
+    <div class="row">        
       {# Header #}
       {% if page.header %}
         {% block header %}
-            <div class="col-sm-9" role="heading">
+            <div class="col-sm-12" role="heading">
             {{ page.header }}
             </div>
         {% endblock %}
@@ -156,8 +144,9 @@
       {# Sidebar First #}
       {% if page.sidebar_first %}
         {% block sidebar_first %}
-            <aside class="col-sm-3" role="complementary">
+            <aside id="main_menu" class="col-sm-3 sidebar-first" role="complementary">
             {{ page.sidebar_first }}
+             <span id="main_menu_toggle_button" class="glyphicon  glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span>
             </aside>
         {% endblock %}
       {% endif %}
@@ -168,7 +157,8 @@
           page.sidebar_first and page.sidebar_second ? 'col-sm-6',
           page.sidebar_first and page.sidebar_second is empty ? 'col-sm-9',
           page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
-          page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
+          page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12',
+          'main-content'
         ]
       %}
             <section{{ content_attributes.addClass(content_classes) }}>
@@ -207,7 +197,7 @@
           {{ page.content }}
         {% endblock %}
             </section>
-        </div>
+       
       {# Sidebar Second #}
       {% if page.sidebar_second %}
         {% block sidebar_second %}
@@ -215,7 +205,8 @@
             {{ page.sidebar_second }}
         </aside>
         {% endblock %}
-      {% endif %}            
+      {% endif %} 
+             </div>
     </div>
 </div>
 {% endblock %}
