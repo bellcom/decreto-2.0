@@ -1,4 +1,4 @@
-uuid: e9465c98-6a9e-4456-b132-50781359994f
+uuid: f4f5dbda-d5ea-43ef-a803-3e37495d5521
 langcode: en
 status: true
 dependencies:
@@ -6,8 +6,8 @@ dependencies:
     - field.storage.user.field_os2web_user_org
   module:
     - user
-id: organisation_list
-label: 'Organisation List'
+id: decreto_organisation_list
+label: 'Decreto organisation list'
 module: views
 description: ''
 tag: ''
@@ -237,7 +237,7 @@ display:
           entity_type: user
           plugin_id: user_current
       sorts: {  }
-      title: 'Organisation List'
+      title: 'Decreto organisation List'
       header: {  }
       footer: {  }
       empty: {  }

@@ -14,11 +14,11 @@
 .glyphicon.main-menu-toggle-button,
 .glyphicon.user-notification-button,
 .glyphicon.main-menu-toggle-button{
-  cursor: pointer
+    cursor: pointer
 }
 
 .glyphicon.main-menu-toggle-button {
-  float: right;
+    float: right;
 }
 
 .user-menu li{
@@ -29,7 +29,7 @@
     position: absolute;
     padding-left:0;
     display:none;
-   z-index: 999;
+    z-index: 999;
 }
 .user-menu ul.user-sub-menu li{
     display: block;

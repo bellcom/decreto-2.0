@@ -1,21 +1,21 @@
-uuid: 43faf018-64ab-4c52-ac5a-90a1a0bd3243
+uuid: e88eb657-a308-4146-8d54-841cf400f2e6
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.events
+    - views.view.decreto_calender
   module:
     - views
   theme:
     - decreto_theme
-id: views_block__events_block_1
+id: views_block__decreto_calender_block_1
 theme: decreto_theme
 region: sidebar_second
 weight: -9
 provider: null
-plugin: 'views_block:events-block_1'
+plugin: 'views_block:decreto_calender-block_1'
 settings:
-  id: 'views_block:events-block_1'
+  id: 'views_block:decreto_calender-block_1'
   label: ''
   provider: views
   label_display: '0'
