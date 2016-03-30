@@ -3,3 +3,14 @@ sessions
 tmp
 sites/default/files
 /nbproject/private/
+public_html/.idea/.name
+public_html/.idea/encodings.xml
+public_html/.idea/misc.xml
+public_html/.idea/modules.xml
+public_html/.idea/public_html.iml
+public_html/.idea/scopes/scope_settings.xml
+public_html/.idea/vcs.xml
+public_html/.idea/workspace.xml
+public_html/.idea
+settings.local.php
+services.yml
