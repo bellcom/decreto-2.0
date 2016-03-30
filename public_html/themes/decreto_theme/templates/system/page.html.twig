@@ -113,19 +113,21 @@
 
         <div class="col-sm-2 right-sidebar" role="user-menu">
            <ul class="user-menu"> 
-               <li><a href="/" >Tour </a></li>  
-          {% if current_user.name %}
-            
-            <li>
-            {{ current_user.name }} 
-             <span id="user_menu_button" class="glyphicon  glyphicon-chevron-down user-menu-toggle-button" aria-hidden="true" ></span>
-            
-             <ul class="user-sub-menu">
-                <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
-                <li><a href="{{ path('user.logout') }}" >Logout</a></li>
-            </ul>
-             </li>
-            {% endif %} 
+               <li><a href="/" >Tour </a></li> 
+               <li>
+                {% if current_user.name %}
+                  <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          {{ current_user.name }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                       <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
+                        <li><a href="{{ path('user.logout') }}" >Logout</a></li>
+                      </ul>
+                  </div>                
+                {% endif %}
+                </li>   
            <li> <span class="glyphicon  glyphicon-envelope user-notification-button" aria-hidden="true" ></span></li>
            </ul>
         
@@ -146,7 +148,7 @@
         {% block sidebar_first %}
             <aside id="main_menu" class="col-sm-3 sidebar-first" role="complementary">
             {{ page.sidebar_first }}
-             <span id="main_menu_toggle_button" class="glyphicon  glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span>
+               <button type="button"  id="main_menu_toggle_button"  class = "pull-right"><span class="glyphicon glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span></button>
             </aside>
         {% endblock %}
       {% endif %}

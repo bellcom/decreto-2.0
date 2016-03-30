@@ -1,9 +1,9 @@
-uuid: f4f5dbda-d5ea-43ef-a803-3e37495d5521
+uuid: 93e795b1-fd4d-45ae-9400-ab6addc68352
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_os2web_user_org
+    - field.storage.user.field_decreto_usr_orgs
   module:
     - user
 id: decreto_organisation_list
@@ -55,24 +55,19 @@ display:
         type: default
       row:
         type: fields
-        options:
-          default_field_elements: false
-          inline: {  }
-          separator: ''
-          hide_empty: false
       fields:
-        field_os2web_user_org_1:
-          id: field_os2web_user_org_1
-          table: user__field_os2web_user_org
-          field: field_os2web_user_org
+        field_decreto_usr_orgs:
+          id: field_decreto_usr_orgs
+          table: user__field_decreto_usr_orgs
+          field: field_decreto_usr_orgs
           relationship: none
           group_type: group
-          admin_label: 'Organisation TID'
+          admin_label: 'Organisation Name'
           label: ''
           exclude: false
           alter:
-            alter_text: true
-            text: '{{ field_os2web_user_org_1__target_id }}'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -124,18 +119,18 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_os2web_user_org:
-          id: field_os2web_user_org
-          table: user__field_os2web_user_org
-          field: field_os2web_user_org
+        field_decreto_usr_orgs_1:
+          id: field_decreto_usr_orgs_1
+          table: user__field_decreto_usr_orgs
+          field: field_decreto_usr_orgs
           relationship: none
           group_type: group
-          admin_label: 'Organisation Name'
+          admin_label: 'Organisation TID'
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: '{{ field_os2web_user_org__target_id }}'
+            alter_text: true
+            text: '{{ field_decreto_usr_orgs_1__target_id }} '
             make_link: false
             path: ''
             absolute: false
@@ -167,7 +162,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: false
+          element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -183,7 +178,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: ul
+          multi_type: separator
           separator: ', '
           field_api_classes: false
           plugin_id: field
@@ -237,7 +232,7 @@ display:
           entity_type: user
           plugin_id: user_current
       sorts: {  }
-      title: 'Decreto organisation List'
+      title: 'Decreto organisation list'
       header: {  }
       footer: {  }
       empty: {  }
@@ -252,7 +247,7 @@ display:
         - user
         - user.permissions
       tags:
-        - 'config:field.storage.user.field_os2web_user_org'
+        - 'config:field.storage.user.field_decreto_usr_orgs'
   organisations:
     display_plugin: block
     id: organisations
@@ -268,4 +263,4 @@ display:
         - user
         - user.permissions
       tags:
-        - 'config:field.storage.user.field_os2web_user_org'
+        - 'config:field.storage.user.field_decreto_usr_orgs'

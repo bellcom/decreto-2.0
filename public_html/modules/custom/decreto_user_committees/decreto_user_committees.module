@@ -1,0 +1,22 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function decreto_helper_user_committees_print_committees(){
+  // Load the current user.
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  $user_committees = $user->get('field_os2web_user_com')->getValue();
+  if (isset($user_committees)){
+    foreach ($user_committees as $com){
+     $term_object = taxonomy_term_load($com['target_id']);
+      $term_name = $term_object->get('name')->value;
+      echo('<b>' . $term_name . '</b><br/>');
+    }
+  }
+  
+  
+}

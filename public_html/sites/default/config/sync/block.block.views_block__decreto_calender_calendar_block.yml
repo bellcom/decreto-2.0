@@ -1,4 +1,4 @@
-uuid: e88eb657-a308-4146-8d54-841cf400f2e6
+uuid: 56f33d07-7944-4b37-b85f-95e6c773d9f6
 langcode: en
 status: true
 dependencies:
@@ -8,17 +8,17 @@ dependencies:
     - views
   theme:
     - decreto_theme
-id: views_block__decreto_calender_block_1
+id: views_block__decreto_calender_calendar_block
 theme: decreto_theme
 region: sidebar_second
-weight: -9
+weight: -7
 provider: null
-plugin: 'views_block:decreto_calender-block_1'
+plugin: 'views_block:decreto_calender-calendar_block'
 settings:
-  id: 'views_block:decreto_calender-block_1'
+  id: 'views_block:decreto_calender-calendar_block'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
 visibility: {  }
