@@ -1,0 +1,48 @@
+uuid: e24bfd2b-e043-47a7-a300-cf3e3d1a28ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.decreto_bullet_point_attachment.body
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_id
+    - node.type.decreto_bullet_point_attachment
+  module:
+    - file
+    - text
+    - user
+id: node.decreto_bullet_point_attachment.default
+targetEntityType: node
+bundle: decreto_bullet_point_attachment
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_decreto_bpa_file:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_decreto_bpa_html:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+  field_decreto_bpa_id:
+    weight: 104
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+  links:
+    weight: 100
+hidden: {  }

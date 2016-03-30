@@ -1,0 +1,22 @@
+uuid: b036cf52-f723-4b82-ad16-22af68c89981
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.decreto_meeting
+  module:
+    - text
+id: node.decreto_meeting.body
+field_name: body
+entity_type: node
+bundle: decreto_meeting
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

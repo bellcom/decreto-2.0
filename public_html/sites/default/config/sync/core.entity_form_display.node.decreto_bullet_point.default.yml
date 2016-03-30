@@ -1,0 +1,74 @@
+uuid: 509e46b0-87c1-4d9e-b403-03ee92d79664
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
+    - field.field.node.decreto_bullet_point.field_decreto_bp_closed
+    - field.field.node.decreto_bullet_point.field_decreto_bp_id
+    - node.type.decreto_bullet_point
+  module:
+    - path
+id: node.decreto_bullet_point.default
+targetEntityType: node
+bundle: decreto_bullet_point
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  field_decreto_bp_bpas:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_decreto_bp_closed:
+    weight: 32
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_decreto_bp_id:
+    weight: 33
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

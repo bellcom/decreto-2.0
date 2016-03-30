@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.user.user.field_os2web_user_com
-    - field.field.user.user.field_os2web_user_org
+    - field.field.user.user.field_decreto_usr_coms
+    - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -17,15 +17,15 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
-  field_os2web_user_com:
-    weight: 7
+  field_decreto_usr_coms:
+    weight: 8
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-  field_os2web_user_org:
-    weight: 6
+  field_decreto_usr_orgs:
+    weight: 9
     label: above
     settings:
       link: true

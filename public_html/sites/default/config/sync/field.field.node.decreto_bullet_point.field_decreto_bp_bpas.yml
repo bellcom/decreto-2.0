@@ -1,0 +1,26 @@
+uuid: 931172c1-ec0e-4eab-ba25-3794d83f471c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_bp_bpas
+    - node.type.decreto_bullet_point
+    - node.type.decreto_bullet_point_attachment
+id: node.decreto_bullet_point.field_decreto_bp_bpas
+field_name: field_decreto_bp_bpas
+entity_type: node
+bundle: decreto_bullet_point
+label: 'Bullet point attachments'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_bullet_point_attachment: decreto_bullet_point_attachment
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,18 @@
+uuid: b27ef84d-e848-405d-a600-c8806fd4549a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Bullet point'
+type: decreto_bullet_point
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

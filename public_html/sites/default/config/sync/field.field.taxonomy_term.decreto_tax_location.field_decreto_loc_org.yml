@@ -1,0 +1,26 @@
+uuid: 08a320fc-9928-4074-b408-8d5d024d7cc0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_decreto_loc_org
+    - node.type.decreto_organisation
+    - taxonomy.vocabulary.decreto_tax_location
+id: taxonomy_term.decreto_tax_location.field_decreto_loc_org
+field_name: field_decreto_loc_org
+entity_type: taxonomy_term
+bundle: decreto_tax_location
+label: Organisation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_organisation: decreto_organisation
+    sort:
+      field: _none
+field_type: entity_reference

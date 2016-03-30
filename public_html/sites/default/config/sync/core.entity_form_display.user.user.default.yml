@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.user.user.field_os2web_user_com
-    - field.field.user.user.field_os2web_user_org
+    - field.field.user.user.field_decreto_usr_coms
+    - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -21,16 +21,16 @@ content:
     weight: -10
   contact:
     weight: 5
-  field_os2web_user_com:
-    weight: 8
+  field_decreto_usr_coms:
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
-  field_os2web_user_org:
-    weight: 7
+  field_decreto_usr_orgs:
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60

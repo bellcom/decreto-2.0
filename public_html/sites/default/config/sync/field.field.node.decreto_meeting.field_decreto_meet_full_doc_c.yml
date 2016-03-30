@@ -1,0 +1,27 @@
+uuid: 952e4067-0e36-4032-bf3d-6136d9482c85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_full_doc_c
+    - node.type.decreto_meeting
+  module:
+    - file
+id: node.decreto_meeting.field_decreto_meet_full_doc_c
+field_name: field_decreto_meet_full_doc_c
+entity_type: node
+bundle: decreto_meeting
+label: 'Full doc closed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: txt
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
