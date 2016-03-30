@@ -15,29 +15,14 @@ bundle: decreto_bullet_point
 mode: default
 content:
   field_decreto_bp_bpas:
-    weight: 101
-    label: above
+    weight: 0
+    label: hidden
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
-  field_decreto_bp_closed:
-    weight: 102
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-  field_decreto_bp_id:
-    weight: 103
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-  links:
-    weight: 100
-hidden: {  }
+    type: entity_reference_entity_view
+hidden:
+  field_decreto_bp_closed: true
+  field_decreto_bp_id: true
+  links: true

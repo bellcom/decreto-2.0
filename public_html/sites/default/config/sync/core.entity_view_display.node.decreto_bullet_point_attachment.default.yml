@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_id
     - node.type.decreto_bullet_point_attachment
   module:
-    - file
     - text
     - user
 id: node.decreto_bullet_point_attachment.default
@@ -19,30 +18,13 @@ mode: default
 content:
   body:
     label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-  field_decreto_bpa_file:
-    weight: 102
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: file_default
-  field_decreto_bpa_html:
-    weight: 103
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: file_default
-  field_decreto_bpa_id:
-    weight: 104
-    label: above
+    type: text_summary_or_trimmed
+    weight: 0
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      trim_length: 600
     third_party_settings: {  }
-    type: number_integer
-  links:
-    weight: 100
-hidden: {  }
+hidden:
+  field_decreto_bpa_file: true
+  field_decreto_bpa_html: true
+  field_decreto_bpa_id: true
+  links: true

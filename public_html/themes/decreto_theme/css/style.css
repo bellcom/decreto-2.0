@@ -6,8 +6,18 @@
     float: left;
 }
 
-.decreto-bullet-point.teaser > .content-wrapper {
+.area-expand-collapse {
     margin-left: 50px;
+}
+
+.btn-expand-collapse[aria-expanded="false"] .glyphicon:before{
+    /*icon up*/
+    content: "\e094";
+}
+
+.btn-expand-collapse[aria-expanded="true"] .glyphicon:before{
+    /*icon down*/
+    content: "\e093";
 }
 
 .glyphicon.user-menu-toggle-button,
