@@ -9,3 +9,50 @@
 .decreto-bullet-point.teaser > .content-wrapper {
     margin-left: 50px;
 }
+
+.glyphicon.user-menu-toggle-button,
+.glyphicon.main-menu-toggle-button,
+.glyphicon.user-notification-button,
+.glyphicon.main-menu-toggle-button{
+    cursor: pointer
+}
+
+.glyphicon.main-menu-toggle-button {
+    float: right;
+}
+
+.user-menu li{
+    display: inline-block;
+    padding-right: 10px;
+}
+.user-menu ul.user-sub-menu {
+    position: absolute;
+    padding-left:0;
+    display:none;
+    z-index: 999;
+}
+.user-menu ul.user-sub-menu li{
+    display: block;
+    
+}
+
+/****** MAIN MENU ***********/
+
+#main_menu ul li{
+    position: relative;
+}
+
+#main_menu select {
+    width:100%;
+}
+#main_menu ul li.has-children ul.sidebar{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 160px;
+    display: none;
+    z-index: 999;
+}
+#main_menu ul li.has-children.hover ul.sidebar{
+    display: block;
+}

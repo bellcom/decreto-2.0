@@ -3,6 +3,8 @@ module:
   block: 0
   block_content: 0
   breakpoint: 0
+  calendar: 0
+  calendar_datetime: 0
   ckeditor: 0
   color: 0
   comment: 0
@@ -11,6 +13,7 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
+  decreto_user_committees: 0
   devel: 0
   dynamic_page_cache: 0
   editor: 0
@@ -39,6 +42,7 @@ module:
   tour: 0
   update: 0
   user: 0
+  views_templates: 0
   views_ui: 0
   menu_link_content: 1
   views: 10
