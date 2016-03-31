@@ -109,28 +109,20 @@
         <div class="col-sm-7 top-content" role="search">
            {{ search_from }}
         </div> 
-
-
-        <div class="col-sm-2 right-sidebar" role="user-menu">
-           <ul class="user-menu"> 
-               <li><a href="/" >Tour </a></li> 
-               <li>
-                {% if current_user.name %}
-                  <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                          {{ current_user.name }}
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                       <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
-                        <li><a href="{{ path('user.logout') }}" >Logout</a></li>
-                      </ul>
-                  </div>                
-                {% endif %}
-                </li>   
-           <li> <span class="glyphicon  glyphicon-envelope user-notification-button" aria-hidden="true" ></span></li>
-           </ul>
         
+        <div class="col-sm-2 right-sidebar" role="user-menu">
+           {% if current_user.name %}
+              <div class="dropdown">
+                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ current_user.name }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
+                    <li><a href="{{ path('user.logout') }}" >Logout</a></li>
+                  </ul>
+               </div>
+           {% endif %}
          </div>  
     </div>    
     <div class="row">        
@@ -161,6 +153,7 @@
           page.sidebar_second and page.sidebar_first is empty ? 'col-sm-9',
           page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12',
           'main-content'
+          
         ]
       %}
             <section{{ content_attributes.addClass(content_classes) }}>

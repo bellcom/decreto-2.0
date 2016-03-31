@@ -288,6 +288,7 @@ display:
             replacement_format: 'F Y'
           plugin_id: datetime_year_month
       display_extenders: {  }
+      use_ajax: true
     cache_metadata:
       max-age: 0
       contexts:
