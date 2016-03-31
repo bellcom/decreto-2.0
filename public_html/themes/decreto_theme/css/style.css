@@ -15,6 +15,10 @@
     content: "\e093";
 }
 
+#pdf-main {
+    position: relative !important;
+}
+
 .user-menu li{
     display: inline-block;
     padding-right: 5px;

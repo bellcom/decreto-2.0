@@ -1,0 +1,33 @@
+<?php
+
+module_load_include('inc', 'decreto_pdf2htmlex', '/inc/decreto_pdf2htmlex.utils');
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_pdf2htmlex_theme() {
+  return array(
+    'decreto_pdf2htmlex_rendered_html_formatter' => array(
+      'variables' => array('file' => null),
+    ),
+    'decreto_pdf2htmlex_rendered_html_first_page_formatter' => array(
+      'variables' => array('file' => null),
+    ),
+  );
+}
+
+/**
+ * Implements template_preprocess_decreto_pdf2htmlex_rendered_html_formatter().
+ */
+function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) {
+  template_preprocess_file_link($vars);
+  $vars['html'] = decreto_pdf2htmlex_get_all_pages($vars['file']);
+}
+
+/**
+ * Implements template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatter().
+ */
+function template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatter(&$vars) {
+  template_preprocess_file_link($vars);
+  $vars['html'] = decreto_pdf2htmlex_get_first_page($vars['file']);
+}
