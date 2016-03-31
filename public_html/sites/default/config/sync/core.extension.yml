@@ -13,6 +13,7 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
+  decreto_pdf2htmlex: 0
   decreto_user_committees: 0
   devel: 0
   dynamic_page_cache: 0

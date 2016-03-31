@@ -1,0 +1,7 @@
+type: module
+name: Decreto PDF2HTMLEX
+description: 'module that takes care of PDF to HTML conversion by utilising pdf2htmlEX'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'
