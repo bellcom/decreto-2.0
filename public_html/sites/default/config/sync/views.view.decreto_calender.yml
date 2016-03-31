@@ -32,7 +32,7 @@ display:
           role:
             authenticated: authenticated
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -72,8 +72,8 @@ display:
           multiday_theme: '1'
           multiday_hidden: {  }
           granularity_links:
-            day: ''
-            week: ''
+            day: view.decreto_calender.page_day
+            week: view.decreto_calender.page_week
       row:
         type: calendar_row
         options:
@@ -289,6 +289,8 @@ display:
           plugin_id: datetime_year_month
       display_extenders: {  }
       use_ajax: true
+      link_url: ''
+      link_display: page_month
     cache_metadata:
       max-age: 0
       contexts:
@@ -357,7 +359,7 @@ display:
             calendar_colors_vocabulary: {  }
       path: calendar-field-date/day
       menu:
-        type: tab
+        type: none
         title: Day
         description: ''
         expanded: false
@@ -410,18 +412,6 @@ display:
           empty: true
           tokenize: 1
           content: '{{ arguments.field_decreto_meet_start_date_value_full_date }}'
-          pager_embed: 0
-          plugin_id: calendar_header
-        calendar_header_1:
-          id: calendar_header_1
-          table: views
-          field: calendar_header
-          relationship: none
-          group_type: group
-          admin_label: 'Calendar Pager'
-          empty: true
-          tokenize: 1
-          content: ''
           pager_embed: 1
           plugin_id: calendar_header
     cache_metadata:
