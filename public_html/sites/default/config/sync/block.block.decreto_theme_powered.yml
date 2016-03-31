@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_powered
 theme: decreto_theme
 region: '-1'
-weight: 7
+weight: -3
 provider: null
 plugin: system_powered_by_block
 settings:

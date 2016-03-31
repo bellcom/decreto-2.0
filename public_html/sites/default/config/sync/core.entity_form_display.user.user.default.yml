@@ -19,8 +19,12 @@ mode: default
 content:
   account:
     weight: -10
+    settings: {  }
+    third_party_settings: {  }
   contact:
     weight: 5
+    settings: {  }
+    third_party_settings: {  }
   field_decreto_usr_coms:
     weight: 9
     settings:
@@ -39,8 +43,12 @@ content:
     type: entity_reference_autocomplete
   language:
     weight: 0
+    settings: {  }
+    third_party_settings: {  }
   timezone:
     weight: 6
+    settings: {  }
+    third_party_settings: {  }
   user_picture:
     type: image_image
     settings:

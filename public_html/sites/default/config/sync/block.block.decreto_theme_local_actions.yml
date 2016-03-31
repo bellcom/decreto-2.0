@@ -9,7 +9,7 @@ _core:
 id: decreto_theme_local_actions
 theme: decreto_theme
 region: '-1'
-weight: 3
+weight: -2
 provider: null
 plugin: local_actions_block
 settings:

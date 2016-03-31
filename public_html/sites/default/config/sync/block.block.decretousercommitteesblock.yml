@@ -1,6 +1,6 @@
 uuid: 97dd494f-6a5a-4865-8200-cd703ae997ae
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - decreto_user_committees
@@ -8,8 +8,8 @@ dependencies:
     - decreto_theme
 id: decretousercommitteesblock
 theme: decreto_theme
-region: sidebar_second
-weight: -6
+region: '-1'
+weight: 4
 provider: null
 plugin: 'Decreto  User Committees Block'
 settings:
