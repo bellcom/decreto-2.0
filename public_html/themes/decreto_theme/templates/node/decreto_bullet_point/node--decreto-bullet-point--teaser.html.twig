@@ -87,14 +87,14 @@
 				{{ title_prefix }}
 				{% if not page %}
 					<span{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            <a href="{{ url }}" rel="bookmark">{{ label }}{{ content.field_decreto_bp_closed }}</a>
           </span>
 				{% endif %}
 				{{ title_suffix }}
 			</div>
 		</div>
 		<div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bp-content-' ~ node.id) }}>
-			{{ content }}
+			{{ content|without('field_decreto_bp_closed') }}
 		</div>
 	</div>
 </article>

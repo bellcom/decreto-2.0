@@ -85,10 +85,10 @@ view_mode ? view_mode|clean_class,
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">{{ node.getTitle }}</h3>
+			<h3 class="panel-title">{{ node.getTitle }}{{ content.field_decreto_bp_closed }}</h3>
 		</div>
 		<div{{ content_attributes.addClass('content', 'panel-body') }}>
-			{{ content }}
+			{{ content|without('field_decreto_bp_closed') }}
 		</div>
 	</div>
 </article>
