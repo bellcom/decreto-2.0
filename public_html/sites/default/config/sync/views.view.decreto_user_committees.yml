@@ -69,7 +69,7 @@ display:
             alter_text: false
             text: ''
             make_link: true
-            path: /
+            path: '/dashboard/{{ field_decreto_usr_coms__target_id }}'
             absolute: false
             external: false
             replace_spaces: false

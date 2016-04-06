@@ -1,8 +1,0 @@
-type: module
-name: Decreto user Committee
-description: 'Committee block'
-package: Decreto
-# core: 8.x
-
-core: '8.x'
-project: 'decreto'

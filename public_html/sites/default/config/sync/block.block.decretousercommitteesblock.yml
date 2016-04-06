@@ -2,8 +2,6 @@ uuid: 97dd494f-6a5a-4865-8200-cd703ae997ae
 langcode: en
 status: false
 dependencies:
-  module:
-    - decreto_user_committees
   theme:
     - decreto_theme
 id: decretousercommitteesblock

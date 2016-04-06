@@ -1,0 +1,7 @@
+type: module
+name: Decreto DASHBOARD
+description: 'Decreto dashboard'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'
