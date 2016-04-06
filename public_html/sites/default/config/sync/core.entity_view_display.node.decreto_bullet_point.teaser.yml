@@ -23,7 +23,15 @@ content:
       view_mode: teaser
       link: false
     third_party_settings: {  }
+  field_decreto_bp_closed:
+    type: boolean
+    weight: 1
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
 hidden:
-  field_decreto_bp_closed: true
   field_decreto_bp_id: true
   links: true
