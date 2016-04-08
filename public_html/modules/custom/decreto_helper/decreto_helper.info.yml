@@ -1,0 +1,7 @@
+type: module
+name: Decreto HELPER
+description: 'Contain varions of helper functions for Decreto project.'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

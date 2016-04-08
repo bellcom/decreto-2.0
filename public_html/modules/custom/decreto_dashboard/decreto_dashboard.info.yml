@@ -3,5 +3,8 @@ name: Decreto DASHBOARD
 description: 'Decreto dashboard'
 package: Decreto
 
+dependencies:
+ - decreto_helper
+
 core: '8.x'
 project: 'decreto'

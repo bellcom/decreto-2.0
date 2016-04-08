@@ -2,7 +2,7 @@
 /*
  * Return current user committtees
  */
-function decreto_dashboard_get_user_committees(){
+/*function decreto_dashboard_get_user_committees(){
   // Load the current user.
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
   $user_committees = $user->get('field_decreto_usr_coms')->getValue();
@@ -14,4 +14,4 @@ function decreto_dashboard_get_user_committees(){
   }
   return $terms;
   
-}
+}*/

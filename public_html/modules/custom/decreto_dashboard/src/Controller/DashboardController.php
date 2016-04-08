@@ -14,7 +14,7 @@ class DashboardController extends ControllerBase {
   public function meetingsBlock() {
     global $base_url;
 
-    $args = array(implode('+', decreto_dashboard_get_user_committees()));
+    $args = array(implode('+', decreto_helper_get_user_committees()));
     $footer = '<a href="' . $base_url . '/dashboard/all_committees">...</a>';
     $meetings_my_committes = $this->decreto_dashboard_view_render('decreto_meetings', t('My committees meetings'), $footer, $args, FALSE); 
     $meetings_all_committes = $this->decreto_dashboard_view_render('decreto_meetings', t('All committees meetings'), $footer, array(), FALSE);
