@@ -16,8 +16,8 @@ class DashboardController extends ControllerBase {
 
     $args = array(implode('+', decreto_dashboard_get_user_committees()));
     $footer = '<a href="' . $base_url . '/dashboard/all_committees">...</a>';
-    $meetings_my_committes = $this->decreto_dashboard_view_render('decreto_meetings', 'My committees meetings', $footer, $args, FALSE); 
-    $meetings_all_committes = $this->decreto_dashboard_view_render('decreto_meetings', 'All committees meetings', $footer, array(), FALSE);
+    $meetings_my_committes = $this->decreto_dashboard_view_render('decreto_meetings', t('My committees meetings'), $footer, $args, FALSE); 
+    $meetings_all_committes = $this->decreto_dashboard_view_render('decreto_meetings', t('All committees meetings'), $footer, array(), FALSE);
 
     return array(
       '#type' => 'container',
@@ -30,12 +30,12 @@ class DashboardController extends ControllerBase {
 
     if ($committee == 'my_committees') {
       $args = array(implode('+', decreto_dashboard_get_user_committees()));
-      $title = 'My commitees meetings';
+      $title = t('My commitees meetings');
     } else if ($committee == 'all_committees') {
-      $title = 'All commitees meetings';
+      $title = t('All commitees meetings');
     } else {
       $args = array($committee);
-      $title = \Drupal\taxonomy\Entity\Term::load($committee)->getName() . ' committees meetings';
+      $title = \Drupal\taxonomy\Entity\Term::load($committee)->getName() . t(' committees meetings');
     }
     $meetings = $this->decreto_dashboard_view_render('decreto_meetings', $title, '', $args, TRUE);
 
@@ -48,7 +48,7 @@ class DashboardController extends ControllerBase {
 /*
  * Set view's header
  */
-  private function decreto_dashboard_set_veiw_header(&$view, $title) {
+  private function decreto_dashboard_set_view_header(&$view, $title) {
     $options = array(
       'id' => 'area_text_custom',
       'table' => 'views',
@@ -61,7 +61,7 @@ class DashboardController extends ControllerBase {
 /*
  * Set view's footer
  */
-  private function decreto_dashboard_set_veiw_footer(&$view, $footer) {
+  private function decreto_dashboard_set_view_footer(&$view, $footer) {
     $options = array(
       'id' => 'area_text_custom',
       'table' => 'views',
@@ -82,7 +82,7 @@ class DashboardController extends ControllerBase {
   private function decreto_dashboard_view_render($view_name, $title = "", $footer = "", $arg = array(), $all_rows = TRUE) {
     $view = \Drupal\views\Views::getView($view_name);   
     $view->setArguments($arg);
-    $this->decreto_dashboard_set_veiw_header($view, $title);
+    $this->decreto_dashboard_set_view_header($view, $title);
 
     if (!$all_rows) {
       $full_view = \Drupal\views\Views::getView($view_name);    
@@ -93,7 +93,7 @@ class DashboardController extends ControllerBase {
       $view->getPager()->options['total_pages'] = 1;
     }
     if (!$all_rows && $view->getItemsPerPage() < $total_rows) {
-      $this->decreto_dashboard_set_veiw_footer($view, $footer);
+      $this->decreto_dashboard_set_view_footer($view, $footer);
     }
     $view->execute();
     return \Drupal::service('renderer')->render($view->render());
