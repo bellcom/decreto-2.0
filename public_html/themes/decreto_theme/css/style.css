@@ -45,6 +45,8 @@
 #main_menu ul li.has-children.hover ul.sidebar{
     display: block;
 }
+/*****************CALENDAR VIEW ********************/
+
 table .mini-day-on a:after{
   content: '\2713';  
 }

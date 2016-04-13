@@ -100,48 +100,46 @@
 {# Main #}
 {% block main %}
 <div role="main" class="main-container {{ container }} js-quickedit-main-content">
-    <div class="row" role="top">
-        <div class="col-sm-3 sidebar-first" role="logo">
-            <!-- Begin - logo -->
-            <a class="header-logo" href="#" data-scroll-to="#banner" data-toggle="tooltip" data-placement="bottom" title="Gå til toppen af siden"></a>
-            <!-- End - logo -->
-        </div>
-        <div class="col-sm-7 top-content" role="search">
-           {{ search_from }}
-        </div> 
-        
-        <div class="col-sm-2 right-sidebar" role="user-menu">
-           {% if current_user.name %}
-              <div class="dropdown">
-                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    {{ current_user.name }}
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
-                    <li><a href="{{ path('user.logout') }}" >Logout</a></li>
-                  </ul>
-               </div>
-           {% endif %}
-         </div>  
-    </div>    
-    <div class="row">        
       {# Header #}
       {% if page.header %}
         {% block header %}
-            <div class="col-sm-12" role="heading">
-            {{ page.header }}
-            </div>
-        {% endblock %}
-      {% endif %}
+            <div class="row">  
+                <div class="col-sm-3 sidebar-first" role="logo">
+                    <!-- Begin - logo -->
+                    <a class="header-logo" href="#" data-scroll-to="#banner" data-toggle="tooltip" data-placement="bottom" title="Gå til toppen af siden"></a>
+                    <!-- End - logo -->
+                </div>
+                <div class="col-sm-7 top-content" role="search">
+                   {{ page.header }}
+                </div> 
 
+                <div class="col-sm-2 right-sidebar" role="user-menu">
+                   {% if user.account.name %}
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+                             {{ user.account.name}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
+                            <li><a href="{{ path('user.logout') }}" >Logout</a></li>
+                        </ul>
+                    </div>
+                   {% endif %}
+                </div>
+            </div>
+          {% endblock %}
+        {% endif %}
+
+    <div class="row">
       {# Sidebar First #}
       {% if page.sidebar_first %}
         {% block sidebar_first %}
-            <aside id="main_menu" class="col-sm-3 sidebar-first" role="complementary">
+        <aside id="main_menu" class="col-sm-3 sidebar-first" role="complementary">
             {{ page.sidebar_first }}
-               <button type="button"  id="main_menu_toggle_button"  class = "pull-right"><span class="glyphicon glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span></button>
-            </aside>
+            <button type="button"  id="main_menu_toggle_button"  class = "pull-right"><span class="glyphicon glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span></button>
+        </aside>
         {% endblock %}
       {% endif %}
 
@@ -155,12 +153,12 @@
           'main-content'  
         ]
       %}
-            <section{{ content_attributes.addClass(content_classes) }}>
+        <section{{ content_attributes.addClass(content_classes) }}>
 
         {# Highlighted #}
         {% if page.highlighted %}
           {% block highlighted %}
-                <div class="highlighted">{{ page.highlighted }}</div>
+            <div class="highlighted">{{ page.highlighted }}</div>
           {% endblock %}
         {% endif %}
 
@@ -174,7 +172,7 @@
         {# Action Links #}
         {% if action_links %}
           {% block action_links %}
-                <ul class="action-links">{{ action_links }}</ul>
+            <ul class="action-links">{{ action_links }}</ul>
           {% endblock %}
         {% endif %}
 
@@ -187,11 +185,11 @@
 
         {# Content #}
         {% block content %}
-                <a id="main-content"></a>
+            <a id="main-content"></a>
           {{ page.content }}
         {% endblock %}
-            </section>
-       
+        </section>
+
       {# Sidebar Second #}
       {% if page.sidebar_second %}
         {% block sidebar_second %}
@@ -200,8 +198,8 @@
         </aside>
         {% endblock %}
       {% endif %} 
-             </div>
     </div>
+</div>
 </div>
 {% endblock %}
 

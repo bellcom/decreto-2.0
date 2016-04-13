@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.decreto_calender
   module:
+    - user
     - views
   theme:
     - decreto_theme
@@ -21,4 +22,11 @@ settings:
   label_display: visible
   views_label: ''
   items_per_page: none
-visibility: {  }
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

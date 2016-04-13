@@ -1,22 +1,23 @@
-uuid: 7bacda67-8187-4cbb-a326-3815ae3a6f19
+uuid: b8275af9-7406-4236-8702-48b81be01304
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.decreto_user_committees
+    - views.view.decreto_my_committees_block
   module:
+    - system
     - user
     - views
   theme:
     - decreto_theme
-id: views_block__decreto_user_committees_my_committees_block
+id: views_block__decreto_my_committees_block_block_1
 theme: decreto_theme
-region: sidebar_second
-weight: -7
+region: content
+weight: -9
 provider: null
-plugin: 'views_block:decreto_user_committees-my_committees_block'
+plugin: 'views_block:decreto_my_committees_block-block_1'
 settings:
-  id: 'views_block:decreto_user_committees-my_committees_block'
+  id: 'views_block:decreto_my_committees_block-block_1'
   label: ''
   provider: views
   label_display: visible
@@ -30,3 +31,8 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

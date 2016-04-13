@@ -13,8 +13,6 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
-  decreto_dashboard: 0
-  decreto_helper: 0
   decreto_pdf2htmlex: 0
   devel: 0
   dynamic_page_cache: 0
@@ -44,7 +42,6 @@ module:
   tour: 0
   update: 0
   user: 0
-  views_php: 0
   views_templates: 0
   views_ui: 0
   menu_link_content: 1
