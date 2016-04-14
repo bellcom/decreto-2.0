@@ -10,21 +10,22 @@ jQuery(function($) {
         if ($(this).children('span').hasClass('glyphicon-chevron-left')){
           $(this).children('span').removeClass('glyphicon-chevron-left').addClass('glyphicon-chevron-right');           
           $('.sidebar-first').removeClass('col-sm-3').addClass('col-sm-2');
-          $('.top-content').removeClass('col-sm-7').addClass('col-sm-8');
-        
+          $('#main_menu').parent('aside').removeClass('col-sm-3').addClass('col-sm-2');          
+          $('.top-content').removeClass('col-sm-7').addClass('col-sm-8');         
           if ($('.region-sidebar-second').length>0)
-            $('.main-content').removeClass('col-sm-6').addClass('col-sm-7');
+            $('.main-content').parent('section').removeClass('col-sm-6').addClass('col-sm-7');
           else 
-            $('.main-content').removeClass('col-sm-9').addClass('col-sm-10');
+            $('.main-content').parent('section').removeClass('col-sm-9').addClass('col-sm-10');
         }
         else {
          $(this).children('span').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-left');
          $('.sidebar-first').removeClass('col-sm-2').addClass('col-sm-3');
+         $('#main_menu').parent('aside').removeClass('col-sm-2').addClass('col-sm-3');
          $('.top-content').removeClass('col-sm-9').addClass('col-sm-7');
          if ($('.region-sidebar-second').length>0)
-            $('.main-content').removeClass('col-sm-7').addClass('col-sm-6');
+            $('.main-content').parent('section').removeClass('col-sm-7').addClass('col-sm-6');
           else 
-            $('.main-content').removeClass('col-sm-10').addClass('col-sm-9');
+            $('.main-content').parent('section').removeClass('col-sm-10').addClass('col-sm-9');
         }
      return false;  
     });
