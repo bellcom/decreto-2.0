@@ -1,4 +1,4 @@
-uuid: ece5b924-cecd-43d9-9433-a8a568f34efe
+uuid: 2f70bbca-02d9-44ae-a867-8707e4414fe2
 langcode: en
 status: true
 dependencies:
@@ -12,8 +12,8 @@ dependencies:
     - options
     - taxonomy
     - user
-id: decreto_my_committees_block
-label: 'Decreto My Committees block'
+id: decreto_my_meetings_block
+label: 'Decreto My Meetings block'
 module: views
 description: ''
 tag: ''
@@ -412,9 +412,9 @@ display:
       tags:
         - 'config:field.storage.node.field_decreto_meet_start_date'
         - 'config:field.storage.node.field_decreto_meet_type'
-  block_1:
+  my_meetings:
     display_plugin: block
-    id: block_1
+    id: my_meetings
     display_title: Block
     position: 1
     display_options:

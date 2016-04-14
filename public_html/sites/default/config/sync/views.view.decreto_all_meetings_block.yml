@@ -1,4 +1,4 @@
-uuid: 0b1881c0-ca78-4a43-9137-0f3b0c5c0f5d
+uuid: 4ed6d45e-d745-4987-ac9d-ebf10b67b3c5
 langcode: en
 status: true
 dependencies:
@@ -12,8 +12,8 @@ dependencies:
     - node
     - options
     - user
-id: decreto_all_commiettees_block
-label: 'Decreto All Commiettees block'
+id: decreto_all_meetings_block
+label: ' Decreto All Meetings block'
 module: views
 description: ''
 tag: ''
@@ -380,9 +380,9 @@ display:
       tags:
         - 'config:field.storage.node.field_decreto_meet_start_date'
         - 'config:field.storage.node.field_decreto_meet_type'
-  block_1:
+  all_meetings:
     display_plugin: block
-    id: block_1
+    id: all_meetings
     display_title: Block
     position: 1
     display_options:
