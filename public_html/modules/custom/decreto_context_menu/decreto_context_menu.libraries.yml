@@ -1,0 +1,9 @@
+decreto-stretchy-navigation:
+  version: 1.x
+  css:
+    theme:
+      css/decreto-context-menu.css: {}
+  js:
+    js/decreto-context-menu.js: {}
+  dependencies:
+    - core/jquery

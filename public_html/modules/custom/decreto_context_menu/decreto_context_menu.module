@@ -1,0 +1,24 @@
+<?php
+module_load_include('inc', 'decreto_context_menu', '/inc/decreto_context_menu.utils');
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function decreto_context_menu_preprocess_node(&$variables) {
+
+  $node = $variables['node'];
+  $variables['decreto_context_menu'] = array(
+    '#theme' => 'decreto_context_menu',
+    '#links' => decreto_context_menu_get_menu_links($node, $variables['view_mode'])
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_context_menu_theme(&$vars) {
+  return array(
+    'decreto_context_menu' => array(
+    )
+  );
+}

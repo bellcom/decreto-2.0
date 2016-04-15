@@ -74,7 +74,6 @@
 	]
 %}
 
-
 <article{{ attributes.addClass(classes) }}>
 	<a class="btn btn-primary btn-expand-collapse pull-left" role="button" data-toggle="collapse" href="#bp-content-{{ node.id }}" aria-expanded="false"
 	   aria-controls="bp-content-{{ node.id }}">
@@ -83,6 +82,7 @@
 
 	<div class="area-expand-collapse">
 		<div class="panel panel-default">
+			{{ decreto_context_menu }}
 			<div class="panel-body">
 				{{ title_prefix }}
 				{% if not page %}
