@@ -11,7 +11,7 @@ id: node.decreto_meeting.body
 field_name: body
 entity_type: node
 bundle: decreto_meeting
-label: Body
+label: Description
 description: ''
 required: false
 translatable: true
