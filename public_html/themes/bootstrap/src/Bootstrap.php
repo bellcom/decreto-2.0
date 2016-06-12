@@ -243,8 +243,13 @@ class Bootstrap {
    *   if no match could be made.
    */
   public static function cssClassFromString($string, $default = '') {
+    static $lang;
+    if (!isset($lang)) {
+      $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+
     $theme = Bootstrap::getTheme();
-    $texts = $theme->getCache('cssClassFromString');
+    $texts = $theme->getCache('cssClassFromString', [$lang]);
 
     $string = (string) $string;
 
@@ -559,8 +564,13 @@ class Bootstrap {
    *   no match could be made.
    */
   public static function glyphiconFromString($string, $default = []) {
+    static $lang;
+    if (!isset($lang)) {
+      $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+
     $theme = Bootstrap::getTheme();
-    $texts = $theme->getCache('glyphiconFromString');
+    $texts = $theme->getCache('glyphiconFromString', [$lang]);
 
     $string = (string) $string;
 
@@ -589,6 +599,7 @@ class Bootstrap {
           t('Remove')->render()     => 'trash',
           t('Search')->render()     => 'search',
           t('Upload')->render()     => 'upload',
+          t('Preview')->render()    => 'eye-open',
         ],
       ];
 
