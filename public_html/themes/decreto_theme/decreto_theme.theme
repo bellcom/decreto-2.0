@@ -21,40 +21,35 @@ function decreto_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &
 
 function _decreto_theme_decreto_meeting_form_alter($elements) {
 
-	$elements['title']['#weight'] = 0;
-	$elements['field_decreto_meet_committee']['#weight'] = 1;
-	$elements['field_decreto_meet_type']['#weight'] = 2;
-	$elements['field_decreto_meet_start_date']['#weight'] = 3;
-	$elements['field_decreto_meet_end_date']['#weight'] = 4;
-	$elements['field_decreto_meet_location']['#weight'] = 5;
-	$elements['field_decreto_meet_partic']['#weight'] = 6;
-	$elements['body']['#weight'] = 7;
-	$elements['field_decreto_meet_full_doc']['#weight'] = 8;
-	$elements['field_decreto_meet_full_doc_c']['#weight'] = 9;
-	$elements['field_decreto_meet_id']['#weight'] = 10;
+	$elements['field_decreto_meet_id']['#weight'] = 0;
+	$elements['field_decreto_meet_id']['widget'][0]['value']['#title'] = '';
+	$elements['field_decreto_meet_id']['widget'][0]['value']['#placeholder'] = t('ID');
+
+	$elements['title']['#weight'] = 1;
+	$elements['title']['widget'][0]['value']['#title'] = '';
+	$elements['title']['widget'][0]['value']['#placeholder'] = t('Title');
+
+	$elements['field_decreto_meet_committee']['#weight'] = 2;
+	$elements['field_decreto_meet_committee']['widget'][0]['target_id']['#title'] = '';
+	$elements['field_decreto_meet_committee']['widget'][0]['target_id']['#placeholder'] = t('Committee');
+
+	$elements['field_decreto_meet_type']['#weight'] = 3;
+	$elements['field_decreto_meet_type']['widget']['#title'] = '';
+	$elements['field_decreto_meet_type']['widget']['#options']['_none'] = '- ' . t('Type') . ' -';
+
+	$elements['field_decreto_meet_start_date']['#weight'] = 4;
+	$elements['field_decreto_meet_end_date']['#weight'] = 5;
+
+	$elements['field_decreto_meet_location']['#weight'] = 6;
+	$elements['field_decreto_meet_location']['widget'][0]['target_id']['#title'] = '';
+	$elements['field_decreto_meet_location']['widget'][0]['target_id']['#placeholder'] = t('Location');
+
+	$elements['field_decreto_meet_partic']['#weight'] = 7;
+	$elements['body']['#weight'] = 8;
+	$elements['field_decreto_meet_full_doc']['#weight'] = 9;
+	$elements['field_decreto_meet_full_doc_c']['#weight'] = 10;
 	$elements['field_decreto_meet_bps']['#weight'] = 11;
 
 	return $elements;
-}
-
-
-function _decreto_theme_debug($msg) {
-	$file_name = '/var/www/DECRETO_DEBUG.txt';
-
-	if (!file_exists($file_name)) {
-		@touch($file_name);
-		@chmod($file_name, 0777);
-	}
-
-	if (file_exists($file_name) && is_writable($file_name)) {
-		$content = sprintf("[%s]\n%s\n===================\n\n"
-			, date("d.m Y H:i:s")
-			, $msg
-		);
-
-		$fh = fopen($file_name, 'a');
-		fwrite($fh, $content);
-		fclose($fh);
-	}
 }
 
