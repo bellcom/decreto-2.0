@@ -50,3 +50,40 @@
 table .mini-day-on a:after{
   content: '\2713';  
 }
+
+
+/*** Decreto meeting form ***/
+
+@media only screen and (min-width:900px) {
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-start-date,
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-end-date,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-start-date,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-end-date {
+		float:left;
+		width:40%;
+	}
+
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-location,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-location {
+		clear:both;
+	}
+
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-full-doc,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-full-doc {
+		float:left;
+		margin-right:20px;
+		width:40%;
+	}
+
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-full-doc-c,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-full-doc-c {
+		float:left;
+		width:40%;
+	}
+
+	form.node-decreto-meeting-form .field--name-field-decreto-meet-bps,
+	form.node-decreto-meeting-edit-form .field--name-field-decreto-meet-bps {
+		clear:both;
+	}
+}
+
