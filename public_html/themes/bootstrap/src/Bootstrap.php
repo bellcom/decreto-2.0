@@ -243,8 +243,13 @@ class Bootstrap {
    *   if no match could be made.
    */
   public static function cssClassFromString($string, $default = '') {
+    static $lang;
+    if (!isset($lang)) {
+      $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+
     $theme = Bootstrap::getTheme();
-    $texts = $theme->getCache('cssClassFromString');
+    $texts = $theme->getCache('cssClassFromString', [$lang]);
 
     $string = (string) $string;
 
@@ -559,8 +564,13 @@ class Bootstrap {
    *   no match could be made.
    */
   public static function glyphiconFromString($string, $default = []) {
+    static $lang;
+    if (!isset($lang)) {
+      $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+
     $theme = Bootstrap::getTheme();
-    $texts = $theme->getCache('glyphiconFromString');
+    $texts = $theme->getCache('glyphiconFromString', [$lang]);
 
     $string = (string) $string;
 
@@ -589,6 +599,7 @@ class Bootstrap {
           t('Remove')->render()     => 'trash',
           t('Search')->render()     => 'search',
           t('Upload')->render()     => 'upload',
+          t('Preview')->render()    => 'eye-open',
         ],
       ];
 
@@ -994,6 +1005,7 @@ class Bootstrap {
       $variables['theme']['title'] = $theme->getTitle();
       $variables['theme']['settings'] = $theme->settings()->get();
       $variables['theme']['has_glyphicons'] = $theme->hasGlyphicons();
+      $variables['theme']['query_string'] = \Drupal::getContainer()->get('state')->get('system.css_js_query_string') ?: '0';
     }
 
     // Invoke necessary preprocess plugin.

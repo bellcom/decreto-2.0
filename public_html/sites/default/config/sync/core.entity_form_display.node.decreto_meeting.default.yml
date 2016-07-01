@@ -18,7 +18,7 @@ dependencies:
   module:
     - datetime
     - field_group
-    - file
+    - plupload_widget
     - text
 third_party_settings:
   field_group:
@@ -97,13 +97,13 @@ content:
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
-    type: file_generic
+    type: plupload_file_widget
   field_decreto_meet_full_doc_c:
     weight: 9
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
-    type: file_generic
+    type: plupload_file_widget
   field_decreto_meet_location:
     weight: 4
     settings:

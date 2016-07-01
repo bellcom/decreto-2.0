@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.decreto_user_committees
   module:
+    - system
     - user
     - views
   theme:
@@ -30,3 +31,8 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/node/*'
+    negate: true
+    context_mapping: {  }
