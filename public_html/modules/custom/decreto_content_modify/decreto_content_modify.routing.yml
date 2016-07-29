@@ -1,0 +1,44 @@
+decreto_content_modify.meetings:
+  path: '/meetings'
+  defaults:
+    _title: 'Decreto edit meeting'
+    _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
+  requirements:
+    _permission: 'access content'
+decreto_content_modify.bps_add:
+  path: '/bullet_points/add'
+  options:
+      parameters:
+        node:
+          type: entity:node
+  defaults:
+    _title: 'Decreto add bullet point'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
+    node: null
+  requirements:
+    _permission: 'access content'
+    node: \d+
+decreto_content_modify.bps_edit:
+  path: '/bullet_points/{node}/edit'
+  options:
+      parameters:
+        node:
+          type: entity:node
+  defaults:
+    _title: 'Decreto edit bullet point'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
+  requirements:
+    _permission: 'access content'
+    node: \d+
+decreto_content_modify.bps_delete:
+  path: '/bullet_points/{node}/delete'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto delete bullet point'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
+  requirements:
+    _permission: 'access content'
+    node: \d+

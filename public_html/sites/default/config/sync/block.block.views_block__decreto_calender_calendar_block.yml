@@ -33,6 +33,6 @@ visibility:
       user: '@user.current_user_context:current_user'
   request_path:
     id: request_path
-    pages: '/node/*'
+    pages: "/node*\r\n/meetings*"
     negate: true
     context_mapping: {  }

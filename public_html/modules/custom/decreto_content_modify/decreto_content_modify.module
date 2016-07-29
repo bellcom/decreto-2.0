@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_content_modify_theme(&$vars) {
+  drupal_set_message('decreto_content_modify_theme');
+  //kint($vars);
+  //$vars['test'] = 'testik1';
+  //drupal_set_message(print_r($vars));
+
+  //kint($vars);
+  return array(
+    'decreto_content_modify_bullet_point' => array(
+      'variables' => array(
+        'node' => NULL,
+        'content' => NULL,
+        'label' => NULL,
+        'decreto_context_menu' => NULL
+      ),
+    )
+  );
+}
