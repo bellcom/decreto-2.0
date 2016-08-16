@@ -1,0 +1,10 @@
+decreto-annotator:
+  version: 1.x
+  css:
+    theme:
+      lib/annotator.min.css: {}
+  js:
+      lib/annotator-full.min.js: {}
+      js/decreto_annotator.js: {}
+  dependencies:
+    - core/jquery

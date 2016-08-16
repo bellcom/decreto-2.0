@@ -1,0 +1,44 @@
+decreto_annotator.annotator.create:
+  path: '/annotator/create'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorCreate'
+    _title: 'Create'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST'
+    
+decreto_annotator.annotator.search:
+  path: '/annotator/search'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorSearch'
+    _title: 'Search'
+  requirements:
+    _permission: 'access content'
+    _method: 'GET'
+
+decreto_annotator.annotator.update:
+  path: '/annotator/update/{id}'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorUpdate'
+    _title: 'Update'
+  requirements:
+    _permission: 'access content'
+    _method: 'PUT'
+    
+decreto_annotator.annotator.delete:
+  path: '/annotator/delete/{id}'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorDelete'
+    _title: 'Delete'
+  requirements:
+    _permission: 'access content'
+    _method: 'DELETE'
+    
+decreto_annotator.annotator.read:
+  path: '/annotator/read/{id}'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorRead'
+    _title: 'Read'
+  requirements:
+    _permission: 'access content'
+    _method: 'GET'    

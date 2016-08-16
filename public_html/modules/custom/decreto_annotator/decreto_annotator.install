@@ -1,0 +1,34 @@
+<?php 
+
+function decreto_annotator_schema() {
+    $schema['decreto_annotator_notes'] = array(
+        'description' => 'This table stores the user added notes',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The note id',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+        'bilag_id' => array(
+                'description' => 'Node id of the attachment',
+                'type' => 'int',
+		'not null' => TRUE,
+            ),	    
+	    'uid' => array(
+                'description' => 'The user id of the note author',
+                'type' => 'int',
+		'not null' => TRUE,
+            ),
+	    'note_info' => array(
+                'description' => 'The information of the note object',
+                'type' => 'text',
+            ),
+        ),
+        'primary key' => array('id'),
+	    'indexes' => array(
+	    'ind_bilag_id'        => array('bilag_id'),
+	    'uid'                 => array('uid'),
+	),
+    );
+    return $schema;
+}
