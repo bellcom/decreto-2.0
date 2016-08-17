@@ -11,10 +11,10 @@
                     // The endpoint of the store on your server.
                     prefix: drupalSettings.path.baseUrl,
                     annotationData: {
-                        'bilag_id': this.getAttribute('id').replace('bpa-content-', ''),
+                        'bpa_id': this.getAttribute('id').replace('bpa-content-', ''),
                     },
                     loadFromSearch: {
-                        'bilag_id': this.getAttribute('id').replace('bpa-content-', ''),
+                        'bpa_id': this.getAttribute('id').replace('bpa-content-', ''),
                     },
                     urls: {
                         create: 'annotator/create',
