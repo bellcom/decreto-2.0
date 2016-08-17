@@ -1,4 +1,4 @@
- (function ($) {
+(function ($) {
     Drupal.behaviors.decretoContextMenu = {
         attach: function (context, settings) {
             if( $('.cd-stretchy-nav').length > 0 ) {
