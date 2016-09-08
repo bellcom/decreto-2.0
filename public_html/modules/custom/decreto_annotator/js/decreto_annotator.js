@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,8 +7,13 @@
     Drupal.behaviors.decretoAnnotator = {
         attach: function(context, settings) {
             jQuery('.decreto-bullet-point-attachment .content').each(function(index) {
+               jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Touch', {
+                    force: 1,
+                    useHighlighter: location.search.indexOf('highlighter') > -1,
+                });
                 jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Store', {
                     // The endpoint of the store on your server.
+
                     prefix: drupalSettings.path.baseUrl,
                     annotationData: {
                         'bpa_id': this.getAttribute('id').replace('bpa-content-', ''),
@@ -24,10 +29,7 @@
                         search: 'annotator/search'
                     }
                 });
-            }
-            );
-
-
+            });
         }
     };
 })(jQuery);
