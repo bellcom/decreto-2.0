@@ -34,8 +34,6 @@ module:
   options: 0
   page_cache: 0
   path: 0
-  plupload: 0
-  plupload_widget: 0
   rdf: 0
   search: 0
   shortcut: 0
