@@ -28,6 +28,9 @@ function decreto_context_menu_get_menu($node, $view_mode) {
 function decreto_context_menu_theme(&$vars) {
   return array(
     'decreto_context_menu' => array(
+      'variables' => array(
+        'links' => NULL
+      )
     )
   );
 }

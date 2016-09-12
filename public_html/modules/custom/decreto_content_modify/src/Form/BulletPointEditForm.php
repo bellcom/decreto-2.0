@@ -24,11 +24,15 @@ use Drupal\Core\Ajax\InvokeCommand;
  * @see \Drupal\Core\Form\FormBase
  */
 class BulletPointEditForm extends FormBase {
+  protected $node;
+  protected $isNew;
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = null) {
+    $this->node = $node;
+
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
 
     $form['#prefix'] = '<div id="decreto-content-modify-bp-edit-form">';
@@ -63,10 +67,6 @@ class BulletPointEditForm extends FormBase {
 
     //loading node values
     if ($node) {
-      $form['nid'] = [
-        '#type' => 'hidden',
-        '#value' => $node->id()
-      ];
       $form['title']['#default_value'] = $node->getTitle();
       $form['closed']['#default_value'] = $node->get('field_decreto_bp_closed')->value;
     }
@@ -88,9 +88,8 @@ class BulletPointEditForm extends FormBase {
     $title = $form_state->getValue('title');
     $closed = $form_state->getValue('closed');
 
-    $nid = $form_state->getValue('nid');
-    if (!$nid) {
-      $node = Node::create(array(
+    if (!$this->node) {
+      $this->node = Node::create(array(
         'type' => 'decreto_bullet_point',
         'title' => $title,
         'status' => 1,
@@ -98,17 +97,15 @@ class BulletPointEditForm extends FormBase {
           'value' => $closed,
         ]
       ));
-      $form_state->setValue('is_new', true);
     } else {
-      $node = Node::load($nid);
-      $node->title = $title;
-      $node->field_decreto_bp_closed = [
+      $node = $this->node;
+      $this->node->title = $title;
+      $this->node->field_decreto_bp_closed = [
         'value' => $closed
       ];
     }
 
-    $node->save();
-    $form_state->setValue('nid', $node->id());
+    $this->isNew = $this->node->save();
   }
 
   /**
@@ -123,10 +120,6 @@ class BulletPointEditForm extends FormBase {
    *   Array of ajax commands to execute on submit of the modal form.
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-    // At this point the submit handler has fired.
-    // Clear the message set by the submit handler.
-    //drupal_get_messages();
-
     // We begin building a new ajax reponse.
     $response = new AjaxResponse();
     if ($form_state->getErrors()) {
@@ -139,11 +132,11 @@ class BulletPointEditForm extends FormBase {
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-edit-form', $form));
     }
     else {
-      $nid = $form_state->getValue('nid');
-      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $nid);
+      $nid = $this->node->id();
+      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $nid, false);
 
       //is new
-      if ($form_state->getValue('is_new')) {
+      if ($this->isNew == SAVED_NEW) {
         $response->addCommand(new AppendCommand('#js-bps-container', $render_bullet_point));
         $response->addCommand(new InvokeCommand('#js-bp-nids', 'appendValue', array($nid)));
       } else {

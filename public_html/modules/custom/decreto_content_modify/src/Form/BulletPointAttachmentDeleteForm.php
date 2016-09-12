@@ -4,11 +4,10 @@ namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\HtmlCommand;
 
-class BulletPointDeleteForm extends AjaxConfirmFormBase{
+class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase{
   /**
    * {@inheritdoc}
    */
@@ -20,13 +19,20 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase{
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'decreto-content-modify-bp-delete-form';
+    return 'decreto-content-modify-bpa-delete-form';
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    for ($i = 0; $i <= $this->parent->field_decreto_bp_bpas->count(); $i++) {
+      if ($this->parent->field_decreto_bp_bpas->get($i)->target_id == $this->node->id()) {
+        $this->parent->field_decreto_bp_bpas->removeItem($i);
+        $this->parent->save();
+        break;
+      }
+    }
     $this->node->delete();
   }
 
@@ -44,11 +50,13 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase{
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
-      $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-delete-form', $form));
+      $response->addCommand(new HtmlCommand('#decreto-content-modify-bpa-delete-form', $form));
     } else {
-      $nid = $this->node->id();
-      $response->addCommand(new RemoveCommand("#js-bp-$nid-container"));
-      $response->addCommand(new InvokeCommand('#js-bp-nids', 'removeValue', array($nid)));
+      $parent_nid = $this->parent->id();
+      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $parent_nid, true);
+
+      //replacing old bullet point with refreshed bullet point
+      $response->addCommand(new HtmlCommand("#js-bp-$parent_nid-container", $render_bullet_point));
       $response->addCommand(new CloseModalDialogCommand());
     }
 

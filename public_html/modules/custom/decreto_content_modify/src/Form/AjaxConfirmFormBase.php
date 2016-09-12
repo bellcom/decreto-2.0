@@ -22,6 +22,13 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
   protected $node;
 
   /**
+   * Parent node, if any
+   *
+   * @var NodeInterface parent
+   */
+  protected $parent;
+
+  /**
    * {@inheritdoc}
    * {@deprecated}
    */
@@ -46,8 +53,9 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $parent = null, NodeInterface $node = null) {
     $this->node = $node;
+    $this->parent = $parent;
     $form = parent::buildForm($form, $form_state);
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
 

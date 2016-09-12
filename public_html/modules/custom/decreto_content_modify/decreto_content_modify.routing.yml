@@ -1,29 +1,45 @@
-decreto_content_modify.meetings:
-  path: '/meetings'
+decreto_content_modify.meetings_add:
+  path: '/meetings/add'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto edit meeting'
+    _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
+    node: null
+  requirements:
+    _permission: 'access content'
+decreto_content_modify.meetings_edit:
+  path: '/meetings/{node}/edit'
+  options:
+    parameters:
+      node:
+        type: entity:node
   defaults:
     _title: 'Decreto edit meeting'
     _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
   requirements:
     _permission: 'access content'
+    node: \d+
 decreto_content_modify.bps_add:
   path: '/bullet_points/add'
   options:
-      parameters:
-        node:
-          type: entity:node
+    parameters:
+      node:
+        type: entity:node
   defaults:
     _title: 'Decreto add bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
     node: null
   requirements:
     _permission: 'access content'
-    node: \d+
 decreto_content_modify.bps_edit:
   path: '/bullet_points/{node}/edit'
   options:
-      parameters:
-        node:
-          type: entity:node
+    parameters:
+      node:
+        type: entity:node
   defaults:
     _title: 'Decreto edit bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
@@ -41,4 +57,47 @@ decreto_content_modify.bps_delete:
     _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
   requirements:
     _permission: 'access content'
+    node: \d+
+decreto_content_modify.bpas_add:
+  path: '/bullet_points/{bullet_point}/bullet_point_attachments/add'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+  defaults:
+    _title: 'Decreto add bullet point attachment'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm'
+    node: null
+  requirements:
+    _permission: 'access content'
+    bullet_point: \d+
+decreto_content_modify.bpas_edit:
+  path: '/bullet_points/{bullet_point}/bullet_point_attachments/{node}/edit'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto edit bullet point attachment'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm'
+  requirements:
+    _permission: 'access content'
+    bullet_point: \d+
+    node: \d+
+decreto_content_modify.bpas_delete:
+  path: '/bullet_points/{parent}/bullet_point_attachments/{node}/delete'
+  options:
+    parameters:
+      parent:
+        type: entity:node
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto delete bullet point attachment'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm'
+  requirements:
+    _permission: 'access content'
+    parent: \d+
     node: \d+

@@ -15,7 +15,7 @@ class CommonFormUtils {
 
     $form['bullet_points_container']['bp_nids'] = [
       '#type' => 'hidden',
-      '#value' => implode(',', $bp_nids),
+      '#default_value' => implode(',', $bp_nids),
       '#attributes' => ['id' => 'js-bp-nids'],
     ];
 
@@ -26,85 +26,109 @@ class CommonFormUtils {
     return $form;
   }
 
-  public static function buildSingleBulletPointContainer($form, $bp_nid = null) {
+  public static function buildSingleBulletPointContainer($form, $bp_nid = null, $expanded = false) {
     $bullet_point = Node::load($bp_nid);
 
     $form['bullet_points_container']['bp_' . $bp_nid] = array(
       '#type' => 'container',
       '#attributes' => ['id' => "js-bp-$bp_nid-container"],
-      '#label' => $bullet_point->title->value,
-      '#theme' => 'decreto_content_modify_bullet_point',
+      '#theme' => 'node',
+      '#view_mode' => 'teaser_ajax',
       '#node' => $bullet_point,
-      '#content' => array(
-        'field_decreto_bp_closed' => array(
-          '#theme' => 'field',
-          '#title' => 'Closed',
-          '#field_type' => 'boolean',
-          '#label_display' => 'hidden',
-          '#field_name' => 'field_decreto_bp_closed',
-          '#entity_type' => 'node',
-          '#bundle' => 'decreto_bullet_point',
-          '#is_multiple' => FALSE,
-          '0' => array('#markup' => $bullet_point->get('field_decreto_bp_closed')->value),
+      '#expanded' => $expanded,
+      'title' => array(
+        '#label_display' => "hidden",
+        '#field_name' => "title",
+        '#field_type' => "string",
+        '#entity_type' => "node",
+        '#bundle' => "decreto_bullet_point",
+        '0' => array(
+          '#type' => "inline_template",
+          '#template' => "{{ value|nl2br }}",
+          '#context' => [
+            'value' => $bullet_point->title->value,
+          ]
         ),
-        'field_decreto_bp_bpas' => array(
-          '#theme' => 'field',
-          '#title' => 'Bullet point attachments',
-          '#field_type' => 'entity_reference',
-          '#label_display' => "hidden",
-          '#field_name' => 'field_decreto_bp_bpas',
-          '#entity_type' => 'node',
-          '#bundle' => 'decreto_bullet_point',
-          '#is_multiple' => TRUE
-        ),
+        '#is_multiple' => FALSE,
+      ),
+      'field_decreto_bp_closed' => array(
+        '#theme' => 'field',
+        '#title' => 'Closed',
+        '#field_type' => 'boolean',
+        '#label_display' => 'hidden',
+        '#field_name' => 'field_decreto_bp_closed',
+        '#entity_type' => 'node',
+        '#bundle' => 'decreto_bullet_point',
+        '#is_multiple' => FALSE,
+        '0' => array('#markup' => $bullet_point->get('field_decreto_bp_closed')->value),
       ),
     );
 
-    if (\Drupal::moduleHandler()->moduleExists('decreto_context_menu')) {
-      $form['bullet_points_container']['bp_' . $bp_nid]['#decreto_context_menu'] = decreto_context_menu_get_menu($bullet_point, 'teaser_ajax');
-    }
+    // Bullet point attachments - START
+    $form['bullet_points_container']['bp_' . $bp_nid]['bpas_container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => "js-bp-$bp_nid-bpas-container"],
+    ];
 
-    $bpa_counter = 0;
     foreach ($bullet_point->get('field_decreto_bp_bpas')->getValue() as $bpa_target) {
-      $bpa = Node::load($bpa_target['target_id']);
-      $form['bullet_points_container']['bp_' . $bp_nid]['#content']['field_decreto_bp_bpas'][$bpa_counter] = array(
-        '#theme' => 'node',
-        '#node' => $bpa,
-        '#view_mode' => 'teaser',
-        'title' => array(
-          '#label_display' => "hidden",
-          '#field_name' => "title",
-          '#field_type' => "string",
-          '#entity_type' => "node",
-          '#bundle' => "decreto_bullet_point_attachment",
-          '0' => array(
-            '#type' => "inline_template",
-            '#template' => "{{ value|nl2br }}",
-            '#context' => [
-              'value' => $bpa->title->value,
-            ]
-          ),
-          '#is_multiple' => FALSE,
-        ),
-        'body' => array(
-          '0' => array(
-            '#type' => 'processed_text',
-            '#text' => $bpa->body->value,
-            '#format' => 'basic_html',
-          ),
-        )
-      );
-
-      if ($bpa->field_decreto_bpa_html->entity) {
-        $form['bullet_points_container']['bp_' . $bp_nid]['#content']['field_decreto_bp_bpas'][$bpa_counter]['field_decreto_bpa_html'] = array(
-          '0' => array(
-            '#theme' => "decreto_pdf2htmlex_rendered_html_first_page_formatter",
-            '#file' => $bpa->field_decreto_bpa_html->entity,
-          )
-        );
-      }
-      $bpa_counter++;
+      $form = self::buildSingleBPA($form, $bp_nid, $bpa_target['target_id']);
     }
+
+    $form['bullet_points_container']['bp_' . $bp_nid]['add_bpa'] = [
+      '#title' => t('Add new bullet point attachment'),
+      '#type' => 'link',
+      '#url' => Url::fromRoute('decreto_content_modify.bpas_add', array('bullet_point' => $bullet_point->id())),
+      '#attributes' => array(
+        'class' => array('use-ajax'),
+        'data-dialog-type' => 'modal',
+      ),
+    ];
+    // Bullet point attachments - END
+
+    return $form;
+  }
+
+  public static function buildSingleBPA($form, $bp_nid, $bpa_nid) {
+    $bpa = Node::load($bpa_nid);
+
+    $field_decreto_bpa_html = null;
+    if ($bpa->field_decreto_bpa_html->entity) {
+      $field_decreto_bpa_html = [
+        '0' => [
+          '#theme' => "decreto_pdf2htmlex_rendered_html_first_page_formatter",
+          '#file' => $bpa->field_decreto_bpa_html->entity,
+        ]
+      ];
+    }
+
+    $form['bullet_points_container']['bp_' . $bp_nid]['bpas_container']['field_decreto_bp_bpas'][] = array(
+      '#theme' => 'node',
+      '#node' => $bpa,
+      '#view_mode' => 'teaser_ajax',
+      'title' => array(
+        '#label_display' => "hidden",
+        '#field_name' => "title",
+        '#field_type' => "string",
+        '#entity_type' => "node",
+        '#bundle' => "decreto_bullet_point_attachment",
+        '0' => array(
+          '#type' => "inline_template",
+          '#template' => "{{ value|nl2br }}",
+          '#context' => [
+            'value' => $bpa->title->value,
+          ]
+        ),
+        '#is_multiple' => FALSE,
+      ),
+      'body' => array(
+        '0' => array(
+          '#type' => 'processed_text',
+          '#text' => $bpa->body->value,
+          '#format' => 'basic_html',
+        ),
+      ),
+      'field_decreto_bpa_html' => $field_decreto_bpa_html,
+    );
 
     return $form;
   }

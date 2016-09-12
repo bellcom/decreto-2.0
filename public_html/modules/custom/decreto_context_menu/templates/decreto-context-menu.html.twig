@@ -14,11 +14,6 @@
 #}
 {{ attach_library('decreto_context_menu/decreto-stretchy-navigation') }}
 
-{#TODO: find a way to avoid using _context['']#}
-{%
-  set links = _context['']['#links']
-%}
-
 {% if links %}
   <div class="nav-container">
     <nav class="cd-stretchy-nav edit-content">
