@@ -1,0 +1,37 @@
+uuid: d6c77185-8b6a-499f-86eb-4c11b6259811
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_ajax
+    - field.field.node.decreto_bullet_point_attachment.body
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_id
+    - node.type.decreto_bullet_point_attachment
+  module:
+    - decreto_pdf2htmlex
+    - text
+    - user
+id: node.decreto_bullet_point_attachment.teaser_ajax
+targetEntityType: node
+bundle: decreto_bullet_point_attachment
+mode: teaser_ajax
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  field_decreto_bpa_html:
+    type: decreto_pdf2htmlex_rendered_html_first_page
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_decreto_bpa_file: true
+  field_decreto_bpa_id: true
+  links: true

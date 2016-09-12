@@ -12,6 +12,9 @@ type: list_string
 settings:
   allowed_values:
     -
+      value: _none_
+      label: '-Select type-'
+    -
       value: Planlagt
       label: Planlagt
     -

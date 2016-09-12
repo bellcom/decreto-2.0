@@ -14,11 +14,6 @@
 #}
 {{ attach_library('decreto_context_menu/decreto-stretchy-navigation') }}
 
-{#TODO: find a way to avoid using _context['']#}
-{%
-  set links = _context['']['#links']
-%}
-
 {% if links %}
   <div class="nav-container">
     <nav class="cd-stretchy-nav edit-content">
@@ -28,11 +23,24 @@
       </a>
       <ul>
         {% for link in links %}
-          <li><a href="{{ link.path }}" class="{{ link.cssClass }}"><span>{{ link.name }}</span></a></li>
+          {#classes#}
+          {% set classes = "" %}
+          {% for cssClass in link.cssClass %}
+            {% set classes = classes ~ ' ' ~ cssClass %}
+          {% endfor %}
+
+          {#data-#}
+          {% set data = "" %}
+          {% for dataName, dataAttr in link.data %}
+            {% set data = data ~ ' data-' ~ dataName ~ '=' ~  dataAttr %}
+          {% endfor %}
+
+          <li><a href="{{ link.path }}" class="{{ classes }}"{{ data }}><span>{{ link.name }}</span></a></li>
         {% endfor %}
       </ul>
 
       <span aria-hidden="true" class="stretchy-nav-bg"></span>
     </nav>
   </div>
+
 {% endif %}

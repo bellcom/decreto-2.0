@@ -11,7 +11,7 @@ id: node.decreto_meeting.field_decreto_meet_start_date
 field_name: field_decreto_meet_start_date
 entity_type: node
 bundle: decreto_meeting
-label: 'Start date'
+label: From
 description: ''
 required: false
 translatable: false

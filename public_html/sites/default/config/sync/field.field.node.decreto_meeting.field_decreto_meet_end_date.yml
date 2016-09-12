@@ -11,7 +11,7 @@ id: node.decreto_meeting.field_decreto_meet_end_date
 field_name: field_decreto_meet_end_date
 entity_type: node
 bundle: decreto_meeting
-label: 'End date'
+label: to
 description: ''
 required: false
 translatable: false

@@ -1,0 +1,7 @@
+type: module
+name: Decreto Content Modify
+description: 'provides functionality for comfortable content create/modify'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

@@ -13,12 +13,14 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
+  decreto_content_modify: 0
   decreto_context_menu: 0
   decreto_pdf2htmlex: 0
   devel: 0
   dynamic_page_cache: 0
   editor: 0
   field: 0
+  field_group: 0
   field_ui: 0
   file: 0
   filter: 0

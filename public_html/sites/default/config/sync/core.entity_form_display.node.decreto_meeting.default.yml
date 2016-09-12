@@ -17,9 +17,47 @@ dependencies:
     - node.type.decreto_meeting
   module:
     - datetime
+    - field_group
     - file
-    - path
     - text
+third_party_settings:
+  field_group:
+    group_decreto_meet_dates:
+      children:
+        - field_decreto_meet_start_date
+        - field_decreto_meet_end_date
+      parent_name: ''
+      weight: 3
+      label: 'Meeting dates'
+      format_type: html_element
+      format_settings:
+        label: 'Meeting dates'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'container-inline form-group'
+    group_decreto_meet_docs:
+      children:
+        - field_decreto_meet_full_doc
+        - field_decreto_meet_full_doc_c
+      parent_name: ''
+      weight: 7
+      label: Descriptions
+      format_type: html_element
+      format_settings:
+        label: Descriptions
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'form-inline form-group'
 id: node.decreto_meeting.default
 targetEntityType: node
 bundle: decreto_meeting
@@ -27,19 +65,14 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 31
+    weight: 6
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
-  created:
-    type: datetime_timestamp
-    weight: 10
-    settings: {  }
-    third_party_settings: {  }
   field_decreto_meet_bps:
-    weight: 32
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -47,91 +80,66 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
   field_decreto_meet_committee:
-    weight: 33
+    weight: 1
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: ''
+      placeholder: Committee
     third_party_settings: {  }
     type: entity_reference_autocomplete
   field_decreto_meet_end_date:
-    weight: 34
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_decreto_meet_full_doc:
-    weight: 36
+    weight: 8
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
   field_decreto_meet_full_doc_c:
-    weight: 38
+    weight: 9
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
-  field_decreto_meet_id:
-    weight: 37
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
   field_decreto_meet_location:
-    weight: 39
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: ''
+      placeholder: Location
     third_party_settings: {  }
     type: entity_reference_autocomplete
   field_decreto_meet_partic:
-    weight: 40
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
   field_decreto_meet_start_date:
-    weight: 41
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_decreto_meet_type:
-    weight: 42
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
-  path:
-    type: path
-    weight: 30
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 15
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 16
-    third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     settings:
       size: 60
-      placeholder: ''
+      placeholder: Title
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  created: true
+  field_decreto_meet_id: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

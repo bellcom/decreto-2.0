@@ -1,0 +1,6 @@
+meeting-edit:
+  version: 1.x
+  js:
+    js/meeting-edit.js: {preprocess: false}
+  dependencies:
+    - core/jquery
