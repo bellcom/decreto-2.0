@@ -6,8 +6,8 @@ decreto-annotator:
       lib/touch-plugin/annotator.touch.css: {}
   js:
       lib/annotator-full.min.js: {}
+      lib/touch-plugin/annotator.touch.min.js: {}
       js/decreto_annotator.js: {}
-      lib/touch-plugin/annotator.touch-syddjurs.min.js: {}
       
   dependencies:
     - core/jquery

@@ -7,13 +7,13 @@
     Drupal.behaviors.decretoAnnotator = {
         attach: function(context, settings) {
             jQuery('.decreto-bullet-point-attachment .content').each(function(index) {
-               jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Touch', {
-                    force: 1,
-                    useHighlighter: location.search.indexOf('highlighter') > -1,
-                });
+                 //TODO: bug in touch plugin, submitted https://github.com/aron/annotator.touch.js/issues/13
+//               jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Touch', {
+//                    force: 1,
+//                    useHighlighter: location.search.indexOf('highlighter') > -1,
+//                });
                 jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Store', {
                     // The endpoint of the store on your server.
-
                     prefix: drupalSettings.path.baseUrl,
                     annotationData: {
                         'bpa_id': this.getAttribute('id').replace('bpa-content-', ''),
