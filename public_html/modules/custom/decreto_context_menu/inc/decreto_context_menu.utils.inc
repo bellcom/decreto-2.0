@@ -11,7 +11,6 @@ use Drupal\Core\Url;
  */
 function decreto_context_menu_get_menu_links($node, $view_mode) {
   $links = array();
-
   if ($view_mode == 'full') {
     $links[] = array(
       'name' => 'Share',
@@ -29,9 +28,8 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       );
     }
   }
-
   //default links for decreto_meeting
-  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType == 'decreto_meeting') {
+  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_meeting') {
     if ($node->access('update')) {
       $links[] = array(
         'name' => 'Edit',
@@ -39,6 +37,7 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
         'cssClass' => array('dec-quick-edit-link')
       );
     }
+   
     if ($node->access('delete')) {
       $links[] = array(
         'name' => 'Delete',
@@ -47,7 +46,47 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       );
     }
   }
+   //default links for decreto_meeting
+  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_bullet_point') {
+    if ($node->access('update')) {
+      $links[] = array(
+        'name' => 'Edit',
+        'path' => Url::fromRoute('entity.node.edit_form', array('node' => $node->id())),
+        'cssClass' => array('dec-quick-edit-link')
+      );
+    }
+   
+    if ($node->access('delete')) {
+      $links[] = array(
+        'name' => 'Delete',
+        'path' => Url::fromRoute('entity.node.delete_form', array('node' => $node->id())),
+        'cssClass' => array('dec-quick-delete-link')
+      );      
+    }
+    $links[] = array(
+        'name' => 'SpeakerPaper',
+        'path' => Url::fromRoute('decreto_content_modify.sp_add', ['bullet_point' => $node->id()]),
+        'cssClass' => array('use-ajax', 'dec-quick-add-sp-link'),
+       'data' => array('dialog-type' => 'modal')
+     ); 
+  }
 
+  //default links for decreto_meeting
+  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_speaker_paper') {
+     $links[] = array(
+        'name' => 'Edit',
+        'path' => Url::fromRoute('decreto_content_modify.sp_edit', ['node' => $node->id()]),
+        'cssClass' => array('use-ajax', 'dec-quick-edit-sp-link'),
+        'data' => array('dialog-type' => 'modal')
+      );      
+      $links[] = array(
+        'name' => 'Delete',
+        'path' => Url::fromRoute('decreto_content_modify.sp_delete', ['node' => $node->id()]),
+        'cssClass' => array('use-ajax', 'dec-quick-delete-sp-link'),
+        'data' => array('dialog-type' => 'modal')
+      );      
+
+  }
   //ajax links, for decreto_content_modify module
   if ($view_mode == 'teaser_ajax' && \Drupal::moduleHandler()->moduleExists('decreto_content_modify')) {
     $edit_link = [
@@ -62,7 +101,6 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       'cssClass' => ['use-ajax', 'dec-quick-delete-link'],
       'data' => ['dialog-type' => 'modal']
     ];
-
     if ($node->getType() == 'decreto_bullet_point') {
       if ($node->access('update')) {
         $links['edit'] = $edit_link;
@@ -93,6 +131,5 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       }
     }
   }
-
   return $links;
 }

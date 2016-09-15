@@ -84,17 +84,21 @@
 		<div class="panel panel-default">
 			{#{{ decreto_context_menu }}#}
 			<div class="panel-body">
-				{{ title_prefix }}
+				{{ title_prefix }} {{ decreto_context_menu }}
 				{% if not page %}
 					<span{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}{{ content.field_decreto_bp_closed }}</a>
           </span>
 				{% endif %}
 				{{ title_suffix }}
+                                {{ decreto_context_menu }}
 			</div>
 		</div>
 		<div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bp-content-' ~ node.id) }}>
 			{{ content|without('field_decreto_bp_closed') }}
 		</div>
+                <div id="speaker-papers-container">
+                   {{ speaker_papers }}
+                </div>
 	</div>
 </article>
