@@ -76,6 +76,12 @@ a.annotator-wrapper {
     width: 75px;
     margin: -20px 0 0px -10px;
 }
+/* ---------------------------- Annotator override END---------------------------- */
 
+/* ---------------------------- Speaker paper override START---------------------------- */
+.decreto-speaker-paper .panel:last-child{
+    margin-bottom: 20px;
+}
+/* ---------------------------- Speaker paper override START---------------------------- */
 
 

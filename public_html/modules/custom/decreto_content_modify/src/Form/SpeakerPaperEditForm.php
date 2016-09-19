@@ -143,7 +143,7 @@ class SpeakerPaperEditForm extends FormBase {
       //reloadind bullet point
       $render_speaker_paper = node_view($this->node);
       if ($this->isNew == SAVED_NEW) {
-        $response->addCommand(new AppendCommand('#speaker-papers-container', $render_speaker_paper));
+        $response->addCommand(new AppendCommand('#speaker-papers-container-'.$this->bullet_point->id(), $render_speaker_paper));
       }
       else{
         //replacing old bullet point with refreshed bullet point

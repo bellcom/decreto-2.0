@@ -90,10 +90,10 @@ view_mode ? view_mode|clean_class,
 		</div>
 		<div{{ content_attributes.addClass('content', 'panel-body') }}>
 			{{ content|without('field_decreto_bp_closed') }}
+                    <div id="speaker-papers-container-{{node.id()}}">
+                         {{ speaker_papers }}
+                    </div>
                 </div>
-                <div id="speaker-papers-container">
-                    {{ speaker_papers }}
-                </div>     
 	</div>
 </article>
 
