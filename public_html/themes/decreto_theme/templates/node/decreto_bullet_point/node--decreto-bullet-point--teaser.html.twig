@@ -95,10 +95,10 @@
 			</div>
 		</div>
 		<div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bp-content-' ~ node.id) }}>
-		   {{ content|without('field_decreto_bp_closed') }}
-                   <div id="speaker-papers-container-{{node.id()}}">
-                         {{ speaker_papers }}
-                   </div>
+                    {{ content|without('field_decreto_bp_closed') }}
+                    <div id="speaker-papers-container-{{node.id()}}">
+                     {{ speaker_papers }}
+                    </div>
 		</div>
 	</div>
 </article>

@@ -89,9 +89,9 @@ view_mode ? view_mode|clean_class,
 			<h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
 		</div>
 		<div{{ content_attributes.addClass('content', 'panel-body') }}>
-			{{ content|without('field_decreto_bp_closed') }}
+                    {{ content|without('field_decreto_bp_closed') }}
                     <div id="speaker-papers-container-{{node.id()}}">
-                         {{ speaker_papers }}
+                        {{ speaker_papers }}
                     </div>
                 </div>
 	</div>
