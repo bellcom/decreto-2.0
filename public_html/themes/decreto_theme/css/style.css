@@ -45,7 +45,68 @@
 }
 #main_menu ul li.has-children.hover ul.sidebar{
     display: block;
+}  
+#main_menu ul
+/*#organisation-switch */ {
+    list-style: none;
+    width: 100%;
 }
+#main_menu ul.tablet-menu{
+    padding-left: 0;
+}
+a.main-menu-link::before{   
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+ }
+ 
+.tablet-menu a.main-menu-link::before,
+#organisation-switch a.main-menu-link::before{
+     font-size: 36px;
+     display: block;
+}
+ .tablet-menu a.main-menu-link,
+ #organisation-switch a.main-menu-link {
+      text-align: center;
+      display: block;
+     
+ }
+ .desktop-menu a.main-menu-link::before,
+ .phone-menu a.main-menu-link::before {
+     right: 10px;
+ }
+ a.main-menu-link.dashboard::before{
+   content:"\e141";
+ }
+a.main-menu-link.calendar::before{
+ content: "\e109"
+ }
+a.main-menu-link.meetings::before{
+ content: "\e032"
+ }
+a.main-menu-link.settings::before{
+ content: "\e109"
+ }
+a.main-menu-link.users::before{
+ content: "\e008"
+ }
+a.main-menu-link.settings::before{
+ content: "\e136"
+ }
+ a.main-menu-link.organisation::before{
+  content: "\e110"   
+ }
+ #organisation_select {
+     text-align: left;
+ }
+ .navbar-header {
+     float: none;
+ }
 /*****************CALENDAR VIEW ********************/
 
 table .mini-day-on a:after{

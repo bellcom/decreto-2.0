@@ -1,6 +1,22 @@
-<select>
-    <option value="_none"> My organisation </option>
-{% for row in rows %}
-   {{ row.content }} 
-{% endfor %}
-</select>
+<div class="dropdown hidden-sm">
+  <button class="btn btn-default btn-group-justified dropdown-toggle" type="button" id="organisation_select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    My organisation
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" aria-labelledby="organisation_select">
+     {% for row in rows %}
+      {{ row.content }}
+    {% endfor %}
+
+  </ul>
+</div>
+<ul id = "organisation-switch" class="list-group visible-sm">
+    <li class='list-group has-children'> <a href='#' class="main-menu-link organisation">Switch </a>
+    <ul class='sublinks submenus sidebar'>
+      {% for row in rows %}
+        {{ row.content }}
+      {% endfor %}
+    </ul>
+    </li>
+</ul>

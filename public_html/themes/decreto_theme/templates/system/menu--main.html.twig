@@ -1,18 +1,20 @@
 {% import _self as menus %}
 {% set keys = 1 %}
+
+
 {{ menus.menu_links(items, attributes, 0, "") }}
 
 {% macro menu_links(items, attributes, menu_level, parent) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul id="menu">
+    <ul id="menu" class='desktop-menu'>
     {% else %}<ul id = "menu_link{{ parent }}" class=" sublinks collapse submenus">
     {% endif %}
     {% for item in items %}
         <li  {% if item.below %} class="has-children" {% endif %}>
            {% if item.below %}
-             <a href="#" data-toggle="collapse" data-target='#menu_link{{ keys }}' data-parent="#menu">{{ item.title }}</a>
+           {{ link(item.title, item.url, { 'data-toggle':['collapse'], "data-target":['#menu_link' ~ keys ], 'data-parent':['#menu'] }) }}
            {% else %}
         {{ link(item.title, item.url) }}
             {% endif %}
@@ -25,4 +27,3 @@
     </li> </ul>
   {% endif %}
 {% endmacro %}
-</ul>

@@ -1,7 +1,10 @@
-<div id="main_menu">           
+<div id="main_menu" class="navbar navbar-default ">
    {% if content %}
      {{ content }}
-     <button type="button"  id="main_menu_toggle_button"  class = "pull-right"><span class="glyphicon glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span></button>
-   {% endif %}
-</div> 
+     <div class="hidden-sm hidden-xs">
+      <button type="button"  id="main_menu_toggle_button"  class = "pull-right"><span class="glyphicon glyphicon-chevron-left main-menu-toggle-button" aria-hidden="true" ></span></button>
+     </div>
+    {% endif %}
+</div>
+
 

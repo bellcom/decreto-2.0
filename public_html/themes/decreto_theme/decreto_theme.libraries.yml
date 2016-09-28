@@ -1,3 +1,4 @@
+
 global-styling:
   css:
     theme:
@@ -6,3 +7,4 @@ global-styling:
       
   js:
     js/main.js: {}
+    
