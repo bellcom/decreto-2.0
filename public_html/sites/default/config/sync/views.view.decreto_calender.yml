@@ -7,7 +7,6 @@ dependencies:
     - user.role.authenticated
   module:
     - calendar
-    - calendar_datetime
     - datetime
     - node
     - user

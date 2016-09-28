@@ -8,6 +8,7 @@ module:
   ckeditor: 0
   color: 0
   comment: 0
+  composer_manager: 0
   config: 0
   contact: 0
   contextual: 0
@@ -38,6 +39,7 @@ module:
   rdf: 0
   search: 0
   shortcut: 0
+  special_menu_items: 0
   system: 0
   taxonomy: 0
   text: 0
