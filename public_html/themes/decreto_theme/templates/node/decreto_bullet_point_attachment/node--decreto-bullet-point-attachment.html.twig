@@ -64,8 +64,7 @@
  */
 #}
 {{ attach_library('decreto_annotator/decreto-annotator') }}
-{%
-set classes = [
+{% set classes = [
 node.bundle|clean_class,
 node.isPromoted() ? 'is-promoted',
 node.isSticky() ? 'is-sticky',
@@ -73,17 +72,16 @@ not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
 
-]
-%}
+] %}
 <article{{ attributes.addClass(classes) }}>
 
-	{{ title_prefix }}
-	{% if not page %}
-    <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-	{% endif %}
-	{{ title_suffix }}
+    {{ title_prefix }}
+    {% if not page %}
+        <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+    {{ title_suffix }}
 
     <div class="panel panel-default">
         <div class="panel-heading">

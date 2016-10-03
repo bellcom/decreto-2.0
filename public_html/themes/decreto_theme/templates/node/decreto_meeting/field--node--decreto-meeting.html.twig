@@ -37,49 +37,47 @@
  * @see template_preprocess_field()
  */
 #}
-{%
-  set classes = [
-    'field',
-    'field--name-' ~ field_name|clean_class,
-    'field--type-' ~ field_type|clean_class,
-    'field--label-' ~ label_display,
-  ]
-%}
-{%
-  set title_classes = [
-    'field--label',
-    label_display == 'visually_hidden' ? 'sr-only',
-    'col-xs-3'
-  ]
-%}
+{% set classes = [
+'field',
+'field--name-' ~ field_name|clean_class,
+'field--type-' ~ field_type|clean_class,
+'field--label-' ~ label_display,
+] %}
+{% set title_classes = [
+'field--label',
+label_display == 'visually_hidden' ? 'sr-only',
+'col-xs-3'
+] %}
 
 {% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field--items') }}>
-      {% for item in items %}
-        <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field--item') }}>{{ item.content }}{{ item.title }}</div>
-    {% endfor %}
-  {% endif %}
+    {% if multiple %}
+        <div{{ attributes.addClass(classes, 'field--items') }}>
+            {% for item in items %}
+                <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% for item in items %}
+            <div{{ attributes.addClass(classes, 'field--item') }}>{{ item.content }}{{ item.title }}</div>
+        {% endfor %}
+    {% endif %}
 {% else %}
-  <div{{ attributes.addClass(classes, 'row') }}>
-    <div{{ title_attributes.addClass(title_classes) }}>
-        {# TODO: change to different icons #}
-        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-        {{ label }}
+    <div{{ attributes.addClass(classes, 'row') }}>
+        <div{{ title_attributes.addClass(title_classes) }}>
+            {# TODO: change to different icons #}
+            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+            {{ label }}
+        </div>
+        {% if multiple %}
+        <div class="field__items">
+            {% endif %}
+            {% for item in items %}
+                <div class="col-xs-9">
+                    <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
+                </div>
+            {% endfor %}
+            {% if multiple %}
+        </div>
+        {% endif %}
     </div>
-    {% if multiple %}
-      <div class="field__items">
-    {% endif %}
-    {% for item in items %}
-      <div class="col-xs-9"><div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div></div>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  </div>
 {% endif %}

@@ -64,36 +64,34 @@
  */
 #}
 {{ attach_library('decreto_annotator/decreto-annotator') }}
-{%
-  set classes = [
-    node.bundle|clean_class,
-    node.isPromoted() ? 'is-promoted',
-    node.isSticky() ? 'is-sticky',
-    not node.isPublished() ? 'is-unpublished',
-    view_mode ? view_mode|clean_class,
-    'clearfix',
-  ]
-%}
+{% set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+] %}
 <article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+    {{ title_prefix }}
+    {% if not page %}
+        <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+    {{ title_suffix }}
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{ node.getTitle }} {{ decreto_context_menu }}</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ node.getTitle }} {{ decreto_context_menu }}</h3>
+        </div>
+        <div{{ content_attributes.addClass('content', 'panel-body') }}>
+            <ul class="nav nav-tabs nav-justified">
+                <li><a href="#">Info </a></li>
+                <li><a href="#"> Agenda </a></li>
+            </ul>
+            {{ content }}
+        </div>
     </div>
-    <div{{ content_attributes.addClass('content', 'panel-body') }}>
-     <ul class="nav nav-tabs nav-justified">
-         <li> <a href="#">Info </a></li>
-         <li><a href="#"> Agenda </a></li>
-     </ul>
-        {{ content }}
-    </div>
-  </div>
 </article>

@@ -63,18 +63,16 @@
  *   in different view modes.
  */
 #}
-{%
-set classes = [
+{% set classes = [
 node.bundle|clean_class,
 node.isPromoted() ? 'is-promoted',
 node.isSticky() ? 'is-sticky',
 not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
-]
-%}
+] %}
 <div {{ attributes.addClass(classes).setAttribute('id', 'speaker-paper-' ~ node.id) }}>
-    <div class="panel panel-default" >
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
         </div>
