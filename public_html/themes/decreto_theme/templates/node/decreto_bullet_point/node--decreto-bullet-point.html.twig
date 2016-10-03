@@ -1,4 +1,4 @@
-{#
+h{#
 /**
  * @file
  * Theme override to display a node.
@@ -78,22 +78,22 @@ view_mode ? view_mode|clean_class,
 
 	{{ title_prefix }}
 	{% if not page %}
-		<h2{{ title_attributes }}>
-			<a href="{{ url }}" rel="bookmark">{{ label }}</a>
-		</h2>
+    <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
 	{% endif %}
 	{{ title_suffix }}
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
-		</div>
-		<div{{ content_attributes.addClass('content', 'panel-body') }}>
-                    {{ content|without('field_decreto_bp_closed') }}
-                    <div id="speaker-papers-container-{{node.id()}}">
-                        {{ speaker_papers }}
-                    </div>
-                </div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
+        </div>
+        <div{{ content_attributes.addClass('content', 'panel-body') }}>
+            {{ content|without('field_decreto_bp_closed') }}
+            <div id="speaker-papers-container-{{node.id()}}">
+               {{ speaker_papers }}
+            </div>
+        </div>
+    </div>
 </article>
 
