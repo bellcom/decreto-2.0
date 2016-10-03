@@ -1,7 +1,7 @@
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
-  url: 'http://decreto2.dd:8083/themes/bootstrap/favicon.ico'
+  url: ''
   use_default: true
 schema: 8000
 features:

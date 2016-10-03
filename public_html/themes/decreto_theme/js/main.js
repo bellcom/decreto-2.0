@@ -13,13 +13,13 @@ jQuery(function($) {
         return "xs";
     } else if(window.innerWidth < 991){
         // Small Device
-        return "sm"
+        return "sm";
     } else if(window.innerWidth < 1199){
         // Medium Device
-        return "md"
+        return "md";
     } else {
         // Large Device
-        return "lg"
+        return "lg";
     }
 };
 $( document ).ready(function() {

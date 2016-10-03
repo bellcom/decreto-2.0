@@ -8,8 +8,9 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-    <ul id="menu" class='desktop-menu'>
-    {% else %}<ul id = "menu_link{{ parent }}" class=" sublinks collapse submenus">
+<ul id="menu" class="desktop-menu">
+    {% else %}
+    <ul id = "menu_link{{ parent }}" class="sublinks collapse submenus">
     {% endif %}
     {% for item in items %}
         <li  {% if item.below %} class="has-children" {% endif %}>
@@ -22,8 +23,8 @@
           {{ menus.menu_links(item.below, attributes, menu_level + 1, keys) }}
               {% set keys = keys+1 %}
         {% endif %}
-
+        </li>
     {% endfor %}
-    </li> </ul>
+    </ul>
   {% endif %}
 {% endmacro %}
