@@ -23,15 +23,15 @@
         <ul id = "menu_link{{ parent }}" class="sublinks collapse submenus">
     {% endif %}
     {% for item in items %}
-     <li  {% if item.below %} class="has-children" {% endif %}>
+        <li  {% if item.below %} class="has-children" {% endif %}>
            {% if item.below %}
-           {{ link(item.title, item.url, {"data-toggle":["collapse"], "data-target":['#menu_link' ~ keys ], 'data-parent':['#menu'] }) }}
+             {{ link(item.title, item.url, {"data-toggle":["collapse"], "data-target":['#menu_link' ~ keys ], 'data-parent':['#menu'] }) }}
            {% else %}
-        {{ link(item.title, item.url) }}
-            {% endif %}
+             {{ link(item.title, item.url) }}
+           {% endif %}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1, keys) }}
-              {% set keys = keys+1 %}
+          {% set keys = keys+1 %}
         {% endif %}
     </li>
    {% endfor %}
