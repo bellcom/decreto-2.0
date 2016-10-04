@@ -45,7 +45,7 @@
 }
 #main_menu ul li.has-children.hover ul.sidebar{
     display: block;
-}  
+}
 #main_menu ul
 /*#organisation-switch */ {
     list-style: none;
@@ -57,7 +57,7 @@ ul.phone-menu {
 .divider {
   height: 1px;
   width:100%;
-  display:block; 
+  display:block;
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
@@ -65,7 +65,7 @@ ul.phone-menu {
 #main_menu ul.tablet-menu{
     padding-left: 0;
 }
-a.main-menu-link::before{   
+a.main-menu-link::before{
     position: relative;
     top: 1px;
     display: inline-block;
@@ -75,7 +75,7 @@ a.main-menu-link::before{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
  }
- 
+
 .tablet-menu a.main-menu-link::before,
 #organisation-switch a.main-menu-link::before{
      font-size: 36px;
@@ -85,7 +85,7 @@ a.main-menu-link::before{
  #organisation-switch a.main-menu-link {
       text-align: center;
       display: block;
-     
+
  }
  .desktop-menu a.main-menu-link::before,
  .phone-menu a.main-menu-link::before {
@@ -110,7 +110,7 @@ a.main-menu-link.settings::before{
  content: "\e136"
  }
  a.main-menu-link.organisation::before{
-  content: "\e110"   
+  content: "\e110"
  }
  #organisation_select {
      text-align: left;
@@ -118,11 +118,11 @@ a.main-menu-link.settings::before{
  .navbar-header {
      float: none;
  }
- 
+
 /*****************CALENDAR VIEW ********************/
 
 table .mini-day-on a:after{
-  content: '\2713';  
+  content: '\2713';
 }
 
 /* ---------------------------- Annotator override START---------------------------- */
@@ -148,5 +148,23 @@ a.annotator-wrapper {
     height: 75px;
     width: 75px;
     margin: -20px 0 0px -10px;
+}
+/* ---------------------------- Annotator override END---------------------------- */
+
+/* ---------------------------- Meeting view tabs START---------------------------- */
+.decreto-meeting .tab-content > .tab-pane {
+    display: block;
+}
+.decreto-meeting .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+}
+@media (max-width: 767px){
+    .decreto-meeting .tab-content > .tab-pane {
+        display: none;
+    }
+    .decreto-meeting .tab-content > .tab-pane.active{
+        display: block;
+    }
 }
 
