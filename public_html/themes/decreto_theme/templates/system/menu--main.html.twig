@@ -1,21 +1,31 @@
 {% import _self as menus %}
 {% set keys = 1 %}
-
-
+<ul id="menu" class="desktop-menu">
 {{ menus.menu_links(items, attributes, 0, "") }}
+     {% if user.account.name %}
+    <div class="visible-xs">
+        <li role="separator" class="divider"></li>
+        <li class="has-children">
+            <a href="#" data-toggle ="collapse" data-target="#userMenu"> {{ user.account.name}} </a>            
+            <ul class="sublinks submenus collapse" id="userMenu">
+                <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
+                <li><a href="{{ path('user.logout') }}" >Logout</a></li>
+            </ul>
 
+        <li>
+    </div>     
+     {% endif %}
+</ul>
 {% macro menu_links(items, attributes, menu_level, parent) %}
   {% import _self as menus %}
   {% if items %}
-    {% if menu_level == 0 %}
-<ul id="menu" class="desktop-menu">
-    {% else %}
-    <ul id = "menu_link{{ parent }}" class="sublinks collapse submenus">
+    {% if menu_level != 0 %}
+        <ul id = "menu_link{{ parent }}" class="sublinks collapse submenus">
     {% endif %}
     {% for item in items %}
-        <li  {% if item.below %} class="has-children" {% endif %}>
+     <li  {% if item.below %} class="has-children" {% endif %}>
            {% if item.below %}
-           {{ link(item.title, item.url, { 'data-toggle':['collapse'], "data-target":['#menu_link' ~ keys ], 'data-parent':['#menu'] }) }}
+           {{ link(item.title, item.url, {"data-toggle":["collapse"], "data-target":['#menu_link' ~ keys ], 'data-parent':['#menu'] }) }}
            {% else %}
         {{ link(item.title, item.url) }}
             {% endif %}
@@ -23,8 +33,10 @@
           {{ menus.menu_links(item.below, attributes, menu_level + 1, keys) }}
               {% set keys = keys+1 %}
         {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
+    </li>
+   {% endfor %}
+   {% if menu_level != 0 %}
+        </ul>
+   {% endif %}
   {% endif %}
 {% endmacro %}

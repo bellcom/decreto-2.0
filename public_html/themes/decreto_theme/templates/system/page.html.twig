@@ -109,7 +109,14 @@
       {% if page.sidebar_first %}
         {% block sidebar_first %}
           <aside class="col-md-3 col-sm-2 col-xs-12" role="complementary">
-            {{ page.sidebar_first }}
+              <div id="main_menu" class="navbar navbar-default ">
+                  {% if  page.sidebar_first.views_block__decreto_organisation_list_organisations %}
+                    {{ page.sidebar_first.views_block__decreto_organisation_list_organisations }}
+                  {% endif%}
+                  <div role="navigation"  class="collapse navbar-collapse" id="menu_collapse">
+                      {{ page.sidebar_first|without('views_block__decreto_organisation_list_organisations') }}
+                  </div>
+              </div>             
           </aside>
         {% endblock %}
       {% endif %}

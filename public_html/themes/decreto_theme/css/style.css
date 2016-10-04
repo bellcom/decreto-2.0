@@ -51,6 +51,17 @@
     list-style: none;
     width: 100%;
 }
+ul.phone-menu {
+    padding-left: 0;
+}
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; 
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
 #main_menu ul.tablet-menu{
     padding-left: 0;
 }
@@ -107,6 +118,7 @@ a.main-menu-link.settings::before{
  .navbar-header {
      float: none;
  }
+ 
 /*****************CALENDAR VIEW ********************/
 
 table .mini-day-on a:after{
@@ -137,6 +149,4 @@ a.annotator-wrapper {
     width: 75px;
     margin: -20px 0 0px -10px;
 }
-
-
 

@@ -9,7 +9,7 @@ dependencies:
 id: searchform
 theme: decreto_theme
 region: header
-weight: -10
+weight: -11
 provider: null
 plugin: search_form_block
 settings:
