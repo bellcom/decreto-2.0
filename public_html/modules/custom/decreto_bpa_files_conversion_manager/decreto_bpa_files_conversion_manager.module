@@ -1,0 +1,21 @@
+<?php
+
+use Drupal\decreto_bpa_files_conversion_manager\DecretoPdfConversionScheduler\DecretoPdfConversionScheduler;
+
+function decreto_bpa_files_conversion_manager_cron() {
+  /*  $convertion_dir_path = drupal_realpath(variable_get('os2web_convertion_dir',OS2WEB_CONVERTION_DIR));
+    if (file_exists($convertion_dir_path)===FALSE) {
+    watchdog('file convertion management:', 'Folder %uri is not created', array('%uri' => variable_get('os2web_convertion_dir',OS2WEB_CONVERTION_DIR)), WATCHDOG_WARNING);
+    return;
+    }
+    _os2web_pdf_conversion_manager_manage_msg($convertion_dir_path);
+    _os2web_pdf_conversion_manager_manage_pdf($convertion_dir_path);
+    _os2web_pdf_conversion_manager_delete_msg_attachments_folder($convertion_dir_path);
+    _os2web_pdf_conversion_manager_delete_lock_files($convertion_dir_path);
+
+    */
+  \Drupal\decreto_bpa_files_conversion_manager\DecretoPdfConversionScheduler\PdfScheduler::managePdfConversion();
+  \Drupal\decreto_bpa_files_conversion_manager\DecretoPdfConversionScheduler\PdfScheduler::deleteLockFiles();
+   drupal_flush_all_caches();
+  
+}

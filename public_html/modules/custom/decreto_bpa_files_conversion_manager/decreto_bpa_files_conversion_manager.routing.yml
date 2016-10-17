@@ -1,0 +1,8 @@
+decreto_bpa_files_conversion_manager.cron.test:
+  path: '/cron/test'
+  defaults:
+    _controller: '\Drupal\decreto_bpa_files_conversion_manager\Controller\DecretoController::cronTest'
+    _title: 'Create'
+  requirements:
+    _permission: 'access content'
+    _method: 'GET'

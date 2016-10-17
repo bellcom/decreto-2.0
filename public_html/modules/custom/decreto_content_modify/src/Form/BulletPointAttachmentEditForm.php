@@ -10,6 +10,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\file\Entity\File;
+use Drupal\decreto_bpa_files_conversion_manager\DecretoPdfConversionScheduler\PdfScheduler;
 
 /**
  * Implements the ModalForm form controller.
@@ -23,8 +24,8 @@ use Drupal\file\Entity\File;
  * @see \Drupal\Core\Form\FormBase
  */
 class BulletPointAttachmentEditForm extends FormBase {
-  protected $parent;
 
+  protected $parent;
   protected $node;
 
   /**
@@ -50,22 +51,21 @@ class BulletPointAttachmentEditForm extends FormBase {
     $form[]['#markup'] = '<ul class="nav nav-tabs">';
     $form[]['#markup'] = '<li role="select_type" class="active">
                           <a href="#custom_text" aria-controls="custom_text" role="tab" data-toggle="tab">'
-                          . $this->t('Custom text')
-                          . '</a></li>';
+      . $this->t('Custom text')
+      . '</a></li>';
     $form[]['#markup'] = '<li role="select_type">
                           <a href="#upload_file" aria-controls="upload_file" role="tab" data-toggle="tab">'
-                          . $this->t('Upload file')
-                          . '</a></li>';
-    $form[]['#markup'] = '</ul>';//<ul class="nav nav-tabs">
-
+      . $this->t('Upload file')
+      . '</a></li>';
+    $form[]['#markup'] = '</ul>'; //<ul class="nav nav-tabs">
     //tab content
     $form[]['#markup'] = '<div class="tab-content">';
     //custom_text
     $form['body'] = array(
       '#prefix' => '<div role="tabpanel" class="tab-pane active" id="custom_text">',
       '#type' => 'text_format',
-      '#format'=> 'basic_html',
-      '#suffix' => '</div>',//<div role="tabpanel" class="tab-pane active" id="custom_text">
+      '#format' => 'basic_html',
+      '#suffix' => '</div>', //<div role="tabpanel" class="tab-pane active" id="custom_text">
     );
 
     //upload file
@@ -89,7 +89,7 @@ class BulletPointAttachmentEditForm extends FormBase {
     $form['file'] = array(
       //'#title' => $this->t('Open description'),
       '#type' => 'managed_file',
-      '#upload_location' => 'public://',
+      '#upload_location' => 'public://' . date('Y') . '-' . date('m'),
       '#default_value' => NULL,
       '#upload_validators' => array(
         'file_validate_extensions' => array('txt pdf doc docx html'),
@@ -106,10 +106,8 @@ class BulletPointAttachmentEditForm extends FormBase {
       '#title' => $this->t('Convert to HTML')// . ' not implemented',
     ];
 
-    $form[]['#markup'] = '</div>';//<div role="tabpanel" class="tab-pane" id="upload_file">
-    $form[]['#markup'] = '</div>';//<div class="tab-content">
-
-
+    $form[]['#markup'] = '</div>'; //<div role="tabpanel" class="tab-pane" id="upload_file">
+    $form[]['#markup'] = '</div>'; //<div class="tab-content">
     // Group submit handlers in an actions element with a key of "actions" so
     // that it gets styled correctly, and so that other modules may add actions
     // to the form.
@@ -131,6 +129,7 @@ class BulletPointAttachmentEditForm extends FormBase {
     if ($node) {
       $form['title']['#default_value'] = $node->getTitle();
       $form['body']['#default_value'] = $node->body->value;
+      $form['file']['#default_value'] = array_pop($node->field_decreto_bpa_file->getValue());
     }
 
     return $form;
@@ -150,28 +149,32 @@ class BulletPointAttachmentEditForm extends FormBase {
     $title = $form_state->getValue('title');
     $body = $form_state->getValue('body');
     $file_field = $form_state->getValue('file');
+    $convert_to_pdf = $form_state->getValue('convert_to_pdf');
+    $convert_to_html = $form_state->getValue('convert_to_html');
     $bpa_file = null;
     $bpa_html = null;
-
     if ($file_field) {
       $file = File::load(array_pop($file_field));
 
       if ($file->getMimeType() == 'text/html') {
         $bpa_html = $file;
-      }
-      else {
+      } else {
         $bpa_file = $file;
+        if ($convert_to_pdf && $file->getMimeType() != 'application/pdf') {
+          $obj = new PdfScheduler($file);
+          $obj->schedulePdfConversion();
+        }
       }
     }
 
     if (!$this->node) {
       $this->node = Node::create([
-        'type' => 'decreto_bullet_point_attachment',
-        'title' => $title,
-        'body' => $body,
-        'status' => 1,
-        'field_decreto_bpa_file' => ($bpa_file)? ['target_id' => $bpa_file->id()] : null,
-        'field_decreto_bpa_html' => ($bpa_html)? ['target_id' => $bpa_html->id()] : null,
+          'type' => 'decreto_bullet_point_attachment',
+          'title' => $title,
+          'body' => $body,
+          'status' => 1,
+          'field_decreto_bpa_file' => ($bpa_file) ? ['target_id' => $bpa_file->id()] : null,
+          'field_decreto_bpa_html' => ($bpa_html) ? ['target_id' => $bpa_html->id()] : null,
       ]);
     } else {
       $this->node->title = $title;
@@ -184,11 +187,19 @@ class BulletPointAttachmentEditForm extends FormBase {
       }
     }
 
+    //$obj = new DecretoPdfConversionScheduler($file);
+    // var_dump($obj->schedule_pdf());
+    // var_dump($bpa_file->id());
+    //var_dump($bpa_html->id());
+    //var_dump(array_pop($this->node->get('field_decreto_bpa_file')->getValue('target_id')));
     if ($this->node->save() == SAVED_NEW) {
       //updating parent
       $this->parent->field_decreto_bp_bpas->appendItem($this->node->id());
       $this->parent->save();
     }
+
+    //$obj = new DecretoPdfConversionScheduler($bpa_file->id());
+    //var_dump($obj->schedule_pdf());
   }
 
   /**
@@ -206,7 +217,6 @@ class BulletPointAttachmentEditForm extends FormBase {
     // At this point the submit handler has fired.
     // Clear the message set by the submit handler.
     //drupal_get_messages();
-
     // We begin building a new ajax reponse.
     $response = new AjaxResponse();
     if ($form_state->getErrors()) {
@@ -217,8 +227,7 @@ class BulletPointAttachmentEditForm extends FormBase {
         '#weight' => -10,
       ];
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bpa-edit-form', $form));
-    }
-    else {
+    } else {
       $bp_nid = $this->parent->id();
       //reloadind bullet point
       $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $bp_nid, true);
@@ -227,8 +236,8 @@ class BulletPointAttachmentEditForm extends FormBase {
       $response->addCommand(new HtmlCommand("#js-bp-$bp_nid-container", $render_bullet_point));
       $response->addCommand(new CloseModalDialogCommand());
     }
+
     return $response;
   }
+
 }
-
-
