@@ -2,6 +2,15 @@
 
 module_load_include('inc', 'decreto_pdf2htmlex', '/inc/decreto_pdf2htmlex.utils');
 
+use Drupal\decreto_pdf2htmlex\DecretoPdf2htmlexScheduler\Pdf2HtmlScheduler;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\file\Entity\File;
+
+define('DEFAULT_PDF_HTML_ZOOM', 1.25); // default zoom for convertion
+define('DEFAULT_TEMP_DIR', '/tmp/'); //
+define('DEFAULT_PDF_HTML_TRANS_LIMIT', 500);
+
 /**
  * Implements hook_theme().
  */
@@ -30,4 +39,69 @@ function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) 
 function template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatter(&$vars) {
   template_preprocess_file_link($vars);
   $vars['html'] = decreto_pdf2htmlex_get_first_page($vars['file']);
+}
+
+function decreto_pdf2htmlex_cron() {
+  setlocale(LC_CTYPE, "en_US.UTF-8");
+  $config = \Drupal::service('config.factory')->getEditable('decreto_pdf2htmlex.settings');
+  $pdf_html_trans_limit = $config->get('decreto_pdf2htmlex_trans_limit');
+  //make convertion
+  $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f')
+    ->fields('f', ['fid', 'did'])
+    ->isNull('f.progress')
+    ->range(0, $pdf_html_trans_limit);
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    decreto_pdf2htmlex_convert($record['fid'], $record['did']);
+  }
+  //go through the finished tasks
+  $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f');
+  $query->fields('f')
+    ->condition('progress', 'Converted')
+    ->range(0, $pdf_html_trans_limit);
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $destination_node = Node::Load($record['did']);
+
+    if (empty($destination_node)) {
+      \Drupal::database()->update('decreto_pdf2htmlex_files')
+        ->fields(array(
+          'progress' => 'Not found',
+        ))
+        ->condition('fid', $record['fid'], '=')
+        ->condition('did', $record['did'], '=')
+        ->execute();
+
+      continue;
+    }
+    $path = $record['created_filepath'];
+    //var_dump($path);
+    if (strpos($path, \Drupal::service('file_system')->realpath('private://')) === FALSE)
+      $uri = str_replace(\Drupal::service('file_system')->realpath('public://'), 'public://', $path);
+    else
+      $uri = str_replace(\Drupal::service('file_system')->realpath('private://'), 'private://', $path);
+
+    $fid = \Drupal::database()->select('file_managed', 'fm')
+        ->fields('fm', ['fid'])
+        ->condition('uri', $uri)
+        ->execute()->fetchField();
+  }
+  if ($fid) {
+    $file = File::Load($fid);
+  } else {
+    $file = File::Create([
+        'uri' => $uri,
+        'display' => 1,
+        'filename' => pathinfo($path, PATHINFO_BASENAME),
+        'filemime' => \Drupal::service('file.mime_type.guesser')->guess($uri),
+        'uid' => 1,
+        'status' => FILE_STATUS_PERMANENT
+    ]);
+    $file->save();
+  }
+  $destination_node->field_decreto_bpa_html->setValue(['target_id' => $file->id()]);
+  $destination_node->save();
+  // $destination_node->field_os2web_meetings_bpa_pages[LANGUAGE_NONE][0]['value'] = _os2dagsorden_pdf2htmlex_calc_page_amount($data);
 }

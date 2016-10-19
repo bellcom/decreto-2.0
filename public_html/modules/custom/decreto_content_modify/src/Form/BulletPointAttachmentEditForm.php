@@ -11,6 +11,11 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\file\Entity\File;
 use Drupal\decreto_bpa_files_conversion_manager\DecretoPdfConversionScheduler\PdfScheduler;
+use Drupal\decreto_pdf2htmlex\DecretoPdf2htmlexScheduler\Pdf2HtmlScheduler;
+
+
+module_load_include('inc', 'decreto_pdf_conversion_manager', '/inc/decreto_pdf_conversion_manager.utils');
+module_load_include('inc', 'decreto_pdf2htmlex', '/inc/decreto_pdf2htmlex.utils');
 
 /**
  * Implements the ModalForm form controller.
@@ -160,10 +165,6 @@ class BulletPointAttachmentEditForm extends FormBase {
         $bpa_html = $file;
       } else {
         $bpa_file = $file;
-        if ($convert_to_pdf && $file->getMimeType() != 'application/pdf') {
-          $obj = new PdfScheduler($file);
-          $obj->schedulePdfConversion();
-        }
       }
     }
 
@@ -186,20 +187,30 @@ class BulletPointAttachmentEditForm extends FormBase {
         $this->node->field_decreto_bpa_html->setValue(['target_id' => $bpa_html->id()]);
       }
     }
-
-    //$obj = new DecretoPdfConversionScheduler($file);
-    // var_dump($obj->schedule_pdf());
-    // var_dump($bpa_file->id());
-    //var_dump($bpa_html->id());
-    //var_dump(array_pop($this->node->get('field_decreto_bpa_file')->getValue('target_id')));
+    
     if ($this->node->save() == SAVED_NEW) {
       //updating parent
       $this->parent->field_decreto_bp_bpas->appendItem($this->node->id());
       $this->parent->save();
     }
-
-    //$obj = new DecretoPdfConversionScheduler($bpa_file->id());
-    //var_dump($obj->schedule_pdf());
+    
+    //schedule to conversion
+    if ($bpa_file){
+    if (\Drupal::moduleHandler()->moduleExists('decreto_bpa_files_conversion_manager')) {
+          if ($convert_to_pdf && $bpa_file->getMimeType() != 'application/pdf') {
+           /* $obj = new PdfScheduler($bpa_file);
+            $obj->schedulePdfConversion();*/
+            decreto_pdf_conversion_manager_schedulePdfConversion($bpa_file, $convert_to_html);
+          }
+        }
+        if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
+          if ($convert_to_html && $bpa_file->getMimeType() == 'application/pdf') {
+           /* $obj = new Pdf2HtmlScheduler($bpa_file->id(), $this->node->id());
+            $obj->scheduleHTMLConversion();*/
+            decreto_pdf2htmlex_schedule_if_bpa($bpa_file->id());            
+          }
+        }
+    }   
   }
 
   /**

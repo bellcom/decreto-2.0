@@ -1,7 +1,0 @@
-type: module
-name: Decreto BPA files conversion manager
-description: 'The functionality of this module is to manage of BPA files conversion   into .pdf and .html'
-package: Decreto
-
-core: '8.x'
-project: 'decreto'

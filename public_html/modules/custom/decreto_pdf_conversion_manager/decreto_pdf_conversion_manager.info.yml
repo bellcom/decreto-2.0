@@ -1,0 +1,7 @@
+type: module
+name: Decreto PDF files conversion manager
+description: 'The functionality of this module is to manage of PDF files conversion into .pdf'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

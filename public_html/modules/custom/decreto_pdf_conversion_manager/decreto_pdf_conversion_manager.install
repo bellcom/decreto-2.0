@@ -1,7 +1,7 @@
 <?php 
 
-function  decreto_bpa_files_conversion_manager_schema() {
-  $schema['decreto_bpa_files_conversion_manager_pdf_files'] = array(
+function  decreto_pdf_conversion_manager_schema() {
+  $schema['decreto_pdf_conversion_manager_pdf_files'] = array(
     'description' => 'This table is used for save file info  for * -> PDF convertion',
     'fields' => array(
       'fid' => array(
@@ -36,6 +36,13 @@ function  decreto_bpa_files_conversion_manager_schema() {
       ), 
       'attempt' => array(
         'description' => 'The number of attempts file has been tried to be convered',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'defualt' => 0,
+      ),
+      'html_convert' => array(
+        'description' => 'File must be sheduled to html convertion',
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,

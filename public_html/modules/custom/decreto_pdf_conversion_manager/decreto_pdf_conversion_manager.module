@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\file\Entity\File;
+
+module_load_include('inc', 'decreto_pdf_conversion_manager', '/inc/decreto_pdf_conversion_manager.utils');
+
+function decreto_pdf_conversion_manager_cron() {
+  decreto_pdf_conversion_manager_manage_pdf();
+  decreto_pdf_conversion_delete_lock_files();
+  drupal_flush_all_caches();
+}
+
+function decreto_pdf_conversion_manager_node_presave($node) {
+  if ($node->getType() == 'decreto_meeting') {
+    $full_doc = array_pop($node->field_decreto_meet_full_doc->getValue());
+    $full_doc_closed = array_pop($node->field_decreto_meet_full_doc_c->getValue());
+    if (isset($full_doc['target_id'])) {
+      $full_doc_file = File::load($full_doc['target_id']);
+      if ($full_doc_file->getMimeType() != 'application/pdf') {
+        decreto_pdf_conversion_manager_schedulePdfConversion($full_doc_file);
+      }
+    }
+    if (isset($full_doc_closed['target_id'])) {
+      $full_doc_closed_file = File::load($full_doc_closed['target_id']);
+      if ($full_doc_closed_file->getMimeType() != 'application/pdf') {
+        decreto_pdf_conversion_manager_schedulePdfConversion($full_doc_closed_file);
+      }
+    }
+  }
+}

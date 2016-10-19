@@ -106,7 +106,7 @@ class MeetingsEditForm extends FormBase {
     $form['full_doc'] = array(
       '#title' => $this->t('Open description'),
       '#type' => 'managed_file',
-      '#upload_location' => 'public://',
+      '#upload_location' => 'public://' . date('Y') . '-' . date('m'),
       '#default_value' => NULL,
       '#upload_validators' => array(
         'file_validate_extensions' => array('txt pdf doc docx'),
@@ -117,7 +117,7 @@ class MeetingsEditForm extends FormBase {
       '#title' => $this->t('Closed description'),
       '#type' => 'managed_file',
       //'#upload_location' => 'private://',
-      '#upload_location' => 'public://',//TODO:change to private
+      '#upload_location' => 'public://' . date('Y') . '-' . date('m'),//TODO:change to private
       '#default_value' => NULL,
       '#upload_validators' => array(
         'file_validate_extensions' => array('txt pdf doc docx'),
