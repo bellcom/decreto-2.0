@@ -1,0 +1,25 @@
+uuid: 7dedb531-18eb-40c4-a7a6-7233415aedde
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f1531f5e-8482-4289-a6f2-88aaba82069e'
+  module:
+    - block_content
+  theme:
+    - decreto_theme
+id: mobilesearchblock
+theme: decreto_theme
+region: sidebar_first
+weight: -9
+provider: null
+plugin: 'block_content:f1531f5e-8482-4289-a6f2-88aaba82069e'
+settings:
+  id: 'block_content:f1531f5e-8482-4289-a6f2-88aaba82069e'
+  label: 'Mobile search block'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
