@@ -1,9 +1,10 @@
 <?php
+// @codingStandardsIgnoreFile
 
 namespace Drupal\Core\DependencyInjection;
 
 use Drupal\Component\FileCache\FileCacheFactory;
-use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Serialization\Yaml;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
@@ -51,13 +52,12 @@ class YamlFileLoader
     /**
      * Loads a Yaml file.
      *
-     * @param mixed  $file The resource
+     * @param mixed $file
+     *   The resource
      */
     public function load($file)
     {
         // Load from the file cache, fall back to loading the file.
-        // @todo Refactor this to cache parsed definition objects in
-        //   https://www.drupal.org/node/2464053
         $content = $this->fileCache->get($file);
         if (!$content) {
             $content = $this->loadFile($file);
@@ -98,7 +98,7 @@ class YamlFileLoader
     /**
      * Parses definitions
      *
-     * @param array  $content
+     * @param array $content
      * @param string $file
      */
     private function parseDefinitions($content, $file)
@@ -111,7 +111,16 @@ class YamlFileLoader
             throw new InvalidArgumentException(sprintf('The "services" key should contain an array in %s. Check your YAML syntax.', $file));
         }
 
+        // Some extensions split up their dependencies into multiple files.
+        if (isset($content['_provider'])) {
+            $provider = $content['_provider'];
+        }
+        else {
+            $basename = basename($file);
+            list($provider, ) = explode('.', $basename, 2);
+        }
         foreach ($content['services'] as $id => $service) {
+            $service['tags'][] = ['name' => '_provider', 'provider' => $provider];
             $this->parseDefinition($id, $service, $file);
         }
     }
@@ -120,10 +129,11 @@ class YamlFileLoader
      * Parses a definition.
      *
      * @param string $id
-     * @param array  $service
+     * @param array $service
      * @param string $file
      *
-     * @throws InvalidArgumentException When tags are invalid
+     * @throws InvalidArgumentException
+     *   When tags are invalid.
      */
     private function parseDefinition($id, $service, $file)
     {
@@ -317,7 +327,8 @@ class YamlFileLoader
      *
      * @return array The file content
      *
-     * @throws InvalidArgumentException when the given file is not a local file or when it does not exist
+     * @throws InvalidArgumentException
+     *   When the given file is not a local file or when it does not exist.
      */
     protected function loadFile($file)
     {
@@ -335,12 +346,13 @@ class YamlFileLoader
     /**
      * Validates a YAML file.
      *
-     * @param mixed  $content
+     * @param mixed $content
      * @param string $file
      *
      * @return array
      *
-     * @throws InvalidArgumentException When service file is not valid
+     * @throws InvalidArgumentException
+     *   When service file is not valid.
      */
     private function validate($content, $file)
     {

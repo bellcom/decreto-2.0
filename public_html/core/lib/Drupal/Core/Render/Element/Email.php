@@ -10,12 +10,13 @@ use Drupal\Core\Render\Element;
  *
  * Properties:
  * - #default_value: An RFC-compliant email address.
+ * - #size: The size of the input element in characters.
  *
  * Example usage:
  * @code
  * $form['email'] = array(
  *   '#type' => 'email',
- *   '#title' => t('Email'),
+ *   '#title' => $this->t('Email'),
  * );
  * @end
  *

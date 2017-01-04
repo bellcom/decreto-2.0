@@ -91,8 +91,8 @@ class BlockContentTranslationUITest extends ContentTranslationUITestBase {
    *   Created custom block.
    */
   protected function createBlockContent($title = FALSE, $bundle = FALSE) {
-    $title = ($title ? : $this->randomMachineName());
-    $bundle = ($bundle ? : $this->bundle);
+    $title = $title ?: $this->randomMachineName();
+    $bundle = $bundle ?: $this->bundle;
     $block_content = BlockContent::create(array(
       'info' => $title,
       'type' => $bundle,
@@ -179,7 +179,10 @@ class BlockContentTranslationUITest extends ContentTranslationUITestBase {
    * {@inheritdoc}
    */
   protected function doTestTranslationEdit() {
-    $entity = entity_load($this->entityTypeId, $this->entityId, TRUE);
+    $storage = $this->container->get('entity_type.manager')
+      ->getStorage($this->entityTypeId);
+    $storage->resetCache([$this->entityId]);
+    $entity = $storage->load($this->entityId);
     $languages = $this->container->get('language_manager')->getLanguages();
 
     foreach ($this->langcodes as $langcode) {

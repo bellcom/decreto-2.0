@@ -124,7 +124,7 @@ class ConfigSync extends FormBase {
    *   The module installer.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler.
-   * @param \Drupal\Core\Render\RendererInterface
+   * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer.
    */
   public function __construct(StorageInterface $sync_storage, StorageInterface $active_storage, StorageInterface $snapshot_storage, LockBackendInterface $lock, EventDispatcherInterface $event_dispatcher, ConfigManagerInterface $config_manager, TypedConfigManagerInterface $typed_config, ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, ThemeHandlerInterface $theme_handler, RendererInterface $renderer) {
@@ -330,7 +330,7 @@ class ConfigSync extends FormBase {
     if ($config_importer->alreadyImporting()) {
       drupal_set_message($this->t('Another request may be synchronizing configuration already.'));
     }
-    else{
+    else {
       try {
         $sync_steps = $config_importer->initialize();
         $batch = array(
@@ -410,6 +410,5 @@ class ConfigSync extends FormBase {
       drupal_set_message($message, 'error');
     }
   }
-
 
 }

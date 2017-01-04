@@ -24,7 +24,24 @@ class LibraryInfo extends PluginBase implements AlterInterface {
    * {@inheritdoc}
    */
   public function alter(&$libraries, &$extension = NULL, &$context2 = NULL) {
+    $livereload = $this->theme->livereloadUrl();
+
+    // Disable preprocess on all CSS/JS if "livereload" is enabled.
+    if ($livereload) {
+      $this->processLibrary($libraries, function (&$info, &$key, $type) {
+        if ($type === 'css' || $type === 'js') {
+          $info['preprocess'] = FALSE;
+        }
+      });
+    }
+
     if ($extension === 'bootstrap') {
+      // Alter the "livereload.js" placeholder with the correct URL.
+      if ($livereload) {
+        $libraries['livereload']['js'][$livereload] = $libraries['livereload']['js']['livereload.js'];
+        unset($libraries['livereload']['js']['livereload.js']);
+      }
+
       // Retrieve the theme's CDN provider and assets.
       $provider = $this->theme->getProvider();
       $assets = $provider ? $provider->getAssets() : [];
@@ -48,9 +65,15 @@ class LibraryInfo extends PluginBase implements AlterInterface {
         $overrides = $ancestor->getPath() . "/css/$version/overrides$provider_theme.min.css";
         if (file_exists($overrides)) {
           // Since this uses a relative path to the ancestor from DRUPAL_ROOT,
-          // we must prefix the entire path with / so it doesn't append the
-          // active theme's path (which would duplicate the prefix).
-          $libraries['theme']['css']['theme']["/$overrides"] = [];
+          // we must prepend the entire path with forward slash (/) so it
+          // doesn't prepend the active theme's path.
+          $overrides = "/$overrides";
+
+          // The overrides file must also be stored in the "base" category so
+          // it isn't added after any potential sub-theme's "theme" category.
+          // There's no weight, so it will be added after the provider's assets.
+          // @see https://www.drupal.org/node/2770613
+          $libraries['theme']['css']['base'][$overrides] = [];
           break;
         }
       }
@@ -61,6 +84,40 @@ class LibraryInfo extends PluginBase implements AlterInterface {
       if ($this->theme->getSetting('modal_enabled')) {
         $libraries['drupal.dialog']['override'] = 'bootstrap/drupal.dialog';
         $libraries['drupal.dialog.ajax']['override'] = 'bootstrap/drupal.dialog.ajax';
+      }
+    }
+  }
+
+  /**
+   * Processes library definitions.
+   *
+   * @param array $libraries
+   *   The libraries array, passed by reference.
+   * @param callable $callback
+   *   The callback to perform processing on the library.
+   */
+  public function processLibrary(&$libraries, callable $callback) {
+    foreach ($libraries as &$library) {
+      foreach ($library as $type => $definition) {
+        if (is_array($definition)) {
+          $modified = [];
+          // CSS needs special handling since it contains grouping.
+          if ($type === 'css') {
+            foreach ($definition as $group => $files) {
+              foreach ($files as $key => $info) {
+                call_user_func_array($callback, [&$info, &$key, $type]);
+                $modified[$group][$key] = $info;
+              }
+            }
+          }
+          else {
+            foreach ($definition as $key => $info) {
+              call_user_func_array($callback, [&$info, &$key, $type]);
+              $modified[$key] = $info;
+            }
+          }
+          $library[$type] = $modified;
+        }
       }
     }
   }

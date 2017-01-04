@@ -1,16 +1,9 @@
 <?php
-/**
- * @file
- * Contains \Drupal\calendar\CalendarViewsTrait.
- */
-
 
 namespace Drupal\calendar;
 
-
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\views\Views;
-use Drupal\views\ViewsDataHelper;
 
 trait CalendarViewsTrait {
 

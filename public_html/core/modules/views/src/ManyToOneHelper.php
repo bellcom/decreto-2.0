@@ -17,7 +17,6 @@ use Drupal\views\Plugin\views\HandlerBase;
  * definition terms:
  * - numeric: If true, treat this field as numeric, using %d instead of %s in
  *            queries.
- *
  */
 class ManyToOneHelper {
 
@@ -299,7 +298,7 @@ class ManyToOneHelper {
         }
         $placeholders = array(
           $placeholder => $value,
-        ) + $this->placeholders;
+        );
         $this->handler->query->addWhereExpression($options['group'], "$field $operator", $placeholders);
       }
       else {

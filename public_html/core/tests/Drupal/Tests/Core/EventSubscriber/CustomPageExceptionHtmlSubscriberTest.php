@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RequestContext;
 
 /**
  * @coversDefaultClass \Drupal\Core\EventSubscriber\CustomPageExceptionHtmlSubscriber
@@ -31,7 +32,7 @@ class CustomPageExceptionHtmlSubscriberTest extends UnitTestCase {
   /**
    * The mocked config factory
    *
-   * @var  \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $configFactory;
 
@@ -127,6 +128,12 @@ class CustomPageExceptionHtmlSubscriberTest extends UnitTestCase {
   public function testHandleWithPostRequest() {
     $request = Request::create('/test', 'POST', array('name' => 'druplicon', 'pass' => '12345'));
 
+    $request_context = new RequestContext();
+    $request_context->fromRequest($request);
+    $this->accessUnawareRouter->expects($this->any())
+      ->method('getContext')
+      ->willReturn($request_context);
+
     $this->kernel->expects($this->once())->method('handle')->will($this->returnCallback(function (Request $request) {
       return new HtmlResponse($request->getMethod());
     }));
@@ -148,6 +155,12 @@ class CustomPageExceptionHtmlSubscriberTest extends UnitTestCase {
     $request = Request::create('/test', 'GET', array('name' => 'druplicon', 'pass' => '12345'));
     $request->attributes->set(AccessAwareRouterInterface::ACCESS_RESULT, AccessResult::forbidden()->addCacheTags(['druplicon']));
 
+    $request_context = new RequestContext();
+    $request_context->fromRequest($request);
+    $this->accessUnawareRouter->expects($this->any())
+      ->method('getContext')
+      ->willReturn($request_context);
+
     $this->kernel->expects($this->once())->method('handle')->will($this->returnCallback(function (Request $request) {
       return new Response($request->getMethod() . ' ' . UrlHelper::buildQuery($request->query->all()));
     }));
@@ -162,4 +175,3 @@ class CustomPageExceptionHtmlSubscriberTest extends UnitTestCase {
   }
 
 }
-

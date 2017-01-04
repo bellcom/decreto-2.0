@@ -230,7 +230,8 @@ class SchemaTest extends KernelTestBase {
     try {
       db_create_table('test_timestamp', $table_specification);
     }
-    catch (\Exception $e) {}
+    catch (\Exception $e) {
+    }
     $this->assertTrue(db_table_exists('test_timestamp'), 'Table with database specific datatype was created.');
   }
 
@@ -427,7 +428,7 @@ class SchemaTest extends KernelTestBase {
     // Now set up columns for the other types.
     $types = array('int', 'float', 'numeric');
     foreach ($types as $type) {
-      $column_spec = array('type' => $type, 'unsigned'=> TRUE);
+      $column_spec = array('type' => $type, 'unsigned' => TRUE);
       if ($type == 'numeric') {
         $column_spec += array('precision' => 10, 'scale' => 0);
       }
@@ -504,6 +505,7 @@ class SchemaTest extends KernelTestBase {
           array('not null' => FALSE, 'default' => 7),
           array('not null' => TRUE, 'initial' => 1),
           array('not null' => TRUE, 'initial' => 1, 'default' => 7),
+          array('not null' => TRUE, 'initial_from_field' => 'serial_column'),
         );
 
         foreach ($variations as $variation) {
@@ -531,6 +533,7 @@ class SchemaTest extends KernelTestBase {
           array('not null' => FALSE, 'default' => 7),
           array('not null' => TRUE, 'initial' => 1),
           array('not null' => TRUE, 'initial' => 1, 'default' => 7),
+          array('not null' => TRUE, 'initial_from_field' => 'serial_column'),
         );
 
         foreach ($variations as $variation) {
@@ -617,6 +620,19 @@ class SchemaTest extends KernelTestBase {
         ->execute()
         ->fetchField();
       $this->assertEqual($count, 0, 'Initial values filled out.');
+    }
+
+    // Check that the initial value from another field has been registered.
+    if (isset($field_spec['initial_from_field'])) {
+      // There should be no row with a value different than
+      // $field_spec['initial_from_field'].
+      $count = db_select($table_name)
+        ->fields($table_name, array('serial_column'))
+        ->where($table_name . '.' . $field_spec['initial_from_field'] . ' <> ' . $table_name . '.' . $field_name)
+        ->countQuery()
+        ->execute()
+        ->fetchField();
+      $this->assertEqual($count, 0, 'Initial values from another field filled out.');
     }
 
     // Check that the default value has been registered.

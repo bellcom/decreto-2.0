@@ -10,6 +10,7 @@ use Drupal\Core\Language\Language;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\simpletest\WebTestBase;
 
@@ -77,11 +78,11 @@ class ConfigTranslationUiTest extends WebTestBase {
     ];
 
     /** @var \Drupal\filter\FilterFormatInterface $filter_test_format */
-    $filter_test_format = entity_load('filter_format', 'filter_test');
+    $filter_test_format = FilterFormat::load('filter_test');
     /** @var \Drupal\filter\FilterFormatInterface $filtered_html_format */
-    $filtered_html_format = entity_load('filter_format', 'filtered_html');
+    $filtered_html_format = FilterFormat::load('filtered_html');
     /** @var \Drupal\filter\FilterFormatInterface $full_html_format */
-    $full_html_format = entity_load('filter_format', 'full_html');
+    $full_html_format = FilterFormat::load('full_html');
 
     $admin_permissions = array_merge(
       $translator_permissions,
@@ -104,7 +105,7 @@ class ConfigTranslationUiTest extends WebTestBase {
         'translate interface',
       ]
     );
-    // Create and login user.
+    // Create and log in user.
     $this->translatorUser = $this->drupalCreateUser($translator_permissions);
     $this->adminUser = $this->drupalCreateUser($admin_permissions);
 
@@ -456,7 +457,7 @@ class ConfigTranslationUiTest extends WebTestBase {
       'medium' => 'Default medium date',
       'custom_medium' => 'Custom medium date',
     );
-    foreach($formats as $id => $label) {
+    foreach ($formats as $id => $label) {
       $translation_base_url = 'admin/config/regional/date-time/formats/manage/' . $id . '/translate';
 
       $this->drupalGet($translation_base_url);
@@ -526,7 +527,7 @@ class ConfigTranslationUiTest extends WebTestBase {
     $this->drupalGet('admin/config/people/accounts/translate/fr/edit');
     foreach ($edit as $key => $value) {
       // Check the translations appear in the right field type as well.
-      $xpath = '//' . (strpos($key, '[body]') ? 'textarea' : 'input') . '[@name="'. $key . '"]';
+      $xpath = '//' . (strpos($key, '[body]') ? 'textarea' : 'input') . '[@name="' . $key . '"]';
       $this->assertFieldByXPath($xpath, $value);
     }
     // Check that labels for email settings appear.

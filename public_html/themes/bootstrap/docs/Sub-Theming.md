@@ -19,8 +19,10 @@ templates, and theme processing.
 
 - @link sub_theming_cdn CDN Starterkit @endlink - uses the "out-of-the-box"
   CSS and JavaScript files served by the [jsDelivr CDN].
-- @link sub_theming_less LESS Starterkit @endlink - uses the [Bootstrap Framework]
-  [LESS] source files and a local [LESS] preprocessor.
+- @link sub_theming_less Less Starterkit @endlink - uses the [Bootstrap Framework]
+  [Less] source files and a local [Less] preprocessor.
+- @link sub_theming_sass Sass Starterkit @endlink - uses the [Bootstrap Framework]
+  [Sass] source files and a local [Sass] preprocessor.
 
 Once you've selected one of the above starterkits, here's how to install it:
 
@@ -33,10 +35,11 @@ Once you've selected one of the above starterkits, here's how to install it:
    directory inside it. For example, the primary file Drupal uses to determine
    if a theme exists is: `./THEMENAME/THEMENAME.info.yml`.
 3. Rename `./THEMENAME/THEMENAME.starterkit.yml` to match
-   `./THEMENAME/THEMENAME.info.yml`.
+   `./THEMENAME/THEMENAME.info.yml`. Also, rename `./THEMENAME/THEMENAME.libraries.yml` 
+   and `./THEMENAME/THEMENAME.theme` as well.
 4. Open `./THEMENAME/THEMENAME.info.yml` and change the name, description and any
    other properties to suite your needs. Make sure to rename the library name as
-   well:  `- THEMENAME/globalstyling`.
+   well:  `- THEMENAME/global-styling`.
 5. Rename the sub-theme configuration files, located at:
    `./THEMENAME/config/install/THEMENAME.settings.yml` and
    `./THEMENAME/config/schema/THEMENAME.schema.yml`.
@@ -59,4 +62,5 @@ your starterkit, please refer to the starterkit's documentation page to customiz
 [Drupal Bootstrap]: https://www.drupal.org/project/bootstrap
 [Bootstrap Framework]: http://getbootstrap.com
 [jsDelivr CDN]: http://www.jsdelivr.com
-[LESS]: http://lesscss.org
+[Less]: http://lesscss.org
+[Sass]: http://sass-lang.com

@@ -20,7 +20,6 @@ class ErrorTest extends UnitTestCase {
    *   The expected return array.
    *
    * @dataProvider providerTestGetLastCaller
-   *
    */
   public function testGetLastCaller($backtrace, $expected) {
     $this->assertSame($expected, Error::getLastCaller($backtrace));
@@ -113,7 +112,7 @@ class ErrorTest extends UnitTestCase {
   /**
    * Creates a mock backtrace item.
    *
-   * @param string|NULL $function
+   * @param string|null $function
    *   (optional) The function name to use in the backtrace item.
    * @param string $class
    *   (optional) The class to use in the backtrace item.

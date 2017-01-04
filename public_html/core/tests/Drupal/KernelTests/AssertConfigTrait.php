@@ -75,7 +75,7 @@ trait AssertConfigTrait {
           }
           foreach ($op->closing as $closing) {
             // The UUIDs don't exist in the default config.
-            if (strpos($closing, 'uuid: ') === 0)  {
+            if (strpos($closing, 'uuid: ') === 0) {
               continue;
             }
             throw new \Exception($config_name . ': ' . var_export($op, TRUE));
@@ -83,7 +83,6 @@ trait AssertConfigTrait {
           break;
         default:
           throw new \Exception($config_name . ': ' . var_export($op, TRUE));
-          break;
       }
     }
   }

@@ -126,7 +126,7 @@ class EntityFormDisplayTest extends KernelTestBase {
     ));
 
     // Check that default options are correctly filled in.
-    $formatter_settings =  \Drupal::service('plugin.manager.field.widget')->getDefaultSettings('text_textfield');
+    $formatter_settings = \Drupal::service('plugin.manager.field.widget')->getDefaultSettings('text_textfield');
     $expected = array(
       'test_no_display' => NULL,
       'test_display_configurable' => array(
@@ -158,7 +158,7 @@ class EntityFormDisplayTest extends KernelTestBase {
     $this->assertFalse(isset($data['hidden']['test_display_non_configurable']));
 
     // Check that defaults are correctly filled when loading the display.
-    $display = entity_load('entity_form_display', $display->id());
+    $display = EntityFormDisplay::load($display->id());
     foreach ($expected as $field_name => $options) {
       $this->assertEqual($display->getComponent($field_name), $options);
     }
@@ -168,7 +168,7 @@ class EntityFormDisplayTest extends KernelTestBase {
     $data['content']['test_display_non_configurable'] = $expected['test_display_non_configurable'];
     $data['content']['test_display_non_configurable']['weight']++;
     $config->setData($data)->save();
-    $display = entity_load('entity_form_display', $display->id());
+    $display = EntityFormDisplay::load($display->id());
     foreach ($expected as $field_name => $options) {
       $this->assertEqual($display->getComponent($field_name), $options);
     }
@@ -193,7 +193,7 @@ class EntityFormDisplayTest extends KernelTestBase {
     $field->save();
 
     // Create default and compact entity display.
-    EntityFormMode::create(array('id' =>  'entity_test.compact', 'targetEntityType' => 'entity_test'))->save();
+    EntityFormMode::create(array('id' => 'entity_test.compact', 'targetEntityType' => 'entity_test'))->save();
     EntityFormDisplay::create(array(
       'targetEntityType' => 'entity_test',
       'bundle' => 'entity_test',

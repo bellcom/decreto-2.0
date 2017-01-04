@@ -8,11 +8,14 @@ use Drupal\Core\Render\Element;
 /**
  * Provides a form element for entering a password, with hidden text.
  *
+ * Properties:
+ * - #size: The size of the input element in characters.
+ *
  * Usage example:
  * @code
  * $form['pass'] = array(
  *   '#type' => 'password',
- *   '#title => t('Password'),
+ *   '#title' => $this->t('Password'),
  *   '#size' => 25,
  * );
  * @endcode

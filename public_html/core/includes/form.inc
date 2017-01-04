@@ -7,6 +7,7 @@
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Render\Element\RenderElement;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,7 +30,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 function template_preprocess_select(&$variables) {
   $element = $variables['element'];
   Element::setAttributes($element, array('id', 'name', 'size'));
-  Element\RenderElement::setAttributes($element, array('form-select'));
+  RenderElement::setAttributes($element, array('form-select'));
 
   $variables['attributes'] = $element['#attributes'];
   $variables['options'] = form_select_options($element);
@@ -191,7 +192,7 @@ function form_get_options($element, $key) {
 function template_preprocess_fieldset(&$variables) {
   $element = $variables['element'];
   Element::setAttributes($element, array('id'));
-  Element\RenderElement::setAttributes($element);
+  RenderElement::setAttributes($element);
   $variables['attributes'] = isset($element['#attributes']) ? $element['#attributes'] : array();
   $variables['prefix'] = isset($element['#field_prefix']) ? $element['#field_prefix'] : NULL;
   $variables['suffix'] = isset($element['#field_suffix']) ? $element['#field_suffix'] : NULL;
@@ -253,6 +254,7 @@ function template_preprocess_details(&$variables) {
   $variables['description'] = (!empty($element['#description'])) ? $element['#description'] : '';
   $variables['children'] = (isset($element['#children'])) ? $element['#children'] : '';
   $variables['value'] = (isset($element['#value'])) ? $element['#value'] : '';
+  $variables['required'] = !empty($element['#required']) ? $element['#required'] : NULL;
 
   // Suppress error messages.
   $variables['errors'] = NULL;
@@ -312,7 +314,6 @@ function template_preprocess_checkboxes(&$variables) {
  *   An associative array containing:
  *   - element: An associative array containing the properties and children of
  *     the details element. Properties used: #children.
- *
  */
 function template_preprocess_vertical_tabs(&$variables) {
   $element = $variables['element'];
@@ -371,12 +372,11 @@ function template_preprocess_form(&$variables) {
  *   - element: An associative array containing the properties of the element.
  *     Properties used: #title, #value, #description, #rows, #cols,
  *     #placeholder, #required, #attributes, #resizable
- *
  */
 function template_preprocess_textarea(&$variables) {
   $element = $variables['element'];
   Element::setAttributes($element, array('id', 'name', 'rows', 'cols', 'placeholder'));
-  Element\RenderElement::setAttributes($element, array('form-textarea'));
+  RenderElement::setAttributes($element, array('form-textarea'));
   $variables['wrapper_attributes'] = new Attribute();
   $variables['attributes'] = new Attribute($element['#attributes']);
   $variables['value'] = $element['#value'];
@@ -511,8 +511,6 @@ function template_preprocess_form_element_label(&$variables) {
     $variables['title'] = ['#markup' => $element['#title']];
   }
 
-  $variables['attributes'] = array();
-
   // Pass elements title_display to template.
   $variables['title_display'] = $element['#title_display'];
 
@@ -593,7 +591,8 @@ function template_preprocess_form_element_label(&$variables) {
  *   //   1 (or no value explicitly set) means the operation is finished
  *   //   and the batch processing can continue to the next operation.
  *
- *   $nodes = entity_load_multiple_by_properties('node', array('uid' => $uid, 'type' => $type));
+ *   $nodes = \Drupal::entityTypeManager()->getStorage('node')
+ *     ->loadByProperties(['uid' => $uid, 'type' => $type]);
  *   $node = reset($nodes);
  *   $context['results'][] = $node->id() . ' : ' . SafeMarkup::checkPlain($node->label());
  *   $context['message'] = SafeMarkup::checkPlain($node->label());

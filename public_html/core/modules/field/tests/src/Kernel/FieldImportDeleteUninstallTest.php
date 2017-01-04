@@ -70,7 +70,7 @@ class FieldImportDeleteUninstallTest extends FieldKernelTestBase {
 
     // Verify entity has been created properly.
     $id = $entity->id();
-    $entity = entity_load('entity_test', $id);
+    $entity = EntityTest::load($id);
     $this->assertEqual($entity->field_test->value, $value);
     $this->assertEqual($entity->field_test[0]->value, $value);
     $this->assertEqual($entity->field_int->value, '99');
@@ -125,7 +125,7 @@ class FieldImportDeleteUninstallTest extends FieldKernelTestBase {
     ])->save();
 
     // Create 12 entities to ensure that the purging works as expected.
-    for ($i=0; $i < 12; $i++) {
+    for ($i = 0; $i < 12; $i++) {
       $entity = EntityTest::create();
       $value = '+0123456789';
       $entity->field_test = $value;
@@ -134,7 +134,7 @@ class FieldImportDeleteUninstallTest extends FieldKernelTestBase {
 
       // Verify entity has been created properly.
       $id = $entity->id();
-      $entity = entity_load('entity_test', $id);
+      $entity = EntityTest::load($id);
       $this->assertEqual($entity->field_test->value, $value);
     }
 

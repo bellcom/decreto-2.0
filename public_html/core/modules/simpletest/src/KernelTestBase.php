@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Additional modules needed in a test may be loaded and added to the fixed
  * module list.
  *
- * @deprecated in Drupal 8.0.x, will be removed before Drupal 8.2.x. Use
+ * @deprecated in Drupal 8.0.x, will be removed before Drupal 9.0.0. Use
  *   \Drupal\KernelTests\KernelTestBase instead.
  *
  * @see \Drupal\simpletest\KernelTestBase::$modules
@@ -497,7 +497,7 @@ EOD;
    * To install test modules outside of the testing environment, add
    * @code
    * $settings['extension_discovery_scan_tests'] = TRUE;
-   * @encode
+   * @endcode
    * to your settings.php.
    *
    * @param array $modules
@@ -519,7 +519,7 @@ EOD;
 
     // Write directly to active storage to avoid early instantiation of
     // the event dispatcher which can prevent modules from registering events.
-    $active_storage =  \Drupal::service('config.storage');
+    $active_storage = \Drupal::service('config.storage');
     $extensions = $active_storage->read('core.extension');
 
     foreach ($modules as $module) {

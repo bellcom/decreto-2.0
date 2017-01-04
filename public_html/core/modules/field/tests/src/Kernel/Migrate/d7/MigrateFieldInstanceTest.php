@@ -5,6 +5,7 @@ namespace Drupal\Tests\field\Kernel\Migrate\d7;
 use Drupal\comment\Entity\CommentType;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\FieldConfigInterface;
+use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
 use Drupal\node\Entity\NodeType;
 
@@ -20,7 +21,7 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
    *
    * @var array
    */
-  static $modules = array(
+  public static $modules = array(
     'comment',
     'datetime',
     'file',
@@ -45,6 +46,7 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
     $this->createType('book');
     $this->createType('forum');
     $this->createType('test_content_type');
+    Vocabulary::create(['vid' => 'test_vocabulary'])->save();
     $this->executeMigrations(['d7_field', 'd7_field_instance']);
   }
 
@@ -76,7 +78,7 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
    *   The expected field label.
    * @param string $expected_field_type
    *   The expected field type.
-   * @param boolean $is_required
+   * @param bool $is_required
    *   Whether or not the field is required.
    */
   protected function assertEntity($id, $expected_label, $expected_field_type, $is_required) {
@@ -92,6 +94,19 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
     $this->assertIdentical($expected_name, $field->getName());
     $this->assertEqual($is_required, $field->isRequired());
     $this->assertIdentical($expected_entity_type . '.' . $expected_name, $field->getFieldStorageDefinition()->id());
+  }
+
+  /**
+   * Asserts the settings of a link field config entity.
+   *
+   * @param $id
+   *   The entity ID in the form ENTITY_TYPE.BUNDLE.FIELD_NAME.
+   * @param $title_setting
+   *   The expected title setting.
+   */
+  protected function assertLinkFields($id, $title_setting) {
+    $field = FieldConfig::load($id);
+    $this->assertSame($title_setting, $field->getSetting('title'));
   }
 
   /**
@@ -126,9 +141,16 @@ class MigrateFieldInstanceTest extends MigrateDrupal7TestBase {
     $this->assertEntity('node.test_content_type.field_integer_list', 'Integer List', 'list_integer', FALSE);
     $this->assertEntity('node.test_content_type.field_long_text', 'Long text', 'text_with_summary', FALSE);
     $this->assertEntity('node.test_content_type.field_term_reference', 'Term Reference', 'entity_reference', FALSE);
+    $this->assertEntity('node.test_content_type.field_node_entityreference', 'Node Entity Reference', 'entity_reference', FALSE);
+    $this->assertEntity('node.test_content_type.field_user_entityreference', 'User Entity Reference', 'entity_reference', FALSE);
+    $this->assertEntity('node.test_content_type.field_term_entityreference', 'Term Entity Reference', 'entity_reference', FALSE);
     $this->assertEntity('node.test_content_type.field_text', 'Text', 'text', FALSE);
     $this->assertEntity('comment.comment_node_test_content_type.field_integer', 'Integer', 'integer', FALSE);
     $this->assertEntity('user.user.field_file', 'File', 'file', FALSE);
+
+    $this->assertLinkFields('node.test_content_type.field_link', DRUPAL_OPTIONAL);
+    $this->assertLinkFields('node.article.field_link', DRUPAL_DISABLED);
+    $this->assertLinkFields('node.blog.field_link', DRUPAL_REQUIRED);
   }
 
 }

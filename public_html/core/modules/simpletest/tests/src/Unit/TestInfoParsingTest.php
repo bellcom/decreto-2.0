@@ -5,7 +5,7 @@
  * Contains \Drupal\Tests\simpletest\Unit\TestInfoParsingTest.
  */
 
-namespace Drupal\Tests\simpletest\Unit {
+namespace Drupal\Tests\simpletest\Unit;
 
 use Composer\Autoload\ClassLoader;
 use Drupal\Core\Extension\Extension;
@@ -25,7 +25,7 @@ class TestInfoParsingTest extends UnitTestCase {
    * @dataProvider infoParserProvider
    */
   public function testTestInfoParser($expected, $classname, $doc_comment = NULL) {
-    $info = \Drupal\simpletest\TestDiscovery::getTestInfo($classname, $doc_comment);
+    $info = TestDiscovery::getTestInfo($classname, $doc_comment);
     $this->assertEquals($expected, $info);
   }
 
@@ -60,13 +60,13 @@ class TestInfoParsingTest extends UnitTestCase {
     $tests[] = [
       // Expected result.
       [
-        'name' => 'Drupal\Tests\simpletest\Functional\BrowserTestBaseTest',
-        'group' => 'simpletest',
+        'name' => 'Drupal\FunctionalTests\BrowserTestBaseTest',
+        'group' => 'browsertestbase',
         'description' => 'Tests BrowserTestBase functionality.',
         'type' => 'PHPUnit-Functional',
       ],
       // Classname.
-      'Drupal\Tests\simpletest\Functional\BrowserTestBaseTest',
+      'Drupal\FunctionalTests\BrowserTestBaseTest',
     ];
 
     // kernel PHPUnit test.
@@ -245,7 +245,7 @@ class TestInfoParsingTest extends UnitTestCase {
  * Bulk delete storages and fields, and clean up afterwards.
  */
 EOT;
-    \Drupal\simpletest\TestDiscovery::getTestInfo($classname, $doc_comment);
+    TestDiscovery::getTestInfo($classname, $doc_comment);
   }
 
   /**
@@ -258,7 +258,7 @@ EOT;
  * @group field
  */
 EOT;
-    $info = \Drupal\simpletest\TestDiscovery::getTestInfo($classname, $doc_comment);
+    $info = TestDiscovery::getTestInfo($classname, $doc_comment);
     $this->assertEmpty($info['description']);
   }
 
@@ -400,7 +400,7 @@ class TestTestDiscovery extends TestDiscovery {
     $data['simpletest-kerneltest'] = ['\Drupal\hal\Tests\FileNormalizeTest', FALSE];
     $data['module-unittest'] = [static::class, 'Unit'];
     $data['module-kerneltest'] = ['\Drupal\KernelTests\Core\Theme\TwigMarkupInterfaceTest', 'Kernel'];
-    $data['module-functionaltest'] = ['\Drupal\Tests\simpletest\Functional\BrowserTestBaseTest', 'Functional'];
+    $data['module-functionaltest'] = ['\Drupal\FunctionalTests\BrowserTestBaseTest', 'Functional'];
     $data['module-functionaljavascripttest'] = ['\Drupal\Tests\toolbar\FunctionalJavascript\ToolbarIntegrationTest', 'FunctionalJavascript'];
     $data['core-unittest'] = ['\Drupal\Tests\ComposerIntegrationTest', 'Unit'];
     $data['core-unittest2'] = ['Drupal\Tests\Core\DrupalTest', 'Unit'];
@@ -413,9 +413,7 @@ class TestTestDiscovery extends TestDiscovery {
 
 }
 
-}
-
-namespace Drupal\simpletest\Tests {
+namespace Drupal\simpletest\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
@@ -425,6 +423,4 @@ use Drupal\simpletest\WebTestBase;
  * @group simpletest
  */
 class ExampleSimpleTest extends WebTestBase {
-}
-
 }

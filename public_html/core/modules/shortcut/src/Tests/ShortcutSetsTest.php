@@ -88,7 +88,7 @@ class ShortcutSetsTest extends ShortcutTestBase {
       $weight--;
     }
 
-    $this->drupalPostForm(NULL, $edit, t('Save changes'));
+    $this->drupalPostForm(NULL, $edit, t('Save'));
     $this->assertRaw(t('The shortcut set has been updated.'));
 
     \Drupal::entityManager()->getStorage('shortcut')->resetCache();
@@ -207,4 +207,5 @@ class ShortcutSetsTest extends ShortcutTestBase {
     $this->drupalGet('user/' . $this->adminUser->id() . '/shortcuts');
     $this->assertText($new_set->label(), 'Generated shortcut set was listed as a choice on the user account page.');
   }
+
 }

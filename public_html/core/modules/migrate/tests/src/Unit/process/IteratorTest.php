@@ -67,7 +67,7 @@ class IteratorTest extends MigrateTestCase {
       ),
     );
     // This is not used but the interface requires it, so create an empty row.
-    $row = new Row(array(), array());
+    $row = new Row();
 
     // After transformation, check to make sure that source_foo and source_id's
     // values ended up in the proper destinations, and that the value of the
@@ -78,4 +78,5 @@ class IteratorTest extends MigrateTestCase {
     $this->assertSame($new_value[42]['foo'], 'test');
     $this->assertSame($new_value[42]['id'], 42);
   }
+
 }

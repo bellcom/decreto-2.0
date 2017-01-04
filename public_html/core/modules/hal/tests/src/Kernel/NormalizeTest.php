@@ -7,7 +7,7 @@ use Drupal\Core\Url;
 use Drupal\entity_test\Entity\EntityTest;
 
 /**
- * Tests that entities can be normalized in HAL.
+ * Tests HAL normalization edge cases for EntityResource.
  *
  * @group hal
  */
@@ -67,7 +67,7 @@ class NormalizeTest extends NormalizerTestBase {
           array(
             'href' => '/relations',
             'name' => 'site',
-            'templated' => true,
+            'templated' => TRUE,
           ),
         ),
         'self' => array(

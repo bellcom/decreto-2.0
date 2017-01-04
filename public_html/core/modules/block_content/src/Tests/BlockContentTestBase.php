@@ -19,7 +19,7 @@ abstract class BlockContentTestBase extends WebTestBase {
   /**
    * Admin user
    *
-   * @var object
+   * @var \Drupal\user\UserInterface
    */
   protected $adminUser;
 
@@ -74,7 +74,7 @@ abstract class BlockContentTestBase extends WebTestBase {
    *   Created custom block.
    */
   protected function createBlockContent($title = FALSE, $bundle = 'basic', $save = TRUE) {
-    $title = ($title ? : $this->randomMachineName());
+    $title = $title ?: $this->randomMachineName();
     $block_content = BlockContent::create(array(
       'info' => $title,
       'type' => $bundle,

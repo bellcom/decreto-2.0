@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\devel\Tests\DevelControllerTest.
- */
-
 namespace Drupal\devel\Tests;
 
 use Drupal\simpletest\WebTestBase;
@@ -64,19 +59,20 @@ class DevelControllerTest extends WebTestBase {
   }
 
   function testRouteGeneration() {
-    // @TODO remove after https://www.drupal.org/node/2431263 is solved.
-    $this->container->get('module_installer')->install(array('kint'));
-
     // Test Devel load and render routes for entities with both route
     // definitions.
     $this->drupalGet('entity_test/' . $this->entity->id());
     $this->assertText('Devel', 'Devel tab is present');
     $this->drupalGet('devel/entity_test/' . $this->entity->id());
     $this->assertResponse(200);
+    $this->assertText('Definition', 'Devel definition tab is present');
     $this->assertText('Load', 'Devel load tab is present');
     $this->assertText('Render', 'Devel load tab is present');
     $this->assertLinkByHref('devel/entity_test/' . $this->entity->id() . '/render');
     $this->drupalGet('devel/entity_test/' . $this->entity->id() . '/render');
+    $this->assertResponse(200);
+    $this->assertLinkByHref('devel/entity_test/' . $this->entity->id() . '/definition');
+    $this->drupalGet('devel/entity_test/' . $this->entity->id() . '/definition');
     $this->assertResponse(200);
 
     // Test Devel load and render routes for entities with only canonical route
@@ -90,6 +86,9 @@ class DevelControllerTest extends WebTestBase {
     $this->assertResponse(404);
     $this->drupalGet('devel/devel_entity_test_canonical/' . $this->entity_canonical->id() . '/render');
     $this->assertResponse(200);
+    $this->assertLinkByHref('devel/devel_entity_test_canonical/' . $this->entity_canonical->id() . '/definition');
+    $this->drupalGet('devel/devel_entity_test_canonical/' . $this->entity_canonical->id() . '/definition');
+    $this->assertResponse(200);
 
     // Test Devel load and render routes for entities with only edit route
     // definitions.
@@ -97,10 +96,13 @@ class DevelControllerTest extends WebTestBase {
     $this->assertText('Devel', 'Devel tab is present');
     $this->assertLinkByHref('devel/devel_entity_test_edit/' . $this->entity_edit->id());
     $this->assertNoLinkByHref('devel/devel_entity_test_edit/' . $this->entity_edit->id() . '/render');
+    $this->assertNoLinkByHref('devel/devel_entity_test_edit/' . $this->entity_edit->id() . '/definition');
     $this->drupalGet('devel/devel_entity_test_edit/' . $this->entity_edit->id());
     $this->assertResponse(200);
     $this->drupalGet('devel/devel_entity_test_edit/' . $this->entity_edit->id() . '/render');
     $this->assertResponse(404);
+    $this->drupalGet('devel/devel_entity_test_edit/' . $this->entity_edit->id() . '/definition');
+    $this->assertResponse(200);
 
     // Test Devel load and render routes for entities with no route
     // definitions.
@@ -108,9 +110,12 @@ class DevelControllerTest extends WebTestBase {
     $this->assertNoText('Devel', 'Devel tab is not present');
     $this->assertNoLinkByHref('devel/devel_entity_test_no_links/' . $this->entity_no_links->id());
     $this->assertNoLinkByHref('devel/devel_entity_test_no_links/' . $this->entity_no_links->id() . '/render');
+    $this->assertNoLinkByHref('devel/devel_entity_test_no_links/' . $this->entity_no_links->id() . '/definition');
     $this->drupalGet('devel/devel_entity_test_no_links/' . $this->entity_no_links->id());
     $this->assertResponse(404);
     $this->drupalGet('devel/devel_entity_test_no_links/' . $this->entity_no_links->id() . '/render');
+    $this->assertResponse(404);
+    $this->drupalGet('devel/devel_entity_test_no_links/' . $this->entity_no_links->id() . '/definition');
     $this->assertResponse(404);
   }
 

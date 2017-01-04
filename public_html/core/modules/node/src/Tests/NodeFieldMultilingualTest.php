@@ -97,7 +97,7 @@ class NodeFieldMultilingualTest extends WebTestBase {
     $this->assertRaw($body_value, 'Body correctly displayed using English as requested language');
   }
 
-  /*
+  /**
    * Tests multilingual field display settings.
    */
   function testMultilingualDisplaySettings() {
@@ -119,7 +119,7 @@ class NodeFieldMultilingualTest extends WebTestBase {
 
     // Check if node body is showed.
     $this->drupalGet('node/' . $node->id());
-     $body = $this->xpath('//article[contains(concat(" ", normalize-space(@class), " "), :node-class)]//div[contains(concat(" ", normalize-space(@class), " "), :content-class)]/descendant::p', array(
+    $body = $this->xpath('//article[contains(concat(" ", normalize-space(@class), " "), :node-class)]//div[contains(concat(" ", normalize-space(@class), " "), :content-class)]/descendant::p', array(
       ':node-class' => ' node ',
       ':content-class' => 'node__content',
     ));

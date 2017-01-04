@@ -2,6 +2,7 @@
 
 namespace Drupal\KernelTests\Core\Entity;
 
+use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
 use Drupal\Core\Cache\Cache;
@@ -158,13 +159,14 @@ class EntityViewBuilderTest extends EntityKernelTestBase {
     // Test a view mode in default conditions: render caching is enabled for
     // the entity type and the view mode.
     $build = $this->container->get('entity.manager')->getViewBuilder('entity_test')->view($entity_test, 'full');
-    $this->assertTrue(isset($build['#cache']) && array_keys($build['#cache']) == ['tags', 'contexts', 'max-age', 'keys', 'bin'] , 'A view mode with render cache enabled has the correct output (cache tags, keys, contexts, max-age and bin).');
+    $this->assertTrue(isset($build['#cache']) && array_keys($build['#cache']) == ['tags', 'contexts', 'max-age', 'keys', 'bin'], 'A view mode with render cache enabled has the correct output (cache tags, keys, contexts, max-age and bin).');
 
     // Test that a view mode can opt out of render caching.
     $build = $this->container->get('entity.manager')->getViewBuilder('entity_test')->view($entity_test, 'test');
     $this->assertTrue(isset($build['#cache']) && array_keys($build['#cache']) == ['tags', 'contexts', 'max-age'], 'A view mode with render cache disabled has the correct output (only cache tags, contexts and max-age).');
 
     // Test that an entity type can opt out of render caching completely.
+    $this->installEntitySchema('entity_test_label');
     $entity_test_no_cache = $this->createTestEntity('entity_test_label');
     $entity_test_no_cache->save();
     $build = $this->container->get('entity.manager')->getViewBuilder('entity_test_label')->view($entity_test_no_cache, 'full');
@@ -185,7 +187,7 @@ class EntityViewBuilderTest extends EntityKernelTestBase {
 
     // Create and build a test entity.
     $entity_test = $this->createTestEntity('entity_test');
-    $view =  $this->container->get('entity.manager')->getViewBuilder('entity_test')->view($entity_test, 'full');
+    $view = $this->container->get('entity.manager')->getViewBuilder('entity_test')->view($entity_test, 'full');
     $renderer->renderRoot($view);
 
     // Check that the weight is respected.
@@ -207,6 +209,25 @@ class EntityViewBuilderTest extends EntityKernelTestBase {
       'name' => $this->randomMachineName(),
     );
     return $this->container->get('entity.manager')->getStorage($entity_type)->create($data);
+  }
+
+  /**
+   * Tests that viewing an entity without template does not specify #theme.
+   */
+  public function testNoTemplate() {
+    // Ensure that an entity type without explicit view builder uses the
+    // default.
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $entity_type = $entity_type_manager->getDefinition('entity_test_base_field_display');
+    $this->assertTrue($entity_type->hasViewBuilderClass());
+    $this->assertEquals(EntityViewBuilder::class, $entity_type->getViewBuilderClass());
+
+    // Ensure that an entity without matching template does not have a #theme
+    // key.
+    $entity = $this->createTestEntity('entity_test');
+    $build = $entity_type_manager->getViewBuilder('entity_test')->view($entity);
+    $this->assertEquals($entity, $build['#entity_test']);
+    $this->assertFalse(array_key_exists('#theme', $build));
   }
 
 }

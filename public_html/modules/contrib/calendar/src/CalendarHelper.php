@@ -1,8 +1,5 @@
 <?php
-/**
- * @file
- * Contains \Drupal\calendar\CalendarHelper.
- */
+
 namespace Drupal\calendar;
 
 use Datetime;
@@ -701,8 +698,8 @@ class CalendarHelper extends DateHelper {
    * @param \Drupal\views\ViewExecutable $view
    * @param null $display_id
    *
-   * @return \Drupal\calendar\DateArgumentWrapper|FALSE Returns the Date handler if one is found, or FALSE otherwise.
-   * Returns the Date handler if one is found, or FALSE otherwise.
+   * @return \Drupal\calendar\DateArgumentWrapper|FALSE
+   *   Returns the Date handler if one is found, or FALSE otherwise.
    */
   public static function getDateArgumentHandler(ViewExecutable $view, $display_id = NULL) {
     $all_arguments = [];
@@ -713,7 +710,7 @@ class CalendarHelper extends DateHelper {
 
       $argument_configs = $view->getHandlers('argument', $display_id);
       foreach ($argument_configs as $argument_config) {
-        $all_arguments[] = $argument_manager->createInstance($argument_config['plugin_id'], $argument_config);
+        $all_arguments[] = $argument_manager->getHandler($argument_config);
       }
     }
     else {

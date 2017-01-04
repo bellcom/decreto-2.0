@@ -17,7 +17,7 @@ class MigrateShortcutSetUsersTest extends MigrateDrupal7TestBase {
    *
    * @var array
    */
-  static $modules = array(
+  public static $modules = array(
     'link',
     'field',
     'shortcut',
@@ -36,8 +36,8 @@ class MigrateShortcutSetUsersTest extends MigrateDrupal7TestBase {
     $this->executeMigration('d7_user_role');
     $this->executeMigration('d7_user');
     $this->executeMigration('d7_shortcut_set');
-    $this->executeMigration('menu');
-    $this->executeMigration('menu_links');
+    $this->executeMigration('d7_menu');
+    $this->executeMigration('d7_menu_links');
     $this->executeMigration('d7_shortcut');
     $this->executeMigration('d7_shortcut_set_users');
   }

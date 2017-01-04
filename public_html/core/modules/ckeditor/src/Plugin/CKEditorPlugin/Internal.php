@@ -4,7 +4,8 @@ namespace Drupal\ckeditor\Plugin\CKEditorPlugin;
 
 use Drupal\ckeditor\CKEditorPluginBase;
 use Drupal\ckeditor\CKEditorPluginContextualInterface;
-use Drupal\Component\Utility\NestedArray;
+use Drupal\ckeditor\CKEditorPluginManager;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -113,14 +114,7 @@ class Internal extends CKEditorPluginBase implements ContainerFactoryPluginInter
     list($config['allowedContent'], $config['disallowedContent']) = $this->generateACFSettings($editor);
 
     // Add the format_tags setting, if its button is enabled.
-    $toolbar_rows = array();
-    $settings = $editor->getSettings();
-    foreach ($settings['toolbar']['rows'] as $row_number => $row) {
-      $toolbar_rows[] = array_reduce($settings['toolbar']['rows'][$row_number], function (&$result, $button_group) {
-        return array_merge($result, $button_group['items']);
-      }, array());
-    }
-    $toolbar_buttons = array_unique(NestedArray::mergeDeepArray($toolbar_rows));
+    $toolbar_buttons = CKEditorPluginManager::getEnabledButtons($editor);
     if (in_array('Format', $toolbar_buttons)) {
       $config['format_tags'] = $this->generateFormatTagsSetting($editor);
     }
@@ -376,7 +370,7 @@ class Internal extends CKEditorPluginBase implements ContainerFactoryPluginInter
       foreach ($possible_format_tags as $tag) {
         $input = '<' . $tag . '>TEST</' . $tag . '>';
         $output = trim(check_markup($input, $editor->id()));
-        if ($input == $output) {
+        if (Html::load($output)->getElementsByTagName($tag)->length !== 0) {
           $format_tags[] = $tag;
         }
       }

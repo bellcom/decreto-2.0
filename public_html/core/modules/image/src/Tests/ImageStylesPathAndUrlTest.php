@@ -62,9 +62,9 @@ class ImageStylesPathAndUrlTest extends WebTestBase {
   /**
    * Tests an image style URL with the "public://" scheme and unclean URLs.
    */
-   function testImageStyleUrlAndPathPublicUnclean() {
-     $this->doImageStyleUrlAndPathTests('public', FALSE);
-   }
+  function testImageStyleUrlAndPathPublicUnclean() {
+    $this->doImageStyleUrlAndPathTests('public', FALSE);
+  }
 
   /**
    * Tests an image style URL with the "private://" schema and unclean URLs.
@@ -155,6 +155,11 @@ class ImageStylesPathAndUrlTest extends WebTestBase {
     $image = $this->container->get('image.factory')->get($generated_uri);
     $this->assertEqual($this->drupalGetHeader('Content-Type'), $image->getMimeType(), 'Expected Content-Type was reported.');
     $this->assertEqual($this->drupalGetHeader('Content-Length'), $image->getFileSize(), 'Expected Content-Length was reported.');
+
+    // Check that we did not download the original file.
+    $original_image = $this->container->get('image.factory')->get($original_uri);
+    $this->assertNotEqual($this->drupalGetHeader('Content-Length'), $original_image->getFileSize());
+
     if ($scheme == 'private') {
       $this->assertEqual($this->drupalGetHeader('Expires'), 'Sun, 19 Nov 1978 05:00:00 GMT', 'Expires header was sent.');
       $this->assertNotEqual(strpos($this->drupalGetHeader('Cache-Control'), 'no-cache'), FALSE, 'Cache-Control header contains \'no-cache\' to prevent caching.');
@@ -164,6 +169,12 @@ class ImageStylesPathAndUrlTest extends WebTestBase {
       // works too.
       $this->drupalGet($generate_url);
       $this->assertResponse(200, 'Image was generated at the URL.');
+
+      // Check that the second request also returned the generated image.
+      $this->assertEqual($this->drupalGetHeader('Content-Length'), $image->getFileSize());
+
+      // Check that we did not download the original file.
+      $this->assertNotEqual($this->drupalGetHeader('Content-Length'), $original_image->getFileSize());
 
       // Make sure that access is denied for existing style files if we do not
       // have access.
@@ -175,7 +186,7 @@ class ImageStylesPathAndUrlTest extends WebTestBase {
       // make sure that access is denied.
       $file_noaccess = array_shift($files);
       $original_uri_noaccess = file_unmanaged_copy($file_noaccess->uri, $scheme . '://', FILE_EXISTS_RENAME);
-      $generated_uri_noaccess = $scheme . '://styles/' . $this->style->id() . '/' . $scheme . '/'. drupal_basename($original_uri_noaccess);
+      $generated_uri_noaccess = $scheme . '://styles/' . $this->style->id() . '/' . $scheme . '/' . drupal_basename($original_uri_noaccess);
       $this->assertFalse(file_exists($generated_uri_noaccess), 'Generated file does not exist.');
       $generate_url_noaccess = $this->style->buildUrl($original_uri_noaccess);
 
@@ -249,7 +260,7 @@ class ImageStylesPathAndUrlTest extends WebTestBase {
 
     // Check that requesting a nonexistent image does not create any new
     // directories in the file system.
-    $directory = $scheme . '://styles/' .  $this->style->id() . '/' . $scheme . '/' . $this->randomMachineName();
+    $directory = $scheme . '://styles/' . $this->style->id() . '/' . $scheme . '/' . $this->randomMachineName();
     $this->drupalGet(file_create_url($directory . '/' . $this->randomString()));
     $this->assertFalse(file_exists($directory), 'New directory was not created in the filesystem when requesting an unauthorized image.');
   }

@@ -356,7 +356,7 @@ class CommentNonNodeTest extends WebTestBase {
     ));
     $this->drupalGet('entity_test/' . $this->entity->id());
     $this->assertPattern('@<h2[^>]*>Comments</h2>@', 'Comments were displayed.');
-    $this->assertLink('Log in', 0, 'Link to log in was found.');
+    $this->assertLink('Log in', 0, 'Link to login was found.');
     $this->assertLink('register', 0, 'Link to register was found.');
     $this->assertNoFieldByName('subject[0][value]', '', 'Subject field not found.');
     $this->assertNoFieldByName('comment_body[0][value]', '', 'Comment field not found.');
@@ -384,6 +384,7 @@ class CommentNonNodeTest extends WebTestBase {
       'administer entity_test fields',
       'view test entity',
       'administer entity_test content',
+      'administer comments',
     ));
     $this->drupalLogin($limited_user);
     $this->drupalGet('entity_test/structure/entity_test/fields/entity_test.entity_test.comment');

@@ -9,6 +9,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Plugin\Discovery\ContainerDerivativeDiscoveryDecorator;
+use Drupal\migrate\Plugin\Discovery\ProviderFilterDecorator;
 use Drupal\Core\Plugin\Discovery\YamlDirectoryDiscovery;
 use Drupal\Core\Plugin\Factory\ContainerFactory;
 use Drupal\migrate\MigrateBuildDependencyInterface;
@@ -68,7 +69,15 @@ class MigrationPluginManager extends DefaultPluginManager implements MigrationPl
       }, $this->moduleHandler->getModuleDirectories());
 
       $yaml_discovery = new YamlDirectoryDiscovery($directories, 'migrate');
-      $this->discovery = new ContainerDerivativeDiscoveryDecorator($yaml_discovery);
+      // This gets rid of migrations which try to use a non-existent source
+      // plugin. The common case for this is if the source plugin has, or
+      // specifies, a non-existent provider.
+      $only_with_source_discovery  = new NoSourcePluginDecorator($yaml_discovery);
+      // This gets rid of migrations with explicit providers set if one of the
+      // providers do not exist before we try to use a potentially non-existing
+      // deriver. This is a rare case.
+      $filtered_discovery = new ProviderFilterDecorator($only_with_source_discovery, [$this->moduleHandler, 'moduleExists']);
+      $this->discovery = new ContainerDerivativeDiscoveryDecorator($filtered_discovery);
     }
     return $this->discovery;
   }
@@ -77,7 +86,7 @@ class MigrationPluginManager extends DefaultPluginManager implements MigrationPl
    * {@inheritdoc}
    */
   public function createInstance($plugin_id, array $configuration = array()) {
-    $instances = $this->createInstances([$plugin_id], $configuration);
+    $instances = $this->createInstances([$plugin_id], [$plugin_id => $configuration]);
     return reset($instances);
   }
 
@@ -157,6 +166,7 @@ class MigrationPluginManager extends DefaultPluginManager implements MigrationPl
     // current migration.
     $dependency_graph = [];
     $required_dependency_graph = [];
+    $have_optional = FALSE;
     foreach ($migrations as $migration) {
       /** @var \Drupal\migrate\Plugin\MigrationInterface $migration */
       $id = $migration->id();
@@ -172,14 +182,15 @@ class MigrationPluginManager extends DefaultPluginManager implements MigrationPl
           $this->addDependency($dependency_graph, $id, $dependency, $dynamic_ids);
         }
       }
-      if (isset($migration_dependencies['optional'])) {
+      if (!empty($migration_dependencies['optional'])) {
         foreach ($migration_dependencies['optional'] as $dependency) {
           $this->addDependency($dependency_graph, $id, $dependency, $dynamic_ids);
         }
+        $have_optional = TRUE;
       }
     }
     $dependency_graph = (new Graph($dependency_graph))->searchAndSort();
-    if (!empty($migration_dependencies['optional'])) {
+    if ($have_optional) {
       $required_dependency_graph = (new Graph($required_dependency_graph))->searchAndSort();
     }
     else {
@@ -224,6 +235,27 @@ class MigrationPluginManager extends DefaultPluginManager implements MigrationPl
   public function createStubMigration(array $definition) {
     $id = isset($definition['id']) ? $definition['id'] : uniqid();
     return Migration::create(\Drupal::getContainer(), [], $id, $definition);
+  }
+
+  /**
+   * Finds plugin definitions.
+   *
+   * @return array
+   *   List of definitions to store in cache.
+   *
+   * @todo This is a temporary solution to the fact that migration source
+   *   plugins have more than one provider. This functionality will be moved to
+   *   core in https://www.drupal.org/node/2786355.
+   */
+  protected function findDefinitions() {
+    $definitions = $this->getDiscovery()->getDefinitions();
+    foreach ($definitions as $plugin_id => &$definition) {
+      $this->processDefinition($definition, $plugin_id);
+    }
+    $this->alterDefinitions($definitions);
+    return ProviderFilterDecorator::filterDefinitions($definitions, function ($provider) {
+      return $this->providerExists($provider);
+    });
   }
 
 }

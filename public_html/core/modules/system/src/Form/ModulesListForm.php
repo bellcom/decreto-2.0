@@ -216,7 +216,7 @@ class ModulesListForm extends FormBase {
         '#type' => 'link',
         '#title' => $this->t('Help'),
         '#url' => Url::fromRoute('help.page', ['name' => $module->getName()]),
-        '#options' => array('attributes' => array('class' =>  array('module-link', 'module-link-help'), 'title' => $this->t('Help'))),
+        '#options' => array('attributes' => array('class' => array('module-link', 'module-link-help'), 'title' => $this->t('Help'))),
       );
     }
 
@@ -259,7 +259,7 @@ class ModulesListForm extends FormBase {
     if (!empty($module->info['required'])) {
       // Used when displaying modules that are required by the installation profile
       $row['enable']['#disabled'] = TRUE;
-      $row['#required_by'][] = $distribution . (!empty($module->info['explanation']) ? ' ('. $module->info['explanation'] .')' : '');
+      $row['#required_by'][] = $distribution . (!empty($module->info['explanation']) ? ' (' . $module->info['explanation'] . ')' : '');
     }
 
     // Check the compatibilities.
@@ -411,6 +411,7 @@ class ModulesListForm extends FormBase {
     foreach (array_keys($modules['install']) as $module) {
       if (!drupal_check_module($module)) {
         unset($modules['install'][$module]);
+        unset($modules['experimental'][$module]);
         foreach (array_keys($data[$module]->required_by) as $dependent) {
           unset($modules['install'][$dependent]);
           unset($modules['dependencies'][$dependent]);
