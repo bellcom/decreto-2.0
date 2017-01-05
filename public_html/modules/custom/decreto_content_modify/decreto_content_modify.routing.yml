@@ -101,3 +101,44 @@ decreto_content_modify.bpas_delete:
     _permission: 'access content'
     parent: \d+
     node: \d+
+decreto_content_modify.sp_add:
+  path: '/speaker_paper/add/{bullet_point}'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+  defaults:
+    _title: 'Decreto add speaker paper'
+    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperEditForm'
+    bullet_point: null
+  requirements:
+    _permission: 'access content'
+    bullet_point: \d+
+
+decreto_content_modify.sp_edit:
+  path: '/speaker_paper/edit/{node}'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto edit speaker paper'
+    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperEditForm'
+    node: null
+  requirements:
+    _permission: 'access content'
+    node: \d+
+
+decreto_content_modify.sp_delete:
+  path: '/speaker_paper/delete/{node}'
+  options:
+    parameters:
+      node:
+        type: entity:node
+  defaults:
+    _title: 'Decreto delete speaker paper'
+    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperDeleteForm'
+    node: null
+  requirements:
+    _permission: 'access content'
+    node: \d+

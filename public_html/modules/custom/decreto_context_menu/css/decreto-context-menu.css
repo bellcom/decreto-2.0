@@ -456,6 +456,16 @@ edit content
 .cd-stretchy-nav.edit-content ul a.dec-quick-delete-link::after {
     content: "\e020";
 }
+
+.cd-stretchy-nav.edit-content ul a.dec-quick-add-sp-link::after {
+    content: "\e022";
+}
+.cd-stretchy-nav.edit-content ul a.dec-quick-delete-sp-link::after {
+    content: "\e020";
+}
+.cd-stretchy-nav.edit-content ul a.dec-quick-edit-sp-link::after {
+    content: "\270f";
+}
 /*.cd-stretchy-nav.edit-content ul li:first-of-type a::after {*/
     /*background-position: -16px 0;*/
 /*}*/

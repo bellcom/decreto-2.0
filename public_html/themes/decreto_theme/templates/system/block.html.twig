@@ -46,17 +46,17 @@
  */
 #}
 <section{{ attributes.addClass('block', 'clearfix', 'panel', 'panel-default') }}>
-  {{ title_prefix }}
-  {% if label %}
-			<div class="panel-heading">
-        <h2{{ title_attributes.addClass('panel-title') }}>{{ label }}</h2>
-			</div>
-  {% endif %}
-	{{ title_suffix }}
-  <div class="panel-body">
-    {% block content %}
-      {{ content }}
-    {% endblock %}
-  </div>
+    {{ title_prefix }}
+    {% if label %}
+        <div class="panel-heading">
+            <h2{{ title_attributes.addClass('panel-title') }}>{{ label }}</h2>
+        </div>
+    {% endif %}
+    {{ title_suffix }}
+    <div class="panel-body">
+        {% block content %}
+            {{ content }}
+        {% endblock %}
+    </div>
 </section>
 
