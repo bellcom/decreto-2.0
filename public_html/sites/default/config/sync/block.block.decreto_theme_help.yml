@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_help
 theme: decreto_theme
 region: '-1'
-weight: -6
+weight: -8
 provider: null
 plugin: help_block
 settings:

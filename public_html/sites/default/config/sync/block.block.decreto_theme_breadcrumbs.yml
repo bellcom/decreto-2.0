@@ -1,6 +1,6 @@
 uuid: 4d359d49-87a9-4707-9161-9702608998aa
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
 id: decreto_theme_breadcrumbs
 theme: decreto_theme
-region: '-1'
-weight: -8
+region: content
+weight: -9
 provider: null
 plugin: system_breadcrumb_block
 settings:

@@ -131,8 +131,12 @@ class MeetingsEditForm extends FormBase {
       $form['title']['#default_value'] = $node->getTitle();
       $form['committee']['#default_value'] = $node->field_decreto_meet_committee->target_id;
       $form['type']['#default_value'] = $node->field_decreto_meet_type->value;
-      $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_start_date->value);
-      $form['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_end_date->value);
+      if ($node->field_decreto_meet_start_date->value) {
+        $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_start_date->value);
+      }
+      if ($node->field_decreto_meet_end_date->value) {
+        $form['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_end_date->value);
+      }
       $form['location']['#default_value'] = $node->field_decreto_meet_location->target_id;
       $form['participants']['#default_value'] = $node->field_decreto_meet_partic->value;
       $form['description']['#default_value'] = $node->body->value;
