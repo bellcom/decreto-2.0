@@ -22,7 +22,7 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       'cssClass' => array('dec-quick-print-link')
     );
 
-    if ($node->getType = 'decreto_meeting') {
+    if ($node->getType() == 'decreto_meeting') {
       $links[] = array(
         'name' => 'Download',
         'cssClass' => array('dec-quick-download-link')
@@ -31,11 +31,11 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
   }
 
   //default links for decreto_meeting
-  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType == 'decreto_meeting') {
+  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_meeting') {
     if ($node->access('update')) {
       $links[] = array(
         'name' => 'Edit',
-        'path' => Url::fromRoute('entity.node.edit_form', array('node' => $node->id())),
+        'path' => Url::fromRoute('decreto_content_modify.meetings_edit', ['node' => $node->id()]),
         'cssClass' => array('dec-quick-edit-link')
       );
     }
