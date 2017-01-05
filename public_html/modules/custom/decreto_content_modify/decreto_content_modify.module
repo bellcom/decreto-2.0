@@ -21,3 +21,23 @@
 //    )
 //  );
 //}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function decreto_content_modify_preprocess_node(&$variables) {
+  $uid = \Drupal::currentUser()->id();
+
+ if($variables['node']->getType()=='decreto_bullet_point') {
+   $query = \Drupal::entityQuery('node')
+          ->condition('status', 1)
+          ->condition('type', 'decreto_speaker_paper')
+          ->condition('uid', $uid)
+          ->condition('field_decreto_sp_bp', $variables['node']->id());
+   $nids =  $query->execute();
+   foreach ($nids as $key => $value){
+   $node = \Drupal\node\Entity\Node::load($value);
+   $variables['speaker_papers'][]=node_view($node);
+   }
+ }
+}

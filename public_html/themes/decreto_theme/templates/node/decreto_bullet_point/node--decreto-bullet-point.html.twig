@@ -64,33 +64,34 @@
  */
 #}
 {{ attach_library('decreto_annotator/decreto-annotator') }}
-{%
-set classes = [
+{% set classes = [
 node.bundle|clean_class,
 node.isPromoted() ? 'is-promoted',
 node.isSticky() ? 'is-sticky',
 not node.isPublished() ? 'is-unpublished',
 view_mode ? view_mode|clean_class,
 'clearfix',
-]
-%}
+] %}
 <article{{ attributes.addClass(classes) }}>
 
-	{{ title_prefix }}
-	{% if not page %}
-		<h2{{ title_attributes }}>
-			<a href="{{ url }}" rel="bookmark">{{ label }}</a>
-		</h2>
-	{% endif %}
-	{{ title_suffix }}
+    {{ title_prefix }}
+    {% if not page %}
+        <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+    {{ title_suffix }}
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
-		</div>
-		<div{{ content_attributes.addClass('content', 'panel-body') }}>
-			{{ content|without('field_decreto_bp_closed') }}
-		</div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ node.getTitle }}{{ decreto_context_menu }}{{ content.field_decreto_bp_closed }}</h3>
+        </div>
+        <div{{ content_attributes.addClass('content', 'panel-body') }}>
+            {{ content|without('field_decreto_bp_closed') }}
+            <div id="speaker-papers-container-{{ node.id() }}">
+                {{ speaker_papers }}
+            </div>
+        </div>
+    </div>
 </article>
 

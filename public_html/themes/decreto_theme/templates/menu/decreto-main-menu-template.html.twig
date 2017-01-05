@@ -6,19 +6,21 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul>
-    {% else %}<ul class="submenus">
-    {% endif %}
-    {% for item in items %}
-        
-        <li  {% if item.below %} class="has-children" {% endif %}>
-        {{ link(item.title, item.url) }}
-        {% if item.below %}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+<ul>
+    {% else %}
+    <ul class="submenus">
         {% endif %}
+        {% for item in items %}
 
-    {% endfor %}
-    </li> </ul>
-  {% endif %}
-{% endmacro %}
+        <li  {% if item.below %} class="has-children" {% endif %}>
+            {{ link(item.title, item.url) }}
+            {% if item.below %}
+                {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            {% endif %}
+
+            {% endfor %}
+        </li>
+    </ul>
+    {% endif %}
+    {% endmacro %}
 </ul>

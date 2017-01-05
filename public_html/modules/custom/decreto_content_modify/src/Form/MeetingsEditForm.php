@@ -38,7 +38,8 @@ class MeetingsEditForm extends FormBase {
     $form['#attached']['library'][] = 'core/drupal.dialog';
     $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
-
+    $form['#attached']['library'][] = 'decreto_context_menu/decreto-stretchy-navigation';
+    
     $form['title'] = [
       '#type' => 'textfield',
       '#placeholder' => $this->t('Title'),

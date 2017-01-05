@@ -1,27 +1,29 @@
-<div class="row">  
+<div class="row">
     <div class="col-sm-3 sidebar-first" role="logo">
         <!-- Begin - logo -->
-        <a class="header-logo" href="#" data-scroll-to="#banner" data-toggle="tooltip" data-placement="bottom" title="Gå til toppen af siden"></a>
+        <a class="header-logo" href="#" data-scroll-to="#banner" data-toggle="tooltip" data-placement="bottom"
+           title="Gå til toppen af siden"></a>
         <!-- End - logo -->
     </div>
     <div class="col-sm-7 top-content" role="search">
         {% if content %}
             {{ content }}
         {% endif %}
-    </div> 
+    </div>
 
     <div class="col-sm-2 right-sidebar" role="user-menu">
-      {% if user.account.name %}
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{ user.account.name}}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit" >Edit</a></li>
-                <li><a href="{{ path('user.logout') }}" >Logout</a></li>
-            </ul>
-        </div>
-     {% endif %}
+        {% if user.account.name %}
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    {{ user.account.name }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="{{ path('entity.user.canonical', {'user': user.id}) }}/edit">Edit</a></li>
+                    <li><a href="{{ path('user.logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        {% endif %}
     </div>
 </div>
