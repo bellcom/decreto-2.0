@@ -39,7 +39,7 @@ class MeetingsEditForm extends FormBase {
     $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
     $form['#attached']['library'][] = 'decreto_context_menu/decreto-stretchy-navigation';
-    
+
     $form['title'] = [
       '#type' => 'textfield',
       '#placeholder' => $this->t('Title'),
@@ -136,8 +136,12 @@ class MeetingsEditForm extends FormBase {
       $form['location']['#default_value'] = $node->field_decreto_meet_location->target_id;
       $form['participants']['#default_value'] = $node->field_decreto_meet_partic->value;
       $form['description']['#default_value'] = $node->body->value;
-      $form['full_doc']['#default_value']['fid'] = $node->field_decreto_meet_full_doc->target_id;
-      $form['full_doc_closed']['#default_value']['fid'] = $node->field_decreto_meet_full_doc_c->target_id;
+      if (!$node->field_decreto_meet_full_doc->isEmpty()) {
+        $form['full_doc']['#default_value']['fid'] = $node->field_decreto_meet_full_doc->target_id;
+      }
+      if (!$node->field_decreto_meet_full_doc_c->isEmpty()) {
+        $form['full_doc_closed']['#default_value']['fid'] = $node->field_decreto_meet_full_doc_c->target_id;
+      }
       foreach($node->field_decreto_meet_bps as $bp) {
         $bp_ids[] = $bp->target_id;
       }

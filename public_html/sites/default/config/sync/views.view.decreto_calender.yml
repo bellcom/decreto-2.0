@@ -7,7 +7,6 @@ dependencies:
     - user.role.authenticated
   module:
     - calendar
-    - calendar_datetime
     - datetime
     - node
     - user
@@ -279,7 +278,7 @@ display:
           plugin_id: field
       filters:
         status:
-          value: true
+          value: '1'
           table: node_field_data
           field: status
           plugin_id: boolean
@@ -433,6 +432,7 @@ display:
         weight: 0
         context: '0'
         menu_name: main
+        enabled: true
       arguments:
         field_decreto_meet_start_date_value_full_date:
           id: field_decreto_meet_start_date_value_full_date
@@ -508,6 +508,7 @@ display:
         weight: 0
         context: '0'
         menu_name: main
+        enabled: true
       tab_options:
         type: normal
         title: Calendar
@@ -587,6 +588,7 @@ display:
         weight: 0
         context: '0'
         menu_name: main
+        enabled: true
       arguments:
         field_decreto_meet_start_date_value_year_week:
           id: field_decreto_meet_start_date_value_year_week
@@ -763,6 +765,7 @@ display:
         weight: 0
         context: '0'
         menu_name: main
+        enabled: true
     cache_metadata:
       max-age: 0
       contexts:
