@@ -93,7 +93,11 @@ view_mode ? view_mode|clean_class,
         </div>
 
         <div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
-            {{ content }}
+            {% if content.field_decreto_bpa_html|render|trim is not empty %}
+                {{ content|without('body') }}
+            {% else %}
+                {{ content }}
+            {% endif %}
         </div>
     </div>
 

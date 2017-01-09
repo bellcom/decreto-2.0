@@ -1,6 +1,8 @@
 <?php
 
-module_load_include('inc', 'decreto_pdf2htmlex', '/inc/decreto_pdf2htmlex.utils');
+use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_theme().
@@ -8,10 +10,10 @@ module_load_include('inc', 'decreto_pdf2htmlex', '/inc/decreto_pdf2htmlex.utils'
 function decreto_pdf2htmlex_theme() {
   return array(
     'decreto_pdf2htmlex_rendered_html_formatter' => array(
-      'variables' => array('file' => null),
+      'variables' => array('file' => NULL),
     ),
     'decreto_pdf2htmlex_rendered_html_first_page_formatter' => array(
-      'variables' => array('file' => null),
+      'variables' => array('file' => NULL),
     ),
   );
 }
@@ -21,7 +23,7 @@ function decreto_pdf2htmlex_theme() {
  */
 function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) {
   template_preprocess_file_link($vars);
-  $vars['html'] = decreto_pdf2htmlex_get_all_pages($vars['file']);
+  $vars['html'] = DecretoHTMLUtils::getAllPages($vars['file']);
 }
 
 /**
@@ -29,5 +31,30 @@ function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) 
  */
 function template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatter(&$vars) {
   template_preprocess_file_link($vars);
-  $vars['html'] = decreto_pdf2htmlex_get_first_page($vars['file']);
+  $vars['html'] = DecretoHTMLUtils::getFirstPage($vars['file']);
+}
+
+function decreto_pdf2htmlex_cron() {
+  $queue_factory = \Drupal::service('queue');
+  $queue = $queue_factory->get('decreto_pdf2htmlex_queue');
+
+  $scheduled_files = decreto_pdf2htmlex_get_scheduled_files();
+  drupal_set_message(print_r($scheduled_files,1));
+  foreach ($scheduled_files as $schedule_file) {
+    $queue->createItem($schedule_file);
+  }
+}
+
+/**
+ * Returns the list of files that must are scheduled for conversion
+ *
+ * @return mixed
+ */
+function decreto_pdf2htmlex_get_scheduled_files() {
+  $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f')
+    ->fields('f')
+    ->isNull('f.progress');
+  $result = $query->execute();
+
+  return $result->fetchAll();
 }

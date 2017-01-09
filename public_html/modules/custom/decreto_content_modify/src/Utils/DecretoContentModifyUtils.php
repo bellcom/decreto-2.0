@@ -4,7 +4,7 @@ namespace Drupal\decreto_content_modify\Utils;
 
 use Drupal\node\Entity\Node;
 
-class DecretoUtils  {
+class DecretoContentModifyUtils  {
 
   /**
    * Helper function to reduce repetition of common queries.

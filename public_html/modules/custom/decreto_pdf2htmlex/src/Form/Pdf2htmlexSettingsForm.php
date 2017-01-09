@@ -1,0 +1,61 @@
+<?php
+namespace Drupal\decreto_pdf2htmlex\Form;
+
+use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_pdf2htmlex\Plugin\QueueWorker\Pdf2htmlexQueueWorker;
+
+/**
+ * Configure example settings for this site.
+ */
+class pdf2htmlexSettingsForm extends ConfigFormBase {
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'decreto_pdf2htmlex_settings';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getEditableConfigNames() {
+    return [
+      'decreto_pdf2htmlex.settings',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    $config = $this->config('decreto_pdf2htmlex.settings');
+    $form['decreto_pdf2htmlex_path'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Path to pdf2htmlEX'),
+      '#default_value' => $config->get('decreto_pdf2htmlex_path'),
+    );
+    $form['decreto_pdf2htmlex_zoom'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Default zoom for convertion'),
+      '#default_value' => $config->get('decreto_pdf2htmlex_zoom'),
+    );
+
+    $scheduled_entry = reset(decreto_pdf2htmlex_get_scheduled_files());
+    $worker = new Pdf2htmlexQueueWorker(array(), null, null);
+    $worker->processItem($scheduled_entry);
+
+    return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $config = \Drupal::service('config.factory')->getEditable('decreto_pdf2htmlex.settings');
+    $config->set('decreto_pdf2htmlex_path', $form_state->getValue('decreto_pdf2htmlex_path'))
+      ->set('decreto_pdf2htmlex_zoom', $form_state->getValue('decreto_pdf2htmlex_zoom'))
+      ->save();
+    parent::submitForm($form, $form_state);
+  }
+}

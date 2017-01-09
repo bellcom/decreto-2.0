@@ -1,0 +1,5 @@
+decreto_pdf2htmlex.settings:
+  title: 'PDF to HTML conversion settings'
+  parent: system.admin_config_system
+  description: 'Settings for pdf to HTML convertation'
+  route_name: decreto_pdf2htmlex.settings

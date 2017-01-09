@@ -1,0 +1,7 @@
+decreto_pdf2htmlex.settings:
+  path: '/admin/config/pdf2htmlex/settings'
+  defaults:
+    _form: '\Drupal\decreto_pdf2htmlex\Form\Pdf2htmlexSettingsForm'
+    _title: 'PDF to HTML conversion settings'
+  requirements:
+    _permission: 'administer site configuration'

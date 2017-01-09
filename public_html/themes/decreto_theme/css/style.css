@@ -17,7 +17,7 @@
     content: "\e093";
 }
 
-#pdf-main {
+#pdf-main, #page-container {
     position: relative !important;
 }
 
