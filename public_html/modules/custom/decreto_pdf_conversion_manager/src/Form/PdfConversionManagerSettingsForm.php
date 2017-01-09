@@ -21,9 +21,6 @@ class PdfConversionManagerSettingsForm extends ConfigFormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
-    dpm('here');
-    DecretoPDFUtils::deleteScheduledJob(14);
-
     $config = $this->config('decreto_pdf_conversion_manager.settings');
     $form['decreto_pdf_conversion_manager_max_attempts'] = array(
       '#type' => 'textfield',
