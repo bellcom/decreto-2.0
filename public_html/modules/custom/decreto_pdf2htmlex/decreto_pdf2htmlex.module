@@ -53,7 +53,7 @@ function decreto_pdf2htmlex_cron() {
 function decreto_pdf2htmlex_get_scheduled_files() {
   $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f')
     ->fields('f')
-    ->isNull('f.progress');
+    ->isNull('f.status');
   $result = $query->execute();
 
   return $result->fetchAll();

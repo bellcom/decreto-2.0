@@ -128,7 +128,7 @@ class DecretoPdf2htmlexUtils {
   public static function updateStatus($fid, $status) {
     \Drupal::database()->update('decreto_pdf2htmlex_files')
       ->fields(array(
-        'progress' => $status,
+        'status' => $status,
       ))
       ->condition('fid', $fid, '=')
       ->execute();

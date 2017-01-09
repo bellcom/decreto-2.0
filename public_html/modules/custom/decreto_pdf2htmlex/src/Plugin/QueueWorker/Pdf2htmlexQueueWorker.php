@@ -62,7 +62,7 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
           ->fields(array(
             'filename' => $file->getFilename(),
             'created_filepath' => $path,
-            'progress' => 'Converted',
+            'status' => 'Converted',
           ))
           ->condition('fid', $item->fid, '=')
           ->condition('did', $item->did, '=')

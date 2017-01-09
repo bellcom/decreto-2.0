@@ -34,7 +34,7 @@ function decreto_pdf2htmlex_schema() {
         'length' => 1024,
         'serialize' => TRUE,
       ),
-      'progress' => array(
+      'status' => array(
         'description' => 'The information about the job',
         'type' => 'varchar',
         'length' => 1024,
