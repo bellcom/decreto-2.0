@@ -11,6 +11,7 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\file\Entity\File;
 use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
+use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 
 /**
  * Implements the ModalForm form controller.
@@ -97,10 +98,12 @@ class BulletPointAttachmentEditForm extends FormBase {
       )
     );
 
-    $form['convert_to_pdf'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Convert to PDF') // . ' not implemented',
-    ];
+    if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
+      $form['convert_to_pdf'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Convert to PDF')
+      ];
+    }
 
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
       $form['convert_to_html'] = [
@@ -139,6 +142,10 @@ class BulletPointAttachmentEditForm extends FormBase {
         if (DecretoHTMLUtils::isScheduled($node->field_decreto_bpa_file->entity, $node)) {
           $form['convert_to_html']['#default_value'] = 1;
         }
+
+        if (DecretoPDFUtils::isScheduled($node->field_decreto_bpa_file->entity, $node)) {
+          $form['convert_to_pdf']['#default_value'] = 1;
+        }
       }
     }
 
@@ -159,6 +166,8 @@ class BulletPointAttachmentEditForm extends FormBase {
     $title = $form_state->getValue('title');
     $body = $form_state->getValue('body');
     $file_field = $form_state->getValue('file');
+    $convert_to_pdf = $form_state->getValue('convert_to_pdf');
+    $convert_to_html = $form_state->getValue('convert_to_html');
     $bpa_file = NULL;
     $bpa_html = NULL;
 
@@ -189,14 +198,16 @@ class BulletPointAttachmentEditForm extends FormBase {
       if ($bpa_file) {
         $this->node->field_decreto_bpa_file->setValue(['target_id' => $bpa_file->id()]);
         $this->node->field_decreto_bpa_html->setValue(NULL);
-      } else {
+      }
+      else {
         $this->node->field_decreto_bpa_file->setValue(NULL);
       }
 
       if ($bpa_html) {
         $this->node->field_decreto_bpa_html->setValue(['target_id' => $bpa_html->id()]);
         $this->node->field_decreto_bpa_file->setValue(['target_id' => $bpa_html->id()]);
-      } else {
+      }
+      else {
         $this->node->field_decreto_bpa_html->setValue(NULL);
       }
     }
@@ -209,8 +220,14 @@ class BulletPointAttachmentEditForm extends FormBase {
 
     //handle PDF > HTML convetsion
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
-      if ($bpa_file) {
+      if ($bpa_file && $convert_to_html && $bpa_file->getMimeType() == 'application/pdf') {
         DecretoHTMLUtils::scheduleConversion($bpa_file, $this->node);
+      }
+    }
+
+    if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
+      if ($bpa_file && $convert_to_pdf) {
+        DecretoPDFUtils::scheduleConversion($bpa_file, $this->node, $convert_to_html);
       }
     }
   }

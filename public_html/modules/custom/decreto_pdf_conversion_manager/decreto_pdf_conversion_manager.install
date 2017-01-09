@@ -1,0 +1,61 @@
+<?php
+
+function  decreto_pdf_conversion_manager_schema() {
+  $schema['decreto_pdf_conversion_manager_files'] = array(
+    'description' => 'This table is used for save file info  for * -> PDF convertion',
+    'fields' => array(
+      'fid' => array(
+        'description' => 'The file entry fid.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'did' => array(
+        'description' => 'The destination nid.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'filename' => array(
+        'description' => 'Name of the file',
+        'type' => 'varchar',
+        'length' => 1024,
+        'serialize' => TRUE,
+      ),
+      'created_filepath' => array(
+        'description' => 'The path of the created output',
+        'type' => 'varchar',
+        'length' => 1024,
+        'serialize' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Status of the conversion',
+        'type' => 'varchar',
+        'length' => 1024,
+        'serialize' => TRUE,
+      ),
+      'message' => array(
+        'description' => 'Error message',
+        'type' => 'text',
+        'serialize' => TRUE,
+      ),
+      'attempt' => array(
+        'description' => 'The number of attempts file has been tried to be converted',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'convert_to_html' => array(
+        'description' => 'File must be scheduled for HTML conversion',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fid'),
+  );
+  return $schema;
+}

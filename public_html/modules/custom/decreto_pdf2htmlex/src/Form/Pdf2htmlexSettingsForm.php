@@ -3,7 +3,6 @@ namespace Drupal\decreto_pdf2htmlex\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\decreto_pdf2htmlex\Plugin\QueueWorker\Pdf2htmlexQueueWorker;
 
 /**
  * Configure example settings for this site.
@@ -40,10 +39,6 @@ class pdf2htmlexSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Default zoom for convertion'),
       '#default_value' => $config->get('decreto_pdf2htmlex_zoom'),
     );
-
-    $scheduled_entry = reset(decreto_pdf2htmlex_get_scheduled_files());
-    $worker = new Pdf2htmlexQueueWorker(array(), null, null);
-    $worker->processItem($scheduled_entry);
 
     return parent::buildForm($form, $form_state);
   }

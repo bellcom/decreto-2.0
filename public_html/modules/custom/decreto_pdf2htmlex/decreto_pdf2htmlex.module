@@ -1,7 +1,6 @@
 <?php
 
 use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
-use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 
 /**
@@ -34,27 +33,31 @@ function template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatt
   $vars['html'] = DecretoHTMLUtils::getFirstPage($vars['file']);
 }
 
+/**
+ * Implements hook_cron()
+ */
 function decreto_pdf2htmlex_cron() {
+  //TODO: is that needed?
+  // Clean up pdf2htmlEX garbage before converting
+  //shell_exec('find /tmp/pdf2htmlEX-* -mtime +1 -delete 2> /dev/null');
+
   $queue_factory = \Drupal::service('queue');
   $queue = $queue_factory->get('decreto_pdf2htmlex_queue');
 
-  $scheduled_files = decreto_pdf2htmlex_get_scheduled_files();
-  drupal_set_message(print_r($scheduled_files,1));
+  $scheduled_files = DecretoHTMLUtils::getScheduledFiles();
+
   foreach ($scheduled_files as $schedule_file) {
     $queue->createItem($schedule_file);
   }
 }
 
 /**
- * Returns the list of files that must are scheduled for conversion
+ * Implement hook_entity_delete()
  *
- * @return mixed
+ * @param File $file
  */
-function decreto_pdf2htmlex_get_scheduled_files() {
-  $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f')
-    ->fields('f')
-    ->isNull('f.status');
-  $result = $query->execute();
-
-  return $result->fetchAll();
+function decreto_pdf2htmlex_file_delete(File $file) {
+  if (DecretoHTMLUtils::isScheduled($file)) {
+    DecretoPDFUtils::deleteScheduledJob($file->id());
+  }
 }

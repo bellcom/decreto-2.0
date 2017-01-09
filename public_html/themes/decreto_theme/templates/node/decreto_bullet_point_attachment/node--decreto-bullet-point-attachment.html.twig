@@ -88,7 +88,11 @@ view_mode ? view_mode|clean_class,
             <h3 class="panel-title">{{ node.getTitle }} {{ decreto_context_menu }}</h3>
         </div>
         <div{{ content_attributes.addClass('content', 'panel-body').setAttribute('id', 'bpa-content-' ~ node.id) }}>
-            {{ content }}
+            {% if content.field_decreto_bpa_html|render|trim is not empty %}
+                {{ content|without('body') }}
+            {% else %}
+                {{ content }}
+            {% endif %}
         </div>
     </div>
 </article>

@@ -1,0 +1,5 @@
+decreto_pdf_conversion_manager.settings:
+  title: '* > PDF conversion settings'
+  parent: system.admin_config_system
+  description: 'Settings for * to PDF convertation'
+  route_name: decreto_pdf_conversion_manager.settings

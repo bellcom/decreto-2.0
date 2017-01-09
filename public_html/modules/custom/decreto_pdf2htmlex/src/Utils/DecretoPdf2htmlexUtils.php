@@ -109,13 +109,16 @@ class DecretoPdf2htmlexUtils {
    * @param Node $destination
    * @return mixed
    */
-  public static function isScheduled(File $file, Node $destination) {
-    $result = \Drupal::database()->select('decreto_pdf2htmlex_files', 'd')
+  public static function isScheduled(File $file, Node $destination = NULL) {
+    $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'd')
       ->fields('d')
-      ->condition('fid', $file->id())
-      ->condition('did', $destination->id())
-      ->countQuery()
-      ->execute();
+      ->condition('fid', $file->id());
+
+    if ($destination) {
+      $query->condition('did', $destination->id());
+    }
+
+    $result = $query->countQuery()->execute();
     return $result->fetchField();
   }
 
@@ -132,5 +135,40 @@ class DecretoPdf2htmlexUtils {
       ))
       ->condition('fid', $fid, '=')
       ->execute();
+  }
+
+  /**
+   * Deletes a scheduled job from a list
+   *
+   * @param null $fid
+   * @param null $did
+   */
+  public static function deleteScheduledJob($fid = NULL, $did = NULL) {
+    $query = \Drupal::database()->delete('decreto_pdf2htmlex_files');
+
+    if ($fid) {
+      $query->condition('fid', $fid, '=');
+    }
+    if ($did) {
+      $query->condition('did', $did, '=');
+    }
+
+    if ($fid || $did) {
+      $query->execute();
+    }
+  }
+
+  /**
+   * Returns the list of files that must are scheduled for conversion
+   *
+   * @return mixed
+   */
+  public static function getScheduledFiles() {
+    $query = \Drupal::database()->select('decreto_pdf2htmlex_files', 'f')
+      ->fields('f')
+      ->isNull('f.status');
+    $result = $query->execute();
+
+    return $result->fetchAll();
   }
 }
