@@ -1,0 +1,7 @@
+type: module
+name: Decreto Search
+description: 'module responsible for global search'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

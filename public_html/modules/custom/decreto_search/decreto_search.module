@@ -1,0 +1,39 @@
+<?php
+function decreto_search_edit_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  drupal_set_message('here');
+}
+
+function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-decreto-search-page') {
+    //print_r('<pre>' . print_r($form,1) . '</pre>');
+    $form['#attached']['library'][] = 'decreto_search/decreto-bootstrap-multiselect';
+
+    //submit button
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+
+    //select type
+    $form['type']['#attributes']['class'][] = 'bootstrap-multiselect';
+    $form['type']['#attributes']['data-multiselect-title'] = t('Select Type');
+
+    //start date
+    $form['field_decreto_meet_start_date']['#type'] = 'datetime';
+    //$form['field_decreto_meet_start_date']['#type'] = 'date';
+
+    //end date
+    $form['field_decreto_meet_end_date']['#type'] = 'datetime';
+    //$form['field_decreto_meet_end_date']['#type'] = 'date';
+
+    //committee
+    $form['field_decreto_meet_committee']['#attributes']['class'][] = 'bootstrap-multiselect';
+    $form['field_decreto_meet_committee']['#attributes']['data-multiselect-title'] = t('Select Committee');
+
+
+  }
+}
+
+function decreto_search_theme_suggestions_select_alter(&$suggestions, &$vars) {
+  //only for those that have bootstrap-multiselect
+  if (in_array('bootstrap-multiselect', $vars['element']['#attributes']['class'])){
+    $suggestions[] = 'select__bootstrap_multiselect';
+  }
+}
