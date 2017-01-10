@@ -138,9 +138,10 @@ class PDFConverter {
 
         }
         $filter_name = isset(self::$exportFilterMap['pdf'][$this->fileFamily]['unoconv']) ? self::$exportFilterMap['pdf'][$this->fileFamily]['unoconv'] : self::$exportFilterMap['pdf'][self::FAMILY_TEXT]['unoconv'];
-        exec('/usr/local/bin/unoconv -f pdf -eSelectPdfVersion=1 --doctype=' . $filter_name . ' "' . $this->file . '" 2>&1', $errors);
-        if ($errors)
+        exec('unoconv -f pdf -eSelectPdfVersion=1 --doctype=' . $filter_name . ' "' . $this->file . '" 2>&1', $errors);
+        if ($errors) {
           throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
+        }
         $this->improveHTML($output_dir, TRUE);
         return TRUE;
 
