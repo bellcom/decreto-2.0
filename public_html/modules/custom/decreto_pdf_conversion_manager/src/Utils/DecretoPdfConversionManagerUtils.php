@@ -42,7 +42,7 @@ class DecretoPdfConversionManagerUtils {
    * @param Node $destination
    * @return mixed
    */
-  public static function isScheduled(File $file, Node $destination = null) {
+  public static function isScheduled(File $file, Node $destination = NULL) {
     $query = \Drupal::database()->select('decreto_pdf_conversion_manager_files', 'd')
       ->fields('d')
       ->condition('fid', $file->id());

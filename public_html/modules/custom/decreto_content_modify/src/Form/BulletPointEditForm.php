@@ -2,15 +2,15 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
-use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements the ModalForm form controller.
@@ -30,7 +30,7 @@ class BulletPointEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
     $this->node = $node;
 
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
@@ -97,7 +97,8 @@ class BulletPointEditForm extends FormBase {
           'value' => $closed,
         ]
       ));
-    } else {
+    }
+    else {
       $node = $this->node;
       $this->node->title = $title;
       $this->node->field_decreto_bp_closed = [
@@ -133,13 +134,14 @@ class BulletPointEditForm extends FormBase {
     }
     else {
       $nid = $this->node->id();
-      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $nid, false);
+      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $nid, FALSE);
 
       //is new
       if ($this->isNew == SAVED_NEW) {
         $response->addCommand(new AppendCommand('#js-bps-container', $render_bullet_point));
         $response->addCommand(new InvokeCommand('#js-bp-nids', 'appendValue', array($nid)));
-      } else {
+      }
+      else {
         $response->addCommand(new HtmlCommand("#js-bp-$nid-container", $render_bullet_point));
       }
 

@@ -10,7 +10,6 @@ namespace Drupal\decreto_annotator\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\user\Entity\User;
 
 class AnnotatorController extends ControllerBase {
 
@@ -21,7 +20,7 @@ class AnnotatorController extends ControllerBase {
    * @return none.
    */
   public function annotatorCreate() {
-    $note_json = json_decode(file_get_contents('php://input'), true);
+    $note_json = json_decode(file_get_contents('php://input'), TRUE);
     $bpa_id = $note_json['bpa_id'];
 
     //filtering on fields - removing those, that are saved separatelly
@@ -66,7 +65,7 @@ class AnnotatorController extends ControllerBase {
    * @return none.
    */
   public function annotatorUpdate($id) {
-    $note_json = json_decode(file_get_contents('php://input'), true);
+    $note_json = json_decode(file_get_contents('php://input'), TRUE);
 
     //filtering on fields - removing those, that are saved separatelly
     unset($note_json['id']);
@@ -88,7 +87,7 @@ class AnnotatorController extends ControllerBase {
     $query = \Drupal::database()->delete('decreto_annotator_notes')
       ->condition('id', $id)
       ->execute();
-    
+
     return new JsonResponse();
   }
 

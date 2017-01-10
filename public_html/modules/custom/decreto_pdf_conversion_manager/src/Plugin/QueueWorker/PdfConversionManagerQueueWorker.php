@@ -130,7 +130,7 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
    * * @param File $convertedFile
    */
   private function updateDestinationNode(Node $node, File $originalFile, File $convertedFile) {
-    foreach(file_get_file_references($originalFile) as $field_name => $reference) {
+    foreach (file_get_file_references($originalFile) as $field_name => $reference) {
       $refNode = reset($reference['node']);
       if ($refNode->id() == $node->id()) {
         $node->{$field_name}->setValue(['target_id' => $convertedFile->id()]);

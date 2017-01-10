@@ -9,12 +9,12 @@ namespace Drupal\decreto_pdf_conversion_manager\lib;
  */
 class PDFConverter {
 
-  const FAMILY_TEXT           = "Text";
-  const FAMILY_SPREADSHEET    = "Spreadsheet";
-  const FAMILY_PRESENTATION   = "Presentation";
-  const FAMILY_DRAWING        = "Drawing";
-  const FAMILY_MULTIPAGETIFF  = "Multipage";
-  const FAMILY_MSG            = "Outlook";
+  const FAMILY_TEXT = "Text";
+  const FAMILY_SPREADSHEET = "Spreadsheet";
+  const FAMILY_PRESENTATION = "Presentation";
+  const FAMILY_DRAWING = "Drawing";
+  const FAMILY_MULTIPAGETIFF = "Multipage";
+  const FAMILY_MSG = "Outlook";
 
   /**
    * Array of families' extensions.
@@ -22,7 +22,7 @@ class PDFConverter {
    */
   public static $familyExtensions = array(
     self::FAMILY_TEXT => array('txt', 'doc', 'docx', 'odt', 'html'),
-    self::FAMILY_SPREADSHEET => array('ods','ots','rdf','xls','xlsx','xlsb'),
+    self::FAMILY_SPREADSHEET => array('ods', 'ots', 'rdf', 'xls', 'xlsx', 'xlsb'),
     self::FAMILY_PRESENTATION => array('ppt', 'pptx', 'odp'),
     self::FAMILY_DRAWING => array('odg'),
     self::FAMILY_MULTIPAGETIFF => array('tiff', 'tif'),
@@ -61,7 +61,7 @@ class PDFConverter {
       $this->file = $file;
       $this->pdf = preg_replace('/\.(' . implode('|', self::getAllowedExtenstions()) . ')$/i', '.pdf', $file);
       $this->fileExtension = strtolower(pathinfo($this->file, PATHINFO_EXTENSION));
-      $this->fileName=strtolower(pathinfo($this->file, PATHINFO_FILENAME));
+      $this->fileName = strtolower(pathinfo($this->file, PATHINFO_FILENAME));
 
       $this->fileFamily = $this->getFamily();
     }
@@ -112,8 +112,9 @@ class PDFConverter {
         // writer as filter.
         $filter_name = isset(self::$exportFilterMap['pdf'][$this->fileFamily]['soffice']) ? self::$exportFilterMap['pdf'][$this->fileFamily]['soffice'] : self::$exportFilterMap['pdf'][self::FAMILY_TEXT]['soffice'];
         exec('soffice --headless --invisible -convert-to pdf:' . $filter_name . ' -outdir "' . $output_dir . '" "' . $this->file . '" 2>&1', $errors);
-        if ($errors)
+        if ($errors) {
           throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
+        }
         return TRUE;
 
         break;
@@ -124,17 +125,19 @@ class PDFConverter {
       case 'unoconv':
         // Get the correct filter name. If couldnt be found it uses regular
         // writer as filter.
-        if ($this->fileExtension=='html'){
+        if ($this->fileExtension == 'html') {
           // change HTML encoding to UTF 8
           $this->improveHTML($output_dir, FALSE);
-          $tmp_filename=$output_dir . '/' .  $this->fileName.'_tmp.'.$this->fileExtension;
-          $encoding= str_replace("\n", '', array_pop(explode(':', shell_exec('file --mime-encoding ' . $this->file))));         //
-          if (strpos($encoding,'unknown'))
-            $encoding = 'iso-8859-1' ;
+          $tmp_filename = $output_dir . '/' . $this->fileName . '_tmp.' . $this->fileExtension;
+          $encoding = str_replace("\n", '', array_pop(explode(':', shell_exec('file --mime-encoding ' . $this->file)))); //
+          if (strpos($encoding, 'unknown')) {
+            $encoding = 'iso-8859-1';
+          }
           exec('iconv -f ' . $encoding . ' -t utf8 ' . $this->file . ' > ' . $tmp_filename . ' 2>&1', $errors);
-          if ($errors)
+          if ($errors) {
             throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
-          shell_exec('mv ' .  $tmp_filename . ' ' . $this->file);
+          }
+          shell_exec('mv ' . $tmp_filename . ' ' . $this->file);
 
         }
         $filter_name = isset(self::$exportFilterMap['pdf'][$this->fileFamily]['unoconv']) ? self::$exportFilterMap['pdf'][$this->fileFamily]['unoconv'] : self::$exportFilterMap['pdf'][self::FAMILY_TEXT]['unoconv'];
@@ -153,8 +156,9 @@ class PDFConverter {
       //
       case 'ImageMagick':
         exec('convert -quiet "' . $this->file . '" -density 300x300 -compress jpeg "' . $this->pdf . '" 2>&1', $errors);
-        if ($errors)
+        if ($errors) {
           throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
+        }
         return TRUE;
 
         break;
@@ -176,8 +180,9 @@ class PDFConverter {
         // Convert .msg file to .eml
         if (!file_exists($eml_file) && preg_match('/\.msg$/i', $this->file)) {
           exec('mapitool -i --no-verbose "' . $this->file . '" 2>&1', $errors);
-          if ($errors)
+          if ($errors) {
             throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
+          }
         }
 
         // http://manpages.ubuntu.com/manpages/intrepid/man1/munpack.1.html
@@ -185,8 +190,9 @@ class PDFConverter {
         // directory.
         if (file_exists($eml_file) && !file_exists($sub_dir . '/' . basename($eml_file) . '.part1.html')) {
           exec('munpack -t -C "' . $sub_dir . '" "' . $eml_file . '" 2>&1', $errors);
-          if ($errors)
+          if ($errors) {
             throw new \Exception('Conversion of ' . $this->file . ' failed: ' . PHP_EOL . implode(PHP_EOL, $errors));
+          }
 
           // Munpack unpacks the content of the email in .msg as a part1(txt)
           // and part2(html). Lets rename them and make it a correct filetype.
@@ -224,25 +230,29 @@ class PDFConverter {
     }
     return $allowed_extensions;
   }
-  private function improveHTML($output_dir, $inline_img=TRUE) {
+
+  private function improveHTML($output_dir, $inline_img = TRUE) {
     $html = file_get_contents($this->file);
 
     $doc = new \DOMDocument();
     @$doc->loadHTML($html);
     $tags = $doc->getElementsByTagName('img');
-    if ($tags->length==0) return FALSE;
+    if ($tags->length == 0) {
+      return FALSE;
+    }
     foreach ($tags as $tag) {
-      if ($tag->getAttribute('src')!="") {
+      if ($tag->getAttribute('src') != "") {
         preg_match("#\w*?.(jpg|png|gif)#is", $tag->getAttribute('src'), $filename);
-        if (file_exists($output_dir . '/' . $filename[0])){
-          if ($inline_img)  {
+        if (file_exists($output_dir . '/' . $filename[0])) {
+          if ($inline_img) {
             $imgData = base64_encode(file_get_contents($output_dir . '/' . $filename[0]));
-            $src = 'data: '.mime_content_type($output_dir . '/' . $filename[0]).';base64,'.$imgData;
+            $src = 'data: ' . mime_content_type($output_dir . '/' . $filename[0]) . ';base64,' . $imgData;
           }
-          else
-            $src=$filename[0];
+          else {
+            $src = $filename[0];
+          }
 
-          $tag->setAttribute('src',$src);
+          $tag->setAttribute('src', $src);
         }
       }
     }

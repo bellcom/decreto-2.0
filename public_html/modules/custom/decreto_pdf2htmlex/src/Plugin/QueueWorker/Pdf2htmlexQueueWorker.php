@@ -42,12 +42,14 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
 
         if (strpos($path, \Drupal::service('file_system')->realpath('private://')) === FALSE) {
           $uri = str_replace(\Drupal::service('file_system')->realpath('public://'), 'public://', $path);
-        } else {
+        }
+        else {
           $uri = str_replace(\Drupal::service('file_system')->realpath('private://'), 'private://', $path);
         }
 
         $htmlFile = file_save_data($data, $uri, FILE_EXISTS_REPLACE);
-      } else {
+      }
+      else {
         //still cannot be converted
         DecretoHTMLUtils::updateStatus($item->fid, 'Cannot be converted');
       }
@@ -67,7 +69,8 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
         self::updateDestinationNode($node, $htmlFile);
         DecretoHTMLUtils::updateStatus($item->fid, 'Completed');
       }
-    } else {
+    }
+    else {
       DecretoHTMLUtils::updateStatus($item->fid, 'Source file is not found');
     }
   }
@@ -88,7 +91,7 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
     if (file_exists($path)) {
       return $path;
     }
-    return null;
+    return NULL;
   }
 
   /**

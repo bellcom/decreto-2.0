@@ -2,15 +2,14 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
-use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\file\Entity\File;
-use Drupal\Core\Ajax\AppendCommand;
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements the ModalForm form controller.
@@ -24,14 +23,14 @@ use Drupal\Core\Ajax\AppendCommand;
  * @see \Drupal\Core\Form\FormBase
  */
 class SpeakerPaperEditForm extends FormBase {
-  protected $bullet_point;  
+  protected $bullet_point;
   protected $node;
   protected $isNew;
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = null, NodeInterface $node = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL, NodeInterface $node = NULL) {
     $this->bullet_point = $bullet_point;
     if ($node) {
       $this->node = $node;
@@ -47,15 +46,15 @@ class SpeakerPaperEditForm extends FormBase {
       '#required' => TRUE,
     ];
 
-     //custom_text
+    //custom_text
     $form['body'] = array(
       '#prefix' => '<div role="tabpanel" class="tab-pane active" id="custom_text">',
       '#type' => 'text_format',
-      '#format'=> 'basic_html',
-      '#suffix' => '</div>',//<div role="tabpanel" class="tab-pane active" id="custom_text">
+      '#format' => 'basic_html',
+      '#suffix' => '</div>', //<div role="tabpanel" class="tab-pane active" id="custom_text">
     );
 
-        // Group submit handlers in an actions element with a key of "actions" so
+    // Group submit handlers in an actions element with a key of "actions" so
     // that it gets styled correctly, and so that other modules may add actions
     // to the form.
     $form['actions'] = [
@@ -93,21 +92,23 @@ class SpeakerPaperEditForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $body = $form_state->getValue('body');
-  
+
     if (!$this->node) {
       $this->node = Node::create([
         'type' => 'decreto_speaker_paper',
         'title' => $title,
         'body' => $body,
-        'status' => 1,     
+        'status' => 1,
       ]);
-    } else {
+    }
+    else {
       $this->node->title = $title;
       $this->node->body = $body;
     }
-   if ($this->bullet_point)
+    if ($this->bullet_point) {
       $this->node->field_decreto_sp_bp->appendItem($this->bullet_point->id());
-    
+    }
+
     $this->isNew = $this->node->save();
   }
 
@@ -139,20 +140,20 @@ class SpeakerPaperEditForm extends FormBase {
       $response->addCommand(new HtmlCommand('#decreto-content-modify-sp-edit-form', $form));
     }
     else {
-     // $bp_nid = $this->parent->id();
+      // $bp_nid = $this->parent->id();
       //reloadind bullet point
       $render_speaker_paper = node_view($this->node);
       if ($this->isNew == SAVED_NEW) {
-        $response->addCommand(new AppendCommand('#speaker-papers-container-'.$this->bullet_point->id(), $render_speaker_paper));
+        $response->addCommand(new AppendCommand('#speaker-papers-container-' . $this->bullet_point->id(), $render_speaker_paper));
       }
-      else{
+      else {
         //replacing old bullet point with refreshed bullet point
         $response->addCommand(new HtmlCommand("#speaker-paper-{$this->node->id()}", $render_speaker_paper));
         //$response->addCommand(new CloseModalDialogCommand());
-       }
-    $response->addCommand(new CloseModalDialogCommand());
-    return $response;
+      }
+      $response->addCommand(new CloseModalDialogCommand());
+      return $response;
+    }
   }
- }
 }
 

@@ -26,7 +26,7 @@ class CommonFormUtils {
     return $form;
   }
 
-  public static function buildSingleBulletPointContainer($form, $bp_nid = null, $expanded = false) {
+  public static function buildSingleBulletPointContainer($form, $bp_nid = NULL, $expanded = FALSE) {
     $bullet_point = Node::load($bp_nid);
 
     $form['bullet_points_container']['bp_' . $bp_nid] = array(
@@ -91,7 +91,7 @@ class CommonFormUtils {
   public static function buildSingleBPA($form, $bp_nid, $bpa_nid) {
     $bpa = Node::load($bpa_nid);
 
-    $field_decreto_bpa_html = null;
+    $field_decreto_bpa_html = NULL;
     if ($bpa->field_decreto_bpa_html->entity) {
       $field_decreto_bpa_html = [
         '0' => [

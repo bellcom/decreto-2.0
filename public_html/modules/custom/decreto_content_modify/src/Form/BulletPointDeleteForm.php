@@ -2,13 +2,13 @@
 namespace Drupal\decreto_content_modify\Form;
 
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RemoveCommand;
+use Drupal\Core\Form\FormStateInterface;
 
-class BulletPointDeleteForm extends AjaxConfirmFormBase{
+class BulletPointDeleteForm extends AjaxConfirmFormBase {
   /**
    * {@inheritdoc}
    */
@@ -45,7 +45,8 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase{
         '#weight' => -10,
       ];
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-delete-form', $form));
-    } else {
+    }
+    else {
       $nid = $this->node->id();
       $response->addCommand(new RemoveCommand("#js-bp-$nid-container"));
       $response->addCommand(new InvokeCommand('#js-bp-nids', 'removeValue', array($nid)));

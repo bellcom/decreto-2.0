@@ -2,13 +2,12 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-use Drupal\Core\Form\ConfirmFormBase;
-use Drupal\node\NodeInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
+use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
 use Prophecy\Exception\Doubler\MethodNotFoundException;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 /**
  * {@inheritdoc}
@@ -53,7 +52,7 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $parent = null, NodeInterface $node = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $parent = NULL, NodeInterface $node = NULL) {
     $this->node = $node;
     $this->parent = $parent;
     $form = parent::buildForm($form, $form_state);

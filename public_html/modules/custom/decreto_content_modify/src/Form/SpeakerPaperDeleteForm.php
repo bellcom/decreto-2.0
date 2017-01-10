@@ -2,13 +2,12 @@
 namespace Drupal\decreto_content_modify\Form;
 
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RemoveCommand;
+use Drupal\Core\Form\FormStateInterface;
 
-class SpeakerPaperDeleteForm extends AjaxConfirmFormBase{
+class SpeakerPaperDeleteForm extends AjaxConfirmFormBase {
   /**
    * {@inheritdoc}
    */
@@ -45,8 +44,9 @@ class SpeakerPaperDeleteForm extends AjaxConfirmFormBase{
         '#weight' => -10,
       ];
       $response->addCommand(new HtmlCommand('#decreto-content-modify-sp-delete-form', $form));
-    } else {      
-      $response->addCommand(new RemoveCommand("#speaker-paper-{$this->node->id()}"));      
+    }
+    else {
+      $response->addCommand(new RemoveCommand("#speaker-paper-{$this->node->id()}"));
       $response->addCommand(new CloseModalDialogCommand());
     }
 

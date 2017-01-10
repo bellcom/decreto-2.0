@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function decreto_annotator_schema() {
   $schema['decreto_annotator_notes'] = array(

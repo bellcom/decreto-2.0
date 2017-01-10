@@ -6,13 +6,13 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-use Drupal\node\Entity\Node;
-use Drupal\Core\Url;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Field\Plugin\Field\FieldFormatter;
+use Drupal\Core\Url;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
 /**
@@ -31,7 +31,7 @@ class MeetingsEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = null) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
     $this->node = $node;
 
     $form['#attached']['library'][] = 'core/drupal.ajax';
@@ -100,7 +100,7 @@ class MeetingsEditForm extends FormBase {
     //description
     $form['description'] = array(
       '#type' => 'text_format',
-      '#format'=> 'basic_html',
+      '#format' => 'basic_html',
       '#title' => $this->t('Description'),
     );
 
@@ -118,7 +118,7 @@ class MeetingsEditForm extends FormBase {
       '#title' => $this->t('Closed description'),
       '#type' => 'managed_file',
       //'#upload_location' => 'private://',
-      '#upload_location' => 'public://',//TODO:change to private
+      '#upload_location' => 'public://', //TODO:change to private
       '#default_value' => NULL,
       '#upload_validators' => array(
         'file_validate_extensions' => array('txt pdf doc docx'),
@@ -132,10 +132,10 @@ class MeetingsEditForm extends FormBase {
       $form['committee']['#default_value'] = $node->field_decreto_meet_committee->target_id;
       $form['type']['#default_value'] = $node->field_decreto_meet_type->value;
       if ($node->field_decreto_meet_start_date->value) {
-        $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_start_date->value);
+        $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT, $node->field_decreto_meet_start_date->value);
       }
       if ($node->field_decreto_meet_end_date->value) {
-        $form['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT,$node->field_decreto_meet_end_date->value);
+        $form['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT, $node->field_decreto_meet_end_date->value);
       }
       $form['location']['#default_value'] = $node->field_decreto_meet_location->target_id;
       $form['participants']['#default_value'] = $node->field_decreto_meet_partic->value;
@@ -146,7 +146,7 @@ class MeetingsEditForm extends FormBase {
       if (!$node->field_decreto_meet_full_doc_c->isEmpty()) {
         $form['full_doc_closed']['#default_value']['fid'] = $node->field_decreto_meet_full_doc_c->target_id;
       }
-      foreach($node->field_decreto_meet_bps as $bp) {
+      foreach ($node->field_decreto_meet_bps as $bp) {
         $bp_ids[] = $bp->target_id;
       }
     }
@@ -156,7 +156,7 @@ class MeetingsEditForm extends FormBase {
     $form['add_bp'] = [
       '#title' => $this->t('Add new bullet point'),
       '#type' => 'link',
-      '#url' => Url::fromRoute('decreto_content_modify.bps_add', array('node' => null)),
+      '#url' => Url::fromRoute('decreto_content_modify.bps_add', array('node' => NULL)),
       '#attributes' => array(
         'class' => array('use-ajax'),
         'data-dialog-type' => 'modal',
@@ -209,28 +209,29 @@ class MeetingsEditForm extends FormBase {
         'type' => 'decreto_meeting',
         'status' => 1,
         'title' => $title,
-        'field_decreto_meet_committee' => ($committee_tid) ? $committee_tid : null,
+        'field_decreto_meet_committee' => ($committee_tid) ? $committee_tid : NULL,
         'field_decreto_meet_type' => $type,
-        'field_decreto_meet_start_date' => ($start_date)? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : null,
-        'field_decreto_meet_end_date' => ($end_date)? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : null,
-        'field_decreto_meet_location' => ($location_tid) ? $location_tid : null,
+        'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
+        'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
+        'field_decreto_meet_location' => ($location_tid) ? $location_tid : NULL,
         'field_decreto_meet_partic' => $participants,
         'body' => $description,
-        'field_decreto_meet_full_doc' => !empty($full_doc)? ['target_id' => array_pop($full_doc)] : null,
-        'field_decreto_meet_full_doc_c' => !empty($full_doc_closed)? ['target_id' => array_pop($full_doc_closed)] : null,
+        'field_decreto_meet_full_doc' => !empty($full_doc) ? ['target_id' => array_pop($full_doc)] : NULL,
+        'field_decreto_meet_full_doc_c' => !empty($full_doc_closed) ? ['target_id' => array_pop($full_doc_closed)] : NULL,
         'field_decreto_meet_bps' => $field_decreto_meet_bps
       ));
-    } else {
+    }
+    else {
       $this->node->title = $title;
-      $this->node->field_decreto_meet_committee = ($committee_tid) ? $committee_tid : null;
+      $this->node->field_decreto_meet_committee = ($committee_tid) ? $committee_tid : NULL;
       $this->node->field_decreto_meet_type = $type;
-      $this->node->field_decreto_meet_start_date = ($start_date)? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : null;
-      $this->node->field_decreto_meet_end_date = ($end_date)? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : null;
-      $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : null;
+      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;
+      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;
+      $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
       $this->node->field_decreto_meet_partic = $participants;
       $this->node->body = $description;
-      $this->node->field_decreto_meet_full_doc = !empty($full_doc)? ['target_id' => array_pop($full_doc)] : null;
-      $this->node->field_decreto_meet_full_doc_c = !empty($full_doc_closed)? ['target_id' => array_pop($full_doc_closed)] : null;
+      $this->node->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => array_pop($full_doc)] : NULL;
+      $this->node->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => array_pop($full_doc_closed)] : NULL;
       $this->node->field_decreto_meet_bps = $field_decreto_meet_bps;
     }
 
