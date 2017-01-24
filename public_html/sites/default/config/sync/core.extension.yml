@@ -17,6 +17,7 @@ module:
   decreto_content_modify: 0
   decreto_context_menu: 0
   decreto_pdf2htmlex: 0
+  decreto_search: 0
   devel: 0
   dynamic_page_cache: 0
   editor: 0
@@ -37,6 +38,9 @@ module:
   path: 0
   rdf: 0
   search: 0
+  search_api: 0
+  search_api_solr: 0
+  search_api_views_taxonomy: 0
   shortcut: 0
   system: 0
   taxonomy: 0
