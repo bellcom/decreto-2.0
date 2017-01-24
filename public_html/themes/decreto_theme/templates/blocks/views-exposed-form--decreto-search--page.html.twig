@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+    This ensures that, if clean URLs are off, the 'q' is added first,
+    as a hidden form element, so that it shows up first in the POST URL.
+  #}
+  {{ q }}
+{% endif %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="input-group search-input-group">
+      {{ form.search_api_fulltext }}
+      <span class="input-group-btn">
+        {{ form.actions }}
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 form-inline">
+  {#<div class="col-sm-2">#}
+    {{ form.type }}
+  {#</div>#}
+  {#<div class="col-sm-4">#}
+    {{ form.field_decreto_meet_start_date }}
+  {#</div>#}
+  {#<div class="col-sm-4">#}
+    {{ form.field_decreto_meet_end_date }}
+  {#</div>#}
+  {#<div class="col-sm-2">#}
+    {{ form.field_decreto_meet_committee }}
+  {#</div>#}
+  </div>
+</div>

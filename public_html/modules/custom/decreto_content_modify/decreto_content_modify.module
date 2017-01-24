@@ -59,7 +59,7 @@ function decreto_content_modify_system_breadcrumb_alter(&$breadcrumb, $route_mat
 
   if ($node = $route_match->getParameter('node')) {
     if ($node->getType() == 'decreto_meeting' || $node->getType() == 'decreto_bullet_point' || $node->getType() == 'decreto_bullet_point_attachment') {
-      $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<front>')); //TODO: change to meetings
+      $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), 'view.decreto_search.page')); //TODO: change to meetings
     }
 
     if ($node->getType() == 'decreto_bullet_point' || $node->getType() == 'decreto_bullet_point_attachment') {
