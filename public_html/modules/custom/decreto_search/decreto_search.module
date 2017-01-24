@@ -9,7 +9,10 @@
 
 function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-decreto-search-page') {
-    //print_r('<pre>' . print_r($form,1) . '</pre>');
+    //formatting search field
+    $form['search_api_fulltext']['#theme_wrappers'] = null;
+    $form['actions']['#theme_wrappers'] = null;
+
     $form['#attached']['library'][] = 'decreto_search/decreto-bootstrap-multiselect';
 
     //submit button
@@ -54,6 +57,6 @@ function decreto_search_theme_suggestions_select_alter(&$suggestions, &$vars) {
  */
 function decreto_search_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
   if ($route_match->getRouteName() == 'view.decreto_search.page') {
-    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>')); //TODO: change to meetings
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
   }
 }

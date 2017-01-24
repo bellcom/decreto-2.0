@@ -82,6 +82,12 @@ a.annotator-wrapper {
 .decreto-speaker-paper .panel:last-child{
     margin-bottom: 20px;
 }
-/* ---------------------------- Speaker paper override START---------------------------- */
+/* ---------------------------- Speaker paper override END---------------------------- */
+
+/* ---------------------------- Search block START ---------------------------- */
+#views-exposed-form-decreto-search-page {
+    margin-bottom: 15px;
+}
+/* ---------------------------- Search block END ---------------------------- */
 
 
