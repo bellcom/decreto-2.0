@@ -1,6 +1,6 @@
 uuid: eb119b2a-cc55-4421-bb03-3f702b6e79e8
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
 id: decreto_theme_branding
 theme: decreto_theme
-region: '-1'
-weight: -3
+region: header
+weight: -10
 provider: null
 plugin: system_branding_block
 settings:
@@ -21,5 +21,5 @@ settings:
   label_display: '0'
   use_site_logo: true
   use_site_name: true
-  use_site_slogan: true
+  use_site_slogan: false
 visibility: {  }

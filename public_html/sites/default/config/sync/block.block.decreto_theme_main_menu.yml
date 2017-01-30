@@ -14,7 +14,7 @@ _core:
 id: decreto_theme_main_menu
 theme: decreto_theme
 region: sidebar_first
-weight: -8
+weight: -9
 provider: null
 plugin: 'system_menu_block:main'
 settings:

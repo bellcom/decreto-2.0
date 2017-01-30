@@ -9,7 +9,7 @@ _core:
 id: decreto_theme_local_tasks
 theme: decreto_theme
 region: '-1'
-weight: -1
+weight: -2
 provider: null
 plugin: local_tasks_block
 settings:

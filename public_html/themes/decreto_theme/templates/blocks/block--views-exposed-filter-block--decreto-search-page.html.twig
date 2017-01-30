@@ -41,7 +41,7 @@ set classes = [
 'block-' ~ plugin_id|clean_class,
 ]
 %}
-
+<div class="col-sm-10" role="search">
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
@@ -51,4 +51,5 @@ set classes = [
   {% block content %}
     {{ content }}
   {% endblock %}
+</div>
 </div>
