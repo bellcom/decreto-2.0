@@ -3,41 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-jQuery(function($) {
+jQuery(function ($) {
 
-    $('#main_menu_toggle_button').click(function() {
-        $("#main_menu ul li.has-children ul").toggleClass('sidebar');
-        if ($(this).children('span').hasClass('glyphicon-chevron-left')){
-          $(this).children('span').removeClass('glyphicon-chevron-left').addClass('glyphicon-chevron-right');           
-          $('.sidebar-first').removeClass('col-sm-3').addClass('col-sm-2');
-          $('#main_menu').parent('aside').removeClass('col-sm-3').addClass('col-sm-2');          
-          $('.top-content').removeClass('col-sm-7').addClass('col-sm-8');         
-          if ($('.region-sidebar-second').length>0)
-            $('.main-content').parent('section').removeClass('col-sm-6').addClass('col-sm-7');
-          else 
-            $('.main-content').parent('section').removeClass('col-sm-9').addClass('col-sm-10');
+    //main menu
+    //alert('her');
+    $('#toggle-menu-trigger').click(function () {
+        //header-container
+        $('.header-container .toggle-menu-left').toggleClass('col-sm-1 col-sm-2');
+        $('.header-container .toggle-menu-right').toggleClass('col-sm-9 col-sm-10');
+
+        //main-container
+        $('.main-container .toggle-menu-left').toggleClass('col-sm-1 col-sm-2');
+        if ($('.main-container .toggle-menu-right').hasClass('col-sm-7') || $('.main-container .toggle-menu-right').hasClass('col-sm-8')) {
+            $('.main-container .toggle-menu-right').toggleClass('col-sm-7 col-sm-8');
         }
-        else {
-         $(this).children('span').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-left');
-         $('.sidebar-first').removeClass('col-sm-2').addClass('col-sm-3');
-         $('#main_menu').parent('aside').removeClass('col-sm-2').addClass('col-sm-3');
-         $('.top-content').removeClass('col-sm-9').addClass('col-sm-7');
-         if ($('.region-sidebar-second').length>0)
-            $('.main-content').parent('section').removeClass('col-sm-7').addClass('col-sm-6');
-          else 
-            $('.main-content').parent('section').removeClass('col-sm-10').addClass('col-sm-9');
+
+        if ($('.main-container .toggle-menu-right').hasClass('col-sm-10') || $('.main-container .toggle-menu-right').hasClass('col-sm-11')) {
+            $('.main-container .toggle-menu-right').toggleClass('col-sm-10 col-sm-11');
         }
-     return false;  
     });
 
     $("#main_menu ul li.has-children").hover(
-        function() {
-          $("#main_menu ul li.has-children").removeClass('hover');
-          $(this).addClass('hover');
-       }, 
-       function() {
-        $("#main_menu ul li.has-children").removeClass('hover');
-    }
-  );
+        function () {
+            $("#main_menu ul li.has-children").removeClass('hover');
+            $(this).addClass('hover');
+        },
+        function () {
+            $("#main_menu ul li.has-children").removeClass('hover');
+        }
+    );
 });
 

@@ -3,6 +3,22 @@
  * Place your custom styles here.
  */
 
+/* ---------------------------- General START---------------------------- */
+.header-container {
+    position: fixed;
+    z-index: 1;
+    background: white;
+    margin-top: -15px;
+    padding-top: 15px;
+}
+
+.main-container {
+    margin-top: 100px;
+}
+
+/* ---------------------------- General END---------------------------- */
+
+/* ---------------------------- Meeting layout START---------------------------- */
 .area-expand-collapse {
     margin-left: 50px;
 }
@@ -21,31 +37,36 @@
     position: relative !important;
 }
 
-.user-menu li{
-    display: inline-block;
-    padding-right: 5px;
-}
+/* ---------------------------- Meeting layout END ---------------------------- */
 
-/****** MAIN MENU ***********/
+/*.user-menu li{*/
+    /*display: inline-block;*/
+    /*padding-right: 5px;*/
+/*}*/
 
-#main_menu ul li{
-    position: relative;
-}
+/* ---------------------------- Main menu START ---------------------------- */
 
-#main_menu select {
-    width:100%;
-}
-#main_menu ul li.has-children ul.sidebar{
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 160px;
-    display: none;
-    z-index: 999;
-}
-#main_menu ul li.has-children.hover ul.sidebar{
-    display: block;
-}
+/*#main_menu ul li{*/
+    /*position: relative;*/
+/*}*/
+
+/*#main_menu select {*/
+    /*width:100%;*/
+/*}*/
+/*#main_menu ul li.has-children ul.sidebar{*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 100%;*/
+    /*width: 160px;*/
+    /*display: none;*/
+    /*z-index: 999;*/
+/*}*/
+/*#main_menu ul li.has-children.hover ul.sidebar{*/
+    /*display: block;*/
+/*}*/
+
+/* ---------------------------- Main menu END ---------------------------- */
+
 /*****************CALENDAR VIEW ********************/
 
 table .mini-day-on a:after{
