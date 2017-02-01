@@ -4,7 +4,19 @@
  */
 
 /* ---------------------------- General START---------------------------- */
-.header-container {
+.left-container {
+    position: fixed;
+    height: 100%;
+    margin-top: -15px;
+    padding-top: 15px;
+    border-right: 1px solid black;
+}
+
+.main-container__content {
+    margin-top: 150px;
+}
+
+.main-container__header {
     position: fixed;
     z-index: 1;
     background: white;
@@ -12,9 +24,6 @@
     padding-top: 15px;
 }
 
-.main-container {
-    margin-top: 100px;
-}
 
 /* ---------------------------- General END---------------------------- */
 
@@ -45,6 +54,43 @@
 /*}*/
 
 /* ---------------------------- Main menu START ---------------------------- */
+
+.toggle-menu-container {
+    width: 220px;
+}
+
+.toggle-menu-container.collapsed {
+    width: 100px;
+}
+
+.toggle-menu-container #toggle-menu-trigger {
+    position: fixed;
+    bottom: 15px;
+    left: 175px;
+}
+
+.toggle-menu-container.collapsed #toggle-menu-trigger {
+    left: 55px;
+}
+
+
+.toggle-menu-container #toggle-menu-trigger .glyphicon:before{
+    /*left arrow*/
+    content: "\e251";
+}
+
+.toggle-menu-container.collapsed #toggle-menu-trigger .glyphicon:before{
+    /*right arrow*/
+    content: "\e250";
+}
+
+.toggle-menu-container + .main-container {
+    margin-left: 220px;
+}
+
+.toggle-menu-container.collapsed + .main-container {
+    margin-left: 100px;
+}
 
 /*#main_menu ul li{*/
     /*position: relative;*/
