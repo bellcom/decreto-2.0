@@ -16,6 +16,7 @@
  */
 #}
 {% block content %}
+    <div class="clearfix">
     {% if site_logo %}
         <a class="logo navbar-btn" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
             <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
@@ -27,4 +28,5 @@
     {% if site_slogan %}
         <p class="navbar-text">{{ site_slogan }}</p>
     {% endif %}
+    </div>
 {% endblock %}

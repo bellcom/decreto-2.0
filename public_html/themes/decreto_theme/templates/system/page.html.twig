@@ -96,7 +96,7 @@
     {% endblock %}
 {% endif %}
 
-<aside class="left-container toggle-menu-container">
+<aside class="left-container toggle-menu-container {{ toggle_main_menu }}">
     {# Sidebar First #}
     {% if page.sidebar_first %}
         {% block sidebar_first %}

@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page()
+ *
+ * loads the toggle_main_menu state from cookies
+ */
+function decreto_theme_preprocess_page(&$vars) {
+  if (isset($_COOKIE['toggle_main_menu'])) {
+    $vars['toggle_main_menu'] = $_COOKIE['toggle_main_menu'];
+  }
+}

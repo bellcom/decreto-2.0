@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-jQuery(function ($) {
+(function ($, Drupal) {
+    Drupal.behaviors.main_menu = {
+        attach: function (context, settings) {
+            //main menu
+            $('#toggle-menu-trigger', context).once('toggle-main-menu').click(function () {
+                var toggle_menu_container = $(context).find('.toggle-menu-container');
+                toggle_menu_container.toggleClass('collapsed');
 
-    //main menu
-    $('#toggle-menu-trigger').click(function () {
-        $('.toggle-menu-container').toggleClass('collapsed');
-    });
+                if (toggle_menu_container.hasClass('collapsed')) {
+                    $.cookie('toggle_main_menu', 'collapsed');
+                } else {
+                    $.removeCookie('toggle_main_menu');
+                }
 
-    $("#main_menu ul li.has-children").hover(
-        function () {
-            $("#main_menu ul li.has-children").removeClass('hover');
-            $(this).addClass('hover');
-        },
-        function () {
-            $("#main_menu ul li.has-children").removeClass('hover');
+            });
         }
-    );
-});
-
+    }
+})(jQuery, Drupal);

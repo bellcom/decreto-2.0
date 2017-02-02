@@ -1,6 +1,6 @@
 uuid: f935dc54-9ba9-4792-b02f-a143ed7bac67
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.decreto_organisation_list
@@ -10,8 +10,8 @@ dependencies:
     - decreto_theme
 id: views_block__decreto_organisation_list_organisations
 theme: decreto_theme
-region: sidebar_first
-weight: -10
+region: '-1'
+weight: 1
 provider: null
 plugin: 'views_block:decreto_organisation_list-organisations'
 settings:

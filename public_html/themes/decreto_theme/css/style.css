@@ -10,6 +10,7 @@
     margin-top: -15px;
     padding-top: 15px;
     border-right: 1px solid black;
+    z-index: 1;
 }
 
 .main-container__content {
@@ -55,42 +56,145 @@
 
 /* ---------------------------- Main menu START ---------------------------- */
 
+.toggle-menu-container select {
+    width: 100%;
+}
+.toggle-menu-container nav ul {
+    list-style: none;
+}
+.toggle-menu-container .main-menu-link {
+    text-decoration: none;
+}
+
 .toggle-menu-container {
-    width: 220px;
+    width: 200px;
+}
+.toggle-menu-container + .main-container {
+    margin-left: 200px;
 }
 
 .toggle-menu-container.collapsed {
     width: 100px;
 }
+.toggle-menu-container.collapsed + .main-container {
+    margin-left: 100px;
+}
+
+.toggle-menu-container.collapsed .navbar-btn {
+    display: block;
+    text-align: center;
+}
+
+.toggle-menu-container.collapsed .navbar-brand {
+    display: none;
+}
 
 .toggle-menu-container #toggle-menu-trigger {
     position: fixed;
     bottom: 15px;
-    left: 175px;
+    left: 155px;
 }
-
 .toggle-menu-container.collapsed #toggle-menu-trigger {
     left: 55px;
 }
-
 
 .toggle-menu-container #toggle-menu-trigger .glyphicon:before{
     /*left arrow*/
     content: "\e251";
 }
-
 .toggle-menu-container.collapsed #toggle-menu-trigger .glyphicon:before{
     /*right arrow*/
     content: "\e250";
 }
 
-.toggle-menu-container + .main-container {
-    margin-left: 220px;
+.toggle-menu-container .main-menu-link::before{
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px;
+    top: 3px;
+    margin-left: -10px;
+    margin-right: 5px;
 }
 
-.toggle-menu-container.collapsed + .main-container {
-    margin-left: 100px;
+/* superfish menu start */
+.toggle-menu-container #block-mainnavigation > ul {
+    width: 100%;
 }
+.toggle-menu-container #block-mainnavigation ul.sf-menu.sf-vertical li:hover > ul,
+.toggle-menu-container #block-mainnavigation ul.sf-menu.sf-vertical li.sfHover > ul {
+    left: 100px;
+}
+
+.toggle-menu-container #block-mainnavigation .sf-depth-1 ul li {
+    background: white;
+}
+
+.toggle-menu-container #block-mainnavigation .sf-depth-1 > .main-menu-link {
+    width: 100%;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+.toggle-menu-container #block-mainnavigation .sf-depth-1 > .main-menu-link::before {
+    display: block;
+    top: 0;
+    font-size: 40px;
+    margin-left: 0;
+}
+/* superfish menu end */
+
+/* showing/hiding menus start */
+.toggle-menu-container.collapsed #block-decreto-theme-main-menu {
+    display: none;
+}
+
+.toggle-menu-container .block-superfishmain {
+    display: none;
+}
+.toggle-menu-container.collapsed .block-superfishmain {
+    display: block;
+}
+/* showing/hiding menus end */
+
+/* icons on the menu start */
+.toggle-menu-container .main-menu-link.dashboard::before{
+    content:"\e141";
+}
+.toggle-menu-container .main-menu-link.calendar::before{
+    content: "\e109";
+}
+.toggle-menu-container .main-menu-link.meetings::before{
+    content: "\e032";
+}
+.toggle-menu-container .main-menu-link.all-meetings::before{
+    content: "\e032";
+}
+.toggle-menu-container .main-menu-link.add-meeting::before{
+    content: "\002b";
+}
+.toggle-menu-container .main-menu-link.settings::before{
+    content: "\e109";
+}
+.toggle-menu-container .main-menu-link.users::before{
+    content: "\e008";
+}
+.toggle-menu-container .main-menu-link.all-users::before{
+    content: "\e008";
+}
+.toggle-menu-container .main-menu-link.add-user::before{
+    content: "\002b";
+}
+.toggle-menu-container .main-menu-link.settings::before{
+    content: "\e136";
+}
+/* icons on the menu end */
+
+
 
 /*#main_menu ul li{*/
     /*position: relative;*/

@@ -7,7 +7,6 @@ dependencies:
     - field.storage.node.field_decreto_meet_end_date
     - field.storage.node.field_decreto_meet_start_date
     - search_api.index.decreto_search_index
-    - system.menu.main
     - taxonomy.vocabulary.decreto_tax_committee
   module:
     - datetime
@@ -596,12 +595,12 @@ display:
       path: meetings
       exposed_block: true
       menu:
-        type: normal
-        title: Meetings
+        type: none
+        title: 'All Meetings'
         description: ''
-        expanded: false
-        parent: ''
-        weight: -48
+        expanded: true
+        parent: 'menu_link_content:402917f9-d364-48de-90a0-077efb16672c'
+        weight: -50
         context: '0'
         menu_name: main
     cache_metadata:
