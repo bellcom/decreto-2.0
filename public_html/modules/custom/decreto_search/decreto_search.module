@@ -13,14 +13,12 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
     $form['search_api_fulltext']['#theme_wrappers'] = null;
     $form['actions']['#theme_wrappers'] = null;
 
-    $form['#attached']['library'][] = 'decreto_search/decreto-bootstrap-multiselect';
-
     //submit button
     $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
 
     //select type
-    $form['type']['#attributes']['class'][] = 'bootstrap-multiselect';
-    $form['type']['#attributes']['data-multiselect-title'] = t('Select Type');
+    //$form['type']['#attributes']['class'][] = 'bootstrap-multiselect';
+    //$form['type']['#attributes']['data-multiselect-title'] = t('Select Type');
 
     //start date
     $form['field_decreto_meet_start_date']['#type'] = 'datetime';
@@ -33,6 +31,14 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
     //committee
     $form['field_decreto_meet_committee']['#attributes']['class'][] = 'bootstrap-multiselect';
     $form['field_decreto_meet_committee']['#attributes']['data-multiselect-title'] = t('Select Committee');
+
+    //hiding additional filtets, if not search page
+    if (\Drupal::routeMatch()->getRouteName() != 'view.decreto_search.page') {
+      $form['#filters_dispay'] = FALSE;
+    } else {
+      $form['#filters_dispay'] = TRUE;
+    }
+
   }
 }
 

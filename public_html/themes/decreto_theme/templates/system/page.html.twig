@@ -64,6 +64,7 @@
         'navbar',
         theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
         theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
+        'visible-xs'
         ] %}
         <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
             {% if not navbar_attributes.hasClass('container') %}
@@ -96,13 +97,11 @@
     {% endblock %}
 {% endif %}
 
-<aside class="left-container toggle-menu-container {{ toggle_main_menu }}">
+<aside class="left-container toggle-menu-container {{ toggle_main_menu }} hidden-xs">
     {# Sidebar First #}
     {% if page.sidebar_first %}
         {% block sidebar_first %}
-            {#<aside class="col-sm-2 toggle-menu toggle-menu-left" role="complementary">#}
             {{ page.sidebar_first }}
-            {#</aside>#}
         {% endblock %}
     {% endif %}
 </aside>
@@ -111,7 +110,7 @@
 {% block main %}
     <div role="main" class="main-container {{ container }} js-quickedit-main-content">
 
-        <header class="row main-container__header">
+        <header class="row main-container__header hidden-xs">
             {# Header #}
             {% if page.header %}
                 {% block header %}
@@ -123,8 +122,8 @@
         <div class="row main-container__content">
             {# Content #}
             {% set content_classes = [
-            page.sidebar_second ? 'col-sm-9',
-            page.sidebar_second is empty ? 'col-sm-12'
+            page.sidebar_second ? 'col-md-9',
+            page.sidebar_second is empty ? 'col-md-12'
             ] %}
             <section{{ content_attributes.addClass(content_classes).addClass('toggle-menu toggle-menu-right') }}>
 
@@ -166,7 +165,7 @@
             {# Sidebar Second #}
             {% if page.sidebar_second %}
                 {% block sidebar_second %}
-                    <aside class="col-sm-3" role="complementary">
+                    <aside class="col-md-3 hidden-sm hidden-xs" role="complementary">
                         {{ page.sidebar_second }}
                     </aside>
                 {% endblock %}

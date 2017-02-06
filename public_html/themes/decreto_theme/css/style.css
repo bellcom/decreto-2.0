@@ -64,15 +64,9 @@
 .toggle-menu-container {
     width: 200px;
 }
-.toggle-menu-container + .main-container {
-    margin-left: 200px;
-}
 
 .toggle-menu-container.collapsed {
     width: 100px;
-}
-.toggle-menu-container.collapsed + .main-container {
-    margin-left: 100px;
 }
 
 .toggle-menu-container.collapsed .navbar-btn {
@@ -102,19 +96,28 @@
     content: "\e250";
 }
 
-.toggle-menu-container .main-menu-link::before{
-    position: relative;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 20px;
-    top: 3px;
-    margin-left: -10px;
-    margin-right: 5px;
+/*bootstrap menu override start */
+.toggle-menu-container .navbar-nav {
+    float: none;
+    width: 100%;
 }
+
+.toggle-menu-container .navbar-nav > li {
+    float: none;
+}
+
+.toggle-menu-container .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/*bootstrap menu override end */
 
 /* superfish menu start */
 .toggle-menu-container #block-mainnavigation > ul {
@@ -157,60 +160,61 @@
 /* showing/hiding menus end */
 
 /* icons on the menu start */
-.toggle-menu-container .main-menu-link.dashboard::before{
+.main-menu-link::before{
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px;
+    top: 3px;
+    margin-left: -10px;
+    margin-right: 5px;
+}
+.main-menu-link.dashboard::before{
     content:"\e141";
 }
-.toggle-menu-container .main-menu-link.calendar::before{
+.main-menu-link.calendar::before{
     content: "\e109";
 }
-.toggle-menu-container .main-menu-link.meetings::before{
+.main-menu-link.meetings::before{
     content: "\e032";
 }
-.toggle-menu-container .main-menu-link.all-meetings::before{
+.main-menu-link.all-meetings::before{
     content: "\e032";
 }
-.toggle-menu-container .main-menu-link.add-meeting::before{
+.main-menu-link.add-meeting::before{
     content: "\002b";
 }
-.toggle-menu-container .main-menu-link.settings::before{
+.main-menu-link.settings::before{
     content: "\e109";
 }
-.toggle-menu-container .main-menu-link.users::before{
+.main-menu-link.users::before{
     content: "\e008";
 }
-.toggle-menu-container .main-menu-link.all-users::before{
+.main-menu-link.all-users::before{
     content: "\e008";
 }
-.toggle-menu-container .main-menu-link.add-user::before{
+.main-menu-link.add-user::before{
     content: "\002b";
 }
-.toggle-menu-container .main-menu-link.settings::before{
+.main-menu-link.settings::before{
     content: "\e136";
 }
 /* icons on the menu end */
 
+/* ---------------------------- Main menu END ---------------------------- */
 
-
-/*#main_menu ul li{*/
-    /*position: relative;*/
-/*}*/
-
-/*#main_menu select {*/
-    /*width:100%;*/
-/*}*/
-/*#main_menu ul li.has-children ul.sidebar{*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 100%;*/
-    /*width: 160px;*/
-    /*display: none;*/
-    /*z-index: 999;*/
-/*}*/
-/*#main_menu ul li.has-children.hover ul.sidebar{*/
-    /*display: block;*/
-/*}*/
+/* ---------------------------- Toggle/mobile menu START ---------------------------- */
+#block-exposed-form-decreto-search-page-mobile {
+    margin-top: 15px;
+}
 
 /* ---------------------------- Main menu END ---------------------------- */
+
+
 
 /*****************CALENDAR VIEW ********************/
 

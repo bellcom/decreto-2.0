@@ -13,6 +13,7 @@ global-styling:
     theme:
       css/style.css: {}
       css/bootstrap-overrides.css: {}
+      css/style-sm.css: {}
       
   js:
     js/main.js: {}

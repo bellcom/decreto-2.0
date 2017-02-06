@@ -1,0 +1,23 @@
+uuid: 0c7fe29d-6f3c-4040-8c77-ae9180962d20
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_search
+  module:
+    - views
+  theme:
+    - decreto_theme
+id: exposed_form_decreto_search_page_mobile
+theme: decreto_theme
+region: navigation_collapsible
+weight: -12
+provider: null
+plugin: 'views_exposed_filter_block:decreto_search-page'
+settings:
+  id: 'views_exposed_filter_block:decreto_search-page'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+visibility: {  }

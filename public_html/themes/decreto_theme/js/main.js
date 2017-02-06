@@ -55,9 +55,12 @@
     Drupal.behaviors.main_container_offset = {
         attach: function (context, settings) {
             //offsetting main-container__content
-            $('.main-container__content', context).css('margin-top', $('.main-container__header', context).height());
+            var height = $('.main-container__header', context).height();
+            $('.main-container__content', context).css('margin-top', height > 0 ? height : 0);
+
             $(window).once('main_container_offset').resize(function () {
-                $('.main-container__content', context).css('margin-top', $('.main-container__header', context).height());
+                var height = $('.main-container__header', context).height();
+                $('.main-container__content', context).css('margin-top', height > 0 ? height : 0);
             });
         }
     }
