@@ -1,3 +1,13 @@
+decreto-bootstrap-multiselect:
+  version: 1.x
+  css:
+    theme:
+      ../../libraries/bootstrap-multiselect/dist/css/bootstrap-multiselect.css: {}
+  js:
+    ../../libraries/bootstrap-multiselect/dist/js/bootstrap-multiselect.js: {}
+  dependencies:
+    - core/jquery
+
 global-styling:
   css:
     theme:
