@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Contains
+ * \Drupal\calendar\Plugin\ViewsTemplateBuilder\FieldTemplate.
+ */
+
 
 namespace Drupal\calendar\Plugin\ViewsTemplateBuilder;
 

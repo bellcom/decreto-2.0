@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Contains the CalendarStyleInfo class.
+ */
 
 namespace Drupal\calendar;
 

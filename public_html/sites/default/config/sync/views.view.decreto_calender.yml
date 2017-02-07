@@ -530,6 +530,36 @@ display:
       defaults:
         arguments: true
         header: false
+        style: false
+        row: false
+      style:
+        type: calendar
+        options:
+          calendar_type: month
+          mini: '0'
+          name_size: '3'
+          with_weekno: '0'
+          max_items: '0'
+          max_items_behavior: more
+          groupby_times: hour
+          groupby_times_custom: null
+          theme_style: '1'
+          groupby_field: ''
+          multiday_theme: '1'
+          multiday_hidden: {  }
+          granularity_links:
+            day: ''
+            week: ''
+      row:
+        type: calendar_row
+        options:
+          colors:
+            legend: type
+            calendar_colors_type:
+              article: '#ffffff'
+              page: '#ffffff'
+            taxonomy_field: ''
+            calendar_colors_vocabulary: {  }
     cache_metadata:
       max-age: 0
       contexts:

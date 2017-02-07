@@ -46,7 +46,7 @@
 {% set title_classes = [
 'field--label',
 label_display == 'visually_hidden' ? 'sr-only',
-'col-xs-3'
+'col-xs-5 col-sm-3 col-md-2'
 ] %}
 
 {% if label_hidden %}
@@ -72,7 +72,7 @@ label_display == 'visually_hidden' ? 'sr-only',
         <div class="field__items">
             {% endif %}
             {% for item in items %}
-                <div class="col-xs-9">
+                <div class="col-xs-7 col-sm-9 col-md-10">
                     <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
                 </div>
             {% endfor %}

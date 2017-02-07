@@ -7,4 +7,15 @@
         margin-left: 100px;
     }
     /* ---------------------------- Main menu END ---------------------------- */
+
+    /* ---------------------------- Meeting layout START---------------------------- */
+    .decreto-meeting .tab-content > .tab-pane {
+        display: block;
+        opacity: 1;
+    }
+
+    .decreto-meeting .field--name-field-decreto-meet-bps {
+        margin-top: 15px;
+    }
+    /* ---------------------------- Meeting layout END---------------------------- */
 }

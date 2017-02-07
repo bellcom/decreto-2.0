@@ -11,12 +11,31 @@ function decreto_theme_preprocess_page(&$vars) {
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_alter()
+ *
+ * @param $suggestions
+ * @param $vars
+ */
 function decreto_theme_theme_suggestions_menu_alter(&$suggestions, &$vars) {
   if (isset($vars['attributes']['block'])) {
     $suggestions[] = 'menu' . '__' . $vars['menu_name'] . '__' . $vars['attributes']['block'];
   }
 }
 
+/**
+ * Implement hook_preprocess_block()
+ *
+ * @param $vars
+ */
 function decreto_theme_preprocess_block(&$vars) {
   $vars['content']['#attributes']['block'] = $vars['elements']['#id'];
+}
+
+function decreto_theme_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
+  dpm('here');
+  dpm($route_match->getRouteName());
+  if ($route_match->getRouteName() == 'view.decreto_search.page') {
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
+  }
 }

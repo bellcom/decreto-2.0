@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Contains \Drupal\calendar\Plugin\Block\CalendarLegend.
+ */
 
 namespace Drupal\calendar\Plugin\Block;
 

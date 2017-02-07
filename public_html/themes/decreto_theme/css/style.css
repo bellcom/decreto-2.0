@@ -42,6 +42,16 @@
     position: relative !important;
 }
 
+.decreto-meeting .nav {
+    margin-bottom: 10px;
+}
+
+.decreto-meeting .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+}
+
+
 /* ---------------------------- Meeting layout END ---------------------------- */
 
 /*.user-menu li{*/
@@ -260,6 +270,15 @@ a.annotator-wrapper {
 /* ---------------------------- Search block START ---------------------------- */
 #views-exposed-form-decreto-search-page {
     margin-bottom: 15px;
+}
+#views-exposed-form-decreto-search-page .form-control.form-date {
+    max-width: 170px;
+}
+#views-exposed-form-decreto-search-page .form-control.form-time {
+    max-width: 105px;
+}
+#views-exposed-form-decreto-search-page .form-group.form-inline > .form-item.form-group {
+    margin-bottom: 10px;
 }
 /* ---------------------------- Search block END ---------------------------- */
 

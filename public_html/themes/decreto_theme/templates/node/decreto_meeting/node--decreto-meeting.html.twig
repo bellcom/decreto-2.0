@@ -87,7 +87,21 @@ view_mode ? view_mode|clean_class,
             <h3 class="panel-title">{{ node.getTitle }} {{ decreto_context_menu }}</h3>
         </div>
         <div{{ content_attributes.addClass('content', 'panel-body') }}>
-            {{ content }}
+            <ul class="nav nav-pills nav-justified visible-xs">
+                <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
+                <li><a data-toggle="tab"href="#agenda">Agenda</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="info" class="tab-pane fade in active">
+                    {{ content | without('field_decreto_meet_bps')}}
+                </div>
+                <div id="agenda" class="tab-pane fade in">
+                    {{ content.field_decreto_meet_bps}}
+                </div>
+            </div>
+
+            {#{{ content }}#}
         </div>
     </div>
 </article>

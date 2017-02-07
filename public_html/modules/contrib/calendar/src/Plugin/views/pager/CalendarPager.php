@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ * Contains \Drupal\calendar\Plugin\views\pager\CalendarPager.
+ */
+
 
 namespace Drupal\calendar\Plugin\views\pager;
 
@@ -49,10 +54,10 @@ class CalendarPager extends PagerPluginBase {
       return [];
     }
     $items['previous'] = [
-      'url' => $this->getPagerURL($this::PREVIOUS, $input),
+      'url' => $this->getPagerURL($this::PREVIOUS),
     ];
     $items['next'] = [
-      'url' => $this->getPagerURL($this::NEXT, $input),
+      'url' => $this->getPagerURL($this::NEXT),
     ];
     return array(
       '#theme' => $this->themeFunctions(),
@@ -79,14 +84,11 @@ class CalendarPager extends PagerPluginBase {
    * Get the href value for the pager link.
    *
    * @param $mode
-   *   Either '-' or '+' to determine which direction.
-   * @param array $input
-   *   Any extra GET parameters that should be retained, such as exposed
-   *   input.
+   *  Either '-' or '+' to determine which direction.
    *
    * @return string
    */
-  protected function getPagerURL($mode, $input) {
+  protected function getPagerURL($mode) {
     $value = $this->getPagerArgValue($mode);
     $base_path = $this->view->getPath();
     $current_position = 0;
@@ -105,7 +107,7 @@ class CalendarPager extends PagerPluginBase {
     }
     
     // @todo How do you get display_id here so we can use CalendarHelper::getViewsURL
-    return Url::fromUri('internal:/' . $base_path . '/' . implode('/', $arg_vals), ['query' => $input]);
+    return Url::fromUri('internal:/' . $base_path . '/' . implode('/', $arg_vals));
   }
 
   /**

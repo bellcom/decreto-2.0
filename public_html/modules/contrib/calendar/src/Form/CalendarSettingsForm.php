@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains Drupal\calendar\Form\CalendarSettingsForm.
+ */
+
 namespace Drupal\calendar\Form;
 
 use Drupal\Core\Form\ConfigFormBase;

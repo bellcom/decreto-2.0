@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\calendar\Plugin\views\area\CalendarHeader.
+ */
+
 namespace Drupal\calendar\Plugin\views\area;
 
 use Drupal\calendar\CalendarHelper;

@@ -6,7 +6,6 @@
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-
 function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-decreto-search-page') {
     //formatting search field
