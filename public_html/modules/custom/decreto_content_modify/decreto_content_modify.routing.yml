@@ -142,3 +142,10 @@ decreto_content_modify.sp_delete:
   requirements:
     _permission: 'access content'
     node: \d+
+
+decreto_content_modify.user_edit:
+  path: '/user/edit'
+  defaults:
+    _controller: '\Drupal\decreto_content_modify\Controller\UserController::redirectToEditPage'
+  requirements:
+    _permission: 'access content'

@@ -10,3 +10,13 @@ function decreto_theme_preprocess_page(&$vars) {
     $vars['toggle_main_menu'] = $_COOKIE['toggle_main_menu'];
   }
 }
+
+function decreto_theme_theme_suggestions_menu_alter(&$suggestions, &$vars) {
+  if (isset($vars['attributes']['block'])) {
+    $suggestions[] = 'menu' . '__' . $vars['menu_name'] . '__' . $vars['attributes']['block'];
+  }
+}
+
+function decreto_theme_preprocess_block(&$vars) {
+  $vars['content']['#attributes']['block'] = $vars['elements']['#id'];
+}

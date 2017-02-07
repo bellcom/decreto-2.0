@@ -170,7 +170,6 @@
     -moz-osx-font-smoothing: grayscale;
     font-size: 20px;
     top: 3px;
-    margin-left: -10px;
     margin-right: 5px;
 }
 .main-menu-link.dashboard::before{
@@ -210,6 +209,10 @@
 /* ---------------------------- Toggle/mobile menu START ---------------------------- */
 #block-exposed-form-decreto-search-page-mobile {
     margin-top: 15px;
+}
+
+#block-user-account-menu-mobile hr {
+    border-color: #e7e7e7;
 }
 
 /* ---------------------------- Main menu END ---------------------------- */
