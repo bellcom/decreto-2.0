@@ -1,5 +1,5 @@
 type: module
-name: Decreto BPA files conversion manager
+name: Decreto PDF conversion manager
 description: 'The functionality of this module is to manage of file conversion into PDF'
 package: Decreto
 

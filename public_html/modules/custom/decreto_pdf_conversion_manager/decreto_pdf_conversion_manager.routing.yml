@@ -1,7 +1,7 @@
 decreto_pdf_conversion_manager.settings:
   path: '/admin/config/pdfconversion/settings'
   defaults:
-    _form: '\Drupal\decreto_pdf_conversion_manager\Form\pdfConversionManagerSettingsForm'
+    _form: '\Drupal\decreto_pdf_conversion_manager\Form\PdfConversionManagerSettingsForm'
     _title: '* > PDF conversion settings'
   requirements:
     _permission: 'administer site configuration'
