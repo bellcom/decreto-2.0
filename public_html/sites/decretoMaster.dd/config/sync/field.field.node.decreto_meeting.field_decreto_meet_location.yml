@@ -1,0 +1,27 @@
+uuid: 80588020-4f7c-4f3b-a000-fa77fadbd8fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_location
+    - node.type.decreto_meeting
+    - taxonomy.vocabulary.decreto_tax_location
+id: node.decreto_meeting.field_decreto_meet_location
+field_name: field_decreto_meet_location
+entity_type: node
+bundle: decreto_meeting
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_location: decreto_tax_location
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

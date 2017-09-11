@@ -1,0 +1,22 @@
+uuid: b5d98fe7-8717-44bf-8708-8b89b2e7ff18
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.decreto_organisation
+  module:
+    - text
+id: node.decreto_organisation.body
+field_name: body
+entity_type: node
+bundle: decreto_organisation
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

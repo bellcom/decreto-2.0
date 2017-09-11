@@ -1,0 +1,32 @@
+uuid: 50742737-1a0b-483c-8105-5c15e9a9d720
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.decreto_speaker_paper.body
+    - field.field.node.decreto_speaker_paper.field_decreto_sp_bp
+    - node.type.decreto_speaker_paper
+  module:
+    - text
+    - user
+id: node.decreto_speaker_paper.default
+targetEntityType: node
+bundle: decreto_speaker_paper
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_decreto_sp_bp:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 100
+hidden: {  }

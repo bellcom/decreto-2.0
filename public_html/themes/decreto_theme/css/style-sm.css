@@ -1,10 +1,11 @@
 @media(min-width:768px) {
     /* ---------------------------- Main menu START ---------------------------- */
     .toggle-menu-container + .main-container {
-        margin-left: 200px;
+        margin-left: 0px;
+        margin-top: 0;
     }
     .toggle-menu-container.collapsed + .main-container {
-        margin-left: 100px;
+        margin-left: 0px;
     }
     /* ---------------------------- Main menu END ---------------------------- */
 

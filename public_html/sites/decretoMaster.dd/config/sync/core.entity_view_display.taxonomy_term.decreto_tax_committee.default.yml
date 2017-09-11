@@ -1,0 +1,28 @@
+uuid: 346b374e-d107-4b7c-b500-f3b2e8312ec1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.decreto_tax_committee.field_decreto_com_org
+    - taxonomy.vocabulary.decreto_tax_committee
+  module:
+    - text
+id: taxonomy_term.decreto_tax_committee.default
+targetEntityType: taxonomy_term
+bundle: decreto_tax_committee
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  field_decreto_com_org:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+hidden: {  }

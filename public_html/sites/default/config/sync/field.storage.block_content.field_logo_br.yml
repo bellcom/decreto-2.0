@@ -1,0 +1,30 @@
+uuid: 01537326-7a82-480f-b0fe-cb4289e5518f
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - file
+    - image
+id: block_content.field_logo_br
+field_name: field_logo_br
+entity_type: block_content
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: c69c39c5-04bf-4ebb-bd00-f774f383eb0a
+    alt: ''
+    title: ''
+    width: 285
+    height: 170
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

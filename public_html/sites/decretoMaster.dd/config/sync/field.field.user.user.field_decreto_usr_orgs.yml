@@ -1,0 +1,27 @@
+uuid: 4b4cb172-4731-4d5d-a000-df48506aba45
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_decreto_usr_orgs
+    - node.type.decreto_organisation
+  module:
+    - user
+id: user.user.field_decreto_usr_orgs
+field_name: field_decreto_usr_orgs
+entity_type: user
+bundle: user
+label: Organisations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_organisation: decreto_organisation
+    sort:
+      field: _none
+field_type: entity_reference

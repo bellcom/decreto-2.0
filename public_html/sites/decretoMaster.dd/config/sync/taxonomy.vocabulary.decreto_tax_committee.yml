@@ -1,0 +1,9 @@
+uuid: c5ff718a-e7f3-4bfa-8300-0e493aec83d6
+langcode: en
+status: true
+dependencies: {  }
+name: Committee
+vid: decreto_tax_committee
+description: ''
+hierarchy: 0
+weight: 0

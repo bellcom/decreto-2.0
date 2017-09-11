@@ -64,6 +64,38 @@
             });
         }
     }
-
-
+    /*-------------------------------------fgewg---------------------------*/
+   
 })(jQuery, Drupal);
+
+
+jQuery(document).ready(function($){
+
+
+$(".btn-primary").click(function(){
+    $(this).toggleClass("down"); 
+});
+});
+/*------------------------njhdbh*/
+jQuery(document).ready(function($){
+
+
+$("#toggle-menu-trigger").click(function(){
+    $('.toggle-menu-container').toggleClass('containerClose');
+    $('#superfish-main li').toggleClass('closeContainerMenuItems');
+    $('#toggle-menu-trigger').toggleClass("rotated");
+    $('#toggle-menu-trigger').toggleClass("visible");
+    $('.container-fluid').toggleClass('move');
+
+});
+});
+/*----------------------------                          */
+jQuery(document).ready(function($){
+
+$(".sf-sub-indicator").click(function(){
+    
+    $('.sf-depth-1 .sf-depth-2 > a').toggleClass("open");
+    $('.sf-sub-indicator').toggleClass("rotate");
+});
+});
+/*-----------mobile-site-information-------*/

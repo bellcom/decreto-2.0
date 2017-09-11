@@ -1,0 +1,27 @@
+uuid: 1e6a3ea3-7174-4f61-b649-736fa3d5a969
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_committee
+    - node.type.decreto_meeting
+    - taxonomy.vocabulary.decreto_tax_committee
+id: node.decreto_meeting.field_decreto_meet_committee
+field_name: field_decreto_meet_committee
+entity_type: node
+bundle: decreto_meeting
+label: Committee
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_committee: decreto_tax_committee
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

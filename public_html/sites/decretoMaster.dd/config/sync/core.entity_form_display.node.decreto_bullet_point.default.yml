@@ -1,0 +1,42 @@
+uuid: 509e46b0-87c1-4d9e-b403-03ee92d79664
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
+    - field.field.node.decreto_bullet_point.field_decreto_bp_closed
+    - field.field.node.decreto_bullet_point.field_decreto_bp_id
+    - node.type.decreto_bullet_point
+id: node.decreto_bullet_point.default
+targetEntityType: node
+bundle: decreto_bullet_point
+mode: default
+content:
+  field_decreto_bp_bpas:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_decreto_bp_closed:
+    weight: 1
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_decreto_bp_id: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

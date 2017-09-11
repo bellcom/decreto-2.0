@@ -1,0 +1,20 @@
+uuid: 44885016-44c4-4b66-8123-35451050e596
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_decreto_meet_end_date
+field_name: field_decreto_meet_end_date
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

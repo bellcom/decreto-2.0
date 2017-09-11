@@ -15,6 +15,9 @@ global-styling:
       css/bootstrap-overrides.css: {}
       css/style-sm.css: {}
       css/style-md.css: {}
-      
+      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css: {}
+      "https://fonts.googleapis.com/css?family=Source+Sans+Pro": { type: external, minified: true }
+
   js:
     js/main.js: {}
+

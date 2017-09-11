@@ -44,7 +44,7 @@
 'field--label-' ~ label_display,
 ] %}
 {% set title_classes = [
-'field--label',
+'field--label meeting-label',
 label_display == 'visually_hidden' ? 'sr-only',
 'col-xs-5 col-sm-3 col-md-2'
 ] %}
@@ -66,14 +66,16 @@ label_display == 'visually_hidden' ? 'sr-only',
         <div{{ title_attributes.addClass(title_classes) }}>
             {# TODO: change to different icons #}
             <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-            {{ label }}
+            <a href="#{{ label }}" class="meeting-label {{ label }}" data-toggle="collapse" aria-expanded="true" aria-controls="{{ label }}">{{ label }}</a>
         </div>
         {% if multiple %}
         <div class="field__items">
             {% endif %}
             {% for item in items %}
                 <div class="col-xs-7 col-sm-9 col-md-10">
-                    <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
+                <div class="area-expand-collapse">
+                    <div{{ item.attributes.addClass('field--item collapse') }} id="{{ label }}">{{ item.content }}</div>
+                    </div>
                 </div>
             {% endfor %}
             {% if multiple %}

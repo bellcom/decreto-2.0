@@ -1,0 +1,23 @@
+uuid: dc8ea6d5-7f37-4888-bd00-ce01f211ebd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_bpa_id
+    - node.type.decreto_bullet_point_attachment
+id: node.decreto_bullet_point_attachment.field_decreto_bpa_id
+field_name: field_decreto_bpa_id
+entity_type: node
+bundle: decreto_bullet_point_attachment
+label: ID
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,26 @@
+uuid: dcb75405-47ac-4828-a400-cd499b4930b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.decreto_organisation.body
+    - node.type.decreto_organisation
+  module:
+    - text
+    - user
+id: node.decreto_organisation.teaser
+targetEntityType: node
+bundle: decreto_organisation
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden: {  }
