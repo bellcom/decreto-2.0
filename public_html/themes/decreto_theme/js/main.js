@@ -90,6 +90,8 @@ $("#toggle-menu-trigger").click(function(){
 });
 });
 /*----------------------------                          */
+
+/*------------------subIndicatorsMainMenuForDesktop-------------*/
 jQuery(document).ready(function($){
 
 $(".sf-sub-indicator").click(function(){
@@ -98,4 +100,20 @@ $(".sf-sub-indicator").click(function(){
     $('.sf-sub-indicator').toggleClass("rotate");
 });
 });
-/*-----------mobile-site-information-------*/
+
+/*----------------------------toggleClassMeetingsForParticipants------------*/
+jQuery(document).ready(function($){
+
+$('#info .field--name-field-decreto-meet-partic .field--label').on('click', function() {
+    $('#info .col-xs-7 #Participants').animate({
+        'height': 'toggle'
+    },0); });
+});
+/*----------------------------toggleClassMeetingsForDescription------------*/
+jQuery(document).ready(function($){
+
+$('#info .field--type-text-with-summary').on('click', function() {
+    $('#info .col-xs-7 #Description').animate({
+        'height': 'toggle'
+    }, 0); });
+});

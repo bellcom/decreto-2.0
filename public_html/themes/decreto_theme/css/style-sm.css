@@ -3,6 +3,7 @@
     .toggle-menu-container + .main-container {
         margin-left: 0px;
         margin-top: 0;
+        
     }
     .toggle-menu-container.collapsed + .main-container {
         margin-left: 0px;

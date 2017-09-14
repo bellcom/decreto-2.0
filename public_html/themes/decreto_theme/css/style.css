@@ -32,14 +32,15 @@ body {
 }
 
 .decreto-dashboard-logo {
-    background-image: url('../image/decreto-logo-white.png');
-    background-size: 70px;
+    background-image: url('../image/decreto-sign.png');
+    background-size: 40px;
     width: 100px;
     height: auto;
     background-repeat: no-repeat;
     background-position: center;
     color: transparent;
     padding: 10px;
+    background-position: 1px 2px;
 }
 
 /*--------------login page starts here-------*/
@@ -84,6 +85,8 @@ body {
 .field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item{
     width: 100%;
     margin: 0px auto;
+    padding-left: 10px;
+    font-size: 14px;
 }
 .user-form-call-to-action-buttons {
     list-style: none;
@@ -247,6 +250,10 @@ body {
     padding: 0;
     margin: 0;
 }
+/*------------------hamburger-menu---------------*/
+.fa-navicon:before, .fa-reorder:before, .fa-bars:before{
+
+}
 /*---------------------navbar-toggle------------------------*/
 .navbar-header {
 
@@ -261,6 +268,7 @@ body {
 #navbar-collapse{
     border: none;
     box-shadow: none;
+    margin-top: 10px;
 }
 #navbar-collapse .col-sm-10{
     padding: 0
@@ -315,12 +323,14 @@ body {
     flex-direction: row-reverse;
 }
 #edit-submit-decreto-search .glyphicon-search:before{
-    content: "\2315";
-    font-family: FontAwesome;
-    transform: rotateY(180deg);
-    margin-top: -14px;
-    font-size: 44px;
+    background-image: url(../image/google_search2.svg);
+    color: transparent;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: -2px -3px;
+
 }
+
 /*----------------------navbar-menu-icons-------------*/
 .navbar-nav .dashboard:before{
     font-family: FontAwesome;
@@ -430,15 +440,20 @@ a.main-menu-link.is-active{
     color: #fff; 
 }
 .caret{
-    width: 17px;
+    width: 18px;
     height: 20px;
     border: none;
     float: right;
-    background-image: url("../image/down-arrow.png");
+    background-image: url("../image/arrow-down.svg");
 }
 .open .caret{
-    transform: rotate(180deg);
-    transition: .2s;
+   -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    
 }
 #block-user-account-menu-mobile li a{
     border-bottom: 1px solid rgba(255,255,255,.08);
@@ -453,6 +468,11 @@ a.main-menu-link.is-active{
 }
 .breadcrumb li{
     font-size: 15px
+}
+.breadcrumb > li + li:before{
+    content: "\f105";
+    font-family: fontAwesome;
+    color: #338ecf;
 }
 .col-md-9.toggle-menu.toggle-menu-right{
     background:#ffffff;
@@ -518,8 +538,9 @@ a.main-menu-link.is-active{
     background: #cbe8d2;
     color: #3c464c;
     cursor: pointer;
-    padding-left: 0;
+    padding-left: 10px;
     font-size: 20px;
+    font-weight: 900;
 }
 .nav-justified > li:nth-child(1){
     width: 50%;
@@ -528,7 +549,7 @@ a.main-menu-link.is-active{
 .nav-justified > li > a:nth-child(1){
     font-size: 20px;
     border-radius: inherit;
-    background: #e7e7e7;
+    background: #cbe8d2;
     border-right: 1px solid #e7e7e7;
     border-left: 1px solid #e7e7e7;
     color: #323641;
@@ -554,7 +575,7 @@ a.main-menu-link.is-active{
 }
 .annotator-wrapper{
     position: relative;
-    margin-left: 55px;
+    margin-left: 51px;
     margin-bottom: 10px;
     font-size: 16px;
     height: 100%;
@@ -575,7 +596,7 @@ a.main-menu-link.is-active{
     margin: 0;
     display: flex;
     width: 100%;
-    padding-top: 10px;
+    padding-top: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     height: 100%;
 }
@@ -613,20 +634,22 @@ display: block!important;
     padding-left: 12px;
 }
 #info .field--name-field-decreto-meet-partic .field--label:after{
-    content: "\f0dd";
+    content: "\f107";
     font-family: fontAwesome;
     cursor: pointer;
     float: right;
     font-size: 20px;
     margin-top: -10px;
+    font-weight: 900;
 }
 #info .field--type-text-with-summary .field--label:after{
-    content: "\f0dd";
+    content: "\f107";
     font-family: fontAwesome;
     cursor: pointer;
     float: right;
     font-size: 20px;
     margin-top: -10px;
+    font-weight: 900;
 }
 #info .field .field--label{
     font-size: 18px;
@@ -654,10 +677,12 @@ width: 100%;
 #agenda .btn-primary{
     background:transparent;
     border: transparent;
+    margin-top: 0px;
+    margin-left: 8.5px;
 }
 .btn-expand-collapse .glyphicon:before{
     font-family: FontAwesome;
-    content: "\f0a7";
+    content: "\f107";
     color: #32424c;
     font-size: 20px;
 }
@@ -758,9 +783,6 @@ width: 100%;
     color: #323641;
     background:#ffffff;
     border: none;
-}
-.pager li > a, .pager li > span{
-    border-radius: 50px;
 }
 /*---------------------------calender days and month-------------------*/
 .calendar-calendar td{
@@ -929,9 +951,7 @@ width: 100%;
     border-color: transparent;
 }
 .decreto-bullet-point .panel{
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
+    margin-left: -10px;
     border:none;
     box-shadow: none;
     margin-bottom: 0px;
@@ -941,6 +961,9 @@ width: 100%;
 }
 #speaker-paper-4 .panel-title{
     font-size: 15px;
+    background: transparent;
+    text-decoration: underline;
+    padding-left: 10px;
 
  }
 
@@ -1046,7 +1069,7 @@ html,body{
    }
    .breadcrumb{
     background: #ffffff;
-        padding: 20px 10px;
+    margin-bottom: 0;
    }
    .contextual-region .tab-content{
     background: #ffffff;
@@ -1069,16 +1092,20 @@ html,body{
    
 /*---------------------------------column---3----------------------------*/
    .col-md-3{
-    margin-top: 30px;
+    margin-top: 20px;
+   }
+   .col-md-3 .panel-heading{
+    padding-left: 0;
+    padding-right: 0;
    }
 /*----------------------------------dashboard---------------------------*/
 #block-views-block-decreto-my-meetings-block-my-meetings,
 #block-views-block-decreto-all-meetings-block-all-meetings{
-    margin-top: 30px;
-    border: 1px solid#ccc;
+    margin-top: 20px;
     border-radius: inherit;
     margin-left: 10px;
     margin-right: 10px;
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
 }
 
 /*------------------dashboard-table--------------------*/
@@ -1119,7 +1146,7 @@ ul.sf-menu.sf-vertical{
     width: 180px;
 }
 ul.sf-menu.sf-vertical li{
-    width: 180px;
+    width: 178px;
     background: #323641;
     display: list-item;
     border-bottom: 1px solid #3d4250;
@@ -1160,7 +1187,6 @@ ul.sf-menu.sf-vertical li:hover > ul {
         margin-top: 0;
         background-image: url(../image/decreto-logo-white.png);
         margin: 0;
-        padding: 1px;
         margin-bottom: 0px;
         background-size: 120px;
         background-repeat: no-repeat;
@@ -1172,7 +1198,8 @@ ul.sf-menu.sf-vertical li:hover > ul {
         width:180px;
         top: 28px;
         transition: 1s;
-        border-left: 2px solid #ec7139;
+        border-left: 2px solid #cbe8d2;
+        background-position: -3.5px 5px;
     }
     .toggle-menu-container {
        
@@ -1187,6 +1214,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
         background-origin: content-box;
         padding-left: 20px;
         border-left: none;
+        background-position: -5px 5px;
      }
      /*-----------
      .toggle-menu-container:not(:hover){
@@ -1218,7 +1246,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     }
     #superfish-main .main-menu-link{
         border-bottom: 1px solid transparent;
-        font-size: 15px;
+        font-size: 13px;
         font-family: sans-serif;
         color: #ffffff;
         padding-left: 20px;
@@ -1249,32 +1277,32 @@ ul.sf-menu.sf-vertical li:hover > ul {
 .sf-depth-1 .dashboard:before{
     font-family: FontAwesome;
     content: "\f0E4";
-    margin-right:25px;
-    font-size: 30px;
+    margin-right:27px;
+    font-size: 25px;
 }
 .sf-depth-1 .calendar:before{
     font-family: FontAwesome;
     content: "\f073";
-    margin-right:25px;
-    font-size: 30px;
+    margin-right:27px;
+    font-size: 25px;
 }
 .sf-depth-1 .meetings:before{
     font-family: FontAwesome;
     content: "\f2b7";
-    margin-right:25px;
-    font-size: 30px;
+    margin-right:27px;
+    font-size: 25px;
 }
 .sf-depth-1 .users:before{
     font-family: FontAwesome;
     content: "\f2bd";
-    margin-right:25px;
-    font-size: 30px;
+    margin-right:27px;
+    font-size: 25px;
 }
 .sf-depth-1 .settings:before{
     font-family: FontAwesome;
     content: "\f013";
-    margin-right:25px;
-    font-size: 35px;
+    margin-right:27px;
+    font-size: 28px;
 }
 /*-------------------------desktop header-----------------------*/
 .content-wrapper .main-container{
@@ -1304,7 +1332,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 #edit-search-api-fulltext:focus{
     background:#24272f;
-    color: #ffffff;
+    color: #cbe8d2;
 }
 #block-user-account-menu{
     margin: 0;
@@ -1315,11 +1343,11 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
 }
 .region .col-sm-2{
-    width: 13%;
+    width: 11%;
 }
 /*----------------------notifications-link---------------*/
 #block-notificationsiconlink{
-   width: 6%;
+   width: 8%;
     float: left;
     height: 50px;
     background: #323641;
@@ -1329,15 +1357,15 @@ ul.sf-menu.sf-vertical li:hover > ul {
     cursor: pointer;
 }
 #block-notificationsiconlink .fa-envelope{
-    margin-left: 5px;
-    margin-top: 13px;
+    margin-left: 15px;
+    margin-top: 17px;
 }
 #block-notificationsiconlink .fa-envelope:before{
     color: #ffffff;
-    font-size: 25px;
+    font-size: 20px;
 }
 #block-notificationsiconlink .fa-envelope:hover:before{
-    color: #cbe8d2;
+    
 }
 #edit-submit-decreto-search {
     background: #323641;
@@ -1353,25 +1381,27 @@ ul.sf-menu.sf-vertical li:hover > ul {
     color: #ffffff;
     margin: 0;
     padding:0;
-}
-#edit-submit-decreto-search:hover{
-    background:#24272f;
+    height: 50px;
 }
 #edit-submit-decreto-search .glyphicon-search:before{
-    content: "\2315";
-    font-family: FontAwesome;
-    transform: rotateY(180deg);
-    margin-top: -11px;
-    font-size: 35px;
-    margin-top: 2px;
-    font-size: 35px;
-    margin-right: 10px;
+    background-image: url(../image/google_search2.svg);
+    color: transparent;
+    background-repeat: no-repeat;
+    background-size: 27px;
+    background-position: 0px 12px;
+    padding: 5px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    margin-top: 5px;
 }
 .input-group-addon, .input-group-btn{
     width: .5%;
 }
 #edit-submit-decreto-search .glyphicon-search:hover::before{
-    color: #ffffff;
+    color: transparent;
 }
 #views-exposed-form-decreto-search-page .col-xs-12{
     background: #323641;
@@ -1390,14 +1420,16 @@ ul.sf-menu.sf-vertical li:hover > ul {
     display: flex;
     justify-content: space-around;
     font-size: 16px;
+    padding-left: 15px;
 }
 #decreto-user-menu-dropdown:hover{
-    background:#24272f;
-    color: #ffffff;
+    text-decoration: underline;
 }
 #decreto-user-menu-dropdown .caret{
-    margin-top: 6px;
-    margin-right: -15px
+    margin-top: 2px;
+    margin-right: -15px;
+   content: "/f002";
+   font-family: fontAwesome;
 }
 .dropdown .dropdown-menu{
     background: #ffffff;
@@ -1421,12 +1453,20 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
 }
 /*--------------calendar-------------------*/
+.calendar-calendar td .inner div.day a{
+    color: #ec7139;
+}
 .pager li > a, .pager li > span{
     background:transparent;
 }
+.pager li > a:hover, .pager li > a:focus{
+    background-color: transparent;
+}
 #block-views-block-decreto-calender-calendar-block{
     border-radius: 0;
-    margin-bottom: 60px;
+    margin-bottom: 76px;
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.2);
+    border-color: transparent;
 }
 .mini-day-off {
     display: flex;
@@ -1506,19 +1546,17 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 #block-views-block-decreto-user-committees-my-committees-block{
     background-color: none; 
-    border-radius: 0px; 
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0,0); 
-    box-shadow: 0 1px 1px rgba(0, 0, 0,0);
+    border-radius: 0px;
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
 }
 #block-views-block-decreto-user-committees-my-committees-block .panel-title{
     margin: 0;
 }
 /*-----------------info and agenda starts here--------------*/
 .contextual-region .panel-title{
-    margin-top: -30px;
     font-size: 16px;
-    margin-left: 10px;
-    margin-right: 10px;
+    font-weight: 900;
+    padding-left: 20px;
 }
 #info .field .col-xs-7{
     width: 100%;
@@ -1531,6 +1569,9 @@ ul.sf-menu.sf-vertical li:hover > ul {
 #info .field .field--label{
     font-size: 14px;
     width: 25vw;
+}
+#agenda .btn-primary{
+    margin-top: 7px;
 }
 /*----------------------------------separated by participants---------------------*/
 #info .field--name-field-decreto-meet-partic{
@@ -1567,12 +1608,10 @@ pointer-events: none;
     font-size: 14px;
 }
 .region-content .decreto-meeting{
-    border: 1px solid #aaabae;
-    box-shadow: 15px 15px 15px -15px #888888; 
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1); 
     border-color: #e8e4ea;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 #agenda{
     padding-top: 0;
@@ -1650,16 +1689,15 @@ pointer-events: none;
 }
 
 #speaker-paper-4{
-    margin-top: 20px;
-    border: 1px solid #f0e9e9;
     height: 100%;
 }
 #speaker-paper-4 .panel-heading{
     border-color: transparent;
+    margin-top: 20px;
 }
 #speaker-paper-4 .panel-title{
     font-size: 15px;
-    margin-top: -40px
+  
  }
  /*-------------------------------read-more-about-page------------------------*/
  .teaser h2{
@@ -1680,8 +1718,8 @@ pointer-events: none;
     left: 152px;
     background: transparent;
     border: none;
-    bottom: 0;
-    transition: 1s
+    bottom: 0px;
+    transition: .5s;
 }
 #toggle-menu-trigger.visible{
     left: 47px;
@@ -1700,9 +1738,9 @@ pointer-events: none;
     width: 100px;
 }
 .btn-primary{
-    -moz-transition: all 1s linear;
-    -webkit-transition: all 1s linear;
-    transition: all 1s linear;
+    -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
 }
 
 .btn-primary.down{
@@ -1710,6 +1748,7 @@ pointer-events: none;
     -moz-transform:rotate(180deg);
     -webkit-transform:rotate(180deg);
     transform:rotate(180deg);
+    transition: .3s;
 }
 .cd-nav-trigger:before{
     content: "\2193";
@@ -1721,11 +1760,13 @@ pointer-events: none;
     font-family: fontAwesome;
 }
 #toggle-menu-trigger.rotated {
-    -webkit-transform: rotate(180deg);  /* Chrome, Safari 3.1+ */
-    -moz-transform: rotate(180deg);  /* Firefox 3.5-15 */
-    -ms-transform: rotate(180deg);  /* IE 9 */
-    -o-transform: rotate(180deg);  /* Opera 10.50-12.00 */
-    transform: rotate(180deg);  /* Firefox 16+, IE 10+, Opera 12.10+ */
+     -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        transition: .5s;
     
 }
 
