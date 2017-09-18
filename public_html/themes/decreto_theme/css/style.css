@@ -16,19 +16,20 @@ html {
 }
 body {
   font-size: 1.6rem;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   color: #3e454c;
   background-color: #ffffff;
 }
 /*---------------background-login-page-----------*/
 .region-login{
-    background: #f7f7f7;
+    background: #eaf3f3;
 }
 .region-content{
-    background: #f7f7f7;
+    background: #eaf3f3;
 }
 #signup_button{
-    background: #f7f7f7;
+    background: #eaf3f3;
+    padding: 0
 }
 
 .decreto-dashboard-logo {
@@ -47,6 +48,7 @@ body {
 .col-md-12.toggle-menu.toggle-menu-right{
     padding-right: 0px;
     padding-left: 0px;
+    background: #eaf3f3
 }
 #block-decretologobrand .field--label{
     display: none;
@@ -75,18 +77,35 @@ body {
 #block-menu-icon-links{
     border:none;
     box-shadow: none;
-    background:#f7f7f7;
+    background:#eaf3f3;
 }
 .panel-body {
   
     width: 100%;
     margin: 0px auto;
     }
-.field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item{
-    width: 100%;
-    margin: 0px auto;
-    padding-left: 10px;
-    font-size: 14px;
+.annotator-wrapper .field p{
+    background: #d7e4e4;
+    padding-bottom: 50px;
+    height: 100%;
+    padding-left: 55px;
+    padding-right: 10px; 
+    margin-bottom: 10px;
+}
+.contextual-region .decreto-bullet-point-attachment{
+    background: #eaf3f3
+}
+.decreto-bullet-point-attachment .btn{
+    background: #eaf3f3;
+}
+.decreto-bullet-point-attachment .btn:focus{
+    background: #eaf3f3;
+}
+#block-socialiconsconnect .field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item{
+    font-size: 0;
+    height: 50px;
+    margin: 0;
+    padding: 0;
 }
 .user-form-call-to-action-buttons {
     list-style: none;
@@ -144,12 +163,15 @@ body {
     border-color: #ebebec
 }
 /*---------------------login field------------*/
+.user-login-form .form-group{
+    margin-bottom: 30px;
+}
 .form-item-name .required{
     display: block;
     width: 100%;
     height: 60px;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.42857143;
     color: #555;
     background-color: #fff;
@@ -165,7 +187,7 @@ body {
     width: 100%;
     height: 60px;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.42857143;
     color: #555;
     background-color: #fff;
@@ -176,9 +198,11 @@ body {
     border:none;
     box-shadow: none;
 }
-#edit-submit{
-    display: block;
+#user-login-form #edit-submit{
+    display: flex;
+    flex-direction: row-reverse;
     width: 100%;
+    justify-content: space-between;
     height: 60px;
     padding: 6px 12px;
     font-size: 14px;
@@ -192,29 +216,36 @@ body {
     background-color: #ec7139;
     border:none;
     box-shadow: none;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+}
+.glyphicon-question-sign:before{
+    display: none!important;
 }
 .alert.alert-info.messages.info.region.region-help{
     background:none;
     border:none;
     padding:0px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 /*------------------------signup field------------------*/
 #block-signuplink{
     width: 100%;
     height: 60px;
-    border: 1px solid #e8e8e8;
+    border: 1px solid #ddd;
     box-shadow: none;
     background:none;
 }
 #block-signuplink .field--label{
     display: none;
 }
-#login-page .glyphicon {
-    display: none;
-}
 #login-page .region-content {
     padding-right: 20px;
     padding-left: 20px;
+    background: #eaf3f3;
 }
 .field--item{
     width: 100%;
@@ -223,13 +254,19 @@ body {
     margin: 0px;
 }
 .field.field--name-field-primary.field--type-link.field--label-above{
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 18px;
+}
+#block-signuplink .panel-body{
+    padding-left: 10px;
+    padding-right: 10px;
 }
 #block-signuplink .field--type-link a{
     color: #4b616f;
     font-weight: 200;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
    }
 #block-forgotpassword{
     border: none;
@@ -240,10 +277,17 @@ body {
     color: #4b616f;
     font-size: 15px;
 }
+/*-----------------login-messages-bar------------*/
+.tooltip.right {
+    padding: 0 5px;
+    margin-left: -280px;
+    margin-top: 40px;
+    /* width: 350px; */
+}
 /*-------------------- login page end here--------------*/
 /*-----------------------dashboard page-----------------*/
 #navbar{
-    background:#323641;
+    background:#1b1e24;
     border-left: none;
     border-right: none;
     border-top: none;
@@ -263,6 +307,9 @@ body {
 }
 .navbar-default .navbar-toggle:focus {
     background: none;
+}
+#views-exposed-form-decreto-search-page .row{
+    margin-top: 0px;
 }
 /*----------------------navbar-collapse---------------------*/
 #navbar-collapse{
@@ -298,7 +345,7 @@ body {
 /*---------------------search-bar----------------------*/
 
 #edit-search-api-fulltext{
-    color: #32424c;
+    color: #1b1e24;
     border: none;
     box-shadow: none;
     border-radius: inherit;
@@ -335,34 +382,40 @@ body {
 .navbar-nav .dashboard:before{
     font-family: FontAwesome;
     content: "\f0E4";
-    margin-right:10px;
+    margin-right: 15px;
+    font-size: 25px;
 }
 .navbar-nav .calendar:before{
     font-family: FontAwesome;
     content: "\f073";
-    margin-right:10px;
+    margin-right: 15px;
+    font-size: 25px;
 }
 .navbar-nav .meetings:before{
     font-family: FontAwesome;
     content: "\f2b7";
-    margin-right:10px;
+    margin-right: 15px;
+    font-size: 25px;
 }
 .navbar-nav .users:before{
     font-family: FontAwesome;
     content: "\f2bd";
-    margin-right:10px;
+    margin-right: 15px;
+    font-size: 25px;
 }
 .navbar-nav .settings:before{
     font-family: FontAwesome;
     content: "\f013";
-    margin-right:10px;
+    margin-right: 15px;
+    font-size: 28px;
 }
 
 
 /*---------------------expand menu---------------------*//*----111A1F----*/
 .navbar-default .navbar-nav > li > a{
     color: white;
-    font-family: open Sans
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
 }
 .navbar-default .navbar-nav > li > a:hover{
     color: #ffffff;
@@ -380,17 +433,11 @@ body {
     color: #ec7139;
     background: transparent;
 }
+.navbar-nav .dropdown-menu{
+    padding-left: 30px;
+}
 .navbar-default .navbar-nav .open .dropdown-menu > li > a{
     color:#e0dfdf;
-}
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus{
-    color: #ec7139;
-    background: transparent;
-}
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: white;
-    background-color: transparent;
 }
 .navbar-nav .dropdown-menu{
     font-size: 20px;
@@ -400,32 +447,18 @@ body {
 }
 #block-main-navigation-mobile li{
     color: #fff;
-    padding-top: 11px;
+    padding-top: 5px;
     position: relative;
-    font-size: 15.98px;
-    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
     width: 100%;
-    color: #fff;
-    
-}
-#block-main-navigation-mobile li a{
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    color: #ffffff;
-}
-#block-main-navigation-mobile li a:hover{
-    color: #ffffff;
+    color: #fff;  
 }
 .navbar-nav .expanded{
-    padding-right: 10px;
+    padding-right: 0px;
 }
 a.main-menu-link.is-active{
     background: transparent!important;
         color: #ec7139;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:focus {
-    background: transparent!important;
-    color: #ec7139;
 }
 /*---------------------------------user account menu responsive------------------*/
 #block-user-account-menu-mobile hr{
@@ -435,24 +468,24 @@ a.main-menu-link.is-active{
     color: #fff;
     padding-top: 11px;
     position: relative;
-    font-size: 17.98px;
     width: 100%;
     color: #fff; 
 }
-.caret{
+.caret:before{
     width: 18px;
     height: 20px;
     border: none;
     float: right;
-    background-image: url("../image/arrow-down.svg");
+    font-family: fontAwesome;
 }
-.open .caret{
-   -moz-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        transform: scaleX(-1);
-        filter: FlipH;
-        -ms-filter: "FlipH";
+.open .caret:before{
+    -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  margin-right: 0;
+  transition: .1s;
     
 }
 #block-user-account-menu-mobile li a{
@@ -463,7 +496,7 @@ a.main-menu-link.is-active{
     margin-left: 0 auto;
     height: 100%;
     list-style: none;
-    background-color: none;
+    background-color: #eaf3f3;
     border-radius: 0px;
 }
 .breadcrumb li{
@@ -475,7 +508,7 @@ a.main-menu-link.is-active{
     color: #338ecf;
 }
 .col-md-9.toggle-menu.toggle-menu-right{
-    background:#ffffff;
+    background:#eaf3f3;
     padding-left: 0px;
     padding-right: 0px;
     overflow: hidden;
@@ -491,6 +524,7 @@ a.main-menu-link.is-active{
     background: #ffffff;
     border-radius: initial;
     height: 100%;
+    border: none;
 }
 .panel-title{
     color: #3c464c;
@@ -520,40 +554,41 @@ a.main-menu-link.is-active{
     transition: .3s
 }
 .table-striped thead{
-    background: #F4F4F4;
+    background: #eaf3f3;
     color: #32424c;
     font-size: 16px;
 
 }
 .table-striped > tbody > tr:nth-of-type(odd){
-    background:#Ffffff;
+    background:#d7e4e4;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(even){
-    background:#F4F4F4;
+    background:#eaf3f3;
     font-size: 18px;
 }
 /*--------------------info and agenda---------------------------*/
 .contextual-region .panel-title{
-    background: #cbe8d2;
-    color: #3c464c;
+    background: #eaf3f3;
+    color: #1b1e24;
     cursor: pointer;
-    padding-left: 10px;
+    padding-left: 13px;
     font-size: 20px;
-    font-weight: 900;
 }
 .nav-justified > li:nth-child(1){
     width: 50%;
     height: 45px;
 }
+.nav-justified > li > a{
+    margin-bottom: 0;
+}
 .nav-justified > li > a:nth-child(1){
     font-size: 20px;
     border-radius: inherit;
-    background: #cbe8d2;
+    background: #eaf3f3;
     border-right: 1px solid #e7e7e7;
     border-left: 1px solid #e7e7e7;
     color: #323641;
-    padding: 2px;
 
 }
 .nav-justified > li > a:nth-child(1):focus{
@@ -571,37 +606,41 @@ a.main-menu-link.is-active{
 .contextual-region .content{
     padding-top: 0px;
     height: 100%;
-    background: #ffffff;
+    background: #d7e4e4;
 }
 .annotator-wrapper{
     position: relative;
-    margin-left: 51px;
-    margin-bottom: 10px;
     font-size: 16px;
     height: 100%;
-    margin-top: 10px;
 }
 .contextual-region .tab-content{
-    padding-left: 10px;
     width: 100%;
+    background: #eaf3f3;
 }
 .contextual-region .nav-pills{
     padding: 0;
+    background: #d7e4e4;
+    text-transform: uppercase;
 }
 .contextual-region .panel-body {
     padding: 0px;
+    background: #eaf3f3;
+    padding-bottom: 10px;
 }
 
 #info .field{
     margin: 0;
     display: flex;
     width: 100%;
-    padding-top: 15px;
+    padding-top: 30px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     height: 100%;
 }
 #info .Type {
 pointer-events: none;
+}
+#info .field--name-field-decreto-meet-type{
+    background: #d7e4e4;
 }
 #info #Type {
 display: block!important;
@@ -618,6 +657,9 @@ pointer-events: none;
 #info #From{
 display: block!important;    
 }
+#info .field--name-field-decreto-meet-start-date{
+    background: #d7e4e4;
+}
 #info .to{
 pointer-events: none; 
 }
@@ -630,6 +672,9 @@ pointer-events: none;
 #info #Location{
 display: block!important;    
 }
+#info .field--name-field-decreto-meet-location{
+    background: #d7e4e4;
+}
 .field--name-field-decreto-meet-partic .field--label{
     padding-left: 12px;
 }
@@ -641,6 +686,9 @@ display: block!important;
     font-size: 20px;
     margin-top: -10px;
     font-weight: 900;
+}
+#info .field--type-text-with-summary{
+    background: #d7e4e4;
 }
 #info .field--type-text-with-summary .field--label:after{
     content: "\f107";
@@ -671,14 +719,14 @@ display: block!important;
 }
 /*----------------agenda starts here--------------*/
 #agenda{
-padding-top: 20px;
 width: 100%;
 }
 #agenda .btn-primary{
-    background:transparent;
     border: transparent;
     margin-top: 0px;
-    margin-left: 8.5px;
+    background: #d7e4e4;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .btn-expand-collapse .glyphicon:before{
     font-family: FontAwesome;
@@ -688,9 +736,7 @@ width: 100%;
 }
 .area-expand-collapse span a{
     color: #32424c;
-    font-size: 14px;
-    margin-left: 15px;
-    font-weight: 900;
+    font-size: 20px;
 }
 
 #agenda .panel-default{
@@ -734,13 +780,22 @@ width: 100%;
     font-family: fontawesome;
     margin-right: 12px;
 }
+#info .field--name-field-decreto-meet-committee{
+    background: #eaf3f3;
+}
+#info .field--name-field-decreto-meet-end-date{
+    background: #eaf3f3;
+}
 #info .field--name-field-decreto-meet-partic{
     display: inline-grid;
+    background: #eaf3f3;
 }
 #info .col-xs-7 #Participants{
     float: left;
     text-align: left!important;
     padding-left: 25px!important;
+    height: 100%;
+    padding-top: 20px;
 }
 #info .field--type-text-with-summary{
     display: inline-grid;
@@ -749,6 +804,8 @@ width: 100%;
     float: left;
     text-align: left!important;
     padding-left: 25px!important;
+    height: 100%;
+    padding-top: 20px;
 }
 .field--name-field-decreto-meet-partic .glyphicon-asterisk:before{
     content: "\f0c0";
@@ -817,7 +874,7 @@ width: 100%;
 /*-----------------------------create new meetings form----------------*/
 #decreto-content-modify-meeting-edit-form{
     padding:10px;
-    background:#f7f7f7;
+    background:#eaf3f3;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings{
     background: #ffffff;
@@ -829,6 +886,12 @@ width: 100%;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-title{
 
+}
+#cke_1_top{
+    background: #eaf3f3;
+}
+#cke_1_bottom{
+    background: #eaf3f3;
 }
 .form-control{
     background:#ffffff;
@@ -856,8 +919,8 @@ width: 100%;
     border:1px solid #ebebec;
 }
 #edit-description-format{
-    background:#f7f7f7;
-    border: 1px solid #ebebec;
+    background:#eaf3f3;
+    border: 1px solid #eaf3f3;
     box-shadow: none;
     border-top: none;
     display: flex;
@@ -867,17 +930,14 @@ width: 100%;
 #edit-full-doc-upload{
    border: none;
    box-shadow: none;
-   background: #f7f7f7;
+   background: #eaf3f3;
    padding-left: 0;
 }
 #edit-full-doc-closed-upload{
    border: none;
    box-shadow: none;
-   background:#f7f7f7;
+   background:#eaf3f3;
    padding-left: 0;
-}
-#ajax-wrapper{
-    margin-bottom: 0;
 }
 #ajax-wrapper--2{
     margin-bottom: 0;
@@ -892,16 +952,31 @@ width: 100%;
 }
 #decreto-content-modify-meeting-edit-form .js-form-wrapper{
     margin-top: 15px;
+    margin-bottom: 10px;
+}
+.decreto-bullet-point .btn-primary{
+    margin-top: 10px;
+    background: #d7e4e4;
+    margin-right: 10px;
+}
+.decreto-bullet-point .area-expand-collapse{
+    background: #eaf3f3;
+}
+.decreto-bullet-point .panel-body{
+    background: #eaf3f3;
 }
 /*----------------------------this is for modal content------------------*/
+.modal-content{
+    margin-top: 200px;
+}
 .modal-header{
-    background: #32424c;
-    color: #f7f7f7;
+    background: #eaf3f3;
+    color: #0e0f12;
 }
-.btn-success{
-    background:#ec7139;
+.btn-success, .btn-success:hover, .btn-success:focus{
+    background:#a5c0c0;
     border: none;
-}
+} 
 #js-bps-container:before{
     content: "\f0fe";
     font-family: fontAwesome;
@@ -909,12 +984,24 @@ width: 100%;
     margin-right: 10px;
     margin-top: -7px;
     font-size: 30px;
-    color: #9d9d9d;
+    color: #a5c0c0;
+}
+.modal-footer{
+    border-top: transparent;
 }
 .modal-footer .button:hover,
 .modal-footer .button:not(:hover)
 {
-    background: #e84d06;
+    background: #a5c0c0;
+}
+.modal-footer .js-form-submit{
+    margin: 20px;
+}
+#cke_44_top{
+    background: #eaf3f3;
+}
+#cke_44_bottom{
+    background: #eaf3f3;
 }
 /*--------------button icons----------*/
 
@@ -936,7 +1023,7 @@ width: 100%;
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #ffffff;
+    border-color: #eaf3f3;
  }
 .btn-expand-collapse{
     background:transparent;
@@ -951,7 +1038,6 @@ width: 100%;
     border-color: transparent;
 }
 .decreto-bullet-point .panel{
-    margin-left: -10px;
     border:none;
     box-shadow: none;
     margin-bottom: 0px;
@@ -961,10 +1047,15 @@ width: 100%;
 }
 #speaker-paper-4 .panel-title{
     font-size: 15px;
-    background: transparent;
+    background: #eaf3f3;
     text-decoration: underline;
-    padding-left: 10px;
-
+ }
+ 
+ #speaker-paper-4 .field p{
+    background: #d7e4e4;
+    padding-bottom: 50px;
+    height: 100%;
+    padding-left: 30px;
  }
 
 /* -----------------icons on the menu end here--- ----- */
@@ -986,21 +1077,27 @@ width: 100%;
     width: 400px;
     margin: 0 auto;
     text-align: center;
-    background: #f7f7f7;
+    background: #eaf3f3;
     }
     #edit-name{
-        width: 400px;
+        width: 350px;
     }
     #edit-pass{
-        width:400px;
+        width:350px;
     }
-    #edit-submit{
-        width: 400px;
+    #user-login-form #edit-submit{
+        width: 350px;
     }
+     #user-login-form #edit-submit.active{
+        transform: rotate(0deg);
+   -webkit-transform: rotate(0deg);
+   -ms-transform: rotate(0deg);
+     }
+
     #block-signuplink{
-        width: 400px;
+        width: 350px;
         margin: 0 auto;
-        border: 1px solid #eeeeee;
+        border: 1px solid #ddd;
     }
     #block-signuplink .field--type-link a{
     display: flex;
@@ -1026,7 +1123,7 @@ width: 100%;
 
     .content-wrapper .container-fluid{
         position: absolute;
-        left: 180px;
+        left: 195px;
         width: 
     }.container-fluid{
         transition: 1s;
@@ -1034,6 +1131,9 @@ width: 100%;
     .container-fluid.move{
         left: 71px;
         transition: 1s;
+    }
+    .main-container{
+        width: -moz-available;
     }
     .content-wrapper .main-container{
         margin: 0 auto;
@@ -1066,20 +1166,25 @@ html,body{
    .row .region-content{
     margin-left: 0px;
     margin-right: 0px;
+    background: #eaf3f3;
    }
    .breadcrumb{
-    background: #ffffff;
+    background: #eaf3f3;
     margin-bottom: 0;
+    padding-left: 21px;
+   }
+   .breadcrumb li{
+    font-size: 18px;
    }
    .contextual-region .tab-content{
-    background: #ffffff;
+    background: #eaf3f3;
     padding-left: 0;
    }
    .tab-content .tab-pane{
     padding-left: 0;
    }
    .col-md-12.toggle-menu.toggle-menu-right{
-    background: #ffffff;
+    background: #eaf3f3;
     padding-left: 0px;
     padding-right: 0px;
    }
@@ -1092,11 +1197,10 @@ html,body{
    
 /*---------------------------------column---3----------------------------*/
    .col-md-3{
-    margin-top: 20px;
+    margin-top: 57px;
    }
    .col-md-3 .panel-heading{
-    padding-left: 0;
-    padding-right: 0;
+    padding:0;
    }
 /*----------------------------------dashboard---------------------------*/
 #block-views-block-decreto-my-meetings-block-my-meetings,
@@ -1110,8 +1214,6 @@ html,body{
 
 /*------------------dashboard-table--------------------*/
 .view-content .table-responsive{
-    margin-right: 10px;
-    padding-left: 10px;
     height: 300px;
 }
 /*-----------------dashboard-table------------------------*/
@@ -1123,9 +1225,15 @@ html,body{
  .table > tfoot > tr > td{
     padding-left: 16px;
     font-size: 14px;
+    padding-left: 20px;
  }
 /*--------------------superfish-menu--------------------*/
-
+.clearfix .navbar-btn{
+    display: none!important;
+}
+#block-decreto-theme-main-menu{
+    display: none!important;
+}
 ul.sf-menu a, ul.sf-menu span.nolink{
     color: #aaabae;
 }
@@ -1143,20 +1251,23 @@ ul.sf-menu .sf-sub-indicator{
     transform: rotate(180deg);  /* Firefox 16+, IE 10+, Opera 12.10+ */
 }
 ul.sf-menu.sf-vertical{
-    width: 180px;
+    width: 195px;
 }
 ul.sf-menu.sf-vertical li{
-    width: 178px;
-    background: #323641;
+    width: 195px;
+    background: #1b1e24;
     display: list-item;
-    border-bottom: 1px solid #3d4250;
+    border-bottom: 1px solid #22252d;
     transition: 1s;
 }
+ul.sf-menu.sf-vertical li:hover{
+    background: #121418;
+}
 #main-menu-link-contentbf9dea01-cdae-4d31-b0fe-6c6ebc219ec8 ul{
-    width: 180px;
+    width: 195px;
 }
 #main-menu-link-contenta25c1967-54bd-442d-bf94-5631ad42800a ul{
-    width: 180px;
+    width: 195px;
 }
 .sf-depth-1 .menuparent .sf-hidden{
     display: block;
@@ -1180,8 +1291,9 @@ ul.sf-menu.sf-vertical li:hover > ul {
 .full .panel-heading{
     margin-top: 80x;
 }
+
     .toggle-menu-container{
-        background:#323641;
+        background:#1b1e24;
         color:#FFFFFF;
         width: 100%;
         margin-top: 0;
@@ -1195,10 +1307,9 @@ ul.sf-menu.sf-vertical li:hover > ul {
         background-origin: content-box;
         position: fixed;
         bottom: 0;
-        width:180px;
+        width:195px;
         top: 28px;
         transition: 1s;
-        border-left: 2px solid #cbe8d2;
         background-position: -3.5px 5px;
     }
     .toggle-menu-container {
@@ -1207,7 +1318,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     
      .toggle-menu-container.containerClose{
         width:71px;
-        transition: 1s;
+        transition: .1s;
         background-image: url(../image/decreto-sign.png);
         background-size: 40px;
         background-repeat: no-repeat;
@@ -1229,7 +1340,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     #superfish-main li.closeContainerMenuItems{
         width: 71px;
         overflow: hidden;
-        transition: 1s;
+        transition: .1s;
         margin-top: 10px;
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -1246,11 +1357,11 @@ ul.sf-menu.sf-vertical li:hover > ul {
     }
     #superfish-main .main-menu-link{
         border-bottom: 1px solid transparent;
-        font-size: 13px;
-        font-family: sans-serif;
+        font-size: 18px;
+        font-family: 'Work Sans', sans-serif;
         color: #ffffff;
         padding-left: 20px;
-        width: 180px;
+        width: 195px;
         transition: 1s;
     }
     #superfish-main a:hover{
@@ -1266,7 +1377,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     font-family: fontawesome;
     font-size: 18px;
     color: #ffffff;
-    margin-top: 13px;
+    margin-top: 10px;
     margin-left: 12px;
     transform: rotate(90deg);
     }
@@ -1313,7 +1424,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     background: #323641;
 }
 .region .col-sm-10{
-    width: 81%;
+    width: 70%;
 }
 .notifications-link-glypjicon a{
     width: 100%
@@ -1323,7 +1434,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
     border: none;
     border-radius: 0;
-    background-color: #323641;
+    background-color: #1b1e24;
     border-left: 1px solid #51585e;
     color: #ffffff;
     height: 50px;
@@ -1331,7 +1442,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding-left: 10px;
 }
 #edit-search-api-fulltext:focus{
-    background:#24272f;
+    background:#121418;
     color: #cbe8d2;
 }
 #block-user-account-menu{
@@ -1343,32 +1454,20 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
 }
 .region .col-sm-2{
-    width: 11%;
+    width: 13%;
 }
 /*----------------------notifications-link---------------*/
 #block-notificationsiconlink{
-   width: 8%;
+    width: 4%;
     float: left;
     height: 50px;
-    background: #323641;
+    background: #1b1e24;
     border-radius: inherit;
-    color: #cbe8d2;
     border: none;
     cursor: pointer;
 }
-#block-notificationsiconlink .fa-envelope{
-    margin-left: 15px;
-    margin-top: 17px;
-}
-#block-notificationsiconlink .fa-envelope:before{
-    color: #ffffff;
-    font-size: 20px;
-}
-#block-notificationsiconlink .fa-envelope:hover:before{
-    
-}
 #edit-submit-decreto-search {
-    background: #323641;
+    background: #1b1e24;
     color: transparent;
     height: 50px;
     border-radius: inherit;
@@ -1376,35 +1475,78 @@ ul.sf-menu.sf-vertical li:hover > ul {
     margin: 0;
     padding: 0;
 }
-#edit-submit-decreto-search span{
+#block-notificationsiconlink .panel-body{
+    background: #1b1e24;
+    height: 50px;
+    border: none;
+}
+#block-notificationsiconlink .fa-bell{
+    margin-top: 22px;
+    /* margin-left: 35px; */
+    font-size: 15px;
+    color: #b0b7c5;
+}
+/*--------------social-media-icons------------------*/
+#block-socialiconsconnect{
+    float: left;
+    width: 13%;
+    border: none;
+    height: 30px;
+    margin-left: -1px;
+}
+#block-socialiconsconnect .panel-body{
+    height: 50px;
+    background: #1b1e24;
+    padding-left: 15%;
+}
+.social-media-icons ul{
+    list-style: none; 
+    height: 40px;
+}
+.social-media-icons ul li{
+    float: left;
+    padding-right: 15%;
+    font-size: 14px;
+    padding-top: 15px;
+}
+.social-media-icons ul li:hover{
+    -moz-transform: scale(1.3);
+ -webkit-transform: scale(1.3);
+ transform: scale(1.3);
+}
+.social-media-icons ul li:first-child a{
+    color: #3b5998;
+}
+.social-media-icons ul li:nth-child(2) a{
+    color: #0084b4;
+}
+.social-media-icons ul li:nth-child(3) a{
+    color: #c71610;
+}
+/*-----------social-media-icons-end--------------*/
+#edit-submit-decreto-search .glyphicon-search{
     font-size: 24px;
     color: #ffffff;
     margin: 0;
     padding:0;
     height: 50px;
+    padding-right: 25px;
 }
 #edit-submit-decreto-search .glyphicon-search:before{
-    background-image: url(../image/google_search2.svg);
-    color: transparent;
-    background-repeat: no-repeat;
-    background-size: 27px;
-    background-position: 0px 12px;
+    color: #b0b7c5;
     padding: 5px;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
-    transform: rotate(90deg);
-    margin-top: 5px;
-}
-.input-group-addon, .input-group-btn{
-    width: .5%;
-}
-#edit-submit-decreto-search .glyphicon-search:hover::before{
-    color: transparent;
+    margin-top: -2px;
+    content: "\f00e";
+    font-family: fontAwesome;
+    font-size: 17px;
+    background-image: none;
 }
 #views-exposed-form-decreto-search-page .col-xs-12{
-    background: #323641;
+    background: #eaf3f3;
 }
 /*------------------admin/users dropdown menu--------------*/
 #decreto-user-menu-dropdown{
@@ -1414,25 +1556,36 @@ ul.sf-menu.sf-vertical li:hover > ul {
     width: 100%;
     height: 50px;
     border-radius: inherit;
-    background: #323641;
+    background: #1b1e24;
     border: none;
-    color: #ffffff;
+    color: #b0b7c5;
     display: flex;
     justify-content: space-around;
-    font-size: 16px;
-    padding-left: 15px;
+    font-size: 13px;
+    padding-left: 10%;
+    padding-top: 20px;
 }
 #decreto-user-menu-dropdown:hover{
     text-decoration: underline;
 }
 #decreto-user-menu-dropdown .caret{
-    margin-top: 2px;
-    margin-right: -15px;
-   content: "/f002";
-   font-family: fontAwesome;
+    margin-top: 8px;
+    margin-right: 10%;
+    content: "/f002";
+    font-family: fontAwesome;
+    /* padding-right: 50px; */
+    background-repeat: no-repeat;
+    margin-left: 0;
+}
+#decreto-user-menu-dropdown .open .caret{
+     -o-transition-property: none !important;
+ -moz-transition-property: none !important;
+ -ms-transition-property: none !important;
+ -webkit-transition-property: none !important;
+ transition-property: none !important;
 }
 .dropdown .dropdown-menu{
-    background: #ffffff;
+    background: #eaf3f3;
     width: -webkit-fill-available;
     height: 70px;
     margin: 0;
@@ -1446,11 +1599,12 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 .dropdown .dropdown-menu li a:hover{
    text-decoration: underline;
-   background: #ffffff;
+   background: transparent;
 }
 .container-fluid .row{
     margin: 0;
     padding: 0;
+    background: #eaf3f3;
 }
 /*--------------calendar-------------------*/
 .calendar-calendar td .inner div.day a{
@@ -1464,7 +1618,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 #block-views-block-decreto-calender-calendar-block{
     border-radius: 0;
-    margin-bottom: 76px;
+    margin-bottom: 0px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.2);
     border-color: transparent;
 }
@@ -1548,14 +1702,19 @@ ul.sf-menu.sf-vertical li:hover > ul {
     background-color: none; 
     border-radius: 0px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
+    border: none;
 }
 #block-views-block-decreto-user-committees-my-committees-block .panel-title{
     margin: 0;
 }
+#block-views-block-decreto-user-committees-my-committees-block ul{
+    list-style-type: none;
+    padding-left: 20px;
+}
 /*-----------------info and agenda starts here--------------*/
 .contextual-region .panel-title{
-    font-size: 16px;
-    font-weight: 900;
+    font-size: 18px;
+    font-weight: 100;
     padding-left: 20px;
 }
 #info .field .col-xs-7{
@@ -1564,14 +1723,17 @@ ul.sf-menu.sf-vertical li:hover > ul {
     text-align: left;
 }
 #info .field{
-    padding: 8px;
+    padding-left: 8px;
+    padding-top: 25px;
 }
 #info .field .field--label{
-    font-size: 14px;
+    font-size: 18px;
     width: 25vw;
 }
 #agenda .btn-primary{
     margin-top: 7px;
+    background: #d7e4e4;
+    margin-left: 10px;
 }
 /*----------------------------------separated by participants---------------------*/
 #info .field--name-field-decreto-meet-partic{
@@ -1585,6 +1747,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 #info .col-xs-7 #Participants{
     padding-left: 0px!important;
     display: block!important; 
+    padding-top: 0;
 }
 /*----------------------------------separated by description---------------------*/
 #info .field--type-text-with-summary{
@@ -1598,6 +1761,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 #info .col-xs-7 #Description{
     padding-left: 0px!important;
     display: block!important; 
+    padding-top: 0;
 }
 #info .Description{
 pointer-events: none; 
@@ -1605,13 +1769,11 @@ pointer-events: none;
 /*-------------------------------end of description table-----------------------*/
 #info .field .field--item{
     text-align: inherit;
-    font-size: 14px;
+    font-size: 18px;
 }
 .region-content .decreto-meeting{
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1); 
     border-color: #e8e4ea;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 #agenda{
     padding-top: 0;
@@ -1624,26 +1786,35 @@ pointer-events: none;
 }
 .area-expand-collapse span a{
     color: #32424c;
-    font-size: 16px;
+    font-size: 18px;
     margin: 0;
     padding-left: 10px;
-    font-weight: 900;
+    font-weight: 100;
 }
 .contextual-region .content{
-    background: #ffffff;
+    background: #eaf3f3;
+}
+#bp-content-2 .field{
+    background: #eaf3f3;
 }
 .annotator-wrapper{
     position: relative;
-    font-size: 16px;
     height: 100%;
 }
-
+.annotator-wrapper .field p{
+    background: #d7e4e4;
+    padding-bottom: 80px;
+    height: 100%;
+    font-size: 16px;
+    padding-left: 70px;
+    color: #1b1e24;
+}
+.decreto-meeting .field--name-field-decreto-meet-bps{
+    margin-top: 0px;
+}
 /*---------------------create new meetings-----------*/
 #decreto-content-modify-meeting-edit-form .form-text{
     width: 50%
-}
-#ajax-wrapper{
-    margin-top: 10px;
 }
 .select-wrapper{
     width: 50%;
@@ -1656,13 +1827,13 @@ pointer-events: none;
 }
 /*---------------------------full-clearfix-decreto-bulletpoint--------*/
 .decreto-bullet-point{
-    background: #ffffff;
+    background: #eaf3f3;
 }
 .form-group:last-child,
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #ffffff;
+    border-color: #eaf3f3;
  }
 .btn-expand-collapse{
     background:transparent;
@@ -1677,12 +1848,11 @@ pointer-events: none;
     border-color: transparent;
 }
 .decreto-bullet-point .panel{
-    margin-left: 10px;
-    margin-right: 10px;
     margin-top: 10px;
     border:none;
     box-shadow: none;
     margin-bottom: 0px;
+    margin-left: 0;
 }
 .area-expand-collapse .panel-defaul{
     border-color:#ffffff;
@@ -1690,14 +1860,21 @@ pointer-events: none;
 
 #speaker-paper-4{
     height: 100%;
+    background: #eaf3f3;
 }
 #speaker-paper-4 .panel-heading{
     border-color: transparent;
-    margin-top: 20px;
 }
 #speaker-paper-4 .panel-title{
-    font-size: 15px;
-  
+    font-size: 20px;
+    background: #eaf3f3;
+    padding-left: 10px;
+ }
+ #speaker-paper-4 .field p{
+    padding-left: 10px;
+ }
+ .decreto-bullet-point .btn-primary{
+    margin-top: 0;
  }
  /*-------------------------------read-more-about-page------------------------*/
  .teaser h2{
@@ -1715,7 +1892,7 @@ pointer-events: none;
 /*-------------------jquey link------------*/
 #toggle-menu-trigger{
     position: absolute;
-    left: 152px;
+    left: 165px;
     background: transparent;
     border: none;
     bottom: 0px;
@@ -1723,7 +1900,7 @@ pointer-events: none;
 }
 #toggle-menu-trigger.visible{
     left: 47px;
-    transition: 1s;
+    transition: .1s;
 }
 #toggle-menu-trigger:before{
     content: "\f104";
