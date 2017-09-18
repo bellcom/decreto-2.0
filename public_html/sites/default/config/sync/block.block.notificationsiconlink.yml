@@ -12,7 +12,7 @@ dependencies:
 id: notificationsiconlink
 theme: decreto_theme
 region: header
-weight: 0
+weight: -13
 provider: null
 plugin: 'block_content:495745c6-9bb7-4724-b206-2c0f1be91e25'
 settings:
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/user/login*'
+    pages: /user/login
     negate: true
     context_mapping: {  }

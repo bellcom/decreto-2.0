@@ -1,23 +1,23 @@
-uuid: b861abad-76a3-48e3-a56c-6f3f87b07501
+uuid: d9e062aa-69a9-4e06-bdce-99735e863863
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:495745c6-9bb7-4724-b206-2c0f1be91e25'
+    - 'block_content:basic:fe179df7-b6ff-4d0e-9113-6074ba738a35'
   module:
     - block_content
     - system
   theme:
     - decreto_theme
-id: notificationsiconlink
+id: socialiconsconnect
 theme: decreto_theme
 region: header
-weight: -13
+weight: -15
 provider: null
-plugin: 'block_content:495745c6-9bb7-4724-b206-2c0f1be91e25'
+plugin: 'block_content:fe179df7-b6ff-4d0e-9113-6074ba738a35'
 settings:
-  id: 'block_content:495745c6-9bb7-4724-b206-2c0f1be91e25'
-  label: notifications-icon-link
+  id: 'block_content:fe179df7-b6ff-4d0e-9113-6074ba738a35'
+  label: social-icons-connect
   provider: block_content
   label_display: '0'
   status: true
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /user/login
+    pages: '/user/login*'
     negate: true
     context_mapping: {  }

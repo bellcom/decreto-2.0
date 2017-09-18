@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.decreto_search
   module:
+    - system
     - user
     - views
   theme:
@@ -12,7 +13,7 @@ dependencies:
 id: exposed_form_decreto_search_page
 theme: decreto_theme
 region: header
-weight: -13
+weight: -16
 provider: null
 plugin: 'views_exposed_filter_block:decreto_search-page'
 settings:
@@ -30,3 +31,8 @@ visibility:
     negate: false
     context_mapping:
       user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

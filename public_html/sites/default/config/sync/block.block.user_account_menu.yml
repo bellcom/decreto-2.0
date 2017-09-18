@@ -12,7 +12,7 @@ dependencies:
 id: user_account_menu
 theme: decreto_theme
 region: header
-weight: -12
+weight: -14
 provider: null
 plugin: 'system_menu_block:account'
 settings:

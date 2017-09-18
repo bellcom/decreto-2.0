@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.decreto_search
   module:
+    - system
     - views
   theme:
     - decreto_theme
@@ -20,4 +21,9 @@ settings:
   provider: views
   label_display: visible
   views_label: ''
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }
