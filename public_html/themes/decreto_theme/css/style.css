@@ -1702,11 +1702,9 @@ ul.sf-menu.sf-vertical li:hover > ul {
 .pager li {
     font-size: 20px;
 }
-.col-md-9 .js-pager__items{
-    background: #eaf3f3;
-}
 .js-pager__items{
     justify-content: center;
+    background: #eaf3f3;
 }
 #block-views-block-decreto-user-committees-my-committees-block{
     background-color: none; 
