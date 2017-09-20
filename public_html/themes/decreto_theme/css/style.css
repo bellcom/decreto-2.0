@@ -20,16 +20,24 @@ body {
   color: #3e454c;
   background-color: #ffffff;
 }
+
+.container-fluid {
+    padding: 0;
+}
 /*---------------background-login-page-----------*/
 .region-login{
     background: #f7f7f7;
+    width: 80%;
 }
 .region-content{
     background: #f7f7f7;
+    width: 100%;
 }
+
 #signup_button{
     background: #f7f7f7;
-    padding: 0
+    padding: 0;
+    width: 100%;
 }
 
 .decreto-dashboard-logo {
@@ -45,10 +53,78 @@ body {
 }
 
 /*--------------login page starts here-------*/
+.path-user {
+    background: #f7f7f7;
+}
+#login-page .user-form-wrapper .btn {
+    padding: 15px 25px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+}
+
+#login-page .user-form-wrapper .user-form-container {
+    width: 320px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#login-page .user-form-wrapper .user-form-header {
+    position: relative;
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+
+#login-page .user-form-wrapper .user-form-header .user-form-header-logo {
+    width: 100%;
+}
+#login-page .main-container__content .user-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#login-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 70px;
+}
+#login-page .user-form-wrapper .user-form-footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.user-form-footer a {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.user-form-wrapper .user-form-footer p {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #aeaeae;
+}
+
+#login-page {
+    background: #f7f7f7;
+    min-height: 100%;
+}
+
 .col-md-12.toggle-menu.toggle-menu-right{
     padding-right: 0px;
     padding-left: 0px;
-    background: #f7f7f7
+    background: #f7f7f7;
 }
 #block-decretologobrand .field--label{
     display: none;
@@ -72,6 +148,12 @@ body {
 }
 .user-form-form-wrapper {
     position: relative;
+}
+.user-form-container img {
+    height: 165px;
+}
+.user-form-container a {
+    display: flex;
 }
 /* ----------------------------Icons--------------------------- */
 #block-menu-icon-links{
@@ -165,6 +247,18 @@ body {
 .user-login-form .form-group{
     margin-bottom: 30px;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  text-transform: capitalize;
+}
+::-moz-placeholder { /* Firefox 19+ */
+   text-transform: capitalize;
+}
+:-ms-input-placeholder { /* IE 10+ */
+   text-transform: capitalize;
+}
+:-moz-placeholder { /* Firefox 18- */
+   text-transform: capitalize;
+}
 .form-item-name .required{
     display: block;
     width: 100%;
@@ -202,24 +296,21 @@ body {
     flex-direction: row-reverse;
     width: 100%;
     justify-content: space-between;
-    height: 60px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
+    font-weight: 100;
+    height: 55px;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 0 auto;
+    padding: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
     background-color: #ec7139;
     border:none;
     box-shadow: none;
-    font-size: 18px;
-    padding-left: 10px;
-    padding-right: 10px;
     color: #ffffff;
 }
+
 .glyphicon-question-sign:before{
     display: none!important;
 }
@@ -231,12 +322,33 @@ body {
     padding-right: 20px;
 }
 /*------------------------signup field------------------*/
-#block-signuplink{
+
+#login-page input {
+    height: 55px;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid #ebebec;
+    
+}
+#block-signuplink { background: none; height: 55px;}
+#block-signuplink a{
+    background: none;
+    display: flex;
+    flex-direction: row-reverse;
     width: 100%;
-    height: 60px;
+    font-size: 16px;
+    justify-content: space-between;
+    font-weight: 100;
+    background-image: none;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 auto;
+    border:none;
     box-shadow: none;
-    background:none;
+    color: #ffffff;
+     padding: 16px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 #block-signuplink .field--label{
     display: none;
@@ -381,12 +493,8 @@ body {
     padding-left: 5px;
 }
 /*----------------------navbar-menu-icons-------------*/
-.navbar-nav .dashboard:before{
-    font-family: FontAwesome;
-    content: "\f0E4";
-    margin-right: 15px;
-    font-size: 15px;
-}
+.navbar-nav .dashboard::before { font-family: "Material Icons"; content: "\E876"; }
+
 .navbar-nav .calendar:before{
     font-family: FontAwesome;
     content: "\f073";
@@ -1124,6 +1232,10 @@ width: 100%;
         margin: 0;
         padding: 0;
     }
+    .region-login {
+        width: 320px;
+    display: flex;
+    }
     /*-------------------------------login page-------------------------*/
     #block-decretologobrand .panel-body{
         margin-top: 50px;
@@ -1212,10 +1324,13 @@ width: 100%;
         padding: 0;
     }
 /*--------------------Desktop version(margin and padding)------------------*/
-html,body{
+html,
+html body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     width: 100%
-    height:100%;
-}
+} 
 .panel-default{
     border-color: none!important;
 }
@@ -1249,6 +1364,7 @@ html,body{
     margin-left: 0px;
     padding-right: 0;
     padding-left: 0;
+
    }
    
 /*---------------------------------column---3----------------------------*/
@@ -1443,12 +1559,14 @@ ul.sf-menu.sf-vertical li:hover > ul {
          transform: rotate(180deg);
     }
 /*-----------------------superfish-menu-icons------------------*/
-.sf-depth-1 .dashboard:before{
-    font-family: FontAwesome;
-    content: "\f0E4";
-    margin-right:27px;
-    font-size: 25px;
-}
+    
+    .sf-depth-1 .main-menu-link:before {
+        margin-right: 10px;
+        font-size: 18px;
+    }    
+    
+.sf-depth-1 .dashboard:before { font-family: "Material Icons"; content: "\E871"; }
+    
 .sf-depth-1 .calendar:before{
     font-family: FontAwesome;
     content: "\f073";
@@ -1999,11 +2117,7 @@ pointer-events: none;
 #block-mainnavigation{
     width: 100px;
 }
-.btn-primary{
-    -moz-transition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    transition: all .3s linear;
-}
+
 .cd-nav-trigger:before{
     content: "\2193";
     font-family: fontAwesome;

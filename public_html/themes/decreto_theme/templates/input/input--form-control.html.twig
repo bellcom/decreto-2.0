@@ -28,6 +28,6 @@
   %}
 
   {% block input %}  
-    <input{{ attributes.addClass(classes) }} placeholder="search..." />
+    <input{{ attributes.addClass(classes) }} placeholder="{{ attributes.name }}" />
   {% endblock %}
 {% endspaceless %}
