@@ -16,7 +16,7 @@ global-styling:
       css/style-sm.css: {}
       css/style-md.css: {}
       "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css": {}
-      "//fonts.googleapis.com/css?family=Work+Sans": { type: external }
+      "//fonts.googleapis.com/css?family=Open+Sans:400,600,700": { type: external }
       "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css": {type: external}
 
 icons:

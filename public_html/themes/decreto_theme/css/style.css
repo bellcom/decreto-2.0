@@ -16,19 +16,19 @@ html {
 }
 body {
   font-size: 1.6rem;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #3e454c;
   background-color: #ffffff;
 }
 /*---------------background-login-page-----------*/
 .region-login{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .region-content{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #signup_button{
-    background: #eaf3f3;
+    background: #f7f7f7;
     padding: 0
 }
 
@@ -48,7 +48,7 @@ body {
 .col-md-12.toggle-menu.toggle-menu-right{
     padding-right: 0px;
     padding-left: 0px;
-    background: #eaf3f3
+    background: #f7f7f7
 }
 #block-decretologobrand .field--label{
     display: none;
@@ -77,7 +77,7 @@ body {
 #block-menu-icon-links{
     border:none;
     box-shadow: none;
-    background:#eaf3f3;
+    background:#f7f7f7;
 }
 .panel-body {
   
@@ -85,7 +85,7 @@ body {
     margin: 0px auto;
     }
 .annotator-wrapper .field p{
-    background: #dfebeb;
+    background: #f0f0f0;
     padding-bottom: 50px;
     height: 100%;
     padding-left: 55px;
@@ -93,13 +93,13 @@ body {
     margin-bottom: 10px;
 }
 .contextual-region .decreto-bullet-point-attachment{
-    background: #eaf3f3
+    background: #f7f7f7
 }
 .decreto-bullet-point-attachment .btn{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .decreto-bullet-point-attachment .btn:focus{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #block-socialiconsconnect .field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item{
     font-size: 0;
@@ -244,7 +244,7 @@ body {
 #login-page .region-content {
     padding-right: 20px;
     padding-left: 20px;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .field--item{
     width: 100%;
@@ -348,7 +348,7 @@ body {
 /*---------------------search-bar----------------------*/
 
 #edit-search-api-fulltext{
-    color: #1b1e24;
+    color: #323641;
     border: none;
     box-shadow: none;
     border-radius: inherit;
@@ -421,7 +421,7 @@ body {
     color: #ec7139;
 }
 .dropdown .meetings:focus{
-    background: #1b1e24;
+    background: #323641;
     color: #ec7139;
 }
 .dropdown .dropdown-menu{
@@ -507,7 +507,7 @@ a[href^="/user/logout"]:before{
     margin-left: 0 auto;
     height: 100%;
     list-style: none;
-    background-color: #eaf3f3;
+    background-color: #f7f7f7;
     border-radius: 0px;
 }
 .breadcrumb li{
@@ -519,7 +519,7 @@ a[href^="/user/logout"]:before{
     color: #338ecf;
 }
 .col-md-9.toggle-menu.toggle-menu-right{
-    background:#eaf3f3;
+    background:#f7f7f7;
     padding-left: 0px;
     padding-right: 0px;
     overflow: hidden;
@@ -559,19 +559,19 @@ a[href^="/user/logout"]:before{
     color:#373f44;
 }
 .table-striped thead{
-    background: #eaf3f3;
+    background: #f7f7f7;
     color: #32424c;
     font-size: 16px;
 }
 .table-striped > tbody > tr:nth-of-type(odd){
-    background:#dfebeb;
+    background:#f0f0f0;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(odd):hover{
     background: #ffffff;
 }
 .table-striped > tbody > tr:nth-of-type(even){
-    background:#eaf3f3;
+    background:#f7f7f7;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(even):hover{
@@ -589,7 +589,7 @@ a[href^="/user/logout"]:before{
 .pagination > li > a:hover, 
 .pagination > li > span:hover,
 .pagination > li > span:focus{
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 .pagination > .active > a, 
 .pagination > .active > span, 
@@ -598,7 +598,7 @@ a[href^="/user/logout"]:before{
 .pagination > .active > a:focus, 
 .pagination > .active > span:focus{
     background: transparent;
-    color: #1b1e24;
+    color: #323641;
 }
 .pager__item.pager__item--first{
     display: none;
@@ -608,8 +608,8 @@ a[href^="/user/logout"]:before{
 }
 /*--------------------info and agenda---------------------------*/
 .contextual-region .panel-title{
-    background: #eaf3f3;
-    color: #1b1e24;
+    background: #f7f7f7;
+    color: #323641;
     cursor: pointer;
     padding-left: 13px;
     font-size: 20px;
@@ -624,7 +624,7 @@ a[href^="/user/logout"]:before{
 .nav-justified > li > a:nth-child(1){
     font-size: 20px;
     border-radius: inherit;
-    background: #eaf3f3;
+    background: #f7f7f7;
     border-right: 1px solid #e7e7e7;
     border-left: 1px solid #e7e7e7;
     color: #323641;
@@ -645,7 +645,7 @@ a[href^="/user/logout"]:before{
 .contextual-region .content{
     padding-top: 0px;
     height: 100%;
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 .annotator-wrapper{
     position: relative;
@@ -654,16 +654,16 @@ a[href^="/user/logout"]:before{
 }
 .contextual-region .tab-content{
     width: 100%;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .contextual-region .nav-pills{
     padding: 0;
-    background: #dfebeb;
+    background: #f0f0f0;
     text-transform: uppercase;
 }
 .contextual-region .panel-body {
     padding: 0px;
-    background: #eaf3f3;
+    background: #f7f7f7;
     padding-bottom: 10px;
 }
 
@@ -679,7 +679,7 @@ a[href^="/user/logout"]:before{
 pointer-events: none;
 }
 #info .field--name-field-decreto-meet-type{
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 #info #Type {
 display: block!important;
@@ -688,7 +688,8 @@ display: block!important;
 pointer-events: none; 
 }
 #info #Committee{
-display: block!important;    
+display: block!important;  
+font-weight: 600;  
 }
 #info .From{
 pointer-events: none; 
@@ -697,7 +698,7 @@ pointer-events: none;
 display: block!important;    
 }
 #info .field--name-field-decreto-meet-start-date{
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 #info .to{
 pointer-events: none; 
@@ -709,10 +710,11 @@ display: block!important;
 pointer-events: none; 
 }
 #info #Location{
-display: block!important;    
+display: block!important;   
+font-weight: 600; 
 }
 #info .field--name-field-decreto-meet-location{
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 .field--name-field-decreto-meet-partic .field--label{
     padding-left: 12px;
@@ -727,7 +729,7 @@ display: block!important;
     font-weight: 900;
 }
 #info .field--type-text-with-summary{
-    background: #dfebeb;
+    background: #f0f0f0;
 }
 #info .field--type-text-with-summary .field--label:after{
     content: "\f107";
@@ -741,7 +743,7 @@ display: block!important;
 #info .field .field--label{
     font-size: 18px;
     color: #333333;
-    font-weight: 200;
+    font-weight: 600;
     width: 100%
 }
 #info .field .field--item{
@@ -763,7 +765,7 @@ width: 100%;
 #agenda .btn-primary{
     border: transparent;
     margin-top: 0px;
-    background: #dfebeb;
+    background: #f0f0f0;
     margin-right: 10px;
     margin-left: 10px;
 }
@@ -823,14 +825,14 @@ width: 100%;
     margin-right: 12px;
 }
 #info .field--name-field-decreto-meet-committee{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #info .field--name-field-decreto-meet-end-date{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #info .field--name-field-decreto-meet-partic{
     display: inline-grid;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #info .col-xs-7 #Participants{
     float: left;
@@ -870,7 +872,7 @@ width: 100%;
     background:white;
 }
 .col-md-9 .js-pager__items{
-    background: #eaf3f3;
+    background: #f7f7f7;
     border-radius: inherit;
 }
 .js-pager__items{
@@ -920,7 +922,7 @@ width: 100%;
 /*-----------------------------create new meetings form----------------*/
 #decreto-content-modify-meeting-edit-form{
     padding:10px;
-    background:#eaf3f3;
+    background:#f7f7f7;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings{
     background: #ffffff;
@@ -931,18 +933,19 @@ width: 100%;
     padding: 0px;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-body{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #cke_1_top{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #cke_1_bottom{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .form-control{
     background:#ffffff;
     height: 40px;
     border: 1px solid #ebebec;
+    padding: 0;
 }
 .form-control:focus{
     border: 1px solid #a8d3ce;
@@ -965,8 +968,8 @@ width: 100%;
     border:1px solid #ebebec;
 }
 #edit-description-format{
-    background:#eaf3f3;
-    border: 1px solid #eaf3f3;
+    background:#f7f7f7;
+    border: 1px solid #f7f7f7;
     box-shadow: none;
     border-top: none;
     display: flex;
@@ -976,13 +979,13 @@ width: 100%;
 #edit-full-doc-upload{
    border: none;
    box-shadow: none;
-   background: #eaf3f3;
+   background: #f7f7f7;
    padding-left: 0;
 }
 #edit-full-doc-closed-upload{
    border: none;
    box-shadow: none;
-   background:#eaf3f3;
+   background:#f7f7f7;
    padding-left: 0;
 }
 #ajax-wrapper--2{
@@ -1002,14 +1005,14 @@ width: 100%;
 }
 .decreto-bullet-point .btn-primary{
     margin-top: 10px;
-    background: #dfebeb;
+    background: #f0f0f0;
     margin-right: 10px;
 }
 .decreto-bullet-point .area-expand-collapse{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .decreto-bullet-point .panel-body{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 /*----------------------------this is for modal content------------------*/
 .nav-tabs > li.active > a, 
@@ -1023,7 +1026,7 @@ width: 100%;
     margin-top: 150px;
 }
 .modal-header{
-    background: #eaf3f3;
+    background: #f7f7f7;
     color: #0e0f12;
 }
 .btn-success, .btn-success:hover, .btn-success:focus{
@@ -1051,10 +1054,10 @@ width: 100%;
     margin: 20px;
 }
 #cke_44_top{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #cke_44_bottom{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 /*--------------button icons----------*/
 
@@ -1076,7 +1079,7 @@ width: 100%;
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #eaf3f3;
+    border-color: #f7f7f7;
  }
 .btn-expand-collapse{
     background:transparent;
@@ -1100,12 +1103,12 @@ width: 100%;
 }
 #speaker-paper-4 .panel-title{
     font-size: 15px;
-    background: #eaf3f3;
+    background: #f7f7f7;
     text-decoration: underline;
  }
  
  #speaker-paper-4 .field p{
-    background: #dfebeb;
+    background: #f0f0f0;
     padding-bottom: 50px;
     height: 100%;
     padding-left: 30px;
@@ -1130,7 +1133,7 @@ width: 100%;
     width: 400px;
     margin: 0 auto;
     text-align: center;
-    background: #eaf3f3;
+    background: #f7f7f7;
     }
     #edit-name{
         width: 350px;
@@ -1219,10 +1222,10 @@ html,body{
    .row .region-content{
     margin-left: 0px;
     margin-right: 0px;
-    background: #eaf3f3;
+    background: #f7f7f7;
    }
    .breadcrumb{
-    background: #eaf3f3;
+    background: #f7f7f7;
     margin-bottom: 0;
     padding-left: 21px;
    }
@@ -1230,14 +1233,14 @@ html,body{
     font-size: 18px;
    }
    .contextual-region .tab-content{
-    background: #eaf3f3;
+    background: #f7f7f7;
     padding-left: 0;
    }
    .tab-content .tab-pane{
     padding-left: 0;
    }
    .col-md-12.toggle-menu.toggle-menu-right{
-    background: #eaf3f3;
+    background: #f7f7f7;
     padding-left: 0px;
     padding-right: 0px;
    }
@@ -1262,14 +1265,14 @@ html,body{
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #dfebeb;
+    border: 1px solid #f0f0f0;
     margin-top: 10px;
 }
 
 /*------------------dashboard-table--------------------*/
 .view-content .table-responsive{
-    height: 310px;
-    background: #eaf3f3;
+    height: 282px;
+    background: #f7f7f7;
 }
 /*-----------------dashboard-table------------------------*/
 .table > thead > tr > th,
@@ -1310,13 +1313,13 @@ ul.sf-menu.sf-vertical{
 }
 ul.sf-menu.sf-vertical li{
     width: 195px;
-    background: #1b1e24;
+    background: #323641;
     display: list-item;
-    border-bottom: 1px solid #22252d;
+    border-bottom: 1px solid #3b3f4c;
     transition: 1s;
 }
 ul.sf-menu.sf-vertical li:hover{
-    background: #121418;
+    background: #2c3039;
 }
 #main-menu-link-contentbf9dea01-cdae-4d31-b0fe-6c6ebc219ec8 ul{
     width: 195px;
@@ -1348,7 +1351,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 
     .toggle-menu-container{
-        background:#1b1e24;
+        background:#323641;
         color:#FFFFFF;
         width: 100%;
         margin-top: 0;
@@ -1489,7 +1492,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
     border: none;
     border-radius: 0;
-    background-color: #1b1e24;
+    background-color: #323641;
     border-left: 1px solid #51585e;
     color: #ffffff;
     height: 50px;
@@ -1497,7 +1500,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding-left: 10px;
 }
 #edit-search-api-fulltext:focus{
-    background:#121418;
+    background:#2c3039;
     color: #cbe8d2;
 }
 #block-user-account-menu{
@@ -1517,13 +1520,13 @@ ul.sf-menu.sf-vertical li:hover > ul {
     width: 4%;
     float: left;
     height: 50px;
-    background: #1b1e24;
+    background: #323641;
     border-radius: inherit;
     border: none;
     cursor: pointer;
 }
 #edit-submit-decreto-search {
-    background: #1b1e24;
+    background: #323641;
     color: transparent;
     height: 50px;
     border-radius: inherit;
@@ -1532,7 +1535,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
 }
 #block-notificationsiconlink .panel-body{
-    background: #1b1e24;
+    background: #323641;
     height: 50px;
     border: none;
 }
@@ -1552,7 +1555,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 #block-socialiconsconnect .panel-body{
     height: 50px;
-    background: #1b1e24;
+    background: #323641;
     padding-left: 15%;
 }
 .social-media-icons ul{
@@ -1602,7 +1605,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     background-image: none;
 }
 #views-exposed-form-decreto-search-page .col-xs-12{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 /*------------------admin/users dropdown menu--------------*/
 #decreto-user-menu-dropdown{
@@ -1612,7 +1615,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     width: 100%;
     height: 50px;
     border-radius: inherit;
-    background: #1b1e24;
+    background: #323641;
     border: none;
     color: #b0b7c5;
     display: flex;
@@ -1640,7 +1643,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     display: none;
 }
 .dropdown .dropdown-menu{
-    background: #eaf3f3;
+    background: #f7f7f7;
     width: -webkit-fill-available;
     height: 70px;
     margin: 0;
@@ -1663,7 +1666,7 @@ a[href^="/user/edit"]:before{
 .container-fluid .row{
     margin: 0;
     padding: 0;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 /*--------------calendar-------------------*/
 .calendar-calendar td .inner div.day a{
@@ -1679,7 +1682,7 @@ a[href^="/user/edit"]:before{
     border-radius: 0;
     margin-bottom: 0px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.2);
-    border-color: #dfebeb;
+    border-color: #f0f0f0;
 }
 .mini-day-off {
     display: flex;
@@ -1756,13 +1759,13 @@ a[href^="/user/edit"]:before{
 }
 .js-pager__items{
     justify-content: center;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #block-views-block-decreto-user-committees-my-committees-block{
     background-color: none; 
     border-radius: 0px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #dfebeb;
+    border: 1px solid #f0f0f0;
 }
 #block-views-block-decreto-user-committees-my-committees-block .panel-title{
     margin: 0;
@@ -1780,7 +1783,7 @@ a[href^="/user/edit"]:before{
 #info{
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #dbe8e8;
+    border: 1px solid #f0f0f0;
 }
 #info .field .col-xs-7{
     width: 100%;
@@ -1797,7 +1800,7 @@ a[href^="/user/edit"]:before{
 }
 #agenda .btn-primary{
     margin-top: 7px;
-    background: #dfebeb;
+    background: #f0f0f0;
     margin-left: 10px;
 }
 /*----------------------------------separated by participants---------------------*/
@@ -1860,29 +1863,29 @@ pointer-events: none;
     font-weight: 100;
 }
 .contextual-region .content{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #bp-content-2 .field{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .annotator-wrapper{
     position: relative;
     height: 100%;
 }
 .annotator-wrapper .field p{
-    background: #dfebeb;
+    background: #f0f0f0;
     padding-bottom: 80px;
     height: 100%;
     font-size: 16px;
     padding-left: 65px;
-    color: #1b1e24;
+    color: #323641;
 }
 .decreto-meeting .field--name-field-decreto-meet-bps{
     margin-top: 15px;
     padding-top: 0;
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #dbe8e8;
+    border: 1px solid #f0f0f0;
 }
 /*---------------------create new meetings-----------*/
 #decreto-content-modify-meeting-edit-form .form-text{
@@ -1906,13 +1909,13 @@ pointer-events: none;
     padding-right: 20px;
 }
 .decreto-bullet-point{
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 .form-group:last-child,
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #eaf3f3;
+    border-color: #f7f7f7;
  }
 .btn-expand-collapse{
     background:transparent;
@@ -1939,14 +1942,14 @@ pointer-events: none;
 
 #speaker-paper-4{
     height: 100%;
-    background: #eaf3f3;
+    background: #f7f7f7;
 }
 #speaker-paper-4 .panel-heading{
     border-color: transparent;
 }
 #speaker-paper-4 .panel-title{
     font-size: 20px;
-    background: #eaf3f3;
+    background: #f7f7f7;
     padding-left: 10px;
  }
  #speaker-paper-4 .field p{
