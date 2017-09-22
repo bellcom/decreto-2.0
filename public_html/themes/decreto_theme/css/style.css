@@ -26,16 +26,16 @@ body {
 }
 /*---------------background-login-page-----------*/
 .region-login{
-    background: #f7f7f7;
+    background: #fbfbfb;
     width: 80%;
 }
 .region-content{
-    background: #f7f7f7;
+    background: #fbfbfb;
     width: 100%;
 }
 
 #signup_button{
-    background: #f7f7f7;
+    background: #fbfbfb;
     padding: 0;
     width: 100%;
 }
@@ -54,7 +54,7 @@ body {
 
 /*--------------login page starts here-------*/
 .path-user {
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #login-page .user-form-wrapper .btn {
     padding: 15px 25px;
@@ -117,14 +117,14 @@ body {
 }
 
 #login-page {
-    background: #f7f7f7;
+    background: #fbfbfb;
     min-height: 100%;
 }
 
 .col-md-12.toggle-menu.toggle-menu-right{
     padding-right: 0px;
     padding-left: 0px;
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #block-decretologobrand .field--label{
     display: none;
@@ -159,7 +159,7 @@ body {
 #block-menu-icon-links{
     border:none;
     box-shadow: none;
-    background:#f7f7f7;
+    background:#fbfbfb;
 }
 .panel-body {
   
@@ -167,21 +167,21 @@ body {
     margin: 0px auto;
     }
 .annotator-wrapper .field p{
-    background: #f0f0f0;
+    background: #ffffff;
     padding-bottom: 50px;
     height: 100%;
     padding-left: 55px;
-    padding-right: 10px; 
-    margin-bottom: 10px;
+    padding-right: 10px;
 }
 .contextual-region .decreto-bullet-point-attachment{
-    background: #f7f7f7
+    background: #fbfbfb
 }
 .decreto-bullet-point-attachment .btn{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 .decreto-bullet-point-attachment .btn:focus{
-    background: #f7f7f7;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 #block-socialiconsconnect .field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item{
     font-size: 0;
@@ -356,7 +356,7 @@ body {
 #login-page .region-content {
     padding-right: 20px;
     padding-left: 20px;
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 .field--item{
     width: 100%;
@@ -404,7 +404,8 @@ body {
     border-left: none;
     border-right: none;
     border-top: none;
-    padding: 0;
+    padding-right: 20px;
+    padding-left: 20px;
     margin: 0;
 }
 .region.navbar-btn{
@@ -440,7 +441,7 @@ body {
 
 .hamburger-icon i {
     font-size: 25px;
-    color: #f7f7f7;
+    color: #fbfbfb;
     float: right;
     margin-top: 12px;
     margin-right: 15px;
@@ -493,31 +494,36 @@ body {
     padding-left: 5px;
 }
 /*----------------------navbar-menu-icons-------------*/
-.navbar-nav .dashboard::before { font-family: "Material Icons"; content: "\E876"; }
-
-.navbar-nav .calendar:before{
-    font-family: FontAwesome;
-    content: "\f073";
+.navbar-nav .dashboard:before{
     margin-right: 15px;
-    font-size: 15px;
+    font-size: 20px;
+    font-family: "Material Icons";
+    content: "\E871";
+}
+.navbar-nav .calendar:before{
+    margin-right: 15px;
+    font-size: 20px;
+    font-family: "Material Icons";
+    content: "\E916";
 }
 .navbar-nav .meetings:before{
-    font-family: FontAwesome;
-    content: "\f2b7";
+    content: "\E7fb";
     margin-right: 15px;
-    font-size: 15px;
+    font-size:20px;
+    font-family: "Material Icons";
 }
 .navbar-nav .users:before{
-    font-family: FontAwesome;
-    content: "\f2bd";
     margin-right: 15px;
-    font-size: 15px;
+    font-size: 20px;
+    font-family: "Material Icons";
+    content: "\E851";
 }
 .navbar-nav .settings:before{
-    font-family: FontAwesome;
     content: "\f013";
     margin-right: 15px;
-    font-size: 18px;
+    font-size: 20px;
+    font-family: "Material Icons";
+    content: "\E8b9";
 }
 
 
@@ -612,11 +618,13 @@ a[href^="/user/logout"]:before{
 }
 /*------------------dashboard comitte meetings--------------*/
 .breadcrumb{
-    margin-left: 0 auto;
     height: 100%;
     list-style: none;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     border-radius: 0px;
+    margin: 0;
+    padding: 20px;
+    padding-top: 10px;
 }
 .breadcrumb li{
     font-size: 15px
@@ -627,7 +635,7 @@ a[href^="/user/logout"]:before{
     color: #338ecf;
 }
 .col-md-9.toggle-menu.toggle-menu-right{
-    background:#f7f7f7;
+    background:#FFFFFF;
     padding-left: 0px;
     padding-right: 0px;
     overflow: hidden;
@@ -635,24 +643,28 @@ a[href^="/user/logout"]:before{
 #block-views-block-decreto-my-meetings-block-my-meetings{
     border: none;
     margin: 0px;
-    box-shadow: 15px 15px 15px -15px #888888;
-    margin-bottom: 10px;
-   
+    margin-bottom: 0px;
+    padding-top: 1px;
+    padding: 20px;
+    padding-bottom: 0;
+    padding-top: 10px;
+}
+#block-views-block-decreto-my-meetings-block-my-meetings .panel-body{
+    padding: 0;
 }
 .panel-default > .panel-heading {
     background: #ffffff;
     border-radius: initial;
     height: 100%;
     border: none;
+    border-radius: 5px;
 }
 .panel-title{
     color: #3c464c;
     cursor: pointer;
-    padding-left: 30px;
 }
 .panel-title:hover{
-    color: #f5f5f5;
-    background:#3c464c;
+    background:transparent;
 }
 .views-element-container .panel-body {
     padding: 4px;
@@ -667,26 +679,21 @@ a[href^="/user/logout"]:before{
     color:#373f44;
 }
 .table-striped thead{
-    background: #f7f7f7;
+    background: #ffffff;
     color: #32424c;
     font-size: 16px;
 }
 .table-striped > tbody > tr:nth-of-type(odd){
-    background:#f0f0f0;
+    background:#fbfbfb;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(odd):hover{
-    background: #ffffff;
 }
 .table-striped > tbody > tr:nth-of-type(even){
-    background:#f7f7f7;
+    background:#ffffff;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(even):hover{
-    background: #ffffff;
-}
-.pager-nav.text-center{
-    height: 29px;
 }
 .pagination > li > a, 
 .pagination > li > span{
@@ -697,7 +704,7 @@ a[href^="/user/logout"]:before{
 .pagination > li > a:hover, 
 .pagination > li > span:hover,
 .pagination > li > span:focus{
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 .pagination > .active > a, 
 .pagination > .active > span, 
@@ -715,8 +722,8 @@ a[href^="/user/logout"]:before{
     display: none;
 }
 /*--------------------info and agenda---------------------------*/
-.contextual-region .panel-title{
-    background: #f7f7f7;
+#block-views-block-decreto-my-meetings-block-my-meetings .panel-title{
+    background: #ffffff;
     color: #323641;
     cursor: pointer;
     padding-left: 13px;
@@ -732,9 +739,8 @@ a[href^="/user/logout"]:before{
 .nav-justified > li > a:nth-child(1){
     font-size: 20px;
     border-radius: inherit;
-    background: #f7f7f7;
+    background: #ffffff;
     border-right: 1px solid #e7e7e7;
-    border-left: 1px solid #e7e7e7;
     color: #323641;
 
 }
@@ -753,7 +759,7 @@ a[href^="/user/logout"]:before{
 .contextual-region .content{
     padding-top: 0px;
     height: 100%;
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 .annotator-wrapper{
     position: relative;
@@ -762,19 +768,23 @@ a[href^="/user/logout"]:before{
 }
 .contextual-region .tab-content{
     width: 100%;
-    background: #f7f7f7;
+    background: #ffffff;
 }
 .contextual-region .nav-pills{
     padding: 0;
-    background: #f0f0f0;
+    background: #ffffff;
     text-transform: uppercase;
+    height: 45px;
 }
 .contextual-region .panel-body {
     padding: 0px;
-    background: #f7f7f7;
-    padding-bottom: 10px;
+    background: #ffffff;
 }
-
+#info{
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #ffffff;
+}
 #info .field{
     margin: 0;
     display: flex;
@@ -787,7 +797,7 @@ a[href^="/user/logout"]:before{
 pointer-events: none;
 }
 #info .field--name-field-decreto-meet-type{
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 #info #Type {
 display: block!important;
@@ -806,7 +816,7 @@ pointer-events: none;
 display: block!important;    
 }
 #info .field--name-field-decreto-meet-start-date{
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 #info .to{
 pointer-events: none; 
@@ -822,7 +832,7 @@ display: block!important;
 font-weight: 600; 
 }
 #info .field--name-field-decreto-meet-location{
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 .field--name-field-decreto-meet-partic .field--label{
     padding-left: 12px;
@@ -837,7 +847,7 @@ font-weight: 600;
     font-weight: 900;
 }
 #info .field--type-text-with-summary{
-    background: #f0f0f0;
+    background: #fbfbfb;
 }
 #info .field--type-text-with-summary .field--label:after{
     content: "\f107";
@@ -869,13 +879,20 @@ font-weight: 600;
 /*----------------agenda starts here--------------*/
 #agenda{
 width: 100%;
+background: #ffffff;
+padding-left: 15px;
+padding-right: 15px;
 }
 #agenda .btn-primary{
-    border: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
     margin-top: 0px;
-    background: #f0f0f0;
+    background: #ffffff;
     margin-right: 10px;
     margin-left: 10px;
+}
+#agenda .nav-container{
+    height: 0;
+    font-weight: 0;
 }
 .btn-expand-collapse .glyphicon:before{
     font-family: FontAwesome;
@@ -896,9 +913,6 @@ width: 100%;
     -moz-transform:rotate(180deg);
     -webkit-transform:rotate(180deg);
     transform:rotate(180deg);
-}
-#agenda .decreto-bullet-point-attachment{
-    padding-top: 10px;
 }
 /*-------------------field icons(info and agenda page)--------*/
 .field--name-field-decreto-meet-type .glyphicon-asterisk:before{
@@ -933,14 +947,14 @@ width: 100%;
     margin-right: 12px;
 }
 #info .field--name-field-decreto-meet-committee{
-    background: #f7f7f7;
+    background: #ffffff;
 }
 #info .field--name-field-decreto-meet-end-date{
-    background: #f7f7f7;
+    background: #ffffff;
 }
 #info .field--name-field-decreto-meet-partic{
     display: inline-grid;
-    background: #f7f7f7;
+    background: #ffffff;
 }
 #info .col-xs-7 #Participants{
     float: left;
@@ -980,8 +994,8 @@ width: 100%;
     background:white;
 }
 .col-md-9 .js-pager__items{
-    background: #f7f7f7;
-    border-radius: inherit;
+    background: #ffffff;
+    font-size: 12px;
 }
 .js-pager__items{
     margin: 0 auto;
@@ -1029,8 +1043,15 @@ width: 100%;
 }
 /*-----------------------------create new meetings form----------------*/
 #decreto-content-modify-meeting-edit-form{
-    padding:10px;
-    background:#f7f7f7;
+    margin-right: 10px;
+    margin-left: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 7px;
+    padding: 10px;
+}
+.table-responsive{
+    margin-bottom: 0;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings{
     background: #ffffff;
@@ -1038,21 +1059,26 @@ width: 100%;
     box-shadow: 15px 15px 15px -15px #888888;
     border-color: #e8e4ea;
     border: none;
-    padding: 0px;
+    padding:20px;
+    padding-top: 0;
+}
+#block-views-block-decreto-all-meetings-block-all-meetings .panel-title{
+    font-size: 20px;
 }
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-body{
-    background: #f7f7f7;
+    background: #fbfbfb;
+    padding: 0;
 }
 #cke_1_top{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #cke_1_bottom{
-    background: #f7f7f7;
+    background: #ffffff;
 }
 .form-control{
     background:#ffffff;
     height: 40px;
-    border: 1px solid #ebebec;
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 0;
 }
 .form-control:focus{
@@ -1062,7 +1088,7 @@ width: 100%;
    
 }
 .has-glyphicons .select-wrapper:after{
-   color: #999999;
+   color: rgba(0,0,0,0.3);
 }
 #edit-participants{
     margin-top: 5px;
@@ -1076,24 +1102,25 @@ width: 100%;
     border:1px solid #ebebec;
 }
 #edit-description-format{
-    background:#f7f7f7;
-    border: 1px solid #f7f7f7;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
     box-shadow: none;
     border-top: none;
     display: flex;
     justify-content: space-between;
+    margin-top: 0!important;
 }
 
 #edit-full-doc-upload{
    border: none;
    box-shadow: none;
-   background: #f7f7f7;
+   background: #ffffff;
    padding-left: 0;
 }
 #edit-full-doc-closed-upload{
    border: none;
    box-shadow: none;
-   background:#f7f7f7;
+   background:#ffffff;
    padding-left: 0;
 }
 #ajax-wrapper--2{
@@ -1112,15 +1139,20 @@ width: 100%;
     margin-bottom: 10px;
 }
 .decreto-bullet-point .btn-primary{
-    margin-top: 10px;
-    background: #f0f0f0;
+    background: transparent;
     margin-right: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
 }
-.decreto-bullet-point .area-expand-collapse{
-    background: #f7f7f7;
+.decreto-bullet-point .btn-primary:hover{
+    border: 1px solid rgba(0,0,0,0.1);
+}
+#agenda .decreto-bullet-point .area-expand-collapse{
+    background: #ffffff;
+    padding-bottom: 10px;
+    border-radius: 7px;
 }
 .decreto-bullet-point .panel-body{
-    background: #f7f7f7;
+    background: #ffffff;
 }
 /*----------------------------this is for modal content------------------*/
 .nav-tabs > li.active > a, 
@@ -1134,21 +1166,20 @@ width: 100%;
     margin-top: 150px;
 }
 .modal-header{
-    background: #f7f7f7;
+    background: #fbfbfb;
     color: #0e0f12;
 }
 .btn-success, .btn-success:hover, .btn-success:focus{
-    background:#a5c0c0;
-    border: none;
+    border: 1px solid rgba(0,0,0,0.1);
 } 
 #js-bps-container:before{
-    content: "\f0fe";
-    font-family: fontAwesome;
+    font-family: "Material Icons";  
+    content: "\E146";
     float: left;
     margin-right: 10px;
     margin-top: -7px;
     font-size: 30px;
-    color: #a5c0c0;
+    color: rgba(0,0,0,0.5);
 }
 .modal-footer{
     border-top: transparent;
@@ -1162,10 +1193,10 @@ width: 100%;
     margin: 20px;
 }
 #cke_44_top{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #cke_44_bottom{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 /*--------------button icons----------*/
 
@@ -1187,19 +1218,14 @@ width: 100%;
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #f7f7f7;
+    border-color: #fbfbfb;
  }
 .btn-expand-collapse{
     background:transparent;
     border-color: transparent;
 }
-.btn-expand-collapse:focus{
-    background: transparent;
-    border-color: transparent;
-}
 .btn-expand-collapse:hover{
-    background: transparent;
-    border-color: transparent;
+    border:1px solid rgba(0,0,0,0.1);
 }
 .decreto-bullet-point .panel{
     border:none;
@@ -1211,12 +1237,12 @@ width: 100%;
 }
 #speaker-paper-4 .panel-title{
     font-size: 15px;
-    background: #f7f7f7;
+    background: #fbfbfb;
     text-decoration: underline;
  }
  
  #speaker-paper-4 .field p{
-    background: #f0f0f0;
+    background: #fbfbfb;
     padding-bottom: 50px;
     height: 100%;
     padding-left: 30px;
@@ -1245,7 +1271,7 @@ width: 100%;
     width: 400px;
     margin: 0 auto;
     text-align: center;
-    background: #f7f7f7;
+    background: #fbfbfb;
     }
     #edit-name{
         width: 350px;
@@ -1334,13 +1360,13 @@ html body {
 .panel-default{
     border-color: none!important;
 }
-   .row .region-content{
+   .col-md-9 .region-content{
     margin-left: 0px;
     margin-right: 0px;
-    background: #f7f7f7;
+    background: #ffffff;
    }
    .breadcrumb{
-    background: #f7f7f7;
+    background: #ffffff;
     margin-bottom: 0;
     padding-left: 21px;
    }
@@ -1348,14 +1374,14 @@ html body {
     font-size: 18px;
    }
    .contextual-region .tab-content{
-    background: #f7f7f7;
+    background: #ffffff;
     padding-left: 0;
    }
    .tab-content .tab-pane{
     padding-left: 0;
    }
    .col-md-12.toggle-menu.toggle-menu-right{
-    background: #f7f7f7;
+    background: #fbfbfb;
     padding-left: 0px;
     padding-right: 0px;
    }
@@ -1369,7 +1395,7 @@ html body {
    
 /*---------------------------------column---3----------------------------*/
    .col-md-3{
-    margin-top: 10px;
+    margin-top: 20px;
    }
    .col-md-3 .panel-heading{
     padding:0;
@@ -1377,18 +1403,17 @@ html body {
 /*----------------------------------dashboard---------------------------*/
 #block-views-block-decreto-my-meetings-block-my-meetings,
 #block-views-block-decreto-all-meetings-block-all-meetings{
-    border-radius: inherit;
-    margin-left: 10px;
-    margin-right: 10px;
-    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #f0f0f0;
-    margin-top: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0;
 }
 
 /*------------------dashboard-table--------------------*/
 .view-content .table-responsive{
-    height: 282px;
-    background: #f7f7f7;
+    height: 100%;
+    background: #fbfbfb;
 }
 /*-----------------dashboard-table------------------------*/
 .table > thead > tr > th,
@@ -1532,7 +1557,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     #superfish-main .main-menu-link{
         border-bottom: 1px solid transparent;
         font-size: 18px;
-        font-family: 'Work Sans', sans-serif;
+        font-family: 'open Sans', sans-serif;
         color: #ffffff;
         padding-left: 20px;
         width: 195px;
@@ -1546,50 +1571,50 @@ ul.sf-menu.sf-vertical li:hover > ul {
     #superfish-main .main-menu-link:hover{
         background: transparent;
     }
+
+    ul.sf-menu.sf-vertical .sf-sub-indicator:after { font-family: "Material Icons"; content: "\E313"; }
     ul.sf-menu.sf-vertical .sf-sub-indicator:after {
-    content: "\f105";
-    font-family: fontawesome;
-    font-size: 18px;
+    font-size: 20px;
     color: #ffffff;
-    margin-top: 10px;
-    margin-left: 12px;
-    transform: rotate(90deg);
+    margin-top: 12px;
+    margin-left: 8px;
     }
     ul.sf-menu.sf-vertical .sf-sub-indicator:focus:after{
          transform: rotate(180deg);
     }
 /*-----------------------superfish-menu-icons------------------*/
     
-    .sf-depth-1 .main-menu-link:before {
-        margin-right: 10px;
-        font-size: 18px;
+.sf-depth-1 .main-menu-link:before {
+     margin-right: 27px;
+        font-size: 25px;
     }    
-    
 .sf-depth-1 .dashboard:before { font-family: "Material Icons"; content: "\E871"; }
-    
+.sf-depth-1 .dashboard:before{
+     margin-right: 27px;
+        font-size: 25px;
+}
+
+.sf-depth-1 .calendar:before { font-family: "Material Icons"; content: "\E916"; }
 .sf-depth-1 .calendar:before{
-    font-family: FontAwesome;
-    content: "\f073";
-    margin-right:27px;
-    font-size: 25px;
+     margin-right: 27px;
+        font-size: 25px;
 }
+.sf-depth-1 .meetings:before{ font-family: "Material Icons"; content: "\E7fb"; }
 .sf-depth-1 .meetings:before{
-    font-family: FontAwesome;
-    content: "\f2b7";
-    margin-right:27px;
-    font-size: 25px;
+     margin-right: 27px;
+        font-size: 25px;
 }
+
+.sf-depth-1 .users:before{ font-family: "Material Icons"; content: "\E851"; }
 .sf-depth-1 .users:before{
-    font-family: FontAwesome;
-    content: "\f2bd";
-    margin-right:27px;
-    font-size: 25px;
+    margin-right: 27px;
+        font-size: 25px;
 }
+
+.sf-depth-1 .settings:before{ font-family: "Material Icons"; content: "\E8b9"; }
 .sf-depth-1 .settings:before{
-    font-family: FontAwesome;
-    content: "\f013";
-    margin-right:27px;
-    font-size: 28px;
+    margin-right: 27px;
+        font-size: 25px;
 }
 /*-------------------------desktop header-----------------------*/
 .content-wrapper .main-container{
@@ -1612,7 +1637,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     border-radius: 0;
     background-color: #323641;
     border-left: 1px solid #51585e;
-    color: #ffffff;
+    color: #ffffff!important;
     height: 50px;
     font-size: 16px;
     padding-left: 10px;
@@ -1661,8 +1686,13 @@ ul.sf-menu.sf-vertical li:hover > ul {
     margin-top: 22px;
     /* margin-left: 35px; */
     font-size: 15px;
-    color: #b0b7c5;
 }
+.fa-bell:before{
+    font-family: "Material Icons";
+    content: "\E253"!important;
+    color: #ffffff;
+    font-size: 18px;
+   }
 /*--------------social-media-icons------------------*/
 #block-socialiconsconnect{
     float: left;
@@ -1674,7 +1704,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 #block-socialiconsconnect .panel-body{
     height: 50px;
     background: #323641;
-    padding-left: 15%;
+    padding-left: 14%;
 }
 .social-media-icons ul{
     list-style: none; 
@@ -1684,7 +1714,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     float: left;
     padding-right: 15%;
     font-size: 14px;
-    padding-top: 15px;
+    padding-top: 18px;
 }
 .social-media-icons ul li:hover{
     -moz-transform: scale(1.3);
@@ -1692,12 +1722,21 @@ ul.sf-menu.sf-vertical li:hover > ul {
  transform: scale(1.3);
 }
 .social-media-icons ul li:first-child a{
+    color: #ffffff;
+}
+.social-media-icons ul li:first-child a:hover{
     color: #3b5998;
 }
 .social-media-icons ul li:nth-child(2) a{
+    color: #ffffff;
+}
+.social-media-icons ul li:nth-child(2) a:hover{
     color: #0084b4;
 }
 .social-media-icons ul li:nth-child(3) a{
+    color: #ffffff;
+}
+.social-media-icons ul li:nth-child(3) a:hover{
     color: #c71610;
 }
 /*-----------social-media-icons-end--------------*/
@@ -1707,23 +1746,22 @@ ul.sf-menu.sf-vertical li:hover > ul {
     margin: 0;
     padding:0;
     height: 50px;
-    padding-right: 25px;
+    padding-right: 15px;
 }
+#edit-submit-decreto-search .glyphicon-search:before{ font-family: "Material Icons"; content: "\E8b6"; }
 #edit-submit-decreto-search .glyphicon-search:before{
-    color: #b0b7c5;
+    color: #ffffff;
     padding: 5px;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
-    margin-top: -2px;
-    content: "\f00e";
-    font-family: fontAwesome;
-    font-size: 17px;
+    margin-top: 0;
+    font-size: 25px;
     background-image: none;
 }
 #views-exposed-form-decreto-search-page .col-xs-12{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 /*------------------admin/users dropdown menu--------------*/
 #decreto-user-menu-dropdown{
@@ -1735,12 +1773,11 @@ ul.sf-menu.sf-vertical li:hover > ul {
     border-radius: inherit;
     background: #323641;
     border: none;
-    color: #b0b7c5;
+    color: #ffffff;
     display: flex;
-    justify-content: space-around;
-    font-size: 13px;
+    font-size: 15px;
     padding-left: 10%;
-    padding-top: 20px;
+    padding-top: 16.5px;
 }
 #decreto-user-menu-dropdown:hover{
     text-decoration: underline;
@@ -1755,13 +1792,14 @@ ul.sf-menu.sf-vertical li:hover > ul {
     border-top: 4px solid \9;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
-    margin-top: 8px;
+    margin-left: 15%!important;
+    margin-top: 12px;
 }
 .caret:before{
     display: none;
 }
 .dropdown .dropdown-menu{
-    background: #f7f7f7;
+    background: #fbfbfb;
     width: -webkit-fill-available;
     height: 70px;
     margin: 0;
@@ -1784,7 +1822,7 @@ a[href^="/user/edit"]:before{
 .container-fluid .row{
     margin: 0;
     padding: 0;
-    background: #f7f7f7;
+    background: #ffffff;
 }
 /*--------------calendar-------------------*/
 .calendar-calendar td .inner div.day a{
@@ -1797,10 +1835,10 @@ a[href^="/user/edit"]:before{
     background-color: transparent;
 }
 #block-views-block-decreto-calender-calendar-block{
-    border-radius: 0;
+    border-radius: 5px;
     margin-bottom: 0px;
-    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.2);
-    border-color: #f0f0f0;
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0,0,0,0.1);
 }
 .mini-day-off {
     display: flex;
@@ -1871,19 +1909,22 @@ a[href^="/user/edit"]:before{
 .pager{
     border-radius: none;
     margin:0px;
+    border-radius: 5px;
 }
 .pager li {
     font-size: 20px;
 }
 .js-pager__items{
     justify-content: center;
-    background: #f7f7f7;
+    background: #ffffff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 #block-views-block-decreto-user-committees-my-committees-block{
-    background-color: none; 
-    border-radius: 0px;
+    border-radius: 5px;
     box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #f0f0f0;
+    border: 1px solid #fbfbfb;
+    margin-top: 20px;
 }
 #block-views-block-decreto-user-committees-my-committees-block .panel-title{
     margin: 0;
@@ -1897,11 +1938,15 @@ a[href^="/user/edit"]:before{
     font-size: 18px;
     font-weight: 100;
     padding-left: 20px;
+    border-radius: 5px;
+    background: #ffffff;
 }
 #info{
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0;
+    border-radius: 7px;0;
 }
 #info .field .col-xs-7{
     width: 100%;
@@ -1912,13 +1957,19 @@ a[href^="/user/edit"]:before{
     padding-left: 8px;
     padding-top: 25px;
 }
+#info .field--name-field-decreto-meet-type{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
 #info .field .field--label{
     font-size: 18px;
     width: 25vw;
 }
 #agenda .btn-primary{
-    margin-top: 7px;
-    background: #f0f0f0;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-top: 0px;
+    background: #ffffff;
+    margin-right: 10px;
     margin-left: 10px;
 }
 /*----------------------------------separated by participants---------------------*/
@@ -1942,6 +1993,8 @@ a[href^="/user/edit"]:before{
 #info .field--type-text-with-summary{
     display: flex;
     height: auto;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 
 #info .field--type-text-with-summary .field--label:after{
@@ -1965,7 +2018,7 @@ pointer-events: none;
     border-color: #e8e4ea;
 }
 #agenda{
-    padding-top: 0;
+    padding: 0;
 }
 #agenda .panel-default{
     margin-left: 50px;
@@ -1981,29 +2034,41 @@ pointer-events: none;
     font-weight: 100;
 }
 .contextual-region .content{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #bp-content-2 .field{
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 .annotator-wrapper{
     position: relative;
     height: 100%;
+    background: #ffffff
 }
 .annotator-wrapper .field p{
-    background: #f0f0f0;
+    background: #fbfbfb;
+    padding-bottom: 50px;
+    border-radius: 7px;
+    height: 100%;
+    padding-left: 55px;
+    padding-right: 10px;
+}
+#agenda .annotator-wrapper .field p{
+    background: #Fafafa;
     padding-bottom: 80px;
     height: 100%;
     font-size: 16px;
-    padding-left: 65px;
+    padding-left: 60px;
+    margin-left: 10px;
     color: #323641;
+    border-radius: 7px;
 }
 .decreto-meeting .field--name-field-decreto-meet-bps{
     margin-top: 15px;
     padding-top: 0;
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 7px;
 }
 /*---------------------create new meetings-----------*/
 #decreto-content-modify-meeting-edit-form .form-text{
@@ -2021,19 +2086,24 @@ pointer-events: none;
 /*---------------------------full-clearfix-decreto-bulletpoint--------*/
 #bpa-content-57{
     padding: 0;
+    border-radius: 7px;
 }
 .contextual-region .decreto-bullet-point-attachment{
     padding-left: 20px;
     padding-right: 20px;
+    background: #FFFFFF;
+    padding-top: 10px;
 }
-.decreto-bullet-point{
-    background: #f7f7f7;
+#agenda .decreto-bullet-point{
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 7px;
 }
 .form-group:last-child,
  .panel:last-child, 
  .popover ol:last-child, 
  .popover ul:last-child, p:last-child{
-    border-color: #f7f7f7;
+    border-color: #fbfbfb;
  }
 .btn-expand-collapse{
     background:transparent;
@@ -2060,14 +2130,14 @@ pointer-events: none;
 
 #speaker-paper-4{
     height: 100%;
-    background: #f7f7f7;
+    background: #fbfbfb;
 }
 #speaker-paper-4 .panel-heading{
     border-color: transparent;
 }
 #speaker-paper-4 .panel-title{
     font-size: 20px;
-    background: #f7f7f7;
+    background: #fbfbfb;
     padding-left: 10px;
  }
  #speaker-paper-4 .field p{
@@ -2092,7 +2162,7 @@ pointer-events: none;
 /*-------------------jquey link------------*/
 #toggle-menu-trigger{
     position: absolute;
-    left: 165px;
+    left: 162px;
     background: transparent;
     border: none;
     bottom: 0px;
@@ -2102,12 +2172,12 @@ pointer-events: none;
     outline: none;
 }
 #toggle-menu-trigger.visible{
-    left: 47px;
+    left: 12px;
     transition: .1s;
 }
+
+#toggle-menu-trigger:before { font-family: "Material Icons"; content: "\E314"; }
 #toggle-menu-trigger:before{
-    content: "\f104";
-    font-family: fontAwesome;
     font-size: 30px;
     color: #aaabae;
 }
