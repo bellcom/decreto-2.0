@@ -20,10 +20,10 @@ body {
   color: #3e454c;
   background-color: #ffffff;
 }
-
-.container-fluid {
-    padding: 0;
-}
+    .col-xs-12{
+        margin: 0;
+        padding:0;
+    }
 /*---------------background-login-page-----------*/
 .region-login{
     background: #fbfbfb;
@@ -404,9 +404,8 @@ body {
     border-left: none;
     border-right: none;
     border-top: none;
-    padding-right: 20px;
-    padding-left: 20px;
     margin: 0;
+    padding: 0;
 }
 .region.navbar-btn{
     display: none;
@@ -433,9 +432,6 @@ body {
     border: none;
     box-shadow: none;
     margin-top: 10px;
-}
-#navbar-collapse .col-sm-10{
-    padding: 0
 }
 /*---------------------icon-bar------------------------*/
 
@@ -613,9 +609,6 @@ a[href^="/user/logout"]:before{
   transition: .1s;
     
 }
-#block-user-account-menu-mobile li a{
-    border-bottom: 1px solid rgba(255,255,255,.08);
-}
 /*------------------dashboard comitte meetings--------------*/
 .breadcrumb{
     height: 100%;
@@ -774,15 +767,17 @@ a[href^="/user/logout"]:before{
     padding: 0;
     background: #ffffff;
     text-transform: uppercase;
-    height: 45px;
+    height: 48px;
 }
 .contextual-region .panel-body {
     padding: 0px;
     background: #ffffff;
 }
 #info{
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
     background: #ffffff;
 }
 #info .field{
@@ -798,6 +793,8 @@ pointer-events: none;
 }
 #info .field--name-field-decreto-meet-type{
     background: #fbfbfb;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 #info #Type {
 display: block!important;
@@ -848,6 +845,9 @@ font-weight: 600;
 }
 #info .field--type-text-with-summary{
     background: #fbfbfb;
+    display: inline-grid;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 #info .field--type-text-with-summary .field--label:after{
     content: "\f107";
@@ -862,7 +862,8 @@ font-weight: 600;
     font-size: 18px;
     color: #333333;
     font-weight: 600;
-    width: 100%
+    width: 100%;
+    padding-left: 5px;
 }
 #info .field .field--item{
     font-size: 18px;
@@ -878,10 +879,9 @@ font-weight: 600;
 }
 /*----------------agenda starts here--------------*/
 #agenda{
-width: 100%;
-background: #ffffff;
-padding-left: 15px;
-padding-right: 15px;
+    width: 100%;
+    background: #ffffff;
+    padding-top: 20px;
 }
 #agenda .btn-primary{
     border: 1px solid rgba(0,0,0,0.1);
@@ -916,35 +916,39 @@ padding-right: 15px;
 }
 /*-------------------field icons(info and agenda page)--------*/
 .field--name-field-decreto-meet-type .glyphicon-asterisk:before{
-    content: "\f0a3";
+    font-family: "Material Icons";  
+    content: "\E838";
     display: inline-block;
-    font-family: fontawesome;
-    margin-right: 11px;
+    margin-right: 10px;
+    color: rgba(0,0,0,0.6);
 }
 .field--name-field-decreto-meet-committee .glyphicon-asterisk:before{
-    content: "\f0e8";
+    font-family: "Material Icons";  
+    content: "\E25F";
     display: inline-block;
-    font-family: fontawesome;
     margin-right: 10px;
+    color: rgba(0,0,0,0.6);
 }
-
 .field--name-field-decreto-meet-start-date .glyphicon-asterisk:before{
-    content: "\f073";
+    font-family: "Material Icons";  
+    content: "\E916";
     display: inline-block;
-    font-family: fontawesome;
     margin-right: 10px;
+    color: rgba(0,0,0,0.6);
 }
 .field--name-field-decreto-meet-end-date .glyphicon-asterisk:before{
-    content: "\f253";
+    font-family: "Material Icons";  
+    content: "\E01b";
     display: inline-block;
-    font-family: fontawesome;
     margin-right: 10px;
+    color: rgba(0,0,0,0.6);
 }
 .field--name-field-decreto-meet-location .glyphicon-asterisk:before{
-    content: "\f041";
+    font-family: "Material Icons";  
+    content: "\E55f";
     display: inline-block;
-    font-family: fontawesome;
-    margin-right: 12px;
+    margin-right: 10px;
+    color: rgba(0,0,0,0.6);
 }
 #info .field--name-field-decreto-meet-committee{
     background: #ffffff;
@@ -963,9 +967,6 @@ padding-right: 15px;
     height: 100%;
     padding-top: 20px;
 }
-#info .field--type-text-with-summary{
-    display: inline-grid;
-}
 #info .col-xs-7 #Description{
     float: left;
     text-align: left!important;
@@ -974,16 +975,20 @@ padding-right: 15px;
     padding-top: 20px;
 }
 .field--name-field-decreto-meet-partic .glyphicon-asterisk:before{
-    content: "\f0c0";
+    font-family: "Material Icons";  
+    content: "\E7fb";
     display: inline-block;
-    font-family: fontawesome;
-    margin-right: 06.5px;
+    margin-right: 9px;
+    margin-left: 3px;
+    color: rgba(0,0,0,0.6);
 }
 .field--name-body .glyphicon-asterisk:before{
-    content: "\f086";
+    font-family: "Material Icons";  
+    content: "\E873";
     display: inline-block;
-    font-family: fontawesome;
-    margin-right: 07px;
+    margin-right: 9px;
+    margin-left: 2px;
+    color: rgba(0,0,0,0.6);
 }
 .field--name-body .field--label{
     padding-left: 13px;
@@ -1042,13 +1047,17 @@ padding-right: 15px;
     border-left: 2px solid #ec7139;
 }
 /*-----------------------------create new meetings form----------------*/
-#decreto-content-modify-meeting-edit-form{
+.path-meetings{
+    background: #ffffff;
+}
+.path-meetings .region-content{
+    background: #ffffff;
+}
+.path-meetings #decreto-content-modify-meeting-edit-form{
     margin-right: 10px;
     margin-left: 10px;
     background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 7px;
-    padding: 10px;
+    padding: 5px;
 }
 .table-responsive{
     margin-bottom: 0;
@@ -1079,7 +1088,7 @@ padding-right: 15px;
     background:#ffffff;
     height: 40px;
     border: 1px solid rgba(0,0,0,0.1);
-    padding: 0;
+    padding: 0 10px;
 }
 .form-control:focus{
     border: 1px solid #a8d3ce;
@@ -1097,6 +1106,14 @@ padding-right: 15px;
 .form-item .control-label{
     margin-bottom: 10px;
     font-size: 16px;
+    color: rgba(0,0,0,0.6);
+}
+.radio input[type="radio"], 
+.radio-inline input[type="radio"], 
+.checkbox input[type="checkbox"], 
+.checkbox-inline input[type="checkbox"]{
+    width: 20px;
+    height: 15px;
 }
 #cke_edit-description-value{
     border:1px solid #ebebec;
@@ -1131,28 +1148,56 @@ padding-right: 15px;
     font-size: 13px;
 }
 #edit-add-bp{
-    color: #64605e;
+    color: rgba(0,0,0,0.5);
     margin-bottom: 20px;
 }
 #decreto-content-modify-meeting-edit-form .js-form-wrapper{
     margin-top: 15px;
     margin-bottom: 10px;
 }
-.decreto-bullet-point .btn-primary{
+.path-meetings .decreto-bullet-point .btn-primary{
     background: transparent;
     margin-right: 10px;
     border: 1px solid rgba(0,0,0,0.1);
+    margin-left: 0px;
 }
-.decreto-bullet-point .btn-primary:hover{
+.decreto-bullet-point .btn-primary:hover,
+.decreto-bullet-point .btn-primary:focus{
     border: 1px solid rgba(0,0,0,0.1);
+}
+.path-meetings .decreto-bullet-point{
+    padding-left: 5px;
 }
 #agenda .decreto-bullet-point .area-expand-collapse{
     background: #ffffff;
-    padding-bottom: 10px;
     border-radius: 7px;
 }
-.decreto-bullet-point .panel-body{
+.path-meetings .decreto-bullet-point .panel-body{
     background: #ffffff;
+    padding: 0;
+    margin-bottom: 10px;
+}
+.path-meetings #js-bps-container{
+    margin-left: -5px;
+}
+#js-bps-container:before{
+    font-family: "Material Icons";  
+    content: "\E146";
+    float: left;
+    margin-right: 10px;
+    margin-top: -7px;
+    font-size: 30px;
+    color: rgba(0,0,0,0.2);
+}
+.path-meetings #decreto-content-modify-meeting-edit-form .collapse.in{
+    transition: 0s!important;
+}
+.path-meetings #decreto-content-modify-meeting-edit-form .collapse.in p{
+    margin-left: 50px;
+}
+#decreto-content-modify-meeting-edit-form a{
+    color: rgba(0,0,0,0.6);
+    transition: 0s!important
 }
 /*----------------------------this is for modal content------------------*/
 .nav-tabs > li.active > a, 
@@ -1161,25 +1206,24 @@ padding-right: 15px;
     border-bottom: 1px solid #ddd
  }
 .modal-content{
-    width: 320px;
+    width: 338px;
     margin: auto;
     margin-top: 150px;
 }
+#edit-title--o9xVk3OPYLg{
+    padding-left: 10px;
+}
 .modal-header{
-    background: #fbfbfb;
-    color: #0e0f12;
+    background: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.6);
 }
 .btn-success, .btn-success:hover, .btn-success:focus{
     border: 1px solid rgba(0,0,0,0.1);
-} 
-#js-bps-container:before{
-    font-family: "Material Icons";  
-    content: "\E146";
-    float: left;
-    margin-right: 10px;
-    margin-top: -7px;
-    font-size: 30px;
+    background: rgba(0,0,0,0.1);
     color: rgba(0,0,0,0.5);
+}
+.nav-tabs a{
+    color: rgba(0,0,0,0.6)
 }
 .modal-footer{
     border-top: transparent;
@@ -1187,7 +1231,7 @@ padding-right: 15px;
 .modal-footer .button:hover,
 .modal-footer .button:not(:hover)
 {
-    background: #a5c0c0;
+    background: rgba(0,0,0,0.1);
 }
 .modal-footer .js-form-submit{
     margin: 20px;
@@ -1227,10 +1271,10 @@ padding-right: 15px;
 .btn-expand-collapse:hover{
     border:1px solid rgba(0,0,0,0.1);
 }
-.decreto-bullet-point .panel{
+.user-logged-in .decreto-bullet-point .panel{
     border:none;
     box-shadow: none;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 .area-expand-collapse .panel-defaul{
     border-color:#ffffff;
@@ -1574,7 +1618,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
 
     ul.sf-menu.sf-vertical .sf-sub-indicator:after { font-family: "Material Icons"; content: "\E313"; }
     ul.sf-menu.sf-vertical .sf-sub-indicator:after {
-    font-size: 20px;
+    font-size: 22px;
     color: #ffffff;
     margin-top: 12px;
     margin-left: 8px;
@@ -2071,6 +2115,14 @@ pointer-events: none;
     border-radius: 7px;
 }
 /*---------------------create new meetings-----------*/
+#decreto-content-modify-meeting-edit-form {
+    margin-right: 10px;
+    margin-left: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 7px;
+    padding: 10px!important;
+}
 #decreto-content-modify-meeting-edit-form .form-text{
     width: 50%
 }
@@ -2078,7 +2130,7 @@ pointer-events: none;
     width: 50%;
 }
 #js-bps-container .panel-body{
-    margin-top: -22px;
+    padding: 0
 }
 #js-bp-23-container{
     margin:50px;
