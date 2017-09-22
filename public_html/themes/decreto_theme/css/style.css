@@ -65,6 +65,10 @@ body {
     text-align: left;
 }
 
+#login-page .main-container__content {
+    background: none!important;
+}
+
 #login-page .user-form-wrapper .user-form-container {
     width: 320px;
     padding: 0;
@@ -154,6 +158,20 @@ body {
 }
 .user-form-container a {
     display: flex;
+}
+
+th {
+    color: #364045!important;
+}
+#block-views-block-decreto-calender-calendar-block .today {
+    background: #ea6022!important;
+        color: #fff!important;
+    border-radius: 100px!important;
+    width: 30px;
+    height: 38px;
+}
+a {
+    color: #ea6022;
 }
 /* ----------------------------Icons--------------------------- */
 #block-menu-icon-links{
@@ -249,15 +267,19 @@ body {
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   text-transform: capitalize;
+    color: #eee;
 }
 ::-moz-placeholder { /* Firefox 19+ */
    text-transform: capitalize;
+    color: #eee;
 }
 :-ms-input-placeholder { /* IE 10+ */
    text-transform: capitalize;
+    color: #eee;
 }
 :-moz-placeholder { /* Firefox 18- */
    text-transform: capitalize;
+    color: #eee;
 }
 .form-item-name .required{
     display: block;
@@ -461,23 +483,24 @@ body {
 /*---------------------search-bar----------------------*/
 
 #edit-search-api-fulltext{
-    color: #323641;
-    border: none;
+    color: rgba(50,59,64,0.95);
+    border: 1px solid rgba(0,0,0,0.0);
     box-shadow: none;
     border-radius: inherit;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    font-size: 20px;
+    font-size: 14px!important;
+    text-indent: 15px;
 }
 #edit-submit-decreto-search{
-    background: #ec7139;
-    color: transparent;
-    height: 40px;
-    border-radius: inherit;
-    width: 100%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border: 1px solid #ec7139;
+    margin-top: 3px!important;
+    background: #fff;
+    height: 35px;
+    border-radius: 100px!important;
+    border-bottom-left-radius: 0px!important;
+    border: none!important;
+    border-top-left-radius: 0px!important
+  
 }
 #edit-submit-decreto-search span{
     color: #32424c;
@@ -675,6 +698,9 @@ a[href^="/user/logout"]:before{
 .table-responsive{
     border: none;
 }
+.table {
+    margin-bottom: 0px;
+}
 .table-responsive a{
     color:#373f44;
 }
@@ -684,7 +710,7 @@ a[href^="/user/logout"]:before{
     font-size: 16px;
 }
 .table-striped > tbody > tr:nth-of-type(odd){
-    background:#fbfbfb;
+    background:none;
     font-size: 18px;
 }
 .table-striped > tbody > tr:nth-of-type(odd):hover{
@@ -1003,6 +1029,9 @@ padding-right: 15px;
     display: flex;
     justify-content: space-between;
 }
+.js-pager__items ul li a {
+    color: #364045;
+}
 .pager li{
     font-size: 30px;
 }
@@ -1056,8 +1085,7 @@ padding-right: 15px;
 #block-views-block-decreto-all-meetings-block-all-meetings{
     background: #ffffff;
     margin-right: 0px;
-    box-shadow: 15px 15px 15px -15px #888888;
-    border-color: #e8e4ea;
+    border-color: #f1f2f3;
     border: none;
     padding:20px;
     padding-top: 0;
@@ -1312,7 +1340,7 @@ padding-right: 15px;
     }
     .content-wrapper.position{
     left: -71px;
-    transition: 1s;
+    transition: all .3s ease-in-out;
     }
 
     .content-wrapper .container-fluid{
@@ -1320,11 +1348,11 @@ padding-right: 15px;
         left: 195px;
         width: 
     }.container-fluid{
-        transition: 1s;
+       transition: all .3s ease-in-out;
     }
     .container-fluid.move{
         left: 71px;
-        transition: 1s;
+        transition: all .3s ease-in-out;
     }
     .main-container{
         width: -moz-available;
@@ -1403,11 +1431,12 @@ html body {
 /*----------------------------------dashboard---------------------------*/
 #block-views-block-decreto-my-meetings-block-my-meetings,
 #block-views-block-decreto-all-meetings-block-all-meetings{
-    border-radius: 5px;
+    border-radius: 6px;
+    overflow: hidden;
     margin: 20px;
-    box-shadow: none;
     border: 1px solid rgba(0,0,0,0.1);
     padding: 0;
+    box-shadow: none;
 }
 
 /*------------------dashboard-table--------------------*/
@@ -1438,7 +1467,8 @@ ul.sf-menu a, ul.sf-menu span.nolink{
 }
 ul.sf-menu .sf-sub-indicator{
     height: 30px;
-    right: .1em;
+    right: 0.5em;
+    top: 1.5em;
     width: 30px;
     cursor: pointer;
 }
@@ -1454,13 +1484,12 @@ ul.sf-menu.sf-vertical{
 }
 ul.sf-menu.sf-vertical li{
     width: 195px;
-    background: #323641;
     display: list-item;
     border-bottom: 1px solid #3b3f4c;
-    transition: 1s;
+    transition: all .3s ease-in-out;
 }
 ul.sf-menu.sf-vertical li:hover{
-    background: #2c3039;
+    background: #323b40;
 }
 #main-menu-link-contentbf9dea01-cdae-4d31-b0fe-6c6ebc219ec8 ul{
     width: 195px;
@@ -1470,17 +1499,42 @@ ul.sf-menu.sf-vertical li:hover{
 }
 .sf-depth-1 .menuparent .sf-hidden{
     display: block;
-    background: #323641;
+  
     left: 2em;
 }
+    
+    .left-container #block-mainnavigation .main-menu-link {
+        display: flex;
+        align-items: center;
+    }
+    .left-container #block-mainnavigation .main-menu-link:before { 
+    color: #A7A9AC;
+        }
+    
+    .left-container #block-mainnavigation .sf-depth-1 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 /*-------un-ordered list-----//////-#dff0d8*/
+    ul.sf-menu.sf-vertical li {
+        transition-delay: 1s;
+    }
 ul.sf-menu.sf-vertical li:hover > ul {
     left: 0em;
-    background: #323641;
     position: relative;
     border: none;
     box-shadow: none;
+    padding-bottom: 0px!important;
 }
+   .left-container #block-mainnavigation .menuparent:hover {
+        padding-bottom: 0px;
+    }
+    .left-container #block-mainnavigation .sf-with-ul {
+        padding-bottom: 0px;
+    }
+    .left-container #block-mainnavigation .menuparent {
+        transition: all .3s;
+    }
 .sf-depth-1 .sf-depth-2 > a{
     display: none;
 }
@@ -1492,24 +1546,20 @@ ul.sf-menu.sf-vertical li:hover > ul {
 }
 
     .toggle-menu-container{
-        background:#323641;
+        background:#364045;
         color:#FFFFFF;
         width: 100%;
         margin-top: 0;
-        background-image: url(../image/decreto-logo-white.png);
         margin: 0;
         margin-bottom: 0px;
-        background-size: 120px;
-        background-repeat: no-repeat;
         padding-left:20px;
         padding-top: 20px;
-        background-origin: content-box;
         position: fixed;
         bottom: 0;
         width:195px;
         top: 28px;
-        transition: 1s;
-        background-position: -3.5px 5px;
+        transition: all .3s ease-in-out;
+        
     }
     .toggle-menu-container {
        
@@ -1517,14 +1567,9 @@ ul.sf-menu.sf-vertical li:hover > ul {
     
      .toggle-menu-container.containerClose{
         width:71px;
-        transition: .1s;
-        background-image: url(../image/decreto-sign.png);
-        background-size: 40px;
-        background-repeat: no-repeat;
-        background-origin: content-box;
+        transition: all .3s ease-in-out;
         padding-left: 20px;
         border-left: none;
-        background-position: -5px 5px;
      }
      /*-----------
      .toggle-menu-container:not(:hover){
@@ -1539,7 +1584,7 @@ ul.sf-menu.sf-vertical li:hover > ul {
     #superfish-main li.closeContainerMenuItems{
         width: 71px;
         overflow: hidden;
-        transition: .1s;
+        transition: all .3s ease-in-out;
         margin-top: 10px;
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -1556,12 +1601,14 @@ ul.sf-menu.sf-vertical li:hover > ul {
     }
     #superfish-main .main-menu-link{
         border-bottom: 1px solid transparent;
-        font-size: 18px;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+        text-transform: capitalize;
         font-family: 'open Sans', sans-serif;
         color: #ffffff;
         padding-left: 20px;
         width: 195px;
-        transition: 1s;
+        transition: all .3s ease-in-out;
     }
     #superfish-main a:hover{
         text-decoration: none;
@@ -1585,37 +1632,53 @@ ul.sf-menu.sf-vertical li:hover > ul {
 /*-----------------------superfish-menu-icons------------------*/
     
 .sf-depth-1 .main-menu-link:before {
-     margin-right: 27px;
+     margin-right: 14px;
         font-size: 25px;
     }    
 .sf-depth-1 .dashboard:before { font-family: "Material Icons"; content: "\E871"; }
 .sf-depth-1 .dashboard:before{
-     margin-right: 27px;
+     margin-right: 14px;
         font-size: 25px;
 }
 
 .sf-depth-1 .calendar:before { font-family: "Material Icons"; content: "\E916"; }
 .sf-depth-1 .calendar:before{
-     margin-right: 27px;
+     margin-right: 14px;
         font-size: 25px;
 }
 .sf-depth-1 .meetings:before{ font-family: "Material Icons"; content: "\E7fb"; }
 .sf-depth-1 .meetings:before{
-     margin-right: 27px;
+     margin-right: 14px;
         font-size: 25px;
 }
 
 .sf-depth-1 .users:before{ font-family: "Material Icons"; content: "\E851"; }
 .sf-depth-1 .users:before{
-    margin-right: 27px;
+    margin-right: 14px;
         font-size: 25px;
 }
 
 .sf-depth-1 .settings:before{ font-family: "Material Icons"; content: "\E8b9"; }
 .sf-depth-1 .settings:before{
-    margin-right: 27px;
+    margin-right: 14px;
         font-size: 25px;
 }
+    
+    .containerClose .main-menu-link:before {
+       margin-right: 25px;
+        margin-left: 3px;
+        transition: all .3s ease-in-out;
+        color: #fff!important;
+    }
+    .containerClose .superfish-main li {
+        margin: 0!important;
+        
+    }
+    .containerClose #block-mainnavigation .sf-depth-1 {
+        padding-top: 10px;
+        margin: 0!important;
+        padding-bottom: 10px;
+    }
 /*-------------------------desktop header-----------------------*/
 .content-wrapper .main-container{
     height: 100%
@@ -1633,17 +1696,17 @@ ul.sf-menu.sf-vertical li:hover > ul {
 #edit-search-api-fulltext{
     margin: 0;
     padding: 0;
-    border: none;
-    border-radius: 0;
-    background-color: #323641;
-    border-left: 1px solid #51585e;
-    color: #ffffff!important;
-    height: 50px;
+    color: #000!important;
+    height: 35px;
     font-size: 16px;
     padding-left: 10px;
+    border-top-right-radius: 0px!important;
+    border-bottom-right-radius: 0px!important;
+    border-radius: 100px;
+    margin-top: 3px;
 }
 #edit-search-api-fulltext:focus{
-    background:#2c3039;
+    background:#fff;
     color: #cbe8d2;
 }
 #block-user-account-menu{
@@ -1651,34 +1714,58 @@ ul.sf-menu.sf-vertical li:hover > ul {
     padding: 0;
     margin-left: -1px;
 }
+    #block-user-account-menu {
+        width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 10px;
+    position: relative;
+    }
 #block-user-account-menu-menu{
     margin: 0;
     padding: 0;
 }
+    header .region-header {
+        display: flex;
+        align-items: center;
+        height: 60px;
+    }
 .region .col-sm-2{
     width: 13%;
 }
+    .btn-default:hover, .btn-default:focus {
+        background: none!important;
+    }
+    header .dropdown-toggle {
+        color: #364045!important;
+    }
+    header .caret {
+        margin-left: 10px!important;
+        margin-top: 10px!important;
+    }
 /*----------------------notifications-link---------------*/
 #block-notificationsiconlink{
-    width: 4%;
+    min-width: 60px;
     float: left;
-    height: 50px;
-    background: #323641;
+    height: 60px;
     border-radius: inherit;
     border: none;
     cursor: pointer;
+    box-shadow: none;
+    background: #ea6022;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #edit-submit-decreto-search {
-    background: #323641;
     color: transparent;
-    height: 50px;
     border-radius: inherit;
     border: none;
     margin: 0;
     padding: 0;
+    
 }
 #block-notificationsiconlink .panel-body{
-    background: #323641;
     height: 50px;
     border: none;
 }
@@ -1687,11 +1774,12 @@ ul.sf-menu.sf-vertical li:hover > ul {
     /* margin-left: 35px; */
     font-size: 15px;
 }
+ 
 .fa-bell:before{
     font-family: "Material Icons";
-    content: "\E253"!important;
+    content: "\E7F4"!important;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 24px;
    }
 /*--------------social-media-icons------------------*/
 #block-socialiconsconnect{
@@ -1745,24 +1833,27 @@ ul.sf-menu.sf-vertical li:hover > ul {
     color: #ffffff;
     margin: 0;
     padding:0;
-    height: 50px;
-    padding-right: 15px;
+
 }
 #edit-submit-decreto-search .glyphicon-search:before{ font-family: "Material Icons"; content: "\E8b6"; }
 #edit-submit-decreto-search .glyphicon-search:before{
-    color: #ffffff;
+    color: #364045;
     padding: 5px;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     margin-top: 0;
-    font-size: 25px;
+    font-size: 14px;
     background-image: none;
 }
-#views-exposed-form-decreto-search-page .col-xs-12{
-    background: #fbfbfb;
-}
+    #edit-submit-decreto-search span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px!important;
+    }
+
 /*------------------admin/users dropdown menu--------------*/
 #decreto-user-menu-dropdown{
     margin: 0;
@@ -1771,7 +1862,6 @@ ul.sf-menu.sf-vertical li:hover > ul {
     width: 100%;
     height: 50px;
     border-radius: inherit;
-    background: #323641;
     border: none;
     color: #ffffff;
     display: flex;
@@ -1819,10 +1909,51 @@ a[href^="/user/edit"]:before{
    text-decoration: underline;
    background: transparent;
 }
+    
+    header #views-exposed-form-decreto-search-page .col-xs-12 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    header {
+        background: #f1f2f3!important;
+        height: 60px;
+/*
+     -webkit-box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
+box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
+*/
+        border-bottom: 1px solid rgba(0,0,0,0.01);
+       
+    }
+    .main-container__content-space {
+        margin-top: 50px!important;
+    }
+    header .panel-body {
+        background: none!important;
+    }
+    header .btn-default {
+        background: none;
+    }
+    header .panel {
+        background: none;
+    }
+    .notification-link {
+        display: flex;
+    width: 100%;
+    height: 100%;
+    }
+    .notification-link a {
+        display: flex;
+    width: 100%;
+    min-height: 100%;
+    margin: 0!important;
+    justify-content: center;
+    align-items: center;
+    }
 .container-fluid .row{
     margin: 0;
     padding: 0;
-    background: #ffffff;
+   
 }
 /*--------------calendar-------------------*/
 .calendar-calendar td .inner div.day a{
@@ -1837,7 +1968,7 @@ a[href^="/user/edit"]:before{
 #block-views-block-decreto-calender-calendar-block{
     border-radius: 5px;
     margin-bottom: 0px;
-    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     border: 1px solid rgba(0,0,0,0.1);
 }
 .mini-day-off {
@@ -1922,8 +2053,8 @@ a[href^="/user/edit"]:before{
 }
 #block-views-block-decreto-user-committees-my-committees-block{
     border-radius: 5px;
-    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #fbfbfb;
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.1);
     margin-top: 20px;
 }
 #block-views-block-decreto-user-committees-my-committees-block .panel-title{
@@ -1936,7 +2067,7 @@ a[href^="/user/edit"]:before{
 /*-----------------info and agenda starts here--------------*/
 .contextual-region .panel-title{
     font-size: 18px;
-    font-weight: 100;
+    font-weight: 400;
     padding-left: 20px;
     border-radius: 5px;
     background: #ffffff;
@@ -2162,23 +2293,23 @@ pointer-events: none;
 /*-------------------jquey link------------*/
 #toggle-menu-trigger{
     position: absolute;
-    left: 162px;
+    right: 0;
     background: transparent;
     border: none;
     bottom: 0px;
-    transition: .5s;
+    transition: all .3s ease-in-out;
 }
 #toggle-menu-trigger:focus{
     outline: none;
 }
 #toggle-menu-trigger.visible{
-    left: 12px;
-    transition: .1s;
+    right: 0;
+    transition: all .3s ease-in-out;
 }
 
 #toggle-menu-trigger:before { font-family: "Material Icons"; content: "\E314"; }
 #toggle-menu-trigger:before{
-    font-size: 30px;
+    font-size: 20px;
     color: #aaabae;
 }
 #toggle-menu-trigger:hover:before{
@@ -2204,7 +2335,7 @@ pointer-events: none;
         transform: scaleX(-1);
         filter: FlipH;
         -ms-filter: "FlipH";
-        transition: .5s;
+        transition: all .3s ease-in-out;
     
 }
 

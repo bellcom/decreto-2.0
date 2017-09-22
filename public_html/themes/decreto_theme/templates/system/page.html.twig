@@ -95,7 +95,7 @@
     {% endblock %}
 {% endif %}
 
-
+{% if logged_in %}
 <div class="content-wrapper">
 <aside class="left-container toggle-menu-container {{ toggle_main_menu }} hidden-xs">
     {# Sidebar First #}
@@ -105,9 +105,11 @@
         {% endblock %}
     {% endif %}
 </aside>
+{% endif %}
 
 {# Main #}
 {% block main %}
+   {% if logged_in %}
     <div role="main" class="main-container {{ container }} js-quickedit-main-content">
 
         <header class="row main-container__header hidden-xs">
@@ -118,7 +120,7 @@
                 {% endblock %}
             {% endif %}
         </header>
-
+      {% endif %}
         <div class="row main-container__content-space">
             {# Content #}
             {% set content_classes = [
