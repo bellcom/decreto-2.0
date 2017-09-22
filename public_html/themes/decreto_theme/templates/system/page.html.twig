@@ -98,6 +98,9 @@
 {% if logged_in %}
 <div class="content-wrapper">
 <aside class="left-container toggle-menu-container {{ toggle_main_menu }} hidden-xs">
+  <div class="sidebar-logo">
+   <a class="sidebar-logo-file" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home"><span>Decreto</span></a>
+   </div>
     {# Sidebar First #}
     {% if page.sidebar_first %}
         {% block sidebar_first %}
