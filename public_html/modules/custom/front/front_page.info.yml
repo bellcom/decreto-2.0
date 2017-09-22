@@ -1,0 +1,11 @@
+name: Front Page
+description: 'Allows site admins setup custom front pages for the site.'
+type: module
+configure: front_page.settings
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2017-02-21
+version: '8.x-1.0-alpha2'
+core: '8.x'
+project: 'front'
+datestamp: 1487686985

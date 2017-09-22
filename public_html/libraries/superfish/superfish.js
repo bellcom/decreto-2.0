@@ -21,7 +21,7 @@
       over = function(){
         var $$ = $(this), menu = getMenu($$);
         clearTimeout(menu.sfTimer);
-        $$.showSuperfishUl().siblings().hideSuperfishUl();
+        $$.click(function(){$(this).showSuperfishUl().siblings().hideSuperfishUl();});
       },
       out = function(){
         var $$ = $(this), menu = getMenu($$), o = sf.op;
@@ -30,7 +30,7 @@
           if ($$.children('.sf-clicked').length == 0){
             o.retainPath=($.inArray($$[0],o.$path)>-1);
             $$.hideSuperfishUl();
-            if (o.$path.length && $$.parents(['li.',o.hoverClass].join('')).length<1){over.call(o.$path);}
+            if (o.$path.length && $$.parents(['li.',o.activeClass].join('')).length<1){over.call(o.$path);}
           }
         },o.delay);
       },
@@ -47,7 +47,7 @@
       o.$path = $('li.'+o.pathClass,this).slice(0,o.pathLevels),
       p = o.$path;
       for (var l = 0; l < p.length; l++){
-        p.eq(l).addClass([o.hoverClass,c.bcClass].join(' ')).filter('li:has(ul)').removeClass(o.pathClass);
+        p.eq(l).addClass([o.activeClass,c.bcClass].join(' ')).filter('li:has(ul)').removeClass(o.pathClass);
       }
       sf.o[s] = sf.op = o;
 
@@ -85,11 +85,8 @@
     shadowClass: 'sf-shadow'
   };
   sf.defaults = {
-    hoverClass: 'sfHover',
-    pathClass: 'overideThisToUse',
+    activeClass: 'no-hover',
     pathLevels: 1,
-    delay: 800,
-    animation: {opacity:'show'},
     speed: 'fast',
     autoArrows: true,
     dropShadows: true,
@@ -99,24 +96,5 @@
     onShow: function(){},
     onHide: function(){}
   };
-  $.fn.extend({
-    hideSuperfishUl : function(){
-      var o = sf.op,
-        not = (o.retainPath===true) ? o.$path : '';
-      o.retainPath = false;
-      var $ul = $(['li.',o.hoverClass].join(''),this).add(this).not(not).removeClass(o.hoverClass)
-          .children('ul').addClass('sf-hidden');
-      o.onHide.call($ul);
-      return this;
-    },
-    showSuperfishUl : function(){
-      var o = sf.op,
-        sh = sf.c.shadowClass+'-off',
-        $ul = this.addClass(o.hoverClass)
-          .children('ul.sf-hidden').hide().removeClass('sf-hidden');
-      o.onBeforeShow.call($ul);
-      $ul.animate(o.animation,o.speed,function(){ o.onShow.call($ul); });
-      return this;
-    }
-  });
+
 })(jQuery);
