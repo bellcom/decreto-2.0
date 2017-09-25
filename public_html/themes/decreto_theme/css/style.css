@@ -50,15 +50,16 @@ body {
 }
 
 .decreto-dashboard-logo {
-    background-image: url('../image/decreto-sign.png');
-    background-size: 40px;
-    width: 100px;
-    height: auto;
+    background-image: url(../image/decreto-logo-white.png);
+    background-size: 80px;
+    /* width: 100px; */
+    /* height: auto; */
     background-repeat: no-repeat;
     background-position: center;
     color: transparent;
-    padding: 10px;
+    padding-right: 20px;
     background-position: 1px 2px;
+
 }
 
 
@@ -241,7 +242,7 @@ th {
 }
 
 .contextual-region .decreto-bullet-point-attachment {
-    background: #fbfbfb
+    background: #ffffff
 }
 
 .decreto-bullet-point-attachment .btn {
@@ -521,7 +522,7 @@ th {
 /*-----------------------dashboard page-----------------*/
 
 #navbar {
-    background: #323641;
+    background: #364045;
     border-left: none;
     border-right: none;
     border-top: none;
@@ -543,8 +544,14 @@ th {
 
 /*---------------------navbar-toggle------------------------*/
 
-.navbar-header {}
-
+.navbar-header {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.navbar-brand{
+    position: absolute;
+    left: 120px;
+}
 .navbar-default .navbar-toggle:hover {
     background: none
 }
@@ -563,12 +570,15 @@ th {
 #navbar-collapse {
     border: none;
     box-shadow: none;
-    margin-top: 10px;
+    margin-top: 50px;
 }
 
 
 /*---------------------icon-bar------------------------*/
-
+.hamburger-icon{
+    position: absolute;
+    left: 16px;
+}
 .hamburger-icon i {
     font-size: 25px;
     color: #fbfbfb;
@@ -603,32 +613,36 @@ th {
     border-bottom-left-radius: 5px;
     font-size: 14px!important;
     text-indent: 15px;
+    height: 35px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
 }
 
 #edit-submit-decreto-search {
-    margin-top: 3px!important;
     background: #fff;
     height: 35px;
     border-radius: 100px!important;
     border-bottom-left-radius: 0px!important;
-    border: none!important;
-    border-top-left-radius: 0px!important
+    border: 1px solid rgba(0,0,0,0);
+    border-top-left-radius: 0px!important;
+    color: transparent;
 }
 
 #edit-submit-decreto-search span {
     color: #32424c;
-    font-size: 24px;
+    font-size: 19px;
     display: flex;
     flex-direction: row-reverse;
 }
 
 #edit-submit-decreto-search .glyphicon-search:before {
-    background-image: url(../image/google_search2.svg);
-    color: transparent;
+   font-family: "Material Icons"; 
+   content: "\E8b6";
     background-repeat: no-repeat;
     background-size: 30px;
     background-position: -2px -3px;
     padding-left: 5px;
+    outline: none;
 }
 
 
@@ -2153,11 +2167,12 @@ p:last-child {
         align-items: center;
     }
     #edit-submit-decreto-search {
-        color: transparent;
-        border-radius: inherit;
-        border: none;
-        margin: 0;
-        padding: 0;
+    color: transparent;
+    border-radius: inherit;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 3px;
     }
     #block-notificationsiconlink .panel-body {
         height: 50px;
@@ -2262,9 +2277,12 @@ p:last-child {
         font-size: 15px;
         padding-left: 10%;
         padding-top: 16.5px;
+        outline: none;
     }
-    #decreto-user-menu-dropdown:hover {
+    #decreto-user-menu-dropdown:hover,
+    #decreto-user-menu-dropdown:focus {
         text-decoration: underline;
+        outline: none;
     }
     .caret {
         display: inline-block;
