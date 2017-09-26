@@ -1,6 +1,6 @@
 uuid: a7e1f8bc-a4d0-4a00-96bc-dc80b0115a0c
 langcode: en
-status: true
+status: false
 dependencies:
   content:
     - 'block_content:logo_image:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
@@ -11,8 +11,8 @@ dependencies:
     - decreto_theme
 id: decretologobrand
 theme: decreto_theme
-region: login
-weight: -14
+region: '-1'
+weight: -16
 provider: null
 plugin: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
 settings:
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/user/* '
+    pages: /user/register
     negate: false
     context_mapping: {  }

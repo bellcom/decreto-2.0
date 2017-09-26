@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_breadcrumbs
 theme: decreto_theme
 region: content
-weight: -16
+weight: -17
 provider: null
 plugin: system_breadcrumb_block
 settings:
@@ -22,6 +22,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/user/login*'
+    pages: "/user/login*\r\n/user/register*\r\n/user/password*"
     negate: true
     context_mapping: {  }

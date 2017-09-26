@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_content
 theme: decreto_theme
 region: content
-weight: -12
+weight: -13
 provider: null
 plugin: system_main_block
 settings:
@@ -19,4 +19,9 @@ settings:
   label: 'Main page content'
   provider: system
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

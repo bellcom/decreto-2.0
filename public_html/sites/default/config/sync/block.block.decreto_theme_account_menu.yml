@@ -13,7 +13,7 @@ _core:
 id: decreto_theme_account_menu
 theme: decreto_theme
 region: '-1'
-weight: -5
+weight: -3
 provider: null
 plugin: 'system_menu_block:account'
 settings:

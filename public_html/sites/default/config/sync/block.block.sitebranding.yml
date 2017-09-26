@@ -23,6 +23,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /user/login
-    negate: false
+    pages: '/user/login*'
+    negate: true
     context_mapping: {  }

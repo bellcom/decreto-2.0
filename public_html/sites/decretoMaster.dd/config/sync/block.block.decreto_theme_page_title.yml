@@ -9,7 +9,7 @@ _core:
 id: decreto_theme_page_title
 theme: decreto_theme
 region: '-1'
-weight: -11
+weight: -10
 provider: null
 plugin: page_title_block
 settings:
