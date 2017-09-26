@@ -51,15 +51,14 @@ body {
 
 .decreto-dashboard-logo {
     background-image: url(../image/decreto-logo-white.png);
-    background-size: 80px;
+    background-size: 100px;
     /* width: 100px; */
     /* height: auto; */
     background-repeat: no-repeat;
     background-position: center;
     color: transparent;
-    padding-right: 20px;
+    padding-right: 40px;
     background-position: 1px 2px;
-
 }
 
 
@@ -147,7 +146,9 @@ body {
     padding-left: 0px;
     background: #fbfbfb;
 }
-
+#block-decretologobrand{
+    display: none;
+}
 #block-decretologobrand .field--label {
     display: none;
 }
@@ -233,14 +234,16 @@ th {
     margin: 0px auto;
 }
 
-.annotator-wrapper .field p {
+.page-node-type-decreto-meeting .annotator-wrapper .field p {
     background: #ffffff;
     padding-bottom: 50px;
     height: 100%;
-    padding-left: 55px;
+    padding-left: 59px;
     padding-right: 10px;
 }
-
+.page-node-type-decreto-meeting .panel-title{
+    padding-left: 20px;
+}
 .contextual-region .decreto-bullet-point-attachment {
     background: #ffffff
 }
@@ -292,7 +295,18 @@ th {
     color: #32424c;
     font-size: 20px
 }
-
+.fa-shopping-cart:before{
+    font-family: "Material Icons"; 
+    content: "\E8cc"!important;
+}
+.fa-envelope:before{
+    font-family: "Material Icons"; 
+    content: "\E0be"!important;
+}
+.fa-question:before{
+    font-family: "Material Icons"; 
+    content: "\E0be"!important;
+}
 .user-form-call-to-action-buttons li a {
     display: flex;
     justify-content: center;
@@ -501,7 +515,13 @@ th {
     color: #4b616f;
     font-size: 15px;
 }
-
+#block-forgotpassword a{
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.5);
+    text-decoration: underline;
+}
 
 /*-----------------login-messages-bar------------*/
 
@@ -522,7 +542,7 @@ th {
 /*-----------------------dashboard page-----------------*/
 
 #navbar {
-    background: #364045;
+    background: #333;
     border-left: none;
     border-right: none;
     border-top: none;
@@ -550,7 +570,7 @@ th {
 }
 .navbar-brand{
     position: absolute;
-    left: 120px;
+    left: 30px;
 }
 .navbar-default .navbar-toggle:hover {
     background: none
@@ -577,14 +597,17 @@ th {
 /*---------------------icon-bar------------------------*/
 .hamburger-icon{
     position: absolute;
-    left: 16px;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    top: 5px;
 }
 .hamburger-icon i {
     font-size: 25px;
     color: #fbfbfb;
     float: right;
-    margin-top: 12px;
-    margin-right: 15px;
+    margin-top: 8px;
+    margin-right: 9.6px;
     cursor: pointer;
 }
 
@@ -603,12 +626,13 @@ th {
 
 
 /*---------------------search-bar----------------------*/
-
+.col-xs-12 .input-group{
+    border-radius: 100px;
+}
 #edit-search-api-fulltext {
     color: rgba(50, 59, 64, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.0);
     box-shadow: none;
-    border-radius: inherit;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     font-size: 14px!important;
@@ -649,14 +673,14 @@ th {
 /*----------------------navbar-menu-icons-------------*/
 
 .navbar-nav .dashboard:before {
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E871";
 }
 
 .navbar-nav .calendar:before {
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E916";
@@ -664,13 +688,13 @@ th {
 
 .navbar-nav .meetings:before {
     content: "\E7fb";
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
 }
 
 .navbar-nav .users:before {
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E851";
@@ -678,7 +702,7 @@ th {
 
 .navbar-nav .settings:before {
     content: "\f013";
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E8b9";
@@ -689,13 +713,17 @@ th {
 
 
 /*----111A1F----*/
-
+.nav > li{
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
 #block-main-navigation-mobile .navbar-nav li a {
-    color: #ffffff;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
 }
 
 #block-main-navigation-mobile .navbar-nav li a:focus {
-    color: #ec7139;
+    background: rgba(0,0,0,.9);
 }
 
 .dropdown .meetings:focus {
@@ -711,18 +739,19 @@ th {
 
 .dropdown .dropdown-menu li {
     padding-top: 2px;
+    padding-left: 13px;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-    background: transparent;
+    background: rgba(0,0,0,.9);
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-    background: transparent;
+    background: rgba(0,0,0,.9);
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
@@ -744,20 +773,21 @@ th {
     position: relative;
     width: 100%;
     color: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a[href^="/user/edit"]:before {
-    content: "\f040";
-    font-family: fontAwesome;
     font-size: 15px;
-    margin-right: 15px;
+    margin-right: 25px;
+    font-family: "Material Icons";
+    content: "\E254";
 }
 
 a[href^="/user/logout"]:before {
     content: "\f08b";
     font-family: fontAwesome;
     font-size: 15px;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .caret {
@@ -823,14 +853,11 @@ a[href^="/user/logout"]:before {
 
 #block-views-block-decreto-my-meetings-block-my-meetings {
     border: none;
-    margin: 0px;
+    margin: 10px;
     margin-bottom: 0px;
     padding-top: 1px;
-    padding: 20px;
     padding-bottom: 0;
-    padding-top: 10px;
 }
-
 #block-views-block-decreto-my-meetings-block-my-meetings .panel-body {
     padding: 0;
 }
@@ -842,20 +869,8 @@ a[href^="/user/logout"]:before {
     border: none;
     border-radius: 5px;
 }
-
-.panel-title {
-    color: #3c464c;
-    cursor: pointer;
-}
-
 .panel-title:hover {
     background: transparent;
-}
-
-.views-element-container .panel-body {
-    padding: 4px;
-    background: #F4F4F4;
-    border: 6px solid #ffffff;
 }
 
 
@@ -878,9 +893,11 @@ a[href^="/user/logout"]:before {
     color: #32424c;
     font-size: 16px;
 }
-
+.table > thead > tr > th{
+    border-bottom: none!important;
+}
 .table-striped > tbody > tr:nth-of-type(odd) {
-    background: none;
+    background: #f7f7f7;
     font-size: 18px;
 }
 
@@ -928,11 +945,13 @@ a[href^="/user/logout"]:before {
 /*--------------------info and agenda---------------------------*/
 
 #block-views-block-decreto-my-meetings-block-my-meetings .panel-title {
-    background: #ffffff;
-    color: #323641;
+    background: #333;
+    color: #ffffff;
     cursor: pointer;
     padding-left: 13px;
     font-size: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .nav-justified > li:nth-child(1) {
@@ -999,7 +1018,6 @@ a[href^="/user/logout"]:before {
 #info {
     margin-left: 10px;
     margin-right: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     background: #ffffff;
 }
@@ -1130,6 +1148,7 @@ a[href^="/user/logout"]:before {
     width: 100%;
     background: #ffffff;
     padding-top: 20px;
+    padding-left: 10px;
 }
 
 #agenda .btn-primary {
@@ -1154,7 +1173,7 @@ a[href^="/user/logout"]:before {
 
 .area-expand-collapse span a {
     color: #32424c;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 #agenda .panel-default {
@@ -1279,7 +1298,7 @@ a[href^="/user/logout"]:before {
     margin: 0 auto;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .js-pager__items ul li a {
@@ -1361,12 +1380,16 @@ a[href^="/user/logout"]:before {
     margin-right: 0px;
     border-color: #f1f2f3;
     border: none;
-    padding: 20px;
+    padding: 5px;
     padding-top: 0;
 }
 
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-title {
     font-size: 20px;
+    background: #333;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-body {
@@ -1594,19 +1617,32 @@ a[href^="/user/logout"]:before {
 
 
 /*---------------------------full-clearfix-decreto-bulletpoint--------*/
-
-.decreto-bullet-point {
-    background: #ffffff;
+.page-node-type-decreto-bullet-point .contextual-region .panel-title {
+    color: #3c464c;
+    cursor: pointer;
+    padding-left: 10px;
 }
 
+.page-node-type-decreto-bullet-point .decreto-bullet-point {
+    background: #ffffff;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.page-node-type-decreto-bullet-point .region-content{
+    background: #ffffff;
+}
+.page-node-type-decreto-bullet-point .decreto-bullet-point-attachment .btn{
+    background: #FFFFFF;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-right: 10px;
+}
 .form-group:last-child,
 .panel:last-child,
 .popover ol:last-child,
 .popover ul:last-child,
 p:last-child {
-    border-color: #fbfbfb;
+    border-color: #ffffff;
 }
-
 .btn-expand-collapse {
     background: transparent;
     border-color: transparent;
@@ -1615,7 +1651,12 @@ p:last-child {
 .btn-expand-collapse:hover {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
+.user-logged-in{
+    background: #ffffff;
+}
+.user-logged-in .form-inline{
+    background: #333;
+}
 .user-logged-in .decreto-bullet-point .panel {
     border: none;
     box-shadow: none;
@@ -1695,6 +1736,173 @@ p:last-child {
     .img-responsive {
         width: 300px;
     }
+    /*-----------------user-register----page---------*/
+    .user-register-form{
+        width: 400px;
+        margin: 0 auto;
+    }
+    .user-register-form #edit-mail{
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .user-register-form #edit-mail:focus{
+        border: 1px solid #a8d3ce;
+        box-shadow: none;
+    }
+    .user-register-form .username{
+        width: 400px!important;
+        margin: 0 auto;
+        height: 40px;
+        margin: 0;
+        font-size: 14px;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .user-register-form .username:focus{
+        border: 1px solid #a8d3ce;
+    }
+    .user-register-form #edit-user-picture-0-upload{
+        padding: 8px;
+        border: 1px solid rgba(0,0,0,0.1);
+        outline: none;
+        box-shadow: none;
+    }
+    .user-register-form #edit-user-picture-0-upload:focus{
+        border: 1px solid #a8d3ce;
+    }
+    .user-register-form #edit-contact{
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .user-register-form .js-form-item-timezone{
+        background: #ffffff!important;
+    }
+    .user-register-form #edit-timezone{
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .user-register-form #edit-field-decreto-usr-coms-wrapper{
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 5px;
+        background: #ffffff;
+    }
+    .user-register-form .tabledrag-toggle-weight{
+        border: none;
+    }
+    .user-register-form .tabledrag-toggle-weight:hover{
+        text-decoration: underline;
+    }
+    .user-register-form .draggable.odd{
+        background: #ffffff;
+    }
+    .user-register-form .draggable.odd span{
+        margin-top: 10px;
+    }
+    .user-register-form .draggable.odd .field-multiple-drag{
+        padding-left: 20px;
+    }
+    .user-register-form .draggable.odd td{
+        padding-left: 0;
+    }
+    .user-register-form .draggable.odd .field-multiple-drag a{
+        display: block!important;
+    }
+    .user-register-form .input-group .input-group-addon .glyphicon{
+        margin-top: 0;
+    }
+    .user-register-form .field-add-more-submit{
+        border: none;
+        background: rgba(0,0,0,0.1);
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form #edit-field-decreto-usr-orgs-wrapper{
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 5px;
+        background: #ffffff;
+    }
+    .user-register-form .field-add-more-submit{
+        border: none;
+        background: rgba(0,0,0,0.1);
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form .field-add-more-submit:hover{
+        border: none;
+        background: rgba(0,0,0,0.1);
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form .form-autocomplete{
+        outline: none;
+        box-shadow: none;
+    }
+    .user-register-form .form-select.form-control{
+        outline: none;
+        box-shadow: none;        
+    }
+     .user-register-form #edit-submit{
+        color: rgba(0,0,0,0.9);
+        float: right;
+        margin-right: 0;
+     }
+     .user-register-form #edit-submit:hover,
+     .user-register-form #edit-submit:focus{
+        color: rgba(0,0,0,0.9);
+        float: right;
+        margin-right: 0; 
+        background: rgba(0,0,0,0.1);       
+     }
+     .user-register-form .delta-order .select-wrapper{
+        width: 100%;
+     }
+     /*--------------------alert-message-register----------------*/
+     .alert.alert-success.alert-dismissible{
+        background: rgba(0,0,0,0.1);
+        color: rgba(0,0,0,0.9);
+     }
+     .alert.alert-danger.alert-dismissible{
+        background: rgba(0,0,0,0.1);
+        color: rgba(0,0,0,0.9); 
+        border: none;       
+     }
+     /*-------------------forgot-password-----------------*/
+     .user-pass{
+        width: 700px;
+        font-size: 18px;
+        margin: 100px auto;
+     }
+     .user-pass #edit-name{
+        width: 400px;
+        height: 40px;
+        border: 1px solid rgba(0,0,0,0.1);
+     }
+     .user-pass #edit-name:focus{
+        border: 1px solid #a8d3ce;
+     }
+     .user-pass p{
+        text-align: center;
+     }
+     .user-pass #edit-submit{
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        justify-content: space-between;
+        font-weight: 100;
+        height: 55px;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: #ec7139;
+        border: none;
+        box-shadow: none;
+        color: #ffffff;
+        width: 100px;
+        height: 40px;
+        border: 1px solid#ec7139;
+     }
     /*------------------------------content-wrapper-------------------*/
     .content-wrapper {
         display: flex;
@@ -1817,6 +2025,7 @@ p:last-child {
         padding-left: 16px;
         font-size: 14px;
         padding-left: 20px;
+        border-bottom: none;
     }
     /*--------------------superfish-menu--------------------*/
     .clearfix .navbar-btn {
@@ -2267,17 +2476,16 @@ p:last-child {
     #decreto-user-menu-dropdown {
         margin: 0;
         padding: 15px;
-        padding-left: 0;
         width: 100%;
         height: 50px;
         border-radius: inherit;
         border: none;
-        color: #ffffff;
         display: flex;
         font-size: 15px;
         padding-left: 10%;
         padding-top: 16.5px;
         outline: none;
+        background: #f1f2f3;
     }
     #decreto-user-menu-dropdown:hover,
     #decreto-user-menu-dropdown:focus {
@@ -2301,15 +2509,23 @@ p:last-child {
         display: none;
     }
     .dropdown .dropdown-menu {
-        background: #fbfbfb;
-        width: -webkit-fill-available;
-        height: 70px;
-        margin: 0;
-        padding: 10px;
-        border: none;
-        border-radius: inherit;
-        min-width: 110px;
-        font-size: 12px!important;
+    background: #f1f2f3;
+    width: -webkit-fill-available;
+    height: 55px;
+    margin: 0;
+    padding: 10px;
+    border: none;
+    border-radius: inherit;
+    min-width: 110px;
+    font-size: 12px!important;
+    margin-top: 5px;
+    left: -15px;
+}
+#block-user-account-menu .dropdown-menu li{
+    padding: 0;
+}
+ a[href^="/user/logout"]:before {
+        display: none;
     }
     a[href^="/user/edit"]:before {
         display: none;
@@ -2324,6 +2540,9 @@ p:last-child {
     header #views-exposed-form-decreto-search-page .col-xs-12 {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    .col-xs-12 .input-group{
+        border-radius: 100px!important;
     }
     header {
         background: #f1f2f3!important;
@@ -2477,11 +2696,11 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     }
     /*-----------------info and agenda starts here--------------*/
     .contextual-region .panel-title {
-        font-size: 18px;
-        font-weight: 400;
-        padding-left: 20px;
-        border-radius: 5px;
-        background: #ffffff;
+    font-size: 18px!important;
+    font-weight: 400!important;
+    padding-left: 20px!important;
+    background: #ffffff!important;
+    color: #333!important;
     }
     #info {
         margin-left: 20px;
@@ -2489,7 +2708,6 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
         border: 1px solid rgba(0, 0, 0, 0.1);
         padding: 0;
         border-radius: 7px;
-        0;
     }
     #info .field .col-xs-7 {
         width: 100%;
@@ -2654,6 +2872,7 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     .popover ul:last-child,
     p:last-child {
         border-color: #fbfbfb;
+        background: #Fbfbfb;
     }
     .btn-expand-collapse {
         background: transparent;
