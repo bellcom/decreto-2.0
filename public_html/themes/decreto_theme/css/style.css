@@ -521,6 +521,9 @@ th {
     .user-register-form .username:focus{
         border: 1px solid #a8d3ce;
     }
+    #edit-user-picture-wrapper #ajax-wrapper .form-item{
+        background: #fbfbfb;
+    }
     .user-register-form #edit-user-picture-0-upload{
         padding: 0;
         border: none;
@@ -640,6 +643,9 @@ th {
         width: 100%;
         font-size: 15px;
         margin: 100px auto;
+     }
+     .user-pass #edit-actions{
+        background: #fbfbfb;
      }
      .user-pass #edit-name{
         width: 290px;

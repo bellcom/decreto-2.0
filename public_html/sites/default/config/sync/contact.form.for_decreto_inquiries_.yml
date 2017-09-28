@@ -1,0 +1,12 @@
+uuid: e77883b3-56f3-4cb4-b73b-94abf0fae428
+langcode: en
+status: true
+dependencies: {  }
+id: for_decreto_inquiries_
+label: 'decreto  Inquiries '
+recipients:
+  - sharmarajat2chd@gmail.com
+reply: ''
+weight: 0
+message: 'Thank you for getting in touch with us regarding decreto. We will respond shortly! '
+redirect: ''
