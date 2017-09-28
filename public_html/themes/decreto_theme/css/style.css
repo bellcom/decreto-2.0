@@ -32,21 +32,10 @@ body {
 
 
 /*---------------background-login-page-----------*/
-
-.region-login {
-    background: #fbfbfb;
-    width: 80%;
-}
-
-.region-content {
-    background: #fbfbfb;
-    width: 100%;
-}
-
 #signup_button {
     background: #fbfbfb;
     padding: 0;
-    width: 100%;
+    width: 290px;
 }
 
 .decreto-dashboard-logo {
@@ -63,11 +52,21 @@ body {
 
 
 /*--------------login page starts here-------*/
-
+.container-fluid{
+    padding:0;
+}
+.user-logged-in .container-fluid{
+    padding-right: 15px;
+    padding-left: 15px;
+}
 .path-user {
     background: #fbfbfb;
 }
-
+#login-page .region-login{
+    width: 290px;
+    margin: 0 auto;
+    background: #fbfbfb;
+}
 #login-page .user-form-wrapper .btn {
     padding: 15px 25px;
     font-size: 16px;
@@ -82,7 +81,6 @@ body {
 }
 
 #login-page .user-form-wrapper .user-form-container {
-    width: 320px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -91,6 +89,8 @@ body {
     text-align: center;
     padding-left: 15px;
     padding-right: 15px;
+    flex-direction: column;
+    width: 100%;
 }
 
 #login-page .user-form-wrapper .user-form-header {
@@ -103,18 +103,10 @@ body {
 #login-page .user-form-wrapper .user-form-header .user-form-header-logo {
     width: 100%;
 }
-
-#login-page .main-container__content .user-form-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
 #login-page .user-form-wrapper .user-form-form-wrapper {
     position: relative;
-    padding-top: 70px;
+    padding-top: 20px;
 }
-
 #login-page .user-form-wrapper .user-form-footer {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -123,24 +115,20 @@ body {
     align-items: center;
     flex-direction: column;
 }
-
 .user-form-footer a {
     font-weight: 400;
     font-size: 16px;
     margin-bottom: 10px;
 }
-
 .user-form-wrapper .user-form-footer p {
     font-size: 12px;
     margin-top: 5px;
     color: #aeaeae;
 }
-
 #login-page {
     background: #fbfbfb;
     min-height: 100%;
 }
-
 .col-md-12.toggle-menu.toggle-menu-right {
     padding-right: 0px;
     padding-left: 0px;
@@ -152,44 +140,29 @@ body {
 #block-decretologobrand .field--label {
     display: none;
 }
-
 #block-decretologobrand {
     border: none;
     box-shadow: none;
 }
-
-.user-form-header {
-    position: relative;
-    background-color: #fff;
-    padding-top: 0px;
-    padding-bottom: 0px
-}
-
 .img-responsive {
     width: 100%;
     margin: 0 auto;
 }
-
 .path-user .user-form-header .user-form-header-logo {
     width: 100%
 }
-
 .user-form-form-wrapper {
     position: relative;
 }
-
 .user-form-container img {
     height: 165px;
 }
-
 .user-form-container a {
     display: flex;
 }
-
 th {
     color: #364045!important;
 }
-
 .sidebar-logo {
     width: 100%;
     display: flex;
@@ -203,7 +176,6 @@ th {
     padding-top: 5px;
     padding-bottom: 0px;
 }
-
 #block-views-block-decreto-calender-calendar-block .today {
     background: #ea6022!important;
     color: #fff!important;
@@ -211,16 +183,12 @@ th {
     width: 30px;
     height: 38px;
 }
-
 .view-display-id-calendar_block a {
     color: #ea6022;
 }
-
 #block-views-block-decreto-user-committees-my-committees-block a {
     color: #ea6022;
 }
-
-
 /* ----------------------------Icons--------------------------- */
 
 #block-menu-icon-links {
@@ -228,17 +196,15 @@ th {
     box-shadow: none;
     background: #fbfbfb;
 }
-
 .panel-body {
     width: 100%;
     margin: 0px auto;
 }
-
 .page-node-type-decreto-meeting .annotator-wrapper .field p {
     background: #ffffff;
     padding-bottom: 50px;
     height: 100%;
-    padding-left: 59px;
+    padding-left: 10px;
     padding-right: 10px;
 }
 .page-node-type-decreto-meeting .panel-title{
@@ -247,23 +213,19 @@ th {
 .contextual-region .decreto-bullet-point-attachment {
     background: #ffffff
 }
-
 .decreto-bullet-point-attachment .btn {
     background: #fbfbfb;
 }
-
 .decreto-bullet-point-attachment .btn:focus {
     background: transparent;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 #block-socialiconsconnect .field.field--name-body.field--type-text-with-summary.field--label-hidden.field--item {
     font-size: 0;
     height: 50px;
     margin: 0;
     padding: 0;
 }
-
 .user-form-call-to-action-buttons {
     list-style: none;
     display: flex;
@@ -272,11 +234,9 @@ th {
     width: 100%;
     padding: 0;
 }
-
 .user-form-call-to-action-buttons li {
     padding-bottom: 40px;
 }
-
 .user-form-call-to-action-buttons li a {
     display: inline-block;
     width: 46px;
@@ -290,7 +250,10 @@ th {
     -o-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
-
+.user-form-call-to-action-buttons li a:hover,
+.user-form-call-to-action-buttons li a:focus{
+    text-decoration: none;
+}
 .user-form-call-to-action-buttons li a .icon {
     color: #32424c;
     font-size: 20px
@@ -304,48 +267,39 @@ th {
     content: "\E0be"!important;
 }
 .fa-question:before{
-    font-family: "Material Icons"; 
-    content: "\E0be"!important;
+    font-size: 20px;
 }
 .user-form-call-to-action-buttons li a {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .user-form-call-to-action-buttons li a:hover,
 .user-form-call-to-action-buttons li a:focus {
     border-color: #9cd7cc;
     border-width: 4px
 }
-
 .user-form-call-to-action-buttons li a:hover .icon,
 .user-form-call-to-action-buttons li a:focus .icon {
     color: #ec7139
 }
-
 .user-form-form-wrapper .user-form-form {
     margin: 0 -25px
 }
-
 .user-form-form .form-group {
     margin-bottom: 25px
 }
-
 .user-form-form .form-control {
     height: 55px;
     padding: 15px 25px;
     border-width: 1px;
     border-color: #ebebec
 }
-
-
 /*---------------------login field------------*/
 
 .user-login-form .form-group {
     margin-bottom: 30px;
 }
-
 ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     text-transform: capitalize;
@@ -419,7 +373,7 @@ th {
     padding-left: 24px;
     padding-right: 24px;
     background-color: #ec7139;
-    border: none;
+    border: 1px solid #ec7139;
     box-shadow: none;
     color: #ffffff;
 }
@@ -432,15 +386,13 @@ th {
     background: none;
     border: none;
     padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 
 /*------------------------signup field------------------*/
 
 #login-page input {
-    height: 55px;
+    height: 60px;
     font-size: 16px;
     font-weight: 300;
     border: 1px solid #ebebec;
@@ -476,8 +428,7 @@ th {
 }
 
 #login-page .region-content {
-    padding-right: 20px;
-    padding-left: 20px;
+    width: 290px;
     background: #fbfbfb;
 }
 
@@ -515,14 +466,21 @@ th {
     color: #4b616f;
     font-size: 15px;
 }
+#block-forgotpassword .panel-body{
+    padding: 0;
+    padding-top: 15px;
+}
 #block-forgotpassword a{
     display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.5);
-    text-decoration: underline;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.7);
+    margin-bottom: 5px;
 }
-
+#block-forgotpassword p{
+    color: rgba(0,0,0,0.6);
+    font-size: 13px;
+}
 /*-----------------login-messages-bar------------*/
 
 .tooltip.right {
@@ -532,7 +490,190 @@ th {
     /* width: 350px; */
 }
 
-
+/*-----------------user-register----page---------*/
+.path-user .row{
+    margin: 0;
+    margin-bottom: 40px;
+}
+    .user-register-form{
+        width: 290px!important;
+        margin: 10px auto;
+    }
+    .user-register-form #edit-mail{
+        border: 1px solid #ebebec;
+        box-shadow: none;
+        height: 60px;
+    }
+    .user-register-form #edit-mail:focus{
+        border: 1px solid #a8d3ce;
+        box-shadow: none;
+    }
+    .user-register-form .username{
+        width: 290px!important;
+        margin: 0 auto;
+        height: 40px;
+        margin: 0;
+        font-size: 14px;
+        border: 1px solid #ebebec;
+        box-shadow: none;
+        height: 60px;
+    }
+    .user-register-form .username:focus{
+        border: 1px solid #a8d3ce;
+    }
+    .user-register-form #edit-user-picture-0-upload{
+        padding: 0;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        background: transparent;
+    }
+    .user-register-form #edit-user-picture-0-upload:focus{
+        border: 1px solid #a8d3ce;
+    }
+    .user-register-form #edit-contact{
+        border: 1px solid #ebebec;
+        box-shadow: none;
+    }
+    .user-register-form .js-form-item-timezone{
+        background: #ffffff!important;
+        box-shadow: none;
+    }
+    .user-register-form #edit-timezone{
+        border: 1px solid #ebebec;
+        box-shadow: none;
+    }
+    .user-register-form #edit-field-decreto-usr-coms-wrapper{
+        border: 1px solid #ebebec;
+        border-radius: 5px;
+        background: #ffffff;
+    }
+    .user-register-form .tabledrag-toggle-weight{
+        border: none;
+        outline: none;
+    }
+    .user-register-form .tabledrag-toggle-weight:hover{
+        text-decoration: underline;
+    }
+    .user-register-form .draggable.odd{
+        background: #ffffff;
+    }
+    .user-register-form .draggable.odd span{
+        margin-top: 10px;
+    }
+    .user-register-form .draggable.odd .field-multiple-drag{
+        padding-left: 20px;
+    }
+    .user-register-form .draggable.odd td{
+        padding-left: 0;
+    }
+    .user-register-form .draggable.odd .field-multiple-drag a{
+        display: block!important;
+    }
+    .user-register-form .input-group .input-group-addon .glyphicon{
+        margin-top: 0;
+    }
+    .user-register-form .field-add-more-submit{
+        border: none;
+        background: #ebebec;
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form #edit-field-decreto-usr-orgs-wrapper{
+        border: 1px solid #ebebec;
+        border-radius: 5px;
+        background: #ffffff;
+    }
+    .user-register-form .field-add-more-submit{
+        border: none;
+        background: #ebebec;
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form .field-add-more-submit:hover{
+        border: none;
+        background: #ebebec;
+        color: rgba(0,0,0,0.9);
+        border-top-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+    .user-register-form .form-autocomplete{
+        outline: none;
+        box-shadow: none;
+    }
+    .user-register-form .form-select.form-control{
+        outline: none;
+        box-shadow: none;        
+    }
+     .user-register-form #edit-submit{
+        color: #ffffff;
+        float: right;
+        margin-right: 0;
+        background: #ec7139;
+        margin-top: 10px;
+     }
+     .user-register-form #edit-submit:hover,
+     .user-register-form #edit-submit:focus{
+        color: #ffffff;
+        float: right;
+        margin-right: 0; 
+        background: #e95c1c;  
+        border: 1px solid #e95c1c;    
+     }
+     .user-register-form .delta-order .select-wrapper{
+        width: 100%;
+     }
+     /*--------------------alert-message-register----------------*/
+     .alert.alert-success.alert-dismissible{
+        background: #ebebec;
+        color: rgba(0,0,0,0.9);
+     }
+     .alert.alert-danger.alert-dismissible{
+        background: #ebebec;
+        color: rgba(0,0,0,0.9); 
+        border: none;       
+     }
+     /*-------------------forgot-password-----------------*/
+     .user-pass{
+        width: 100%;
+        font-size: 15px;
+        margin: 100px auto;
+     }
+     .user-pass #edit-name{
+        width: 290px;
+        height: 40px;
+        border: 1px solid #ebebec;
+     }
+     .user-pass #edit-name:focus{
+        border: 1px solid #a8d3ce;
+     }
+     .user-pass p{
+        width: 290px;
+        margin: 0 auto 10px;
+     }
+     .user-pass #edit-submit{
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        justify-content: space-between;
+        font-weight: 100;
+        height: 55px;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: #ec7139;
+        border: none;
+        box-shadow: none;
+        color: #ffffff;
+        width: 100px;
+        height: 40px;
+        border: 1px solid#ec7139;
+     }
 /*-------------------- login page end here--------------*/
 
 
@@ -570,7 +711,7 @@ th {
 }
 .navbar-brand{
     position: absolute;
-    left: 30px;
+    left: 33%;
 }
 .navbar-default .navbar-toggle:hover {
     background: none
@@ -597,7 +738,7 @@ th {
 /*---------------------icon-bar------------------------*/
 .hamburger-icon{
     position: absolute;
-    left: 0;
+    left: 7px;
     width: 40px;
     height: 40px;
     top: 5px;
@@ -953,7 +1094,6 @@ a[href^="/user/logout"]:before {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-
 .nav-justified > li:nth-child(1) {
     width: 50%;
     height: 45px;
@@ -989,7 +1129,7 @@ a[href^="/user/logout"]:before {
 .contextual-region .content {
     padding-top: 0px;
     height: 100%;
-    background: #fbfbfb;
+    background: #ffffff;
 }
 
 .annotator-wrapper {
@@ -1009,15 +1149,18 @@ a[href^="/user/logout"]:before {
     text-transform: uppercase;
     height: 48px;
 }
-
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover,
+ .nav-pills > li.active > a:focus{
+    background: #333;
+    color: #fff;
+ }
 .contextual-region .panel-body {
     padding: 0px;
     background: #ffffff;
 }
 
 #info {
-    margin-left: 10px;
-    margin-right: 10px;
     border-radius: 5px;
     background: #ffffff;
 }
@@ -1026,9 +1169,11 @@ a[href^="/user/logout"]:before {
     margin: 0;
     display: flex;
     width: 100%;
-    padding-top: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     height: 100%;
+    padding-left: 10px;
 }
 
 #info .Type {
@@ -1097,10 +1242,15 @@ a[href^="/user/logout"]:before {
     cursor: pointer;
     float: right;
     font-size: 20px;
-    margin-top: -10px;
     font-weight: 900;
 }
-
+#info .field--name-field-decreto-meet-partic .field--label:after.moveUp{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
 #info .field--type-text-with-summary {
     background: #fbfbfb;
     display: inline-grid;
@@ -1114,7 +1264,6 @@ a[href^="/user/logout"]:before {
     cursor: pointer;
     float: right;
     font-size: 20px;
-    margin-top: -10px;
     font-weight: 900;
 }
 
@@ -1374,7 +1523,15 @@ a[href^="/user/logout"]:before {
 .table-responsive {
     margin-bottom: 0;
 }
-
+#decreto-content-modify-meeting-edit-form .form-no-label{
+    padding-left: 0;
+}
+#decreto-content-modify-meeting-edit-form #edit-start-date{
+    background-color: #ffffff;
+}
+#decreto-content-modify-meeting-edit-form #edit-end-date{
+    background: #ffffff;
+}
 #block-views-block-decreto-all-meetings-block-all-meetings {
     background: #ffffff;
     margin-right: 0px;
@@ -1526,7 +1683,7 @@ a[href^="/user/logout"]:before {
     margin-right: 10px;
     margin-top: -7px;
     font-size: 30px;
-    color: rgba(0, 0, 0, 0.2);
+    padding-left: 2px;
 }
 
 .path-meetings #decreto-content-modify-meeting-edit-form .collapse.in {
@@ -1552,9 +1709,8 @@ a[href^="/user/logout"]:before {
 }
 
 .modal-content {
-    width: 338px;
+    width: 100%;
     margin: auto;
-    margin-top: 150px;
 }
 
 #edit-title--o9xVk3OPYLg {
@@ -1566,14 +1722,16 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.btn-success,
-.btn-success:hover,
-.btn-success:focus {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.5);
+.btn-success{
+    border: 1px solid #e95c1c;
+    background: #e95c1c;
+    color: #fff;
 }
-
+.btn-success:hover,
+.btn-success:focus{
+    background: #e95c1c!important;
+    outline: none;
+}
 .nav-tabs a {
     color: rgba(0, 0, 0, 0.6)
 }
@@ -1581,24 +1739,16 @@ a[href^="/user/logout"]:before {
 .modal-footer {
     border-top: transparent;
 }
-
-.modal-footer .button:hover,
-.modal-footer .button:not(:hover) {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.modal-footer .js-form-submit {
-    margin: 20px;
+.modal-content .modal-footer .js-form-submit{
+    margin-left: 50px;
 }
 
 #cke_44_top {
     background: #fbfbfb;
 }
-
 #cke_44_bottom {
     background: #fbfbfb;
 }
-
 
 /*--------------button icons----------*/
 
@@ -1654,6 +1804,9 @@ p:last-child {
 .user-logged-in{
     background: #ffffff;
 }
+.tab-pane .form-inline{
+    background: #ffffff!important;
+}
 .user-logged-in .form-inline{
     background: #333;
 }
@@ -1662,7 +1815,22 @@ p:last-child {
     box-shadow: none;
     margin-bottom: 10px;
 }
-
+.user-logged-in .col-md-9 .region-content{
+    background: #ffffff;
+}
+.user-logged-in .form-no-label{
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #ffffff;
+}
+.user-logged-in #drupal-modal--body .form-no-label{
+    padding: 0;
+}
+.user-logged-in .field--name-field-decreto-usr-coms{
+    padding-left: 20px;
+    background: #ffffff;
+    height: 100%;
+}
 .area-expand-collapse .panel-defaul {
     border-color: #ffffff;
 }
@@ -1685,7 +1853,11 @@ p:last-child {
 
 
 /* --------------------Main menu END ------------------ */
-
+/*--------------label------------*/
+.label{
+    color: #3e454c;
+    padding-left: 5px;
+}
 
 /*------------------only for media screen---------------*/
 
@@ -1694,11 +1866,19 @@ p:last-child {
         margin: 0;
         padding: 0;
     }
-    .region-login {
-        width: 320px;
+    #login-page .region-login {
+        width: 370px;
         display: flex;
     }
     /*-------------------------------login page-------------------------*/
+    #login-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 70px;
+    }
+    #login-page .region-content {
+    width: 400px;
+    background: #fbfbfb;
+}
     #block-decretologobrand .panel-body {
         margin-top: 50px;
         margin-bottom: 50px;
@@ -1718,6 +1898,10 @@ p:last-child {
     #user-login-form #edit-submit {
         width: 350px;
     }
+    #user-login-form #edit-submit:hover,
+    #user-login-form #edit-submit:focus{
+        background: #e95c1c;
+    }
     #user-login-form #edit-submit.active {
         transform: rotate(0deg);
         -webkit-transform: rotate(0deg);
@@ -1726,7 +1910,11 @@ p:last-child {
     #block-signuplink {
         width: 350px;
         margin: 0 auto;
-        border: 1px solid #ddd;
+        border: 1px solid #ebebec;
+        box-shadow: none;
+    }
+    #signup_button{
+        width: 400px;
     }
     #block-signuplink .field--type-link a {
         display: flex;
@@ -1736,173 +1924,28 @@ p:last-child {
     .img-responsive {
         width: 300px;
     }
-    /*-----------------user-register----page---------*/
+    /*--------------regiter-page-for-desktop--------------*/
     .user-register-form{
-        width: 400px;
-        margin: 0 auto;
-    }
-    .user-register-form #edit-mail{
-        border: 1px solid rgba(0,0,0,0.1);
-    }
-    .user-register-form #edit-mail:focus{
-        border: 1px solid #a8d3ce;
-        box-shadow: none;
+        width: 400px!important;
     }
     .user-register-form .username{
         width: 400px!important;
-        margin: 0 auto;
-        height: 40px;
-        margin: 0;
-        font-size: 14px;
-        border: 1px solid rgba(0,0,0,0.1);
     }
-    .user-register-form .username:focus{
-        border: 1px solid #a8d3ce;
-    }
-    .user-register-form #edit-user-picture-0-upload{
-        padding: 8px;
-        border: 1px solid rgba(0,0,0,0.1);
-        outline: none;
-        box-shadow: none;
-    }
-    .user-register-form #edit-user-picture-0-upload:focus{
-        border: 1px solid #a8d3ce;
-    }
-    .user-register-form #edit-contact{
-        border: 1px solid rgba(0,0,0,0.1);
-    }
-    .user-register-form .js-form-item-timezone{
-        background: #ffffff!important;
-    }
-    .user-register-form #edit-timezone{
-        border: 1px solid rgba(0,0,0,0.1);
-    }
-    .user-register-form #edit-field-decreto-usr-coms-wrapper{
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 5px;
-        background: #ffffff;
-    }
-    .user-register-form .tabledrag-toggle-weight{
-        border: none;
-    }
-    .user-register-form .tabledrag-toggle-weight:hover{
-        text-decoration: underline;
-    }
-    .user-register-form .draggable.odd{
-        background: #ffffff;
-    }
-    .user-register-form .draggable.odd span{
-        margin-top: 10px;
-    }
-    .user-register-form .draggable.odd .field-multiple-drag{
-        padding-left: 20px;
-    }
-    .user-register-form .draggable.odd td{
-        padding-left: 0;
-    }
-    .user-register-form .draggable.odd .field-multiple-drag a{
-        display: block!important;
-    }
-    .user-register-form .input-group .input-group-addon .glyphicon{
-        margin-top: 0;
-    }
-    .user-register-form .field-add-more-submit{
-        border: none;
-        background: rgba(0,0,0,0.1);
-        color: rgba(0,0,0,0.9);
-        border-top-left-radius: inherit;
-        border-bottom-right-radius: inherit;
-    }
-    .user-register-form #edit-field-decreto-usr-orgs-wrapper{
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 5px;
-        background: #ffffff;
-    }
-    .user-register-form .field-add-more-submit{
-        border: none;
-        background: rgba(0,0,0,0.1);
-        color: rgba(0,0,0,0.9);
-        border-top-left-radius: inherit;
-        border-bottom-right-radius: inherit;
-    }
-    .user-register-form .field-add-more-submit:hover{
-        border: none;
-        background: rgba(0,0,0,0.1);
-        color: rgba(0,0,0,0.9);
-        border-top-left-radius: inherit;
-        border-bottom-right-radius: inherit;
-    }
-    .user-register-form .form-autocomplete{
-        outline: none;
-        box-shadow: none;
-    }
-    .user-register-form .form-select.form-control{
-        outline: none;
-        box-shadow: none;        
-    }
-     .user-register-form #edit-submit{
-        color: rgba(0,0,0,0.9);
-        float: right;
-        margin-right: 0;
-     }
-     .user-register-form #edit-submit:hover,
-     .user-register-form #edit-submit:focus{
-        color: rgba(0,0,0,0.9);
-        float: right;
-        margin-right: 0; 
-        background: rgba(0,0,0,0.1);       
-     }
-     .user-register-form .delta-order .select-wrapper{
+    /*-------------forgot-password----------------*/
+    .user-pass{
         width: 100%;
-     }
-     /*--------------------alert-message-register----------------*/
-     .alert.alert-success.alert-dismissible{
-        background: rgba(0,0,0,0.1);
-        color: rgba(0,0,0,0.9);
-     }
-     .alert.alert-danger.alert-dismissible{
-        background: rgba(0,0,0,0.1);
-        color: rgba(0,0,0,0.9); 
-        border: none;       
-     }
-     /*-------------------forgot-password-----------------*/
-     .user-pass{
-        width: 700px;
         font-size: 18px;
-        margin: 100px auto;
-     }
-     .user-pass #edit-name{
-        width: 400px;
-        height: 40px;
-        border: 1px solid rgba(0,0,0,0.1);
-     }
-     .user-pass #edit-name:focus{
-        border: 1px solid #a8d3ce;
-     }
-     .user-pass p{
-        text-align: center;
-     }
-     .user-pass #edit-submit{
-        display: flex;
-        flex-direction: row-reverse;
-        width: 100%;
-        justify-content: space-between;
-        font-weight: 100;
-        height: 55px;
-        background-image: none;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin: 0 auto;
-        padding-left: 24px;
-        padding-right: 24px;
-        background-color: #ec7139;
-        border: none;
-        box-shadow: none;
-        color: #ffffff;
-        width: 100px;
-        height: 40px;
-        border: 1px solid#ec7139;
-     }
+    }
+    .user-pass #edit-name{
+        width: 400px!important;
+    }
+    .user-pass p{
+        width: 400px!important;
+    }
+    .user-pass #edit-submit:hover,
+    .user-pass #edit-submit:focus{
+        background: #e95c1c;
+    }
     /*------------------------------content-wrapper-------------------*/
     .content-wrapper {
         display: flex;
@@ -2485,7 +2528,7 @@ p:last-child {
         padding-left: 10%;
         padding-top: 16.5px;
         outline: none;
-        background: #f1f2f3;
+        background: #f1f2f3!important;
     }
     #decreto-user-menu-dropdown:hover,
     #decreto-user-menu-dropdown:focus {
@@ -2601,6 +2644,12 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
         box-shadow: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
+    #block-views-block-decreto-calender-calendar-block .view-display-id-calendar_block .view-content{
+        background: #ffffff;
+    }
+    #block-views-block-decreto-calender-calendar-block .panel-body .form-group{
+        border-radius: 5px;
+    }
     .mini-day-off {
         display: flex;
         width: 100%;
@@ -2689,6 +2738,8 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     }
     #block-views-block-decreto-user-committees-my-committees-block .panel-title {
         margin: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
     }
     #block-views-block-decreto-user-committees-my-committees-block ul {
         list-style-type: none;
@@ -2701,6 +2752,9 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     padding-left: 20px!important;
     background: #ffffff!important;
     color: #333!important;
+    }
+    .cd-stretchy-nav.edit-content{
+        right: 20px;
     }
     #info {
         margin-left: 20px;
@@ -2716,14 +2770,13 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     }
     #info .field {
         padding-left: 8px;
-        padding-top: 25px;
     }
     #info .field--name-field-decreto-meet-type {
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
     }
     #info .field .field--label {
-        font-size: 18px;
+        font-size: 16px;
         width: 25vw;
     }
     #agenda .btn-primary {
@@ -2767,10 +2820,13 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     #info .Description {
         pointer-events: none;
     }
+    #info .Description p{
+        background: #fbfbfb;
+    }
     /*-------------------------------end of description table-----------------------*/
     #info .field .field--item {
         text-align: inherit;
-        font-size: 18px;
+        font-size: 16px;
     }
     .region-content .decreto-meeting {
         box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.1);
@@ -2871,8 +2927,8 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     .popover ol:last-child,
     .popover ul:last-child,
     p:last-child {
-        border-color: #fbfbfb;
-        background: #Fbfbfb;
+        border-color: #ffffff;
+        background: #Ffffff;
     }
     .btn-expand-collapse {
         background: transparent;
@@ -2926,6 +2982,10 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     .full .contextual {
         content: "\2193";
         font-family: fontAwesome;
+    }
+    /*----------------------label--------------------*/
+    .label{
+        color: #3e5057;
     }
     /*-------------------jquey link------------*/
     #toggle-menu-trigger {
