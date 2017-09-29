@@ -295,6 +295,65 @@ th {
     border-width: 1px;
     border-color: #ebebec
 }
+/*-------register-page-------------*/
+/*-------------------------------sign up page-------------------------*/
+    #signup-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 50px;
+    }
+#signup-page .user-form-wrapper .user-form-header {
+    position: relative;
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+#signup-page .user-form-wrapper .user-form-container {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex-direction: column;
+    width: 100%;
+}
+#signup-page .user-form-wrapper .user-form-header .user-form-header-logo {
+    width: 100%;
+}
+#signup-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 20px;
+}
+/*-------------------------------forgot-password-logo page-------------------------*/
+#forgot-password-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 50px;
+    }
+#forgot-password-page .user-form-wrapper .user-form-header {
+    position: relative;
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 60px;
+}
+#forgot-password-page .user-form-wrapper .user-form-container {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex-direction: column;
+    width: 100%;
+}
+#forgot-password-page .user-form-wrapper .user-form-header .user-form-header-logo {
+    width: 100%;
+}
+#forgot-password-page .user-form-wrapper .user-form-form-wrapper {
+    position: relative;
+    padding-top: 20px;
+}
 /*---------------------login field------------*/
 
 .user-login-form .form-group {
@@ -323,7 +382,6 @@ th {
     text-transform: capitalize;
     color: #eee;
 }
-
 .form-item-name .required {
     display: block;
     width: 100%;
@@ -340,7 +398,6 @@ th {
     border: none;
     box-shadow: none;
 }
-
 .form-item-pass .required {
     display: block;
     width: 100%;
@@ -357,7 +414,6 @@ th {
     border: none;
     box-shadow: none;
 }
-
 #user-login-form #edit-submit {
     display: flex;
     flex-direction: row-reverse;
@@ -370,25 +426,19 @@ th {
     border-radius: 4px;
     margin: 0 auto;
     padding: 16px;
-    padding-left: 24px;
-    padding-right: 24px;
     background-color: #ec7139;
     border: 1px solid #ec7139;
     box-shadow: none;
     color: #ffffff;
 }
-
 .glyphicon-question-sign:before {
     display: none!important;
 }
-
 .alert.alert-info.messages.info.region.region-help {
     background: none;
     border: none;
     padding: 0px;
 }
-
-
 /*------------------------signup field------------------*/
 
 #login-page input {
@@ -397,12 +447,13 @@ th {
     font-weight: 300;
     border: 1px solid #ebebec;
 }
-
+#login-page input:focus{
+    border-color: #9cd7cc;
+}
 #block-signuplink {
     background: none;
     height: 55px;
 }
-
 #block-signuplink a {
     background: none;
     display: flex;
@@ -422,32 +473,22 @@ th {
     padding-top: 0px;
     padding-bottom: 0px;
 }
-
 #block-signuplink .field--label {
     display: none;
 }
-
 #login-page .region-content {
     width: 290px;
     background: #fbfbfb;
 }
-
 .field--item {
     width: 100%;
     height: 100%;
     padding: 0px;
     margin: 0px;
 }
-
 .field.field--name-field-primary.field--type-link.field--label-above {
     font-size: 18px;
 }
-
-#block-signuplink .panel-body {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 #block-signuplink .field--type-link a {
     color: #4b616f;
     font-weight: 200;
@@ -456,7 +497,6 @@ th {
     flex-direction: row-reverse;
     justify-content: space-between;
 }
-
 #block-forgotpassword {
     border: none;
     box-shadow: none;
@@ -480,6 +520,7 @@ th {
 #block-forgotpassword p{
     color: rgba(0,0,0,0.6);
     font-size: 13px;
+    background: #fbfbfb;
 }
 /*-----------------login-messages-bar------------*/
 
@@ -495,9 +536,9 @@ th {
     margin: 0;
     margin-bottom: 40px;
 }
-    .user-register-form{
+    #signup-page .user-register-form{
         width: 290px!important;
-        margin: 10px auto;
+        margin: 20px auto;
     }
     .user-register-form #edit-mail{
         border: 1px solid #ebebec;
@@ -616,6 +657,8 @@ th {
         margin-right: 0;
         background: #ec7139;
         margin-top: 10px;
+        border: 1px solid #ec7139;
+        height: 55px;
      }
      .user-register-form #edit-submit:hover,
      .user-register-form #edit-submit:focus{
@@ -642,7 +685,10 @@ th {
      .user-pass{
         width: 100%;
         font-size: 15px;
-        margin: 100px auto;
+        margin: 20px auto;
+     }
+     #edit-actions{
+        background: #fbfbfb;
      }
      .user-pass #edit-actions{
         background: #fbfbfb;
@@ -681,34 +727,19 @@ th {
         border: 1px solid#ec7139;
      }
 /*-------------------- login page end here--------------*/
-
-
-/*--------------dashboard-front-page---------*/
-
-
 /*-----------------------dashboard page-----------------*/
 
 #navbar {
-    background: #333;
+    background: #364045;
     border-left: none;
     border-right: none;
     border-top: none;
     margin: 0;
     padding: 0;
 }
-
 .region.navbar-btn {
     display: none;
 }
-
-
-/*------------------hamburger-menu---------------*/
-
-.fa-navicon:before,
-.fa-reorder:before,
-.fa-bars:before {}
-
-
 /*---------------------navbar-toggle------------------------*/
 
 .navbar-header {
@@ -717,7 +748,7 @@ th {
 }
 .navbar-brand{
     position: absolute;
-    left: 33%;
+    left: 30%;
 }
 .navbar-default .navbar-toggle:hover {
     background: none
@@ -730,17 +761,15 @@ th {
 #views-exposed-form-decreto-search-page .row {
     margin-top: 0px;
 }
-
-
 /*----------------------navbar-collapse---------------------*/
-
 #navbar-collapse {
     border: none;
     box-shadow: none;
     margin-top: 50px;
 }
-
-
+#navbar-collapse .row{
+    margin-bottom: 0;
+}
 /*---------------------icon-bar------------------------*/
 .hamburger-icon{
     position: absolute;
@@ -824,6 +853,7 @@ th {
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E871";
+    color: #A7A9AC;
 }
 
 .navbar-nav .calendar:before {
@@ -831,6 +861,7 @@ th {
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E916";
+    color: #A7A9AC;
 }
 
 .navbar-nav .meetings:before {
@@ -838,6 +869,7 @@ th {
     margin-right: 25px;
     font-size: 20px;
     font-family: "Material Icons";
+    color: #A7A9AC;
 }
 
 .navbar-nav .users:before {
@@ -845,6 +877,7 @@ th {
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E851";
+    color: #A7A9AC;
 }
 
 .navbar-nav .settings:before {
@@ -853,6 +886,7 @@ th {
     font-size: 20px;
     font-family: "Material Icons";
     content: "\E8b9";
+    color: #A7A9AC;
 }
 
 
@@ -866,15 +900,15 @@ th {
 #block-main-navigation-mobile .navbar-nav li a {
     color: #fff;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
+    font-weight: 200;
 }
 
 #block-main-navigation-mobile .navbar-nav li a:focus {
-    background: rgba(0,0,0,.9);
+    background: #323b40;
 }
 
 .dropdown .meetings:focus {
-    background: #323641;
+    background: #323b40;
     color: #ec7139;
 }
 
@@ -885,20 +919,20 @@ th {
 }
 
 .dropdown .dropdown-menu li {
-    padding-top: 2px;
+    padding-top: 10px;
     padding-left: 13px;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-    background: rgba(0,0,0,.9);
+    background: #323b40;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-    background: rgba(0,0,0,.9);
+    background: #323b40;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
@@ -906,14 +940,24 @@ th {
 .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
     background: transparent;
 }
-
+.navbar-nav > li > a{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
 /*---------------------------------user account menu responsive------------------*/
 
 #block-user-account-menu-mobile hr {
     border: 0;
 }
-
+#block-user-account-menu-mobile .row{
+    display: none;
+}
+#block-user-account-menu-mobile .user-account-name{
+    color: #92c9bf;
+    padding-left: 45px;
+    padding-top: 10px;
+}
 #block-user-account-menu-mobile li a {
     color: #fff;
     padding-top: 11px;
@@ -924,17 +968,19 @@ th {
 }
 
 a[href^="/user/edit"]:before {
-    font-size: 15px;
+    font-size: 20px;
     margin-right: 25px;
     font-family: "Material Icons";
     content: "\E254";
+    color: #A7A9AC;
 }
 
 a[href^="/user/logout"]:before {
     content: "\f08b";
     font-family: fontAwesome;
-    font-size: 15px;
-    margin-right: 25px;
+    font-size: 20px;
+    margin-right: 26px;
+    color: #A7A9AC;
 }
 
 .caret {
@@ -1092,7 +1138,7 @@ a[href^="/user/logout"]:before {
 /*--------------------info and agenda---------------------------*/
 
 #block-views-block-decreto-my-meetings-block-my-meetings .panel-title {
-    background: #333;
+    background: #364045;
     color: #ffffff;
     cursor: pointer;
     padding-left: 13px;
@@ -1158,7 +1204,7 @@ a[href^="/user/logout"]:before {
 .nav-pills > li.active > a, 
 .nav-pills > li.active > a:hover,
  .nav-pills > li.active > a:focus{
-    background: #333;
+    background: #364045;
     color: #fff;
  }
 .contextual-region .panel-body {
@@ -1263,7 +1309,9 @@ a[href^="/user/logout"]:before {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
+#info .field--type-text-with-summary p{
+    background: #fbfbfb;
+}
 #info .field--type-text-with-summary .field--label:after {
     content: "\f107";
     font-family: fontAwesome;
@@ -1446,7 +1494,7 @@ a[href^="/user/logout"]:before {
 
 .col-md-9 .js-pager__items {
     background: #ffffff;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .js-pager__items {
@@ -1549,7 +1597,7 @@ a[href^="/user/logout"]:before {
 
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-title {
     font-size: 20px;
-    background: #333;
+    background: #364045;
     color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -1573,8 +1621,13 @@ a[href^="/user/logout"]:before {
     height: 40px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0 10px;
+    box-shadow: none;
+    outline: none;
 }
-
+.form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
 .form-control:focus {
     border: 1px solid #a8d3ce;
 }
@@ -1684,7 +1737,7 @@ a[href^="/user/logout"]:before {
 
 #js-bps-container:before {
     font-family: "Material Icons";
-    content: "\E146";
+    content: "\E145";
     float: left;
     margin-right: 10px;
     margin-top: -7px;
@@ -1704,7 +1757,9 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.6);
     transition: 0s!important
 }
-
+#decreto-content-modify-meeting-edit-form #edit-actions{
+    background: #FFFFFF
+}
 
 /*----------------------------this is for modal content------------------*/
 
@@ -1728,15 +1783,20 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.btn-success{
-    border: 1px solid #e95c1c;
-    background: #e95c1c;
+#decreto-content-modify-meeting-edit-form .btn-success{
+    border: 1px solid #ec7139;
+    background: #ec7139;
     color: #fff;
+    width: 100px;
 }
 .btn-success:hover,
 .btn-success:focus{
     background: #e95c1c!important;
     outline: none;
+}
+#drupal-modal .modal-footer .btn-success{
+    border: 1px solid #ec7139;
+    background: #ec7139;
 }
 .nav-tabs a {
     color: rgba(0, 0, 0, 0.6)
@@ -1879,12 +1939,22 @@ p:last-child {
     /*-------------------------------login page-------------------------*/
     #login-page .user-form-wrapper .user-form-form-wrapper {
     position: relative;
-    padding-top: 70px;
+    padding-top: 50px;
     }
     #login-page .region-content {
     width: 400px;
     background: #fbfbfb;
 }
+
+#signup-page .region-login {
+        width: 370px;
+        display: flex;
+    }
+     #signup-page .region-content {
+    width: 400px;
+    background: #fbfbfb;
+}
+    
     #block-decretologobrand .panel-body {
         margin-top: 50px;
         margin-bottom: 50px;
@@ -1919,6 +1989,9 @@ p:last-child {
         border: 1px solid #ebebec;
         box-shadow: none;
     }
+    #block-signuplink .panel-body:hover{
+        background: #ffffff;
+    }
     #signup_button{
         width: 400px;
     }
@@ -1944,6 +2017,7 @@ p:last-child {
     }
     .user-pass #edit-name{
         width: 400px!important;
+        height: 55px;
     }
     .user-pass p{
         width: 400px!important;
