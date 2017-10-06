@@ -35,7 +35,7 @@ body {
 #signup_button {
     background: #fbfbfb;
     padding: 0;
-    width: 290px;
+    width: 100%;
 }
 
 .decreto-dashboard-logo {
@@ -60,7 +60,7 @@ body {
     background: #fbfbfb;
 }
 #login-page .region-login{
-    width: 290px;
+    width: 100%;
     margin: 0 auto;
     background: #fbfbfb;
 }
@@ -125,6 +125,7 @@ body {
 #login-page {
     background: #fbfbfb;
     min-height: 100%;
+    padding: 0;
 }
 .col-md-12.toggle-menu.toggle-menu-right {
     padding-right: 0px;
@@ -174,11 +175,11 @@ th {
     padding-bottom: 0px;
 }
 #block-views-block-decreto-calender-calendar-block .today {
-    background: #ea6022!important;
-    color: #fff!important;
+    background: transparent;
+    color: #ea6022;
     border-radius: 100px!important;
-    width: 30px;
-    height: 30px;
+    cursor: pointer;
+    font-weight: 600;
 }
 .view-display-id-calendar_block a {
     color: #ea6022;
@@ -323,6 +324,9 @@ th {
     padding-top: 20px;
 }
 /*-------------------------------forgot-password-logo page-------------------------*/
+#forgot-password-page{
+    padding: 0;
+}
 #forgot-password-page .user-form-wrapper .user-form-form-wrapper {
     position: relative;
     padding-top: 50px;
@@ -343,6 +347,10 @@ th {
     padding-right: 15px;
     flex-direction: column;
     width: 100%;
+}
+#forgot-password-page .row{
+    margin-left: 15px;
+    margin-right: 15px;
 }
 #forgot-password-page .user-form-wrapper .user-form-header .user-form-header-logo {
     width: 100%;
@@ -474,8 +482,11 @@ th {
     display: none;
 }
 #login-page .region-content {
-    width: 290px;
+    width: 100%;
     background: #fbfbfb;
+}
+#login-page .row{
+    margin: 0;
 }
 .field--item {
     width: 100%;
@@ -533,7 +544,7 @@ th {
     margin-bottom: 40px;
 }
     #signup-page .user-register-form{
-        width: 290px!important;
+        width: 100%!important;
         margin: 20px auto;
     }
     .user-register-form #edit-mail{
@@ -546,7 +557,7 @@ th {
         box-shadow: none;
     }
     .user-register-form .username{
-        width: 290px!important;
+        width: 100%!important;
         margin: 0 auto;
         height: 40px;
         margin: 0;
@@ -690,7 +701,7 @@ th {
         background: #fbfbfb;
      }
      .user-pass #edit-name{
-        width: 290px;
+        width: 100%;
         height: 40px;
         border: 1px solid #ebebec;
      }
@@ -698,7 +709,7 @@ th {
         border: 1px solid #a8d3ce;
      }
      .user-pass p{
-        width: 290px;
+        width: 100%;
         margin: 0 auto 10px;
      }
      .user-pass #edit-submit{
@@ -1057,7 +1068,8 @@ a[href^="/user/logout"]:before {
     padding-top: 1px;
     padding-bottom: 0;
     margin-bottom: 10px;
-    box-shadow: 5px 5px 10px 10px #ebebec;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 
@@ -1067,11 +1079,12 @@ a[href^="/user/logout"]:before {
 }
 
 .panel-default > .panel-heading {
-    background: #ffffff;
+    background: white;
     border-radius: initial;
     height: 100%;
     border: none;
-    border-radius: 5px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 .panel-title:hover {
     background: transparent;
@@ -1134,7 +1147,7 @@ a[href^="/user/logout"]:before {
 .pagination > .active > span:focus{
     background-color: transparent;
     border-color: transparent;
-    color: #bbcace;
+    color: #bfbfbf;
     font-weight: 700;
     padding: 0;
     padding-left: 9px;
@@ -1142,7 +1155,7 @@ a[href^="/user/logout"]:before {
 .pagination > li > a, .pagination > li > span{
     background-color: transparent;
     border-color: transparent;
-    color: #5c777f;
+    color: #838383;
     padding: 0;
     padding-left: 10px;
     font-family: 'Kameron', serif;
@@ -1153,6 +1166,7 @@ a[href^="/user/logout"]:before {
 .pagination > li > span:focus{
     background-color: transparent;
     border-color: transparent;
+    color: #bfbfbf;
 }
 .pager__item.pager__item--first {
     display: none;
@@ -1164,9 +1178,12 @@ a[href^="/user/logout"]:before {
 
 
 /*--------------------info and agenda---------------------------*/
+.cd-stretchy-nav.edit-content{
+    right: 10px;
+}
 
 #block-views-block-decreto-my-meetings-block-my-meetings .panel-title {
-    background: #ffffff;
+    background: transparent;
     color: #364045;
     cursor: pointer;
     padding-left: 7px;
@@ -1498,7 +1515,7 @@ a[href^="/user/logout"]:before {
     font-family: "Material Icons";
     content: "\E7fb";
     display: inline-block;
-    margin-right: 9px;
+    margin-right: 6.5px;
     margin-left: 3px;
     color: rgba(0, 0, 0, 0.6);
 }
@@ -1507,7 +1524,7 @@ a[href^="/user/logout"]:before {
     font-family: "Material Icons";
     content: "\E873";
     display: inline-block;
-    margin-right: 9px;
+    margin-right: 6.5px;
     margin-left: 2px;
     color: rgba(0, 0, 0, 0.6);
 }
@@ -1556,7 +1573,10 @@ a[href^="/user/logout"]:before {
 .calendar-calendar td {
     color: #777;
 }
-
+.days.sun{
+        color: #ea6022;
+    border-bottom: 1px solid #777777;
+}
 .calendar-calendar th.days {
     background-color: #eee;
     color: #777;
@@ -1564,7 +1584,12 @@ a[href^="/user/logout"]:before {
     border: 1px solid #ccc;
     font-weight: bold;
 }
-
+.calendar-calendar .mini-day-off{
+    font-size: 16px;
+    height: 35px;
+    padding: 0;
+    margin: 0;
+}
 .calendar-calendar .month-view .full td.single-day .calendar-empty,
 .calendar-calendar .month-view .full td.single-day.empty,
 .calendar-calendar .month-view .full td.date-box.empty {
@@ -1627,15 +1652,16 @@ a[href^="/user/logout"]:before {
     padding-top: 1px;
     padding-bottom: 0;
     margin-bottom: 10px;
-    box-shadow: 5px 5px 10px 10px #ebebec;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 #block-views-block-decreto-all-meetings-block-all-meetings .panel-title {
     font-size: 20px;
     background: #ffffff;
     color: #364045;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     padding-left: 9px;
 }
 
@@ -1695,6 +1721,7 @@ a[href^="/user/logout"]:before {
 
 #cke_edit-description-value {
     border: 1px solid #ebebec;
+    box-shadow: none;
 }
 
 #edit-description-format {
@@ -1734,11 +1761,13 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
-
+input[type="file"]:focus{
+    border: none;
+    background: transparent;
+}
 #decreto-content-modify-meeting-edit-form .js-form-wrapper {
     margin: 0;
 }
-
 .path-meetings .decreto-bullet-point .btn-primary {
     background: transparent;
     margin-right: 10px;
@@ -2166,6 +2195,8 @@ p:last-child {
     /*---------------------------------column---3----------------------------*/
     .col-md-3 {
         margin-top: 20px;
+        padding-left: 0;
+        padding-right: 5px;
     }
     .col-md-3 .panel-heading {
         padding: 0;
@@ -2822,9 +2853,7 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
         text-align: center;
         border: none;
         border-bottom: 1px solid;
-        height: 32px;
-        width: 32px;
-        font-size: 16px;
+        font-size: 13px;
         color: #777;
     }
 
@@ -2837,7 +2866,9 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     .calendar-calendar tr.even td.today {
         background-color: #ffb100;
         color: #21201d;
-        font-size: 16px;
+        font-size: 10px;
+        width: 20px;
+        height: 20px;
     }
     .pager {
         border-radius: none;

@@ -61,8 +61,8 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
+            previous: «
+            next: »
             first: ' '
             last: ' '
           expose:
@@ -364,16 +364,43 @@ display:
           plugin_id: field
       filters:
         status:
-          value: '1'
+          id: status
           table: users_field_data
           field: status
+          relationship: none
+          group_type: count_distinct
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
           plugin_id: boolean
           entity_type: user
           entity_field: status
-          id: status
-          expose:
-            operator: ''
-          group: 1
       sorts:
         field_decreto_meet_start_date_value:
           id: field_decreto_meet_start_date_value
@@ -419,6 +446,7 @@ display:
       use_more_text: ...
       link_url: '/search?commitee={{ raw_arguments.field_decreto_meet_committee_target_id }}'
       link_display: custom_url
+      group_by: true
     cache_metadata:
       max-age: 0
       contexts:
