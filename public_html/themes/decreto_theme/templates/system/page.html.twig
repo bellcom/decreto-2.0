@@ -74,11 +74,13 @@
                     {{ page.navigation }}
                     {# .btn-navbar is used as the toggle for collapsed navbar content #}
                     {% if page.navigation_collapsible %}
-                        <a class="hamburger-icon" data-toggle="collapse"
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
                                 data-target="#navbar-collapse">
-                           <i class="fa fa-bars" aria-hidden="true"></i>
-
-                        </a>
+                            <span class="sr-only">{{ 'Toggle navigation'|t }}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                     {% endif %}
                 </div>
 
@@ -95,12 +97,7 @@
     {% endblock %}
 {% endif %}
 
-{% if logged_in %}
-<div class="content-wrapper">
 <aside class="left-container toggle-menu-container {{ toggle_main_menu }} hidden-xs">
-  <div class="sidebar-logo">
-   <a class="sidebar-logo-file" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home"><span>Decreto</span></a>
-   </div>
     {# Sidebar First #}
     {% if page.sidebar_first %}
         {% block sidebar_first %}
@@ -108,11 +105,9 @@
         {% endblock %}
     {% endif %}
 </aside>
-{% endif %}
 
 {# Main #}
 {% block main %}
-   {% if logged_in %}
     <div role="main" class="main-container {{ container }} js-quickedit-main-content">
 
         <header class="row main-container__header hidden-xs">
@@ -123,8 +118,8 @@
                 {% endblock %}
             {% endif %}
         </header>
-      {% endif %}
-        <div class="row main-container__content-space">
+
+        <div class="row main-container__content">
             {# Content #}
             {% set content_classes = [
             page.sidebar_second ? 'col-md-9',
@@ -178,7 +173,7 @@
         </div>
     </div>
 {% endblock %}
-</div>
+
 {% if page.footer %}
     {% block footer %}
         <footer class="footer {{ container }}" role="contentinfo">

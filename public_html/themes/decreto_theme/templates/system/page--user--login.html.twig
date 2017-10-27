@@ -57,52 +57,68 @@
  */
 #}
 {% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{# Navbar #}
+{% if page.navigation or page.navigation_collapsible %}
+    {% block navbar %}
+        {% set navbar_classes = [
+        'navbar',
+        theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
+        theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
+        'visible-xs'
+        ] %}
+        <header{{ navbar_attributes.addClass(navbar_classes) }} id="navbar" role="banner">
+            {% if not navbar_attributes.hasClass('container') %}
+            <div class="{{ container }}">
+                {% endif %}
+                <div class="navbar-header">
+                    {{ page.navigation }}
+                    {# .btn-navbar is used as the toggle for collapsed navbar content #}
+                    {% if page.navigation_collapsible %}
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navbar-collapse">
+                            <span class="sr-only">{{ 'Toggle navigation'|t }}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    {% endif %}
+                </div>
 
-
-{% if logged_in %}
-<aside class="left-container toggle-menu-container {{ toggle_main_menu }} hidden-xs">
-    {# Sidebar First #}
-    {% if page.sidebar_first %}
-        {% block sidebar_first %}
-            {{ page.sidebar_first }}
-        {% endblock %}
-    {% endif %}
-</aside>
-
-  {% else %}
+                {# Navigation (collapsible) #}
+                {% if page.navigation_collapsible %}
+                    <div id="navbar-collapse" class="navbar-collapse collapse">
+                        {{ page.navigation_collapsible }}
+                    </div>
+                {% endif %}
+                {% if not navbar_attributes.hasClass('container') %}
+            </div>
+            {% endif %}
+        </header>
+    {% endblock %}
 {% endif %}
+
 
 
 {# Main #}
 {% block main %}
-    <div role="main" class="main-container {{ container }} js-quickedit-main-content" id="login-page">
-<div class="user-form-wrapper">
-      
-     
-            <div class="user-form-header">
+    <div role="main" class="login-page-main-container {{ container }} js-quickedit-main-content">
 
-        <!-- Begin - container -->
-        <div class="user-form-container">
+        <header class="row main-container__header hidden-xs">
+            {# Header #}
+            {% if page.header %}
+                {% block header %}
+                    {{ page.header }}
+                {% endblock %}
+            {% endif %}
+        </header>
 
-            <!-- Begin - logo -->
-            <a href="{{ front }}">
-             <img src="{{ base_path ~ directory }}/image/logo-2x.png" alt="Decreto Logo" />
-            </a>
-            <!-- End - logo -->
-
-        </div>
-        <!-- End - container -->
-
-            </div>
- 
-       <div class="user-form-form-wrapper">
         <div class="row main-container__content">
             {# Content #}
             {% set content_classes = [
             page.sidebar_second ? 'col-md-9',
             page.sidebar_second is empty ? 'col-md-12'
             ] %}
-            <section class="user-form-container">
+            <section{{ content_attributes.addClass(content_classes).addClass('main-login-page') }}>
 
                 {# Highlighted #}
                 {% if page.highlighted %}
@@ -117,11 +133,18 @@
                         {{ breadcrumb }}
                     {% endblock %}
                 {% endif %}
-                 {{ page.login }} 
+
                 {# Action Links #}
                 {% if action_links %}
                     {% block action_links %}
                         <ul class="action-links">{{ action_links }}</ul>
+                    {% endblock %}
+                {% endif %}
+
+                {# Help #}
+                {% if page.help %}
+                    {% block help %}
+                        {{ page.help }}
                     {% endblock %}
                 {% endif %}
 
@@ -130,9 +153,6 @@
                     <a id="main-content"></a>
                     {{ page.content }}
                 {% endblock %}
-                <div id="signup_button">
-                  {{ page.help }}
-                  </div>
             </section>
 
             {# Sidebar Second #}
@@ -144,14 +164,12 @@
                 {% endblock %}
             {% endif %}
         </div>
-        </div>
-        </div>
     </div>
 {% endblock %}
 
 {% if page.footer %}
     {% block footer %}
-        <footer class="footer {{ container }}" role="contentinfo">
+        <footer class="signup-account {{ container }}" role="contentinfo">
             {{ page.footer }}
         </footer>
     {% endblock %}

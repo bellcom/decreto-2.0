@@ -15,10 +15,12 @@
  * @ingroup templates
  */
 #}
-<div class="row">
+<div class="row" >
     <hr/>
 </div>
-<h4 class="user-account-name">{{ user.account.name }}</h4>
+<h4 class="user-name">
+{{ user.account.name }}
+    </h4>
 
 
 {% import _self as menus %}
