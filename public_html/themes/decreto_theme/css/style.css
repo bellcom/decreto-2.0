@@ -605,8 +605,11 @@ input[type="edit-search-api-fulltext"].big-dog::-webkit-input-placeholder {
 .table-responsive > .table > thead > tr > td, 
 .table-responsive > .table > tbody > tr > td, 
 .table-responsive > .table > tfoot > tr > td{
-    white-space: inherit;
+    white-space: nowrap;
     padding: 10px;
+    width: 28%!important;
+    letter-spacing: .6px;
+    font-weight: 100;
 }
 .table > thead > tr > th, 
 .table > tbody > tr > th, 
@@ -905,6 +908,26 @@ a[href^="?page=0"] {
 .calendar-calendar .month-view table{
     font-size: 12px;
 }
+ .pager__item--previous a{
+    color: transparent!important;
+}
+ .pager__item--previous a:before{
+    font-family: "Material Icons"; 
+    content: "\E314"!important;
+    font-size: 16px;
+    color: #7e7777;
+    position: absolute;
+}
+.pager__item--next a{
+    color: transparent!important;
+}
+ .pager__item--next a:before{
+    font-family: "Material Icons"; 
+    content: "\E315"!important;
+    font-size: 16px;
+    color: #7e7777;
+    position: absolute;
+}
 .path-calendar-field-date .pager li > a, .pager li > span{
     color: #374146;
     font-weight: 100;
@@ -1176,6 +1199,9 @@ a[href^="/bullet_points"]:before{
 .user-logged-in.path-taxonomy .feed-icons a{
     padding-left: 13px;
 }
+.views-field .views-field-title a{
+    color: #40464d;
+}
 /*=============================desktop-pages==============================*/
    
 /* ---------------------------- General START---------------------------- */
@@ -1350,7 +1376,8 @@ ul.sf-menu.sf-vertical .sf-sub-indicator:after{
     background: #80c9c3;
 }
 .dropdown-menu > li > a{
-     padding: 3px 5px;
+    line-height: 2.5;
+    padding: 0
 }
 a[href^="/user/edit"]:before{
     top: 2px;
@@ -1732,7 +1759,7 @@ a[href^="/user/logout"]:before{
 }
 .toggle-menu-container #block-mainnavigation ul.sf-menu.sf-vertical li:hover > ul,
 .toggle-menu-container #block-mainnavigation ul.sf-menu.sf-vertical li.sfHover > ul {
-    left: 100px;
+    
 }
 
 .toggle-menu-container #block-mainnavigation .sf-depth-1 > .main-menu-link {
@@ -1780,6 +1807,12 @@ ul.sf-menu a, ul.sf-menu span.nolink{
 .toggle-menu-container.collapsed #block-decreto-theme-main-menu {
     display: none;
 }
+    ul.sf-menu ul{
+        position: initial!important;
+    }
+    ul.sf-menu.menu, ul.sf-menu.menu ul, ul.sf-menu.menu li{
+        position: static!important
+    }
 .toggle-menu-container.collapsed .block-superfishmain {
     display: block;
     margin-top: 80px;
@@ -2026,9 +2059,26 @@ a.annotator-wrapper {
 }
     
     
-    .sf-depth-1.menuparent.sfHover s{
-        display: none;
+.sf-depth-1.menuparent.sfHover s{
+    display: none;
     }
+/*-----------------after login--page-directed-------------*/
+.label{
+    color: #333333;
+    font-size: 16px;
+    font-weight: 100;
+    padding-left: 15px;
+}
+.field--name-field-decreto-usr-coms{
+    padding-left: 15px;
+}
+.field--name-field-decreto-usr-coms .field--label{
+    font-weight: 100;
+}
+.field--name-field-decreto-usr-coms .field__items{
+    margin-top: 10px;
+    font-weight: 100;
+}
 /*-----------------------------end----------------------------*/
 @media only screen and (min-width: 1200px){
     .search-action-page{
