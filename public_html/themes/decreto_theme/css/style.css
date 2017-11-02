@@ -908,10 +908,10 @@ a[href^="?page=0"] {
 .calendar-calendar .month-view table{
     font-size: 12px;
 }
- .pager__item--previous a{
+.col-md-3 .pager__item--previous a{
     color: transparent!important;
 }
- .pager__item--previous a:before{
+.col-md-3 .pager__item--previous a:before{
     font-family: "Material Icons"; 
     content: "\E314"!important;
     font-size: 16px;
@@ -921,7 +921,7 @@ a[href^="?page=0"] {
 .pager__item--next a{
     color: transparent!important;
 }
- .pager__item--next a:before{
+.col-md-3 .pager__item--next a:before{
     font-family: "Material Icons"; 
     content: "\E315"!important;
     font-size: 16px;
