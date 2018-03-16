@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\bootstrap\Bootstrap.
- */
 
 namespace Drupal\bootstrap;
 
@@ -65,14 +61,14 @@ class Bootstrap {
    *
    * @var string
    */
-  const FRAMEWORK_VERSION = '3.3.5';
+  const FRAMEWORK_VERSION = '3.3.7';
 
   /**
    * The Bootstrap Framework documentation site.
    *
    * @var string
    */
-  const FRAMEWORK_HOMEPAGE = 'http://getbootstrap.com';
+  const FRAMEWORK_HOMEPAGE = 'https://getbootstrap.com/docs/3.3/';
 
   /**
    * The Bootstrap Framework repository.
@@ -93,7 +89,7 @@ class Bootstrap {
    *
    * @var string
    */
-  const PROJECT_DOCUMENTATION = 'http://drupal-bootstrap.org';
+  const PROJECT_DOCUMENTATION = 'https://drupal-bootstrap.org';
 
   /**
    * The Drupal Bootstrap project page.
@@ -171,15 +167,37 @@ class Bootstrap {
    *   associative array as described above.
    */
   public static function alter($function, &$data, &$context1 = NULL, &$context2 = NULL) {
-    static $theme;
-    if (!isset($theme)) {
-      $theme = self::getTheme();
-    }
+    // Do not statically cache this as the active theme may change.
+    $theme = static::getTheme();
+    $theme_name = $theme->getName();
 
     // Immediately return if the active theme is not Bootstrap based.
     if (!$theme->isBootstrap()) {
       return;
     }
+
+    // Handle alter and form managers.
+    static $drupal_static_fast;
+    if (!isset($drupal_static_fast)) {
+      $drupal_static_fast['alter_managers'] = &drupal_static(__METHOD__ . '__alterManagers', []);
+      $drupal_static_fast['form_managers'] = &drupal_static(__METHOD__ . '__formManagers', []);
+    }
+
+    /* @var \Drupal\bootstrap\Plugin\AlterManager[] $alter_managers */
+    $alter_managers = &$drupal_static_fast['alter_managers'];
+    if (!isset($alter_managers[$theme_name])) {
+      $alter_managers[$theme_name] = new AlterManager($theme);
+    }
+
+    /* @var \Drupal\bootstrap\Plugin\FormManager[] $form_managers */
+    $form_managers = &$drupal_static_fast['form_managers'];
+    if (!isset($form_managers[$theme_name])) {
+      $form_managers[$theme_name] = new FormManager($theme);
+    }
+
+    // Retrieve the alter and form managers for this theme.
+    $alter_manager = $alter_managers[$theme_name];
+    $form_manager = $form_managers[$theme_name];
 
     // Extract the alter hook name.
     $hook = Unicode::extractHook($function, 'alter');
@@ -192,7 +210,7 @@ class Bootstrap {
       // Due to a core bug that affects admin themes, we should not double
       // process the "system_theme_settings" form twice in the global
       // hook_form_alter() invocation.
-      // @see https://drupal.org/node/943212
+      // @see https://www.drupal.org/node/943212
       if ($form_id === 'system_theme_settings') {
         return;
       }
@@ -217,9 +235,6 @@ class Bootstrap {
         $ids[] = $form_id;
       }
 
-      // Retrieve a list of form definitions.
-      $form_manager = new FormManager($theme);
-
       // Iterate over each form identifier and look for a possible plugin.
       foreach ($ids as $id) {
         /** @var \Drupal\bootstrap\Plugin\Form\FormInterface $form */
@@ -232,9 +247,6 @@ class Bootstrap {
     }
     // Process hook alter normally.
     else {
-      // Retrieve a list of alter definitions.
-      $alter_manager = new AlterManager($theme);
-
       /** @var \Drupal\bootstrap\Plugin\Alter\AlterInterface $class */
       if ($alter_manager->hasDefinition($hook) && ($class = $alter_manager->createInstance($hook, ['theme' => $theme]))) {
         $class->alter($data, $context1, $context2);
@@ -340,10 +352,11 @@ class Bootstrap {
           // Primary class.
           t('Confirm')->render()            => 'primary',
           t('Filter')->render()             => 'primary',
+          t('Log in')->render()             => 'primary',
           t('Submit')->render()             => 'primary',
           t('Search')->render()             => 'primary',
           t('Settings')->render()           => 'primary',
-          t('Log in')->render()             => 'primary',
+          t('Upload')->render()             => 'primary',
 
           // Danger class.
           t('Delete')->render()             => 'danger',
@@ -434,10 +447,10 @@ class Bootstrap {
    */
   public static function extraVariables() {
     return [
-      // @see https://drupal.org/node/2035055
+      // @see https://www.drupal.org/node/2035055
       'context' => [],
 
-      // @see https://drupal.org/node/2219965
+      // @see https://www.drupal.org/node/2219965
       'icon' => NULL,
       'icon_position' => 'before',
       'icon_only' => FALSE,
@@ -462,12 +475,11 @@ class Bootstrap {
     }
 
     static $themes = [];
-    static $active_theme;
-    if (!isset($active_theme)) {
-      $active_theme = \Drupal::theme()->getActiveTheme()->getName();
-    }
+
+    // Retrieve the active theme.
+    // Do not statically cache this as the active theme may change.
     if (!isset($name)) {
-      $name = $active_theme;
+      $name = \Drupal::theme()->getActiveTheme()->getName();
     }
 
     if (!isset($theme_handler)) {
@@ -523,7 +535,7 @@ class Bootstrap {
 
     $hooks['bootstrap_dropdown'] = [
       'variables' => [
-        'alignment' => NULL,
+        'alignment' => 'down',
         'attributes' => [],
         'items' => [],
         'split' => FALSE,
@@ -584,7 +596,7 @@ class Bootstrap {
    *   The render containing the icon defined by $name, $default value if
    *   icon does not exist or returns NULL if no icon could be rendered.
    */
-  public static function glyphicon($name, $default = []) {
+  public static function glyphicon($name, array $default = []) {
     $icon = [];
 
     // Ensure the icon specified is a valid Bootstrap Glyphicon.
@@ -624,11 +636,11 @@ class Bootstrap {
    * @param array $default
    *   The default render array to return if no match is found.
    *
-   * @return string
+   * @return array
    *   The Bootstrap icon matched against the value of $haystack or $default if
    *   no match could be made.
    */
-  public static function glyphiconFromString(&$value, $default = []) {
+  public static function glyphiconFromString(&$value, array $default = []) {
     static $lang;
     if (!isset($lang)) {
       $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -995,6 +1007,8 @@ class Bootstrap {
         'glyphicon-xbt' => 'xbt',
       ]);
       $versions['3.3.5'] = $versions['3.3.4'];
+      $versions['3.3.6'] = $versions['3.3.5'];
+      $versions['3.3.7'] = $versions['3.3.6'];
     }
 
     // Return a specific versions icon set.
@@ -1091,14 +1105,39 @@ class Bootstrap {
    *   The theme hook info.
    */
   public static function preprocess(array &$variables, $hook, array $info) {
-    static $theme;
-    if (!isset($theme)) {
-      $theme = self::getTheme();
+    // Do not statically cache this as the active theme may change.
+    $theme = static::getTheme();
+    $theme_name = $theme->getName();
+
+    // Handle preprocess managers.
+    static $drupal_static_fast;
+    if (!isset($drupal_static_fast)) {
+      $drupal_static_fast['preprocess_managers'] = &drupal_static(__METHOD__ . '__preprocessManagers', []);
+      $drupal_static_fast['theme_info'] = &drupal_static(__METHOD__ . '__themeInfo', []);
     }
-    static $preprocess_manager;
-    if (!isset($preprocess_manager)) {
-      $preprocess_manager = new PreprocessManager($theme);
+
+    /* @var \Drupal\bootstrap\Plugin\PreprocessManager[] $preprocess_managers */
+    $preprocess_managers = &$drupal_static_fast['preprocess_managers'];
+    if (!isset($preprocess_managers[$theme_name])) {
+      $preprocess_managers[$theme_name] = new PreprocessManager($theme);
     }
+
+    // Retrieve the theme info that will be used in the variables.
+    $theme_info = &$drupal_static_fast['theme_info'];
+    if (!isset($theme_info[$theme_name])) {
+      $theme_info[$theme_name] = $theme->getInfo();
+      $theme_info[$theme_name]['dev'] = $theme->isDev();
+      $theme_info[$theme_name]['livereload'] = $theme->livereloadUrl();
+      $theme_info[$theme_name]['name'] = $theme->getName();
+      $theme_info[$theme_name]['path'] = $theme->getPath();
+      $theme_info[$theme_name]['title'] = $theme->getTitle();
+      $theme_info[$theme_name]['settings'] = $theme->settings()->get();
+      $theme_info[$theme_name]['has_glyphicons'] = $theme->hasGlyphicons();
+      $theme_info[$theme_name]['query_string'] = \Drupal::getContainer()->get('state')->get('system.css_js_query_string') ?: '0';
+    }
+
+    // Retrieve the preprocess manager for this theme.
+    $preprocess_manager = $preprocess_managers[$theme_name];
 
     // Adds a global "is_front" variable back to all templates.
     // @see https://www.drupal.org/node/2829585
@@ -1116,25 +1155,10 @@ class Bootstrap {
       $variables = NestedArray::mergeDeepArray([$info['variables'], $variables], TRUE);
     }
 
-    // Add extra variables to all theme hooks.
-    foreach (Bootstrap::extraVariables() as $key => $value) {
-      if (!isset($variables[$key])) {
-        $variables[$key] = $value;
-      }
-    }
-
     // Add active theme context.
     // @see https://www.drupal.org/node/2630870
     if (!isset($variables['theme'])) {
-      $variables['theme'] = $theme->getInfo();
-      $variables['theme']['dev'] = $theme->isDev();
-      $variables['theme']['livereload'] = $theme->livereloadUrl();
-      $variables['theme']['name'] = $theme->getName();
-      $variables['theme']['path'] = $theme->getPath();
-      $variables['theme']['title'] = $theme->getTitle();
-      $variables['theme']['settings'] = $theme->settings()->get();
-      $variables['theme']['has_glyphicons'] = $theme->hasGlyphicons();
-      $variables['theme']['query_string'] = \Drupal::getContainer()->get('state')->get('system.css_js_query_string') ?: '0';
+      $variables['theme'] = $theme_info[$theme_name];
     }
 
     // Invoke necessary preprocess plugin.

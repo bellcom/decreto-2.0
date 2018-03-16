@@ -1,12 +1,7 @@
 <?php
-/**
- * @file
- * Contains \Drupal\bootstrap\Plugin\Alter\ElementInfo.
- */
 
 namespace Drupal\bootstrap\Plugin\Alter;
 
-use Drupal\bootstrap\Annotation\BootstrapAlter;
 use Drupal\bootstrap\Bootstrap;
 use Drupal\bootstrap\Plugin\PluginBase;
 use Drupal\bootstrap\Plugin\PrerenderManager;
@@ -28,6 +23,7 @@ class ElementInfo extends PluginBase implements AlterInterface {
     // Sort the types for easier debugging.
     ksort($types, SORT_NATURAL);
 
+    $extra_variables = Bootstrap::extraVariables();
     $process_manager = new ProcessManager($this->theme);
     $pre_render_manager = new PrerenderManager($this->theme);
 
@@ -56,10 +52,10 @@ class ElementInfo extends PluginBase implements AlterInterface {
         $element['#panel_type'] = 'default';
       }
 
-      // Add extra variables to all elements.
-      foreach (Bootstrap::extraVariables() as $key => $value) {
-        if (!isset($variables["#$key"])) {
-          $variables["#$key"] = $value;
+      // Add extra variables as defaults to all elements.
+      foreach ($extra_variables as $key => $value) {
+        if (!isset($element["#$key"])) {
+          $element["#$key"] = $value;
         }
       }
 
