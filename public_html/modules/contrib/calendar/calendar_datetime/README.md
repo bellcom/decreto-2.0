@@ -14,9 +14,9 @@ programming changes**.
 
 ## Current Core Patches
  
-1. [#2567815] Can't select granularity on date argument.
+1. ~~[#2567815] Can't select granularity on date argument.
  *Patch*: https://www.drupal.org/files/issues/can_t_select-2567815-13.patch
- *Purpose*: Adds extra Views arguments for Date granularity.
+ *Purpose*: Adds extra Views arguments for Date granularity.~~
 2. [#2325899] Error when setting current day as default argument.
  *Patch*: https://www.drupal.org/files/issues/views_argument_handlers-2325899-39.patch
  *Purpose*: Allow current date to be default argument.
