@@ -1,9 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\calendar\DateArgumentWrapper.
- */
-
 
 namespace Drupal\calendar;
 
@@ -103,7 +98,11 @@ class DateArgumentWrapper {
       $date->setISODate($year, $month);
     }
     else {
-      $date =  \DateTime::createFromFormat($this->getArgFormat(), $value);
+      // Adds a ! character to the format so that the date is reset instead of
+      // using the current day info, which can lead to issues for months with
+      // 31 days.
+      $format = '!' . $this->getArgFormat();
+      $date =  \DateTime::createFromFormat($format, $value);
     }
     return $date;
   }
@@ -200,7 +199,7 @@ class DateArgumentWrapper {
     if ($this->getArgFormat() == 'YW') {
       $info = $this->getYearWeek($value);
       // Find the max week for a year. Some years start a 53rd week.
-      $max_week = gmdate("W", strtotime("31 December {$info['year']}"));
+      $max_week = gmdate("W", strtotime("28 December {$info['year']}"));
       return $info['week'] >= 1 && $info['week'] <= $max_week;
 
     }

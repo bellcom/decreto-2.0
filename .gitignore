@@ -16,3 +16,4 @@ settings.local.php
 services.yml
 drupal8_decreto_dk_2017-09-20.sql.gz
 public_html/sites/default/services.yml
+vendor

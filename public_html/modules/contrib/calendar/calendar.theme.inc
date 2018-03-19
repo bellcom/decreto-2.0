@@ -16,15 +16,15 @@ function template_preprocess_calendar_month(&$vars) {
   $view = $vars['view'];
   $rows = $vars['rows'];
   if (empty($rows)) {
-    $rows = array();
-    $day_names = array();
+    $rows = [];
+    $day_names = [];
   }
   elseif (sizeof($rows) > 1) {
     $day_names = array_shift($rows);
   }
   else {
     $day_names = $rows;
-    $rows = array();
+    $rows = [];
   }
 
   $month_rows = $rows;
@@ -250,7 +250,7 @@ function template_preprocess_calendar_day(&$vars) {
         $next_start_time = array_shift($start_times);
       }
       if (!array_key_exists($start_time, $grouped_items)) {
-        $grouped_items[$start_time]['values'] = array();
+        $grouped_items[$start_time]['values'] = [];
       }
       $start_time = $next_start_time;
       $next_start_time = count($start_times) ? array_shift($start_times) : $end_start_time;
@@ -262,11 +262,11 @@ function template_preprocess_calendar_day(&$vars) {
   $start_times = array_keys($grouped_items);
   foreach ($start_times as $start_time) {
     $next_start_time = array_key_exists($i + 1, $start_times) ? $start_times[$i + 1] : '23:59:59';
-    $variables = array(
+    $variables = [
       'start_time' => $start_time,
       'next_start_time' => $next_start_time,
       'curday_date' => $rows['#date'],
-    );
+    ];
 
     $heading = template_preprocess_calendar_time_row_heading($variables);
 
@@ -481,7 +481,7 @@ function template_preprocess_calendar_week(&$vars) {
             $next_start_time = array_shift($start_times);
           }
           if (!array_key_exists($start_time, $grouped_items)) {
-            $grouped_items[$start_time]['values'][$wday] = array();
+            $grouped_items[$start_time]['values'][$wday] = [];
           }
           $start_time = $next_start_time;
           $next_start_time = count($start_times) ? array_shift($start_times) : $end_start_time;
@@ -496,11 +496,11 @@ function template_preprocess_calendar_week(&$vars) {
   $start_times = array_keys($grouped_items);
   foreach ($start_times as $start_time) {
     $next_start_time = array_key_exists($i + 1, $start_times) ? $start_times[$i + 1] : '23:59:59';
-    $variables = array(
+    $variables = [
       'start_time' => $start_time,
       'next_start_time' => $next_start_time,
       'curday_date' => (isset($row['data'])) ? $row['data']['date'] : NULL,
-    );
+    ];
 
     $heading = template_preprocess_calendar_time_row_heading($variables);
 
@@ -569,10 +569,10 @@ function template_preprocess_calendar_item(&$vars) {
   /** @var \Drupal\calendar\CalendarEvent $item */
   $item = $vars['item'];
 
-  $multiday_hidden = !empty($vars['view']->style_options['multiday_hidden']) ? $vars['view']->style_options['multiday_hidden'] : array();
+  $multiday_hidden = !empty($vars['view']->style_options['multiday_hidden']) ? $vars['view']->style_options['multiday_hidden'] : [];
 
   if (!empty($item->getRenderedFields()) && empty($item->getIsMultiDay())) {
-    $vars['rendered_fields'] = array($item->getRenderedFields());
+    $vars['rendered_fields'] = [$item->getRenderedFields()];
   }
   foreach ($vars['view']->field as $id => $field) {
     foreach ($vars['rendered_fields'] as $index => &$render_array) {
@@ -692,7 +692,7 @@ function template_preprocess_calendar_time_row_heading($vars) {
   }
   elseif ($start_time == '00:00:00') {
     $date = date_create($curday_date . ' ' . $next_start_time);
-    $hour = t('Before @time', array('@time' => date_format($date, $format_hour)));
+    $hour = t('Before @time', ['@time' => date_format($date, $format_hour)]);
   }
   else {
     $date = date_create($curday_date . ' ' . $start_time);
@@ -742,7 +742,7 @@ function template_preprocess_calendar_stripe_legend(&$vars) {
       $vocabularies = (array) $row_options['colors']['calendar_colors_vocabulary'];
       $term_colors = $row_options['colors']['calendar_colors_taxonomy'];
       foreach ($vocabularies as $field_name => $vid) {
-        $vocab = \Drupal::entityManager()->getStorage("taxonomy_term")->loadTree($vid);
+        $vocab = \Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadTree($vid);
         foreach ($vocab as $key => $term) {
           $options[$term->tid] = $term->name;
         }
@@ -821,7 +821,7 @@ function _calc_indents(&$overlapped_items, $start, $end, &$item, $depth = 0) {
       if ($start >= $entry['start'] && $start < $entry['end']) {
 
         // We overlap, create an overlapping entry
-        $entry['children'][] = array('item' => &$item, 'depth' => $depth + 1, 'start' => $start, 'end' => $end, 'children' => array());
+        $entry['children'][] = ['item' => &$item, 'depth' => $depth + 1, 'start' => $start, 'end' => $end, 'children' => []];
         if (is_object($entry['item'])) {
           $max_depth = max($entry['item']->max_depth, $depth + 1);
           $entry['item']->indent = _calc_indent($depth, $max_depth);
@@ -842,24 +842,24 @@ function _calc_indents(&$overlapped_items, $start, $end, &$item, $depth = 0) {
         }
 
         // We overlap, so pop out of this depth
-        return array('overlap' => TRUE, 'max_depth' => $max_depth);
+        return ['overlap' => TRUE, 'max_depth' => $max_depth];
       }
     }
 
     // If there are items at this depth, but no overlap, then return no overlap and pop
     // out of this depth
     if ($depth > 0) {
-      return array('overlap' => FALSE, 'max_depth' => 0);
+      return ['overlap' => FALSE, 'max_depth' => 0];
     }
   }
 
   // No overlap at any depth, reset the array of overlaps
   if ($depth == 0) {
     reset($overlapped_items);
-    $overlapped_items[0] = array('item' => &$item, 'depth' => $depth, 'start' => $start, 'end' => $end, 'children' => array());
+    $overlapped_items[0] = ['item' => &$item, 'depth' => $depth, 'start' => $start, 'end' => $end, 'children' => []];
   }
   else {
-    $overlapped_items[] = array('item' => &$item, 'depth' => $depth, 'start' => $start, 'end' => $end, 'children' => array());
+    $overlapped_items[] = ['item' => &$item, 'depth' => $depth, 'start' => $start, 'end' => $end, 'children' => []];
   }
 
   if (is_object($item)) {
@@ -870,7 +870,7 @@ function _calc_indents(&$overlapped_items, $start, $end, &$item, $depth = 0) {
     $item['indent'] = _calc_indent($depth, $depth);
     $item['max_depth'] = $depth;
   }
-  return array('overlap' => FALSE, 'max_depth' => $depth);
+  return ['overlap' => FALSE, 'max_depth' => $depth];
 }
 
 /**

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\calendar\Plugin\views\style\Calendar.
- */
-
 namespace Drupal\calendar\Plugin\views\style;
 
 use Drupal\calendar\CalendarDateInfo;
@@ -86,18 +81,18 @@ class Calendar extends StylePluginBase {
    *
    * Example:
    * @code
-   * $items = array(
-   *   "2015-10-20" => array(
-   *     "00:00:00" => array(
+   * $items = [
+   *   "2015-10-20" => [
+   *     "00:00:00" => [
    *        0 => Drupal\calendar\CalendarEvent,
-   *      ),
-   *   ),
-   *   "2015-10-21" => array(
-   *     "00:00:00" => array(
+   *      ],
+   *   ],
+   *   "2015-10-21" => [
+   *     "00:00:00" => [
    *        0 => Drupal\calendar\CalendarEvent,
-   *      ),
-   *   ),
-   * );
+   *      ],
+   *   ],
+   * ];
    * @endcode
    *
    * @var array
@@ -466,7 +461,7 @@ class Calendar extends StylePluginBase {
        $msg = 'No calendar date argument value was provided.';
       }
       else {
-        $msg = t('The value <strong>@value</strong> is a valid date argument for @granularity',
+        $msg = t('The value <strong>@value</strong> is not a valid date argument for @granularity',
           [
             '@value' => $argument->getDateArg()->getValue(),
             '@granularity' => $argument->getGranularity(),
@@ -976,7 +971,7 @@ class Calendar extends StylePluginBase {
       $rows[$week][] = [
         'data' => $week_number,
         'class' => 'mini week',
-        'id' => $this->view->name . '-weekno-' . $current_day_date,
+        'id' => $this->view->id() . '-weekno-' . $current_day_date,
       ];
     }
 
