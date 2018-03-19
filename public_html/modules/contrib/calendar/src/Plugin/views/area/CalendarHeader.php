@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\calendar\Plugin\views\area\CalendarHeader.
- */
-
 namespace Drupal\calendar\Plugin\views\area;
 
 use Drupal\calendar\CalendarHelper;
@@ -29,8 +24,8 @@ class CalendarHeader extends TokenizeAreaPluginBase {
     $options['tokenize']['default'] = TRUE;
     $options['empty']['default'] = TRUE;
     // Provide our own defaults.
-    $options['content'] = array('default' => '');
-    $options['pager_embed'] = array('default' => FALSE);
+    $options['content'] = ['default' => ''];
+    $options['pager_embed'] = ['default' => FALSE];
     return $options;
   }
 
@@ -40,16 +35,16 @@ class CalendarHeader extends TokenizeAreaPluginBase {
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
-    $form['content'] = array(
+    $form['content'] = [
       '#title' => $this->t('Heading'),
       '#type' => 'textfield',
       '#default_value' => $this->options['content'],
-    );
-    $form['pager_embed'] = array(
+    ];
+    $form['pager_embed'] = [
       '#title' => $this->t('Use Pager'),
       '#type' => 'checkbox',
       '#default_value' => $this->options['pager_embed'],
-    );
+    ];
 
   }
 
@@ -65,12 +60,12 @@ class CalendarHeader extends TokenizeAreaPluginBase {
       $header_text = $this->renderTextField($this->options['content']);
 
       if (!$this->options['pager_embed']) {
-        $render = array(
+        $render = [
           '#theme' => 'calendar_header',
           '#title' => $header_text,
           '#empty' => $empty,
           '#granularity' => $argument->getGranularity(),
-        );
+        ];
       }
       else {
         if ($this->view->display_handler->renderPager()) {
@@ -85,7 +80,7 @@ class CalendarHeader extends TokenizeAreaPluginBase {
 
     }
 
-    return array();
+    return [];
   }
 
   /**

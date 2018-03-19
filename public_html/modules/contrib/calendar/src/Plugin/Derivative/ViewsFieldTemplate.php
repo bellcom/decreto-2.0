@@ -1,9 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\calendar\Plugin\Derivative\ViewsFieldTemplate.
- */
-
 
 namespace Drupal\calendar\Plugin\Derivative;
 
@@ -25,7 +20,7 @@ class ViewsFieldTemplate implements ContainerDeriverInterface {
    *
    * @var array
    */
-  protected $derivatives = array();
+  protected $derivatives = [];
 
   /**
    * The base plugin ID.

@@ -1,9 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\calendar\Plugin\views\pager\CalendarPager.
- */
-
 
 namespace Drupal\calendar\Plugin\views\pager;
 
@@ -44,6 +39,7 @@ class CalendarPager extends PagerPluginBase {
   public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
     parent::init($view, $display, $options);
     $this->argument = CalendarHelper::getDateArgumentHandler($this->view);
+    $this->setItemsPerPage(0);
   }
 
   /**
@@ -54,16 +50,16 @@ class CalendarPager extends PagerPluginBase {
       return [];
     }
     $items['previous'] = [
-      'url' => $this->getPagerURL($this::PREVIOUS),
+      'url' => $this->getPagerURL(self::PREVIOUS, $input),
     ];
     $items['next'] = [
-      'url' => $this->getPagerURL($this::NEXT),
+      'url' => $this->getPagerURL(self::NEXT, $input),
     ];
-    return array(
+    return [
       '#theme' => $this->themeFunctions(),
       '#items' => $items,
       '#exclude' => $this->options['exclude_display'],
-    );
+    ];
   }
 
   /**
@@ -84,11 +80,14 @@ class CalendarPager extends PagerPluginBase {
    * Get the href value for the pager link.
    *
    * @param $mode
-   *  Either '-' or '+' to determine which direction.
+   *   Either '-' or '+' to determine which direction.
+   * @param array $input
+   *   Any extra GET parameters that should be retained, such as exposed
+   *   input.
    *
    * @return string
    */
-  protected function getPagerURL($mode) {
+  protected function getPagerURL($mode, $input) {
     $value = $this->getPagerArgValue($mode);
     $base_path = $this->view->getPath();
     $current_position = 0;
@@ -105,9 +104,9 @@ class CalendarPager extends PagerPluginBase {
       }
       $current_position++;
     }
-    
+
     // @todo How do you get display_id here so we can use CalendarHelper::getViewsURL
-    return Url::fromUri('internal:/' . $base_path . '/' . implode('/', $arg_vals));
+    return Url::fromUri('internal:/' . $base_path . '/' . implode('/', $arg_vals), ['query' => $input]);
   }
 
   /**
@@ -128,7 +127,7 @@ class CalendarPager extends PagerPluginBase {
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
-    $options['exclude_display'] = array('default' => FALSE);
+    $options['exclude_display'] = ['default' => FALSE];
 
     return $options;
   }
