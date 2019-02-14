@@ -26,4 +26,7 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_decreto_usr_coms: true
+  field_decreto_usr_orgs: true
+  langcode: true
   member_for: true

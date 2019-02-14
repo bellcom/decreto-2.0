@@ -25,13 +25,16 @@ content:
     settings:
       trim_length: 600
     third_party_settings: {  }
+    region: content
   field_decreto_bpa_html:
     weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: decreto_pdf2htmlex_rendered_html_first_page
+    region: content
 hidden:
   field_decreto_bpa_file: true
   field_decreto_bpa_id: true
+  langcode: true
   links: true

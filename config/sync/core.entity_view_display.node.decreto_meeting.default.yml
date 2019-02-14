@@ -31,6 +31,7 @@ content:
     weight: 7
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_decreto_meet_bps:
     weight: 8
     label: hidden
@@ -39,6 +40,7 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
   field_decreto_meet_committee:
     weight: 2
     label: inline
@@ -46,6 +48,7 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   field_decreto_meet_end_date:
     weight: 4
     label: inline
@@ -54,6 +57,7 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
   field_decreto_meet_location:
     weight: 5
     label: inline
@@ -61,12 +65,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   field_decreto_meet_partic:
     weight: 6
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
   field_decreto_meet_start_date:
     weight: 3
     label: inline
@@ -75,17 +81,21 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
   field_decreto_meet_type:
     weight: 1
     label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
   links:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_decreto_meet_full_doc: true
   field_decreto_meet_full_doc_c: true
   field_decreto_meet_id: true
+  langcode: true

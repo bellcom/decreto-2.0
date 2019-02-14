@@ -8,7 +8,7 @@ _core:
   default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
 id: decreto_theme_local_tasks
 theme: decreto_theme
-region: '-1'
+region: navigation
 weight: -5
 provider: null
 plugin: local_tasks_block

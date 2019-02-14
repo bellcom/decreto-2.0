@@ -71,6 +71,7 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_decreto_meet_bps:
     weight: 10
     settings:
@@ -79,6 +80,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
   field_decreto_meet_committee:
     weight: 1
     settings:
@@ -87,23 +89,27 @@ content:
       placeholder: Committee
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
   field_decreto_meet_end_date:
     weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
   field_decreto_meet_full_doc:
     weight: 8
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
   field_decreto_meet_full_doc_c:
     weight: 9
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
   field_decreto_meet_location:
     weight: 4
     settings:
@@ -112,6 +118,7 @@ content:
       placeholder: Location
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
   field_decreto_meet_partic:
     weight: 5
     settings:
@@ -119,16 +126,33 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
   field_decreto_meet_start_date:
     weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
   field_decreto_meet_type:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -136,6 +160,7 @@ content:
       size: 60
       placeholder: Title
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_decreto_meet_id: true

@@ -12,7 +12,7 @@ _core:
   default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
 id: decreto_theme_footer
 theme: decreto_theme
-region: '-1'
+region: navigation
 weight: -14
 provider: null
 plugin: 'system_menu_block:footer'

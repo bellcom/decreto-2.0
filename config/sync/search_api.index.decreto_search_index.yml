@@ -15,21 +15,14 @@ name: 'Decreto Search Index'
 description: ''
 read_only: false
 field_settings:
-  rendered_item:
-    label: 'Rendered HTML output'
-    property_path: rendered_item
-    type: text
-    configuration:
-      roles:
-        authenticated: authenticated
-      view_mode:
-        'entity:node':
-          decreto_meeting: default
-  title:
-    label: Title
+  field_decreto_meet_committee:
+    label: Committee
     datasource_id: 'entity:node'
-    property_path: title
-    type: text
+    property_path: field_decreto_meet_committee
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_committee
   field_decreto_meet_end_date:
     label: to
     datasource_id: 'entity:node'
@@ -46,14 +39,21 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_decreto_meet_start_date
-  field_decreto_meet_committee:
-    label: Committee
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        authenticated: authenticated
+      view_mode:
+        'entity:node':
+          decreto_meeting: default
+  title:
+    label: Title
     datasource_id: 'entity:node'
-    property_path: field_decreto_meet_committee
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_decreto_meet_committee
+    property_path: title
+    type: text
 datasource_settings:
   'entity:node':
     bundles:
@@ -67,8 +67,8 @@ datasource_settings:
       default: true
       selected: {  }
 processor_settings:
-  aggregated_field: {  }
   add_url: {  }
+  aggregated_field: {  }
   rendered_item: {  }
 tracker_settings:
   default: {  }

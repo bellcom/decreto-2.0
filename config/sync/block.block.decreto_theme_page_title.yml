@@ -8,7 +8,7 @@ _core:
   default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
 id: decreto_theme_page_title
 theme: decreto_theme
-region: '-1'
+region: navigation
 weight: -10
 provider: null
 plugin: page_title_block

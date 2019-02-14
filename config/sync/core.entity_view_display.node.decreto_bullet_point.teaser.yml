@@ -23,6 +23,7 @@ content:
       view_mode: teaser
       link: false
     third_party_settings: {  }
+    region: content
   field_decreto_bp_closed:
     type: boolean
     weight: 1
@@ -32,6 +33,8 @@ content:
       format_custom_true: ''
       format_custom_false: ''
     third_party_settings: {  }
+    region: content
 hidden:
   field_decreto_bp_id: true
+  langcode: true
   links: true

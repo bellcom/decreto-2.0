@@ -13,7 +13,7 @@ _core:
   default_config_hash: rx9IrdDv7Ldc4kpalZAxdhIPZfYIeOMh1N-qKoQZwHo
 id: decreto_theme_main_menu
 theme: decreto_theme
-region: '-1'
+region: navigation
 weight: -12
 provider: null
 plugin: 'system_menu_block:main'

@@ -6,7 +6,7 @@ dependencies:
     - decreto_theme
 id: decretousercommitteesblock
 theme: decreto_theme
-region: '-1'
+region: navigation
 weight: -11
 provider: null
 plugin: 'Decreto  User Committees Block'

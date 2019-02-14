@@ -17,6 +17,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   message:
     type: string
     weight: 0
@@ -24,4 +25,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-hidden: {  }
+    region: content
+hidden:
+  langcode: true
