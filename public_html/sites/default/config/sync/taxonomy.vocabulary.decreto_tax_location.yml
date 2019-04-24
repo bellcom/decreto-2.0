@@ -1,9 +1,0 @@
-uuid: 9f428f75-f4b8-4a2a-bd50-80a226df6d98
-langcode: en
-status: true
-dependencies: {  }
-name: Location
-vid: decreto_tax_location
-description: ''
-hierarchy: 0
-weight: 0
