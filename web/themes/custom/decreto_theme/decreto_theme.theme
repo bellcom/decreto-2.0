@@ -33,8 +33,6 @@ function decreto_theme_preprocess_block(&$vars) {
 }
 
 function decreto_theme_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
-  dpm('here');
-  dpm($route_match->getRouteName());
   if ($route_match->getRouteName() == 'view.decreto_search.page') {
     $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
   }
