@@ -1,0 +1,38 @@
+uuid: a6bdce35-1ddb-4db7-9fab-9d5adf899063
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_calender
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - test
+id: test_views_block__decreto_calender_calendar_block
+theme: test
+region: sidebar_second
+weight: -8
+provider: null
+plugin: 'views_block:decreto_calender-calendar_block'
+settings:
+  id: 'views_block:decreto_calender-calendar_block'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: "/node*\r\n/meetings*\r\n/calendar-field-date/month*\r\n\r\n"
+    negate: true
+    context_mapping: {  }

@@ -1,15 +1,17 @@
-uuid: 0eaf4ab6-9ba5-4b52-92f9-c8e83be48d10
+uuid: c9d51df1-38f4-4bf5-a702-2cfe6065b795
 langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_decreto_usr_coms
+    - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
     - user
 _core:
-  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
+  default_config_hash: LLAieeozVsoZDb-2PbFxRJpQqnKmpR7-4OoRJnduz-U
 id: user.user.default
 targetEntityType: user
 bundle: user
@@ -17,15 +19,41 @@ mode: default
 content:
   account:
     weight: -10
+    settings: {  }
+    third_party_settings: {  }
     region: content
   contact:
     weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_decreto_usr_coms:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_decreto_usr_orgs:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   language:
     weight: 0
+    settings: {  }
+    third_party_settings: {  }
     region: content
   timezone:
     weight: 6
+    settings: {  }
+    third_party_settings: {  }
     region: content
   user_picture:
     type: image_image
@@ -35,7 +63,4 @@ content:
     third_party_settings: {  }
     weight: -1
     region: content
-hidden:
-  field_decreto_usr_coms: true
-  field_decreto_usr_orgs: true
-  langcode: true
+hidden: {  }

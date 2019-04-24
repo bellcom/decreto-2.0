@@ -1,8 +1,8 @@
 country:
   default: ''
-first_day: 0
+first_day: 1
 timezone:
-  default: Europe/Tallinn
+  default: UTC
   user:
     configurable: true
     warn: false

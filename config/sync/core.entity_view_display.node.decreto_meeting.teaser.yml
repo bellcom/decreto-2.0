@@ -35,6 +35,8 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_decreto_meet_bps: true
   field_decreto_meet_committee: true
@@ -46,4 +48,3 @@ hidden:
   field_decreto_meet_partic: true
   field_decreto_meet_start_date: true
   field_decreto_meet_type: true
-  langcode: true

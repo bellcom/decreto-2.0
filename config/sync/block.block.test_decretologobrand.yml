@@ -1,0 +1,28 @@
+uuid: 969406b9-2689-4cf4-af6c-a304cff88a4e
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - test
+id: test_decretologobrand
+theme: test
+region: navigation
+weight: -15
+provider: null
+plugin: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
+settings:
+  id: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
+  label: 'Decreto Logo brand'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/register
+    negate: false
+    context_mapping: {  }

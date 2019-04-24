@@ -1,0 +1,29 @@
+uuid: cb5f3bd2-21ac-464b-a743-beb17e4f179e
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - decreto_theme
+id: user_account_menu_mobile
+theme: decreto_theme
+region: navigation_collapsible
+weight: -13
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

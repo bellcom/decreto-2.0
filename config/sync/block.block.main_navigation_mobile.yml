@@ -1,0 +1,29 @@
+uuid: 87d1df81-3545-4248-a03b-c8f360b8ccdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - decreto_theme
+id: main_navigation_mobile
+theme: decreto_theme
+region: navigation_collapsible
+weight: -14
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

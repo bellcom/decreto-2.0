@@ -1,4 +1,4 @@
-uuid: 56a050f1-dfb0-42e1-9349-114d41daa82e
+uuid: 93d5e097-ab6b-4597-b32a-42233d23cb95
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - file
     - user
 _core:
-  default_config_hash: rRWxAX-IQkJ5viACQRovRkC784EyCl9493GU_G23n2Q
+  default_config_hash: cd5WTpAoJg1rBLH-5w1C-GF477pRWanut86CCBMeUz0
 id: files
 label: Files
 module: file
@@ -250,7 +250,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'MIME type'
+          label: 'Mime type'
           exclude: false
           alter:
             alter_text: false
@@ -626,7 +626,7 @@ display:
           exposed: true
           expose:
             operator_id: filemime_op
-            label: 'MIME type'
+            label: 'Mime type'
             description: ''
             use_operator: false
             operator: filemime_op
@@ -726,7 +726,7 @@ display:
         - url
         - url.query_args
         - user.permissions
-      max-age: -1
+      max-age: 0
       tags: {  }
   page_1:
     display_plugin: page
@@ -742,6 +742,8 @@ display:
         menu_name: admin
         weight: 0
         context: ''
+        enabled: true
+        expanded: false
       display_description: ''
       defaults:
         pager: true
@@ -763,7 +765,7 @@ display:
         - url
         - url.query_args
         - user.permissions
-      max-age: -1
+      max-age: 0
       tags: {  }
   page_2:
     display_plugin: page
@@ -1114,11 +1116,14 @@ display:
           admin_label: 'File usage'
           required: true
       display_extenders: {  }
+      menu:
+        enabled: true
+        expanded: false
     cache_metadata:
       contexts:
         - 'languages:language_interface'
         - url
         - url.query_args
         - user.permissions
-      max-age: -1
+      max-age: 0
       tags: {  }

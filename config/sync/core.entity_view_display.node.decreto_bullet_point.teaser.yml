@@ -36,5 +36,4 @@ content:
     region: content
 hidden:
   field_decreto_bp_id: true
-  langcode: true
   links: true

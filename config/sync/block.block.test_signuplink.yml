@@ -1,0 +1,28 @@
+uuid: d21eca48-b60e-4d28-b81f-ec9714555ac6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - test
+id: test_signuplink
+theme: test
+region: help
+weight: -16
+provider: null
+plugin: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+settings:
+  id: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+  label: 'Sign Up Link'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/login
+    negate: false
+    context_mapping: {  }

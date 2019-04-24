@@ -1,0 +1,28 @@
+uuid: 0ff91b84-b539-4fbe-9b7b-451a1231f97a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - test
+id: test_menu_icon_links
+theme: test
+region: navigation
+weight: -2
+provider: null
+plugin: 'block_content:2a1d7782-a8a4-4f86-b502-7cde8718827c'
+settings:
+  id: 'block_content:2a1d7782-a8a4-4f86-b502-7cde8718827c'
+  label: menu_icon_links
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/login
+    negate: false
+    context_mapping: {  }

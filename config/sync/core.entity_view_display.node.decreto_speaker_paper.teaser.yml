@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.decreto_speaker_paper.body
+    - field.field.node.decreto_speaker_paper.field_decreto_sp_bp
     - node.type.decreto_speaker_paper
   module:
     - text
@@ -25,6 +26,7 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_decreto_sp_bp: true
-  langcode: true

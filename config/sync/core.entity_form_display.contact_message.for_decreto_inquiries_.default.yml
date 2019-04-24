@@ -13,6 +13,8 @@ content:
   copy:
     weight: 50
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_company:
     weight: 51
     settings:
@@ -21,16 +23,11 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   mail:
     weight: -40
     region: content
+    settings: {  }
+    third_party_settings: {  }
   message:
     type: string_textarea
     weight: 0
@@ -42,11 +39,13 @@ content:
   name:
     weight: -50
     region: content
-  preview:
-    weight: 40
     settings: {  }
     third_party_settings: {  }
+  preview:
+    weight: 40
     region: content
+    settings: {  }
+    third_party_settings: {  }
   subject:
     type: string_textfield
     weight: -10

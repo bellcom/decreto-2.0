@@ -25,5 +25,6 @@ content:
   links:
     weight: 100
     region: content
-hidden:
-  langcode: true
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

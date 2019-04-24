@@ -1,11 +1,11 @@
 uuid: 196fea27-f7ab-4490-8503-3c7e043adb18
 name: Decreto
-mail: stan@bellcom.ee
+mail: rks@bellcom.dk
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node
+  front: /home
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en

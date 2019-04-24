@@ -1,8 +1,9 @@
 favicon:
   mimetype: image/vnd.microsoft.icon
   path: ''
-  url: ''
+  url: 'http://decreto.devel.dk/themes/bootstrap/favicon.ico'
   use_default: true
+schema: 8000
 features:
   comment_user_picture: true
   comment_user_verification: true

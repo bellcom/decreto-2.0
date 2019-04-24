@@ -1,0 +1,38 @@
+uuid: c55d6697-853c-4792-a132-b6be3b6ae639
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_my_meetings_block
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - test
+id: test_views_block__decreto_my_meetings_block_my_meetings
+theme: test
+region: content
+weight: -15
+provider: null
+plugin: 'views_block:decreto_my_meetings_block-my_meetings'
+settings:
+  id: 'views_block:decreto_my_meetings_block-my_meetings'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

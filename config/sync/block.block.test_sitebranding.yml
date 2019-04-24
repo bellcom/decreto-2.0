@@ -1,0 +1,28 @@
+uuid: 29193e3d-6632-43b2-bd97-f180b7e2f974
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - test
+id: test_sitebranding
+theme: test
+region: navigation
+weight: -16
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

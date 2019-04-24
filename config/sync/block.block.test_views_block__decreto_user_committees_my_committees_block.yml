@@ -1,0 +1,38 @@
+uuid: f6c87c90-3ec3-4b42-8df5-171a095f1636
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_user_committees
+  module:
+    - system
+    - user
+    - views
+  theme:
+    - test
+id: test_views_block__decreto_user_committees_my_committees_block
+theme: test
+region: sidebar_second
+weight: -7
+provider: null
+plugin: 'views_block:decreto_user_committees-my_committees_block'
+settings:
+  id: 'views_block:decreto_user_committees-my_committees_block'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: "/node*\r\n/meetings*\r\n/calendar-field-date/month*"
+    negate: true
+    context_mapping: {  }

@@ -1,4 +1,4 @@
-uuid: 64678e86-2bb9-41f0-94cf-6e5813035104
+uuid: 61d8743c-ea6c-44fa-9400-c263e8a6bfed
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     - block_content
     - user
 _core:
-  default_config_hash: BmeDSOTSaTVy5QLgxgJ5ye_ZseG5t88JXRP1apFoBkk
+  default_config_hash: tp4wP6wVrEPZfApiCfkpoCxUzN-B1ceGcGv5sEzQ2Sg
 id: block_content
 label: 'Custom block library'
 module: views
@@ -395,7 +395,7 @@ display:
           plugin_id: string
         type:
           id: type
-          table: block_content_field_data
+          table: block_content
           field: type
           relationship: none
           group_type: group
@@ -455,8 +455,6 @@ display:
             required: false
             remember: false
             multiple: false
-            remember_roles:
-              authenticated: authenticated
           is_grouped: false
           group_info:
             label: ''
@@ -486,7 +484,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'There are no custom blocks available.'
+          content: 'There are no custom blocks available. '
           plugin_id: text_custom
         block_content_listing_empty:
           admin_label: ''
@@ -527,6 +525,8 @@ display:
         weight: 0
         context: '0'
         menu_name: admin
+        enabled: true
+        expanded: false
     cache_metadata:
       contexts:
         - 'languages:language_content'

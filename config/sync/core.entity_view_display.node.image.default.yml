@@ -1,0 +1,39 @@
+uuid: d3ed4140-bec8-4091-b6c1-d4c26dd4baed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.image.body
+    - field.field.node.image.field_imagelogo
+    - node.type.image
+  module:
+    - image
+    - text
+    - user
+id: node.image.default
+targetEntityType: node
+bundle: image
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_imagelogo:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
