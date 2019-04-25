@@ -151,9 +151,7 @@ class MeetingsEditForm extends FormBase {
       }
     }
 
-    if (!empty($bp_ids)) {
-      $form = CommonFormUtils::buildBulletPointsContainer($form, $bp_ids);
-    }
+    $form = CommonFormUtils::buildBulletPointsContainer($form, $bp_ids);
 
     $form['add_bp'] = [
       '#title' => $this->t('Add new bullet point'),

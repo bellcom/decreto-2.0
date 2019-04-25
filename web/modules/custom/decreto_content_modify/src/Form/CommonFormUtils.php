@@ -15,7 +15,7 @@ class CommonFormUtils {
 
     $form['bullet_points_container']['bp_nids'] = [
       '#type' => 'hidden',
-      '#default_value' => implode(',', $bp_nids),
+      '#default_value' => !empty($bp_nids)? implode(',', $bp_nids) : '',
       '#attributes' => ['id' => 'js-bp-nids'],
     ];
 
