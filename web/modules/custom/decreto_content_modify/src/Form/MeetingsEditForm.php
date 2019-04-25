@@ -146,8 +146,8 @@ class MeetingsEditForm extends FormBase {
       if (!$node->field_decreto_meet_full_doc_c->isEmpty()) {
         $form['full_doc_closed']['#default_value']['fid'] = $node->field_decreto_meet_full_doc_c->target_id;
       }
-      foreach ($node->field_decreto_meet_bps as $bp) {
-        $bp_ids[] = $bp->target_id;
+      foreach ($node->field_decreto_meet_bps->referencedEntities() as $bp) {
+        $bp_ids[] = $bp->id();
       }
     }
 
