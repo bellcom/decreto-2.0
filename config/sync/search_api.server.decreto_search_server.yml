@@ -2,6 +2,9 @@ uuid: 1999b135-c0ac-48f2-aebe-f522d5eada0b
 langcode: en
 status: true
 dependencies:
+  config:
+    - search_api_solr.solr_field_type.text_phonetic_und_7_0_0
+    - search_api_solr.solr_field_type.text_und_7_0_0
   module:
     - search_api_solr
 id: decreto_search_server
@@ -19,14 +22,14 @@ backend_config:
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10
+    finalize_timeout: 30
+    commit_within: 1000
     solr_version: ''
     http_method: AUTO
+    jmx: false
   retrieve_data: false
   highlight_data: false
   skip_schema_check: false
-  site_hash: true
-  autocorrect_spell: true
-  autocorrect_suggest_words: true
-  domain: generic
-  finalize_timeout: 30
   server_prefix: ''
+  domain: generic
+  site_hash: true

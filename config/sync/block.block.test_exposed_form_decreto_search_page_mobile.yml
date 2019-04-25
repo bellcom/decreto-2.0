@@ -1,6 +1,6 @@
 uuid: 5bc18aaf-fc2e-4b2a-a075-cfac7e70beee
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.decreto_search
@@ -11,7 +11,7 @@ dependencies:
     - test
 id: test_exposed_form_decreto_search_page_mobile
 theme: test
-region: navigation_collapsible
+region: ''
 weight: -15
 provider: null
 plugin: 'views_exposed_filter_block:decreto_search-page'
