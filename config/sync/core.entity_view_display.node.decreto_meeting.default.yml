@@ -98,3 +98,4 @@ hidden:
   field_decreto_meet_full_doc: true
   field_decreto_meet_full_doc_c: true
   field_decreto_meet_id: true
+  langcode: true

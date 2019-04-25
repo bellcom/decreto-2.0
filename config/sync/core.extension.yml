@@ -30,6 +30,7 @@ module:
   help: 0
   history: 0
   image: 0
+  language: 0
   link: 0
   menu_link_attributes: 0
   menu_ui: 0
@@ -63,7 +64,6 @@ theme:
   seven: 0
   bootstrap: 0
   decreto_theme: 0
-  test: 0
 profile: standard
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU

@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_decreto_usr_coms
+    - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -30,4 +32,5 @@ hidden:
   field_decreto_usr_orgs: true
   field_os2web_user_com: true
   field_os2web_user_org: true
+  langcode: true
   member_for: true

@@ -36,4 +36,5 @@ content:
 hidden:
   field_decreto_bpa_file: true
   field_decreto_bpa_id: true
+  langcode: true
   links: true
