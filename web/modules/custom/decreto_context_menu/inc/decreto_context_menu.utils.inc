@@ -64,25 +64,25 @@ function decreto_context_menu_get_menu_links($node, $view_mode) {
       );
     }
     $links[] = array(
-      'name' => 'SpeakerPaper',
-      'path' => Url::fromRoute('decreto_content_modify.sp_add', ['bullet_point' => $node->id()]),
-      'cssClass' => array('use-ajax', 'dec-quick-add-sp-link'),
+      'name' => 'Memo',
+      'path' => Url::fromRoute('decreto_content_modify.memo_add', ['bullet_point' => $node->id()]),
+      'cssClass' => array('use-ajax', 'dec-quick-add-memo-link'),
       'data' => array('dialog-type' => 'modal')
     );
   }
 
   //default links for decreto_meeting
-  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_speaker_paper') {
+  if (($view_mode == 'full' || $view_mode == 'teaser') && $node->getType() == 'decreto_memo') {
     $links[] = array(
       'name' => 'Edit',
-      'path' => Url::fromRoute('decreto_content_modify.sp_edit', ['node' => $node->id()]),
-      'cssClass' => array('use-ajax', 'dec-quick-edit-sp-link'),
+      'path' => Url::fromRoute('decreto_content_modify.memo_edit', ['node' => $node->id()]),
+      'cssClass' => array('use-ajax', 'dec-quick-edit-memo-link'),
       'data' => array('dialog-type' => 'modal')
     );
     $links[] = array(
       'name' => 'Delete',
-      'path' => Url::fromRoute('decreto_content_modify.sp_delete', ['node' => $node->id()]),
-      'cssClass' => array('use-ajax', 'dec-quick-delete-sp-link'),
+      'path' => Url::fromRoute('decreto_content_modify.memo_delete', ['node' => $node->id()]),
+      'cssClass' => array('use-ajax', 'dec-quick-delete-memo-link'),
       'data' => array('dialog-type' => 'modal')
     );
 

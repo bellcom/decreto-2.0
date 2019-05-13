@@ -1,18 +1,17 @@
-uuid: ffe83c82-ea9a-4829-b33b-ceaba3c0366e
+uuid: c7baf196-ab1d-4cc3-a6cd-60037473f737
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.image.body
-    - field.field.node.image.field_imagelogo
-    - node.type.image
+    - field.field.node.decreto_memo.body
+    - node.type.decreto_memo
   module:
     - text
     - user
-id: node.image.teaser
+id: node.decreto_memo.teaser
 targetEntityType: node
-bundle: image
+bundle: decreto_memo
 mode: teaser
 content:
   body:
@@ -25,9 +24,8 @@ content:
     region: content
   links:
     weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
-  field_imagelogo: true
   langcode: true

@@ -109,7 +109,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: reverse__node__field_decreto_meet_committee
+          relationship: reverse__node__field_decreto_meet_department
           group_type: group
           admin_label: ''
           label: 'Node ID'
@@ -175,7 +175,7 @@ display:
           id: field_decreto_meet_type
           table: node__field_decreto_meet_type
           field: field_decreto_meet_type
-          relationship: reverse__node__field_decreto_meet_committee
+          relationship: reverse__node__field_decreto_meet_department
           group_type: group
           admin_label: ''
           label: Status
@@ -237,7 +237,7 @@ display:
           id: title
           table: node_field_data
           field: title
-          relationship: reverse__node__field_decreto_meet_committee
+          relationship: reverse__node__field_decreto_meet_department
           group_type: group
           admin_label: ''
           label: Name
@@ -302,7 +302,7 @@ display:
           id: field_decreto_meet_start_date
           table: node__field_decreto_meet_start_date
           field: field_decreto_meet_start_date
-          relationship: reverse__node__field_decreto_meet_committee
+          relationship: reverse__node__field_decreto_meet_department
           group_type: group
           admin_label: ''
           label: Date
@@ -406,7 +406,7 @@ display:
           id: field_decreto_meet_start_date_value
           table: node__field_decreto_meet_start_date
           field: field_decreto_meet_start_date_value
-          relationship: reverse__node__field_decreto_meet_committee
+          relationship: reverse__node__field_decreto_meet_department
           group_type: group
           admin_label: ''
           order: DESC
@@ -415,27 +415,27 @@ display:
             label: ''
           granularity: second
           plugin_id: datetime
-      title: 'My committees meetings'
+      title: 'My departments meetings'
       header: {  }
       footer: {  }
       empty: {  }
       relationships:
-        field_decreto_usr_coms:
-          id: field_decreto_usr_coms
-          table: user__field_decreto_usr_coms
-          field: field_decreto_usr_coms
+        field_decreto_usr_departments:
+          id: field_decreto_usr_departments
+          table: user__field_decreto_usr_departments
+          field: field_decreto_usr_departments
           relationship: none
           group_type: group
-          admin_label: 'user committees'
+          admin_label: 'user deparments'
           required: true
           plugin_id: standard
-        reverse__node__field_decreto_meet_committee:
-          id: reverse__node__field_decreto_meet_committee
+        reverse__node__field_decreto_meet_department:
+          id: reverse__node__field_decreto_meet_department
           table: taxonomy_term_field_data
-          field: reverse__node__field_decreto_meet_committee
-          relationship: field_decreto_usr_coms
+          field: reverse__node__field_decreto_meet_department
+          relationship: field_decreto_usr_departments
           group_type: group
-          admin_label: 'this committee meetings'
+          admin_label: 'this department meetings'
           required: false
           entity_type: taxonomy_term
           plugin_id: entity_reverse
@@ -448,7 +448,7 @@ display:
       link_display: custom_url
       group_by: true
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -465,7 +465,7 @@ display:
     display_options:
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

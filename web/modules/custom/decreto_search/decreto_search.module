@@ -27,9 +27,9 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
     $form['field_decreto_meet_end_date']['#type'] = 'datetime';
     //$form['field_decreto_meet_end_date']['#type'] = 'date';
 
-    //committee
-    $form['field_decreto_meet_committee']['#attributes']['class'][] = 'bootstrap-multiselect';
-    $form['field_decreto_meet_committee']['#attributes']['data-multiselect-title'] = t('Select Committee');
+    // Department.
+    $form['field_decreto_meet_department']['#attributes']['class'][] = 'bootstrap-multiselect';
+    $form['field_decreto_meet_department']['#attributes']['data-multiselect-title'] = t('Select department');
 
     //hiding additional filtets, if not search page
     if (\Drupal::routeMatch()->getRouteName() != 'view.decreto_search.page') {

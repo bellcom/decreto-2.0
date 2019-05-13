@@ -22,7 +22,7 @@ use Drupal\node\NodeInterface;
  *
  * @see \Drupal\Core\Form\FormBase
  */
-class SpeakerPaperEditForm extends FormBase {
+class MemoEditForm extends FormBase {
   protected $bullet_point;
   protected $node;
   protected $isNew;
@@ -38,7 +38,7 @@ class SpeakerPaperEditForm extends FormBase {
 
     //$form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
 
-    $form['#prefix'] = '<div id="decreto-content-modify-sp-edit-form">';
+    $form['#prefix'] = '<div id="decreto-content-modify-memo-edit-form">';
     $form['#suffix'] = '</div>';
     $form['title'] = [
       '#type' => 'textfield',
@@ -83,7 +83,7 @@ class SpeakerPaperEditForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'decreto-content-modify-sp-edit-form';
+    return 'decreto-content-modify-memo-edit-form';
   }
 
   /**
@@ -95,7 +95,7 @@ class SpeakerPaperEditForm extends FormBase {
 
     if (!$this->node) {
       $this->node = Node::create([
-        'type' => 'decreto_speaker_paper',
+        'type' => 'decreto_memo',
         'title' => $title,
         'body' => $body,
         'status' => 1,
@@ -106,7 +106,7 @@ class SpeakerPaperEditForm extends FormBase {
       $this->node->body = $body;
     }
     if ($this->bullet_point) {
-      $this->node->field_decreto_sp_bp->appendItem($this->bullet_point->id());
+      $this->node->field_decreto_memo_bp->appendItem($this->bullet_point->id());
     }
 
     $this->isNew = $this->node->save();
@@ -137,18 +137,18 @@ class SpeakerPaperEditForm extends FormBase {
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
-      $response->addCommand(new HtmlCommand('#decreto-content-modify-sp-edit-form', $form));
+      $response->addCommand(new HtmlCommand('#decreto-content-modify-memo-edit-form', $form));
     }
     else {
       // $bp_nid = $this->parent->id();
       //reloadind bullet point
-      $render_speaker_paper = node_view($this->node);
+      $render_memo = node_view($this->node);
       if ($this->isNew == SAVED_NEW) {
-        $response->addCommand(new AppendCommand('#speaker-papers-container-' . $this->bullet_point->id(), $render_speaker_paper));
+        $response->addCommand(new AppendCommand('#memos-container-' . $this->bullet_point->id(), $render_memo));
       }
       else {
         //replacing old bullet point with refreshed bullet point
-        $response->addCommand(new HtmlCommand("#speaker-paper-{$this->node->id()}", $render_speaker_paper));
+        $response->addCommand(new HtmlCommand("#memo-{$this->node->id()}", $render_memo));
         //$response->addCommand(new CloseModalDialogCommand());
       }
       $response->addCommand(new CloseModalDialogCommand());

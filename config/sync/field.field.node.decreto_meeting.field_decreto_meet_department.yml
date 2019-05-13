@@ -1,0 +1,29 @@
+uuid: 5224d8f6-7bd2-4212-8dbd-7d5b48e0828a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_department
+    - node.type.decreto_meeting
+    - taxonomy.vocabulary.decreto_tax_department
+id: node.decreto_meeting.field_decreto_meet_department
+field_name: field_decreto_meet_department
+entity_type: node
+bundle: decreto_meeting
+label: Department
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_department: decreto_tax_department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

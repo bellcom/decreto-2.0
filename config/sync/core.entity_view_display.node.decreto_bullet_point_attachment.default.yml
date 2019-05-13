@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.decreto_bullet_point_attachment.body
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
-    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_id
     - node.type.decreto_bullet_point_attachment
   module:
     - decreto_pdf2htmlex
@@ -34,6 +33,5 @@ content:
     region: content
 hidden:
   field_decreto_bpa_file: true
-  field_decreto_bpa_id: true
   langcode: true
   links: true

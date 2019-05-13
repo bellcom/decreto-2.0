@@ -1,16 +1,15 @@
-uuid: 322b63ac-b574-4ea6-8602-2ac42a66f597
+uuid: 2e497197-1491-4791-833c-b353273c33fa
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_decreto_bp_id
-field_name: field_decreto_bp_id
+id: node.field_decreto_memo_bp
+field_name: field_decreto_memo_bp
 entity_type: node
-type: integer
+type: entity_reference
 settings:
-  unsigned: false
-  size: normal
+  target_type: node
 module: core
 locked: false
 cardinality: 1

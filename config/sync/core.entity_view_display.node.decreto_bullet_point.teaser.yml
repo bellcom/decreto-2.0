@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
     - field.field.node.decreto_bullet_point.field_decreto_bp_closed
-    - field.field.node.decreto_bullet_point.field_decreto_bp_id
     - node.type.decreto_bullet_point
   module:
     - user
@@ -35,6 +34,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_decreto_bp_id: true
   langcode: true
   links: true

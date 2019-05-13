@@ -2,34 +2,19 @@ uuid: 6aff9cdb-9fa2-40a4-8bad-97e095c353ce
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
+    - search_api
+    - search_api_solr
   config:
     - field.storage.node.field_decreto_meet_end_date
     - field.storage.node.field_decreto_meet_start_date
-    - field.storage.node.field_decreto_meet_committee
     - search_api.server.decreto_search_server
-  module:
-    - search_api
-    - node
 id: decreto_search_index
 name: 'Decreto Search Index'
 description: ''
 read_only: false
 field_settings:
-  rendered_item:
-    label: 'Rendered HTML output'
-    property_path: rendered_item
-    type: text
-    configuration:
-      roles:
-        authenticated: authenticated
-      view_mode:
-        'entity:node':
-          decreto_meeting: default
-  title:
-    label: Title
-    datasource_id: 'entity:node'
-    property_path: title
-    type: text
   field_decreto_meet_end_date:
     label: to
     datasource_id: 'entity:node'
@@ -46,14 +31,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_decreto_meet_start_date
-  field_decreto_meet_committee:
-    label: Committee
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        authenticated: authenticated
+      view_mode:
+        'entity:node':
+          decreto_meeting: default
+  title:
+    label: Title
     datasource_id: 'entity:node'
-    property_path: field_decreto_meet_committee
-    type: integer
+    property_path: title
+    type: text
     dependencies:
-      config:
-        - field.storage.node.field_decreto_meet_committee
+      module:
+        - node
 datasource_settings:
   'entity:node':
     bundles:
@@ -67,11 +62,13 @@ datasource_settings:
       default: true
       selected: {  }
 processor_settings:
-  aggregated_field: {  }
   add_url: {  }
+  aggregated_field: {  }
   rendered_item: {  }
+  solr_date_range: {  }
 tracker_settings:
-  default: {  }
+  default:
+    indexing_order: fifo
 options:
   index_directly: true
   cron_limit: 50

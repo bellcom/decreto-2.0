@@ -184,7 +184,7 @@ th {
 .view-display-id-calendar_block a {
     color: #ea6022;
 }
-#block-views-block-decreto-user-committees-my-committees-block a {
+#block-views-block-decreto-user-departments-my-departments-block a {
     color: #ea6022;
 }
 /* ----------------------------Icons--------------------------- */
@@ -1286,11 +1286,11 @@ a[href^="/user/logout"]:before {
     display: block!important;
 }
 
-#info .Committee {
+#info .department {
     pointer-events: none;
 }
 
-#info #Committee {
+#info #department {
     display: block!important;
     font-weight: 600;
 }
@@ -1446,7 +1446,7 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.field--name-field-decreto-meet-committee .glyphicon-asterisk:before {
+.field--name-field-decreto-meet-department .glyphicon-asterisk:before {
     font-family: "Material Icons";
     content: "\E25F";
     display: inline-block;
@@ -1482,7 +1482,7 @@ a[href^="/user/logout"]:before {
     color: rgba(0, 0, 0, 0.6);
 }
 
-#info .field--name-field-decreto-meet-committee {
+#info .field--name-field-decreto-meet-department {
     background: #ffffff;
 }
 
@@ -1693,8 +1693,6 @@ a[href^="/user/logout"]:before {
 .form-control:focus {
     border: 1px solid #a8d3ce;
 }
-
-#edit-committee {}
 
 .has-glyphicons .select-wrapper:after {
     color: rgba(0, 0, 0, 0.3);
@@ -2884,18 +2882,18 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    #block-views-block-decreto-user-committees-my-committees-block {
+    #block-views-block-decreto-user-departments-my-departments-block {
         border-radius: 5px;
         box-shadow: none;
         border: 1px solid rgba(0, 0, 0, 0.1);
         margin-top: 20px;
     }
-    #block-views-block-decreto-user-committees-my-committees-block .panel-title {
+    #block-views-block-decreto-user-departments-my-departments-block .panel-title {
         margin: 0;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    #block-views-block-decreto-user-committees-my-committees-block ul {
+    #block-views-block-decreto-user-departments-my-departments-block ul {
         list-style-type: none;
         padding-left: 20px;
     }

@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
     - field.field.node.decreto_bullet_point.field_decreto_bp_closed
-    - field.field.node.decreto_bullet_point.field_decreto_bp_id
     - node.type.decreto_bullet_point
 id: node.decreto_bullet_point.default
 targetEntityType: node
@@ -52,7 +51,6 @@ content:
     region: content
 hidden:
   created: true
-  field_decreto_bp_id: true
   path: true
   promote: true
   sticky: true

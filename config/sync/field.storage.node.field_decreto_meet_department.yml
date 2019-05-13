@@ -1,12 +1,12 @@
-uuid: caf8e06e-1772-4ba8-b328-406290f7e018
+uuid: a11cee4a-d7dd-4854-ba6d-2bdc38465998
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_decreto_meet_committee
-field_name: field_decreto_meet_committee
+id: node.field_decreto_meet_department
+field_name: field_decreto_meet_department
 entity_type: node
 type: entity_reference
 settings:

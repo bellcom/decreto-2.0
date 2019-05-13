@@ -1,12 +1,12 @@
-uuid: 4c7c0564-bc53-493a-a400-a1a032dc24c3
+uuid: 2aea5aa8-d29c-46c1-807e-31f28dd900ce
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
     - user
-id: user.field_decreto_usr_coms
-field_name: field_decreto_usr_coms
+id: user.field_decreto_usr_departments
+field_name: field_decreto_usr_departments
 entity_type: user
 type: entity_reference
 settings:

@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.decreto_bullet_point_attachment.body
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
-    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_id
     - node.type.decreto_bullet_point_attachment
   module:
     - file
@@ -45,13 +44,6 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
-    region: content
-  field_decreto_bpa_id:
-    weight: 34
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
     region: content
   langcode:
     type: language_select

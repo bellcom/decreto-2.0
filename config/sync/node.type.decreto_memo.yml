@@ -1,4 +1,4 @@
-uuid: 335aae07-24ec-4de2-9d03-3b6386bc650b
+uuid: aef1ff2c-492e-403b-93bc-41dca54dcf2b
 langcode: en
 status: true
 dependencies:
@@ -9,8 +9,8 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'Speaker paper'
-type: decreto_speaker_paper
+name: Memo
+type: decreto_memo
 description: ''
 help: ''
 new_revision: false

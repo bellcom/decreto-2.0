@@ -5,11 +5,10 @@ dependencies:
   config:
     - field.field.node.decreto_meeting.body
     - field.field.node.decreto_meeting.field_decreto_meet_bps
-    - field.field.node.decreto_meeting.field_decreto_meet_committee
+    - field.field.node.decreto_meeting.field_decreto_meet_department
     - field.field.node.decreto_meeting.field_decreto_meet_end_date
     - field.field.node.decreto_meeting.field_decreto_meet_full_doc
     - field.field.node.decreto_meeting.field_decreto_meet_full_doc_c
-    - field.field.node.decreto_meeting.field_decreto_meet_id
     - field.field.node.decreto_meeting.field_decreto_meet_location
     - field.field.node.decreto_meeting.field_decreto_meet_partic
     - field.field.node.decreto_meeting.field_decreto_meet_start_date
@@ -41,8 +40,8 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  field_decreto_meet_committee:
-    weight: 2
+  field_decreto_meet_department:
+    weight: 4
     label: inline
     settings:
       link: true
@@ -50,7 +49,7 @@ content:
     type: entity_reference_label
     region: content
   field_decreto_meet_end_date:
-    weight: 4
+    weight: 3
     label: inline
     settings:
       format_type: medium
@@ -74,7 +73,7 @@ content:
     type: basic_string
     region: content
   field_decreto_meet_start_date:
-    weight: 3
+    weight: 2
     label: inline
     settings:
       format_type: medium
@@ -91,11 +90,10 @@ content:
     region: content
   links:
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_decreto_meet_full_doc: true
   field_decreto_meet_full_doc_c: true
-  field_decreto_meet_id: true
   langcode: true

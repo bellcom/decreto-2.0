@@ -502,15 +502,15 @@ edit content
     content: "\e020";
 }
 
-.cd-stretchy-nav.edit-content ul a.dec-quick-add-sp-link::after {
+.cd-stretchy-nav.edit-content ul a.dec-quick-add-memo-link::after {
     content: "\e022";
 }
 
-.cd-stretchy-nav.edit-content ul a.dec-quick-delete-sp-link::after {
+.cd-stretchy-nav.edit-content ul a.dec-quick-delete-memo-link::after {
     content: "\e020";
 }
 
-.cd-stretchy-nav.edit-content ul a.dec-quick-edit-sp-link::after {
+.cd-stretchy-nav.edit-content ul a.dec-quick-edit-memo-link::after {
     content: "\270f";
 }
 

@@ -45,18 +45,18 @@ class MeetingsEditForm extends FormBase {
       '#placeholder' => $this->t('Title'),
     ];
 
-    //committee
-    $committee_terms = \Drupal::service('entity_type.manager')
+    // Department.
+    $department_terms = \Drupal::service('entity_type.manager')
       ->getStorage("taxonomy_term")
-      ->loadTree('decreto_tax_committee');
-    $committee_options = array();
-    foreach ($committee_terms as $term) {
-      $committee_options[$term->tid] = $term->name;
+      ->loadTree('decreto_tax_department');
+    $department_options = array();
+    foreach ($department_terms as $term) {
+      $department_options[$term->tid] = $term->name;
     }
-    $form['committee'] = [
+    $form['department'] = [
       '#type' => 'select',
-      '#empty_option' => $this->t('-Select committee-'),
-      '#options' => $committee_options
+      '#empty_option' => $this->t('-Select department-'),
+      '#options' => $department_options
     ];
 
     //type
@@ -129,7 +129,7 @@ class MeetingsEditForm extends FormBase {
     $bp_ids = array();
     if ($node) {
       $form['title']['#default_value'] = $node->getTitle();
-      $form['committee']['#default_value'] = $node->field_decreto_meet_committee->target_id;
+      $form['department']['#default_value'] = $node->field_decreto_meet_department->target_id;
       $form['type']['#default_value'] = $node->field_decreto_meet_type->value;
       if ($node->field_decreto_meet_start_date->value) {
         $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT, $node->field_decreto_meet_start_date->value);
@@ -188,7 +188,7 @@ class MeetingsEditForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
-    $committee_tid = $form_state->getValue('committee');
+    $department_tid = $form_state->getValue('department');
     $type = $form_state->getValue('type');
     $start_date = $form_state->getValue('start_date');
     $end_date = $form_state->getValue('end_date');
@@ -209,7 +209,7 @@ class MeetingsEditForm extends FormBase {
         'type' => 'decreto_meeting',
         'status' => 1,
         'title' => $title,
-        'field_decreto_meet_committee' => ($committee_tid) ? $committee_tid : NULL,
+        'field_decreto_meet_department' => ($department_tid) ? $department_tid : NULL,
         'field_decreto_meet_type' => $type,
         'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
         'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL,
@@ -223,7 +223,7 @@ class MeetingsEditForm extends FormBase {
     }
     else {
       $this->node->title = $title;
-      $this->node->field_decreto_meet_committee = ($committee_tid) ? $committee_tid : NULL;
+      $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
       $this->node->field_decreto_meet_type = $type;
       $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;
       $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;

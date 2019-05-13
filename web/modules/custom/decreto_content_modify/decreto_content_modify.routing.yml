@@ -101,43 +101,43 @@ decreto_content_modify.bpas_delete:
     _permission: 'access content'
     parent: \d+
     node: \d+
-decreto_content_modify.sp_add:
-  path: '/speaker_paper/add/{bullet_point}'
+decreto_content_modify.memo_add:
+  path: '/memo/add/{bullet_point}'
   options:
     parameters:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto add speaker paper'
-    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperEditForm'
+    _title: 'Decreto add memo'
+    _form: '\Drupal\decreto_content_modify\Form\MemoEditForm'
     bullet_point: null
   requirements:
     _permission: 'access content'
     bullet_point: \d+
 
-decreto_content_modify.sp_edit:
-  path: '/speaker_paper/edit/{node}'
+decreto_content_modify.memo_edit:
+  path: '/memo/edit/{node}'
   options:
     parameters:
       node:
         type: entity:node
   defaults:
-    _title: 'Decreto edit speaker paper'
-    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperEditForm'
+    _title: 'Decreto edit memo'
+    _form: '\Drupal\decreto_content_modify\Form\MemoEditForm'
     node: null
   requirements:
     _permission: 'access content'
     node: \d+
 
-decreto_content_modify.sp_delete:
-  path: '/speaker_paper/delete/{node}'
+decreto_content_modify.memo_delete:
+  path: '/memo/delete/{node}'
   options:
     parameters:
       node:
         type: entity:node
   defaults:
-    _title: 'Decreto delete speaker paper'
-    _form: '\Drupal\decreto_content_modify\Form\SpeakerPaperDeleteForm'
+    _title: 'Decreto delete memo'
+    _form: '\Drupal\decreto_content_modify\Form\MemoDeleteForm'
     node: null
   requirements:
     _permission: 'access content'

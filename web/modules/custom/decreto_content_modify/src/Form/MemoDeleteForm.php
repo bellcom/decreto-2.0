@@ -7,7 +7,7 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Form\FormStateInterface;
 
-class SpeakerPaperDeleteForm extends AjaxConfirmFormBase {
+class MemoDeleteForm extends AjaxConfirmFormBase {
   /**
    * {@inheritdoc}
    */
@@ -19,7 +19,7 @@ class SpeakerPaperDeleteForm extends AjaxConfirmFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'decreto-content-modify-sp-delete-form';
+    return 'decreto-content-modify-memo-delete-form';
   }
 
   /**
@@ -43,10 +43,10 @@ class SpeakerPaperDeleteForm extends AjaxConfirmFormBase {
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
-      $response->addCommand(new HtmlCommand('#decreto-content-modify-sp-delete-form', $form));
+      $response->addCommand(new HtmlCommand('#decreto-content-modify-memo-delete-form', $form));
     }
     else {
-      $response->addCommand(new RemoveCommand("#speaker-paper-{$this->node->id()}"));
+      $response->addCommand(new RemoveCommand("#memo-{$this->node->id()}"));
       $response->addCommand(new CloseModalDialogCommand());
     }
 

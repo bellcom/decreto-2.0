@@ -374,7 +374,7 @@ display:
             label: ''
           granularity: second
           plugin_id: datetime
-      title: 'All committees meetings'
+      title: 'All departments meetings'
       header: {  }
       footer: {  }
       empty: {  }
@@ -387,7 +387,7 @@ display:
       use_more_always: false
       use_more_text: ...
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -405,7 +405,7 @@ display:
     display_options:
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
