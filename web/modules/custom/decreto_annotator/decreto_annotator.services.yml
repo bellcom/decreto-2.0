@@ -1,0 +1,4 @@
+services:
+  decreto_annotator.note:
+    class: Drupal\decreto_annotator\Services\NoteService
+    arguments: ['@current_user', '@entity_type.manager']

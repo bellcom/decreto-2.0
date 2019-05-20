@@ -8,6 +8,7 @@
 namespace Drupal\decreto_annotator\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\decreto_annotator\Entity\Note;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -26,16 +27,16 @@ class AnnotatorController extends ControllerBase {
     //filtering on fields - removing those, that are saved separatelly
     unset($note_json['bpa_id']);
 
-    $last_ins_id = \Drupal::database()->insert('decreto_annotator_notes')
-      ->fields(array(
-        'bpa_id' => $bpa_id,
-        'uid' => \Drupal::currentUser()->id(),
-        'note_info' => json_encode($note_json),
-      ))
-      ->execute();
-    $response = new RedirectResponse($GLOBALS['base_url'] . '/annotator/read/' . $last_ins_id);
+    $note = Note::create([
+      'bpa_id' => $bpa_id,
+      'uid' => \Drupal::currentUser()->id(),
+      'note_info' => json_encode($note_json),
+    ]);
+    $note->save();
+
+    $response = new RedirectResponse($GLOBALS['base_url'] . '/annotator/read/' . $note->id());
     $response->send();
-    //return new JsonResponse();   
+    //return new JsonResponse();
   }
 
   public function annotatorSearch() {
@@ -73,21 +74,16 @@ class AnnotatorController extends ControllerBase {
     unset($note_json['permissions']);
     unset($note_json['bpa_id']);
 
-    $query = \Drupal::database()->update('decreto_annotator_notes')
-      ->fields(array(
-        'note_info' => json_encode($note_json),
-      ))
-      ->condition('id', $id, '=')
-      ->execute();
+    $note = Note::load($id);
+    $note->note_info->value = json_encode($note_json);
+    $note->save();
 
     return new JsonResponse();
   }
 
   public function annotatorDelete($id) {
-    $query = \Drupal::database()->delete('decreto_annotator_notes')
-      ->condition('id', $id)
-      ->execute();
-
+    $note = Note::load($id);
+    $note->delete();
     return new JsonResponse();
   }
 

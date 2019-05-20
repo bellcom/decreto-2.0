@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils as DecretoContentUtils;
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_preprocess_node().
@@ -57,5 +59,23 @@ function decreto_content_modify_system_breadcrumb_alter(&$breadcrumb, $route_mat
 
   if ($route_match->getRouteName() == 'view.decreto_calender.page_month') {
     $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Calendar month'), '<none>'));
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function decreto_content_modify_node_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_memo') {
+    Cache::invalidateTags(['decreto_memo_count:' . $entity->getOwnerId()]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function decreto_content_modify_node_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_memo') {
+    Cache::invalidateTags(['decreto_memo_count:' . $entity->getOwnerId()]);
   }
 }
