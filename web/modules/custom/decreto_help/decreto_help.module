@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Decreto help main module file.
+ */
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_help_views_data() {
+  $data['views']['decreto_help_message_popup'] = [
+    'title' => t('Decreto help message popup'),
+    'help' => t('Renders help message popup markup.'),
+    'area' => [
+      'id' => 'decreto_help_message_popup',
+    ],
+  ];
+
+  return $data;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_help_theme() {
+  return [
+    'decreto_help_message_popup' => [
+      'variables' => ['content' => ''],
+    ]
+  ];
+}

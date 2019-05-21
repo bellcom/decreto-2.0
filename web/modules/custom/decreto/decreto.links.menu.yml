@@ -1,0 +1,7 @@
+decreto.admin_index:
+  title: Decreto
+  route_name: decreto.admin_index
+  description: 'Manage Decreto settings.'
+  parent: system.admin_config
+  position: left
+  weight: -30

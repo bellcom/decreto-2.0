@@ -1,0 +1,7 @@
+type: module
+name: Decreto Help
+description: 'Module contains help project functionality'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

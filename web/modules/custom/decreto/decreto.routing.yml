@@ -1,0 +1,7 @@
+decreto.admin_index:
+  path: '/admin/config/decreto'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Decreto'
+  requirements:
+    _permission: 'access administration pages'

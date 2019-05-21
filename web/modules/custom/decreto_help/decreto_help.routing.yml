@@ -1,0 +1,7 @@
+decreto_help_messages.settings:
+  path: '/admin/config/decreto/help-messages'
+  defaults:
+    _form: '\Drupal\decreto_help\Form\HelpMessagesSettings'
+    _title: 'Configure help messages'
+  requirements:
+    _permission: 'administer site configuration'
