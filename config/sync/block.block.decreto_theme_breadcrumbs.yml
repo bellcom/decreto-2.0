@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_breadcrumbs
 theme: decreto_theme
 region: content
-weight: -17
+weight: -15
 provider: null
 plugin: system_breadcrumb_block
 settings:

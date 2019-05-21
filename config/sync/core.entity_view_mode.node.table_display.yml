@@ -1,0 +1,10 @@
+uuid: 99e91156-49d4-4020-bae4-ee394a49ada7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.table_display
+label: 'Table display'
+targetEntityType: node
+cache: true

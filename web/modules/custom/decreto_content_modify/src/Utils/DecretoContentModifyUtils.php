@@ -47,7 +47,24 @@ class DecretoContentModifyUtils {
           return ($load) ? Node::load($nid) : $nid;
         }
       }
+    }
+    elseif ($sourceNode->getType() == 'decreto_memo') {
+      if ($relatedNodeType == 'decreto_meeting') {
+        $bp = self::getRelatedNodes($sourceNode, 'decreto_bullet_point');
+        if ($bp) {
+          $meeting_nid = self::getRelatedNodes($bp, 'decreto_meeting', FALSE);
 
+          return ($load) ? Node::load($meeting_nid) : $meeting_nid;
+        }
+      }
+      elseif ($relatedNodeType == 'decreto_bullet_point') {
+        $bps = $sourceNode->field_decreto_memo_bp->referencedEntities();
+        if ($bps) {
+          $bp = reset($bps);
+
+          return ($load)? $bp : $bp->id();
+        }
+      }
     }
 
     return NULL;

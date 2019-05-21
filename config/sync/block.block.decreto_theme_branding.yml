@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_branding
 theme: decreto_theme
 region: sidebar_first
-weight: -10
+weight: -15
 provider: null
 plugin: system_branding_block
 settings:

@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -78,6 +79,40 @@ class MemoService {
         ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid]);
     }
     return ['total' => $count];
+  }
+
+  /**
+   * Check whether a given meeting has any memos attached to its children bullet points.
+   *
+   * @param NodeInterface $meeting
+   *   Meeting in inspect.
+   * @param UserInterface $user
+   *   Notes author.
+   *
+   * @return boolean
+   *   TRUE or FALSE.
+   */
+  public function getMeetingHasMemo(NodeInterface $meeting, UserInterface $user = NULL) {
+    $uid = $this->currentUser->id();
+    if (!empty($user)) {
+      $uid = $user->id();
+    }
+
+    $count = 0;
+
+    $referenced_bps = $meeting->field_decreto_meet_bps->getValue();
+    if (!empty($referenced_bps)) {
+      $referenced_bp_ids = array_column($referenced_bps, 'target_id');
+
+      $count = $this->memoStorage->getQuery()
+        ->condition('uid', $uid)
+        ->condition('type', 'decreto_memo')
+        ->condition('field_decreto_memo_bp', $referenced_bp_ids, 'IN')
+        ->count()
+        ->execute();
+    }
+
+    return intval($count) > 0;
   }
 
 }

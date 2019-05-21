@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -77,6 +78,48 @@ class NoteService {
         ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid]);
     }
     return ['total' => $count];
+  }
+
+  /**
+   * Check whether a given meeting has any notes attached to its children bullet points attachments.
+   *
+   * @param NodeInterface $meeting
+   *   Meeting in inspect.
+   * @param UserInterface $user
+   *   Notes author.
+   *
+   * @return boolean
+   *   TRUE or FALSE.
+   */
+  public function getMeetingHasNote(NodeInterface $meeting, UserInterface $user = NULL) {
+    $uid = $this->currentUser->id();
+    if (!empty($user)) {
+      $uid = $user->id();
+    }
+
+    $count = 0;
+
+    $referenced_bps = $meeting->field_decreto_meet_bps->referencedEntities();
+    foreach($referenced_bps as $bp) {
+      $referenced_bpas = $bp->field_decreto_bp_bpas->getValue();
+
+      if (!empty($referenced_bpas)) {
+        $referenced_bpa_ids = array_column($referenced_bpas, 'target_id');
+
+        $count = $this->noteManager->getQuery()
+          ->condition('uid', $uid)
+          ->condition('bpa_id', $referenced_bpa_ids, 'IN')
+          ->count()
+          ->execute();
+
+        // It's enough to find at least one BP, not need to continue loop.
+        if ($count) {
+          break;
+        }
+      }
+    }
+
+    return intval($count) > 0;
   }
 
 }

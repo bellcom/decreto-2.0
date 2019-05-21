@@ -5,3 +5,6 @@ package: Decreto
 
 core: '8.x'
 project: 'decreto'
+
+dependencies:
+  - decreto_content_modify

@@ -11,7 +11,7 @@ dependencies:
 id: mainnavigation
 theme: decreto_theme
 region: sidebar_first
-weight: 0
+weight: -14
 provider: null
 plugin: 'superfish:main'
 settings:

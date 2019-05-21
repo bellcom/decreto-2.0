@@ -6,6 +6,8 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\node\Entity\Node;
 
 /**
  * Defines the Note entity.
@@ -60,7 +62,17 @@ class Note extends ContentEntityBase {
    * {@inheritdoc}
    */
   public static function create(array $values = []) {
+    // Invalidating notes count.
     Cache::invalidateTags(['decreto_annotator_note_count:' . $values['uid']]);
+
+    // Getting related meeting.
+    $bpa_id = $values['bpa_id'];
+    $bp = Node::load($bpa_id);
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
+
+    // Invalidating meeting.
+    Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+
     return parent::create($values);
   }
 
@@ -68,7 +80,17 @@ class Note extends ContentEntityBase {
    * {@inheritdoc}
    */
   public function delete() {
+    // Invalidating notes count.
     Cache::invalidateTags(['decreto_annotator_note_count:' . $this->get('uid')->value]);
+
+    // Getting related meeting.
+    $bpa_id = $this->get('bpa_id')->value;
+    $bp = Node::load($bpa_id);
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
+
+    // Invalidating meeting.
+    Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+
     return parent::delete();
   }
 

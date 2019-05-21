@@ -11,7 +11,7 @@ _core:
 id: decreto_theme_messages
 theme: decreto_theme
 region: content
-weight: -16
+weight: -14
 provider: null
 plugin: system_messages_block
 settings:

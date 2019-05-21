@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ae3605f21628acdea4725e6d48a7b74",
+    "content-hash": "5fff7e54a2976b20eed83e8bef3a3929",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3393,6 +3393,57 @@
             "support": {
                 "source": "https://cgit.drupalcode.org/superfish",
                 "issues": "https://www.drupal.org/project/superfish"
+            }
+        },
+        {
+            "name": "drupal/twigsuggest",
+            "version": "1.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/twigsuggest.git",
+                "reference": "8.x-1.0-alpha2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/twigsuggest-8.x-1.0-alpha2.zip",
+                "reference": "8.x-1.0-alpha2",
+                "shasum": "71f72aa4b8d0f014d0492018a3396b00ccb26598"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha2",
+                    "datestamp": "1543493580",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "leymannx",
+                    "homepage": "https://www.drupal.org/user/2482808"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                }
+            ],
+            "description": "Provides template suggestions for things Drupal doesn't.",
+            "homepage": "https://www.drupal.org/project/twigsuggest",
+            "support": {
+                "source": "https://git.drupalcode.org/project/twigsuggest"
             }
         },
         {
@@ -9165,6 +9216,7 @@
         "drupal/calendar": 20,
         "drupal/calendar_datetime": 20,
         "drupal/front_page": 10,
+        "drupal/twigsuggest": 15,
         "drupal/views_templates": 15
     },
     "prefer-stable": true,

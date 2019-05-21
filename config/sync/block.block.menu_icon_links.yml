@@ -2,10 +2,7 @@ uuid: 45b403c5-e294-4478-b711-69aea3fa4abf
 langcode: en
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:2a1d7782-a8a4-4f86-b502-7cde8718827c'
   module:
-    - block_content
     - system
   theme:
     - decreto_theme
