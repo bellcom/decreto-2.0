@@ -1,0 +1,5 @@
+decreto_help_messages.settings:
+  title: 'Help messages'
+  parent: decreto.admin_index
+  description: 'Settings decreto help messages'
+  route_name: decreto_help_messages.settings
