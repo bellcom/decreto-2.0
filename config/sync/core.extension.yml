@@ -10,13 +10,17 @@ module:
   comment: 0
   config: 0
   config_translation: 0
+  config_filter: 0
+  config_ignore: 0
   contact: 0
   contextual: 0
   datetime: 0
   dblog: 0
+  decreto: 0
   decreto_annotator: 0
   decreto_content_modify: 0
   decreto_context_menu: 0
+  decreto_help: 0
   decreto_pdf2htmlex: 0
   decreto_pdf_conversion_manager: 0
   decreto_search: 0

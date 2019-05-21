@@ -23,6 +23,7 @@
         "drupal/bootstrap": "^3.17",
         "drupal/calendar": "1.x-dev",
         "drupal/calendar_datetime": "1.x-dev",
+        "drupal/config_ignore": "^2.1",
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
         "drupal/devel": "^2.0",
