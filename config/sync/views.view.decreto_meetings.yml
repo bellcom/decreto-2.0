@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.table_display
     - node.type.decreto_meeting
   module:
+    - decreto_help
     - node
     - taxonomy
     - user
@@ -153,6 +154,16 @@ display:
           plugin_id: bundle
       sorts: {  }
       header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          message_key: upcoming_events
+          plugin_id: decreto_help_message_popup
         area:
           id: area
           table: views
@@ -241,6 +252,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        header: false
       filters:
         status:
           value: '1'
@@ -305,6 +317,41 @@ display:
           1: AND
       display_description: ''
       title: 'My coming meetings'
+      header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          message_key: my_upcoming_events
+          plugin_id: decreto_help_message_popup
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: 'short explanatory text'
+            format: basic_html
+          plugin_id: text
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: 'Table header'
+          empty: false
+          tokenize: false
+          content: "<div class=\"row\">\r\n<div class=\"col-xs-6\">Name and department</div><div class=\"col-xs-6\">Date and location</div>\r\n</div>"
+          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:

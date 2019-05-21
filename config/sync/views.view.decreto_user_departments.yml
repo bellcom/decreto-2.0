@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.user.field_decreto_usr_departments
   module:
+    - decreto_help
     - user
 id: decreto_user_departments
 label: 'Decreto user departments (User)'
@@ -170,6 +171,16 @@ display:
       sorts: {  }
       title: 'My departments'
       header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          message_key: my_departments
+          plugin_id: decreto_help_message_popup
         area:
           id: area
           table: views
