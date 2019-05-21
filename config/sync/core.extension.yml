@@ -9,15 +9,16 @@ module:
   color: 0
   comment: 0
   config: 0
-  config_translation: 0
   config_filter: 0
   config_ignore: 0
+  config_translation: 0
   contact: 0
   contextual: 0
   datetime: 0
   dblog: 0
   decreto: 0
   decreto_annotator: 0
+  decreto_calendar: 0
   decreto_content_modify: 0
   decreto_context_menu: 0
   decreto_help: 0

@@ -92,6 +92,12 @@
                 ".editorconfig": "../.editorconfig",
                 ".gitattributes": "../.gitattributes"
             }
+        },
+        "enable-patching": true,
+        "patches": {
+            "drupal/calendar": {
+                "2789829 - Query returns no results": "https://www.drupal.org/files/issues/2019-05-22/2789829-2-long-query-name.patch"
+            }
         }
     }
 }
