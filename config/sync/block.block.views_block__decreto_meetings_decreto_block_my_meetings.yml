@@ -12,7 +12,7 @@ dependencies:
 id: views_block__decreto_meetings_decreto_block_my_meetings
 theme: decreto_theme
 region: content
-weight: -12
+weight: -11
 provider: null
 plugin: 'views_block:decreto_meetings-decreto_block_my_meetings'
 settings:

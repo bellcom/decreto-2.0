@@ -1,0 +1,31 @@
+uuid: 7a492c31-37b8-4732-be8c-7e6e86e4322a
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:471282e1-3075-4f96-92d7-7553a4e51d99'
+  module:
+    - block_content
+    - system
+  theme:
+    - decreto_theme
+id: decreto_dashboard_counter_departments
+theme: decreto_theme
+region: content
+weight: -12
+provider: null
+plugin: 'block_content:471282e1-3075-4f96-92d7-7553a4e51d99'
+settings:
+  id: 'block_content:471282e1-3075-4f96-92d7-7553a4e51d99'
+  label: 'Dashboard counter: Departments'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

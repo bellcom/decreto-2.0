@@ -3,16 +3,18 @@
 namespace Drupal\decreto_content_modify\Services;
 
 use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 
 /**
- * The memo service.
+ * Decreto content service service.
  */
-class MemoService {
+class ContentService {
 
   /**
    * The current user.
@@ -26,10 +28,10 @@ class MemoService {
    *
    * @var EntityStorageInterface
    */
-  protected $memoStorage;
+  protected $nodeStorage;
 
   /**
-   * Constructs a MemoService object.
+   * Constructs a ContentService object.
    *
    * @param AccountProxyInterface $currentUser
    *   The current user.
@@ -43,7 +45,49 @@ class MemoService {
     EntityTypeManagerInterface $entityTypeManager
   ) {
     $this->currentUser = $currentUser;
-    $this->memoStorage = $entityTypeManager->getStorage('node');
+    $this->nodeStorage = $entityTypeManager->getStorage('node');
+  }
+
+  /**
+   * Get meetings counter by user.
+   *
+   * If user not provided current user info will be returned.
+   *
+   * @param UserInterface $user
+   *   User to calculate counters.
+   *
+   * @return array
+   *   array with data.
+   */
+  public function getMeetingCounters(UserInterface $user = NULL) {
+    // TODO: currently user id is not used, most likel it will change in the future.
+    if (empty($user)) {
+      $user = $this->currentUser;
+    }
+    $uid = $user->id();
+
+    $cid = 'decreto_meeting_count:' . $uid;
+    $count = NULL;
+    if ($cache = \Drupal::cache()
+      ->get($cid)) {
+      $count = $cache->data;
+    }
+    else {
+      $now = new DrupalDateTime('now');
+      $count = $this->nodeStorage->getQuery()
+        ->condition('type', 'decreto_meeting')
+        ->condition('status', 1)
+        ->condition('field_decreto_meet_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
+        ->count()
+        ->execute();
+      // Caching for 1h = 3600 seconds.
+      \Drupal::cache()
+        ->set($cid, $count, 3600, [$cid, 'decreto_meeting_count']);
+    }
+    return [
+      'my_org' => $count,
+      'total' => $count
+    ];
   }
 
   /**
@@ -57,7 +101,7 @@ class MemoService {
    * @return array
    *   array with data.
    */
-  public function getCounters(UserInterface $user = NULL) {
+  public function getMemoCounters(UserInterface $user = NULL) {
     $uid = $this->currentUser->id();
     if (!empty($user)) {
       $uid = $user->id();
@@ -70,7 +114,7 @@ class MemoService {
       $count = $cache->data;
     }
     else {
-      $count = $this->memoStorage->getQuery()
+      $count = $this->nodeStorage->getQuery()
         ->condition('uid', $uid)
         ->condition('type', 'decreto_memo')
         ->count()
@@ -100,14 +144,14 @@ class MemoService {
 
     $count = 0;
 
-    $referenced_bps = $meeting->field_decreto_meet_bps->getValue();
-    if (!empty($referenced_bps)) {
-      $referenced_bp_ids = array_column($referenced_bps, 'target_id');
+    $referencedBps = $meeting->field_decreto_meet_bps->getValue();
+    if (!empty($referencedBps)) {
+      $referencedBpIds = array_column($referencedBps, 'target_id');
 
-      $count = $this->memoStorage->getQuery()
+      $count = $this->nodeStorage->getQuery()
         ->condition('uid', $uid)
         ->condition('type', 'decreto_memo')
-        ->condition('field_decreto_memo_bp', $referenced_bp_ids, 'IN')
+        ->condition('field_decreto_memo_bp', $referencedBpIds, 'IN')
         ->count()
         ->execute();
     }
