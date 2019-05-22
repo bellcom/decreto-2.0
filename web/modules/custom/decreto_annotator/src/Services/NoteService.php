@@ -13,6 +13,10 @@ use Drupal\user\UserInterface;
  * The Note service for the decreto annotator module.
  */
 class NoteService {
+  /**
+   * Cache ID to be used for note counters.
+   */
+  const CACHE_ID_DECRETO_NOTE_COUNTERS = 'decreto_annotator_note_counters';
 
   /**
    * The current user.
@@ -63,7 +67,7 @@ class NoteService {
       $uid = $user->id();
     }
 
-    $cid = 'decreto_annotator_note_count:' . $uid;
+    $cid = self::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid;
     $count = NULL;
     if ($cache = \Drupal::cache()
       ->get($cid)) {

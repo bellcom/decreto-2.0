@@ -34,7 +34,6 @@ function decreto_theme_preprocess_block(&$vars) {
 
   if ($id == 'decreto_dashboard_counter_coming_meetings') {
     $decretoContentService = \Drupal::service('decreto_content_modify.content');
-
     $meetingCounter = $decretoContentService->getMeetingCounters();
 
     $vars['content']['#org_count'] = $meetingCounter['my_org'];
@@ -42,9 +41,10 @@ function decreto_theme_preprocess_block(&$vars) {
   }
   elseif ($id == 'decreto_dashboard_counter_departments') {
     $decretoContentService = \Drupal::service('decreto_content_modify.content');
+    $taxonomyCounter = $decretoContentService->getDepartmentCounters();
 
-    $vars['content']['#org_count'] = '12';
-    $vars['content']['#total_count'] = '17902';
+    $vars['content']['#org_count'] = $taxonomyCounter['my_org'];
+    $vars['content']['#total_count'] = $taxonomyCounter['total'];
   }
 }
 
