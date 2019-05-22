@@ -15,6 +15,7 @@ class DecretoContentModifyUtils {
    * @param bool $load
    * @return \Drupal\Core\Entity\EntityInterface|mixed|null|static
    */
+  //TODO: refactor and move to ContentService.php
   public static function getRelatedNodes(Node $sourceNode, $relatedNodeType, $load = TRUE) {
     if ($sourceNode->getType() == 'decreto_bullet_point') {
       if ($relatedNodeType == 'decreto_meeting') {

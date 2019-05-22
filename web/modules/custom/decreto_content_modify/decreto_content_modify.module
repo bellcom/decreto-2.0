@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils as DecretoContentUtils;
+use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 
@@ -65,30 +66,46 @@ function decreto_content_modify_system_breadcrumb_alter(&$breadcrumb, $route_mat
 /**
  * Implements hook_ENTITY_TYPE_presave().
  *
- * Invalidates caches related with the memo.
+ * Invalidates caches related with the decreto_memo and decreto_meeting.
  */
 function decreto_content_modify_node_presave(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_memo') {
     // Invalidating memos count.
-    Cache::invalidateTags(['decreto_memo_count:' . $entity->getOwnerId()]);
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
 
     // Getting related meeting.
     $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
 
     // Invalidating meeting.
     Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+  }
+  elseif ($entity->bundle() == 'decreto_meeting') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_content_modify_taxonomy_term_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
   }
 }
 
 /**
  * Implements hook_ENTITY_TYPE_delete().
  *
- * Invalidates caches related with the memo.
+ * Invalidates caches related with the decreto_memo and decreto_meeting.
  */
 function decreto_content_modify_node_delete(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_memo') {
     // Invalidating memos count.
-    Cache::invalidateTags(['decreto_memo_count:' . $entity->getOwnerId()]);
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
 
     // Getting related meeting.
     $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
@@ -96,4 +113,21 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
     // Invalidating meeting.
     Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
   }
+  elseif ($entity->bundle() == 'decreto_meeting') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+  }
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_content_modify_taxonomy_term_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+  }
+}
+

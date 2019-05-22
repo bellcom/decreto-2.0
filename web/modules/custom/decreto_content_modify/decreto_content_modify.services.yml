@@ -1,4 +1,4 @@
 services:
-  decreto_content_modify.memo:
-    class: Drupal\decreto_content_modify\Services\MemoService
+  decreto_content_modify.content:
+    class: Drupal\decreto_content_modify\Services\ContentService
     arguments: ['@current_user', '@entity_type.manager']
