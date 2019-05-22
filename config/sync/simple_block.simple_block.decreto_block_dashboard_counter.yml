@@ -1,0 +1,11 @@
+uuid: ac37b41d-4faf-419d-b037-2f4297234147
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+id: decreto_block_dashboard_counter
+title: 'Decreto dashboard counter'
+content:
+  value: "<p>counters</p>\r\n"
+  format: basic_html
