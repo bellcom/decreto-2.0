@@ -1,0 +1,18 @@
+uuid: 96efac6d-f285-44c2-8a26-8d5abcef149d
+langcode: en
+status: false
+dependencies:
+  theme:
+    - custom_base_theme
+id: custom_base_theme_decretousercommitteesblock
+theme: custom_base_theme
+region: sidebar_first
+weight: -11
+provider: null
+plugin: 'Decreto  User Committees Block'
+settings:
+  id: 'Decreto  User Committees Block'
+  label: 'My Committees'
+  provider: decreto_user_committees
+  label_display: visible
+visibility: {  }

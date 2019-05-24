@@ -28,4 +28,5 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_decreto_memo_bp: true
   langcode: true

@@ -1,0 +1,20 @@
+uuid: 292e1c78-e578-4c33-9e3e-81e7302b73d9
+langcode: en
+status: true
+dependencies:
+  module:
+    - decreto_calendar
+  theme:
+    - custom_base_theme
+id: custom_base_theme_decretocalendarsidebarblock
+theme: custom_base_theme
+region: sidebar_first
+weight: 0
+provider: null
+plugin: decreto_calendar_sidebar
+settings:
+  id: decreto_calendar_sidebar
+  label: Calendar
+  provider: decreto_calendar
+  label_display: visible
+visibility: {  }

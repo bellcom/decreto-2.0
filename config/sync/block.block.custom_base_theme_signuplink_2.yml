@@ -1,0 +1,21 @@
+uuid: e82d907a-37c6-4e50-aec9-20a056aa1a63
+langcode: en
+status: false
+dependencies:
+  theme:
+    - custom_base_theme
+id: custom_base_theme_signuplink_2
+theme: custom_base_theme
+region: sidebar_first
+weight: -6
+provider: null
+plugin: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+settings:
+  id: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+  label: 'Sign Up Link'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

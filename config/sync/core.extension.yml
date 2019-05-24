@@ -76,6 +76,8 @@ theme:
   seven: 0
   bootstrap: 0
   decreto_theme: 0
+  custom_base_theme: 0
+  custom_theme: 0
 profile: standard
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU

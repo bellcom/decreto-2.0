@@ -1,0 +1,28 @@
+uuid: d9fec4db-93a2-40eb-8309-3e8988793d47
+langcode: en
+status: true
+dependencies:
+  config:
+    - simple_block.simple_block.decreto_block_dashboard_counter
+  module:
+    - simple_block
+    - system
+  theme:
+    - custom_theme
+id: custom_theme_decreto_dashboard_counter_coming_meetings
+theme: custom_theme
+region: content
+weight: -14
+provider: null
+plugin: 'simple_block:decreto_block_dashboard_counter'
+settings:
+  id: 'simple_block:decreto_block_dashboard_counter'
+  label: 'Dashboard counter: Coming meetings'
+  provider: simple_block
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
