@@ -1,0 +1,245 @@
+// |--------------------------------------------------------------------------
+// | Calendar
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .calendar
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin calendar-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.view-decreto-calender {
+
+  tr {
+    background-color: transparent !important; // Reset.
+  }
+
+  th,
+  td {
+    padding: 6px 1px !important; // Reset.
+
+    text-align: center;
+
+    border: 0;
+  }
+
+  td {
+
+    &.days {
+      height: 38px;
+
+      font-size: $font-size-small;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+
+      color: #bcbcbc;
+    }
+
+    &.today {
+      background-color: initial !important; // Reset.
+
+      // No meetings.
+      .mini-day-off {
+        border-radius: 100%;
+        background-color: $brand-secondary;
+
+        color: #fff;
+      }
+    }
+
+    &.has-events {
+
+      .mini-day-on,
+      .mini-day-off {
+        position: relative;
+
+        &:after {
+          content: "";
+          position: absolute;
+
+          top: 100%;
+          left: 50%;
+
+          height: 4px;
+          width: 4px;
+
+          margin-top: -4px;
+          margin-left: -2px;
+
+          border-radius: 100%;
+
+          background-color: $brand-secondary;
+        }
+      }
+    }
+
+    &.has-no-events {}
+  }
+
+  .mini-day-on {
+
+    &,
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .mini-day-on,
+  .mini-day-off {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    max-width: 30px;
+    min-height: 30px;
+
+    margin: auto;
+
+    font-size: $font-size-small;
+
+    color: $text-color;
+
+    a {
+
+      &, &:hover, &:active {
+        font-size: $font-size-small;
+
+        text-decoration: none;
+
+        color: $text-color;
+      }
+    }
+  }
+}
+
+// Pager.
+.view-decreto-calender {
+
+  .view-header + .view-content {
+    margin-top: 10px;
+  }
+
+  .pager {
+    margin: 0; // Reset.
+
+    ul {
+      display: flex;
+
+      padding-left: 0; // Reset.
+      margin-bottom: 0; // Reset.
+    }
+
+    li {
+
+      > a {
+        padding: 0; // Reset.
+        background-color: transparent; // Reset.
+        border: 0; // Reset.
+        border-radius: 0; // Reset.
+
+        &, &:hover {
+          color: #bcbcbc;
+        }
+      }
+    }
+
+    // Current month.
+    .pager__item--current {
+      flex-grow: 1;
+
+      font-family: $headings-font-family;
+      font-weight: $headings-font-weight-bold;
+      font-size: $font-size-small;
+    }
+
+    // Previous month.
+    .pager__item--previous {
+      padding-left: floor( ($grid-gutter-width / 2) );
+    }
+
+    // Next month.
+    .pager__item--next {
+      padding-right: floor( ($grid-gutter-width / 2) );
+    }
+
+    // Hide the text inside the toggles.
+    .pager__item--previous span:nth-child(2),
+    .pager__item--next span:nth-child(1) {
+      display: none;
+    }
+
+    // Previous and next icons.
+    .pager__item--previous span:nth-child(1),
+    .pager__item--next span:nth-child(2) {
+      font-size: 0;
+
+      &:after {
+        font-family: FontAwesome;
+        font-size: $font-size-small;
+      }
+    }
+    .pager__item--previous span:nth-child(1) {
+
+      &:after {
+        content: $fa-var-chevron-left;
+      }
+    }
+    .pager__item--next span:nth-child(2) {
+
+      &:after {
+        content: $fa-var-chevron-right;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
