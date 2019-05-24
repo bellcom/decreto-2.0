@@ -20,7 +20,11 @@
 // Styling
 // --------------------------------------------------
 
-.flexy-header {
+.flexy-header {}
+
+.flexy-header--static {
+  margin-bottom: $grid-gutter-width;
+
   border-bottom: 1px solid #e2e2e2;
 }
 

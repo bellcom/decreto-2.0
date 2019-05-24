@@ -21,12 +21,18 @@
 // --------------------------------------------------
 
 .boxy {
+  padding: 15px 0;
+
   background-color: $body-bg-secondary;
   border-radius: $border-radius-base;
 }
-.boxy__body {
-  border: 0;
+
+.boxy__heading {}
+.boxy__heading__title {
+  font-weight: $headings-font-weight-bold;
 }
+
+.boxy__body {}
 
 // --------------------------------------------------
 // Variants
