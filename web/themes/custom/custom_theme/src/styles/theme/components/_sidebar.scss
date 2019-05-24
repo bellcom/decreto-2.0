@@ -32,10 +32,15 @@ $layout-sidebar-width: 300px;
   display: block;
 
   padding: 20px 0;
+
   text-align: center;
 
   img {
     max-width: floor( ($layout-sidebar-width - $grid-gutter-width) );
+  }
+
+  + .region-sidebar {
+    margin-top: $grid-gutter-width;
   }
 }
 
