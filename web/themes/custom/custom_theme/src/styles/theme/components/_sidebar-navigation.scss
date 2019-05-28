@@ -1,9 +1,9 @@
 // |--------------------------------------------------------------------------
-// | Calendar
+// | Sidebar navigation.
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .boxy--calendar
+// | - .sidebar-navigation
 // |
 
 // --------------------------------------------------
@@ -14,43 +14,51 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin boxy-calendar-mixin() {}
+@mixin sidebar-navgiation-mixin() {}
 
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
 
-.boxy--calendar {
-  border-radius: 0;
+.sidebar-navigation {
+  margin: 0;
+  padding: 0;
 
-  .boxy__heading {
+  list-style: none;
+}
+
+.sidebar-navigation__item {
+
+  > a {
+    display: block;
+
     padding: 14px floor( ($grid-gutter-width / 2) );
-    background-color: $brand-primary;
-  }
-  .boxy__heading__title {
-    display: flex;
 
-    align-items: center;
+    font-weight: $font-weight-bold;
 
-    font-weight: $headings-font-weight-bold;
+    color: $text-color;
 
-    color: $headings-color;
+    &, &:hover, &:focus, &:active {
+      text-decoration: none;
+    }
 
-    &:before {
-      @extend .material-icons;
+    &:hover {
+      color: #fff;
 
-      content: "date_range";
-
-      font-size: inherit;
-
-      margin-right: 10px;
+      background-color: $brand-tertiary;
     }
   }
+}
 
-  .boxy__body {
-    padding: 20px 0 floor( ($grid-gutter-width / 2) ) 0;
+.sidebar-navigation__item--active {
 
-    background-color: #fbfbfb;
+  > a {
+
+    &, &:hover, &:focus, &:active {
+      color: #fff;
+
+      background-color: $brand-tertiary;
+    }
   }
 }
 

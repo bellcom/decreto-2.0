@@ -40,7 +40,7 @@ $layout-sidebar-width: 300px;
   }
 
   + .region-sidebar {
-    margin-top: $grid-gutter-width;
+    margin-top: floor( ($grid-gutter-width / 2) );
   }
 }
 

@@ -23,6 +23,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "jquery-slinky": "^3.0.0",
+    "material-design-icons": "^3.0.1",
     "pace-bootstrap-theme": "^1.0.1",
     "pace-progress": "^1.0.2",
     "readable-bootstrap-breakpoints": "^1.0.2",
