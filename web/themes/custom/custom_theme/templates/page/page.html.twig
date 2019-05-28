@@ -1,26 +1,6 @@
 <!-- Begin - wrapper -->
 <div class="layout__wrapper">
 
-{#  {% if page.sidr_left__primary %}#}
-
-{#    <!-- Begin - sidr source provider -->#}
-{#    <aside class="sidr-source-provider">#}
-
-{#      <!-- Begin - navigation -->#}
-{#      <nav class="slinky-menu" role="navigation">#}
-
-{#        {% if page.sidr_left__primary %}#}
-{#          {{ page.sidr_left__primary }}#}
-{#        {% endif %}#}
-
-{#      </nav>#}
-{#      <!-- End - navigation -->#}
-
-{#    </aside>#}
-{#    <!-- End - sidr source provider -->#}
-
-{#  {% endif %}#}
-
   {# Begin - sidebar #}
   {% if page.sidebar %}
     <div class="layout__sidebar">
@@ -102,7 +82,33 @@
     </header>
     <!-- End - header sticky -->
 
-    {# Begin - banner #}
+    <!-- Begin - action boxes -->
+    {% if page.action_box__primary or page.action_box__secondary or page.action_box__tertiary %}
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            {% if page.action_box__secondary %}
+              {{ page.action_box__secondary }}
+            {% endif %}
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            {% if page.action_box__primary %}
+              {{ page.action_box__primary }}
+            {% endif %}
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            {% if page.action_box__tertiary %}
+              {{ page.action_box__tertiary }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <!-- End - action boxes -->
+
+    <!-- Begin - content -->
     <div class="page-content">
       <div class="container">
 
@@ -133,6 +139,7 @@
 
       </div>
     </div>
+    <!-- End - content -->
 
   </main>
   <!-- End - content -->

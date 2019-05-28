@@ -14,6 +14,9 @@ regions:
   help: 'Help'
   sidebar: 'Sidebar - desktop'
   content: 'Content'
+  action_box__secondary: 'Action box - orange'
+  action_box__primary: 'Action box - blue'
+  action_box__tertiary: 'Action box - dark'
 
 libraries:
   - 'custom_theme/fonts'

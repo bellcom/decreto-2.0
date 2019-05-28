@@ -11,8 +11,8 @@ dependencies:
     - custom_theme
 id: custom_theme_decreto_dashboard_counter_coming_meetings
 theme: custom_theme
-region: content
-weight: -14
+region: action_box__secondary
+weight: -15
 provider: null
 plugin: 'simple_block:decreto_block_dashboard_counter'
 settings:
