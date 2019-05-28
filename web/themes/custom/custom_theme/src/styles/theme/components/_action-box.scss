@@ -44,10 +44,6 @@
     background-repeat: no-repeat;
     background-image: url("../images/action-box/briefcase.svg");
   }
-
-  + .action-box__body {
-    margin-top: $grid-gutter-width;
-  }
 }
 .action-box__heading__title {
   margin: 0;
@@ -58,7 +54,25 @@
   color: inherit;
 }
 
-.action-box__body {}
+.action-box-counters {
+  display: flex;
+
+  margin-top: floor( ($grid-gutter-width / 2) );
+}
+.action-box-counters__item {
+  flex-basis: 50%;
+}
+.action-box-counters__item__number {
+  font-family: $headings-font-family;
+  font-size: $font-size-h2;
+}
+.action-box-counters__item__description {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-small;
+
+  color: inherit;
+  opacity: .75;
+}
 
 // --------------------------------------------------
 // Variants

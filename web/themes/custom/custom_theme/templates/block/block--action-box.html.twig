@@ -16,8 +16,24 @@
   {{ title_suffix }}
 
   {% block content %}
-    <div class="action-box__body">
-      {{ content }}
+    <div class="action-box-counters">
+      <div class="action-box-counters__item">
+        <div class="action-box-counters__item__number">
+          {{ content['#current_organization'] }}
+        </div>
+        <div class="action-box-counters__item__description">
+          {{ 'This organization' | trans }}
+        </div>
+      </div>
+
+      <div class="action-box-counters__item">
+        <div class="action-box-counters__item__number">
+          {{ content['#across_organizations'] }}
+        </div>
+        <div class="action-box-counters__item__description">
+          {{ 'Other organizations' | trans }}
+        </div>
+      </div>
     </div>
   {% endblock %}
 

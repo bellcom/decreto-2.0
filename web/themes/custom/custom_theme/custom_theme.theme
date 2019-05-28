@@ -14,3 +14,26 @@ function custom_theme_preprocess_page(array &$variables) {}
  * Implements hook_preprocess_paragraph().
  */
 function custom_theme_preprocess_paragraph(&$variables) {}
+
+/**
+ * Implement hook_preprocess_block()
+ */
+function custom_theme_preprocess_block(&$variables) {
+  $id = $variables['elements']['#id'];
+  $variables['content']['#attributes']['block'] = $id;
+
+  if ($id === 'custom_theme_decreto_dashboard_counter_coming_meetings') {
+    $contentService = \Drupal::service('decreto_content_modify.content');
+    $meetingCounter = $contentService->getMeetingCounters();
+
+    $variables['content']['#current_organization'] = $meetingCounter['my_org'];
+    $variables['content']['#across_organizations'] = $meetingCounter['total'];
+  }
+  elseif ($id === 'custom_theme_decreto_dashboard_counter_departments') {
+    $contentService = \Drupal::service('decreto_content_modify.content');
+    $taxonomyCounter = $contentService->getDepartmentCounters();
+
+    $variables['content']['#current_organization'] = $taxonomyCounter['my_org'];
+    $variables['content']['#across_organizations'] = $taxonomyCounter['total'];
+  }
+}
