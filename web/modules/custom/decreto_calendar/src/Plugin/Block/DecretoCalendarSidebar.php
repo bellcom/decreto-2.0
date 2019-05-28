@@ -18,9 +18,7 @@ class DecretoCalendarSidebar extends BlockBase implements BlockPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
-    $config = $this->getConfiguration();
     $block = views_embed_view('decreto_calender', 'calendar_block');
-
     return $block;
   }
 }

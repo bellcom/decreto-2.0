@@ -46,14 +46,22 @@ class DecretoCalendar extends Calendar {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-    
+    $token = [
+      '#theme' => 'item_list',
+      '#items' => [
+        '[decreto_calendar_date] Calendar date',
+        '[decreto_calendar_date:custom:Ymd] Calendar date with custom format.',
+      ],
+    ];
     // Allow custom path for Day and Week links
     $form['granularity_links_custom_path'] = ['#tree' => TRUE];
     $form['granularity_links_custom_path']['day'] = [
       '#title' => $this->t('Day link path'),
       '#type' => 'textfield',
       '#default_value' => $this->options['granularity_links_custom_path']['day'],
-      '#description' => $this->t("Specify path to be rendered in a  day links."),
+      '#description' => $this->t("Specify internal path to be rendered in a day links. You can use following tokens: @list", [
+        '@list' => \Drupal::service('renderer')->render($token),
+      ]),
     ];
   }
 
@@ -69,7 +77,7 @@ class DecretoCalendar extends Calendar {
     }
 
     if (!UrlHelper::isValid($day_path, FALSE)
-      || strpos($day_path, '/') !== 1) {
+      || strpos($day_path, '/') !== 0) {
       $form_state->setErrorByName('style_options][granularity_links_custom_path][day', $this->t('Path is not valid.'));
     }
   }
@@ -90,13 +98,18 @@ class DecretoCalendar extends Calendar {
     $style_options = $this->view->getStyle()->options;
     // Using custom path for day link if it's present in style config.
     if (!empty($style_options['granularity_links_custom_path']['day'])) {
-      $content = intval(substr($current_day_date, 8, 2));
+      $day_title = intval(substr($current_day_date, 8, 2));
+      $content = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['mini-day-off']],
+        'day' => ['#markup' => $day_title],
+      ];
       $token = \Drupal::token();
       if ($has_events) {
-        $content = [
+        $content['day'] = [
           '#type' => 'link',
           '#url' => Url::fromUri('internal:' . $token->replace($style_options['granularity_links_custom_path']['day'], ['decreto_calendar_date' => $current_day_date])),
-          '#title' => $content,
+          '#title' => $day_title,
         ];
       }
       return $content;
