@@ -24,33 +24,29 @@
   padding: 20px $boxy-spacing-left-right;
   margin-bottom: $grid-gutter-width;
 
-  background-color: $body-bg-secondary;
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .1);
   border-radius: $border-radius-base;
 }
 
-.action-box__icon {
-  text-align: center;
-
-  img {
-    margin: auto;
-  }
-
-  + .action-box__heading,
-  + .action-box__subheading,
-  + .action-box__body,
-  + .action-box__link {
-    margin-top: floor( ($grid-gutter-width / 4) );
-  }
-}
-
 .action-box__heading {
-  text-align: center;
+  display: flex;
 
-  + .action-box__subheading,
-  + .action-box__body,
-  + .action-box__link {
-    margin-top: floor( ($grid-gutter-width / 2) );
+  align-items: center;
+
+  &:before {
+    display: inline-block;
+
+    content: "";
+    margin-right: 15px;
+
+    height: 50px;
+    width: 50px;
+
+    background-repeat: no-repeat;
+    background-image: url("../images/action-box/briefcase.svg");
+  }
+
+  + .action-box__body {
+    margin-top: $grid-gutter-width;
   }
 }
 .action-box__heading__title {
@@ -59,50 +55,60 @@
 
   font-weight: $headings-font-weight-bold;
 
-  color: $boxy-heading-title-color;
+  color: inherit;
 }
 
-.action-box__subheading {
-  text-align: center;
-
-  + .action-box__body,
-  + .action-box__link {
-    margin-top: floor( ($grid-gutter-width / 2) );
-  }
-}
-
-.action-box__body {
-  text-align: center;
-
-  + .action-box__link {
-    margin-top: floor( ($grid-gutter-width / 2) );
-  }
-}
-
-.action-box__link {
-
-  a {
-    @extend .btn;
-    @extend .btn-block;
-    @extend .btn-lg;
-
-    .action-box--no-1 & {
-      @extend .btn-primary;
-    }
-
-    .action-box--no-2 & {
-      @extend .btn-secondary;
-    }
-
-    .action-box--no-3 & {
-      @extend .btn-tertiary;
-    }
-  }
-}
+.action-box__body {}
 
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
+
+.region-action-box__primary {
+
+  .action-box {
+    color: $headings-color;
+
+    background-color: $brand-primary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/department.svg");
+    }
+  }
+}
+
+.region-action-box__secondary {
+
+  .action-box {
+    color: #fff;
+
+    background-color: $brand-secondary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/briefcase.svg");
+    }
+  }
+}
+
+.region-action-box__tertiary {
+
+  .action-box {
+    background-color: $body-bg-tertiary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/mail.svg");
+    }
+  }
+}
 
 // --------------------------------------------------
 // Responsive
@@ -136,13 +142,4 @@
 .touchevents {}
 
 // No touch
-.no-touchevents {
-
-  .action-box {
-    transition: transform $transition-time-short;
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-}
+.no-touchevents {}

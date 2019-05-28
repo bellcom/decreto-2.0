@@ -17,7 +17,7 @@ provider: null
 plugin: 'simple_block:decreto_block_dashboard_counter'
 settings:
   id: 'simple_block:decreto_block_dashboard_counter'
-  label: 'Dashboard counter: Coming meetings'
+  label: 'Kommende møder'
   provider: simple_block
   label_display: visible
 visibility:
