@@ -8,6 +8,7 @@ dependencies:
   module:
     - calendar
     - datetime
+    - decreto_calendar
     - node
     - user
 id: decreto_calender
@@ -56,10 +57,11 @@ display:
         options:
           exclude_display: 1
       style:
-        type: calendar
+        type: decreto_calendar
         options:
           calendar_type: month
           mini: '1'
+          month_name_size: '99'
           name_size: '1'
           with_weekno: '0'
           max_items: '0'
@@ -73,6 +75,8 @@ display:
           granularity_links:
             day: view.decreto_calender.page_day
             week: view.decreto_calender.page_week
+          granularity_links_custom_path:
+            day: '/search/[decreto_calendar_date:custom:Ymd]'
       row:
         type: calendar_row
         options:

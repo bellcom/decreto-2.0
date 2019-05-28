@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Decreto calendar module file.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_token_info().
+ */
+function decreto_calendar_token_info() {
+  return [
+    'types' => [
+      'decreto_calendar_date' => [
+        'name' => t("Decreto calendar date"),
+        'description' => t("Tokens related to calendar date."),
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ *
+ * Builds placeholder replacement tokens data for decreto calendar.
+ */
+function decreto_calendar_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  if ($type != 'decreto_calendar_date' || empty($data['decreto_calendar_date'])) {
+    return [];
+  }
+
+  $decreto_calendar_date = $data['decreto_calendar_date'];
+  $replacements = [];
+  $token_service = \Drupal::token();
+  
+  foreach ($tokens as $name => $original) {
+    $replacements[$original] = $decreto_calendar_date;
+  }
+
+  if ($created_tokens = $token_service->findWithPrefix($tokens, 'custom')) {
+    foreach ($created_tokens as $name => $original) {
+      $replacements[$original] = format_date(strtotime($decreto_calendar_date), 'custom', $name, NULL, empty($options['langcode']) ? NULL : $options['langcode']);
+    }
+  }
+
+  return $replacements;
+}
