@@ -1,0 +1,34 @@
+{% macro menu_links(items, attributes, menu_level, classes) %}
+  {% if items %}
+    <ul{{ attributes.addClass(menu_level == 0 ? 'sidebar-navigation' : 'sidebar-navigation__item__dropdown-menu') }}>
+      {% for item in items %}
+
+        {% if menu_level == 0 %}
+          {% set item_classes = [
+            'sidebar-navigation__item',
+            item.is_expanded and item.below ? 'sidebar-navigation__item--dropdown',
+            item.in_active_trail ? 'sidebar-navigation__item--active',
+            item.url.options.attributes.class ? 'sidebar-navigation__item--' ~ item.url.options.attributes.class,
+          ] %}
+        {% else %}
+          {% set item_classes = [
+            'sidebar-navigation__item__dropdown-menu__item',
+            item.is_expanded and item.below ? 'sidebar-navigation__item__dropdown-menu__item--dropdown',
+            item.in_active_trail ? 'sidebar-navigation__item__dropdown-menu__item--active',
+            item.url.options.attributes.class ? 'sidebar-navigation__item__dropdown-menu__item--' ~ item.url.options.attributes.class,
+          ] %}
+        {% endif %}
+
+        <li{{ item.attributes.addClass(item_classes) }}>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+
+          {% if item.below %}
+            {{ _self.menu_links(item.below, attributes.removeClass(menu_level == 0 ? 'sidebar-navigation' : 'sidebar-navigation__item__dropdown-menu'), menu_level + 1, classes) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{{ _self.menu_links(items, attributes, 0, null) }}

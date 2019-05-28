@@ -66,6 +66,76 @@
 // Variants
 // --------------------------------------------------
 
+// Icons.
+.sidebar-navigation__item--dashboard,
+.sidebar-navigation__item--meetings,
+.sidebar-navigation__item--settings {
+
+  > a {
+    display: flex;
+
+    align-items: center;
+
+    &:before {
+      @extend .material-icons;
+
+      font-size: 24px;
+
+      margin-right: 10px;
+
+      color: $brand-tertiary;
+    }
+
+    &:hover, &:focus, &:active {
+
+      &:before {
+        color: $brand-secondary;
+      }
+    }
+  }
+
+  &.sidebar-navigation__item--active {
+
+    > a {
+
+      &, &:hover, &:focus, &:active {
+
+        &:before {
+          color: $brand-secondary;
+        }
+      }
+    }
+  }
+}
+
+.sidebar-navigation__item--dashboard {
+
+  > a {
+
+    &:before {
+      content: "apps";
+    }
+  }
+}
+.sidebar-navigation__item--meetings {
+
+  > a {
+
+    &:before {
+      content: "business_center";
+    }
+  }
+}
+.sidebar-navigation__item--settings {
+
+  > a {
+
+    &:before {
+      content: "settings";
+    }
+  }
+}
+
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------

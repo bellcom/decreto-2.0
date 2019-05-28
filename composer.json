@@ -31,7 +31,7 @@
         "drupal/field_group": "^1.0",
         "drupal/front_page": "^1.0@beta",
         "drupal/kint": "^2.0",
-        "drupal/menu_link_attributes": "^1.0",
+        "drupal/menu_link_attributes": "1.x-dev",
         "drupal/search_api": "^1.11",
         "drupal/search_api_solr": "^2.5",
         "drupal/search_api_views_taxonomy": "^1.11",
