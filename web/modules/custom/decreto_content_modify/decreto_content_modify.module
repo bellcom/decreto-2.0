@@ -1,0 +1,138 @@
+<?php
+
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils as DecretoContentUtils;
+use Drupal\decreto_content_modify\Services\ContentService;
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function decreto_content_modify_preprocess_node(&$variables) {
+  $uid = \Drupal::currentUser()->id();
+
+  if ($variables['node']->getType() == 'decreto_bullet_point') {
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'decreto_memo')
+      ->condition('uid', $uid)
+      ->condition('field_decreto_memo_bp', $variables['node']->id());
+    $nids = $query->execute();
+    foreach ($nids as $key => $value) {
+      $node = \Drupal\node\Entity\Node::load($value);
+      $variables['memos'][] = node_view($node);
+    }
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter()
+ * @param $breadcrumb
+ * @param $route_match
+ * @param array $context
+ */
+function decreto_content_modify_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
+  foreach ($breadcrumb->getLinks() as $exisiting_link) {
+    if ($exisiting_link->getUrl()->getRouteName() == '<front>') {
+      $exisiting_link->setText(t('Dashboard'));
+    }
+  }
+
+  if ($node = $route_match->getParameter('node')) {
+    if ($node->getType() == 'decreto_meeting' || $node->getType() == 'decreto_bullet_point' || $node->getType() == 'decreto_bullet_point_attachment') {
+    //  $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), 'view.decreto_search.page'));
+    }
+
+    if ($node->getType() == 'decreto_bullet_point' || $node->getType() == 'decreto_bullet_point_attachment') {
+      $meeting = DecretoContentUtils::getRelatedNodes($node, 'decreto_meeting');
+      $breadcrumb->addLink($meeting->toLink());
+    }
+
+    if ($node->getType() == 'decreto_bullet_point_attachment') {
+      $bp = DecretoContentUtils::getRelatedNodes($node, 'decreto_bullet_point');
+      $breadcrumb->addLink($bp->toLink());
+    }
+  }
+
+  if ($route_match->getRouteName() == 'view.decreto_calender.page_day') {
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Calendar day'), '<none>'));
+  }
+
+  if ($route_match->getRouteName() == 'view.decreto_calender.page_month') {
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Calendar month'), '<none>'));
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Invalidates caches related with the decreto_memo and decreto_meeting.
+ */
+function decreto_content_modify_node_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_memo') {
+    // Invalidating memos count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
+
+    // Getting related meeting.
+    $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
+
+    // Invalidating meeting.
+    if ($meeting) {
+      Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+    }
+
+  }
+  elseif ($entity->bundle() == 'decreto_meeting') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_content_modify_taxonomy_term_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Invalidates caches related with the decreto_memo and decreto_meeting.
+ */
+function decreto_content_modify_node_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_memo') {
+    // Invalidating memos count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
+
+    // Getting related meeting.
+    $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
+
+    // Invalidating meeting.
+    if ($meeting) {
+      Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+    }
+  }
+  elseif ($entity->bundle() == 'decreto_meeting') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_content_modify_taxonomy_term_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+  }
+}
+

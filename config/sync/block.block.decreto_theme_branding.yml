@@ -1,0 +1,30 @@
+uuid: eb119b2a-cc55-4421-bb03-3f702b6e79e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - decreto_theme
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: decreto_theme_branding
+theme: decreto_theme
+region: sidebar_first
+weight: -15
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

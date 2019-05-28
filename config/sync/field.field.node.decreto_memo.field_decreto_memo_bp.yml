@@ -1,0 +1,28 @@
+uuid: ef0e649e-1c9e-48f1-90bb-2ec95f120313
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_memo_bp
+    - node.type.decreto_bullet_point
+    - node.type.decreto_memo
+id: node.decreto_memo.field_decreto_memo_bp
+field_name: field_decreto_memo_bp
+entity_type: node
+bundle: decreto_memo
+label: 'Bullet point'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_bullet_point: decreto_bullet_point
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

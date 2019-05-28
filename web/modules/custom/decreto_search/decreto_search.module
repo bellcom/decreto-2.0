@@ -1,0 +1,67 @@
+<?php
+/**
+ * Implements hook_form_alter()
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-decreto-search-page') {
+    //formatting search field
+    $form['search_api_fulltext']['#theme_wrappers'] = null;
+    $form['actions']['#theme_wrappers'] = null;
+
+    //submit button
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+
+    //select type
+    //$form['type']['#attributes']['class'][] = 'bootstrap-multiselect';
+    //$form['type']['#attributes']['data-multiselect-title'] = t('Select Type');
+
+    //start date
+    $form['field_decreto_meet_start_date']['#type'] = 'datetime';
+    //$form['field_decreto_meet_start_date']['#type'] = 'date';
+
+    //end date
+    $form['field_decreto_meet_end_date']['#type'] = 'datetime';
+    //$form['field_decreto_meet_end_date']['#type'] = 'date';
+
+    // Department.
+    $form['field_decreto_meet_department']['#attributes']['class'][] = 'bootstrap-multiselect';
+    $form['field_decreto_meet_department']['#attributes']['data-multiselect-title'] = t('Select department');
+
+    //hiding additional filtets, if not search page
+    if (\Drupal::routeMatch()->getRouteName() != 'view.decreto_search.page') {
+      $form['#filters_dispay'] = FALSE;
+    } else {
+      $form['#filters_dispay'] = TRUE;
+    }
+
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter()
+ *
+ * @param $suggestions
+ * @param $vars
+ */
+function decreto_search_theme_suggestions_select_alter(&$suggestions, &$vars) {
+  //only for those that have bootstrap-multiselect
+  if (in_array('bootstrap-multiselect', $vars['element']['#attributes']['class'])) {
+    $suggestions[] = 'select__bootstrap_multiselect';
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter()
+ * @param $breadcrumb
+ * @param $route_match
+ * @param array $context
+ */
+function decreto_search_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
+  if ($route_match->getRouteName() == 'view.decreto_search.page') {
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
+  }
+}

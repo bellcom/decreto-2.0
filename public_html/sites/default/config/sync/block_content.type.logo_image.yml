@@ -1,8 +1,0 @@
-uuid: e783199b-eece-4b25-905d-263df024b542
-langcode: en
-status: true
-dependencies: {  }
-id: logo_image
-label: Logo_image
-revision: 0
-description: 'This is place to upload a logo image.'

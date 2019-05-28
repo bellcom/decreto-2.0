@@ -1,0 +1,159 @@
+// |--------------------------------------------------------------------------
+// | Action box
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .action-box
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin action-box-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.action-box {
+  padding: 20px $boxy-spacing-left-right;
+  margin-bottom: $grid-gutter-width;
+
+  border-radius: $border-radius-base;
+}
+
+.action-box__heading {
+  display: flex;
+
+  align-items: center;
+
+  &:before {
+    display: inline-block;
+
+    content: "";
+    margin-right: 15px;
+
+    height: 50px;
+    width: 50px;
+
+    background-repeat: no-repeat;
+    background-image: url("../images/action-box/briefcase.svg");
+  }
+}
+.action-box__heading__title {
+  margin: 0;
+  padding: 0;
+
+  font-weight: $headings-font-weight-bold;
+
+  color: inherit;
+}
+
+.action-box-counters {
+  display: flex;
+
+  margin-top: floor( ($grid-gutter-width / 2) );
+}
+.action-box-counters__item {
+  flex-basis: 50%;
+}
+.action-box-counters__item__number {
+  font-family: $headings-font-family;
+  font-size: $font-size-h2;
+}
+.action-box-counters__item__description {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-small;
+
+  color: inherit;
+  opacity: .75;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+.region-action-box__primary {
+
+  .action-box {
+    color: $headings-color;
+
+    background-color: $brand-primary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/department.svg");
+    }
+  }
+}
+
+.region-action-box__secondary {
+
+  .action-box {
+    color: #fff;
+
+    background-color: $brand-secondary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/briefcase.svg");
+    }
+  }
+}
+
+.region-action-box__tertiary {
+
+  .action-box {
+    background-color: $body-bg-tertiary;
+  }
+
+  .action-box__heading {
+
+    &:before {
+      background-image: url("../images/action-box/mail.svg");
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

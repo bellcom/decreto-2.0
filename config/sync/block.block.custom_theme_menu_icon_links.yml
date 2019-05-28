@@ -1,0 +1,28 @@
+uuid: 510e3f8f-6c1f-4d16-89ff-9700f4689084
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - custom_theme
+id: custom_theme_menu_icon_links
+theme: custom_theme
+region: sidr_left__primary
+weight: -16
+provider: null
+plugin: 'block_content:2a1d7782-a8a4-4f86-b502-7cde8718827c'
+settings:
+  id: 'block_content:2a1d7782-a8a4-4f86-b502-7cde8718827c'
+  label: menu_icon_links
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/login
+    negate: false
+    context_mapping: {  }

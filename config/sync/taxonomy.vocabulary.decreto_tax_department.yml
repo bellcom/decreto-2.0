@@ -1,0 +1,9 @@
+uuid: 9a706f3e-d165-45b1-838c-e73ee91708c4
+langcode: en
+status: true
+dependencies: {  }
+name: Department
+vid: decreto_tax_department
+description: ''
+hierarchy: 0
+weight: 0

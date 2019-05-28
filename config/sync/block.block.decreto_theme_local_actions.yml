@@ -1,0 +1,20 @@
+uuid: 4c03dfea-f034-46fd-8d33-51e58369d2c6
+langcode: en
+status: false
+dependencies:
+  theme:
+    - decreto_theme
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: decreto_theme_local_actions
+theme: decreto_theme
+region: navigation
+weight: -8
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

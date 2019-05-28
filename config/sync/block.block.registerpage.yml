@@ -1,0 +1,28 @@
+uuid: 123e6cde-3610-4cbe-8ea9-b513e59d142f
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - decreto_theme
+id: registerpage
+theme: decreto_theme
+region: help
+weight: -15
+provider: null
+plugin: 'block_content:b5f1ede7-bea8-4c66-9fde-1cfe356eb5d6'
+settings:
+  id: 'block_content:b5f1ede7-bea8-4c66-9fde-1cfe356eb5d6'
+  label: 'register page '
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /page/login
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,30 @@
+uuid: fc4a52a7-4042-434d-bcb8-5de0696f4fcd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - custom_theme
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: custom_theme_branding
+theme: custom_theme
+region: sidr_left__primary
+weight: -15
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

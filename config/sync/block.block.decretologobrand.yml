@@ -1,0 +1,28 @@
+uuid: a7e1f8bc-a4d0-4a00-96bc-dc80b0115a0c
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - decreto_theme
+id: decretologobrand
+theme: decreto_theme
+region: navigation
+weight: -16
+provider: null
+plugin: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
+settings:
+  id: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
+  label: 'Decreto Logo brand'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/register
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,13 @@
+{% macro menu_links(items, attributes, menu_level, classes) %}
+  {% if items %}
+    <ul{{ attributes.addClass('flexy-list') }}>
+      {% for item in items %}
+        <li>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{{ _self.menu_links(items, attributes, 0, null) }}

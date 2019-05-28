@@ -1,0 +1,7 @@
+type: module
+name: Decreto Calendar
+description: 'Module contains decreto calendar functionality'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'

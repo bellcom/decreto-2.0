@@ -1,0 +1,25 @@
+{%
+  set classes = [
+    'boxy',
+    'boxy--' ~ configuration.provider|clean_class,
+    'boxy--' ~ plugin_id|clean_class,
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if label %}
+    <div class="boxy__heading">
+      <h2{{ title_attributes.addClass('boxy__heading__title') }}>{{ label }}</h2>
+    </div>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+    <div class="boxy__body">
+      {{ content }}
+    </div>
+  {% endblock %}
+
+</section>
+

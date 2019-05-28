@@ -1,0 +1,98 @@
+<?php
+
+namespace Drupal\decreto_annotator\Entity;
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\decreto_annotator\Services\NoteService;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\node\Entity\Node;
+
+/**
+ * Defines the Note entity.
+ *
+ * @ingroup rate
+ *
+ * @ContentEntityType(
+ *   id = "decreto_annotator_note",
+ *   label = @Translation("Note entity"),
+ *   base_table = "decreto_annotator_notes",
+ *   translatable = FALSE,
+ *   entity_keys = {
+ *     "id" = "id",
+ *     "bpa_id" = "bpa_id",
+ *     "uid" = "uid",
+ *     "note_info" = "note_info",
+ *   },
+ *   list_cache_tags = { "config:decreto_annotator_note" }
+ * )
+ */
+class Note extends ContentEntityBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+    $fields['id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('id'))
+      ->setReadOnly(TRUE)
+      ->setRequired(TRUE)
+      ->setSetting('unsigned', TRUE);
+
+    $fields['bpa_id'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Bullet point attachment id'))
+      ->setRequired(TRUE)
+      ->setReadOnly(TRUE);
+
+
+    $fields['uid'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Note user id'))
+      ->setRequired(TRUE)
+      ->setReadOnly(TRUE);
+
+    $fields['note_info'] = BaseFieldDefinition::create('string_long')
+      ->setLabel(t('Note info'))
+      ->setDefaultValue(serialize([]));
+
+    return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(array $values = []) {
+    // Invalidating notes count.
+    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $values['uid']]);
+
+    // Getting related meeting.
+    $bpa_id = $values['bpa_id'];
+    $bp = Node::load($bpa_id);
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
+
+    // Invalidating meeting.
+    Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+
+    return parent::create($values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function delete() {
+    // Invalidating notes count.
+    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $this->get('uid')->value]);
+
+    // Getting related meeting.
+    $bpa_id = $this->get('bpa_id')->value;
+    $bp = Node::load($bpa_id);
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
+
+    // Invalidating meeting.
+    Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+
+    return parent::delete();
+  }
+
+}

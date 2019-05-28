@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page()
+ *
+ * loads the toggle_main_menu state from cookies
+ */
+function decreto_theme_preprocess_page(&$vars) {
+  if (isset($_COOKIE['toggle_main_menu'])) {
+    $vars['toggle_main_menu'] = $_COOKIE['toggle_main_menu'];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter()
+ *
+ * @param $suggestions
+ * @param $vars
+ */
+function decreto_theme_theme_suggestions_menu_alter(&$suggestions, &$vars) {
+  if (isset($vars['attributes']['block'])) {
+    $suggestions[] = 'menu' . '__' . $vars['menu_name'] . '__' . $vars['attributes']['block'];
+  }
+}
+
+/**
+ * Implement hook_preprocess_block()
+ *
+ * @param $vars
+ */
+function decreto_theme_preprocess_block(&$vars) {
+  $id = $vars['elements']['#id'];
+  $vars['content']['#attributes']['block'] = $id;
+
+  if ($id == 'decreto_dashboard_counter_coming_meetings') {
+    $decretoContentService = \Drupal::service('decreto_content_modify.content');
+    $meetingCounter = $decretoContentService->getMeetingCounters();
+
+    $vars['content']['#org_count'] = $meetingCounter['my_org'];
+    $vars['content']['#total_count'] = $meetingCounter['total'];
+  }
+  elseif ($id == 'decreto_dashboard_counter_departments') {
+    $decretoContentService = \Drupal::service('decreto_content_modify.content');
+    $taxonomyCounter = $decretoContentService->getDepartmentCounters();
+
+    $vars['content']['#org_count'] = $taxonomyCounter['my_org'];
+    $vars['content']['#total_count'] = $taxonomyCounter['total'];
+  }
+}
+
+function decreto_theme_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
+  if ($route_match->getRouteName() == 'view.decreto_search.page') {
+    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function decreto_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+ $node = \Drupal::request()->attributes->get('node');
+  if ($node) {
+    if ($node->getType()) {
+      $suggestions[] = 'page__' . $node->getType();
+    }
+
+    if($node->hasField('field_page_template')){
+    $custom_page_template = $node->get('field_page_template')->getValue();
+      if(isset($custom_page_template[0]['target_id'])){
+        $term = \Drupal\taxonomy\Entity\Term::load($custom_page_template[0]['target_id'])->getname();
+        $term = 'page__' . preg_replace("/[^a-zA-Z0-9s]/", "_", strtolower($term));
+        $suggestions[] = $term;
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements template_proprocess_node().
+ */
+function decreto_theme_preprocess_node(&$variables) {
+  $node = $variables['node'];
+
+  if ($node->getType() == 'decreto_meeting') {
+    if ($variables['view_mode'] == 'table_display') {
+      // Note indicator.
+      $noteService = \Drupal::service('decreto_annotator.note');
+      $variables['content']['contains_notes'] = $noteService->getMeetingHasNote($node);
+
+      // Memos indicator.
+      $decretoContentService = \Drupal::service('decreto_content_modify.content');
+      $variables['content']['contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
+    }
+  }
+}

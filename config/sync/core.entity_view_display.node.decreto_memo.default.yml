@@ -1,0 +1,38 @@
+uuid: a35c1c75-dfc6-43e0-8e06-b625eecc309e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.decreto_memo.body
+    - field.field.node.decreto_memo.field_decreto_memo_bp
+    - node.type.decreto_memo
+  module:
+    - text
+    - user
+id: node.decreto_memo.default
+targetEntityType: node
+bundle: decreto_memo
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_decreto_memo_bp:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true

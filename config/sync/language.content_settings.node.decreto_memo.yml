@@ -1,0 +1,11 @@
+uuid: 3afbbc59-baa7-4d10-b9c3-e6e1b9bd7fab
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.decreto_memo
+id: node.decreto_memo
+target_entity_type_id: node
+target_bundle: decreto_memo
+default_langcode: site_default
+language_alterable: false

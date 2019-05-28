@@ -1,0 +1,31 @@
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'element-wrapper-link',
+]
+%}
+<a href="{{ url }}"{{ attributes.addClass(classes) }}>
+  <div class="entity-{{ view_mode|clean_class }}__heading">
+    <h3 class="entity-{{ view_mode|clean_class }}__heading__title heading-h5">
+      {{ label }}
+    </h3>
+  </div>
+  <div class="entity-{{ view_mode|clean_class }}__body">
+
+    {# Begin - body #}
+    {% set text = content.body|render %}
+    {{ text|striptags }}
+    {# End - body #}
+
+    {# Begin - published at #}
+    <div class="entity-{{ view_mode|clean_class }}__published-at">
+      {{ node.createdTime | date("d-m-Y") }}
+    </div>
+    {# End - published at #}
+
+  </div>
+</a>

@@ -1,0 +1,23 @@
+{%
+  set classes = [
+    'boxy',
+    'boxy--calendar',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if label %}
+  <div class="boxy__heading">
+    <h2{{ title_attributes.addClass('boxy__heading__title heading-h5') }}>{{ label }}</h2>
+  </div>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+    <div class="boxy__body">
+      {{ content }}
+    </div>
+  {% endblock %}
+</section>
+

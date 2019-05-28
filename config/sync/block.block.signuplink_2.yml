@@ -1,0 +1,21 @@
+uuid: 7bc55f26-4020-4449-8c90-fcb4bd776a9c
+langcode: en
+status: false
+dependencies:
+  theme:
+    - decreto_theme
+id: signuplink_2
+theme: decreto_theme
+region: navigation
+weight: -6
+provider: null
+plugin: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+settings:
+  id: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
+  label: 'Sign Up Link'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

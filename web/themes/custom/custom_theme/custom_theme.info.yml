@@ -1,0 +1,24 @@
+name: 'Custom theme'
+type: theme
+description: 'A beautiful custom theme.'
+core: 8.x
+screenshot: dist/images/screenshot.png
+base theme: custom_base_theme
+package: Custom
+
+regions:
+  sidr_left__primary: 'Sidr - left - primary navigation'
+  flexy_navigation__primary: 'Flexy navigation - primary navigation'
+  flexy_navigation__secondary: 'Flexy navigation - secondary navigation'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  sidebar: 'Sidebar - desktop'
+  content: 'Content'
+  action_box__secondary: 'Action box - orange'
+  action_box__primary: 'Action box - blue'
+  action_box__tertiary: 'Action box - dark'
+
+libraries:
+  - 'custom_theme/fonts'
+  - 'custom_theme/styles'
+  - 'custom_theme/javascripts'

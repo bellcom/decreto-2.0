@@ -1,0 +1,103 @@
+// |--------------------------------------------------------------------------
+// | Layout
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .layout__content
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// Responsive
+$xs-layout-content-padding-bottom: $grid-gutter-width;
+$sm-layout-content-padding-bottom: $grid-gutter-width;
+$md-layout-content-padding-bottom: $grid-gutter-width;
+$lg-layout-content-padding-bottom: $grid-gutter-width;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin layout-content-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+html,
+body {
+  overflow-x: initial;
+}
+
+body {
+  margin-top: 0 !important;
+}
+
+.layout__wrapper {
+  display: flex;
+
+  min-height: 100%;
+
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-direction: row;
+}
+
+.layout__content {
+  padding-bottom: $xs-layout-content-padding-bottom;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .layout__content {
+    padding-bottom: $sm-layout-content-padding-bottom;
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .layout__content {
+    padding-bottom: $md-layout-content-padding-bottom;
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .layout__content {
+    padding-bottom: $lg-layout-content-padding-bottom;
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

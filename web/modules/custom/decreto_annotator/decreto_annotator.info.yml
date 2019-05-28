@@ -1,0 +1,10 @@
+type: module
+name: Decreto Annotator
+description: 'A module allowing to add notes documents.'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'
+
+dependencies:
+  - decreto_content_modify

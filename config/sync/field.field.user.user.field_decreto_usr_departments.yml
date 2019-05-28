@@ -1,0 +1,30 @@
+uuid: a4389d05-9c67-4408-b453-1a0652a626e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_decreto_usr_departments
+    - taxonomy.vocabulary.decreto_tax_department
+  module:
+    - user
+id: user.user.field_decreto_usr_departments
+field_name: field_decreto_usr_departments
+entity_type: user
+bundle: user
+label: 'Departments (member of)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_department: decreto_tax_department
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

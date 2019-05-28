@@ -1,0 +1,93 @@
+// |--------------------------------------------------------------------------
+// | Calendar
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .boxy--calendar
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin boxy-calendar-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.boxy--calendar {
+  border-radius: 0;
+
+  .boxy__heading {
+    padding: 14px floor( ($grid-gutter-width / 2) );
+    background-color: $brand-primary;
+  }
+  .boxy__heading__title {
+    display: flex;
+
+    align-items: center;
+
+    font-weight: $headings-font-weight-bold;
+
+    color: $headings-color;
+
+    &:before {
+      @extend .material-icons;
+
+      content: "date_range";
+
+      font-size: inherit;
+
+      margin-right: 10px;
+    }
+  }
+
+  .boxy__body {
+    padding: 20px 0 floor( ($grid-gutter-width / 2) ) 0;
+
+    background-color: #fbfbfb;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

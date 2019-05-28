@@ -1,0 +1,23 @@
+{%
+  set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  <h2{{ title_attributes }}>
+      {{ client_name }} <span class="icon fa fa-angle-right"></span> {{ label }}
+  </h2>
+  {{ title_suffix }}
+
+  <div{{ content_attributes.addClass('content') }}>
+    {{ content }}
+  </div>
+
+</article>

@@ -1,0 +1,102 @@
+// |--------------------------------------------------------------------------
+// | Boxy
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .boxy
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin boxy-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.boxy {
+  padding: 15px 0;
+
+  background-color: $body-bg-secondary;
+  border-radius: $border-radius-base;
+}
+
+.boxy__heading {}
+.boxy__heading__title {
+  font-weight: $headings-font-weight-bold;
+}
+
+.boxy__body {}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+.boxy {
+
+  &.boxy--background-color-transparent {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  &.boxy--background-color-body-bg-secondary {
+    background-color: $body-bg-secondary;
+  }
+
+  &.boxy--background-color-primary {
+    background-color: $brand-primary;
+  }
+
+  &.boxy--background-color-secondary {
+    background-color: $brand-secondary;
+  }
+
+  &.boxy--background-color-tertiary {
+    background-color: $brand-tertiary;
+  }
+
+  &.boxy--background-color-quaternary {
+    background-color: $brand-quaternary;
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

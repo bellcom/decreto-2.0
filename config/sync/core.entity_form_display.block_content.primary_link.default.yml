@@ -1,0 +1,38 @@
+uuid: 1222a351-07be-4483-9faa-c2bc5bc929a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.primary_link
+    - field.field.block_content.primary_link.field_primary
+  module:
+    - link
+id: block_content.primary_link.default
+targetEntityType: block_content
+bundle: primary_link
+mode: default
+content:
+  field_primary:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

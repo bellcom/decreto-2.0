@@ -1,0 +1,6 @@
+name: 'Custom - base theme'
+type: theme
+description: 'Provides a base with sensible defaults.'
+core: 8.x
+base theme: bootstrap
+package: Custom
