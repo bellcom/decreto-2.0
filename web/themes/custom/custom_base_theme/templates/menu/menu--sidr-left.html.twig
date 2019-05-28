@@ -1,0 +1,17 @@
+{% macro menu_links(items, attributes, menu_level, classes) %}
+  {% if items %}
+    <ul>
+      {% for item in items %}
+        <li>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+
+          {% if item.below %}
+            {{ _self.menu_links(item.below, attributes.removeClass(classes), menu_level + 1, classes) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+{{ _self.menu_links(items, attributes, 0, null) }}

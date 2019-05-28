@@ -6,6 +6,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\decreto_annotator\Services\NoteService;
 use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
 use Drupal\node\Entity\Node;
 
@@ -63,7 +64,7 @@ class Note extends ContentEntityBase {
    */
   public static function create(array $values = []) {
     // Invalidating notes count.
-    Cache::invalidateTags(['decreto_annotator_note_count:' . $values['uid']]);
+    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $values['uid']]);
 
     // Getting related meeting.
     $bpa_id = $values['bpa_id'];
@@ -81,7 +82,7 @@ class Note extends ContentEntityBase {
    */
   public function delete() {
     // Invalidating notes count.
-    Cache::invalidateTags(['decreto_annotator_note_count:' . $this->get('uid')->value]);
+    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $this->get('uid')->value]);
 
     // Getting related meeting.
     $bpa_id = $this->get('bpa_id')->value;

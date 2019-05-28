@@ -1,0 +1,153 @@
+// |--------------------------------------------------------------------------
+// | Flexy navigation
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .flexy-navigation
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$flexy-navigation-large-banner-text-color-dark: $text-color-dark;
+$flexy-navigation-large-banner-text-color-light: #fff;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin flexy-navigation-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.flexy-navigation {}
+
+.flexy-navigation__item {
+
+  > a {
+    text-transform: uppercase;
+  }
+}
+
+.flexy-navigation__item--dropdown {
+
+  &:hover {
+
+    > .flexy-navigation__item__dropdown-menu,
+    > .flexy-navigation__item__dropdown-megamenu {
+      display: none;
+    }
+  }
+
+  &.active {
+
+    &, &:hover {
+
+      > .flexy-navigation__item__dropdown-menu,
+      > .flexy-navigation__item__dropdown-megamenu {
+        display: block;
+      }
+    }
+  }
+}
+
+// Dropdown menu
+.flexy-navigation__item__dropdown-menu {
+  padding: 5px $flexy-navigation-spacing-left-right;
+  margin-top: 10px; // to make room for arrow
+
+  border-radius: $border-radius-base;
+
+  &:after {
+    position: absolute;
+
+    left: $flexy-navigation-spacing-left-right;
+    top: -8px;
+
+    width: 0;
+    height: 0;
+    content: "";
+
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid $flexy-navigation-item-dropdown-menu-background-color;
+  }
+}
+.flexy-navigation__item__dropdown-menu__item {
+
+  + .flexy-navigation__item__dropdown-menu__item {
+    border-top: 1px solid $border-color;
+  }
+
+  > a {
+    padding: 15px 0;
+
+    text-transform: uppercase;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+.has-large-banner {
+
+  &.banner-has-text-color-dark {
+
+    .flexy-header--static {
+      @include flexy-navigation-mixin-item-colors(
+                      $flexy-navigation-large-banner-text-color-dark, $flexy-navigation-item-link-background-color,
+                      $flexy-navigation-large-banner-text-color-dark, $flexy-navigation-item-link-hover-background-color,
+                      $flexy-navigation-large-banner-text-color-dark, $flexy-navigation-item-active-link-background-color
+      );
+    }
+  }
+
+  &.banner-has-text-color-light {
+
+    .flexy-header--static {
+      @include flexy-navigation-mixin-item-colors(
+                      $flexy-navigation-large-banner-text-color-light, $flexy-navigation-item-link-background-color,
+                      $flexy-navigation-large-banner-text-color-light, $flexy-navigation-item-link-hover-background-color,
+                      $flexy-navigation-large-banner-text-color-light, $flexy-navigation-item-active-link-background-color
+      );
+    }
+  }
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

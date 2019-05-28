@@ -1,0 +1,148 @@
+// |--------------------------------------------------------------------------
+// | Action box
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .action-box
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin action-box-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.action-box {
+  padding: 20px $boxy-spacing-left-right;
+  margin-bottom: $grid-gutter-width;
+
+  background-color: $body-bg-secondary;
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .1);
+  border-radius: $border-radius-base;
+}
+
+.action-box__icon {
+  text-align: center;
+
+  img {
+    margin: auto;
+  }
+
+  + .action-box__heading,
+  + .action-box__subheading,
+  + .action-box__body,
+  + .action-box__link {
+    margin-top: floor( ($grid-gutter-width / 4) );
+  }
+}
+
+.action-box__heading {
+  text-align: center;
+
+  + .action-box__subheading,
+  + .action-box__body,
+  + .action-box__link {
+    margin-top: floor( ($grid-gutter-width / 2) );
+  }
+}
+.action-box__heading__title {
+  margin: 0;
+  padding: 0;
+
+  font-weight: $headings-font-weight-bold;
+
+  color: $boxy-heading-title-color;
+}
+
+.action-box__subheading {
+  text-align: center;
+
+  + .action-box__body,
+  + .action-box__link {
+    margin-top: floor( ($grid-gutter-width / 2) );
+  }
+}
+
+.action-box__body {
+  text-align: center;
+
+  + .action-box__link {
+    margin-top: floor( ($grid-gutter-width / 2) );
+  }
+}
+
+.action-box__link {
+
+  a {
+    @extend .btn;
+    @extend .btn-block;
+    @extend .btn-lg;
+
+    .action-box--no-1 & {
+      @extend .btn-primary;
+    }
+
+    .action-box--no-2 & {
+      @extend .btn-secondary;
+    }
+
+    .action-box--no-3 & {
+      @extend .btn-tertiary;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {
+
+  .action-box {
+    transition: transform $transition-time-short;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}

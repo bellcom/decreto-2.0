@@ -1,0 +1,17 @@
+fonts:
+  css:
+    base:
+      'https://fonts.googleapis.com/css?family=Roboto:400,700': { type: external }
+
+styles:
+  css:
+    theme:
+      dist/stylesheets/stylesheet.css: {}
+
+javascripts:
+  js:
+    dist/javascripts/app.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/modernizr

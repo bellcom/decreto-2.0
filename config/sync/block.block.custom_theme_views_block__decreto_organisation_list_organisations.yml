@@ -1,0 +1,24 @@
+uuid: 5fe2672d-23c8-4ae3-a147-ad7f88de5371
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.decreto_organisation_list
+  module:
+    - views
+  theme:
+    - custom_theme
+id: custom_theme_views_block__decreto_organisation_list_organisations
+theme: custom_theme
+region: sidr_left__primary
+weight: -15
+provider: null
+plugin: 'views_block:decreto_organisation_list-organisations'
+settings:
+  id: 'views_block:decreto_organisation_list-organisations'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

@@ -1,0 +1,29 @@
+uuid: 8af83da0-13ef-4b2f-95eb-4c7cc5c14b9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - custom_base_theme
+id: custom_base_theme_main_navigation_mobile
+theme: custom_base_theme
+region: sidebar_first
+weight: -14
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/login*'
+    negate: true
+    context_mapping: {  }

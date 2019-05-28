@@ -1,0 +1,114 @@
+// |--------------------------------------------------------------------------
+// | Entity - full
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-full
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$xs-entity-full-header-inner-spacing: 50px;
+$sm-entity-full-header-inner-spacing: 60px;
+$md-entity-full-header-inner-spacing: 80px;
+$lg-entity-full-header-inner-spacing: 90px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-full-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-full__header {
+  padding: $xs-entity-full-header-inner-spacing 0;
+
+  + .entity-full__paragraphs {
+    margin-top: 0;
+  }
+}
+
+.entity-full__heading {
+
+  + .entity-full__subheading {
+    margin-top: 20px;
+  }
+
+  + .entity-full__body {
+    margin-top: 40px;
+  }
+}
+.entity-full__heading__title {
+  margin: 0;
+  padding: 0;
+}
+
+.entity-full__subheading {
+  font-size: $font-size-large;
+
+  + .entity-full__body {
+    margin-top: 40px;
+  }
+}
+
+.entity-full__paragraphs {
+  margin-top: $grid-gutter-width;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .entity-full__header {
+    padding: $sm-entity-full-header-inner-spacing 0;
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {
+
+  .entity-full__header {
+    padding: $md-entity-full-header-inner-spacing 0;
+  }
+}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .entity-full__header {
+    padding: $lg-entity-full-header-inner-spacing 0;
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

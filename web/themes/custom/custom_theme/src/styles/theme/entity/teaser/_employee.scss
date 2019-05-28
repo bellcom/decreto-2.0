@@ -1,0 +1,205 @@
+// |--------------------------------------------------------------------------
+// | Teaser
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-teaser--employee
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$xs-entity-teaser-employee-min-height: 300px;
+$sm-entity-teaser-employee-min-height: 300px;
+$md-entity-teaser-employee-min-height: 270px;
+$lg-entity-teaser-employee-min-height: 270px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-teaser-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-teaser--employee {
+  position: relative;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .entity-teaser__inner {
+    display: flex;
+
+    align-items: center;
+
+    min-height: $xs-entity-teaser-employee-min-height;
+
+    opacity: 1;
+  }
+
+  .entity-teaser__overlay {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    opacity: .6;
+
+    z-index: 0;
+
+    background-color: $body-bg-quaternary;
+  }
+
+  .entity-teaser__content {
+    position: relative;
+
+    flex-grow: 1;
+
+    z-index: 10;
+  }
+
+  .entity-teaser__heading {
+    text-align: center;
+  }
+  .entity-teaser__heading__title {
+    color: #fff;
+  }
+
+  .entity-teaser__job-title {
+    text-align: center;
+
+    + .entity-teaser__phone,
+    + .entity-teaser__email {
+      position: relative;
+
+      margin-top: 25px;
+      padding-top: 25px;
+
+      &:before {
+        position: absolute;
+
+        top: 0;
+        left: 25%;
+        right: 25%;
+
+        content: "";
+        height: 1px;
+        background-color: #fff;
+      }
+    }
+  }
+
+  .entity-teaser__phone {
+    text-align: center;
+
+    a {
+      text-decoration: underline;
+
+      &, &:hover {
+        color: #fff;
+      }
+    }
+
+    + .entity-teaser__email {
+      margin-top: 10px;
+    }
+  }
+
+  .entity-teaser__email {
+    color: #fff;
+
+    text-align: center;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .entity-teaser--employee {
+
+    .entity-teaser__inner {
+      min-height: $sm-entity-teaser-employee-min-height;
+    }
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .entity-teaser--employee {
+
+    .entity-teaser__inner {
+      min-height: $md-entity-teaser-employee-min-height;
+    }
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .entity-teaser--employee {
+
+    .entity-teaser__inner {
+      min-height: $lg-entity-teaser-employee-min-height;
+    }
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {
+
+  .entity-teaser--employee {
+    transition: transform $transition-time-short;
+
+    .entity-teaser__inner {
+      opacity: 0;
+
+      transition: opacity $transition-time-short;
+    }
+
+    .entity-teaser__overlay {
+      opacity: .8;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+
+      .entity-teaser__inner {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+// |--------------------------------------------------------------------------
+// | Additional Bootstrap colors
+// |--------------------------------------------------------------------------
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// Body colors
+$body-bg-secondary: #fff;
+$body-bg-tertiary: #313531;
+$body-bg-quaternary: #000;
+
+// Border colors
+$border-color: #F7F7F7;
+
+// Text colors
+$text-color-highlighted: $brand-primary;
+$text-color-light: #999;
+$text-color-dark: $headings-color;
+$text-color-secondary: $text-color;
+
+// Headings colors
+$headings-color-highlighted: #009688;
+$headings-color-light: $text-muted;
+$headings-color-dark: $text-color-dark;
+$headings-color-secondary: $headings-color;
+
+// Secondary
+$brand-secondary: #ED713A;
+
+// Tertiary
+$brand-tertiary: #606B70;
+
+// Quternary
+$brand-quaternary: #4F6EB4;
