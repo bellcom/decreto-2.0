@@ -1,4 +1,4 @@
-uuid: 5670faad-bc3a-460e-bd5a-c3bd44d400c8
+uuid: 7fbd6d6d-9a25-479a-95ed-32c71e5fab2d
 langcode: en
 status: true
 dependencies:
@@ -8,22 +8,17 @@ dependencies:
     - system
   theme:
     - custom_theme
-id: custom_theme_main_navigation_mobile
+id: main_navigation_desktop
 theme: custom_theme
-region: sidr_left__primary
-weight: -14
+region: sidebar
+weight: -15
 provider: null
 plugin: 'system_menu_block:main'
 settings:
   id: 'system_menu_block:main'
   label: 'Main navigation'
   provider: system
-  label_display: '0'
+  label_display: visible
   level: 1
   depth: 0
-visibility:
-  request_path:
-    id: request_path
-    pages: '/user/login*'
-    negate: true
-    context_mapping: {  }
+visibility: {  }
