@@ -9,7 +9,7 @@ dependencies:
 id: custom_theme_decretologobrand
 theme: custom_theme
 region: sidr_left__primary
-weight: -16
+weight: -14
 provider: null
 plugin: 'block_content:3d114671-a8c6-41b0-a09b-9a8eb0b2117f'
 settings:

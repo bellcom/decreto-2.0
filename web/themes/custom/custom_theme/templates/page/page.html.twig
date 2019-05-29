@@ -1,6 +1,24 @@
 <!-- Begin - wrapper -->
 <div class="layout__wrapper">
 
+  {% if page.sidr_left__primary or page.sidr_left__secondary %}
+    <!-- Begin - sidr source provider -->
+    <aside class="sidr-source-provider">
+
+      <!-- Begin - navigation -->
+      <nav class="slinky-menu" role="navigation">
+
+        {% if page.sidr_left__primary %}
+          {{ page.sidr_left__primary }}
+        {% endif %}
+
+      </nav>
+      <!-- End - navigation -->
+
+    </aside>
+    <!-- End - sidr source provider -->
+  {% endif %}
+
   {# Begin - sidebar #}
   {% if page.sidebar %}
     <div class="layout__sidebar">

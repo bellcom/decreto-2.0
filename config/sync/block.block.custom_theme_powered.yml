@@ -11,7 +11,7 @@ _core:
 id: custom_theme_powered
 theme: custom_theme
 region: sidr_left__primary
-weight: -9
+weight: -4
 provider: null
 plugin: system_powered_by_block
 settings:

@@ -9,7 +9,7 @@ dependencies:
 id: custom_theme_searchform
 theme: custom_theme
 region: sidr_left__primary
-weight: -7
+weight: -2
 provider: null
 plugin: search_form_block
 settings:

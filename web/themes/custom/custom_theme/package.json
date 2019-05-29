@@ -22,7 +22,6 @@
     "flexy-row": "^1.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
-    "jquery-slinky": "^3.0.0",
     "material-design-icons": "^3.0.1",
     "pace-bootstrap-theme": "^1.0.1",
     "pace-progress": "^1.0.2",
@@ -31,7 +30,6 @@
     "sectioned": "^1.0.7",
     "sidr": "^2.2.1",
     "sidr-bootstrap-theme": "^1.0.2",
-    "slinky-bootstrap-theme": "^1.0.2",
     "typography-breakpoints-justification": "^1.0.0",
     "typography-helper": "^1.0.5"
   },

@@ -9,7 +9,7 @@ _core:
 id: custom_theme_local_actions
 theme: custom_theme
 region: sidr_left__primary
-weight: -8
+weight: -3
 provider: null
 plugin: local_actions_block
 settings:

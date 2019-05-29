@@ -1,0 +1,25 @@
+uuid: fe05e1a6-4fbf-4bea-9bf9-f60709011aef
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_calender
+  module:
+    - views
+  theme:
+    - custom_theme
+id: views_block__decreto_calender_calendar_block
+theme: custom_theme
+region: sidr_left__primary
+weight: -15
+provider: null
+plugin: 'views_block:decreto_calender-calendar_block'
+settings:
+  id: 'views_block:decreto_calender-calendar_block'
+  label: Kalender
+  provider: views
+  label_display: visible
+  views_label: Kalender
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }
