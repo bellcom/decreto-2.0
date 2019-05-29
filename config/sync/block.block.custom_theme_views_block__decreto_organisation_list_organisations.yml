@@ -1,10 +1,11 @@
 uuid: 5fe2672d-23c8-4ae3-a147-ad7f88de5371
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - views.view.decreto_organisation_list
   module:
+    - system
     - views
   theme:
     - custom_theme
@@ -16,9 +17,14 @@ provider: null
 plugin: 'views_block:decreto_organisation_list-organisations'
 settings:
   id: 'views_block:decreto_organisation_list-organisations'
-  label: ''
+  label: 'Mine organisationer'
   provider: views
   label_display: visible
-  views_label: ''
+  views_label: 'Mine organisationer'
   items_per_page: none
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

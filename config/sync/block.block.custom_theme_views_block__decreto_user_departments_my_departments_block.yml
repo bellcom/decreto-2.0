@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.decreto_user_departments
   module:
+    - system
     - views
   theme:
     - custom_theme
@@ -16,9 +17,14 @@ provider: null
 plugin: 'views_block:decreto_user_departments-my_departments_block'
 settings:
   id: 'views_block:decreto_user_departments-my_departments_block'
-  label: ''
+  label: 'Mine afdelinger'
   provider: views
   label_display: visible
-  views_label: ''
+  views_label: 'Mine afdelinger'
   items_per_page: none
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

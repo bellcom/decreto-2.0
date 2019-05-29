@@ -232,7 +232,7 @@ display:
           entity_type: user
           plugin_id: user_current
       sorts: {  }
-      title: 'Decreto organisation list'
+      title: 'My organizations'
       header: {  }
       footer: {  }
       empty: {  }
