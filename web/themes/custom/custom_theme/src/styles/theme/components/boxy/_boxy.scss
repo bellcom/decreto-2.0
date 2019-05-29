@@ -21,6 +21,8 @@
 // --------------------------------------------------
 
 .boxy {
+  position: relative;
+
   padding: 15px 0;
 
   background-color: $body-bg-secondary;
@@ -33,6 +35,29 @@
 }
 
 .boxy__body {}
+
+.boxy__helper {
+  position: absolute;
+
+  top: 20px;
+  right: $boxy-spacing-left-right;
+
+  color: $text-color-light;
+
+  cursor: default;
+
+  .material-icons {
+    font-size: inherit;
+  }
+}
+
+.boxy {
+
+  // For the .boxy__helper element.
+  .contextual-region.view {
+    position: initial;
+  }
+}
 
 // --------------------------------------------------
 // Variants
