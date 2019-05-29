@@ -48,7 +48,6 @@ class HelpMessagePopup extends AreaPluginBase {
       $build['message'] = [
         '#theme' => 'decreto_help_message_popup',
         '#content' => strip_tags($message),
-        '#attached' => ['library' => ['core/jquery.ui.tooltip']]
       ];
       return $build;
     }
