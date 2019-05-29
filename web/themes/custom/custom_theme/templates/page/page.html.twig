@@ -85,6 +85,7 @@
     <!-- Begin - content -->
     <div class="page-content">
       <div class="container">
+        <a id="main-content"></a>
 
         {# Highlighted #}
         {% if page.highlighted %}
@@ -126,14 +127,35 @@
         {% endif %}
         <!-- End - action boxes -->
 
-        {# Content #}
-        {% block content %}
-          <!-- Begin - content -->
-          <a id="main-content"></a>
+        {# Begin - content #}
+        {%
+          set content_classes = [
+          page.content__right_sidebar ? 'col-xs-12 col-md-8',
+          page.content__right_sidebar is empty ? 'col-xs-12'
+        ]
+        %}
+        <div class="row">
 
-          {{ page.content }}
-          <!-- End - content -->
-        {% endblock %}
+          {# Begin - content #}
+          {% block content %}
+            <div{{ content_attributes.addClass(content_classes) }}>
+              {{ page.content }}
+            </div>
+          {% endblock %}
+          {# End - content #}
+
+          {# Begin - sidebar right #}
+          {% if page.content__right_sidebar %}
+            {% block content__right_sidebar %}
+              <aside class="col-xs-12 col-md-4" role="complementary">
+                {{ page.content__right_sidebar }}
+              </aside>
+            {% endblock %}
+          {% endif %}
+          {# End - sidebar right #}
+
+        </div>
+        {# End - content #}
 
       </div>
     </div>

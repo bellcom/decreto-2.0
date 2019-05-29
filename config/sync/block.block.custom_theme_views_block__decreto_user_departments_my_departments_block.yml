@@ -10,8 +10,8 @@ dependencies:
     - custom_theme
 id: custom_theme_views_block__decreto_user_departments_my_departments_block
 theme: custom_theme
-region: sidr_left__primary
-weight: 0
+region: content__right_sidebar
+weight: -15
 provider: null
 plugin: 'views_block:decreto_user_departments-my_departments_block'
 settings:

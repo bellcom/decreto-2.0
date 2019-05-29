@@ -14,6 +14,7 @@ regions:
   help: 'Help'
   sidebar: 'Sidebar - desktop'
   content: 'Content'
+  content__right_sidebar: 'Content - right sidebar'
   action_box__secondary: 'Action box - orange'
   action_box__primary: 'Action box - blue'
   action_box__tertiary: 'Action box - dark'
