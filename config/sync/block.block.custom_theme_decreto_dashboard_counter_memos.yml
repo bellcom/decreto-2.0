@@ -1,0 +1,28 @@
+uuid: 8910c277-9fbe-45e9-ba3b-4249f43e3a26
+langcode: en
+status: true
+dependencies:
+  config:
+    - simple_block.simple_block.decreto_block_dashboard_counter
+  module:
+    - simple_block
+    - system
+  theme:
+    - custom_theme
+id: custom_theme_decreto_dashboard_counter_memos
+theme: custom_theme
+region: action_box__tertiary
+weight: 0
+provider: null
+plugin: 'simple_block:decreto_block_dashboard_counter'
+settings:
+  id: 'simple_block:decreto_block_dashboard_counter'
+  label: Beskeder
+  provider: simple_block
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

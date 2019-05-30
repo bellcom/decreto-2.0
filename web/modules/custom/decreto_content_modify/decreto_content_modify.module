@@ -84,7 +84,7 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
   }
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
-    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS]);
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
   }
 }
 

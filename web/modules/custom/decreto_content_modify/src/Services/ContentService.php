@@ -164,7 +164,10 @@ class ContentService {
       \Drupal::cache()
         ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid]);
     }
-    return ['total' => $count];
+    return [
+      'my_org' => $count,
+      'total' => $count
+    ];
   }
 
   /**
