@@ -103,6 +103,9 @@
         "patches": {
             "drupal/calendar": {
                 "2789829 - Query returns no results": "https://www.drupal.org/files/issues/2019-05-22/2789829-2-long-query-name.patch"
+            },
+            "drupal/message_notify": {
+                "2966213 - MessageNotifierBase calling assert(): Calling assert() with a string argument is deprecated" : "https://www.drupal.org/files/issues/2018-10-15/2966213-3.patch"
             }
         }
     }
