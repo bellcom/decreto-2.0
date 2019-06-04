@@ -5,10 +5,12 @@
  */
 namespace Drupal\decreto_notification\Entity;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\decreto_notification\Services\NotificationService;
 
 /**
  * Defines the Subscription entity.
@@ -27,7 +29,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 class Notification extends ContentEntityBase implements ContentEntityInterface {
 
   /**
-   * Determines the schema for the base_table property defined above.
+   * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     // Standard field, used as unique if primary index.
@@ -79,5 +81,25 @@ class Notification extends ContentEntityBase implements ContentEntityInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the Notification was last edited.'));
     return $fields;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(array $values = []) {
+    // Invalidating notifications count.
+    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS. ':' . $values['uid']]);
+
+    return parent::create($values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function delete() {
+    // Invalidating notifications count.
+    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS. ':' . $this->get('uid')->target_id]);
+
+    return parent::delete();
   }
 }

@@ -1,0 +1,4 @@
+services:
+  decreto_notification.notification:
+    class: Drupal\decreto_notification\Services\NotificationService
+    arguments: ['@current_user', '@entity_type.manager']

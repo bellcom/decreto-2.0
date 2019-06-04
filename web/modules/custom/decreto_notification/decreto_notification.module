@@ -77,5 +77,10 @@ function decreto_notification_message_delete(EntityInterface $message) {
 
   $storage_handler = \Drupal::entityTypeManager()->getStorage('decreto_notification');
   $notifications = $storage_handler->loadMultiple($notification_ids);
-  $storage_handler->delete($notifications);
+
+  // Deleting each notification individually so that Notification->delete()
+  // function is executed.
+  foreach ($notifications as $notification) {
+    $notification->delete();
+  }
 }
