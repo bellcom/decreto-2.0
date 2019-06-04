@@ -1,0 +1,22 @@
+uuid: cd5997ae-6142-40ae-a177-88fdecc2cc81
+langcode: en
+status: true
+dependencies: {  }
+template: decreto_meeting_modify
+label: 'Decreto meeting modify'
+description: 'Decreto meeting has been created or updated'
+text:
+  -
+    value: "<p>Meeting \"[message:field_decreto_notif_meeting:entity:title]\" from department \"[message:field_decreto_notif_meeting:entity:field_decreto_meet_department:entity:name]\"&nbsp;has been created or updated&nbsp;</p>\r\n"
+    format: basic_html
+settings:
+  'token options':
+    clear: true
+    'token replace': true
+  purge_override: true
+  purge_methods:
+    days:
+      id: days
+      weight: 0
+      data:
+        days: 7

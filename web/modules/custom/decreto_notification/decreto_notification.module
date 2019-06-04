@@ -1,0 +1,81 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\message\Entity\Message;
+
+/**
+ * @file
+ * Decreto notification module file.
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Creates and sends notification when meeting is created or updated.
+ */
+function decreto_notification_node_presave(EntityInterface $node) {
+  if ($node->bundle() == 'decreto_meeting') {
+    // Creating message.
+    $message = Message ::create(['template' => 'decreto_meeting_modify', 'uid' => $node->get('uid')]);
+    $message->set('field_decreto_notif_meeting', $node);
+    $message->save();
+
+    // Finding subscribers.
+    $department = $node->field_decreto_meet_department->first()->entity;
+    $subscribers = \Drupal::service('message_subscribe.subscribers');
+
+    // Notifying subscribers.
+    $subscribers->sendMessage($department, $message);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Subscribes or unsubscribes user to the department events based on user
+ * departments list.
+ */
+function decreto_notification_user_presave(EntityInterface $user) {
+  $flag_service = \Drupal::service('flag');
+  $flag = $flag_service->getFlagById('subscribe_decreto_tax_department');
+
+  // Getting user departments, ids.
+  $userDepartments = array_column($user->field_decreto_usr_departments->getValue(), 'target_id');
+
+  // Getting all departments, loaded.
+  $vid = 'decreto_tax_department';
+  $allDeparments =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0, NULL, TRUE);
+
+  foreach ($allDeparments as $department) {
+    if (in_array($department->id(), $userDepartments)) {
+      // Ensure flagging is present, if not = subscribe user.
+      $flagging = $flag_service->getFlagging($flag, $department, $user);
+      if (!$flagging) {
+        $flag_service->flag($flag, $department, $user);
+      }
+    }
+    else {
+      // Ensure flagging is not present, if present = unsubscribe user.
+      $flagging = $flag_service->getFlagging($flag, $department, $user);
+      if ($flagging) {
+        $flag_service->unflag($flag, $department, $user);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * When message is deleted, function also deletes all related
+ * decreto_notification entities.
+ */
+function decreto_notification_message_delete(EntityInterface $message) {
+  $query = \Drupal::entityQuery('decreto_notification')
+    ->condition('mid', $message->id());
+  $notification_ids = $query->execute();
+
+  $storage_handler = \Drupal::entityTypeManager()->getStorage('decreto_notification');
+  $notifications = $storage_handler->loadMultiple($notification_ids);
+  $storage_handler->delete($notifications);
+}

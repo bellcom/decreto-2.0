@@ -1,0 +1,28 @@
+uuid: 7993053d-d7db-4c25-b5c8-8e1b85a94482
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.message.field_decreto_notif_meeting
+    - message.template.decreto_meeting_modify
+    - node.type.decreto_meeting
+id: message.decreto_meeting_modify.field_decreto_notif_meeting
+field_name: field_decreto_notif_meeting
+entity_type: message
+bundle: decreto_meeting_modify
+label: Meeting
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_meeting: decreto_meeting
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

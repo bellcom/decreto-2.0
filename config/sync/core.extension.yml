@@ -24,16 +24,19 @@ module:
   decreto_content_modify: 0
   decreto_context_menu: 0
   decreto_help: 0
+  decreto_notification: 0
   decreto_pdf2htmlex: 0
   decreto_pdf_conversion_manager: 0
   decreto_search: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_reference: 0
   field: 0
   field_group: 0
   field_ui: 0
   file: 0
   filter: 0
+  flag: 0
   front_page: 0
   help: 0
   history: 0
@@ -43,6 +46,9 @@ module:
   locale: 0
   menu_link_attributes: 0
   menu_ui: 0
+  message: 0
+  message_notify: 0
+  message_subscribe: 0
   node: 0
   options: 0
   page_cache: 0
@@ -57,6 +63,7 @@ module:
   system: 0
   taxonomy: 0
   text: 0
+  token: 0
   toolbar: 0
   tour: 0
   update: 0

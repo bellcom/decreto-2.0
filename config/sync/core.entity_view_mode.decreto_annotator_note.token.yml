@@ -1,0 +1,10 @@
+uuid: 028d2110-df07-427e-ba6c-e4d29f5a25fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - decreto_annotator
+id: decreto_annotator_note.token
+label: Token
+targetEntityType: decreto_annotator_note
+cache: true

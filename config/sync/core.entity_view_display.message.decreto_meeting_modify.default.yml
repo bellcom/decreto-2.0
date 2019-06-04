@@ -1,0 +1,19 @@
+uuid: 8e3f80a7-2554-453b-bcaf-40ebe96b14dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.decreto_meeting_modify.field_decreto_notif_meeting
+    - message.template.decreto_meeting_modify
+id: message.decreto_meeting_modify.default
+targetEntityType: message
+bundle: decreto_meeting_modify
+mode: default
+content:
+  partial_0:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_decreto_notif_meeting: true

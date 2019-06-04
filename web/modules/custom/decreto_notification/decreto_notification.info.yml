@@ -1,0 +1,11 @@
+type: module
+name: Decreto Notification
+description: 'Module handles Decreto notification functionality'
+package: Decreto
+
+core: '8.x'
+project: 'decreto'
+dependencies:
+  - entity_reference
+  - message_subscribe
+  - user

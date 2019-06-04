@@ -1,0 +1,22 @@
+uuid: df1a2743-c102-4ee3-98f3-04c0d243cfb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.message.decreto_meeting_modify.field_decreto_notif_meeting
+    - message.template.decreto_meeting_modify
+id: message.decreto_meeting_modify.default
+targetEntityType: message
+bundle: decreto_meeting_modify
+mode: default
+content:
+  field_decreto_notif_meeting:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden: {  }

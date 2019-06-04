@@ -1,0 +1,4 @@
+text:
+  -
+    value: "<p>Meeting \"[message:field_decreto_notif_meeting:entity:title]\" from department \"[message:field_decreto_notif_meeting:entity:field_decreto_meet_department:entity:name]\"&nbsp;has been created or updated&nbsp;</p>\r\n"
+    format: basic_html
