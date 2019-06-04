@@ -79,7 +79,7 @@ class NoteService {
         ->count()
         ->execute();
       \Drupal::cache()
-        ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid]);
+        ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid, self::CACHE_ID_DECRETO_NOTE_COUNTERS]);
     }
     return ['total' => $count];
   }
