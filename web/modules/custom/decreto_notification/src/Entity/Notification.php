@@ -24,6 +24,12 @@ use Drupal\decreto_notification\Services\NotificationService;
  *     "uuid" = "uuid",
  *     "uid" = "uid",
  *   },
+ *   handlers = {
+ *     "view_builder" = "Drupal\decreto_notification\NotificationViewBuilder",
+ *     "list_builder" = "Drupal\decreto_notification\NotificationListBuilder",
+ *     "views_data" = "Drupal\decreto_notification\NotificationViewsData",
+ *   },
+ *   list_cache_contexts = { "user" },
  * )
  */
 class Notification extends ContentEntityBase implements ContentEntityInterface {
@@ -48,7 +54,12 @@ class Notification extends ContentEntityBase implements ContentEntityInterface {
       ->setDescription(t('The body of the Notification.'))
       ->setSettings(array(
         'not null' => TRUE,
-      ));
+      ))
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'string',
+        'weight' => -6,
+      ]);
     // Unread field for the notification.
     $fields['unread'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Unread'))

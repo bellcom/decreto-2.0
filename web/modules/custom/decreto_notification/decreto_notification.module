@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Render\Element;
 use Drupal\message\Entity\Message;
 
 /**
@@ -83,4 +84,62 @@ function decreto_notification_message_delete(EntityInterface $message) {
   foreach ($notifications as $notification) {
     $notification->delete();
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_notification_theme() {
+  return [
+    'decreto_notification' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for decreto_notification templates.
+ *
+ * Default template: decreto-notification.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An array of elements to display in view mode.
+ *   - decreto_notification: The decreto_notification object.
+ *   - view_mode: View mode; e.g., 'full', 'teaser', etc.
+ */
+function template_preprocess_decreto_notification(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  $variables['decreto_notification'] = $variables['elements']['#decreto_notification'];
+
+  $created_ts = $variables['decreto_notification']->created->value;
+
+  // Was it created today?
+  if (time() - $created_ts < 24*60*60) {
+    $variables['date'] = \Drupal::service('date.formatter')->format($created_ts, 'html_time', '');
+  }
+  else {
+    $variables['date'] = \Drupal::service('date.formatter')->format($created_ts, 'html_date', '');
+  }
+  unset($variables['elements']['created']);
+
+  // Helpful $content variable for templates.
+  $variables += ['content' => []];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function decreto_notification_theme_suggestions_decreto_notification(array $variables) {
+  $suggestions = [];
+
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'decreto_notification__' . $sanitized_view_mode;
+
+  return $suggestions;
 }

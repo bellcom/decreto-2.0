@@ -1,0 +1,6 @@
+decreto_notification.notification_popup_content:
+  path: 'ajax/notifications-popup'
+  defaults:
+    _controller: '\Drupal\decreto_notification\Controller\NotificationController::popupContentRender'
+  requirements:
+    _permission: 'access content'

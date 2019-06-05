@@ -19,4 +19,6 @@ jQuery(function($) {
     else {
         $('[data-toggle="tooltip"]').tooltip();
     }
+
+    $('#decreto-notifications-popop').load('ajax/notifications-popup');
 });
