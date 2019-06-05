@@ -20,5 +20,6 @@ jQuery(function($) {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    $('#decreto-notifications-popop').load('ajax/notifications-popup');
+    $('#decreto-notifications-popup').load('ajax/notifications-popup');
+    $('#decreto-memos-popup').load('ajax/memos-popup');
 });
