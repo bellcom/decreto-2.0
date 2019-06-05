@@ -10,9 +10,9 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines a class to build a listing of Message entities.
+ * Defines a class to build a listing of Notification entities.
  *
- * @see \Drupal\Message\Entity\Message
+ * @see \Drupal\decreto_notification\Entity\Notification
  */
 class NotificationListBuilder extends EntityListBuilder {
 
@@ -86,8 +86,6 @@ class NotificationListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    kint('buildRow');
-    /** @var Message $entity */
     return [
       'changed' => $this->dateService->format($entity->getCreatedTime(), 'short'),
       'text' => $entity->getText(),

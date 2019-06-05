@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityViewBuilder;
 
 /**
- * Render controller for Messages.
+ * Render controller for Notification.
  */
 class NotificationViewBuilder extends EntityViewBuilder {
 
