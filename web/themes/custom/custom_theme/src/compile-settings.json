@@ -1,7 +1,4 @@
 {
-  "options": {
-    "proxy": "http://decreto.test"
-  },
   "javascripts": [
     "node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
     "node_modules/flexy-header/javascripts/flexy-header.js",

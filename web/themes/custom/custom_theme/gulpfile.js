@@ -1,6 +1,9 @@
 // Configurations
-let config = {
+let compileConfig = {
     settings: require('./src/compile-settings.json')
+};
+let gulpConfig = {
+    settings: require('./src/gulp-settings.json')
 };
 
 
@@ -62,7 +65,7 @@ gulp.task('process:modernizr', () => {
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:styles', () => {
-    return gulp.src(config.settings.styles)
+    return gulp.src(compileConfig.settings.styles)
         .pipe(sourcemaps.init())
         .pipe(styles().on('error', swallowError))
         .pipe(autoprefixer({
@@ -74,7 +77,7 @@ gulp.task('process:styles', () => {
         .pipe(browserSync.stream({match: '**/*.css'}));
 });
 gulp.task('process:javascripts', () => {
-    return gulp.src(config.settings.javascripts)
+    return gulp.src(compileConfig.settings.javascripts)
         .on('error', swallowError)
         .pipe(sourcemaps.init())
         .pipe(babel({
@@ -85,7 +88,7 @@ gulp.task('process:javascripts', () => {
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:fonts', () => {
-    return gulp.src(config.settings.fonts)
+    return gulp.src(compileConfig.settings.fonts)
         .pipe(gulp.dest('dist/fonts'));
 });
 
@@ -145,7 +148,7 @@ gulp.task('watch', ['build'], () => {
 
     // Browser sync
     browserSync.init(['dist/stylesheets/*.css', 'dist/javascripts/*.js'], {
-        proxy: config.settings.options.proxy
+        proxy: gulpConfig.settings.options.proxy
     });
 });
 gulp.task('build', (callback) => {
