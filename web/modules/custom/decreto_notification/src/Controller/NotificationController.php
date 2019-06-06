@@ -10,6 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class NotificationController extends ControllerBase {
 
+  /**
+   * Renders "decreto_notification_popup_embed" display of "decreto_notifications" view and
+   * returns the result.
+   *
+   * @return Response
+   *   Rendered view.
+   */
   public function popupContentRender() {
     $markup = \Drupal::service('renderer')->render(views_embed_view('decreto_notifications', 'decreto_notification_popup_embed'));
 

@@ -1,1 +1,61 @@
 <?php
+
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_annotator_theme() {
+  return [
+    'decreto_annotator_note' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for decreto_annotator_note templates.
+ *
+ * Default template: decreto-annotetor-note.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An array of elements to display in view mode.
+ *   - decreto_annotator_note: The decreto_annotator_note object.
+ *   - view_mode: View mode; e.g., 'full', 'teaser', etc.
+ */
+function template_preprocess_decreto_annotator_note(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  $variables['decreto_annotator_note'] = $variables['elements']['#decreto_annotator_note'];
+
+  $created_ts = $variables['decreto_annotator_note']->created->value;
+
+  // Was it created today?
+  if (time() - $created_ts < 24*60*60) {
+    $variables['date'] = \Drupal::service('date.formatter')->format($created_ts, 'html_time', '');
+  }
+  else {
+    $variables['date'] = \Drupal::service('date.formatter')->format($created_ts, 'html_date', '');
+  }
+  unset($variables['elements']['created']);
+
+  // Helpful $content variable for templates.
+  $variables += ['content' => []];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function decreto_annotator_theme_suggestions_decreto_annotator_note(array $variables) {
+  $suggestions = [];
+
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'decreto_annotator_note__' . $sanitized_view_mode;
+
+  return $suggestions;
+}

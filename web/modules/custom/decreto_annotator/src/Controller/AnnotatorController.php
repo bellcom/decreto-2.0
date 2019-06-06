@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\decreto_annotator\Entity\Note;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnnotatorController extends ControllerBase {
 
@@ -101,6 +102,20 @@ class AnnotatorController extends ControllerBase {
       $note_arr->permissions = array();
     }
     return new JsonResponse($note_arr);
+  }
+
+  /**
+   * Renders "decreto_note_popup_embed" display of "decreto_notes" view and
+   * returns the result.
+   *
+   * @return Response
+   *   Rendered view.
+   */
+  public function popupContentRender() {
+    $markup = \Drupal::service('renderer')->render(views_embed_view('decreto_notes', 'decreto_note_popup_embed'));
+
+    // This is the important part, because will render only the TWIG template.
+    return new Response ($markup);
   }
 
 }

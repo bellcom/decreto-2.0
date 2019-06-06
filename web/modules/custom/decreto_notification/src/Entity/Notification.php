@@ -26,7 +26,6 @@ use Drupal\decreto_notification\Services\NotificationService;
  *   },
  *   handlers = {
  *     "view_builder" = "Drupal\decreto_notification\NotificationViewBuilder",
- *     "list_builder" = "Drupal\decreto_notification\NotificationListBuilder",
  *     "views_data" = "Drupal\decreto_notification\NotificationViewsData",
  *   },
  *   list_cache_contexts = { "user" },

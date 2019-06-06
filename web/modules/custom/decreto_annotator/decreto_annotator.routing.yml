@@ -41,4 +41,11 @@ decreto_annotator.annotator.read:
     _title: 'Read'
   requirements:
     _permission: 'access content'
-    _method: 'GET'    
+    _method: 'GET'
+
+decreto_annotator.note_popup_content:
+  path: 'ajax/notes-popup'
+  defaults:
+    _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::popupContentRender'
+  requirements:
+    _permission: 'access content'

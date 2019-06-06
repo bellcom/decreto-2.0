@@ -21,5 +21,6 @@ jQuery(function($) {
     }
 
     $('#decreto-notifications-popup').load('ajax/notifications-popup');
+    $('#decreto-notes-popup').load('ajax/notes-popup');
     $('#decreto-memos-popup').load('ajax/memos-popup');
 });

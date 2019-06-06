@@ -8,3 +8,6 @@ project: 'decreto'
 
 dependencies:
   - decreto_content_modify
+  - entity_reference
+  - node
+  - user

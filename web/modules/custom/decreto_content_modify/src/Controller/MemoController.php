@@ -10,6 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class MemoController extends ControllerBase {
 
+  /**
+   * Renders "decreto_memo_popup_embed" display of "decreto_memos" view and
+   * returns the result.
+   *
+   * @return Response
+   *   Rendered view.
+   */
   public function popupContentRender() {
     $markup = \Drupal::service('renderer')->render(views_embed_view('decreto_memos', 'decreto_memo_popup_embed'));
 
