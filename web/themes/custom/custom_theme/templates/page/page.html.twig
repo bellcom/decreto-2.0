@@ -45,20 +45,87 @@
       <div class="flexy-header__row flexy-header__row--first">
         <div class="container">
           <div class="flexy-row">
-            <!-- Notification popup loaded via AJAX -->
-            <div id="decreto-notifications-popup">Hello World!</div>
-            <a href="/notifications">View all</a>
-            <!-- Notification popup loaded via AJAX -->
 
-            <!-- Note popup loaded via AJAX -->
-            <div id="decreto-notes-popup">Hello World!</div>
-            <a href="/notes">View all</a>
-            <!-- Note popup loaded via AJAX -->
+            <!-- Begin - notifications -->
+            <div class="poppy">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/notifications-popup" data-ajaxi-target="#poppy_notifications">
+                <span class="poppy-toggle__count">12</span>
 
-            <!-- Memo popup loaded via AJAX -->
-            <div id="decreto-memos-popup">Hello World!</div>
-            <a href="/memos">View all</a>
-            <!-- Memo popup loaded via AJAX -->
+                <i class="poppy-toggle__icon material-icons">
+                  notifications
+                </i>
+              </button>
+
+              <div class="poppy-box">
+                <div class="poppy-box__heading">
+                  <h3 class="poppy-box__heading__title">
+                    {{ 'Notifications' | trans }}
+                  </h3>
+                </div>
+                <div class="poppy-box__content" id="poppy_notifications">
+                  {{ 'Loading...' | trans }}
+                </div>
+
+                <a class="poppy-box__footer" href="/notifications">
+                  {{ 'Show all' | trans }}
+                </a>
+              </div>
+            </div>
+            <!-- End - notifications -->
+
+            <!-- Begin - notes -->
+            <div class="poppy">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/notes-popup" data-ajaxi-target="#poppy_notes">
+                <span class="poppy-toggle__count">8</span>
+
+                <i class="poppy-toggle__icon material-icons">
+                  chat
+                </i>
+              </button>
+
+              <div class="poppy-box">
+                <div class="poppy-box__heading">
+                  <h3 class="poppy-box__heading__title">
+                    {{ 'Notes' | trans }}
+                  </h3>
+                </div>
+                <div class="poppy-box__content" id="poppy_notes">
+                  {{ 'Loading...' | trans }}
+                </div>
+
+                <a class="poppy-box__footer" href="/notes">
+                  {{ 'Show all' | trans }}
+                </a>
+              </div>
+            </div>
+            <!-- End - notes -->
+
+            <!-- Begin - memo -->
+            <div class="poppy">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/memos-popup" data-ajaxi-target="#poppy_memos">
+                <span class="poppy-toggle__count">2</span>
+
+                <i class="poppy-toggle__icon material-icons">
+                  mail
+                </i>
+              </button>
+
+              <div class="poppy-box">
+                <div class="poppy-box__heading">
+                  <h3 class="poppy-box__heading__title">
+                    {{ 'Memos' | trans }}
+                  </h3>
+                </div>
+                <div class="poppy-box__content" id="poppy_memos">
+                  {{ 'Loading...' | trans }}
+                </div>
+
+                <a class="poppy-box__footer" href="/memos">
+                  {{ 'Show all' | trans }}
+                </a>
+              </div>
+            </div>
+            <!-- End - memo -->
 
             <!-- Begin - logo -->
             <a href="{{ url('<front>') }}" class="flexy-header__logo visible-xs visible-sm">

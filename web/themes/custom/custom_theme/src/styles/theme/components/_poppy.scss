@@ -1,0 +1,161 @@
+// |--------------------------------------------------------------------------
+// | Poppy
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .poppy
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin poppy-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.poppy {
+  position: relative;
+}
+
+.poppy-toggle {
+  position: relative;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  background-color: transparent;
+  border-radius: 100%;
+  border: 1px solid $text-color;
+}
+.poppy-toggle__count {
+  position: absolute;
+  display: flex;
+
+  top: -5px;
+  right: -5px;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 100%;
+
+  font-size: 10px;
+
+  color: #fff;
+  background-color: $brand-secondary;
+}
+.poppy-toggle__icon {}
+
+.poppy-box {
+  position: absolute;
+  display: none;
+
+  z-index: $zindex-popover;
+
+  top: 100%;
+  left: 0;
+
+  width: 380px;
+
+  border-radius: $border-radius-base;
+  background-color: $body-bg-secondary;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+
+  .poppy--open & {
+    display: initial;
+  }
+}
+
+.poppy-box__heading {
+  margin-top: 25px;
+  padding: 0 $poppy-box-spacing-left-right;
+
+  + .poppy-box__content {
+    margin-top: 15px;
+  }
+}
+.poppy-box__heading__title {
+  margin: 0;
+
+  font-size: $font-size-h6;
+  font-weight: $headings-font-weight-bold;
+
+  color: $text-color;
+}
+
+.poppy-box__content {
+  padding: 0 $poppy-box-spacing-left-right;
+
+  + .poppy-box__footer {
+    margin-top: 15px;
+  }
+}
+
+.poppy-box__footer {
+  display: block;
+
+  padding: 15px $poppy-box-spacing-left-right;
+
+  text-align: center;
+  text-decoration: underline;
+
+  background-color: $body-bg;
+
+  &, &:hover, &:active, &:focus {
+    color: $text-color;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

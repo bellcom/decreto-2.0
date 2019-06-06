@@ -20,7 +20,25 @@ jQuery(function($) {
         $('[data-toggle="tooltip"]').tooltip();
     }
 
-    $('#decreto-notifications-popup').load('ajax/notifications-popup');
-    $('#decreto-notes-popup').load('ajax/notes-popup');
-    $('#decreto-memos-popup').load('ajax/memos-popup');
+    // Poppy (popovers).
+    $('.poppy-toggle').on('click', function(event) {
+        var $element = $(this);
+        var $parent = $element.parents('.poppy');
+
+        // Make sure that no other windows are open.
+        // $('.poppy--open').removeClass('poppy--open');
+
+        // Toggle the class on this element.
+        $parent.toggleClass('poppy--open');
+    });
+
+    // Ajaxi click loader.
+    $('[data-ajaxi-source]').on('click', function(event) {
+        var $element = $(this);
+        var target = $element.attr('data-ajaxi-target');
+        var source = $element.attr('data-ajaxi-source');
+
+        // Load external content.
+        $(target).load(source);
+    });
 });
