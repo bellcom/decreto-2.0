@@ -10,19 +10,45 @@ use Drupal\message\Entity\Message;
  */
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_insert().
  *
- * Creates and sends notification when meeting is created or updated.
+ * @see decreto_notification_meeting_notify().
  */
-function decreto_notification_node_presave(EntityInterface $node) {
+function decreto_notification_node_insert(EntityInterface $node) {
   if ($node->bundle() == 'decreto_meeting') {
-    // Creating message.
-    $message = Message ::create(['template' => 'decreto_meeting_modify', 'uid' => $node->get('uid')]);
-    $message->set('field_decreto_notif_meeting', $node);
-    $message->save();
+    decreto_notification_meeting_notify($node);
+  }
+}
 
-    // Finding subscribers.
-    $department = $node->field_decreto_meet_department->first()->entity;
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ *
+ * @see decreto_notification_meeting_notify().
+ */
+function decreto_notification_node_update(EntityInterface $node) {
+  if ($node->bundle() == 'decreto_meeting') {
+    decreto_notification_meeting_notify($node);
+  }
+}
+
+/**
+ * Creates and sends notification when meeting is created or updated.
+ *
+ * @param EntityInterface $node
+ *   Meeting node.
+ */
+function decreto_notification_meeting_notify(EntityInterface $node) {
+  // Creating message.
+  $message = Message ::create([
+    'template' => 'decreto_meeting_modify',
+    'uid' => $node->get('uid')
+  ]);
+  $message->set('field_decreto_notif_meeting', $node);
+  $message->save();
+
+  // Finding subscribers.
+  if ($field_decreto_meet_department =  $node->field_decreto_meet_department->first()) {
+    $department = $field_decreto_meet_department->entity;
     $subscribers = \Drupal::service('message_subscribe.subscribers');
 
     // Notifying subscribers.
