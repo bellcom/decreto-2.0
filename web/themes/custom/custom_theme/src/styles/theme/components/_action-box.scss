@@ -39,7 +39,7 @@
     margin-right: 15px;
 
     height: 50px;
-    width: 50px;
+    width: 45px;
 
     background-repeat: no-repeat;
     background-image: url("../images/action-box/briefcase.svg");
@@ -113,6 +113,8 @@
 .region-action-box__tertiary {
 
   .action-box {
+    color: #fff;
+
     background-color: $body-bg-tertiary;
   }
 
