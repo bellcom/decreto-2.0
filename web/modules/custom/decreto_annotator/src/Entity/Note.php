@@ -22,9 +22,9 @@ use Drupal\node\Entity\Node;
  *   translatable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
+ *     "uuid" = "uuid",
  *     "bpa_id" = "bpa_id",
  *     "uid" = "uid",
- *     "note_info" = "note_info",
  *   },
  *   handlers = {
  *     "view_builder" = "Drupal\decreto_annotator\NoteViewBuilder",
