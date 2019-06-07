@@ -1,0 +1,10 @@
+uuid: 21118a59-43ac-4a32-b633-6645b70d5f81
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.list_advanced
+label: 'List - advanced'
+targetEntityType: node
+cache: true
