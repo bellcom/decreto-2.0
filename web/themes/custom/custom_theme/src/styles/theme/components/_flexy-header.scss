@@ -20,7 +20,15 @@
 // Styling
 // --------------------------------------------------
 
-.flexy-header {}
+.flexy-header {
+
+  .poppy {
+
+    + .poppy {
+      margin-left: floor( ($grid-gutter-width / 2) );
+    }
+  }
+}
 
 .flexy-header--static {
   margin-bottom: $grid-gutter-width;
@@ -32,16 +40,6 @@
   border: 0;
 
   background-color: transparent;
-}
-
-.flexy-header {
-
-  .poppy {
-
-    + .poppy {
-      margin-left: floor( ($grid-gutter-width / 2) );
-    }
-  }
 }
 
 // --------------------------------------------------

@@ -57,7 +57,7 @@
             <!-- Begin - notifications -->
             <div class="poppy">
               <button class="poppy-toggle" data-ajaxi-source="ajax/notifications-popup" data-ajaxi-target="#poppy_notifications">
-                <span class="poppy-toggle__count">12</span>
+                <span class="poppy-toggle__count">{{ counter.notification }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
                   notifications
@@ -70,6 +70,7 @@
                     {{ 'Notifications' | trans }}
                   </h3>
                 </div>
+
                 <div class="poppy-box__content" id="poppy_notifications">
                   {{ 'Loading...' | trans }}
                 </div>
@@ -84,7 +85,7 @@
             <!-- Begin - notes -->
             <div class="poppy">
               <button class="poppy-toggle" data-ajaxi-source="ajax/notes-popup" data-ajaxi-target="#poppy_notes">
-                <span class="poppy-toggle__count">8</span>
+                <span class="poppy-toggle__count">{{ counter.note }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
                   chat
@@ -97,6 +98,7 @@
                     {{ 'Notes' | trans }}
                   </h3>
                 </div>
+
                 <div class="poppy-box__content" id="poppy_notes">
                   {{ 'Loading...' | trans }}
                 </div>
@@ -111,7 +113,7 @@
             <!-- Begin - memo -->
             <div class="poppy">
               <button class="poppy-toggle" data-ajaxi-source="ajax/memos-popup" data-ajaxi-target="#poppy_memos">
-                <span class="poppy-toggle__count">2</span>
+                <span class="poppy-toggle__count">{{ counter.memo }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
                   mail
@@ -124,6 +126,7 @@
                     {{ 'Memos' | trans }}
                   </h3>
                 </div>
+
                 <div class="poppy-box__content" id="poppy_memos">
                   {{ 'Loading...' | trans }}
                 </div>

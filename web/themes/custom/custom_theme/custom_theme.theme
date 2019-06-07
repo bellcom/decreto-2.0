@@ -3,27 +3,28 @@
 /**
  * Implements hook_preprocess_html().
  */
-function custom_theme_preprocess_html(array &$variables) {
-  // TOP BAR: Notification counter.
-  $notificationService = \Drupal::service('decreto_notification.notification');
-  $notificationCounter = $notificationService->getCounters();
-  $notificationCount = $notificationCounter['total'];
-
-  // TOP BAR: Note counter.
-  $noteService = \Drupal::service('decreto_annotator.note');
-  $noteCounter = $noteService->getCounters();
-  $noteCount = $noteCounter['total'];
-
-  // TOP BAR: Memo counter.
-  $contentService = \Drupal::service('decreto_content_modify.content');
-  $memoCounter = $contentService->getMemoCounters();
-  $memoCount = $memoCounter['total'];
-}
+function custom_theme_preprocess_html(array &$variables) {}
 
 /**
  * Implements hook_preprocess_page().
  */
-function custom_theme_preprocess_page(array &$variables) {}
+function custom_theme_preprocess_page(array &$variables) {
+
+  // Notification counter.
+  $notificationService = \Drupal::service('decreto_notification.notification');
+  $notificationCounter = $notificationService->getCounters();
+  $variables['counter']['notification'] = $notificationCounter['total'];
+
+  // Note counter.
+  $noteService = \Drupal::service('decreto_annotator.note');
+  $noteCounter = $noteService->getCounters();
+  $variables['counter']['note'] = $noteCounter['total'];
+
+  // Memo counter.
+  $contentService = \Drupal::service('decreto_content_modify.content');
+  $memoCounter = $contentService->getMemoCounters();
+  $variables['counter']['memo'] = $memoCounter['total'];
+}
 
 /*
  * Implements hook_preprocess_paragraph().
