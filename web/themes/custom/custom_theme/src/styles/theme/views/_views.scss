@@ -1,9 +1,9 @@
 // |--------------------------------------------------------------------------
-// | List advanced
+// | Views
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .entity-list-advanced
+// | - .views
 // |
 
 // --------------------------------------------------
@@ -14,74 +14,11 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin entity-list-advanced-mixin() {}
+@mixin views-mixin() {}
 
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
-
-.entity-list-advanced {
-  display: flex;
-
-  padding: 12px 0;
-
-  align-items: center;
-}
-
-.entity-list-advanced__heading {
-
-  + .entity-list-advanced__body {
-    margin-top: 5px;
-  }
-}
-.entity-list-advanced__heading__title {
-  padding: 0;
-  margin: 0;
-
-  font-weight: $headings-font-weight;
-  font-size: $font-size-h6;
-
-  color: $text-color;
-}
-
-.entity-list-advanced__icon {
-  flex-grow: 0;
-
-  + .entity-list-advanced__content {
-    margin-left: 10px;
-  }
-}
-
-.entity-list-advanced__content {
-  flex-grow: 1;
-}
-
-.entity-list-advanced__body {
-  font-size: $font-size-small;
-
-  color: $headings-color-light;
-}
-
-.entity-list-advanced__published-at {
-  flex-basis: 50px;
-
-  text-align: right;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-small;
-
-  color: $text-color-light;
-}
-
-.view-decreto-memos {
-
-  .views-row {
-    border-bottom: 1px solid $border-color;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-}
 
 // --------------------------------------------------
 // Variants

@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\Html;
+
 /**
  * Implements hook_preprocess_html().
  */
@@ -75,16 +77,21 @@ function custom_theme_preprocess_block(&$variables) {
  */
 function custom_theme_preprocess_node(&$variables) {
   $node = $variables['node'];
+}
 
-  if ($node->getType() == 'decreto_meeting') {
-    if ($variables['view_mode'] == 'table_display') {
-      // Note indicator.
-      $noteService = \Drupal::service('decreto_annotator.note');
-      $variables['content']['contains_notes'] = $noteService->getMeetingHasNote($node);
+/**
+ * Implements template_proprocess_node().
+ */
+function custom_theme_preprocess_node__decreto_meeting(&$variables) {
+  $node = $variables['node'];
 
-      // Memos indicator.
-      $decretoContentService = \Drupal::service('decreto_content_modify.content');
-      $variables['content']['contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
-    }
+  if ($variables['view_mode'] == 'table_display') {
+    // Note indicator.
+    $noteService = \Drupal::service('decreto_annotator.note');
+    $variables['content']['contains_notes'] = $noteService->getMeetingHasNote($node);
+
+    // Memos indicator.
+    $decretoContentService = \Drupal::service('decreto_content_modify.content');
+    $variables['content']['contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
   }
 }
