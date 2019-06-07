@@ -25,11 +25,19 @@ jQuery(function($) {
         var $element = $(this);
         var $parent = $element.parents('.poppy');
 
-        // Make sure that no other windows are open.
-        // $('.poppy--open').removeClass('poppy--open');
+        // Make sure that no other "poppys" are open.
+        $('.poppy--open')
+            .not($parent)
+            .removeClass('poppy--open');
 
         // Toggle the class on this element.
         $parent.toggleClass('poppy--open');
+    });
+    $('.poppy').on('click', function(event) {
+       event.stopPropagation();
+    });
+    $('body').on('click', function(event) {
+        $('.poppy--open').removeClass('poppy--open');
     });
 
     // Ajaxi click loader.

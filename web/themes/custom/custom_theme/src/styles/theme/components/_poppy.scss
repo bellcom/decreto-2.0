@@ -39,6 +39,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   background-color: transparent;
   border-radius: 100%;
   border: 1px solid $text-color;
+
+  &:focus {
+    outline: none;
+  }
 }
 .poppy-toggle__count {
   position: absolute;
