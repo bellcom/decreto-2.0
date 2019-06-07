@@ -56,7 +56,7 @@
 
             <!-- Begin - notifications -->
             <div class="poppy">
-              <button class="poppy-toggle" data-ajaxi-source="ajax/notifications-popup" data-ajaxi-target="#poppy_notifications">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.notification }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
@@ -71,9 +71,7 @@
                   </h3>
                 </div>
 
-                <div class="poppy-box__content" id="poppy_notifications">
-                  {{ 'Loading...' | trans }}
-                </div>
+                <div class="poppy-box__content" id="poppy_notifications"></div>
 
                 <a class="poppy-box__footer" href="/notifications">
                   {{ 'Show all' | trans }}
@@ -84,7 +82,7 @@
 
             <!-- Begin - notes -->
             <div class="poppy">
-              <button class="poppy-toggle" data-ajaxi-source="ajax/notes-popup" data-ajaxi-target="#poppy_notes">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/notes-popup" data-ajaxi-target="#poppy_notes" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.note }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
@@ -99,9 +97,7 @@
                   </h3>
                 </div>
 
-                <div class="poppy-box__content" id="poppy_notes">
-                  {{ 'Loading...' | trans }}
-                </div>
+                <div class="poppy-box__content" id="poppy_notes"></div>
 
                 <a class="poppy-box__footer" href="/notes">
                   {{ 'Show all' | trans }}
@@ -112,7 +108,7 @@
 
             <!-- Begin - memo -->
             <div class="poppy">
-              <button class="poppy-toggle" data-ajaxi-source="ajax/memos-popup" data-ajaxi-target="#poppy_memos">
+              <button class="poppy-toggle" data-ajaxi-source="ajax/memos-popup" data-ajaxi-target="#poppy_memos" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.memo }}</span>
 
                 <i class="poppy-toggle__icon material-icons">
@@ -127,9 +123,7 @@
                   </h3>
                 </div>
 
-                <div class="poppy-box__content" id="poppy_memos">
-                  {{ 'Loading...' | trans }}
-                </div>
+                <div class="poppy-box__content" id="poppy_memos"></div>
 
                 <a class="poppy-box__footer" href="/memos">
                   {{ 'Show all' | trans }}

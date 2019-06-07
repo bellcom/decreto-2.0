@@ -1,0 +1,46 @@
+{% set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix',
+] %}
+
+<a href="{{ url }}" class="element-wrapper-link">
+  <div class="entity-list-advanced entity-list-advanced--memo">
+
+    <!-- Begin - icon -->
+    <div class="entity-list-advanced__icon"></div>
+    <!-- End - icon -->
+
+    <!-- Begin - content -->
+    <div class="entity-list-advanced__content">
+
+      <!-- Begin - heading -->
+      <div class="entity-list-advanced__heading">
+        <h4 class="entity-list-advanced__heading__title">
+          Mit navn
+        </h4>
+      </div>
+      <!-- End - heading -->
+
+      <!-- Begin - body -->
+      <div class="entity-list-advanced__body">
+        {% set text = content.body|render %}
+
+        {{ text|striptags }}
+      </div>
+      <!-- End - body -->
+
+    </div>
+    <!-- End - content -->
+
+    <!-- Begin - published at -->
+    <div class="entity-list-advanced__published-at">
+      {{ node.createdTime | date("H:i") }}
+    </div>
+    <!-- End - published at -->
+
+  </div>
+</a>

@@ -45,6 +45,10 @@ jQuery(function($) {
         var $element = $(this);
         var target = $element.attr('data-ajaxi-target');
         var source = $element.attr('data-ajaxi-source');
+        var loading = $element.attr('data-ajaxi-loading');
+
+        // Set loading text.
+        $(target).html(loading);
 
         // Load external content.
         $(target).load(source);
