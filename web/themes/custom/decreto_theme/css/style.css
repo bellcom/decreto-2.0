@@ -198,13 +198,7 @@ th {
     width: 100%;
     margin: 0px auto;
 }
-.page-node-type-decreto-meeting .annotator-wrapper .field p {
-    background: #ffffff;
-    padding-bottom: 50px;
-    height: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-}
+
 .page-node-type-decreto-meeting .panel-title{
     padding-left: 20px;
 }
@@ -1229,11 +1223,7 @@ a[href^="/user/logout"]:before {
     background: #ffffff;
 }
 
-.annotator-wrapper {
-    position: relative;
-    font-size: 16px;
-    height: 100%;
-}
+
 
 .contextual-region .tab-content {
     width: 100%;
@@ -1906,9 +1896,7 @@ input[type="file"]:focus{
 .page-node-type-decreto-bullet-point .btn-primary{
     margin-left: 10px;
 }
-.page-node-type-decreto-bullet-point-attachment .annotator-wrapper p{
-    padding-left: 15px;
-}
+
 .page-node-type-decreto-bullet-point .decreto-bullet-point {
     background: #ffffff;
     margin-left: 10px;
@@ -1922,9 +1910,7 @@ input[type="file"]:focus{
     border: 1px solid rgba(0,0,0,0.1);
     margin-right: 10px;
 }
-.page-node-type-decreto-bullet-point .decreto-bullet-point-attachment .annotator-wrapper p{
-    margin-left: 10px;
-}
+
 .page-node-type-decreto-bullet-point 
 .form-group:last-child,
 .panel:last-child,
@@ -3006,37 +2992,7 @@ box-shadow: 0px 10px 37px -18px rgba(0,0,0,0.20);
     #bp-content-2 .field {
         background: #fbfbfb;
     }
-    .annotator-wrapper {
-        position: relative;
-        height: 100%;
-        background: #ffffff
-    }
-    .annotator-wrapper .field p {
-        background: #fbfbfb;
-        padding-bottom: 50px;
-        border-radius: 7px;
-        height: 100%;
-        padding-right: 10px;
-    }
-    .annotator-wrapper p
-    .page-node-type-decreto-bullet-point .decreto-bullet-point-attachment .annotator-wrapper p{
-        margin-left: 13px;
-    }
-    .page-node-type-decreto-bullet-point-attachment .annotator-wrapper p{
-        padding-left: 0;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-    #agenda .annotator-wrapper .field p {
-        background: #Fafafa;
-        padding-bottom: 80px;
-        height: 100%;
-        font-size: 16px;
-        padding-left: 59px;
-        margin-left: 10px;
-        color: #323641;
-        border-radius: 7px;
-    }
+
     .decreto-meeting .field--name-field-decreto-meet-bps {
         margin-top: 15px;
         padding-top: 0;
