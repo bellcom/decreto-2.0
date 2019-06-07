@@ -36,9 +36,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   width: 44px;
   height: 44px;
 
+  color: $headings-color;
   background-color: transparent;
   border-radius: 100%;
-  border: 1px solid $text-color;
+  border: 1px solid $headings-color;
 
   &:focus {
     outline: none;
@@ -75,6 +76,8 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   top: 100%;
   left: 0;
 
+  overflow: hidden;
+
   width: 380px;
 
   border-radius: $border-radius-base;
@@ -84,6 +87,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   .poppy--open & {
     display: initial;
   }
+}
+.poppy-box--from-right {
+  left: initial;
+  right: 0;
 }
 
 .poppy-box__heading {
