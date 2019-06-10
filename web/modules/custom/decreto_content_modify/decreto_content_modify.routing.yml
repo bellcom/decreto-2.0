@@ -2,14 +2,23 @@ decreto_content_modify.meetings_add:
   path: '/meetings/add'
   options:
     parameters:
-      node:
+      meeting:
         type: entity:node
   defaults:
-    _title: 'Decreto edit meeting'
+    _title_callback: '\Drupal\decreto_content_modify\Form\MeetingsEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
-    node: null
+    meeting: null
   requirements:
     _permission: 'access content'
+
+decreto_content_modify.memo_popup_content:
+  path: 'ajax/memos-popup'
+  defaults:
+    _controller: '\Drupal\decreto_content_modify\Controller\MemoController::popupContentRender'
+  requirements:
+    _permission: 'access content'
+
+### left overfrom old version, will be put above as the project proceeds
 decreto_content_modify.meetings_edit:
   path: '/meetings/{node}/edit'
   options:
@@ -147,12 +156,5 @@ decreto_content_modify.user_edit:
   path: '/user/edit'
   defaults:
     _controller: '\Drupal\decreto_content_modify\Controller\UserController::redirectToEditPage'
-  requirements:
-    _permission: 'access content'
-
-contnet_modify.memo_popup_content:
-  path: 'ajax/memos-popup'
-  defaults:
-    _controller: '\Drupal\decreto_content_modify\Controller\MemoController::popupContentRender'
   requirements:
     _permission: 'access content'

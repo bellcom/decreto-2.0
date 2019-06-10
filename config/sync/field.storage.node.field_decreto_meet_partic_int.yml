@@ -1,0 +1,20 @@
+uuid: a7085a5c-f1df-409d-9d91-785725c17b8e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - user
+id: node.field_decreto_meet_partic_int
+field_name: field_decreto_meet_partic_int
+entity_type: node
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

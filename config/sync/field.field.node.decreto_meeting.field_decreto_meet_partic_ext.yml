@@ -1,0 +1,28 @@
+uuid: d138b151-3cb5-4f0d-9bf4-5d42bb67ff7f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_partic_ext
+    - node.type.decreto_meeting
+id: node.decreto_meeting.field_decreto_meet_partic_ext
+field_name: field_decreto_meet_partic_ext
+entity_type: node
+bundle: decreto_meeting
+label: 'Participants external'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

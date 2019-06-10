@@ -1,18 +1,19 @@
-uuid: 9df34cd2-ce80-47e2-b900-bcfcd28272e3
+uuid: 0ea438d7-47b3-4d31-9d58-73f913680a89
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_decreto_meet_partic
-field_name: field_decreto_meet_partic
+    - user
+id: node.field_decreto_meet_partic_ext
+field_name: field_decreto_meet_partic_ext
 entity_type: node
-type: string_long
+type: entity_reference
 settings:
-  case_sensitive: false
+  target_type: user
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

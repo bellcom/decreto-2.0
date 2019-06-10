@@ -195,6 +195,15 @@
       <div class="container">
         <a id="main-content"></a>
 
+        <!-- Meeting create link -->
+        <a href="/meetings/add"
+           class="use-ajax"
+           data-dialog-type="modal"
+           data-dialog-options='{"width":800,"height":600}'>
+          Create meeting
+        </a>
+        <!-- Meeting create link -->
+
         {# Highlighted #}
         {% if page.highlighted %}
           {% block highlighted %}

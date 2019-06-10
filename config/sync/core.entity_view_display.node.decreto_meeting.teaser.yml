@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.decreto_meeting.field_decreto_meet_full_doc
     - field.field.node.decreto_meeting.field_decreto_meet_full_doc_c
     - field.field.node.decreto_meeting.field_decreto_meet_location
-    - field.field.node.decreto_meeting.field_decreto_meet_partic
     - field.field.node.decreto_meeting.field_decreto_meet_start_date
     - field.field.node.decreto_meeting.field_decreto_meet_type
     - node.type.decreto_meeting
@@ -31,6 +30,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  flag_subscribe_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     region: content
@@ -43,7 +47,6 @@ hidden:
   field_decreto_meet_full_doc: true
   field_decreto_meet_full_doc_c: true
   field_decreto_meet_location: true
-  field_decreto_meet_partic: true
   field_decreto_meet_start_date: true
   field_decreto_meet_type: true
   langcode: true

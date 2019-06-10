@@ -32,6 +32,11 @@ content:
     third_party_settings: {  }
     type: decreto_pdf2htmlex_rendered_html_first_page
     region: content
+  flag_subscribe_node:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_decreto_bpa_file: true
   langcode: true
