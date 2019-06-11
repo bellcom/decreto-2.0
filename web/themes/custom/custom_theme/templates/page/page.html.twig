@@ -52,10 +52,43 @@
             </a>
             <!-- End - logo -->
 
+            <!-- Begin - add -->
+            <div class="poppy hidden-xs hidden-sm">
+              <button class="poppy-toggle">
+                <i class="poppy-toggle__icon material-icons">
+                  add
+                </i>
+              </button>
+
+              <div class="poppy-box poppy-box--narrow">
+                <div class="poppy-box__heading">
+                  <h3 class="poppy-box__heading__title">
+                    {{ 'Create' | trans }}
+                  </h3>
+                </div>
+
+                <div class="poppy-box__content">
+
+                  <ul class="menu">
+                    <li>
+                      <a href="/meetings/add" class="use-ajax" data-dialog-type="modal">
+                        <i class="material-icons">
+                          business_center
+                        </i>
+                        {{ 'Meeting' | trans }}
+                      </a>
+                    </li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+            <!-- End - add -->
+
             <div class="flexy-spacer"></div>
 
             <!-- Begin - notifications -->
-            <div class="poppy">
+            <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.notification }}</span>
 
@@ -81,7 +114,7 @@
             <!-- End - notifications -->
 
             <!-- Begin - notes -->
-            <div class="poppy">
+            <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/notes-popup" data-ajaxi-target="#poppy_notes" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.note }}</span>
 
@@ -107,7 +140,7 @@
             <!-- End - notes -->
 
             <!-- Begin - memo -->
-            <div class="poppy">
+            <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/memos-popup" data-ajaxi-target="#poppy_memos" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                 <span class="poppy-toggle__count">{{ counter.memo }}</span>
 
@@ -194,15 +227,6 @@
     <div class="page-content">
       <div class="container">
         <a id="main-content"></a>
-
-        <!-- Meeting create link -->
-        <a href="/meetings/add"
-           class="use-ajax"
-           data-dialog-type="modal"
-           data-dialog-options='{"width":800,"height":600}'>
-          Create meeting
-        </a>
-        <!-- Meeting create link -->
 
         {# Highlighted #}
         {% if page.highlighted %}

@@ -71,10 +71,12 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   position: absolute;
   display: none;
 
-  z-index: $zindex-popover;
+  z-index: $zindex-modal - 10;
 
   top: 100%;
   left: 0;
+
+  margin-top: 5px;
 
   overflow: hidden;
 
@@ -136,6 +138,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
+
+.poppy-box--narrow {
+  width: 200px;
+}
 
 // --------------------------------------------------
 // Responsive
