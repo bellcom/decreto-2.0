@@ -9,7 +9,7 @@ dependencies:
 id: custom_theme_menu_icon_links
 theme: custom_theme
 region: sidr_left__primary
-weight: -13
+weight: -14
 provider: null
 plugin: 'block_content:2a1d7782-a8a4-4f86-b502-7cde8718827c'
 settings:

@@ -13,7 +13,7 @@ _core:
 id: custom_theme_footer
 theme: custom_theme
 region: sidr_left__primary
-weight: -10
+weight: -11
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

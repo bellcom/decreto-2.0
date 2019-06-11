@@ -7,7 +7,7 @@ dependencies:
 id: custom_theme_signuplink_2
 theme: custom_theme
 region: sidr_left__primary
-weight: -1
+weight: -3
 provider: null
 plugin: 'block_content:40e8dba9-5bd0-4e6d-8a38-acbb63d6a181'
 settings:

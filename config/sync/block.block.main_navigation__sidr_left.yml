@@ -11,7 +11,7 @@ dependencies:
 id: main_navigation__sidr_left
 theme: custom_theme
 region: sidr_left__primary
-weight: -16
+weight: -17
 provider: null
 plugin: 'system_menu_block:main'
 settings:

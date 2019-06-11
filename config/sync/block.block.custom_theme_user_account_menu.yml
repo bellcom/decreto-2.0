@@ -12,7 +12,7 @@ dependencies:
 id: custom_theme_user_account_menu
 theme: custom_theme
 region: sidr_left__primary
-weight: -9
+weight: -10
 provider: null
 plugin: 'system_menu_block:account'
 settings:

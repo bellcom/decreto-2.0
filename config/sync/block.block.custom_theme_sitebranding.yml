@@ -9,7 +9,7 @@ dependencies:
 id: custom_theme_sitebranding
 theme: custom_theme
 region: sidr_left__primary
-weight: -11
+weight: -12
 provider: null
 plugin: system_branding_block
 settings:

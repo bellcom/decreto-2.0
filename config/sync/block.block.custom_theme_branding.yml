@@ -11,7 +11,7 @@ _core:
 id: custom_theme_branding
 theme: custom_theme
 region: sidr_left__primary
-weight: -12
+weight: -13
 provider: null
 plugin: system_branding_block
 settings:
