@@ -47,6 +47,27 @@ img {
     padding: 10px 20px;
 }
 
+.text-primary {
+    color: $headings-color-highlighted;
+}
+.text-secondary {
+    color: $brand-secondary;
+}
+.text-tertiary {
+    color: $brand-tertiary;
+}
+
+.list-inline {
+
+    li {
+        border-right: 1px solid $border-color;
+
+        &:last-child {
+            border-right: 0;
+        }
+    }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------

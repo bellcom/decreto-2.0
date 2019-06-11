@@ -27,7 +27,39 @@
  * @see template_process()
  */
 #}
-<div{{ attributes }}>
-  {{ content }}
-  Date: {{ date }}
+<div class="entity-list-advanced entity-list-advanced--note">
+
+  <!-- Begin - content -->
+  <div class="entity-list-advanced__content">
+
+    <!-- Begin - heading -->
+    <div class="entity-list-advanced__heading">
+      <h4 class="entity-list-advanced__heading__title">
+        {{ content }}
+      </h4>
+    </div>
+    <!-- End - heading -->
+
+    <!-- Begin - footer -->
+    <div class="entity-list-advanced__footer">
+      <ul class="list-inline">
+        <li class="text-secondary">
+          Et foreningsmøde om sodavand
+        </li>
+        <li class="text-primary">
+          Fodbold
+        </li>
+      </ul>
+    </div>
+    <!-- End - footer -->
+
+  </div>
+  <!-- End - content -->
+
+  <!-- Begin - published at -->
+  <div class="entity-list-advanced__published-at">
+    {{ date }}
+  </div>
+  <!-- End - published at -->
+
 </div>

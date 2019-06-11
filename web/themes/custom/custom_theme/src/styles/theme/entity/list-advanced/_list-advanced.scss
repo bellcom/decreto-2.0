@@ -34,7 +34,7 @@
     margin-top: 5px;
   }
 
-  + .entity-list-advanced__department {
+  + .entity-list-advanced__footer {
     margin-top: 5px;
   }
 }
@@ -64,6 +64,10 @@
   font-size: $font-size-small;
 
   color: $headings-color-light;
+
+  + .entity-list-advanced__footer {
+    margin-top: 5px;
+  }
 }
 
 .entity-list-advanced__published-at {
@@ -77,9 +81,9 @@
   color: $text-color-light;
 }
 
-.entity-list-advanced__department {
+.entity-list-advanced__footer {
   font-weight: $font-weight-bold;
-  font-size: $font-size-small;
+  font-size: $font-size-extra-small;
 
   color: $headings-color-highlighted;
 }
