@@ -26,6 +26,10 @@
   padding: 12px 0;
 
   align-items: center;
+
+  .list-inline {
+    margin-bottom: 0;
+  }
 }
 
 .entity-list-advanced__heading {
@@ -61,7 +65,7 @@
 }
 
 .entity-list-advanced__body {
-  font-size: $font-size-small;
+  font-size: $font-size-extra-small;
 
   color: $headings-color-light;
 
@@ -76,7 +80,7 @@
 
   text-align: right;
   font-weight: $font-weight-bold;
-  font-size: $font-size-small;
+  font-size: $font-size-extra-small;
 
   color: $text-color-light;
 }

@@ -105,9 +105,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_label
+          type: entity_reference_entity_view
           settings:
-            link: true
+            view_mode: list
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -181,19 +181,6 @@ display:
           empty: false
           message_key: my_departments
           plugin_id: decreto_help_message_popup
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: 'short explanatory text'
-            format: basic_html
-          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }
