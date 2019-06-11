@@ -33,6 +33,8 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   justify-content: center;
   align-items: center;
 
+  padding: 0;
+
   width: 44px;
   height: 44px;
 
@@ -65,7 +67,12 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   color: #fff;
   background-color: $brand-secondary;
 }
-.poppy-toggle__icon {}
+.poppy-toggle__icon {
+
+  + .poppy-toggle__description {
+    margin-left: 10px;
+  }
+}
 
 .poppy-box {
   position: absolute;
@@ -89,6 +96,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   .poppy--open & {
     display: initial;
   }
+
+  .menu {
+    margin: 0;
+  }
 }
 .poppy-box--from-right {
   left: initial;
@@ -100,7 +111,7 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   padding: 0 $poppy-box-spacing-left-right;
 
   + .poppy-box__content {
-    margin-top: 15px;
+    margin-top: 5px;
   }
 }
 .poppy-box__heading__title {
@@ -113,10 +124,18 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 }
 
 .poppy-box__content {
-  padding: 0 $poppy-box-spacing-left-right;
+  padding: 10px $poppy-box-spacing-left-right;
 
   + .poppy-box__footer {
-    margin-top: 15px;
+    margin-top: 5px;
+  }
+}
+
+.poppy-toggle__description {
+  white-space: nowrap;
+
+  + .caret {
+    margin-left: 5px;
   }
 }
 
@@ -141,6 +160,13 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 
 .poppy-box--narrow {
   width: 200px;
+}
+
+.poppy-toggle--user {
+  width: initial;
+  height: 44px;
+
+  border: 0;
 }
 
 // --------------------------------------------------

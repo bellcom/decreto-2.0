@@ -165,14 +165,34 @@
             </div>
             <!-- End - memo -->
 
-            {% if page.flexy_navigation__primary %}
-              <!-- Begin - navigation -->
-              <nav class="flexy-header__navigation__wrapper hidden-xs hidden-sm"
-                   role="navigation">
-                {{ page.flexy_navigation__primary }}
-              </nav>
-              <!-- End - navigation -->
-            {% endif %}
+            <!-- Begin - user navigation -->
+            <div class="poppy hidden-xs hidden-sm">
+              <button class="poppy-toggle poppy-toggle--user">
+
+                <!-- Begin - icon -->
+                <div class="poppy-toggle__icon">
+                  <span class="initial-icon">
+                    {{ user_initials }}
+                  </span>
+                </div>
+                <!-- End - icon -->
+
+                <!-- Begin - description -->
+                <div class="poppy-toggle__description">
+                  {{ user_name }}
+                </div>
+                <!-- End - description -->
+
+                <span class="caret"></span>
+              </button>
+
+              <div class="poppy-box poppy-box--narrow poppy-box--from-right">
+                <div class="poppy-box__content">
+                  {{ page.flexy_navigation__user }}
+                </div>
+              </div>
+            </div>
+            <!-- End - user navigation -->
 
             <!-- Begin - responsive toggle -->
             <button

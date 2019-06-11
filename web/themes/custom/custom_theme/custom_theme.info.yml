@@ -8,8 +8,7 @@ package: Custom
 
 regions:
   sidr_left__primary: 'Sidr - left - primary navigation'
-  flexy_navigation__primary: 'Flexy navigation - primary navigation'
-  flexy_navigation__secondary: 'Flexy navigation - secondary navigation'
+  flexy_navigation__user: 'Flexy navigation - user navigation'
   highlighted: 'Highlighted'
   help: 'Help'
   sidebar: 'Sidebar - desktop'
