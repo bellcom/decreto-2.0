@@ -1,0 +1,16 @@
+uuid: 2a4b8269-4f39-49e9-b069-235a8a932a7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.list
+    - taxonomy.vocabulary.decreto_tax_department
+id: taxonomy_term.decreto_tax_department.list
+targetEntityType: taxonomy_term
+bundle: decreto_tax_department
+mode: list
+content: {  }
+hidden:
+  description: true
+  flag_subscribe_term: true
+  langcode: true
