@@ -68,6 +68,43 @@ img {
     }
 }
 
+.btn {
+    min-width: 140px;
+
+    border-width: 0;
+
+    font-weight: $font-weight-bold;
+
+    .icon {
+        display: none;
+    }
+}
+
+.btn-default:not(.btn-success) {
+    border: 1px solid $btn-default-border;
+
+    &:hover, &:focus {
+        color: #fff;
+        border-color: $headings-color-highlighted;
+        background-color: $headings-color-highlighted;
+    }
+}
+
+label {
+    font-size: $font-size-small;
+    text-transform: uppercase;
+
+    color: $headings-color-light;
+
+    .form-type-checkbox & {
+        text-transform: initial;
+    }
+}
+
+.help-block {
+    color: $text-color-light;
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------

@@ -1,0 +1,144 @@
+// |--------------------------------------------------------------------------
+// | Modal
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .modal
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+
+// Responsive.
+$xs-modal-inner-spacing: 20px;
+$sm-modal-inner-spacing: 40px;
+$md-modal-inner-spacing: 50px;
+$lg-modal-inner-spacing: 60px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin modal-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.modal {}
+
+.modal-header {
+  border-bottom: none;
+}
+.modal-footer {
+  border-top: none;
+}
+
+.modal-title {
+  font-weight: $headings-font-weight-bold;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: $xs-modal-inner-spacing;
+    padding-right: $xs-modal-inner-spacing;
+  }
+
+  .modal-header {
+    padding-top: $xs-modal-inner-spacing;
+  }
+  .modal-footer {
+    padding-bottom: $xs-modal-inner-spacing;
+  }
+}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: $sm-modal-inner-spacing;
+    padding-right: $sm-modal-inner-spacing;
+  }
+
+  .modal-header {
+    padding-top: $sm-modal-inner-spacing;
+  }
+  .modal-footer {
+    padding-bottom: $sm-modal-inner-spacing;
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {
+
+  .modal-title {
+    font-size: $font-size-h2;
+  }
+}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: $md-modal-inner-spacing;
+    padding-right: $md-modal-inner-spacing;
+  }
+
+  .modal-header {
+    padding-top: $md-modal-inner-spacing;
+  }
+  .modal-footer {
+    padding-bottom: $md-modal-inner-spacing;
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: $lg-modal-inner-spacing;
+    padding-right: $lg-modal-inner-spacing;
+  }
+
+  .modal-header {
+    padding-top: $lg-modal-inner-spacing;
+  }
+  .modal-footer {
+    padding-bottom: $lg-modal-inner-spacing;
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
