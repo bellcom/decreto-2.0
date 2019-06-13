@@ -70,6 +70,17 @@
   }
 }
 
+.view-decreto-user-departments {
+
+  .views-row {
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
