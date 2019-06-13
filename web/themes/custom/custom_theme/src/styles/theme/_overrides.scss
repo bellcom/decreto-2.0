@@ -95,7 +95,12 @@ img {
 @media #{$breakpoint-desktop-only} {}
 
 // Large desktop - and up
-@media #{$breakpoint-large-desktop-and-up} {}
+@media #{$breakpoint-large-desktop-and-up} {
+
+    .container-fluid {
+        max-width: 1200px;
+    }
+}
 
 // Print
 @media print {}

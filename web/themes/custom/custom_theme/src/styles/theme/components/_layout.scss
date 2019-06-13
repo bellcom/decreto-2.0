@@ -103,6 +103,11 @@ body {
     flex-direction: row;
   }
 
+  .layout__sidebar,
+  .layout__content {
+    min-height: 100vh;
+  }
+
   .layout__sidebar {
     display: block;
 
