@@ -1,0 +1,1 @@
+Follow install step from search_api_solr module: search_api_solr/INSTALL.md

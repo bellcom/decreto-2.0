@@ -1,0 +1,29 @@
+uuid: bff3e14e-239b-480b-8284-b205f7e23b1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_search_meetings
+  module:
+    - system
+    - views
+  theme:
+    - custom_theme
+id: decreto_search_meetings_search_form_exposed
+theme: custom_theme
+region: content
+weight: -15
+provider: null
+plugin: 'views_exposed_filter_block:decreto_search_meetings-decreto_page_meetings_search'
+settings:
+  id: 'views_exposed_filter_block:decreto_search_meetings-decreto_page_meetings_search'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /meetings
+    negate: false
+    context_mapping: {  }

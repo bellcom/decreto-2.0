@@ -1,4 +1,81 @@
 <?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_entity_update().
+ *
+ * IF decreto_bullet_point or decreto_bullet_point_attachment is updated, finds
+ * a corresponding meeting and marks it as updated.
+ *
+ * @see decreto_search_mark_entity_updated().
+ */
+function decreto_search_node_update(EntityInterface $entity) {
+  if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
+    decreto_search_mark_entity_updated($meeting);
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * IF decreto_bullet_point or decreto_bullet_point_attachment is deleted, finds
+ * a corresponding meeting and marks it as updated.
+ *
+ * @see decreto_search_mark_entity_updated().
+ */
+function decreto_search_node_delete(EntityInterface $entity) {
+  if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
+    decreto_search_mark_entity_updated($meeting);
+  }
+}
+
+/**
+ * Updates the corresponding tracking table entries for each index that tracks
+ * this entity.
+ *
+ * @see search_api_entity_update().
+ */
+function decreto_search_mark_entity_updated(EntityInterface $entity) {
+  $entity_id = $entity->id();
+
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  if (!$indexes) {
+    return;
+  }
+
+  $datasource_id = 'entity:' . $entity->getEntityTypeId();
+  $combine_id = function ($langcode) use ($entity_id) {
+    return $entity_id . ':' . $langcode;
+  };
+  $updated_item_ids = $entity->getTranslationLanguages();
+  $updated_item_ids = array_map($combine_id, array_keys($updated_item_ids));
+  foreach ($indexes as $index) {
+    if ($updated_item_ids) {
+      $index->trackItemsUpdated($datasource_id, $updated_item_ids);
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function decreto_search_theme_suggestions_form(array $variables) {
+  // TODO: consider moving to theme.
+  if (!empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
+
+  return $suggestions;
+}
+
 /**
  * Implements hook_form_alter()
  *
@@ -7,61 +84,40 @@
  * @param $form_id
  */
 function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form['#id'] == 'views-exposed-form-decreto-search-page') {
-    //formatting search field
-    $form['search_api_fulltext']['#theme_wrappers'] = null;
-    $form['actions']['#theme_wrappers'] = null;
+  if ($form['#id'] == 'views-exposed-form-decreto-search-meetings-decreto-page-meetings-search') {
+    // Adding help message.
+    $message = \Drupal::config('decreto_help_messages.settings')->get('meetings_search_form');
+    $form[] = [
+      '#theme' => 'decreto_help_message_popup',
+      '#content' => strip_tags($message),
+    ];
 
-    //submit button
-    $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+    // Limit departments checkbox.
+    $form['ld'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Show only meetings from departments I am member of'),
+    ];
 
-    //select type
-    //$form['type']['#attributes']['class'][] = 'bootstrap-multiselect';
-    //$form['type']['#attributes']['data-multiselect-title'] = t('Select Type');
-
-    //start date
-    $form['field_decreto_meet_start_date']['#type'] = 'datetime';
-    //$form['field_decreto_meet_start_date']['#type'] = 'date';
-
-    //end date
-    $form['field_decreto_meet_end_date']['#type'] = 'datetime';
-    //$form['field_decreto_meet_end_date']['#type'] = 'date';
-
-    // Department.
-    $form['field_decreto_meet_department']['#attributes']['class'][] = 'bootstrap-multiselect';
-    $form['field_decreto_meet_department']['#attributes']['data-multiselect-title'] = t('Select department');
-
-    //hiding additional filtets, if not search page
-    if (\Drupal::routeMatch()->getRouteName() != 'view.decreto_search.page') {
-      $form['#filters_dispay'] = FALSE;
-    } else {
-      $form['#filters_dispay'] = TRUE;
-    }
-
+    // Changing type of date fields.
+    $form['from']['#type'] = 'date';
+    $form['to']['#type'] = 'date';
   }
 }
 
 /**
- * Implements hook_theme_suggestions_alter()
+ * Implements hook_views_query_alter().
  *
- * @param $suggestions
- * @param $vars
+ * Toggles showing meeting from only user's departments and all departments.
  */
-function decreto_search_theme_suggestions_select_alter(&$suggestions, &$vars) {
-  //only for those that have bootstrap-multiselect
-  if (in_array('bootstrap-multiselect', $vars['element']['#attributes']['class'])) {
-    $suggestions[] = 'select__bootstrap_multiselect';
-  }
-}
+function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'decreto_search_meetings') {
+    $limitDepartments = \Drupal::request()->query->get('ld');
 
-/**
- * Implements hook_system_breadcrumb_alter()
- * @param $breadcrumb
- * @param $route_match
- * @param array $context
- */
-function decreto_search_system_breadcrumb_alter(&$breadcrumb, $route_match, array $context) {
-  if ($route_match->getRouteName() == 'view.decreto_search.page') {
-    $breadcrumb->addLink(\Drupal\Core\Link::createFromRoute(t('Meetings'), '<none>'));
+    if ($limitDepartments) {
+      $user = User::load(\Drupal::currentUser()->id());
+      $userDepartments = array_column($user->field_decreto_usr_departments->getValue(), 'target_id');
+
+      $query->addWhere('', 'department_tid', $userDepartments, 'IN');
+    }
   }
 }
