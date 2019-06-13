@@ -189,7 +189,18 @@ display:
           content: "<div class=\"row\">\r\n<div class=\"col-xs-6\">Name and department</div><div class=\"col-xs-6\">Date and location</div>\r\n</div>"
           plugin_id: text_custom
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: 'No meetings found.'
+          plugin_id: text_custom
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
