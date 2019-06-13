@@ -1,8 +1,9 @@
-uuid: 9ed15987-a091-4f21-8508-8a175757a663
+uuid: 83db58d1-7b0c-44ea-9440-2070c42356c0
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.user.list
     - field.field.user.user.field_decreto_firstname
     - field.field.user.user.field_decreto_lastname
     - field.field.user.user.field_decreto_usr_departments
@@ -14,10 +15,10 @@ dependencies:
     - user
 _core:
   default_config_hash: L2mtwGWH_7wDRCMIR4r_Iu_jmvQ10DV1L8ht8iNZ5qY
-id: user.user.default
+id: user.user.list
 targetEntityType: user
 bundle: user
-mode: default
+mode: list
 content:
   field_decreto_firstname:
     weight: 11
@@ -53,9 +54,9 @@ content:
     region: content
   flag_subscribe_user:
     weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   member_for:
     weight: 5
     region: content
