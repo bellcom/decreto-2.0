@@ -131,6 +131,11 @@ function custom_theme_preprocess_node(&$variables) {
 
   $variables['user_name'] = $name;
   $variables['user_initials'] = (new Initials())->name($name)->generate();
+
+  // Initials of title.
+  $title = $node->getTitle();
+  $variables['label_raw'] = $title;
+  $variables['label_initials'] = (new Initials())->name($title)->generate();
 }
 
 /**

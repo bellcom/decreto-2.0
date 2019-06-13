@@ -1,0 +1,32 @@
+{% set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix',
+] %}
+
+<a href="{{ url }}"
+   class="element-wrapper-link entity-list">
+
+  <!-- Begin - icon -->
+  <div class="entity-list__icon">
+      <span class="initial-icon" data-toggle="tooltip" title="{{ label_raw }}">
+        {{ label_initials}}
+      </span>
+  </div>
+  <!-- End - icon -->
+
+  <!-- Begin - content -->
+  <div class="entity-list__content">
+
+    <div class="entity-list__heading">
+      <h2
+        class="entity-list__heading__title heading-h4">{{ label }}</h2>
+    </div>
+
+  </div>
+  <!-- End - content -->
+
+</a>
