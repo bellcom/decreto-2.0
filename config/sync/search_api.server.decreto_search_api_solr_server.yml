@@ -22,7 +22,7 @@ backend_config:
   connector: standard
   connector_config:
     scheme: http
-    host: 10.0.2.2
+    host: localhost
     port: 8983
     path: /
     core: decreto
