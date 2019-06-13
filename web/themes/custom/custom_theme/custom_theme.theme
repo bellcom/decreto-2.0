@@ -180,3 +180,38 @@ function custom_theme_preprocess_node__decreto_meeting(&$variables) {
     $variables['content']['contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
   }
 }
+
+/**
+ * Implements template_preprocess_user().
+ */
+function custom_theme_preprocess_user(&$variables) {
+  $user = $variables['user'];
+  $view_mode = $variables['elements']['#view_mode'];
+  $variables['url'] = $user->toUrl();
+
+  if ($view_mode === 'list') {
+    $name = '';
+    $firstname = '';
+    $lastname = '';
+    if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
+
+      if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
+        $firstname = $field_firstname[0]['value'];
+      }
+    }
+    if ($user->field_decreto_lastname && !$user->field_decreto_lastname->isEmpty()) {
+
+      if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
+        $lastname = $field_lastname[0]['value'];
+      }
+    }
+    if ($firstname && $lastname) {
+      $name = $firstname . ' ' . $lastname;
+    } else {
+      $name = $user->getDisplayName();
+    }
+
+    $variables['user_full_name'] = $name;
+    $variables['user_initials'] = (new Initials())->name($name)->generate();
+  }
+}

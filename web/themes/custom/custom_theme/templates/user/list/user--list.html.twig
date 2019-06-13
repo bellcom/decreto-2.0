@@ -1,15 +1,10 @@
-{% set classes = [
-  term.bundle|clean_class,
-  view_mode ? view_mode|clean_class,
-] %}
-
 <a href="{{ url }}"
    class="element-wrapper-link entity-list">
 
   <!-- Begin - icon -->
   <div class="entity-list__icon">
-      <span class="initial-icon" data-toggle="tooltip" title="{{ name_raw }}">
-        {{ name_initials }}
+      <span class="initial-icon" data-toggle="tooltip" title="{{ user_full_name }}">
+        {{ user_initials }}
       </span>
   </div>
   <!-- End - icon -->
@@ -19,7 +14,7 @@
 
     <div class="entity-list__heading">
       <h2
-        class="entity-list__heading__title heading-h4">{{ name }}</h2>
+        class="entity-list__heading__title heading-h4">{{ user_full_name }}</h2>
     </div>
 
   </div>
