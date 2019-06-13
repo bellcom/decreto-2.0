@@ -1,0 +1,257 @@
+uuid: 2109116d-327b-4b71-bc3f-2f05d8069e15
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_solr
+    - node
+    - taxonomy
+    - search_api
+    - search_api_attachments
+  config:
+    - field.storage.node.field_decreto_meet_bps
+    - field.storage.node.field_decreto_bp_bpas
+    - field.storage.node.body
+    - field.storage.node.field_decreto_meet_department
+    - field.storage.node.field_decreto_meet_start_date
+    - field.storage.node.field_decreto_meet_location
+    - field.storage.node.field_decreto_meet_end_date
+    - search_api.server.decreto_search_api_solr_server
+    - core.entity_view_mode.node.full
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    advanced:
+      index_prefix: ''
+id: decreto_search_meeting_index
+name: 'Decreto meeting index'
+description: ''
+read_only: false
+field_settings:
+  bp_title:
+    label: 'Bullet points » Content » Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_bps:entity:title'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_bps
+      module:
+        - node
+        - node
+  bpa_body:
+    label: 'Bullet points » Content » Bullet point attachments » Content » Body'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_bps:entity:field_decreto_bp_bpas:entity:body'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_bps
+        - field.storage.node.field_decreto_bp_bpas
+        - field.storage.node.body
+      module:
+        - node
+        - node
+  bpa_title:
+    label: 'Bullet points » Content » Bullet point attachments » Content » Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_bps:entity:field_decreto_bp_bpas:entity:title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_bps
+        - field.storage.node.field_decreto_bp_bpas
+      module:
+        - node
+        - node
+        - node
+  department_name:
+    label: 'Department » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_department:entity:name'
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_department
+      module:
+        - taxonomy
+        - taxonomy
+  department_tid:
+    label: 'Department » Taxonomy term » Term ID'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_department:entity:tid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_department
+      module:
+        - taxonomy
+        - taxonomy
+  field_decreto_meet_end_date:
+    label: to
+    datasource_id: 'entity:node'
+    property_path: field_decreto_meet_end_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_end_date
+  field_decreto_meet_start_date:
+    label: From
+    datasource_id: 'entity:node'
+    property_path: field_decreto_meet_start_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_start_date
+  location_name:
+    label: 'Location » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_decreto_meet_location:entity:name'
+    type: text
+    boost: !!float 5
+    dependencies:
+      config:
+        - field.storage.node.field_decreto_meet_location
+      module:
+        - taxonomy
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    boost: 0.8
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:node':
+          decreto_meeting: full
+  saa_field_decreto_meet_full_doc:
+    label: 'Search api attachments: Open description'
+    property_path: saa_field_decreto_meet_full_doc
+    type: text
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 21
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - decreto_meeting
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  file_attachments:
+    excluded_extensions: 'aif art avi bmp gif ico mov oga ogv png psd ra ram rgb flv'
+    number_indexed: 0
+    number_first_bytes: '0'
+    max_filesize: '0'
+    excluded_private: 1
+    excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv'
+  html_filter:
+    all_fields: true
+    fields:
+      - bp_title
+      - bpa_body
+      - bpa_title
+      - department_name
+      - location_name
+      - rendered_item
+      - saa_field_decreto_meet_full_doc
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+  rendered_item: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: decreto_search_api_solr_server

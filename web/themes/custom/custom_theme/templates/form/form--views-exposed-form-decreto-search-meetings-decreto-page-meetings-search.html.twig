@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ *
+ * @ingroup themeable
+ */
+#}
+<form{{ attributes }}>
+  <h2>
+    {% trans %}
+      Filter meetings
+    {% endtrans %}
+  </h2>
+  <div>
+    {% trans %}
+      short descriptive text
+    {% endtrans %}
+  </div>
+
+  {{ children }}
+</form>
