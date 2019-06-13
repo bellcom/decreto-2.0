@@ -1,0 +1,101 @@
+// |--------------------------------------------------------------------------
+// | List simple
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-list-simple
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-list-simple-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-list-simple {
+  display: flex;
+
+  padding: 8px 0;
+
+  align-items: center;
+}
+
+.entity-list-simple__heading {}
+.entity-list-simple__heading__title {
+  padding: 0;
+  margin: 0;
+
+  font-weight: $headings-font-weight;
+  font-size: $font-size-h6;
+
+  color: $text-color;
+}
+
+.entity-list-simple__icon {
+  flex-grow: 0;
+
+  + .entity-list-simple__content {
+    margin-left: 10px;
+  }
+}
+
+.entity-list-simple__content {
+  flex-grow: 1;
+}
+
+.view-decreto-organisation-list {
+
+  .views-row {
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
