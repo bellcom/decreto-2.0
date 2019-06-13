@@ -78,15 +78,22 @@ img {
     .icon {
         display: none;
     }
+
+    + .btn {
+
+        &,
+        .modal-footer & {
+            margin-left: floor( ($grid-gutter-width / 2) );
+        }
+    }
 }
 
 .btn-default:not(.btn-success) {
     border: 1px solid $btn-default-border;
 
     &:hover, &:focus {
-        color: #fff;
-        border-color: $headings-color-highlighted;
-        background-color: $headings-color-highlighted;
+        color: $headings-color;
+        background-color: $btn-default-border;
     }
 }
 
