@@ -182,7 +182,18 @@ display:
           message_key: my_departments
           plugin_id: decreto_help_message_popup
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: 'No departments found.'
+          plugin_id: text_custom
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
