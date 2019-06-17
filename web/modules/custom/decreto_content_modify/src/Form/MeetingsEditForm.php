@@ -15,6 +15,7 @@ use Drupal\Core\Field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
@@ -58,6 +59,15 @@ class MeetingsEditForm extends FormBase {
     $form['#prefix'] = '<div id="' . $this->getFormId(). '">';
     $form['#suffix'] = '</div>';
 
+    // Type.
+    $type_options = options_allowed_values(FieldStorageConfig::loadByName('node', 'field_decreto_meet_type'));
+    $form['type'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Type'),
+      '#options' => $type_options,
+      '#required' => TRUE,
+    ];
+
     $form['title'] = [
       '#type' => 'textfield',
       '#placeholder' => $this->t('Title'),
@@ -95,19 +105,11 @@ class MeetingsEditForm extends FormBase {
       '#required' => TRUE,
     ];
 
+    // Automatically populate checkbox.
     $form['populate_department_members'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Automatically populate members from selected department'),
     ];
-
-    // TODO: do we need meeting type?
-//    //type
-//    $type_options = options_allowed_values(FieldStorageConfig::loadByName('node', 'field_decreto_meet_type'));
-//    $form['type'] = [
-//      '#type' => 'select',
-//      //'#empty_option' => $this->t('Type'),
-//      '#options' => $type_options
-//    ];
 
     // Meeting dates.
     $form['start_date'] = array(
@@ -203,8 +205,8 @@ class MeetingsEditForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
+    $type = $form_state->getValue('type');
     $department_tid = $form_state->getValue('department');
-//    $type = $form_state->getValue('type');
     $start_date = $form_state->getValue('start_date');
     $end_date = $form_state->getValue('end_date');
     $location_tid = $form_state->getValue('location');
@@ -232,9 +234,9 @@ class MeetingsEditForm extends FormBase {
         'type' => 'decreto_meeting',
         'status' => 1,
         'title' => $title,
+        'field_decreto_meet_type' => $type,
         'field_decreto_meet_department' => $department_tid,
         'field_decreto_meet_location' => $location_tid,
-        //'field_decreto_meet_type' => $type,
         'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
         'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
