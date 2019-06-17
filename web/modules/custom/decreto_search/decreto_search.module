@@ -121,3 +121,35 @@ function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase 
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * If decreto_meeting is displayed on meetings search page, the search param is
+ * added to the url.
+ */
+function decreto_search_preprocess_node(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+
+  if ($current_path == '/meetings') {
+    $node = $variables['elements']['#node'];
+    if ($node->getType() != 'decreto_meeting') {
+      return;
+    }
+
+    $search_param = \Drupal::request()->query->get('s');
+    $node = $variables['elements']['#node'];
+    $variables['url'] = $node
+      ->url('canonical', array(
+        'language' => $node
+            ->language(),
+        'query' => [
+          's' => $search_param
+        ],
+
+      ));
+
+    // We don't want to cache that, since search param is dynamic.
+    $variables['#cache']['max-age'] = 0;
+  }
+}
