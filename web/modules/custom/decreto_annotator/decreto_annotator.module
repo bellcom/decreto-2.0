@@ -40,6 +40,16 @@ function template_preprocess_decreto_annotator_note(array &$variables) {
   }
   unset($variables['elements']['created']);
 
+  $meeting = $variables['decreto_annotator_note']->getMeeting();
+  if ($meeting) {
+    $variables['meeting'] = $meeting->label();
+
+    $department = $variables['decreto_annotator_note']->getDepartment();
+    if ($department) {
+      $variables['department'] = $department->label();
+    }
+  }
+
   // Helpful $content variable for templates.
   $variables += ['content' => []];
   foreach (Element::children($variables['elements']) as $key) {

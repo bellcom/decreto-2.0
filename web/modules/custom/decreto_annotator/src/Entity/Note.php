@@ -156,4 +156,38 @@ class Note extends ContentEntityBase {
     return $note_info_json->quote;
   }
 
+  /**
+   * Returns Decreto meeting, which this Note related bullet point attachment
+   * is attached to.
+   *
+   * @return \Drupal\node\NodeInterface.
+   */
+  public function getMeeting() {
+    $bullet_point_attachment = $this->get('bpa_id')->first()->get('entity')->getTarget()->getValue();
+
+    $meeting = NULL;
+    if ($bullet_point_attachment) {
+      $meeting = DecretoContentModifyUtils::getRelatedNodes($bullet_point_attachment, 'decreto_meeting');
+    }
+
+    return $meeting;
+  }
+
+  /**
+   * Returns Decreto department attached to meeting, related with bullet point
+   * attachment related to Note.
+   *
+   * @see getMeeting().
+   *
+   * @return \Drupal\taxonomy\TermInterface.
+   */
+  public function getDepartment() {
+    $department = NULL;
+    if ($field_decreto_meet_department = $this->getMeeting()->get('field_decreto_meet_department')->first()) {
+      $department = $field_decreto_meet_department->get('entity')->getTarget()->getValue();
+    }
+
+    return $department;
+  }
+
 }
