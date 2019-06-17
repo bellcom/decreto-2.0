@@ -20,8 +20,13 @@ class NotificationNotifier extends MessageNotifierBase {
    * {@inheritdoc}
    */
   public function deliver(array $output = []) {
+    $text = $this->message->getText();
+    if (is_array($text)) {
+      $text = reset($text);
+    }
+
     return Notification::create([
-      'body' => $this->message->getText(),
+      'body' => strip_tags($text),
       'uid' => $this->message->getOwnerId(),
       'mid' => $this->message->original_message->id()
     ])->save();

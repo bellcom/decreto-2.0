@@ -9,18 +9,8 @@
  *   hide($content['field_example']) to temporarily suppress the printing of a
  *   given element.
  * - $title: The (sanitized) entity label.
- * - $url: Direct url of the current entity if specified.
- * - $page: Flag for the full page state.
- * - $classes: String of classes that can be used to style contextually through
- *   CSS. It can be manipulated through the variable $classes_array from
- *   preprocess functions. By default the following classes are available, where
- *   the parts enclosed by {} are replaced by the appropriate values:
- *   - entity-{ENTITY_TYPE}
- *   - {ENTITY_TYPE}-{BUNDLE}
- *
- * Other variables:
- * - $classes_array: Array of html class attribute values. It is flattened
- *   into a string within the variable $classes.
+ * - $date: Date string, if date is today - time is shown, if not only date it shown.
+ * - $department: Department title.
  *
  * @see template_preprocess()
  * @see template_preprocess_decreto_noficiation()
@@ -30,4 +20,5 @@
 <div{{ attributes }}>
   {{ content }}
   Date: {{ date }}
+  Department: {{ department }}
 </div>

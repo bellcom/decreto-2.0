@@ -112,4 +112,48 @@ class Notification extends ContentEntityBase implements ContentEntityInterface {
 
     return parent::delete();
   }
+
+  /**
+   * Returns Message attached to notification.
+   *
+   * @return \Drupal\message\Entity\MessageInterface.
+   */
+  public function getMessage() {
+    $message = $this->get('mid')->first()->get('entity')->getTarget()->getValue();
+
+    return $message;
+  }
+
+  /**
+   * Returns Decreto meeting attached to notification's Message.
+   *
+   * @see getMessage().
+   *
+   * @return \Drupal\node\NodeInterface.
+   */
+  public function getMeeting() {
+    $meeting = NULL;
+    if ($field_decreto_notif_meeting = $this->getMessage()->get('field_decreto_notif_meeting')->first()) {
+      $meeting = $field_decreto_notif_meeting->get('entity')->getTarget()->getValue();
+    }
+
+    return $meeting;
+  }
+
+  /**
+   * Returns Decreto department attached to meeting, related with Message
+   * attached to notification.
+   *
+   * @see getMeeting().
+   *
+   * @return \Drupal\taxonomy\TermInterface.
+   */
+  public function getDepartment() {
+    $department = NULL;
+    if ($field_decreto_meet_department = $this->getMeeting()->get('field_decreto_meet_department')->first()) {
+      $department = $field_decreto_meet_department->get('entity')->getTarget()->getValue();
+    }
+
+    return $department;
+  }
 }

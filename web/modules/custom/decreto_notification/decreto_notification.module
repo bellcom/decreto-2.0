@@ -150,6 +150,10 @@ function template_preprocess_decreto_notification(array &$variables) {
   }
   unset($variables['elements']['created']);
 
+  if ($department = $variables['decreto_notification']->getDepartment()) {
+    $variables['department'] = $department->label();
+  }
+
   // Helpful $content variable for templates.
   $variables += ['content' => []];
   foreach (Element::children($variables['elements']) as $key) {
