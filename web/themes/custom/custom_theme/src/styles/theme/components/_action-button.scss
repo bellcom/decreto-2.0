@@ -1,0 +1,145 @@
+// |--------------------------------------------------------------------------
+// | Action button
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .action-button
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$action-button-expected-height: 45px;
+$expected-list-height: 280px;
+$button-spacing: $grid-gutter-width;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin action-button-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.action-button {
+  margin: 0;
+  padding: 8px 20px;
+
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+
+  border-radius: 20px;
+
+  color: #fff;
+
+  background-color: $brand-tertiary;
+
+  + .action-button {
+    margin-left: 10px;
+  }
+}
+button.action-button {
+  border: 0;
+}
+
+.action-button-list {
+  position: fixed;
+
+  right: 15px;
+  bottom: 15px;
+
+  z-index: 1000;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {
+
+  .action-button {
+    padding: 10px 25px;
+
+    font-size: $font-size-large;
+
+    border-radius: 0;
+    @include border-bottom-radius($border-radius-base);
+
+    + .action-button {
+      margin-left: $button-spacing;
+    }
+  }
+
+  .action-button-list {
+    right: 0;
+    top: ($grid-gutter-width + $sm-flexy-header-static-row-height + $expected-list-height);
+
+    transform-origin: right top;
+    transform: rotate(90deg);
+
+    .toolbar-fixed & {
+      top: (79px + $grid-gutter-width + $sm-flexy-header-static-row-height + $expected-list-height);
+    }
+  }
+
+  .layout__content {
+    padding-right: $action-button-expected-height;
+  }
+  .flexy-header {
+    margin-right: 0 - $action-button-expected-height;
+    padding-right: $action-button-expected-height;
+  }
+}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .action-button-list {
+    top: ($grid-gutter-width + $md-flexy-header-static-row-height + $expected-list-height);
+
+    .toolbar-fixed & {
+      top: (79px + $grid-gutter-width + $md-flexy-header-static-row-height + $expected-list-height);
+    }
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .action-button-list {
+    top: ($grid-gutter-width + $lg-flexy-header-static-row-height + $expected-list-height);
+
+    .toolbar-fixed & {
+      top: (79px + $grid-gutter-width + $lg-flexy-header-static-row-height + $expected-list-height);
+    }
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
