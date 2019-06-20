@@ -1,0 +1,54 @@
+{%
+  set classes = [
+  'boxy',
+  'view',
+  'view-' ~ id|clean_class,
+  'view-id-' ~ id,
+  'view-display-id-' ~ display_id,
+  dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if title %}
+    <div class="boxy__heading">
+      <h1 class="boxy__heading__title">
+        {{ title }}
+      </h1>
+    </div>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div class="boxy__body">
+    <div class="div-table">
+
+      {% if header %}
+        <div class="view-header">
+          <div class="div-table__thead">
+            {{ header }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if rows %}
+        <div class="view-content">
+          <div class="div-table__tbody">
+            {{ rows }}
+          </div>
+        </div>
+      {% elseif empty %}
+        <div class="view-empty">
+          <div class="div-table__tbody">
+            {{ empty }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if pager %}
+        {{ pager }}
+      {% endif %}
+
+    </div>
+  </div>
+
+</div>
