@@ -1,0 +1,126 @@
+// |--------------------------------------------------------------------------
+// | Table
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .entity-table
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin entity-table-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.entity-table {
+
+  .row {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    > [class*='col-'] {
+      display: flex;
+
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    // Fixes Safari issue (https://stackoverflow.com/questions/34250282/flexbox-safari-bug-flex-wrap)
+    &:after,
+    &:before {
+      content: normal; // IE doesn't support `initial`
+    }
+  }
+}
+
+.entity-table__name {}
+.entity-table__department {
+  font-weight: $font-weight-bold;
+}
+
+.entity-table__date,
+.entity-table__location {
+  position: relative;
+
+  padding-left: 24px;
+
+  &:before {
+    position: absolute;
+
+    top: 1px;
+    left: 0;
+
+    font-size: 14px;
+    font-family: "Material Icons";
+
+    color: $text-color-light;
+  }
+}
+.entity-table__date {
+
+  &:before {
+    content: "access_time";
+  }
+}
+.entity-table__location {
+
+  &:before {
+    content: "person_pin_circle";
+  }
+}
+.entity-table__status-icon-list {
+  display: inline-block;
+
+  .material-icons {
+    font-size: $font-size-large;
+
+    color: $text-color-light;
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

@@ -1,0 +1,90 @@
+// |--------------------------------------------------------------------------
+// | div table
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .div-table
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin div-table-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.div-table {
+  border: 1px solid $body-bg;
+
+  .div-table__tr + .div-table__tr,
+  .views-row + .views-row {
+    border-top: 1px solid $body-bg;
+  }
+}
+.div-table__thead {
+  background-color: $body-bg;
+}
+.div-table__tbody {
+  background-color: $body-bg-secondary;
+}
+.div-table__th {
+  font-size: $font-size-extra-small;
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+
+  color: $headings-color-light;
+}
+.div-table__th,
+.div-table__td {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 14px ($grid-gutter-width / 2);
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

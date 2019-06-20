@@ -1,0 +1,10 @@
+uuid: c948cd5e-80f6-420a-a6bf-dda8d49fe857
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.table
+label: Table
+targetEntityType: node
+cache: true

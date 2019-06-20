@@ -170,7 +170,8 @@ function custom_theme_preprocess_node(&$variables) {
 function custom_theme_preprocess_node__decreto_meeting(&$variables) {
   $node = $variables['node'];
 
-  if ($variables['view_mode'] == 'table_display') {
+  if ($variables['view_mode'] === 'table') {
+
     // Note indicator.
     $noteService = \Drupal::service('decreto_annotator.note');
     $variables['content']['contains_notes'] = $noteService->getMeetingHasNote($node);

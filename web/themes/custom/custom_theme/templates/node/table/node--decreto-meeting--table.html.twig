@@ -1,0 +1,87 @@
+<a href="{{ url }}" class="element-wrapper-link">
+  <div class="entity entity-table entity-table--meeting">
+    <div class="div-table__tr">
+      <div class="row">
+
+        <!-- Begin - name and department -->
+        <div class="col-xs-6">
+          <div class="div-table__td">
+
+            {# Begin - name #}
+            <div
+              class="entity-{{ view_mode|clean_class }}__name">
+              {{ label }}
+            </div>
+            {# End - name #}
+
+            {# Begin - department #}
+            {% if node.field_decreto_meet_department.value %}
+              <div
+                class="entity-{{ view_mode|clean_class }}__department">
+                {{ content.field_decreto_meet_department }}
+              </div>
+            {% endif %}
+            {# End - department #}
+
+          </div>
+        </div>
+        <!-- End - name and department -->
+
+        <!-- Begin - date and location -->
+        <div class="col-xs-6">
+          <div class="div-table__td">
+            <div class="flexy-row">
+
+              <div>
+                {# Begin - starting date #}
+                {% if node.field_decreto_meet_start_date.value %}
+                  <div
+                    class="entity-{{ view_mode|clean_class }}__date">
+                    {{ content.field_decreto_meet_start_date }}
+                  </div>
+                {% endif %}
+                {# End - starting date #}
+
+                {# Begin - location #}
+                {% if node.field_decreto_meet_location.value %}
+                  <div
+                    class="entity-{{ view_mode|clean_class }}__location">
+                    {{ content.field_decreto_meet_location }}
+                  </div>
+                {% endif %}
+                {# End - location #}
+              </div>
+
+              <div class="flexy-spacer"></div>
+
+              <!-- Begin - status icon list -->
+              <div class="entity-table__status-icon-list">
+
+                {# Begin - memos #}
+                {% if content.contains_memos %}
+                  <span class="material-icons" title="{{ 'This meeting has memos' | trans }}" data-toggle="tooltip">
+                mail
+              </span>
+                {% endif %}
+                {# End - memos #}
+
+                {# Begin - notes #}
+                {% if content.contains_notes %}
+                  <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">
+                chat
+              </span>
+                {% endif %}
+                {# End - notes #}
+
+              </div>
+              <!-- End - status icon list -->
+
+            </div>
+          </div>
+        </div>
+        <!-- End - date and location -->
+
+      </div>
+    </div>
+  </div>
+</a>
