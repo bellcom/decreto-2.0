@@ -353,32 +353,19 @@ display:
           empty: true
           message_key: meetings_search_table
           plugin_id: decreto_help_message_popup
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<div>short explanatory text</div>'
-            format: basic_html
-          plugin_id: text
+      footer: {  }
+      empty:
         area_text_custom:
           id: area_text_custom
           table: views
           field: area_text_custom
           relationship: none
           group_type: group
-          admin_label: 'Table header'
-          empty: false
+          admin_label: ''
+          empty: true
           tokenize: false
-          content: "<div class=\"row\">\r\n<div class=\"col-xs-6\">Name and department</div><div class=\"col-xs-6\">Date and location</div>\r\n</div>"
+          content: 'No meetings found.'
           plugin_id: text_custom
-      footer: {  }
-      empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }

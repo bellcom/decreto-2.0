@@ -164,17 +164,6 @@ display:
           empty: false
           message_key: upcoming_events
           plugin_id: decreto_help_message_popup
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: 'Table header'
-          empty: false
-          tokenize: false
-          content: "<div class=\"div-table__tr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-6\"><div class=\"div-table__th\">Name and department</div></div>\r\n    <div class=\"col-xs-6\"><div class=\"div-table__th\">Date and location</div></div>\r\n  </div>\r\n</div>"
-          plugin_id: text_custom
       footer: {  }
       empty:
         area_text_custom:
@@ -326,17 +315,6 @@ display:
           empty: false
           message_key: my_upcoming_events
           plugin_id: decreto_help_message_popup
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: 'Table header'
-          empty: false
-          tokenize: false
-          content: "<div class=\"div-table__thead\">\r\n  <div class=\"div-table__tr\">\r\n    <div class=\"row\">\r\n      <div class=\"col-xs-6\"><div class=\"div-table__th\">Name and department</div></div>\r\n      <div class=\"col-xs-6\"><div class=\"div-table__th\">Date and location</div></div>\r\n    </div>\r\n  </div>\r\n</div>"
-          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:

@@ -20,35 +20,53 @@
   {{ title_suffix }}
 
   <div class="boxy__body">
+
+    {% if header %}
+      <div class="view-header">
+        <div class="boxy__heading">
+          <h1 class="boxy__heading__title">
+            {{ header }}
+          </h1>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Begin - content -->
     <div class="div-table">
 
-      {% if header %}
-        <div class="view-header">
-          <div class="div-table__thead">
-            {{ header }}
+      <!-- Begin - thead -->
+      <div class="div-table__thead">
+        <div class="div-table__tr">
+          <div class="row">
+            <div class="col-xs-6"><div class="div-table__th">Name and department</div></div>
+            <div class="col-xs-6"><div class="div-table__th">Date and location</div></div>
           </div>
         </div>
-      {% endif %}
+      </div>
+      <!-- End - thead -->
 
+      <!-- Begin - tbody -->
       {% if rows %}
-        <div class="view-content">
-          <div class="div-table__tbody">
+        <div class="div-table__tbody">
+          <div class="view-content">
             {{ rows }}
           </div>
         </div>
       {% elseif empty %}
-        <div class="view-empty">
-          <div class="div-table__tbody">
+        <div class="div-table__tbody">
+          <div class="view-empty">
             {{ empty }}
           </div>
         </div>
       {% endif %}
-
-      {% if pager %}
-        {{ pager }}
-      {% endif %}
+      <!-- End - tbody -->
 
     </div>
-  </div>
+    <!-- End - content -->
 
+    {% if pager %}
+      {{ pager }}
+    {% endif %}
+
+  </div>
 </div>

@@ -17,19 +17,39 @@
     </div>
   {% endif %}
 
-  {% if rows %}
-    <div class="view-content">
-      <div class="div-table__tbody">
-        {{ rows }}
+  <!-- Begin - content -->
+
+  <!-- End - content -->
+  <div class="div-table">
+
+    <!-- Begin - thead -->
+    <div class="div-table__thead">
+      <div class="div-table__tr">
+        <div class="row">
+          <div class="col-xs-6"><div class="div-table__th">Name and department</div></div>
+          <div class="col-xs-6"><div class="div-table__th">Date and location</div></div>
+        </div>
       </div>
     </div>
-  {% elseif empty %}
-    <div class="view-empty">
+    <!-- End - thead -->
+
+    <!-- Begin - tbody -->
+    {% if rows %}
       <div class="div-table__tbody">
-        {{ empty }}
+        <div class="view-content">
+          {{ rows }}
+        </div>
       </div>
-    </div>
-  {% endif %}
+    {% elseif empty %}
+      <div class="div-table__tbody">
+        <div class="view-empty">
+          {{ empty }}
+        </div>
+      </div>
+    {% endif %}
+    <!-- End - tbody -->
+  </div>
+
 
   {% if pager %}
     {{ pager }}
