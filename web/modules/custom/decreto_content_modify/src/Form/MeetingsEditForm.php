@@ -191,6 +191,20 @@ class MeetingsEditForm extends FormBase {
       ],
     ];
 
+    // Details.
+    $form['pages-page-1']['details'] = [
+      '#markup' => '<h4><strong>' . $this->t('Details') . '</strong></h4>',
+    ];
+
+    // Title.
+    $form['pages-page-1']['title'] = [
+      '#type' => 'textfield',
+      '#placeholder' => $this->t('Title'),
+      '#title' => $this->t('Title'),
+      '#required' => TRUE,
+      '#description' => $this->t('Full title of the meeting'),
+    ];
+
     // Type.
     $type_options = options_allowed_values(FieldStorageConfig::loadByName('node', 'field_decreto_meet_type'));
     $form['pages-page-1']['type'] = [
@@ -198,14 +212,8 @@ class MeetingsEditForm extends FormBase {
       '#title' => $this->t('Type'),
       '#options' => $type_options,
       '#required' => TRUE,
-    ];
-
-    $form['pages-page-1']['title'] = [
-      '#type' => 'textfield',
-      '#placeholder' => $this->t('Title'),
-      '#title' => $this->t('Title'),
-      '#required' => TRUE,
-      '#description' => $this->t('Meeting full title'),
+      '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-4">',
+      '#suffix' => '</div>',
     ];
 
     // Department.
@@ -221,6 +229,8 @@ class MeetingsEditForm extends FormBase {
       '#title' => $this->t('Department'),
       '#options' => $department_options,
       '#required' => TRUE,
+      '#prefix' => '<div class="col-xs-12 col-sm-4">',
+      '#suffix' => '</div>',
     ];
 
     // Location.
@@ -236,6 +246,8 @@ class MeetingsEditForm extends FormBase {
       '#title' => $this->t('Location'),
       '#options' => $location_options,
       '#required' => TRUE,
+      '#prefix' => '<div class="col-xs-12 col-sm-4">',
+      '#suffix' => '</div></div>',
     ];
 
     // Automatically populate checkbox.
@@ -260,13 +272,17 @@ class MeetingsEditForm extends FormBase {
     // Meeting dates.
     $form['pages-page-1']['start_date'] = [
       '#type' => 'datetime',
-      '#title' => $this->t('Start date - Free choice'),
+      '#title' => $this->t('Start date - optional'),
       '#default_value' => DrupalDateTime::createFromTimestamp(time()),
+      '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
+      '#suffix' => '</div>',
     ];
     $form['pages-page-1']['end_date'] = [
       '#type' => 'datetime',
-      '#title' => $this->t('End date - Free choice'),
+      '#title' => $this->t('End date - optional'),
       '#default_value' => DrupalDateTime::createFromTimestamp(time()),
+      '#prefix' => '<div class="col-xs-12 col-sm-6">',
+      '#suffix' => '</div></div>',
     ];
 
     // TODO: do we need to upload PDF and save them as meeting description?
