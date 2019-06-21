@@ -19,19 +19,18 @@
   {% endif %}
   {{ title_suffix }}
 
-  <div class="boxy__body">
-
-    {% if header %}
-      <div class="view-header">
-        <div class="boxy__heading">
-          <h1 class="boxy__heading__title">
-            {{ header }}
-          </h1>
-        </div>
+  {% if header %}
+    <div class="view-header">
+      <div class="boxy__heading">
+        <h1 class="boxy__heading__title">
+          {{ header }}
+        </h1>
       </div>
-    {% endif %}
+    </div>
+  {% endif %}
 
-    <!-- Begin - content -->
+  <!-- Begin - content -->
+  <div class="boxy__body">
     <div class="div-table">
 
       <!-- Begin - thead -->
@@ -62,11 +61,12 @@
       <!-- End - tbody -->
 
     </div>
-    <!-- End - content -->
 
     {% if pager %}
       {{ pager }}
     {% endif %}
 
   </div>
+  <!-- End - content -->
+
 </div>
