@@ -69,7 +69,7 @@ display:
         options:
           view_modes:
             'entity:node':
-              decreto_meeting: table_display
+              decreto_meeting: table
       fields:
         node_grants:
           table: search_api_index_decreto_search_meeting_index
