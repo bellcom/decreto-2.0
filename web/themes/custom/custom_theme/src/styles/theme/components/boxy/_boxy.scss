@@ -61,6 +61,14 @@
   }
 }
 
+.boxy__body + .boxy__actions,
+.view .boxy__actions {
+  margin-top: $grid-gutter-width;
+}
+.boxy__actions {
+  text-align: right;
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------

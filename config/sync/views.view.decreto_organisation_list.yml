@@ -171,7 +171,18 @@ display:
       sorts: {  }
       title: 'My organizations'
       header: {  }
-      footer: {  }
+      footer:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/organisations/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret organisation\r\n  </a>\r\n</div>"
+          plugin_id: text_custom
       empty:
         area_text_custom:
           id: area_text_custom
