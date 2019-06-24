@@ -86,6 +86,13 @@ img {
             margin-left: floor( ($grid-gutter-width / 2) );
         }
     }
+
+    &.btn-primary {
+
+        &, &:focus {
+            color: $headings-color;
+        }
+    }
 }
 
 .btn-default:not(.btn-success) {

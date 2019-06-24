@@ -27,6 +27,10 @@
   .views-row + .views-row {
     border-top: 1px solid $body-bg;
   }
+
+  .flexy-row {
+    flex-wrap: wrap;
+  }
 }
 .div-table__thead {
   background-color: $body-bg;

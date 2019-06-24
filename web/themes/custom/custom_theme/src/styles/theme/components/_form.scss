@@ -1,9 +1,9 @@
 // |--------------------------------------------------------------------------
-// | Views
+// | Form
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .views
+// | - .form-inline
 // |
 
 // --------------------------------------------------
@@ -14,16 +14,32 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin views-mixin() {}
+@mixin form-mixin() {}
 
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
 
-.views-exposed-form {
+.form-inline {
+
+  .form-group {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-item {
+    margin-right: 20px;
+  }
 
   .form-actions {
-    margin-top: $grid-gutter-width;
+    display: block;
+  }
+
+  .btn-info {
+    @extend .btn-primary;
   }
 }
 
@@ -48,7 +64,18 @@
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+
+  .form-inline {
+
+    .form-type-textfield {
+
+      .form-control {
+        min-width: 450px;
+      }
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}

@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'boxy',
+    'boxy--' ~ configuration.provider|clean_class,
+    'boxy--' ~ plugin_id|clean_class,
+    'boxy--background-color-primary'
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+  <div class="boxy__heading">
+    <h2{{ title_attributes.addClass('boxy__heading__title') }}>{{ 'Filter meetings' | trans }}</h2>
+  </div>
+
+  {% block content %}
+    <div class="boxy__body">
+      {{ content }}
+    </div>
+  {% endblock %}
+
+</section>
+

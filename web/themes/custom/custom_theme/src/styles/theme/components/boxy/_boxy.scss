@@ -34,7 +34,9 @@
   font-weight: $headings-font-weight-bold;
 }
 
-.boxy__body {}
+.boxy__body {
+  background-color: inherit;
+}
 
 .boxy__helper {
   position: absolute;
@@ -76,7 +78,23 @@
   }
 
   &.boxy--background-color-primary {
-    background-color: $brand-primary;
+    margin-bottom: 0;
+
+    @include border-bottom-radius(0);
+
+    background-color: #D4EBE7;
+
+    .boxy__heading__title {
+      color: #32424C;
+    }
+
+    label {
+      color: $brand-tertiary;
+    }
+
+    .form-control {
+      border-color: #A5B8B6;
+    }
   }
 
   &.boxy--background-color-secondary {
