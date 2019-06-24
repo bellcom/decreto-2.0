@@ -1,6 +1,5 @@
 {%
   set classes = [
-    'div-table',
     'view',
     'view-' ~ id|clean_class,
     'view-id-' ~ id,
@@ -9,52 +8,59 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  {% if header %}
-    <div class="view-header">
-      {{ header }}
-    </div>
-  {% endif %}
-
-  <!-- Begin - content -->
-
-  <!-- End - content -->
-  <div class="div-table">
-
-    <!-- Begin - thead -->
-    <div class="div-table__thead">
-      <div class="div-table__tr">
-        <div class="row">
-          <div class="col-xs-6"><div class="div-table__th">Name and department</div></div>
-          <div class="col-xs-6"><div class="div-table__th">Date and location</div></div>
-        </div>
+  <div class="div-table">{% if header %}
+      <div class="view-header">
+        {{ header }}
       </div>
-    </div>
-    <!-- End - thead -->
+    {% endif %}
 
-    <!-- Begin - tbody -->
-    {% if rows %}
-      <div class="div-table__tbody">
-        <div class="view-content">
-          {{ rows }}
-        </div>
-      </div>
-    {% elseif empty %}
-      <div class="div-table__tbody">
+    <!-- Begin - content -->
+
+    <!-- End - content -->
+    <div class="div-table">
+
+      <!-- Begin - thead -->
+      <div class="div-table__thead">
         <div class="div-table__tr">
-          <div class="div-table__td">
-            <div class="view-empty">
-              {{ empty }}
-            </div>
+          <div class="row">
+            <div class="col-xs-6"><div class="div-table__th">Name and department</div></div>
+            <div class="col-xs-6"><div class="div-table__th">Date and location</div></div>
           </div>
         </div>
       </div>
+      <!-- End - thead -->
+
+      <!-- Begin - tbody -->
+      {% if rows %}
+        <div class="div-table__tbody">
+          <div class="view-content">
+            {{ rows }}
+          </div>
+        </div>
+      {% elseif empty %}
+        <div class="div-table__tbody">
+          <div class="div-table__tr">
+            <div class="div-table__td">
+              <div class="view-empty">
+                {{ empty }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- End - tbody -->
+    </div>
+
+    {% if pager %}
+      {{ pager }}
     {% endif %}
-    <!-- End - tbody -->
+
   </div>
 
-
-  {% if pager %}
-    {{ pager }}
+  {% if footer %}
+    <div class="view-footer">
+      {{ footer }}
+    </div>
   {% endif %}
 
 </div>
