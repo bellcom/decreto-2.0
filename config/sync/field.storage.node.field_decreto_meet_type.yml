@@ -12,29 +12,11 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: _none_
-      label: '-Select type-'
-    -
-      value: Planlagt
-      label: Planlagt
-    -
-      value: Ændret
-      label: Ændret
-    -
-      value: Aflyst
-      label: Aflyst
-    -
-      value: Dagsorden
+      value: dagsorden
       label: Dagsorden
     -
-      value: Dagsorden_plus
-      label: Dagsorden+
-    -
-      value: Referat
+      value: referat
       label: Referat
-    -
-      value: Referat_plus
-      label: Referat+
   allowed_values_function: ''
 module: options
 locked: false

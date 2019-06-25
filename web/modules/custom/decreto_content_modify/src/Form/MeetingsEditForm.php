@@ -285,27 +285,23 @@ class MeetingsEditForm extends FormBase {
       '#suffix' => '</div></div>',
     ];
 
-    // TODO: do we need to upload PDF and save them as meeting description?
-    //    $form['full_doc'] = array(
-    //      '#title' => $this->t('Open description'),
-    //      '#type' => 'managed_file',
-    //      '#upload_location' => 'public://',
-    //      '#default_value' => NULL,
-    //      '#upload_validators' => array(
-    //        'file_validate_extensions' => array('txt pdf doc docx'),
-    //      )
-    //    );
-    //
-    //    $form['full_doc_closed'] = array(
-    //      '#title' => $this->t('Closed description'),
-    //      '#type' => 'managed_file',
-    //      //'#upload_location' => 'private://',
-    //      '#upload_location' => 'public://', //TODO:change to private
-    //      '#default_value' => NULL,
-    //      '#upload_validators' => array(
-    //        'file_validate_extensions' => array('txt pdf doc docx'),
-    //      )
-    //    );
+    // Meeting description files.
+    $form['pages-page-1']['full_doc'] = [
+      '#title' => $this->t('Open description'),
+      '#type' => 'managed_file',
+      '#upload_location' => 'public://',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['txt pdf doc docx'],
+      ]
+    ];
+    $form['pages-page-1']['full_doc_closed'] = [
+      '#title' => $this->t('Closed description'),
+      '#type' => 'managed_file',
+      '#upload_location' => 'private://',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['txt pdf doc docx'],
+      ]
+    ];
 
     return $form;
   }
@@ -426,6 +422,8 @@ class MeetingsEditForm extends FormBase {
     $start_date = $form_state->getValue('start_date');
     $end_date = $form_state->getValue('end_date');
     $location_tid = $form_state->getValue('location');
+    $full_doc = $form_state->getValue('full_doc');
+    $full_doc_closed = $form_state->getValue('full_doc_closed');
 
     // Participants.
     $autofill_participants = $form_state->get('autofill_participants');
@@ -457,10 +455,6 @@ class MeetingsEditForm extends FormBase {
         }
       }
     }
-//    $description = $form_state->getValue('description');
-//    $full_doc = $form_state->getValue('full_doc');
-//    $full_doc_closed = $form_state->getValue('full_doc_closed');
-//
     if (!$this->meeting) {
       $this->meeting = Node::create([
         'type' => 'decreto_meeting',
@@ -473,8 +467,8 @@ class MeetingsEditForm extends FormBase {
         'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
         'field_decreto_meet_partic_ext' => $field_decreto_meet_partic_ext,
-//        'field_decreto_meet_full_doc' => !empty($full_doc) ? ['target_id' => array_pop($full_doc)] : NULL,
-//        'field_decreto_meet_full_doc_c' => !empty($full_doc_closed) ? ['target_id' => array_pop($full_doc_closed)] : NULL,
+        'field_decreto_meet_full_doc' => !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL,
+        'field_decreto_meet_full_doc_c' => !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL,
       ]);
     }
 //    else {
