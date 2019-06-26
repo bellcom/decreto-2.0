@@ -19,6 +19,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Meeting create or edit form.
@@ -55,12 +56,25 @@ class MeetingsEditForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
-    $this->meeting = $meeting;
+    if ($meeting) {
+      if ($meeting->getType() != 'decreto_meeting') {
+        throw new NotFoundHttpException();
+      }
+      $this->meeting = $meeting;
+    }
 
-    $autofillParticipants = $form_state->get('autofill_participants');
-    if (!isset($autofillParticipants)) {
-      $autofillParticipants = TRUE;
-      $form_state->set('autofill_participants', $autofillParticipants);
+    $useDepartmentMembers = $form_state->get('use_department_members');
+    if (!isset($useDepartmentMembers)) {
+      if ($meeting) {
+        // Reading 'use_department_members' from meeting.
+        $useDepartmentMembers = $meeting->field_decreto_meet_use_dep_mem->value;
+      }
+      else {
+        // No meeting, activate by default.
+        $useDepartmentMembers = TRUE;
+      }
+
+      $form_state->set('use_department_members', $useDepartmentMembers);
     }
 
     $activePage = $form_state->get('active_page');
@@ -76,7 +90,7 @@ class MeetingsEditForm extends FormBase {
     $form['steps-container'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => [($autofillParticipants)? 'hidden' : ''],
+        'class' => [($useDepartmentMembers)? 'hidden' : ''],
       ],
     ];
     $form['steps-container']['steps-step-1'] = [
@@ -104,25 +118,10 @@ class MeetingsEditForm extends FormBase {
     $form = $this->appendFormPage2($form, $form_state);
     // Adding pages END.
 
-//    // If it is meeting's edit page, populate values.
-//    if ($meeting) {
-//      $form['title']['#default_value'] = $meeting->getTitle();
-//      $form['department']['#default_value'] = $meeting->field_decreto_meet_department->target_id;
-////      $form['type']['#default_value'] = $node->field_decreto_meet_type->value;
-//      if ($meeting->field_decreto_meet_start_date->value) {
-//        $form['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT, $meeting->field_decreto_meet_start_date->value);
-//      }
-//      if ($meeting->field_decreto_meet_end_date->value) {
-//        $form['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DATETIME_DATETIME_STORAGE_FORMAT, $meeting->field_decreto_meet_end_date->value);
-//      }
-//      $form['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
-////      if (!$node->field_decreto_meet_full_doc->isEmpty()) {
-////        $form['full_doc']['#default_value']['fid'] = $node->field_decreto_meet_full_doc->target_id;
-////      }
-////      if (!$node->field_decreto_meet_full_doc_c->isEmpty()) {
-////        $form['full_doc_closed']['#default_value']['fid'] = $node->field_decreto_meet_full_doc_c->target_id;
-////      }
-//    }
+    // If it is meeting's edit page, populate values.
+    if ($meeting) {
+      $form = $this->populateFormData($form, $form_state, $meeting);
+    }
 
     // Form actions START.
     $form['actions'] = [
@@ -147,7 +146,7 @@ class MeetingsEditForm extends FormBase {
       ],
       '#submit' => ['::submitSwitchPage'],
       '#attributes' => [
-        'class' => [($autofillParticipants)? 'hidden' : '']
+        'class' => [($useDepartmentMembers)? 'hidden' : '']
       ]
     ];
     $form['actions']['submit'] = [
@@ -158,9 +157,9 @@ class MeetingsEditForm extends FormBase {
         'event' => 'click',
       ],
       '#attributes' => [
-        // Show button only if we autofill participants, or if we are on the
+        // Show button only if we use department members, or if we are on the
         // second page of the form.
-        'class' => [(!$autofillParticipants && $activePage !== 2)? 'hidden' : '']
+        'class' => [(!$useDepartmentMembers && $activePage !== 2)? 'hidden' : '']
       ]
     ];
     // Form actions END.
@@ -180,7 +179,7 @@ class MeetingsEditForm extends FormBase {
    *    Form array with appended page.
    */
   private function appendFormPage1(array $form, FormStateInterface $form_state) {
-    $autofillParticipants = $form_state->get('autofill_participants');
+    $useDepartmentMembers = $form_state->get('use_department_members');
     $activePage = $form_state->get('active_page');
 
     // Page 1 container.
@@ -250,11 +249,11 @@ class MeetingsEditForm extends FormBase {
       '#suffix' => '</div></div>',
     ];
 
-    // Automatically populate checkbox.
+    // Use department members button.
     // Must be of type submit in order to talk to backend via Ajax.
-    $form['pages-page-1']['populate_department_members'] = [
+    $form['pages-page-1']['use_department_members'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Automatically populate members from selected department'),
+      '#value' => $this->t('Use department members as meeting participants'),
       '#ajax' => [
         'callback' => '::ajaxReloadForm',
         'progress' => [
@@ -262,10 +261,11 @@ class MeetingsEditForm extends FormBase {
         ]
       ],
       '#attributes' => [
-        // Example of altering button class depending on autofill mode status.
-        'class' => [($autofillParticipants)? 'btn-primary' : ''],
+        // Example of altering button class depending on ;'use department
+        // members' mode status.
+        'class' => [($useDepartmentMembers)? 'btn-primary' : ''],
       ],
-      '#submit' => ['::submitToggleParticipantsAutofill'],
+      '#submit' => ['::submitToggleUseDepartmentMembers'],
       '#limit_validation_errors' => [],
     ];
 
@@ -407,6 +407,42 @@ class MeetingsEditForm extends FormBase {
   }
 
   /**
+   * Populates meeting form with data from real meeting.
+   *
+   * @param array $form
+   *   Render array representing from.
+   * @param FormStateInterface $form_state
+   *   Current form state.
+   * @param NodeInterface $meeting
+   *   Meeting node.
+   *
+   * @return array
+   *    Form array with appended page.
+   */
+  public function populateFormData(array $form, FormStateInterface $form_state, NodeInterface $meeting) {
+    $form['pages-page-1']['title']['#default_value'] = $meeting->getTitle();
+    $form['pages-page-1']['type']['#default_value'] = $meeting->field_decreto_meet_type->value;
+    $form['pages-page-1']['department']['#default_value'] = $meeting->field_decreto_meet_department->target_id;
+    $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
+
+    if ($start_date = $meeting->field_decreto_meet_start_date->value) {
+      $form['pages-page-1']['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date);
+    }
+    if ($end_date = $meeting->field_decreto_meet_end_date->value) {
+      $form['pages-page-1']['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date);
+    }
+
+    if (!$meeting->field_decreto_meet_full_doc->isEmpty()) {
+      $form['pages-page-1']['full_doc']['#default_value']['fid'] = $meeting->field_decreto_meet_full_doc->target_id;
+    }
+    if (!$meeting->field_decreto_meet_full_doc_c->isEmpty()) {
+      $form['pages-page-1']['full_doc_closed']['#default_value']['fid'] = $meeting->field_decreto_meet_full_doc_c->target_id;
+    }
+
+    return $form;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -426,24 +462,12 @@ class MeetingsEditForm extends FormBase {
     $full_doc_closed = $form_state->getValue('full_doc_closed');
 
     // Participants.
-    $autofill_participants = $form_state->get('autofill_participants');
+    $useDepartmentMembers = $form_state->get('use_department_members');
     $field_decreto_meet_partic_int = [];
     $field_decreto_meet_partic_ext = [];
 
-    if ($autofill_participants) {
-      // Fill participants array based on user department attribute.
-      $query = \Drupal::entityQuery('user')
-        ->condition('status', 1)
-        ->condition('field_decreto_usr_departments', $department_tid, 'IN');
-      $users_ids = $query->execute();
-      if (!empty($users_ids)) {
-        foreach($users_ids as $user_id) {
-          $field_decreto_meet_partic_int[]['target_id'] = $user_id;
-        }
-      }
-    }
-    else {
-      // Not autofill, grab the selected participants.
+    if (!$useDepartmentMembers) {
+      // Not using department members, grab the selected participants.
       $participants = $form_state->getValue('participants');
 
       foreach($participants as $user_id => $participant) {
@@ -467,41 +491,42 @@ class MeetingsEditForm extends FormBase {
         'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
         'field_decreto_meet_partic_ext' => $field_decreto_meet_partic_ext,
+        'field_decreto_meet_use_dep_mem' => $useDepartmentMembers,
         'field_decreto_meet_full_doc' => !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL,
         'field_decreto_meet_full_doc_c' => !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL,
       ]);
     }
-//    else {
-//      $this->node->title = $title;
-//      $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
-//      $this->node->field_decreto_meet_type = $type;
-//      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;
-//      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DATETIME_DATETIME_STORAGE_FORMAT) : NULL;
-//      $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
-//      $this->node->field_decreto_meet_partic = $field_decreto_meet_partic;
-//      $this->node->body = $description;
-//      $this->node->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => array_pop($full_doc)] : NULL;
-//      $this->node->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => array_pop($full_doc_closed)] : NULL;
-//      $this->node->field_decreto_meet_bps = $field_decreto_meet_bps;
-//    }
-//
+    else {
+      $this->meeting->title = $title;
+      $this->meeting->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
+      $this->meeting->field_decreto_meet_type = $type;
+      $this->meeting->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
+      $this->meeting->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
+      $this->meeting->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
+      $this->meeting->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
+      $this->meeting->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
+      $this->meeting->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
+      $this->meeting->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
+      $this->meeting->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
+    }
+
     $this->meeting->save();
   }
 
   /**
-   * Submit handler for 'populate_department_members' button.
+   * Submit handler for 'use_department_members' button.
    *
-   * Toggles between participants autofill and manual fill.
+   * Toggles between using department members and manual fill.
    *
    * @param array $form
    *   Render array representing from.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Current form state.
    */
-  public function submitToggleParticipantsAutofill(array &$form, FormStateInterface $form_state) {
-    $autofillParticipants = $form_state->get('autofill_participants');
+  public function submitToggleUseDepartmentMembers(array &$form, FormStateInterface $form_state) {
+    $useDepartmentMembers = $form_state->get('use_department_members');
 
-    $form_state->set('autofill_participants', !$autofillParticipants);
+    $form_state->set('use_department_members', !$useDepartmentMembers);
     $form_state->setRebuild();
   }
 

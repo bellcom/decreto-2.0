@@ -14,12 +14,12 @@ dependencies:
     - field.field.node.decreto_meeting.field_decreto_meet_partic_int
     - field.field.node.decreto_meeting.field_decreto_meet_start_date
     - field.field.node.decreto_meeting.field_decreto_meet_type
+    - field.field.node.decreto_meeting.field_decreto_meet_use_dep_mem
     - node.type.decreto_meeting
   module:
     - datetime
     - field_group
     - file
-    - text
 third_party_settings:
   field_group:
     group_decreto_meet_dates:
@@ -45,7 +45,7 @@ third_party_settings:
         - field_decreto_meet_full_doc
         - field_decreto_meet_full_doc_c
       parent_name: ''
-      weight: 8
+      weight: 6
       label: Descriptions
       format_type: html_element
       format_settings:
@@ -63,17 +63,8 @@ targetEntityType: node
 bundle: decreto_meeting
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 7
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   field_decreto_meet_bps:
-    weight: 9
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -120,7 +111,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_decreto_meet_partic_ext:
-    weight: 27
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60
@@ -129,7 +120,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_decreto_meet_partic_int:
-    weight: 26
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -149,6 +140,13 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_decreto_meet_use_dep_mem:
+    weight: 9
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   langcode:
     type: language_select
     weight: 1
@@ -160,7 +158,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     region: content
     third_party_settings: {  }
   title:
@@ -172,6 +170,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  body: true
   created: true
   path: true
   promote: true
