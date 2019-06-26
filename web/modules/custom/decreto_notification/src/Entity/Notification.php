@@ -29,6 +29,9 @@ use Drupal\decreto_notification\Services\NotificationService;
  *     "views_data" = "Drupal\decreto_notification\NotificationViewsData",
  *   },
  *   list_cache_contexts = { "user" },
+ *   links = {
+ *     "canonical" = "/notification/{decreto_notification}",
+ *   }
  * )
  */
 class Notification extends ContentEntityBase implements ContentEntityInterface {

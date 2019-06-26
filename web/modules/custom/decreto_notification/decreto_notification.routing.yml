@@ -4,3 +4,14 @@ decreto_notification.notification_popup_content:
     _controller: '\Drupal\decreto_notification\Controller\NotificationController::popupContentRender'
   requirements:
     _permission: 'access content'
+
+entity.decreto_notification.canonical:
+  path: '/notification/{decreto_notification}'
+  defaults:
+    _controller: '\Drupal\decreto_notification\Controller\NotificationController::resolve'
+  options:
+    parameters:
+      decreto_notification:
+        type: entity:decreto_notification
+  requirements:
+    _permission: 'access content'

@@ -3,6 +3,8 @@
 namespace Drupal\decreto_notification\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\decreto_notification\Entity\Notification;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,6 +24,32 @@ class NotificationController extends ControllerBase {
 
     // This is the important part, because will render only the TWIG template.
     return new Response($markup);
+  }
+
+  /**
+   * Notification resolver.
+   *
+   * Loads referenced entity and redirect to it.
+   *
+   * @param Notification $decreto_notification
+   *   Decreto notification entity.
+   *
+   * @return RedirectResponse
+   *   Redirect response.
+   *
+   * @throws
+   */
+  public function resolve(Notification $decreto_notification) {
+    if ($decreto_notification->unread) {
+      $decreto_notification->unread = 0;
+      $decreto_notification->save();
+    }
+    
+    // Loading referenced entity.
+    // Has to be improved to Notification::getReferencedEntity() method.
+    $referenced_entity = $decreto_notification->getMeeting();
+    $response = new RedirectResponse($referenced_entity->toUrl()->toString());
+    return $response;
   }
 
 }
