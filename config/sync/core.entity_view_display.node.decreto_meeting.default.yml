@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.decreto_meeting.field_decreto_meet_partic_int
     - field.field.node.decreto_meeting.field_decreto_meet_start_date
     - field.field.node.decreto_meeting.field_decreto_meet_type
+    - field.field.node.decreto_meeting.field_decreto_meet_use_dep_mem
     - node.type.decreto_meeting
   module:
     - datetime
@@ -97,6 +98,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_decreto_meet_use_dep_mem:
+    weight: 13
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   flag_subscribe_node:
     weight: 10

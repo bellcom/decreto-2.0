@@ -1,0 +1,23 @@
+uuid: b998f774-a888-47f4-b0f0-0a52c93d2607
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_use_dep_mem
+    - node.type.decreto_meeting
+id: node.decreto_meeting.field_decreto_meet_use_dep_mem
+field_name: field_decreto_meet_use_dep_mem
+entity_type: node
+bundle: decreto_meeting
+label: 'Use department members'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
