@@ -85,14 +85,7 @@ class HelpMessagesSettings extends FormBase {
    * @return array
    */
   static public function getKeys() {
-    return [
-      'upcoming_events' => 'Upcoming events',
-      'my_upcoming_events' => 'My upcoming events',
-      'my_departments' => 'My departments',
-      'my_organizations' => 'My organizations',
-      'meetings_search_form' => 'Meetings search (form)',
-      'meetings_search_table' => 'Meetings search (results table)'
-    ];
+    return \Drupal::moduleHandler()->invokeAll('decreto_help_messages');
   }
 
 }

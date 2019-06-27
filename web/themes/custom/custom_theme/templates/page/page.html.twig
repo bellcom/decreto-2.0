@@ -248,15 +248,15 @@
       <div class="action-button-list">
 
         <!-- Begin - find member -->
-        <button class="action-button action-button--find-member">
+        <a class="action-button action-button--find-member use-ajax" data-dialog-type="modal" href="{{ path('decreto_user.search_popup') }}">
           {{ 'Find member' | trans }}
-        </button>
+        </a>
         <!-- End - find member -->
 
         <!-- Begin - chat -->
-        <button class="action-button action-button--chat">
+        <a class="action-button action-button--chat">
           {{ 'Chat' | trans }}
-        </button>
+        </a>
         <!-- End - chat -->
 
       </div>

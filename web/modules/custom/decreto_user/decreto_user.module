@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Contains decreto_user.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function decreto_user_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the decreto_user module.
+    case 'help.page.decreto_user':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Decreto users functionality') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_user_theme() {
+  return [
+    'decreto_user_search_popup' => [
+      'variables' => [
+        'users_list' => '',
+        'help_message' => '',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_user_decreto_help_messages() {
+  return [
+    'user_search_popup' => 'User search popup',
+  ];
+}
