@@ -109,6 +109,16 @@ class Notification extends ContentEntityBase implements ContentEntityInterface {
   /**
    * {@inheritdoc}
    */
+  public function save() {
+    // Invalidating notifications count.
+    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS. ':' . $this->get('uid')->target_id]);
+
+    return parent::save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function delete() {
     // Invalidating notifications count.
     Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS. ':' . $this->get('uid')->target_id]);
