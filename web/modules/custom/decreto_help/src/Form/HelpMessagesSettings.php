@@ -2,14 +2,16 @@
 
 namespace Drupal\decreto_help\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Form to configure Decreto help messages.
  */
-class HelpMessagesSettings extends ConfigFormBase {
+class HelpMessagesSettings extends FormBase {
 
   /**
    * Messages keys array.
@@ -19,25 +21,36 @@ class HelpMessagesSettings extends ConfigFormBase {
   protected $keys;
 
   /**
+   * Messages storage object.
+   *
+   * @var KeyValueStoreInterface $storage
+   */
+  protected $storage;
+
+  /**
    * {@inheritDoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(KeyValueFactoryInterface $keyValueFactory) {
     $this->keys = $this->getKeys();
-    return parent::__construct($config_factory);
+    $this->storage = $keyValueFactory->get('decreto_help.messages_settings');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('keyvalue')
+    );
   }
 
   public function getFormId() {
     return 'decreto_help_messages_settings';
   }
 
-  protected function getEditableConfigNames() {
-    return ['decreto_help_messages.settings'];
-  }
-
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('decreto_help_messages.settings');
     foreach ($this->keys as $key => $title) {
-      $data = $config->get($key);
+      $data = $this->storage->get($key);
       $form[$key. '_fieldset'] = [
         '#type' => 'details',
         '#title' => $title,
@@ -49,16 +62,21 @@ class HelpMessagesSettings extends ConfigFormBase {
         ]
       ];
     }
-    return parent::buildForm($form, $form_state);
+
+    $form['actions']['#type'] = 'actions';
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Save configuration'),
+      '#button_type' => 'primary',
+    ];
+
+    return $form;
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->configFactory->getEditable('decreto_help_messages.settings');
     foreach ($this->keys as $key => $title) {
-      $config->set($key, $form_state->getValue($key));
+      $this->storage->set($key, $form_state->getValue($key));
     }
-    $config->save();
-    parent::submitForm($form, $form_state);
   }
 
   /**

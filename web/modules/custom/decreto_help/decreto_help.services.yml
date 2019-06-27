@@ -1,0 +1,4 @@
+services:
+  decreto_help.message:
+    class: Drupal\decreto_help\HelpMessageService
+    arguments: ['@keyvalue']
