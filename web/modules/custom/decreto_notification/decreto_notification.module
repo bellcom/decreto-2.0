@@ -155,10 +155,15 @@ function template_preprocess_decreto_notification(array &$variables) {
   }
 
   // Helpful $content variable for templates.
-  $variables += ['content' => []];
+  $variables += ['content' => [
+    'unread' => $variables['decreto_notification']->unread->value,
+  ]];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
+
+  // Notification resolve path.
+  $variables['url'] = $variables['decreto_notification']->toUrl()->toString();
 }
 
 /**

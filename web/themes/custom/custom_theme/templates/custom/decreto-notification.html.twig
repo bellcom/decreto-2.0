@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation for decreto_noficiation entities.
+ * Default theme implementation for decreto_notification entities.
  *
  * Available variables:
  * - $content: An array of comment items. Use render($content) to print them all, or
@@ -11,38 +11,38 @@
  * - $title: The (sanitized) entity label.
  * - $date: Date string, if date is today - time is shown, if not only date it shown.
  * - $department: Department title.
+ * - $url: URL to notification resolver path.
  *
  * @see template_preprocess()
- * @see template_preprocess_decreto_noficiation()
+ * @see template_preprocess_decreto_notification()
  * @see template_process()
  */
 #}
-<div class="entity-list-advanced entity-list-advanced--notification">
+<div class="entity-list-advanced entity-list-advanced--notification {{ content.unread ? 'unread' }}">
+  <a href=" {{ url }}">
+    <!-- Begin - content -->
+    <div class="entity-list-advanced__content">
+      <!-- Begin - heading -->
+      <div class="entity-list-advanced__heading">
+        <h4 class="entity-list-advanced__heading__title">
+          {{ content }}
+        </h4>
+      </div>
+      <!-- End - heading -->
 
-  <!-- Begin - content -->
-  <div class="entity-list-advanced__content">
+      <!-- Begin - footer -->
+      <div class="entity-list-advanced__footer">
+        {{ department }}
+      </div>
+      <!-- End - footer -->
 
-    <!-- Begin - heading -->
-    <div class="entity-list-advanced__heading">
-      <h4 class="entity-list-advanced__heading__title">
-        {{ content }}
-      </h4>
     </div>
-    <!-- End - heading -->
+    <!-- End - content -->
 
-    <!-- Begin - footer -->
-    <div class="entity-list-advanced__footer">
-      {{ department }}
+    <!-- Begin - published at -->
+    <div class="entity-list-advanced__published-at">
+      {{ date }}
     </div>
-    <!-- End - footer -->
-
-  </div>
-  <!-- End - content -->
-
-  <!-- Begin - published at -->
-  <div class="entity-list-advanced__published-at">
-    {{ date }}
-  </div>
-  <!-- End - published at -->
-
+    <!-- End - published at -->
+  </a>
 </div>
