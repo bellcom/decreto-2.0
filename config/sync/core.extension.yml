@@ -27,6 +27,7 @@ module:
   decreto_pdf2htmlex: 0
   decreto_pdf_conversion_manager: 0
   decreto_search: 0
+  decreto_user: 0
   dynamic_page_cache: 0
   editor: 0
   entity_reference: 0
