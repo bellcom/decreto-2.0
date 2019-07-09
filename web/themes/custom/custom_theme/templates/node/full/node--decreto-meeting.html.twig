@@ -81,27 +81,79 @@ view_mode ? view_mode|clean_class,
         </h2>
     {% endif %}
     {{ title_suffix }}
-
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ node.getTitle }} {{ decreto_context_menu }}</h3>
+            <h3 class="panel-title">
+                {% if node.field_decreto_meet_department %}
+                    <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}</a>
+                {% endif %}
+                <span>></span>
+                {{ node.getTitle }} </h3>
+                <div>
+                    {# Begin - starting date #}
+                    {% if node.field_decreto_meet_start_date.value %}
+                        <div class="entity-{{ view_mode|clean_class }}__date">
+                            {{ content.field_decreto_meet_start_date }}
+                        </div>
+                    {% endif %}
+                    {# End - starting date #}
+
+                    {# Begin - location #}
+                    {% if node.field_decreto_meet_location.value %}
+                        <div class="entity-{{ view_mode|clean_class }}__location">
+                            {{ content.field_decreto_meet_location }}
+                        </div>
+                    {% endif %}
+                    {# End - location #}
+                </div>
+            {{ decreto_context_menu }}
         </div>
         <div{{ content_attributes.addClass('content', 'panel-body') }}>
+            <div class="boxy__actions boxy">
+                <a href="" class="btn btn-primary">
+                    {{ "Download full copy" | trans }}
+                </a>
+                <a href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}" class="btn btn-primary use-ajax" data-dialog-type="modal">
+                    {{ "Edit meeting" | trans }}
+                </a>
+                <a href="{{ path('view.decreto_notes.decreto_note_page') }}" class="btn btn-primary">
+                    {{ "Own notes" | trans }}
+                </a>
+            </div>
+            <div class="region region-action-box__primary">
+                <div class="action-box">
+                    @TODO Metting search form
+                    {{ decreto_help_message.meeting_search_form }}
+                </div>
+            </div>
+            <div class="boxy__actions boxy">
+                <a href=""  class="btn btn-primary use-ajax" data-dialog-type="modal">
+                    {{ "Create point from file" | trans }}
+                </a>
+                <a href=""  class="btn btn-primary use-ajax" data-dialog-type="modal">
+                    {{ "Create point" | trans }}
+                </a>
+            </div>
             <ul class="nav nav-pills nav-justified visible-xs">
                 <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
                 <li><a data-toggle="tab"href="#agenda">Agenda</a></li>
             </ul>
-
-            <div class="tab-content">
-                <div id="info">
-                    {{ content | without('field_decreto_meet_bps')}}
-                </div>
-                <div id="agenda">
-                    {{ content.field_decreto_meet_bps}}
-                </div>
+            <div id="info">
+                {{ content.field_decreto_meet_type }}
+                {{ content.body }}
+                {{ decreto_help_message.meeting_agenda }}
             </div>
-
-            {#{{ content }}#}
+            <div class="boxy__actions">
+                <a href="">
+                    {{ "Turn on switch mode" | trans }}
+                </a>
+                <a href="">
+                    {{ "Open/close all points" | trans }}
+                </a>
+            </div>
+            <div id="agenda">
+                {{ content.field_decreto_meet_bps}}
+            </div>
         </div>
     </div>
 </article>
