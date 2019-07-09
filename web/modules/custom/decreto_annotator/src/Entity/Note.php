@@ -120,12 +120,13 @@ class Note extends ContentEntityBase {
     Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $this->get('uid')->value]);
 
     // Getting related meeting.
-    $bpa_id = $this->get('bpa_id')->value;
+    $bpa_id = $this->get('bpa_id')->first()->getString();
     $bp = Node::load($bpa_id);
-    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
 
     // Invalidating meeting.
-    Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+    if (!empty($bp) && $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting')) {
+      Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
+    }
 
     return parent::delete();
   }

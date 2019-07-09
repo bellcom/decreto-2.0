@@ -6,7 +6,7 @@ decreto_annotator.annotator.create:
   requirements:
     _permission: 'access content'
     _method: 'POST'
-    
+
 decreto_annotator.annotator.search:
   path: '/annotator/search'
   defaults:
@@ -24,7 +24,10 @@ decreto_annotator.annotator.update:
   requirements:
     _permission: 'access content'
     _method: 'PUT'
-    
+  methods:
+    - PUT
+    - POST
+
 decreto_annotator.annotator.delete:
   path: '/annotator/delete/{id}'
   defaults:
@@ -33,7 +36,10 @@ decreto_annotator.annotator.delete:
   requirements:
     _permission: 'access content'
     _method: 'DELETE'
-    
+  methods:
+    - DELETE
+    - POST
+
 decreto_annotator.annotator.read:
   path: '/annotator/read/{id}'
   defaults:

@@ -93,10 +93,10 @@ view_mode ? view_mode|clean_class,
             </ul>
 
             <div class="tab-content">
-                <div id="info" class="tab-pane fade in active">
+                <div id="info">
                     {{ content | without('field_decreto_meet_bps')}}
                 </div>
-                <div id="agenda" class="tab-pane fade in">
+                <div id="agenda">
                     {{ content.field_decreto_meet_bps}}
                 </div>
             </div>
