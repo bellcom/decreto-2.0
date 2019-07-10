@@ -126,4 +126,59 @@ class NoteService {
     return intval($count) > 0;
   }
 
+  /**
+   * Check whether a given bullet_point attachments has notes.
+   *
+   * @param NodeInterface $bullet_point
+   *   Bullet point in inspect.
+   * @param UserInterface $user
+   *   Notes author.
+   *
+   * @return boolean
+   *   TRUE or FALSE.
+   */
+  public function getBulletPointHasNote(NodeInterface $bullet_point, UserInterface $user = NULL) {
+    $uid = $this->currentUser->id();
+    if (!empty($user)) {
+      $uid = $user->id();
+    }
+
+    $count = 0;
+    $referenced_bpas = $bullet_point->field_decreto_bp_bpas->getValue();
+
+    if (!empty($referenced_bpas)) {
+      $referenced_bpa_ids = array_column($referenced_bpas, 'target_id');
+      $count = $this->noteManager->getQuery()
+        ->condition('uid', $uid)
+        ->condition('bpa_id', $referenced_bpa_ids, 'IN')
+        ->count()
+        ->execute();
+    }
+    return intval($count) > 0;
+  }
+
+  /**
+   * Check whether a given bullet_point_attachment has notes.
+   *
+   * @param NodeInterface $bullet_point_attachment
+   *   Bullet point attachment in inspect.
+   * @param UserInterface $user
+   *   Notes author.
+   *
+   * @return boolean
+   *   TRUE or FALSE.
+   */
+  public function getBulletPointAttachmentHasNote(NodeInterface $bullet_point_attachment, UserInterface $user = NULL) {
+    $uid = $this->currentUser->id();
+    if (!empty($user)) {
+      $uid = $user->id();
+    }
+    $count = $this->noteManager->getQuery()
+        ->condition('uid', $uid)
+        ->condition('bpa_id', $bullet_point_attachment->id())
+        ->count()
+        ->execute();
+    return intval($count) > 0;
+  }
+
 }

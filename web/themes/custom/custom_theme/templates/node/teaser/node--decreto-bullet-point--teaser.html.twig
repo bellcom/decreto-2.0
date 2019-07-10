@@ -73,11 +73,9 @@ view_mode ? view_mode|clean_class,
 ] %}
 
 <article{{ attributes.addClass(classes) }}>
-    <a class="btn btn-primary btn-expand-collapse pull-left" role="button" data-toggle="collapse"
+    <a class="btn-expand-collapse pull-left collapsed" role="button" data-toggle="collapse"
        href="#bp-content-{{ node.id }}" aria-expanded="true"
-       aria-controls="bp-content-{{ node.id }}">
-        <span class="glyphicon" aria-hidden="true"></span>
-    </a>
+       aria-controls="bp-content-{{ node.id }}"></a>
 
     <div>
         <div class="panel panel-default">
@@ -86,7 +84,21 @@ view_mode ? view_mode|clean_class,
                 {{ title_prefix }}
                 {% if not page %}
                     <span{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}{{ content.field_decreto_bp_closed }}</a>
+            <a href="{{ url }}" rel="bookmark">
+                {{ label }}{{ content.field_decreto_bp_closed }}
+                {# Begin - notes #}
+                {% if content.contains_notes %}
+                    <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
+                {% endif %}
+                {# End - notes #}
+            </a>
+            <span class="boxy__bp_actions boxy__actions boxy pull-right">
+                <a href="#" class="bullet-point-toggle" data-bullet-point-id="{{ node.id() }}" title="{{ "Open/close bullet point attachment" | trans }}">open/close</a>
+                <a href="#" title="{{ "Add bullet point attachment" | trans }}">+</a>
+                <a href="#" title="{{ "Delete bullet point" | trans }}">-</a>
+                <a href="#" title="{{ "Edit bullet point" | trans }}">edit</a>
+                <a href="#" title="{{ "Add/edit memos" | trans }}">memos</a>
+            </span>
           </span>
                 {% endif %}
                 {{ title_suffix }}

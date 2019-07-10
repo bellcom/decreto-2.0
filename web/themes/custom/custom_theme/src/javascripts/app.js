@@ -57,7 +57,13 @@ jQuery(function($) {
     // Metting agenda bulletpoints collapse toggle callback.
     $('#meeting-agenda-collapse-toggle').on('click', function(event) {
         $('.area-expand-collapse').collapse('toggle');
-        console.log('meeting-agenda-collapse-toggle');
+        event.preventDefault();
+    });
+
+    // Bullet point collapse toggle callback.
+    $('.bullet-point-toggle').on('click', function(event) {
+        var $wrapper = $(this).parents('article:first');
+        $wrapper.find('.area-expand-collapse').collapse('toggle');
         event.preventDefault();
     });
 });

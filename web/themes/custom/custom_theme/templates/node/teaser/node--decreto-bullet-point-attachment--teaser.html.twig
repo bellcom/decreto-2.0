@@ -73,7 +73,7 @@ view_mode ? view_mode|clean_class,
 ] %}
 <article{{ attributes.addClass(classes) }}>
 
-    <a class="btn btn-primary btn-expand-collapse pull-left" role="button" data-toggle="collapse"
+    <a class="btn-expand-collapse pull-left collapsed" role="button" data-toggle="collapse"
        href="#bpa-content-{{ node.id }}" aria-expanded="false" aria-controls="bpa-content-{{ node.id }}">
         <span class="glyphicon" aria-hidden="true"></span>
     </a>
@@ -85,7 +85,18 @@ view_mode ? view_mode|clean_class,
                 {{ title_prefix }}
                 {% if not page %}
                     <span{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            <a href="{{ url }}" rel="bookmark">
+                {{ label }}
+                {# Begin - notes #}
+                {% if content.contains_notes %}
+                    <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
+                {% endif %}
+                {# End - notes #}
+            </a>
+            <span class="boxy__bpa_actions boxy__actions boxy pull-right">
+                <a href="#" title="{{ "Delete bullet point attachment" | trans }}">-</a>
+                <a href="#" title="{{ "Edit bullet point attachment" | trans }}">edit</a>
+            </span>
           </span>
                 {% endif %}
                 {{ title_suffix }}
