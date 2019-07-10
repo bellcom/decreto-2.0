@@ -53,4 +53,11 @@ jQuery(function($) {
         // Load external content.
         $(target).load(source);
     });
+
+    // Metting agenda bulletpoints collapse toggle callback.
+    $('#meeting-agenda-collapse-toggle').on('click', function(event) {
+        $('.area-expand-collapse').collapse('toggle');
+        console.log('meeting-agenda-collapse-toggle');
+        event.preventDefault();
+    });
 });

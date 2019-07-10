@@ -78,7 +78,7 @@ view_mode ? view_mode|clean_class,
         <span class="glyphicon" aria-hidden="true"></span>
     </a>
 
-    <div class="area-expand-collapse">
+    <div>
         <div class="panel panel-default">
             {#{{ decreto_context_menu }}#}
             <div class="panel-body">
@@ -92,7 +92,7 @@ view_mode ? view_mode|clean_class,
             </div>
         </div>
 
-        <div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
+        <div{{ content_attributes.addClass('content', 'collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
             {% if content.field_decreto_bpa_html|render|trim is not empty %}
                 {{ content|without('body') }}
             {% else %}

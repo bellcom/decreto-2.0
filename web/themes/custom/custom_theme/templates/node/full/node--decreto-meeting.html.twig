@@ -136,7 +136,7 @@ view_mode ? view_mode|clean_class,
             </div>
             <ul class="nav nav-pills nav-justified visible-xs">
                 <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
-                <li><a data-toggle="tab"href="#agenda">Agenda</a></li>
+                <li><a data-toggle="tab" href="#agenda">Agenda</a></li>
             </ul>
             <div id="info">
                 {{ content.field_decreto_meet_type }}
@@ -144,10 +144,10 @@ view_mode ? view_mode|clean_class,
                 {{ decreto_help_message.meeting_agenda }}
             </div>
             <div class="boxy__actions">
-                <a href="">
-                    {{ "Turn on switch mode" | trans }}
+                <a href="" id="meeting-agenda-switch-mode-toggle">
+                    {{ "Turn on/off switch mode" | trans }}
                 </a>
-                <a href="">
+                <a href="" id="meeting-agenda-collapse-toggle">
                     {{ "Open/close all points" | trans }}
                 </a>
             </div>

@@ -79,7 +79,7 @@ view_mode ? view_mode|clean_class,
         <span class="glyphicon" aria-hidden="true"></span>
     </a>
 
-    <div class="area-expand-collapse">
+    <div>
         <div class="panel panel-default">
             {{ decreto_context_menu }}
             <div class="panel-body">
@@ -92,7 +92,7 @@ view_mode ? view_mode|clean_class,
                 {{ title_suffix }}
             </div>
         </div>
-        <div{{ content_attributes.addClass('content', 'collapse').setAttribute('id', 'bp-content-' ~ node.id) }}>
+        <div{{ content_attributes.addClass('content', 'collapse', 'area-expand-collapse').setAttribute('id', 'bp-content-' ~ node.id) }}>
             {{ content|without('field_decreto_bp_closed') }}
             <div id="demos-container-{{ node.id() }}">
                 {{ demos }}
