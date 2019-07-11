@@ -61,6 +61,7 @@ class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
       $response->addCommand(new CloseModalDialogCommand());
     }
 
+    // @TODO Add redirect action.
     return $response;
   }
 }

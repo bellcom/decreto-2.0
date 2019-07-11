@@ -130,7 +130,7 @@ view_mode ? view_mode|clean_class,
                 <a href=""  class="btn btn-primary use-ajax" data-dialog-type="modal">
                     {{ "Create point from file" | trans }}
                 </a>
-                <a href=""  class="btn btn-primary use-ajax" data-dialog-type="modal">
+                <a href="{{ path('decreto_content_modify.bps_add', {'node': node.id()}) }}"  class="btn btn-primary use-ajax" data-dialog-type="modal">
                     {{ "Create point" | trans }}
                 </a>
             </div>

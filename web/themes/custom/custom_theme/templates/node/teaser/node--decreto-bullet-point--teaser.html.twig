@@ -94,9 +94,9 @@ view_mode ? view_mode|clean_class,
             </a>
             <span class="boxy__bp_actions boxy__actions boxy pull-right">
                 <a href="#" class="bullet-point-toggle" data-bullet-point-id="{{ node.id() }}" title="{{ "Open/close bullet point attachment" | trans }}">open/close</a>
-                <a href="#" title="{{ "Add bullet point attachment" | trans }}">+</a>
-                <a href="#" title="{{ "Delete bullet point" | trans }}">-</a>
-                <a href="#" title="{{ "Edit bullet point" | trans }}">edit</a>
+                <a href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}" title="{{ "Add bullet point attachment" | trans }}">+</a>
+                <a href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}" title="{{ "Delete bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">-</a>
+                <a href="{{ path('decreto_content_modify.bps_edit', {'node': node.id()}) }}" title="{{ "Edit bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
                 <a href="#" title="{{ "Add/edit memos" | trans }}">memos</a>
             </span>
           </span>

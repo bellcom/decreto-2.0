@@ -147,6 +147,8 @@ class BulletPointEditForm extends FormBase {
 
       $response->addCommand(new CloseModalDialogCommand());
     }
+
+    // @TODO Add redirect action.
     return $response;
   }
 }

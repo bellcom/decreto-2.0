@@ -268,6 +268,8 @@ class BulletPointAttachmentEditForm extends FormBase {
       $response->addCommand(new HtmlCommand("#js-bp-$bp_nid-container", $render_bullet_point));
       $response->addCommand(new CloseModalDialogCommand());
     }
+
+    // @TODO Add redirect action.
     return $response;
   }
 }
