@@ -82,10 +82,6 @@ class BulletPointEditForm extends FormBase {
       ],
     ];
 
-    $form['title']['#default_value'] = $bullet_point->getTitle();
-    $form['closed']['#default_value'] = $bullet_point->get('field_decreto_bp_closed')->value;
-    $form['closed']['#default_value'] = $bullet_point->get('field_decreto_bp_personal')->value;
-
     return $form;
   }
 
