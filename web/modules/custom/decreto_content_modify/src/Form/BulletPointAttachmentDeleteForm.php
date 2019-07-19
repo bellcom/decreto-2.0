@@ -5,7 +5,10 @@ namespace Drupal\decreto_content_modify\Form;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\node\NodeInterface;
 
 class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
   /**
@@ -53,15 +56,14 @@ class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bpa-delete-form', $form));
     }
     else {
-      $parent_nid = $this->parent->id();
-      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $parent_nid, TRUE);
-
-      //replacing old bullet point with refreshed bullet point
-      $response->addCommand(new HtmlCommand("#js-bp-$parent_nid-container", $render_bullet_point));
       $response->addCommand(new CloseModalDialogCommand());
+      /** @var NodeInterface $meeting */
+      $meeting = DecretoContentModifyUtils::getRelatedNodes($this->parent, 'decreto_meeting');
+      if (!empty($meeting)) {
+        $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
+      }
     }
 
-    // @TODO Add redirect action.
     return $response;
   }
 }

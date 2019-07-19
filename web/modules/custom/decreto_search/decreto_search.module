@@ -18,7 +18,9 @@ use Drupal\user\Entity\User;
 function decreto_search_node_update(EntityInterface $entity) {
   if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
     $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
-    decreto_search_mark_entity_updated($meeting);
+    if (!empty($meeting)) {
+      decreto_search_mark_entity_updated($meeting);
+    }
   }
 }
 
@@ -33,7 +35,9 @@ function decreto_search_node_update(EntityInterface $entity) {
 function decreto_search_node_delete(EntityInterface $entity) {
   if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
     $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
-    decreto_search_mark_entity_updated($meeting);
+    if (!empty($meeting)) {
+      decreto_search_mark_entity_updated($meeting);
+    }
   }
 }
 

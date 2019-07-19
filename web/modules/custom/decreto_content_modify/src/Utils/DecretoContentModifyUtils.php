@@ -34,7 +34,7 @@ class DecretoContentModifyUtils {
     elseif ($sourceNode->getType() == 'decreto_bullet_point_attachment') {
       if ($relatedNodeType == 'decreto_meeting') {
         $bp = self::getRelatedNodes($sourceNode, 'decreto_bullet_point');
-        $meeting_nid = self::getRelatedNodes($bp, 'decreto_meeting', FALSE);
+        $meeting_nid = empty($bp) ? NULL : self::getRelatedNodes($bp, 'decreto_meeting', FALSE);
 
         return ($load) ? Node::load($meeting_nid) : $meeting_nid;
       }
