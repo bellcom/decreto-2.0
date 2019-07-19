@@ -30,31 +30,34 @@ decreto_content_modify.memo_popup_content:
   requirements:
     _permission: 'access content'
 
-### left overfrom old version, will be put above as the project proceeds
 decreto_content_modify.bps_add:
-  path: '/bullet_points/add'
+  path: '/meetings/{meeting}/add-bp'
   options:
     parameters:
-      node:
+      meeting:
         type: entity:node
   defaults:
     _title: 'Decreto add bullet point'
-    _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddForm'
     node: null
   requirements:
     _permission: 'access content'
+    meeting: \d+
+
 decreto_content_modify.bps_edit:
-  path: '/bullet_points/{node}/edit'
+  path: '/bullet_points/{bullet_point}/edit'
   options:
     parameters:
-      node:
+      bullet_point:
         type: entity:node
   defaults:
     _title: 'Decreto edit bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
   requirements:
     _permission: 'access content'
-    node: \d+
+    bullet_point: \d+
+
+### left overfrom old version, will be put above as the project proceeds
 decreto_content_modify.bps_delete:
   path: '/bullet_points/{node}/delete'
   options:

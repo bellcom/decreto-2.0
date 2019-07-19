@@ -1,0 +1,23 @@
+uuid: 3bcc0211-ebb5-4050-89e7-7fe1fa8487c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_bp_personal
+    - node.type.decreto_bullet_point
+id: node.decreto_bullet_point.field_decreto_bp_personal
+field_name: field_decreto_bp_personal
+entity_type: node
+bundle: decreto_bullet_point
+label: Personal
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

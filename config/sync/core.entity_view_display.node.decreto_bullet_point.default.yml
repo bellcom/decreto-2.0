@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
     - field.field.node.decreto_bullet_point.field_decreto_bp_closed
+    - field.field.node.decreto_bullet_point.field_decreto_bp_personal
     - node.type.decreto_bullet_point
   module:
     - user
@@ -30,6 +31,21 @@ content:
       format: boolean
       format_custom_true: ''
       format_custom_false: ''
+    third_party_settings: {  }
+    region: content
+  field_decreto_bp_personal:
+    weight: 11
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  flag_subscribe_node:
+    weight: 10
+    settings: {  }
     third_party_settings: {  }
     region: content
 hidden:

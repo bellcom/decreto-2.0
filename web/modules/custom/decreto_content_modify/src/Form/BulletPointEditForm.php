@@ -7,8 +7,10 @@ use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
@@ -24,28 +26,44 @@ use Drupal\node\NodeInterface;
  * @see \Drupal\Core\Form\FormBase
  */
 class BulletPointEditForm extends FormBase {
-  protected $node;
+  /**
+   * Bullet point node.
+   *
+   * @var NodeInterface $bullet_point
+   */
+  protected $bullet_point;
   protected $isNew;
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
-    $this->node = $node;
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
+    if (empty($bullet_point) || $bullet_point->getType() != 'decreto_bullet_point') {
+      return $form;
+    }
 
-    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
-
+    $this->bullet_point = $bullet_point;
     $form['#prefix'] = '<div id="decreto-content-modify-bp-edit-form">';
     $form['#suffix'] = '</div>';
     $form['title'] = [
       '#type' => 'textfield',
       '#placeholder' => $this->t('Title'),
       '#required' => TRUE,
+      '#default_value' => $bullet_point->getTitle(),
     ];
 
     $form['closed'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Closed'),
+      '#default_value' => $bullet_point->get('field_decreto_bp_closed')->value,
+      '#prefix' => '<div class="form-inline form-item">',
+    ];
+
+    $form['personal'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Personal'),
+      '#default_value' => $bullet_point->get('field_decreto_bp_personal')->value,
+      '#suffix' => '</div>',
     ];
 
     // Group submit handlers in an actions element with a key of "actions" so
@@ -55,7 +73,6 @@ class BulletPointEditForm extends FormBase {
       '#type' => 'actions',
     ];
 
-    // Add a submit button that handles the submission of the form.
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save'),
@@ -65,11 +82,9 @@ class BulletPointEditForm extends FormBase {
       ],
     ];
 
-    //loading node values
-    if ($node) {
-      $form['title']['#default_value'] = $node->getTitle();
-      $form['closed']['#default_value'] = $node->get('field_decreto_bp_closed')->value;
-    }
+    $form['title']['#default_value'] = $bullet_point->getTitle();
+    $form['closed']['#default_value'] = $bullet_point->get('field_decreto_bp_closed')->value;
+    $form['closed']['#default_value'] = $bullet_point->get('field_decreto_bp_personal')->value;
 
     return $form;
   }
@@ -85,28 +100,16 @@ class BulletPointEditForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $title = $form_state->getValue('title');
-    $closed = $form_state->getValue('closed');
-
-    if (!$this->node) {
-      $this->node = Node::create(array(
-        'type' => 'decreto_bullet_point',
-        'title' => $title,
-        'status' => 1,
-        'field_decreto_bp_closed' => [
-          'value' => $closed,
-        ]
-      ));
-    }
-    else {
-      $node = $this->node;
-      $this->node->title = $title;
-      $this->node->field_decreto_bp_closed = [
-        'value' => $closed
+    if (!empty($this->bullet_point)) {
+      $this->bullet_point->title = $form_state->getValue('title');;
+      $this->bullet_point->field_decreto_bp_closed = [
+        'value' => $form_state->getValue('closed')
       ];
+      $this->bullet_point->field_decreto_bp_personal = [
+        'value' => $form_state->getValue('personal')
+      ];
+      $this->bullet_point->save();
     }
-
-    $this->isNew = $this->node->save();
   }
 
   /**
@@ -119,9 +122,10 @@ class BulletPointEditForm extends FormBase {
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
    *   Array of ajax commands to execute on submit of the modal form.
+   *
+   * @throws
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-    // We begin building a new ajax reponse.
     $response = new AjaxResponse();
     if ($form_state->getErrors()) {
       unset($form['#prefix']);
@@ -133,22 +137,14 @@ class BulletPointEditForm extends FormBase {
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-edit-form', $form));
     }
     else {
-      $nid = $this->node->id();
-      $render_bullet_point = CommonFormUtils::buildSingleBulletPointContainer(array(), $nid, FALSE);
-
-      //is new
-      if ($this->isNew == SAVED_NEW) {
-        $response->addCommand(new AppendCommand('#js-bps-container', $render_bullet_point));
-        $response->addCommand(new InvokeCommand('#js-bp-nids', 'appendValue', array($nid)));
-      }
-      else {
-        $response->addCommand(new HtmlCommand("#js-bp-$nid-container", $render_bullet_point));
-      }
-
       $response->addCommand(new CloseModalDialogCommand());
+      /** @var NodeInterface $meeting */
+      $meeting = DecretoContentModifyUtils::getRelatedNodes($this->bullet_point, 'decreto_meeting');
+      if (!empty($meeting)) {
+        $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
+      }
     }
 
-    // @TODO Add redirect action.
     return $response;
   }
 }

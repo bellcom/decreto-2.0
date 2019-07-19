@@ -3,6 +3,7 @@
 namespace Drupal\decreto_content_modify\Utils;
 
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 class DecretoContentModifyUtils {
 
@@ -10,13 +11,13 @@ class DecretoContentModifyUtils {
    * Helper function to reduce repetition of common queries.
    * Performs a smart entityQuery using the sourceNode and extracts the node of $relatedNodeType.
    *
-   * @param Node $sourceNode
+   * @param NodeInterface $sourceNode
    * @param $relatedNodeType
    * @param bool $load
    * @return \Drupal\Core\Entity\EntityInterface|mixed|null|static
    */
   //TODO: refactor and move to ContentService.php
-  public static function getRelatedNodes(Node $sourceNode, $relatedNodeType, $load = TRUE) {
+  public static function getRelatedNodes(NodeInterface $sourceNode, $relatedNodeType, $load = TRUE) {
     if ($sourceNode->getType() == 'decreto_bullet_point') {
       if ($relatedNodeType == 'decreto_meeting') {
         $query = \Drupal::entityQuery('node')
@@ -71,4 +72,3 @@ class DecretoContentModifyUtils {
     return NULL;
   }
 }
- 
