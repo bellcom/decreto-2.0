@@ -1,14 +1,20 @@
 <?php
 namespace Drupal\decreto_content_modify\Form;
 
-
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\InvokeCommand;
-use Drupal\Core\Ajax\RemoveCommand;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\node\NodeInterface;
 
+/**
+ * Class BulletPointDeleteForm.
+ * @package Drupal\decreto_content_modify\Form
+ */
 class BulletPointDeleteForm extends AjaxConfirmFormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -30,7 +36,6 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase {
     $this->node->delete();
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -47,13 +52,14 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase {
       $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-delete-form', $form));
     }
     else {
-      $nid = $this->node->id();
-      $response->addCommand(new RemoveCommand("#js-bp-$nid-container"));
-      $response->addCommand(new InvokeCommand('#js-bp-nids', 'removeValue', array($nid)));
       $response->addCommand(new CloseModalDialogCommand());
+      /** @var NodeInterface $meeting */
+      $meeting = DecretoContentModifyUtils::getRelatedNodes($this->node, 'decreto_meeting');
+      if (!empty($meeting)) {
+        $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
+      }
     }
 
-    // @TODO Add redirect action.
     return $response;
   }
 }
