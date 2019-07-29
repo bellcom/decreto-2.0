@@ -90,11 +90,7 @@ function decreto_search_theme_suggestions_form(array $variables) {
 function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-decreto-search-meetings-decreto-page-meetings-search') {
     // Adding help message.
-    $message = \Drupal::config('decreto_help_messages.settings')->get('meetings_search_form');
-    $form[] = [
-      '#theme' => 'decreto_help_message_popup',
-      '#content' => strip_tags($message),
-    ];
+    $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('meetings_search_form');
 
     // Limit departments checkbox.
     $form['ld'] = [
@@ -156,4 +152,14 @@ function decreto_search_preprocess_node(&$variables) {
     // We don't want to cache that, since search param is dynamic.
     $variables['#cache']['max-age'] = 0;
   }
+}
+
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_search_decreto_help_messages() {
+  return [
+    'meetings_search_form' => 'Meetings search (form)',
+    'meetings_search_table' => 'Meetings search (results table)'
+  ];
 }
