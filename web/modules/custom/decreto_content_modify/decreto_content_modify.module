@@ -89,18 +89,6 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
- *
- * Invalidates caches related decreto_tax_department.
- */
-function decreto_content_modify_taxonomy_term_presave(EntityInterface $entity) {
-  if ($entity->bundle() == 'decreto_tax_department') {
-    // Invalidating meetings count.
-    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
-  }
-}
-
-/**
  * Implements hook_ENTITY_TYPE_delete().
  *
  * Invalidates caches related with the decreto_memo and decreto_meeting.
@@ -125,18 +113,6 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_delete().
- *
- * Invalidates caches related decreto_tax_department.
- */
-function decreto_content_modify_taxonomy_term_delete(EntityInterface $entity) {
-  if ($entity->bundle() == 'decreto_tax_department') {
-    // Invalidating meetings count.
-    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
-  }
-}
-
-/**
  * Implements hook_decreto_help_messages().
  */
 function decreto_content_modify_decreto_help_messages() {
@@ -144,4 +120,3 @@ function decreto_content_modify_decreto_help_messages() {
     'meetings_create_edit_form' => 'Meetings create/edit form',
   ];
 }
-

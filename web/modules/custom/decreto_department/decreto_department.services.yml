@@ -1,0 +1,4 @@
+services:
+  decreto_department.department:
+    class: Drupal\decreto_department\Services\DepartmentService
+    arguments: ['@entity_type.manager']

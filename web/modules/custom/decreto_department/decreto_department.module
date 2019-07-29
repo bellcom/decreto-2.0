@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Contains decreto_departmnet.module.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\decreto_department\Services\DepartmentService;
+
+/**
+ * Implements hook_help().
+ */
+function decreto_department_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the decreto_department module.
+    case 'help.page.decreto_department':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Decreto departments functionality') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_department_decreto_help_messages() {
+  return [
+    'department_create_edit_form' => 'Department create/edit form',
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_department_taxonomy_term_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Invalidates caches related decreto_tax_department.
+ */
+function decreto_department_taxonomy_term_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_department') {
+    // Invalidating meetings count.
+    Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+  }
+}

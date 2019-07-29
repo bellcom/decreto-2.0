@@ -1,0 +1,24 @@
+decreto_department.department_add:
+  path: '/departments/add'
+  options:
+    parameters:
+      department:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_department\Form\DepartmentEditForm::getTitle'
+    _form: '\Drupal\decreto_department\Form\DepartmentEditForm'
+    department: null
+  requirements:
+    _permission: 'create terms in decreto_tax_department'
+decreto_department.department_edit:
+  path: '/departments/{department}/edit'
+  options:
+    parameters:
+      department:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_department\Form\DepartmentEditForm::getTitle'
+    _form: '\Drupal\decreto_department\Form\DepartmentEditForm'
+  requirements:
+    _permission: 'edit terms in decreto_tax_department'
+    department: \d+

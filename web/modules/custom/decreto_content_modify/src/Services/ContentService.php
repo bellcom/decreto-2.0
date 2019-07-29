@@ -21,11 +21,6 @@ class ContentService {
   const CACHE_ID_DECRETO_MEETING_COUNTERS = 'decreto_meeting_counters';
 
   /**
-   * Cache ID to be used for department counters.
-   */
-  const CACHE_ID_DECRETO_DEPARTMENT_COUNTERS = 'decreto_tax_department_counters';
-
-  /**
    * Cache ID to be used for memo counters.
    */
   const CACHE_ID_DECRETO_MEMO_COUNTERS = 'decreto_memo_counters';
@@ -45,13 +40,6 @@ class ContentService {
   protected $nodeStorage;
 
   /**
-   * The taxnomy term storage.
-   *
-   * @var EntityStorageInterface
-   */
-  protected $taxonomyTermStorage;
-
-  /**
    * Constructs a ContentService object.
    *
    * @param AccountProxyInterface $currentUser
@@ -67,7 +55,6 @@ class ContentService {
   ) {
     $this->currentUser = $currentUser;
     $this->nodeStorage = $entityTypeManager->getStorage('node');
-    $this->taxonomyTermStorage = $entityTypeManager->getStorage('taxonomy_term');
   }
 
   /**
@@ -95,36 +82,6 @@ class ContentService {
       // Caching for 10m = 600 seconds.
       \Drupal::cache()
         ->set($cid, $count, 600, [$cid, self::CACHE_ID_DECRETO_MEETING_COUNTERS]);
-    }
-    return [
-      'my_org' => $count,
-      'total' => $count
-    ];
-  }
-
-  /**
-   * Get meetings counter.
-   *
-   * @return array
-   *   array with data.
-   */
-  public function getDepartmentCounters() {
-    $cid = self::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS;
-
-    $count = NULL;
-    if ($cache = \Drupal::cache()
-      ->get($cid)) {
-      $count = $cache->data;
-    }
-    else {
-      $count = $this->taxonomyTermStorage->getQuery()
-        ->condition('vid', 'decreto_tax_department')
-        ->count()
-        ->execute();
-
-      // Caching for 10m = 600 seconds.
-      \Drupal::cache()
-        ->set($cid, $count, 600, [$cid, self::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
     }
     return [
       'my_org' => $count,

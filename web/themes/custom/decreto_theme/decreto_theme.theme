@@ -40,11 +40,11 @@ function decreto_theme_preprocess_block(&$vars) {
     $vars['content']['#total_count'] = $meetingCounter['total'];
   }
   elseif ($id == 'decreto_dashboard_counter_departments') {
-    $decretoContentService = \Drupal::service('decreto_content_modify.content');
-    $taxonomyCounter = $decretoContentService->getDepartmentCounters();
+    $departmentService = \Drupal::service('decreto_department.department');
+    $departmentCounter = $departmentService->getCounters();
 
-    $vars['content']['#org_count'] = $taxonomyCounter['my_org'];
-    $vars['content']['#total_count'] = $taxonomyCounter['total'];
+    $variables['content']['#current_organization'] = $departmentCounter['my_org'];
+    $variables['content']['#across_organizations'] = $departmentCounter['total'];
   }
 }
 

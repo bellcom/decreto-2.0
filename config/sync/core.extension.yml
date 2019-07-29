@@ -22,6 +22,7 @@ module:
   decreto_annotator: 0
   decreto_calendar: 0
   decreto_content_modify: 0
+  decreto_department: 0
   decreto_help: 0
   decreto_notification: 0
   decreto_pdf2htmlex: 0
