@@ -136,3 +136,12 @@ function decreto_content_modify_taxonomy_term_delete(EntityInterface $entity) {
   }
 }
 
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_content_modify_decreto_help_messages() {
+  return [
+    'meetings_create_edit_form' => 'Meetings create/edit form',
+  ];
+}
+

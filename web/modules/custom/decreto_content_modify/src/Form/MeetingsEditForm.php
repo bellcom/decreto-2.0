@@ -86,6 +86,9 @@ class MeetingsEditForm extends FormBase {
     $form['#prefix'] = '<div id="' . $this->getFormId(). '">';
     $form['#suffix'] = '</div>';
 
+    // Adding help message.
+    $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('meetings_create_edit_form');
+
     // Steps container START.
     $form['steps-container'] = [
       '#type' => 'container',
