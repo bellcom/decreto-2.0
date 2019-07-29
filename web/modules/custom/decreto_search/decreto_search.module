@@ -119,6 +119,24 @@ function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase 
 
       $query->addWhere('', 'department_tid', $userDepartments, 'IN');
     }
+
+    // Attempting to find field_decreto_meet_end_date timestamp from 00:00:00
+    // to 23:59:59, if present.
+    foreach ($query->getWhere() as &$condition_group) {
+      foreach ($condition_group['conditions'] as &$condition) {
+        // Is filter present?
+        if ($condition[0] == 'field_decreto_meet_end_date') {
+          // Getting value.
+          $end_date_timestamp = $condition[1];
+
+          // Changing time to 23:59:59.
+          $end_date_timestamp_end_of_day   = strtotime("tomorrow", $end_date_timestamp) - 1;
+
+          // Swapping value.
+          $condition[1] = $end_date_timestamp_end_of_day;
+        }
+      }
+    }
   }
 }
 
