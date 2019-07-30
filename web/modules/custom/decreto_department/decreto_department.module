@@ -34,6 +34,9 @@ function decreto_department_help($route_name, RouteMatchInterface $route_match) 
 function decreto_department_decreto_help_messages() {
   return [
     'department_create_edit_form' => 'Department create/edit form',
+    'department_view_page' => 'Department view page',
+    'department_meetings_list' => 'Coming meetings in this department (block)',
+    'department_members_list' => 'Members of this department (block)',
   ];
 }
 
