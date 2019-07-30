@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - decreto_annotator
+    - node
     - user
 id: decreto_notes
 label: 'Decreto notes'
@@ -21,8 +22,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -186,11 +188,137 @@ display:
       contexts:
         - 'languages:language_interface'
         - user
+        - user.permissions
+      tags: {  }
+  decreto_meeting_note_page:
+    display_plugin: page
+    id: decreto_meeting_note_page
+    display_title: 'Meeting notes page'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      title: Notes
+      defaults:
+        title: false
+        pager: false
+        relationships: false
+        arguments: false
+        access: true
+      pager:
+        type: mini
+        options:
+          items_per_page: 3
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+      path: meetings/%meeting/notes
+      display_description: ''
+      relationships:
+        uid:
+          id: uid
+          table: decreto_annotator_notes
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: User
+          required: true
+          entity_type: decreto_annotator_note
+          entity_field: uid
+          plugin_id: standard
+        bpa_id:
+          id: bpa_id
+          table: decreto_annotator_notes
+          field: bpa_id
+          relationship: none
+          group_type: group
+          admin_label: 'Bullet point attachment'
+          required: false
+          entity_type: decreto_annotator_note
+          entity_field: bpa_id
+          plugin_id: standard
+        reverse__node__field_decreto_bp_bpas:
+          id: reverse__node__field_decreto_bp_bpas
+          table: node_field_data
+          field: reverse__node__field_decreto_bp_bpas
+          relationship: bpa_id
+          group_type: group
+          admin_label: 'Bullet point'
+          required: true
+          entity_type: node
+          plugin_id: entity_reverse
+        reverse__node__field_decreto_meet_bps:
+          id: reverse__node__field_decreto_meet_bps
+          table: node_field_data
+          field: reverse__node__field_decreto_meet_bps
+          relationship: reverse__node__field_decreto_bp_bpas
+          group_type: group
+          admin_label: Meeting
+          required: true
+          entity_type: node
+          plugin_id: entity_reverse
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: reverse__node__field_decreto_meet_bps
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - user.permissions
       tags: {  }
   decreto_note_page:
     display_plugin: page
     id: decreto_note_page
-    display_title: Page
+    display_title: 'Notes page'
     position: 2
     display_options:
       display_extenders: {  }
@@ -217,12 +345,14 @@ display:
             offset: false
             offset_label: Offset
       path: notes
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url.query_args
         - user
+        - user.permissions
       tags: {  }
   decreto_note_popup_embed:
     display_plugin: embed
@@ -236,4 +366,5 @@ display:
       contexts:
         - 'languages:language_interface'
         - user
+        - user.permissions
       tags: {  }
