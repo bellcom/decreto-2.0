@@ -8,7 +8,7 @@
      Only "getter" methods (method names starting with "get", "has", or "is")
      and a few common methods such as "id" and "label" are available. Calling
      other methods (such as node.delete) will result in an exception.
- * - label: The title of the node.
+ * - label: (optional) The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
  *   {{ content|without('field_example') }} to temporarily suppress the printing
@@ -16,8 +16,8 @@
  * - author_picture: The node author user entity, rendered using the "compact"
  *   view mode.
  * - metadata: Metadata for this node.
- * - date: Themed creation date field.
- * - author_name: Themed author name field.
+ * - date: (optional) Themed creation date field.
+ * - author_name: (optional) Themed author name field.
  * - url: Direct URL of the current node.
  * - display_submitted: Whether submission information should be displayed.
  * - attributes: HTML attributes for the containing element.
@@ -56,6 +56,8 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  *
+ * @ingroup templates
+ *
  * @see template_preprocess_node()
  *
  * @todo Remove the id attribute (or make it a class), because if that gets
@@ -63,53 +65,51 @@
  *   in different view modes.
  */
 #}
-{% set classes = [
-node.bundle|clean_class,
-node.isPromoted() ? 'is-promoted',
-node.isSticky() ? 'is-sticky',
-not node.isPublished() ? 'is-unpublished',
-view_mode ? view_mode|clean_class,
-'clearfix',
-] %}
+{%
+  set classes = [
+  node.bundle|clean_class,
+  node.isPromoted() ? 'is-promoted',
+  node.isSticky() ? 'is-sticky',
+  not node.isPublished() ? 'is-unpublished',
+  view_mode ? view_mode|clean_class,
+  'clearfix',
+]
+%}
 <article{{ attributes.addClass(classes) }}>
+  <a class="btn-expand-collapse pull-left collapsed" role="button" data-toggle="collapse"
+     href="#bpa-content-{{ node.id }}" aria-expanded="false" aria-controls="bpa-content-{{ node.id }}">
+    <span class="glyphicon" aria-hidden="true"></span>
+  </a>
 
-    <a class="btn-expand-collapse pull-left collapsed" role="button" data-toggle="collapse"
-       href="#bpa-content-{{ node.id }}" aria-expanded="false" aria-controls="bpa-content-{{ node.id }}">
-        <span class="glyphicon" aria-hidden="true"></span>
-    </a>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{ title_prefix }}
+      <span{{ title_attributes }}>
+        {{ label }}
 
-    <div>
-        <div class="panel panel-default">
-            {#{{ decreto_context_menu }}#}
-            <div class="panel-body">
-                {{ title_prefix }}
-                {% if not page %}
-                    <span{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">
-                {{ label }}
-                {# Begin - notes #}
-                {% if content['#contains_notes'] %}
-                    <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
-                {% endif %}
-                {# End - notes #}
-            </a>
-            <span class="boxy__bpa_actions boxy__actions boxy pull-right">
-                <a href="{{ path('decreto_content_modify.bpas_delete', {'parent': content.bullet_point_id, 'node': node.id()}) }}" title="{{ "Delete bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">-</a>
-                <a href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point': content.bullet_point_id, 'node': node.id()}) }}" title="{{ "Edit bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
-            </span>
-          </span>
-                {% endif %}
-                {{ title_suffix }}
-            </div>
-        </div>
+        {# Begin - notes #}
+        {% if content['#contains_notes'] %}
+          <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
+        {% endif %}
+        {# End - notes #}
 
-        <div{{ content_attributes.addClass('content', 'collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
-            {% if content.field_decreto_bpa_html|render|trim is not empty %}
-                {{ content|without('body') }}
-            {% else %}
-                {{ content }}
-            {% endif %}
-        </div>
+        {# Begin - action #}
+        <span class="boxy__bpa_actions boxy__actions boxy pull-right">
+          <a href="{{ path('decreto_content_modify.bpas_delete', {'parent': content['#bullet_point_id'], 'node': node.id()}) }}" title="{{ "Delete bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">-</a>
+          <a href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point': content['#bullet_point_id'], 'node': node.id()}) }}" title="{{ "Edit bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
+        </span>
+        {# End - action #}
+      </span>
+      {{ title_suffix }}
     </div>
+  </div>
+
+  <div{{ content_attributes.addClass('content', 'collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
+    {% if content.field_decreto_bpa_html|render|trim is not empty %}
+      {{ content|without('body') }}
+    {% else %}
+      {{ content }}
+    {% endif %}
+  </div>
 
 </article>
