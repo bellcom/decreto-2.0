@@ -1,17 +1,17 @@
 <?php
+
+namespace Drupal\decreto_content_modify\Form;
+
 /**
  * @file
  * Contains \Drupal\decreto_content_modify\Form\MeetingsEditForm.
  */
-
-namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
@@ -36,7 +36,7 @@ class MeetingsEditForm extends FormBase {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    *   Title for the form.
    */
-  public function getTitle(NodeInterface $meeting = null) {
+  public function getTitle(NodeInterface $meeting = NULL) {
     if ($meeting) {
       return $this->t('Edit meeting @label', ['@label' => $meeting->label()]);
     }
@@ -83,7 +83,7 @@ class MeetingsEditForm extends FormBase {
       $form_state->set('active_page', $activePage);
     }
 
-    $form['#prefix'] = '<div id="' . $this->getFormId(). '">';
+    $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 
     // Adding help message.
@@ -93,7 +93,7 @@ class MeetingsEditForm extends FormBase {
     $form['steps-container'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => [($useDepartmentMembers)? 'hidden' : ''],
+        'class' => [($useDepartmentMembers) ? 'hidden' : ''],
       ],
     ];
     $form['steps-container']['steps-step-1'] = [
@@ -102,7 +102,7 @@ class MeetingsEditForm extends FormBase {
       '#value' => $this
           ->t('Step 1'),
       '#attributes' => [
-        'class' => [($activePage === 1)? 'bg-primary' : ''],
+        'class' => [($activePage === 1) ? 'bg-primary' : ''],
       ],
     ];
     $form['steps-container']['steps-step-2'] = [
@@ -111,7 +111,7 @@ class MeetingsEditForm extends FormBase {
       '#value' => $this
           ->t('Step 2'),
       '#attributes' => [
-        'class' => [($activePage === 2)? 'bg-primary' : ''],
+        'class' => [($activePage === 2) ? 'bg-primary' : ''],
       ],
     ];
     // Steps container END.
@@ -142,14 +142,14 @@ class MeetingsEditForm extends FormBase {
     ];
     $form['actions']['switch-page'] = [
       '#type' => 'submit',
-      '#value' => ($activePage === 1)? $this->t('Go further') : $this->t('Go back'),
+      '#value' => ($activePage === 1) ? $this->t('Go further') : $this->t('Go back'),
       '#ajax' => [
         'callback' => '::ajaxReloadForm',
         'event' => 'click',
       ],
       '#submit' => ['::submitSwitchPage'],
       '#attributes' => [
-        'class' => [($useDepartmentMembers)? 'hidden' : '']
+        'class' => [($useDepartmentMembers) ? 'hidden' : '']
       ]
     ];
     $form['actions']['submit'] = [
@@ -162,7 +162,7 @@ class MeetingsEditForm extends FormBase {
       '#attributes' => [
         // Show button only if we use department members, or if we are on the
         // second page of the form.
-        'class' => [(!$useDepartmentMembers && $activePage !== 2)? 'hidden' : '']
+        'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : '']
       ]
     ];
     // Form actions END.
@@ -179,7 +179,7 @@ class MeetingsEditForm extends FormBase {
    *   Current form state.
    *
    * @return array
-   *    Form array with appended page.
+   *   Form array with appended page.
    */
   private function appendFormPage1(array $form, FormStateInterface $form_state) {
     $useDepartmentMembers = $form_state->get('use_department_members');
@@ -266,7 +266,7 @@ class MeetingsEditForm extends FormBase {
       '#attributes' => [
         // Example of altering button class depending on ;'use department
         // members' mode status.
-        'class' => [($useDepartmentMembers)? 'btn-primary' : ''],
+        'class' => [($useDepartmentMembers) ? 'btn-primary' : ''],
       ],
       '#submit' => ['::submitToggleUseDepartmentMembers'],
       '#limit_validation_errors' => [],
@@ -318,7 +318,7 @@ class MeetingsEditForm extends FormBase {
    *   Current form state.
    *
    * @return array
-   *    Form array with appended page.
+   *   Form array with appended page.
    */
   private function appendFormPage2(array $form, FormStateInterface $form_state) {
     $activePage = $form_state->get('active_page');
@@ -327,7 +327,7 @@ class MeetingsEditForm extends FormBase {
     $form['pages-page-2'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => [($activePage !== 2)? 'hidden' : ''],
+        'class' => [($activePage !== 2) ? 'hidden' : ''],
       ],
     ];
 
@@ -376,7 +376,7 @@ class MeetingsEditForm extends FormBase {
       ];
       $users = User::loadMultiple($users_ids);
 
-      foreach($users as $user) {
+      foreach ($users as $user) {
         $user_id = $user->id();
         $form['pages-page-2']['participants-container']['participants'][$user_id] = [
           '#type' => 'container',
@@ -420,7 +420,7 @@ class MeetingsEditForm extends FormBase {
    *   Meeting node.
    *
    * @return array
-   *    Form array with appended page.
+   *   Form array with appended page.
    */
   public function populateFormData(array $form, FormStateInterface $form_state, NodeInterface $meeting) {
     $form['pages-page-1']['title']['#default_value'] = $meeting->getTitle();
@@ -440,6 +440,21 @@ class MeetingsEditForm extends FormBase {
     }
     if (!$meeting->field_decreto_meet_full_doc_c->isEmpty()) {
       $form['pages-page-1']['full_doc_closed']['#default_value']['fid'] = $meeting->field_decreto_meet_full_doc_c->target_id;
+    }
+
+    // Populating participants checkboxes.
+    if (!$form_state->get('use_department_members')) {
+      // Internal participants.
+      $internal_participants_ids = array_column($meeting->field_decreto_meet_partic_int->getValue(), 'target_id');
+      foreach ($internal_participants_ids as $participant_id) {
+        $form['pages-page-2']['participants-container']['participants'][$participant_id]['internal']['#default_value'] = TRUE;
+      }
+
+      // External participants.
+      $external_participants_ids = array_column($meeting->field_decreto_meet_partic_ext->getValue(), 'target_id');
+      foreach ($external_participants_ids as $participant_id) {
+        $form['pages-page-2']['participants-container']['participants'][$participant_id]['external']['#default_value'] = TRUE;
+      }
     }
 
     return $form;
@@ -473,7 +488,7 @@ class MeetingsEditForm extends FormBase {
       // Not using department members, grab the selected participants.
       $participants = $form_state->getValue('participants');
 
-      foreach($participants as $user_id => $participant) {
+      foreach ($participants as $user_id => $participant) {
         if ($participant['internal']) {
           $field_decreto_meet_partic_int[]['target_id'] = $user_id;
         }
@@ -634,4 +649,5 @@ class MeetingsEditForm extends FormBase {
 
     return $response;
   }
+
 }

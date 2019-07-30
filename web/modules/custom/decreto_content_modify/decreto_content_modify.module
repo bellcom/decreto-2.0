@@ -117,6 +117,6 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
  */
 function decreto_content_modify_decreto_help_messages() {
   return [
-    'meetings_create_edit_form' => 'Meetings create/edit form',
+    'meetings_create_edit_form' => 'Meeting create/edit form',
   ];
 }
