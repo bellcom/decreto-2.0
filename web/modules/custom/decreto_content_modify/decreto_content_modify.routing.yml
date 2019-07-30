@@ -41,11 +41,11 @@ decreto_content_modify.bps_add:
     _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddForm'
     node: null
   requirements:
-    _permission: 'access content'
+    _permission: 'create decreto_bullet_point content'
     meeting: \d+
 
 decreto_content_modify.bps_edit:
-  path: '/bullet_point/{bullet_point}/edit'
+  path: '/bullet-points/{bullet_point}/edit'
   options:
     parameters:
       bullet_point:
@@ -54,11 +54,11 @@ decreto_content_modify.bps_edit:
     _title: 'Decreto edit bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'edit any decreto_bullet_point content'
     bullet_point: \d+
 
 decreto_content_modify.bps_delete:
-  path: '/bullet_point/{node}/delete'
+  path: '/bullet-points/{node}/delete'
   options:
     parameters:
       node:
@@ -67,7 +67,7 @@ decreto_content_modify.bps_delete:
     _title: 'Decreto delete bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'delete any decreto_bullet_point content'
     node: \d+
 
 ### left overfrom old version, will be put above as the project proceeds
