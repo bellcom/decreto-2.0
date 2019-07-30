@@ -34,7 +34,7 @@ class DepartmentService {
   }
 
   /**
-   * Get meetings counter.
+   * Get department counter.
    *
    * @return array
    *   array with data.

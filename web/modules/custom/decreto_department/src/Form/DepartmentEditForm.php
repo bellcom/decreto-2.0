@@ -13,6 +13,7 @@ use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
@@ -253,16 +254,8 @@ class DepartmentEditForm extends FormBase {
         else {
           // User is no longer present in department, detach department.
           $user = User::load($user_id);
-          $user_departments = $user->field_decreto_usr_departments->getValue();
-
-          foreach ($user_departments as $delta => $user_department) {
-            if ($user_department['target_id'] == $this->department->id()) {
-              unset($user_departments[$delta]);
-              break;
-            }
-          }
-          $user->field_decreto_usr_departments = $user_departments;
-          $user->save();
+          $decretoUser = new DecretoUser($user);
+          $decretoUser->removeDepartment($this->department->id());
 
           // Remove from list.
           unset($attached_users[$user_id]);
@@ -274,8 +267,8 @@ class DepartmentEditForm extends FormBase {
     if (!empty($attached_users)) {
       foreach ($attached_users as $attached_user) {
         $user = User::load($attached_user);
-        $user->field_decreto_usr_departments[] = ['target_id' => $this->department->id()];
-        $user->save();
+        $decretoUser = new DecretoUser($user);
+        $decretoUser->addDepartment($this->department->id());
       }
     }
   }

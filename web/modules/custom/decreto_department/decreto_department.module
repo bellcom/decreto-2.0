@@ -9,6 +9,8 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\decreto_department\Services\DepartmentService;
+use Drupal\decreto_user\Entity\DecretoUser;
+use Drupal\user\Entity\User;
 
 /**
  * Implements hook_help().
@@ -51,10 +53,24 @@ function decreto_department_taxonomy_term_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  *
  * Invalidates caches related decreto_tax_department.
+ * Removes this department from all users.
  */
 function decreto_department_taxonomy_term_delete(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_tax_department') {
     // Invalidating meetings count.
     Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
+
+    // Remove department from all users.
+    $query = \Drupal::entityQuery('user')
+      ->condition('status', 1)
+      ->condition('field_decreto_usr_departments', $entity->id(), 'IN');
+    $users_ids = $query->execute();
+    if (!empty($users_ids)) {
+      foreach ($users_ids as $user_id) {
+        $user = User::load($user_id);
+        $decretoUser = new DecretoUser($user);
+        $decretoUser->removeDepartment($entity->id());
+      }
+    }
   }
 }
