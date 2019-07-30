@@ -87,11 +87,11 @@ function decreto_theme_preprocess_node(&$variables) {
     if ($variables['view_mode'] == 'table_display') {
       // Note indicator.
       $noteService = \Drupal::service('decreto_annotator.note');
-      $variables['content']['contains_notes'] = $noteService->getMeetingHasNote($node);
+      $variables['content']['#contains_notes'] = $noteService->getMeetingHasNote($node);
 
       // Memos indicator.
       $decretoContentService = \Drupal::service('decreto_content_modify.content');
-      $variables['content']['contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
+      $variables['content']['#contains_memos'] = $decretoContentService->getMeetingHasMemo($node);
     }
   }
 }

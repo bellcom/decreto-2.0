@@ -87,7 +87,7 @@ view_mode ? view_mode|clean_class,
             <a href="{{ url }}" rel="bookmark">
                 {{ label }}{{ content.field_decreto_bp_closed }}
                 {# Begin - notes #}
-                {% if content.contains_notes %}
+                {% if content['#contains_notes'] %}
                     <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
                 {% endif %}
                 {# End - notes #}
