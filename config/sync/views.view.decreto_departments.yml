@@ -1,13 +1,14 @@
-uuid: 93e795b1-fd4d-45ae-9400-ab6addc68352
+uuid: b1790cc1-fa5e-4435-895a-c86e82b3e0cf
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_decreto_usr_orgs
+    - field.storage.user.field_decreto_usr_departments
   module:
+    - decreto_help
     - user
-id: decreto_organisation_list
-label: 'Decreto organisation list'
+id: decreto_departments
+label: 'Decreto departments'
 module: views
 description: ''
 tag: ''
@@ -49,20 +50,19 @@ display:
       pager:
         type: none
         options:
-          items_per_page: null
           offset: 0
       style:
         type: default
       row:
         type: fields
       fields:
-        field_decreto_usr_orgs:
-          id: field_decreto_usr_orgs
-          table: user__field_decreto_usr_orgs
-          field: field_decreto_usr_orgs
+        field_decreto_usr_departments:
+          id: field_decreto_usr_departments
+          table: user__field_decreto_usr_departments
+          field: field_decreto_usr_departments
           relationship: none
           group_type: group
-          admin_label: 'Organisation Name'
+          admin_label: 'Department (member)'
           label: ''
           exclude: false
           alter:
@@ -115,7 +115,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: separator
+          multi_type: ul
           separator: ', '
           field_api_classes: false
           plugin_id: field
@@ -169,8 +169,18 @@ display:
           entity_type: user
           plugin_id: user_current
       sorts: {  }
-      title: 'My organizations'
-      header: {  }
+      title: 'My departments'
+      header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          message_key: my_departments
+          plugin_id: decreto_help_message_popup
       footer:
         area_text_custom:
           id: area_text_custom
@@ -181,7 +191,7 @@ display:
           admin_label: ''
           empty: false
           tokenize: false
-          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/organisations/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret organisation\r\n  </a>\r\n</div>"
+          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/departments/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret afdeling\r\n  </a>\r\n</div>"
           plugin_id: text_custom
       empty:
         area_text_custom:
@@ -193,7 +203,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'No organizations found.'
+          content: 'No departments found.'
           plugin_id: text_custom
       relationships: {  }
       arguments: {  }
@@ -206,10 +216,10 @@ display:
         - user
         - user.permissions
       tags:
-        - 'config:field.storage.user.field_decreto_usr_orgs'
-  organisations:
+        - 'config:field.storage.user.field_decreto_usr_departments'
+  decreto_block_my_departments:
     display_plugin: block
-    id: organisations
+    id: decreto_block_my_departments
     display_title: Block
     position: 1
     display_options:
@@ -222,4 +232,4 @@ display:
         - user
         - user.permissions
       tags:
-        - 'config:field.storage.user.field_decreto_usr_orgs'
+        - 'config:field.storage.user.field_decreto_usr_departments'

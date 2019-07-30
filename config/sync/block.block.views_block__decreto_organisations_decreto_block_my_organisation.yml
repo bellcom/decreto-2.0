@@ -1,26 +1,26 @@
-uuid: a990de35-817d-430f-9d71-df3e740051aa
+uuid: 95d718b8-d26d-454f-81a9-ddc9353a67ff
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.decreto_user_departments
+    - views.view.decreto_organisations
   module:
     - system
     - views
   theme:
     - custom_theme
-id: custom_theme_views_block__decreto_user_departments_my_departments_block
+id: views_block__decreto_organisations_decreto_block_my_organisation
 theme: custom_theme
 region: content__right_sidebar
 weight: -15
 provider: null
-plugin: 'views_block:decreto_user_departments-my_departments_block'
+plugin: 'views_block:decreto_organisations-decreto_block_my_organisations'
 settings:
-  id: 'views_block:decreto_user_departments-my_departments_block'
-  label: 'Mine afdelinger'
+  id: 'views_block:decreto_organisations-decreto_block_my_organisations'
+  label: 'Mine organisationer'
   provider: views
   label_display: visible
-  views_label: 'Mine afdelinger'
+  views_label: 'Mine organisationer'
   items_per_page: none
 visibility:
   request_path:
