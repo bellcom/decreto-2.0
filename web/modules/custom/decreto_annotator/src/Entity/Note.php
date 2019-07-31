@@ -103,8 +103,10 @@ class Note extends ContentEntityBase {
 
     // Getting related meeting.
     $bpa_id = $values['bpa_id'];
-    $bp = Node::load($bpa_id);
-    $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting');
+    $bpa = Node::load($bpa_id);
+    $meeting = DecretoContentModifyUtils::getRelatedNodes($bpa, 'decreto_meeting');
+
+    //TODO: invalidate BP and BPA
 
     // Invalidating meeting.
     Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
@@ -121,10 +123,12 @@ class Note extends ContentEntityBase {
 
     // Getting related meeting.
     $bpa_id = $this->get('bpa_id')->first()->getString();
-    $bp = Node::load($bpa_id);
+    $bpa = Node::load($bpa_id);
+
+    //TODO: invalidate BP and BPA
 
     // Invalidating meeting.
-    if (!empty($bp) && $meeting = DecretoContentModifyUtils::getRelatedNodes($bp, 'decreto_meeting')) {
+    if (!empty($bp) && $meeting = DecretoContentModifyUtils::getRelatedNodes($bpa, 'decreto_meeting')) {
       Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
     }
 

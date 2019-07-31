@@ -6,7 +6,7 @@
 (function ($) {
     Drupal.behaviors.decretoAnnotator = {
         attach: function (context, settings) {
-            jQuery('.decreto-bullet-point-attachment .content').each(function (index) {
+            jQuery('.decreto-bullet-point-attachment .content').once('decreto-annotator').each(function (index) {
                 //TODO: bug in touch plugin, submitted https://github.com/aron/annotator.touch.js/issues/13
 //               jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Touch', {
 //                    force: 1,
