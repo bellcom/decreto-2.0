@@ -33,7 +33,6 @@ function decreto_pdf_conversion_manager_cron() {
  * @param File $file
  */
 function decreto_pdf_conversion_manager_file_delete(File $file) {
-  dpm('decreto_pdf_conversion_manager_file_delete');
   if (DecretoPDFUtils::isScheduled($file)) {
     DecretoPDFUtils::deleteScheduledJob($file->id());
   }

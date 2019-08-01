@@ -37,7 +37,6 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
       //not converted, attempt a new conversion
       if (!$path) {
         $path = self::convertFile($file);
-        dpm('here');
       }
 
       if (file_exists($path)) {
@@ -140,4 +139,3 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
     }
   }
 }
- 
