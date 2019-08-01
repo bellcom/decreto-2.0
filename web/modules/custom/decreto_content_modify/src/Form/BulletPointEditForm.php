@@ -3,15 +3,11 @@
 namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\AppendCommand;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
 /**
@@ -134,8 +130,10 @@ class BulletPointEditForm extends FormBase {
     }
     else {
       $response->addCommand(new CloseModalDialogCommand());
-      /** @var NodeInterface $meeting */
-      $meeting = DecretoContentModifyUtils::getRelatedNodes($this->bullet_point, 'decreto_meeting');
+
+      $decretoBP = new DecretoBulletPoint($this->bullet_point);
+      $meeting = $decretoBP->getMeeting();
+
       if (!empty($meeting)) {
         $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
       }

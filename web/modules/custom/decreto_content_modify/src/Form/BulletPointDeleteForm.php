@@ -6,8 +6,6 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
-use Drupal\node\NodeInterface;
 
 /**
  * Class BulletPointDeleteForm.
@@ -53,8 +51,10 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase {
     }
     else {
       $response->addCommand(new CloseModalDialogCommand());
-      /** @var NodeInterface $meeting */
-      $meeting = DecretoContentModifyUtils::getRelatedNodes($this->node, 'decreto_meeting');
+
+      $decretoBP = new DecretoBulletPoint($this->node);
+      $meeting = $decretoBP->getMeeting();
+
       if (!empty($meeting)) {
         $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
       }

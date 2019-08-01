@@ -7,7 +7,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\decreto_annotator\Services\NoteService;
-use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\node\Entity\Node;
 
 /**
@@ -104,7 +105,8 @@ class Note extends ContentEntityBase {
     // Getting related meeting.
     $bpa_id = $values['bpa_id'];
     $bpa = Node::load($bpa_id);
-    $meeting = DecretoContentModifyUtils::getRelatedNodes($bpa, 'decreto_meeting');
+    $decretoBPA = new DecretoBulletPointAttachment($bpa);
+    $meeting = $decretoBPA->getMeeting();
 
     //TODO: invalidate BP and BPA
 
@@ -127,8 +129,10 @@ class Note extends ContentEntityBase {
 
     //TODO: invalidate BP and BPA
 
+    $decretoBPA = new DecretoBulletPointAttachment($bpa);
+
     // Invalidating meeting.
-    if (!empty($bp) && $meeting = DecretoContentModifyUtils::getRelatedNodes($bpa, 'decreto_meeting')) {
+    if ($meeting = $decretoBPA->getMeeting()) {
       Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
     }
 
@@ -162,37 +166,100 @@ class Note extends ContentEntityBase {
   }
 
   /**
-   * Returns Decreto meeting, which this Note related bullet point attachment
-   * is attached to.
+   * Returns related department.
    *
-   * @return \Drupal\node\NodeInterface.
+   * @param bool $load
+   *   If the returned node shall be load. If FALSE, nid is returned.
+   *
+   * @return \Drupal\taxonomy\TermInterface|int|null
+   *   Department term, or department tid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public function getMeeting() {
-    $bullet_point_attachment = $this->get('bpa_id')->first()->get('entity')->getTarget()->getValue();
+  public function getDepartment($load = TRUE) {
+    // Getting meeting first.
+    $meeting = $this->getMeeting();
 
-    $meeting = NULL;
-    if ($bullet_point_attachment) {
-      $meeting = DecretoContentModifyUtils::getRelatedNodes($bullet_point_attachment, 'decreto_meeting');
+    if ($meeting) {
+      $decretoMeeting = new DecretoMeeting($meeting);
+      return $decretoMeeting->getDepartment($load);
     }
 
-    return $meeting;
+    return NULL;
   }
 
   /**
-   * Returns Decreto department attached to meeting, related with bullet point
-   * attachment related to Note.
+   * Returns related meeting.
    *
-   * @see getMeeting().
+   * @param bool $load
+   *   If the returned node shall be load. If FALSE, nid is returned.
    *
-   * @return \Drupal\taxonomy\TermInterface.
+   * @return \Drupal\node\NodeInterface|int|null
+   *   Meeting node, or meeting nid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public function getDepartment() {
-    $department = NULL;
-    if ($field_decreto_meet_department = $this->getMeeting()->get('field_decreto_meet_department')->first()) {
-      $department = $field_decreto_meet_department->get('entity')->getTarget()->getValue();
+  public function getMeeting($load = TRUE) {
+    // Getting BPA first.
+    $bpa = $this->getBulletPointAttachment();
+
+    if ($bpa) {
+      $decretoBPA = new DecretoBulletPointAttachment($bpa);
+      return $decretoBPA->getMeeting($load);
     }
 
-    return $department;
+    return NULL;
+  }
+
+  /**
+   * Returns related bullet point.
+   *
+   * @param bool $load
+   *   If the returned node shall be load. If FALSE, nid is returned.
+   *
+   * @return \Drupal\node\NodeInterface|int|null
+   *   Bullet point node, or Bullet point  nid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getBulletPoint($load = TRUE) {
+    // Getting BPA first.
+    $bpa = $this->getBulletPointAttachment();
+
+    if ($bpa) {
+      $decretoBPA = new DecretoBulletPointAttachment($bpa);
+      return $decretoBPA->getBulletPoint($load);
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Returns related bullet point attachment.
+   *
+   * @param bool $load
+   *   If the returned node shall be load. If FALSE, nid is returned.
+   *
+   * @return \Drupal\node\NodeInterface|int|null
+   *   Bullet point attachment node, or Bullet point attachment nid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getBulletPointAttachment($load = TRUE) {
+    if ($bpaIdField = $this->get('bpa_id')->first()) {
+      if ($load) {
+        return $bpaIdField->get('entity')->getTarget()->getValue();
+      }
+      else {
+        return $bpaIdField->getValue()['target_id'];
+      }
+    }
+
+    return NULL;
   }
 
 }

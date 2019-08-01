@@ -1,7 +1,8 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
@@ -16,11 +17,18 @@ use Drupal\user\Entity\User;
  * @see decreto_search_mark_entity_updated().
  */
 function decreto_search_node_update(EntityInterface $entity) {
-  if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
-    $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
-    if (!empty($meeting)) {
-      decreto_search_mark_entity_updated($meeting);
-    }
+  $meeting = NULL;
+  if ($entity->getType() == 'decreto_bullet_point') {
+    $decretoBP = new DecretoBulletPoint($entity);
+    $meeting = $decretoBP->getMeeting();
+  }
+  elseif ($entity->getType() == 'decreto_bullet_point_attachment') {
+    $decretoBPA = new DecretoBulletPointAttachment($entity);
+    $meeting = $decretoBPA->getMeeting();
+  }
+
+  if (!empty($meeting)) {
+    decreto_search_mark_entity_updated($meeting);
   }
 }
 
@@ -33,11 +41,18 @@ function decreto_search_node_update(EntityInterface $entity) {
  * @see decreto_search_mark_entity_updated().
  */
 function decreto_search_node_delete(EntityInterface $entity) {
-  if ($entity->getType() == 'decreto_bullet_point' || $entity->getType() == 'decreto_bullet_point_attachment') {
-    $meeting = DecretoContentModifyUtils::getRelatedNodes($entity, 'decreto_meeting', TRUE);
-    if (!empty($meeting)) {
-      decreto_search_mark_entity_updated($meeting);
-    }
+  $meeting = NULL;
+  if ($entity->getType() == 'decreto_bullet_point') {
+    $decretoBP = new DecretoBulletPoint($entity);
+    $meeting = $decretoBP->getMeeting();
+  }
+  elseif ($entity->getType() == 'decreto_bullet_point_attachment') {
+    $decretoBPA = new DecretoBulletPointAttachment($entity);
+    $meeting = $decretoBPA->getMeeting();
+  }
+
+  if (!empty($meeting)) {
+    decreto_search_mark_entity_updated($meeting);
   }
 }
 

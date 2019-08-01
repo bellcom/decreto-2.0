@@ -2,13 +2,12 @@
 
 namespace Drupal\decreto_user\Entity;
 
-use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 
 /**
  * Wrapper for User object.
  *
- * Allows to perform commonly used procedured in a more efficient way.
+ * Allows to perform commonly used procedures in a more efficient way.
  */
 class DecretoUser {
   protected $user;
@@ -17,19 +16,19 @@ class DecretoUser {
    * DecretoUser constructor.
    *
    * @param \Drupal\user\UserInterface $user
-   *   Loaded user object.
+   *   User object.
    */
   public function __construct(UserInterface $user) {
     $this->user = $user;
   }
 
   /**
-   * User getter.
+   * Returns original node entity.
    *
    * @return \Drupal\user\UserInterface
    *   User object.
    */
-  public function getUser() {
+  public function getEntity() {
     return $this->user;
   }
 
@@ -40,6 +39,8 @@ class DecretoUser {
    *   Department ID.
    * @param bool $save
    *   If user object needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function addDepartment($departmentId, $save = TRUE) {
     $this->user->field_decreto_usr_departments[] = ['target_id' => $departmentId];
@@ -57,6 +58,8 @@ class DecretoUser {
    *   Department ID.
    * @param bool $save
    *   If user object needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function removeDepartment($departmentId, $save = TRUE) {
     $departmentIsPresent = FALSE;

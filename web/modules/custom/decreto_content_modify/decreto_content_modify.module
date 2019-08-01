@@ -1,7 +1,9 @@
 <?php
 
+use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\decreto_content_modify\Entity\DecretoMemo;
 use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
-use Drupal\decreto_content_modify\Utils\DecretoContentModifyUtils as DecretoContentUtils;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
@@ -39,7 +41,18 @@ function decreto_content_modify_search_api_solr_documents_alter(array &$document
       $item_id = $document->getFields()['ss_search_api_id'];
       $item = $items[$item_id];
       $originalEntity = $item->getOriginalObject()->getEntity();
-      $meeting_nid = DecretoContentUtils::getRelatedNodes($originalEntity, 'decreto_meeting', FALSE);
+
+      $meeting_nid = 0;
+
+      if ($originalEntity->getType() == 'decreto_bullet_point') {
+        $decretoBP = new DecretoBulletPoint($originalEntity);
+        $meeting_nid = $decretoBP->getMeeting(FALSE);
+      }
+      elseif ($originalEntity->getType() == 'decreto_bullet_point_attachment') {
+        $decretoBPA = new DecretoBulletPointAttachment($originalEntity);
+        $meeting_nid = $decretoBPA->getMeeting(FALSE);
+      }
+
       $document->setField('itm_meeting_nid', $meeting_nid);
     }
   }
@@ -56,7 +69,8 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
 
     // Getting related meeting.
-    $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
+    $decretoMemo = new DecretoMemo($entity);
+    $meeting = $decretoMemo->getMeeting();
 
     // Invalidating meeting.
     if ($meeting) {
@@ -81,7 +95,8 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
 
     // Getting related meeting.
-    $meeting = DecretoContentUtils::getRelatedNodes($entity, 'decreto_meeting');
+    $decretoMemo = new DecretoMemo($entity);
+    $meeting = $decretoMemo->getMeeting();
 
     // Invalidating meeting.
     if ($meeting) {
