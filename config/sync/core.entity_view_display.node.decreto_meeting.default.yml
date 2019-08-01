@@ -19,7 +19,6 @@ dependencies:
     - node.type.decreto_meeting
   module:
     - datetime
-    - file
     - options
     - text
     - user
@@ -31,20 +30,12 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 7
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_decreto_meet_bpa_files:
-    weight: 14
-    label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    type: file_default
-    region: content
   field_decreto_meet_bps:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       view_mode: teaser
@@ -78,7 +69,7 @@ content:
     type: entity_reference_label
     region: content
   field_decreto_meet_partic_ext:
-    weight: 12
+    weight: 10
     label: hidden
     settings:
       link: true
@@ -86,7 +77,7 @@ content:
     type: entity_reference_label
     region: content
   field_decreto_meet_partic_int:
-    weight: 11
+    weight: 9
     label: hidden
     settings:
       link: true
@@ -110,7 +101,7 @@ content:
     type: list_default
     region: content
   field_decreto_meet_use_dep_mem:
-    weight: 13
+    weight: 11
     label: hidden
     settings:
       format: default
@@ -120,7 +111,7 @@ content:
     type: boolean
     region: content
   flag_subscribe_node:
-    weight: 10
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -130,6 +121,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_decreto_meet_bpa_files: true
   field_decreto_meet_full_doc: true
   field_decreto_meet_full_doc_c: true
   langcode: true

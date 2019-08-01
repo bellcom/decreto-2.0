@@ -111,9 +111,11 @@ view_mode ? view_mode|clean_class,
         </div>
         <div{{ content_attributes.addClass('content', 'panel-body') }}>
             <div class="boxy__actions boxy">
-                <a href="" class="btn btn-primary">
-                    {{ "Download full copy" | trans }}
-                </a>
+                {%  if (node.field_decreto_meet_full_doc.entity.uri) %}
+                  <a href="{{ file_url(node.field_decreto_meet_full_doc.entity.uri.value) }}" class="btn btn-primary" target="_blank">
+                      {{ "Download full copy" | trans }}
+                  </a>
+                {% endif %}
                 <a href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}" class="btn btn-primary use-ajax" data-dialog-type="modal">
                     {{ "Edit meeting" | trans }}
                 </a>
