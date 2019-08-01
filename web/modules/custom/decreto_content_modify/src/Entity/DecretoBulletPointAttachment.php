@@ -79,4 +79,29 @@ class DecretoBulletPointAttachment {
     return NULL;
   }
 
+  /**
+   * Returns BPA file.
+   *
+   * @param bool $load
+   *   If the returned file entity shall be load. If FALSE, nid is returned.
+   *
+   * @return \Drupal\file\FileInterface|int|null
+   *   File entity, or File did.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getFile($load = TRUE) {
+    if ($fieldBpaFile = $this->getEntity()->get('field_decreto_bpa_file')->first()) {
+      if ($load) {
+        return $fieldBpaFile->get('entity')->getTarget()->getValue();
+      }
+      else {
+        return $fieldBpaFile->getValue()['target_id'];
+      }
+    }
+
+    return NULL;
+  }
+
 }

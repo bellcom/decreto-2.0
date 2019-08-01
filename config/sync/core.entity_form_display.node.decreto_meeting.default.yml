@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.decreto_meeting.body
+    - field.field.node.decreto_meeting.field_decreto_meet_bpa_files
     - field.field.node.decreto_meeting.field_decreto_meet_bps
     - field.field.node.decreto_meeting.field_decreto_meet_department
     - field.field.node.decreto_meeting.field_decreto_meet_end_date
@@ -63,6 +64,13 @@ targetEntityType: node
 bundle: decreto_meeting
 mode: default
 content:
+  field_decreto_meet_bpa_files:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
   field_decreto_meet_bps:
     weight: 10
     settings:

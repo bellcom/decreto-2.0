@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.decreto_meeting.body
+    - field.field.node.decreto_meeting.field_decreto_meet_bpa_files
     - field.field.node.decreto_meeting.field_decreto_meet_bps
     - field.field.node.decreto_meeting.field_decreto_meet_department
     - field.field.node.decreto_meeting.field_decreto_meet_end_date
@@ -18,6 +19,7 @@ dependencies:
     - node.type.decreto_meeting
   module:
     - datetime
+    - file
     - options
     - text
     - user
@@ -32,6 +34,14 @@ content:
     weight: 7
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_decreto_meet_bpa_files:
+    weight: 14
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
     region: content
   field_decreto_meet_bps:
     weight: 8

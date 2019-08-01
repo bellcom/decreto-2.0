@@ -2,6 +2,7 @@
 
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_content_modify\Entity\DecretoMemo;
 use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
@@ -81,6 +82,29 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+  }
+  elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
+    $decretoBPA = new DecretoBulletPointAttachment($entity);
+
+    $old_related_file = NULL;
+    if ($entity->original) {
+      $originalDecretoBPA = new DecretoBulletPointAttachment($entity->original);
+      $old_related_file = $originalDecretoBPA->getFile(FALSE);
+    }
+    $new_related_file = $decretoBPA->getFile(FALSE);
+
+    $meeting = $decretoBPA->getMeeting();
+    $decretoMeeting = new DecretoMeeting($meeting);
+
+    // Remove files from meeting.
+    if ($old_related_file && $old_related_file != $new_related_file) {
+      $decretoMeeting->removeBpaFile($old_related_file);
+    }
+
+    // Add files to meeting, if they are not present there yet.
+    if ($new_related_file && $old_related_file != $new_related_file) {
+      $decretoMeeting->addBpaFile($new_related_file);
+    }
   }
 }
 

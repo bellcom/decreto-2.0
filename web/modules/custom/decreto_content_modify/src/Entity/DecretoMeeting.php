@@ -57,4 +57,49 @@ class DecretoMeeting {
     return NULL;
   }
 
+  /**
+   * Adds the file fid to meeting field_decreto_meet_bpa_files.
+   *
+   * Only does so if the file is not already there.
+   * Saves the meeting as well.
+   *
+   * @param int $fid
+   *   Fid of the file.
+   * @param bool $save
+   *   If node needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function addBpaFile($fid, $save = TRUE) {
+    $bpaFiles = $this->getEntity()->get('field_decreto_meet_bpa_files')->getValue();
+    $key = array_search($fid, array_column($bpaFiles, 'target_id'));
+    if (!$key) {
+      $this->getEntity()->get('field_decreto_meet_bpa_files')->appendItem($fid);
+      if ($save) {
+        $this->getEntity()->save();
+      }
+    }
+  }
+
+  /**
+   * Removes the file fid from meeting field_decreto_meet_bpa_files.
+   *
+   * Saves the meeting as well.
+   *
+   * @param int $fid
+   *   Fid of the file.
+   * @param bool $save
+   *   If node needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeBpaFile($fid, $save = TRUE) {
+    $bpaFiles = $this->getEntity()->get('field_decreto_meet_bpa_files')->getValue();
+    $key = array_search($fid, array_column($bpaFiles, 'target_id'));
+    $this->getEntity()->get('field_decreto_meet_bpa_files')->removeItem($key);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
 }

@@ -13,9 +13,9 @@ dependencies:
     - field.storage.node.field_decreto_bp_bpas
     - field.storage.node.body
     - field.storage.node.field_decreto_meet_department
-    - field.storage.node.field_decreto_meet_end_date
     - field.storage.node.field_decreto_meet_start_date
     - field.storage.node.field_decreto_meet_location
+    - field.storage.node.field_decreto_meet_end_date
     - search_api.server.decreto_search_api_solr_server
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -167,6 +167,10 @@ field_settings:
       view_mode:
         'entity:node':
           decreto_meeting: full
+  saa_field_decreto_meet_bpa_files:
+    label: 'Search api attachments: BPA Files (meta field)'
+    property_path: saa_field_decreto_meet_bpa_files
+    type: text
   saa_field_decreto_meet_full_doc:
     label: 'Search api attachments: Open description'
     property_path: saa_field_decreto_meet_full_doc
@@ -232,6 +236,7 @@ processor_settings:
       - department_name
       - location_name
       - rendered_item
+      - saa_field_decreto_meet_bpa_files
       - saa_field_decreto_meet_full_doc
       - title
     title: true

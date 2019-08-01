@@ -1,0 +1,27 @@
+uuid: dfe15538-01ab-4e83-bfa0-f53ec872b62b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_meet_bpa_files
+    - node.type.decreto_meeting
+  module:
+    - file
+id: node.decreto_meeting.field_decreto_meet_bpa_files
+field_name: field_decreto_meet_bpa_files
+entity_type: node
+bundle: decreto_meeting
+label: 'BPA Files (meta field)'
+description: "this field is filled automatically when adding/removing files from related BPA.\r\nIt's needed for search to index the BPA files together with the meeting."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'pdf doc docx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
