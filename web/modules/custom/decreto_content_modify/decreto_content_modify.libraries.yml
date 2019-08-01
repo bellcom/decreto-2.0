@@ -4,3 +4,9 @@ meeting-edit:
     js/meeting-edit.js: {preprocess: false}
   dependencies:
     - core/jquery
+search-in-meeting-init:
+  version: 1.x
+  js:
+    js/search-in-meeting-init.js: {preprocess: false}
+  dependencies:
+    - core/jquery

@@ -55,6 +55,7 @@
  *   current user is a logged-in member.
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
+ * - search_in_meeting_form: Forms that handles search inside the meeting content.
  *
  * @see template_preprocess_node()
  *
@@ -122,8 +123,7 @@ view_mode ? view_mode|clean_class,
             </div>
             <div class="region region-action-box__primary">
                 <div class="action-box">
-                    @TODO Metting search form
-                    {{ decreto_help_message.meeting_search_form }}
+                    {{ search_in_meeting_form }}
                 </div>
             </div>
             <div class="boxy__actions boxy">

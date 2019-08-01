@@ -13,9 +13,9 @@ dependencies:
     - field.storage.node.field_decreto_bp_bpas
     - field.storage.node.body
     - field.storage.node.field_decreto_meet_department
+    - field.storage.node.field_decreto_meet_end_date
     - field.storage.node.field_decreto_meet_start_date
     - field.storage.node.field_decreto_meet_location
-    - field.storage.node.field_decreto_meet_end_date
     - search_api.server.decreto_search_api_solr_server
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -54,9 +54,10 @@ third_party_settings:
       interestingTerms: none
     advanced:
       index_prefix: ''
+      collection: ''
 id: decreto_search_meeting_index
 name: 'Decreto meeting index'
-description: ''
+description: 'Index that is used for meetings search'
 read_only: false
 field_settings:
   bp_title:
