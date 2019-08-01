@@ -54,16 +54,33 @@ jQuery(function($) {
         $(target).load(source);
     });
 
-    // Metting agenda bulletpoints collapse toggle callback.
+    // Meeting agenda bulletpoints collapse toggle callback.
     $('#meeting-agenda-collapse-toggle').on('click', function(event) {
-        $('.area-expand-collapse').collapse('toggle');
+        // If we have any closed BP containers, open ALL first.
+        if ($('article.decreto-bullet-point > .area-expand-collapse:not(.in)').length) {
+          $('article.decreto-bullet-point > .area-expand-collapse').collapse('show');
+        }
+        // All BP containers are open, close ALL.
+        else {
+          $('article.decreto-bullet-point > .area-expand-collapse').collapse('hide');
+        }
         event.preventDefault();
     });
 
     // Bullet point collapse toggle callback.
     $('.bullet-point-toggle').on('click', function(event) {
         var $wrapper = $(this).parents('article:first');
-        $wrapper.find('.area-expand-collapse').collapse('toggle');
+        // Opening BP container.
+        $wrapper.find('> .area-expand-collapse').collapse('show');
+
+        // If we have any closed BPA containers, open ALL first.
+        if ($wrapper.find('article.decreto-bullet-point-attachment > .area-expand-collapse:not(.in)').length) {
+          $wrapper.find('article.decreto-bullet-point-attachment > .area-expand-collapse').collapse('show');
+        }
+        // All BPA containers are open, close ALL.
+        else {
+          $wrapper.find('article.decreto-bullet-point-attachment > .area-expand-collapse').collapse('hide');
+        }
         event.preventDefault();
     });
 });
