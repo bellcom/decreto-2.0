@@ -70,6 +70,20 @@ decreto_content_modify.bps_delete:
     _permission: 'delete any decreto_bullet_point content'
     node: \d+
 
+decreto_content_modify.bpas_add:
+  path: '/bullet-points/{bullet_point}/add-bpa'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+  defaults:
+    _title: 'Decreto add bullet point attachment'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentsAddForm'
+    node: null
+  requirements:
+    _permission: 'create decreto_bullet_attachment content'
+    bullet_point: \d+
+
 decreto_content_modify.bpas_delete:
   path: '/bullet-point-attachments/{node}/delete'
   options:
@@ -84,19 +98,7 @@ decreto_content_modify.bpas_delete:
     node: \d+
 
 ### left overfrom old version, will be put above as the project proceeds
-decreto_content_modify.bpas_add:
-  path: '/bullet_point/{bullet_point}/bullet_point_attachments/add'
-  options:
-    parameters:
-      bullet_point:
-        type: entity:node
-  defaults:
-    _title: 'Decreto add bullet point attachment'
-    _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm'
-    node: null
-  requirements:
-    _permission: 'access content'
-    bullet_point: \d+
+
 decreto_content_modify.bpas_edit:
   path: '/bullet_point/{bullet_point}/bullet_point_attachments/{node}/edit'
   options:

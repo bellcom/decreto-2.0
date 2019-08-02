@@ -67,6 +67,30 @@ class DecretoBulletPoint extends DecretoNode {
   }
 
   /**
+   * Adds the bullet point attachment nid to bullet point.
+   *
+   * Only does so if the node is not already added.
+   * Saves the bullet point as well.
+   *
+   * @param int $nid
+   *   Nid of the node.
+   * @param bool $save
+   *   If bullet point needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function addBulletPointAttachment($nid, $save = TRUE) {
+    $bpas = $this->getEntity()->get('field_decreto_bp_bpas')->getValue();
+    $key = array_search($nid, array_column($bpas, 'target_id'));
+    if (!$key) {
+      $this->getEntity()->get('field_decreto_bp_bpas')->appendItem($nid);
+      if ($save) {
+        $this->getEntity()->save();
+      }
+    }
+  }
+
+  /**
    * Removes bullet point attachment nid from bullet point field_decreto_bp_bpas field..
    *
    * Saves the bullet point as well.

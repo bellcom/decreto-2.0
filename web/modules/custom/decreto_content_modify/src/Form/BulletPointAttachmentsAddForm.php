@@ -8,22 +8,25 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
 /**
- * Implements the BulletPointsAddForm form.
+ * Implements the BulletPointAttachmentsAddForm form.
  *
  * @see \Drupal\Core\Form\FormBase
  */
-class BulletPointsAddForm extends FormBase {
+class BulletPointAttachmentsAddForm extends FormBase {
+  protected $meeting;
+  protected $bulletPoint;
 
   /**
-   * Meeting to create bullet points.
-   *
-   * @var NodeInterface $bullet_points
+   * {@inheritdoc}
    */
-  protected $meeting;
+  public function getFormId() {
+    return 'decreto-content-modify-bpa-add-form';
+  }
 
   /**
    * Form constructor.
@@ -34,22 +37,28 @@ class BulletPointsAddForm extends FormBase {
    *   The current state of the form.
    * @param NodeInterface $meeting
    *   Meeting node that hosts bullet points.
-
+   *
    * @return array
    *   The form structure.
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
-    if (empty($meeting) || $meeting->getType() != 'decreto_meeting') {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
+    if (empty($bullet_point) || $bullet_point->getType() != 'decreto_bullet_point') {
       return $form;
     }
 
+    $this->bulletPoint = $bullet_point;
+
+    // Saving meeting for redirect purposes.
+    $decretoBPA = new DecretoBulletPoint($bullet_point);
+    $meeting = $decretoBPA->getMeeting();
     $this->meeting = $meeting;
 
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
-    $form['bullet_points'] = [
+
+    $form['bullet_point_attachments'] = [
       '#tree' => TRUE,
-      '#prefix' => '<div id="bullet-points-wrapper">',
+      '#prefix' => '<div id="bullet-point-attachments-wrapper">',
       '#suffix' => '</div>',
     ];
 
@@ -59,40 +68,30 @@ class BulletPointsAddForm extends FormBase {
     }
 
     for ($i = 0; $i < $counter; $i++) {
-      $bullet_point = [
+      $bullet_point_attachment = [
         '#prefix' => '<div class="form-group">',
         '#suffix' => '</div>',
       ];
-      $bullet_point['title'] = [
+      $bullet_point_attachment['title'] = [
         '#type' => 'textfield',
         '#placeholder' => $this->t('Title'),
       ];
 
-      $bullet_point['closed'] = [
-        '#prefix' => '<div class="form-inline form-item">',
-        '#type' => 'checkbox',
-        '#title' => $this->t('Closed'),
-      ];
-      $bullet_point['personal'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Personal'),
-        '#suffix' => '</div>',
-      ];
       if ($counter > 1) {
-        $bullet_point['delete'] = [
-          '#name' => 'edit-bullet-point-index-delete-' . $i,
+        $bullet_point_attachment['delete'] = [
+          '#name' => 'edit-bullet-point-attachment-index-delete-' . $i,
           '#value' => t('Delete'),
-          '#bullet_point_index' => $i,
+          '#bullet_point_attachment_index' => $i,
           '#ajax' => [
-            'wrapper' => 'bullet-points-wrapper',
-            'callback' => '::ajaxBulletPoints',
+            'wrapper' => 'bullet-point-attachments-wrapper',
+            'callback' => '::ajaxBulletPointAttachments',
             'event' => 'click',
           ],
           '#submit' => ['::submitDelete'],
           '#type' => 'submit',
         ];
       }
-      $form['bullet_points'][] = $bullet_point;
+      $form['bullet_point_attachments'][] = $bullet_point_attachment;
     }
 
     $form['counter'] = [
@@ -103,8 +102,8 @@ class BulletPointsAddForm extends FormBase {
       '#value' => t('Add'),
       '#name' => 'add more',
       '#ajax' => [
-        'wrapper' => 'bullet-points-wrapper',
-        'callback' => '::ajaxBulletPoints',
+        'wrapper' => 'bullet-point-attachments-wrapper',
+        'callback' => '::ajaxBulletPointAttachments',
         'event' => 'click',
       ],
       '#submit' => ['::submitAddMore'],
@@ -135,19 +134,12 @@ class BulletPointsAddForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'decreto-content-modify-bp-add-form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     if ($triggering_element['#name'] == 'save') {
-      foreach ($form_state->getValue('bullet_points') as $key => $bullet_point) {
-        if (empty($bullet_point['title'])) {
-          $form_state->setError($form['bullet_points'][$key]['title'], t('Bullet point title should not be empty.'));
+      foreach ($form_state->getValue('bullet_point_attachments') as $key => $bpa) {
+        if (empty($bpa['title'])) {
+          $form_state->setError($form['bullet_point_attachments'][$key]['title'], t('Bullet point attachment title should not be empty.'));
         }
       }
     }
@@ -157,34 +149,25 @@ class BulletPointsAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $bullet_points = $form_state->getValue('bullet_points');
-    foreach ($bullet_points as $bullet_point) {
-      /** @var NodeInterface $bullet_point_node */
-      $bullet_point_node = Node::create(array(
-        'type' => 'decreto_bullet_point',
-        'title' => $bullet_point['title'],
+    $bpas = $form_state->getValue('bullet_point_attachments');
+    foreach ($bpas as $bpa) {
+      $bpa_node = Node::create(array(
+        'type' => 'decreto_bullet_point_attachment',
+        'title' => $bpa['title'],
         'status' => 1,
-        'field_decreto_bp_closed' => [
-          'value' => $bullet_point['closed'],
-        ],
-        'field_decreto_bp_personal' => [
-          'value' => $bullet_point['personal'],
-        ],
       ));
-      $bullet_point_node->isNew();
+      $bpa_node->isNew();
 
-      if ($bullet_point_node->save() == SAVED_NEW) {
-        $this->meeting->field_decreto_meet_bps[] = [
-          'target_id' => $bullet_point_node->id(),
-        ];
-        $this->meeting->save();
+      if ($bpa_node->save() == SAVED_NEW) {
+        $decretoBP = new DecretoBulletPoint($this->bulletPoint);
+        $decretoBP->addBulletPointAttachment($bpa_node->id());
       }
     }
 
   }
 
   /**
-   * Implements the sumbit handler for the ajax call.
+   * Implements the submit handler for the ajax call.
    *
    * @param array $form
    *   Render array representing from.
@@ -193,8 +176,6 @@ class BulletPointsAddForm extends FormBase {
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
    *   Array of ajax commands to execute on submit of the modal form.
-   *
-   * @throws
    */
   public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
@@ -209,7 +190,11 @@ class BulletPointsAddForm extends FormBase {
     }
     else {
       $response->addCommand(new CloseModalDialogCommand());
-      $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
+
+      // Adding redirect command.
+      if (!empty($this->meeting)) {
+        $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
+      }
     }
 
     return $response;
@@ -233,7 +218,7 @@ class BulletPointsAddForm extends FormBase {
   }
 
   /**
-   * Ajax callback that reduce amount of bullet points.
+   * Ajax callback that reduce amount of bullet point attachments.
    *
    * @param array $form
    *   The Form API form.
@@ -246,8 +231,8 @@ class BulletPointsAddForm extends FormBase {
   public function submitDelete(array $form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     $user_input = $form_state->getUserInput();
-    unset($user_input['bullet_points'][$triggering_element['#bullet_point_index']]);
-    $user_input['bullet_points'] = array_values($user_input['bullet_points']);
+    unset($user_input['bullet_point_attachments'][$triggering_element['#bullet_point_attachment_index']]);
+    $user_input['bullet_point_attachments'] = array_values($user_input['bullet_point_attachments']);
     $form_state->setUserInput($user_input);
     $form_state->setValue('counter', $form_state->getValue('counter') - 1);
     $form_state->setRebuild();
@@ -255,7 +240,7 @@ class BulletPointsAddForm extends FormBase {
   }
 
   /**
-   * Ajax bullet point update function.
+   * Ajax bullet point attachments update function.
    *
    * @param array $form
    *   Form API form.
@@ -265,10 +250,8 @@ class BulletPointsAddForm extends FormBase {
    * @return array
    *   Form array.
    */
-  public function ajaxBulletPoints(array $form, FormStateInterface $form_state) {
-    return $form['bullet_points'];
+  public function ajaxBulletPointAttachments(array $form, FormStateInterface $form_state) {
+    return $form['bullet_point_attachments'];
   }
 
 }
-
-
