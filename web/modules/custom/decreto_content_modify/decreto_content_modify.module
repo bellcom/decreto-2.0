@@ -77,37 +77,67 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
     if ($meeting) {
       Cache::invalidateTags($meeting->getCacheTagsToInvalidate());
     }
-
   }
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
   }
+  elseif ($entity->bundle() == 'decreto_bullet_point') {
+  }
   elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
+    // Duplicating file reference to the related meeting as well.
     $decretoBPA = new DecretoBulletPointAttachment($entity);
 
-    $old_related_file = NULL;
+    $old_related_fid = NULL;
     if ($entity->original) {
       $originalDecretoBPA = new DecretoBulletPointAttachment($entity->original);
-      $old_related_file = $originalDecretoBPA->getFile(FALSE);
+      $old_related_fid = $originalDecretoBPA->getFile(FALSE);
     }
-    $new_related_file = $decretoBPA->getFile(FALSE);
+    $new_related_fid = $decretoBPA->getFile(FALSE);
 
     $meeting = $decretoBPA->getMeeting();
-    $decretoMeeting = new DecretoMeeting($meeting);
+    if ($meeting) {
+      $decretoMeeting = new DecretoMeeting($meeting);
 
-    // Remove files from meeting.
-    if ($old_related_file && $old_related_file != $new_related_file) {
-      $decretoMeeting->removeBpaFile($old_related_file);
-    }
+      // Remove file from meeting.
+      if ($old_related_fid && $old_related_fid != $new_related_fid) {
+        $decretoMeeting->removeBpaFile($old_related_fid);
+      }
 
-    // Add files to meeting, if they are not present there yet.
-    if ($new_related_file && $old_related_file != $new_related_file) {
-      $decretoMeeting->addBpaFile($new_related_file);
+      // Add file to meeting, if it's not present there yet.
+      if ($new_related_fid && $old_related_fid != $new_related_fid) {
+        $decretoMeeting->addBpaFile($new_related_fid);
+      }
     }
   }
 }
 
+/**
+ * Implements hook_ENTITY_TYPE_predelete().
+ */
+function decreto_content_modify_node_predelete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_bullet_point') {
+    // Deleting related memos.
+    $decretoBP = new DecretoBulletPoint($entity);
+    $memos = $decretoBP->getMemos();
+    if (!empty($memos)) {
+      foreach ($memos as $memo) {
+        $memo->delete();
+      }
+    }
+  }
+  elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
+    // Deleting related notes.
+    $decretoBPA = new DecretoBulletPointAttachment($entity);
+    $notes = $decretoBPA->getNotes();
+
+    if (!empty($notes)) {
+      foreach ($notes as $note) {
+        $note->delete();
+      }
+    }
+  }
+}
 /**
  * Implements hook_ENTITY_TYPE_delete().
  *
@@ -131,8 +161,51 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
 
-    //TODO: delete meeting related content as well (bp, bpa, memo)
+    // Deleting related BP.
+    $decretoMeeting = new DecretoMeeting($entity);
+    $bps = $decretoMeeting->getBulletPoints();
+    if (!empty($bps)) {
+      foreach ($bps as $bp) {
+        $bp->delete();
+      }
+    }
+
+    // Deleting related messages (deleting message will also delete related
+    // notifications).
+    $messages = $decretoMeeting->getMessages();
+    if (!empty($messages)) {
+      foreach ($messages as $message) {
+        $message->delete();
+      }
+    }
   }
+  elseif ($entity->bundle() == 'decreto_bullet_point') {
+    // Deleting related BPA.
+    $decretoBP = new DecretoBulletPoint($entity);
+    $bpas = $decretoBP->getBulletPointAttachments();
+    if (!empty($bpas)) {
+      foreach ($bpas as $bpa) {
+        $bpa->delete();
+      }
+    }
+
+    // Deleting this BP from meeting.
+    $meeting = $decretoBP->getMeeting();
+    if ($meeting) {
+      $decretoMeeting = new DecretoMeeting($meeting);
+      $decretoMeeting->removeBulletPoint($entity->id());
+    }
+  }
+  elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
+    // Deleting this BPA from BP.
+    $decretoBPA = new DecretoBulletPointAttachment($entity);
+    $bp = $decretoBPA->getBulletPoint();
+    if ($bp) {
+      $decretoBP = new DecretoBulletPoint($bp);
+      $decretoBP->removeBulletPointAttachment($entity->id());
+    }
+  }
+
 }
 
 /**

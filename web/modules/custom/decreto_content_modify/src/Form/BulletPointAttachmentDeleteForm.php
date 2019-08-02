@@ -1,21 +1,22 @@
 <?php
-namespace Drupal\decreto_content_modify\Form;
 
+namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\node\NodeInterface;
 
+/**
+ * Class BulletPointAttachmentDeleteForm.
+ *
+ * @package Drupal\decreto_content_modify\Form
+ */
 class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
-  /**
-   * {@inheritdoc}
-   */
-  public function getQuestion() {
-    return $this->t('Delete @title?', ['@title' => $this->node->getTitle()]);
-  }
+  protected $meeting;
 
   /**
    * {@inheritdoc}
@@ -27,17 +28,14 @@ class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    for ($i = 0; $i <= $this->parent->field_decreto_bp_bpas->count(); $i++) {
-      if ($this->parent->field_decreto_bp_bpas->get($i)->target_id == $this->node->id()) {
-        $this->parent->field_decreto_bp_bpas->removeItem($i);
-        $this->parent->save();
-        break;
-      }
-    }
-    $this->node->delete();
-  }
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
+    // Saving meeting for redirect purposes.
+    $decretoBPA = new DecretoBulletPointAttachment($node);
+    $meeting = $decretoBPA->getMeeting();
+    $this->meeting = $meeting;
 
+    return parent::buildForm($form, $form_state, $node);
+  }
 
   /**
    * {@inheritdoc}
@@ -52,19 +50,18 @@ class BulletPointAttachmentDeleteForm extends AjaxConfirmFormBase {
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
-      $response->addCommand(new HtmlCommand('#decreto-content-modify-bpa-delete-form', $form));
+      $response->addCommand(new HtmlCommand('#' . $this->getFormId(), $form));
     }
     else {
       $response->addCommand(new CloseModalDialogCommand());
 
-      $decretoBP = new DecretoBulletPoint($this->parent);
-      $meeting = $decretoBP->getMeeting();
-
-      if (!empty($meeting)) {
-        $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
+      // Adding redirect command.
+      if (!empty($this->meeting)) {
+        $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
       }
     }
 
     return $response;
   }
+
 }

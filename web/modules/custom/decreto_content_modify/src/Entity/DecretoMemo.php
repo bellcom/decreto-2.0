@@ -2,34 +2,18 @@
 
 namespace Drupal\decreto_content_modify\Entity;
 
-use Drupal\node\NodeInterface;
-
 /**
  * Wrapper for Decreto Memo.
  *
  * Allows to perform commonly used procedures in a more efficient way.
  */
-class DecretoMemo {
-  protected $memo;
+class DecretoMemo extends DecretoNode {
 
   /**
-   * DecretoMemo constructor.
-   *
-   * @param \Drupal\node\NodeInterface $memo
-   *   Memo node.
+   * {@inheritdoc}
    */
-  public function __construct(NodeInterface $memo) {
-    $this->memo = $memo;
-  }
-
-  /**
-   * Returns original node entity.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   Memo node.
-   */
-  public function getEntity() {
-    return $this->memo;
+  public function getEntityType() {
+    return 'decreto_memo';
   }
 
   /**
@@ -43,6 +27,7 @@ class DecretoMemo {
    *   NULL is nothing is found.
    *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   public function getMeeting($load = TRUE) {
     // Getting BP first.

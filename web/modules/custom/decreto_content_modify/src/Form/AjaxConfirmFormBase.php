@@ -21,13 +21,6 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
   protected $node;
 
   /**
-   * Parent node, if any
-   *
-   * @var NodeInterface parent
-   */
-  protected $parent;
-
-  /**
    * {@inheritdoc}
    * {@deprecated}
    */
@@ -52,11 +45,16 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $parent = NULL, NodeInterface $node = NULL) {
+  public function getQuestion() {
+    return $this->t('Delete @title?', ['@title' => $this->node->getTitle()]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
     $this->node = $node;
-    $this->parent = $parent;
     $form = parent::buildForm($form, $form_state);
-    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
 
     $form['actions']['submit']['#ajax'] = [
       'callback' => '::ajaxSubmitForm',
@@ -72,6 +70,13 @@ abstract class AjaxConfirmFormBase extends ConfirmFormBase {
       ],
     ];
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $this->node->delete();
   }
 
   /**

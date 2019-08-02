@@ -37,7 +37,7 @@ class AnnotatorController extends ControllerBase {
 
     $response = new RedirectResponse($GLOBALS['base_url'] . '/annotator/read/' . $note->id());
     $response->send();
-    //return new JsonResponse();
+    return new JsonResponse();
   }
 
   public function annotatorSearch() {

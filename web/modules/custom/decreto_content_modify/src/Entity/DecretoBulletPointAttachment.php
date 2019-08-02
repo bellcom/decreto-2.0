@@ -2,35 +2,21 @@
 
 namespace Drupal\decreto_content_modify\Entity;
 
+use Drupal\decreto_annotator\Entity\Note;
 use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 
 /**
  * Wrapper for Decreto Bullet point attachment.
  *
  * Allows to perform commonly used procedures in a more efficient way.
  */
-class DecretoBulletPointAttachment {
-  protected $bulletPointAttachment;
+class DecretoBulletPointAttachment extends DecretoNode {
 
   /**
-   * DecretoBulletPointAttachment constructor.
-   *
-   * @param \Drupal\node\NodeInterface $bpa
-   *   Bullet point attachment node.
+   * {@inheritdoc}
    */
-  public function __construct(NodeInterface $bpa) {
-    $this->bulletPointAttachment = $bpa;
-  }
-
-  /**
-   * Returns original node entity.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   Bullet point attachment node.
-   */
-  public function getEntity() {
-    return $this->bulletPointAttachment;
+  public function getEntityType() {
+    return 'decreto_bullet_point_attachment';
   }
 
   /**
@@ -66,6 +52,8 @@ class DecretoBulletPointAttachment {
    * @return \Drupal\node\NodeInterface|int|null
    *   Meeting node, or Meeting nid.
    *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   public function getMeeting($load = TRUE) {
     // Getting BP first.
@@ -102,6 +90,29 @@ class DecretoBulletPointAttachment {
     }
 
     return NULL;
+  }
+
+  /**
+   * Returns related notes.
+   *
+   * @param bool $load
+   *   If the returned note shall be load. If FALSE, array of ids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of notes is returned,
+   *   If load is FALSE array of ids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getNotes($load = TRUE) {
+    $query = \Drupal::entityQuery('decreto_annotator_note')
+      ->condition('bpa_id', $this->getEntity()->id());
+
+    $ids = $query->execute();
+    if (!empty($ids)) {
+      return ($load) ? Note::loadMultiple($ids) : $ids;
+    }
+
+    return array();
   }
 
 }

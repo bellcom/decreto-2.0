@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
@@ -6,19 +7,15 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
+use Drupal\node\NodeInterface;
 
 /**
  * Class BulletPointDeleteForm.
+ *
  * @package Drupal\decreto_content_modify\Form
  */
 class BulletPointDeleteForm extends AjaxConfirmFormBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getQuestion() {
-    return $this->t('Delete @title?', ['@title' => $this->node->getTitle()]);
-  }
 
   /**
    * {@inheritdoc}
@@ -30,8 +27,13 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->node->delete();
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
+    // Saving meeting for redirect purposes.
+    $decretoBP = new DecretoBulletPoint($node);
+    $meeting = $decretoBP->getMeeting();
+    $this->meeting = $meeting;
+
+    return parent::buildForm($form, $form_state, $node);
   }
 
   /**
@@ -47,19 +49,18 @@ class BulletPointDeleteForm extends AjaxConfirmFormBase {
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
-      $response->addCommand(new HtmlCommand('#decreto-content-modify-bp-delete-form', $form));
+      $response->addCommand(new HtmlCommand('#' . $this->getFormId(), $form));
     }
     else {
       $response->addCommand(new CloseModalDialogCommand());
 
-      $decretoBP = new DecretoBulletPoint($this->node);
-      $meeting = $decretoBP->getMeeting();
-
-      if (!empty($meeting)) {
-        $response->addCommand(new RedirectCommand($meeting->toUrl()->toString()));
+      // Adding redirect command.
+      if (!empty($this->meeting)) {
+        $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
       }
     }
 
     return $response;
   }
+
 }
