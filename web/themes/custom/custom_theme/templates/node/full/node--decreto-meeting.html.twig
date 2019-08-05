@@ -129,8 +129,8 @@ view_mode ? view_mode|clean_class,
                 </div>
             </div>
             <div class="boxy__actions boxy">
-                <a href=""  class="btn btn-primary use-ajax" data-dialog-type="modal">
-                    {{ "Create point from file" | trans }}
+                <a href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"  class="btn btn-primary use-ajax" data-dialog-type="modal">
+                    {{ "Create point from files" | trans }}
                 </a>
                 <a href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"  class="btn btn-primary use-ajax" data-dialog-type="modal">
                     {{ "Create point" | trans }}

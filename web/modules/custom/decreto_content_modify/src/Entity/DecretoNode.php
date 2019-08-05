@@ -41,6 +41,20 @@ abstract class DecretoNode {
   }
 
   /**
+   * Saves the original node entity.
+   *
+   * @return int
+   *   Output of EntityInterface save function.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @see \Drupal\Core\Entity\EntityInterface::save().
+   */
+  public function save() {
+    return $this->entity->save();
+  }
+
+  /**
    * Return original entity expected type.
    *
    * @return string

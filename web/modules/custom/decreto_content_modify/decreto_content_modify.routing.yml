@@ -39,7 +39,19 @@ decreto_content_modify.bps_add:
   defaults:
     _title: 'Decreto add bullet point'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddForm'
-    node: null
+  requirements:
+    _permission: 'create decreto_bullet_point content'
+    meeting: \d+
+
+decreto_content_modify.bps_add_from_files:
+  path: '/meetings/{meeting}/add-bp-from-files'
+  options:
+    parameters:
+      meeting:
+        type: entity:node
+  defaults:
+    _title: 'Decreto add bullet point from files'
+    _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddFromFilesForm'
   requirements:
     _permission: 'create decreto_bullet_point content'
     meeting: \d+

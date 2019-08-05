@@ -81,6 +81,8 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+
+
   }
   elseif ($entity->bundle() == 'decreto_bullet_point') {
   }
@@ -105,7 +107,7 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
       }
 
       // Add file to meeting, if it's not present there yet.
-      if ($new_related_fid && $old_related_fid != $new_related_fid) {
+      if ($new_related_fid) {
         $decretoMeeting->addBpaFile($new_related_fid);
       }
     }
@@ -125,6 +127,14 @@ function decreto_content_modify_node_predelete(EntityInterface $entity) {
         $memo->delete();
       }
     }
+
+    // Deleting related BPA.
+    $bpas = $decretoBP->getBulletPointAttachments();
+    if (!empty($bpas)) {
+      foreach ($bpas as $bpa) {
+        $bpa->delete();
+      }
+    }
   }
   elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
     // Deleting related notes.
@@ -135,6 +145,14 @@ function decreto_content_modify_node_predelete(EntityInterface $entity) {
       foreach ($notes as $note) {
         $note->delete();
       }
+    }
+
+    // Removing BPA file from meeting.
+    $fid = $decretoBPA->getFile(FALSE);
+    $meeting = $decretoBPA->getMeeting();
+    if ($meeting && $fid) {
+      $decretoMeeting = new DecretoMeeting($meeting);
+      $decretoMeeting->removeBpaFile($fid);
     }
   }
 }
@@ -180,16 +198,8 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
     }
   }
   elseif ($entity->bundle() == 'decreto_bullet_point') {
-    // Deleting related BPA.
-    $decretoBP = new DecretoBulletPoint($entity);
-    $bpas = $decretoBP->getBulletPointAttachments();
-    if (!empty($bpas)) {
-      foreach ($bpas as $bpa) {
-        $bpa->delete();
-      }
-    }
-
     // Deleting this BP from meeting.
+    $decretoBP = new DecretoBulletPoint($entity);
     $meeting = $decretoBP->getMeeting();
     if ($meeting) {
       $decretoMeeting = new DecretoMeeting($meeting);

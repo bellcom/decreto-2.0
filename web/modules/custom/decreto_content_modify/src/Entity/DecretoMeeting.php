@@ -2,6 +2,7 @@
 
 namespace Drupal\decreto_content_modify\Entity;
 
+use Drupal\Core\Render\Element\Page;
 use Drupal\decreto_annotator\Entity\Note;
 use Drupal\message\Entity\Message;
 
@@ -42,6 +43,30 @@ class DecretoMeeting extends DecretoNode {
     }
 
     return NULL;
+  }
+
+  /**
+   * Returns related BPA files.
+   *
+   * @param bool $load
+   *   If the returned files shall be load. If FALSE, array of fids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of files is returned,
+   *   If load is FALSE array of fids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getBpaFiles($load = TRUE) {
+    if ($fieldBpaFies = $this->getEntity()->get('field_decreto_meet_bpa_files')) {
+      if ($load) {
+        return $fieldBpaFies->referencedEntities();
+      }
+      else {
+        return array_column($fieldBpaFies->getValue(), 'target_id');
+      }
+    }
+
+    return array();
   }
 
   /**
@@ -90,6 +115,47 @@ class DecretoMeeting extends DecretoNode {
   }
 
   /**
+   * Refreshes the list of BPA files attached to the meeting.
+   *
+   * Is useful to check that all the attached files are still relevant, which
+   * means they are still attached to the meetings related content, for example,
+   * bullet point attachment.
+   */
+  public function refreshBpaFiles() {
+    // Get the currently attached fids to the field.
+    $bpaFileFieldFids = $this->getBpaFiles(FALSE);
+
+    // Go through attached BPAs and get their fids.
+    $bpaFileFids = [];
+    $bps = $this->getBulletPoints();
+    foreach ($bps as $bp) {
+      $decretoBP = new DecretoBulletPoint($bp);
+
+      $bpas = $decretoBP->getBulletPointAttachments();
+      foreach ($bpas as $bpa) {
+        $decretoBPA = new DecretoBulletPointAttachment($bpa);
+        $fid = $decretoBPA->getFile(FALSE);
+        $bpaFileFids[] = $fid;
+      }
+    }
+
+    // Remove those that are no longer present.
+    $removeFids = array_diff($bpaFileFieldFids, $bpaFileFids);
+    foreach ($removeFids as $fid) {
+      $this->removeBpaFile($fid, FALSE);
+    }
+
+    // Add those that are missing.
+    $addFids = array_diff($bpaFileFids, $bpaFileFieldFids);
+    foreach ($addFids as $fid) {
+      $this->addBpaFile($fid, FALSE);
+    }
+
+    // Saving the meeting.
+    $this->save();
+  }
+
+  /**
    * Returns related bullet points.
    *
    * @param bool $load
@@ -111,6 +177,30 @@ class DecretoMeeting extends DecretoNode {
     }
 
     return array();
+  }
+
+  /**
+   * Adds the bullet point nid to meeting.
+   *
+   * Only does so if the node is not already added.
+   * Saves the meeting as well.
+   *
+   * @param int $nid
+   *   Nid of the node.
+   * @param bool $save
+   *   If meeting needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function addBulletPoint($nid, $save = TRUE) {
+    $bps = $this->getEntity()->get('field_decreto_meet_bps')->getValue();
+    $key = array_search($nid, array_column($bps, 'target_id'));
+    if (!$key) {
+      $this->getEntity()->get('field_decreto_meet_bps')->appendItem($nid);
+      if ($save) {
+        $this->getEntity()->save();
+      }
+    }
   }
 
   /**
