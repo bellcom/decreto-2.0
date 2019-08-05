@@ -2,11 +2,6 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Ajax\RedirectCommand;
-use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\node\Entity\Node;
@@ -17,8 +12,7 @@ use Drupal\node\NodeInterface;
  *
  * @see \Drupal\Core\Form\FormBase
  */
-class BulletPointAttachmentsAddForm extends FormBase {
-  protected $meeting;
+class BulletPointAttachmentsAddForm extends AjaxFormBase {
   protected $bulletPoint;
 
   /**
@@ -29,17 +23,7 @@ class BulletPointAttachmentsAddForm extends FormBase {
   }
 
   /**
-   * Form constructor.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param FormStateInterface $form_state
-   *   The current state of the form.
-   * @param NodeInterface $meeting
-   *   Meeting node that hosts bullet points.
-   *
-   * @return array
-   *   The form structure.
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
     if (empty($bullet_point) || $bullet_point->getType() != 'decreto_bullet_point') {
@@ -51,10 +35,7 @@ class BulletPointAttachmentsAddForm extends FormBase {
     // Saving meeting for redirect purposes.
     $decretoBPA = new DecretoBulletPoint($bullet_point);
     $meeting = $decretoBPA->getMeeting();
-    $this->meeting = $meeting;
-
-    $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
-    $form['#suffix'] = '</div>';
+    $this->parent = $meeting;
 
     $form['bullet_point_attachments'] = [
       '#tree' => TRUE,
@@ -110,23 +91,7 @@ class BulletPointAttachmentsAddForm extends FormBase {
       '#type' => 'submit',
     ];
 
-    // Group submit handlers in an actions element with a key of "actions" so
-    // that it gets styled correctly, and so that other modules may add actions
-    // to the form.
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-
-    // Add a submit button that handles the submission of the form.
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#name' => 'save',
-      '#value' => $this->t('Save'),
-      '#ajax' => [
-        'callback' => '::ajaxSubmitForm',
-        'event' => 'click',
-      ],
-    ];
+    $form = parent::buildForm($form, $form_state);
 
     return $form;
   }
@@ -156,48 +121,11 @@ class BulletPointAttachmentsAddForm extends FormBase {
         'title' => $bpa['title'],
         'status' => 1,
       ));
-      $bpa_node->isNew();
+      $bpa_node->save();
 
-      if ($bpa_node->save() == SAVED_NEW) {
-        $decretoBP = new DecretoBulletPoint($this->bulletPoint);
-        $decretoBP->addBulletPointAttachment($bpa_node->id());
-      }
+      $decretoBP = new DecretoBulletPoint($this->bulletPoint);
+      $decretoBP->addBulletPointAttachment($bpa_node->id());
     }
-
-  }
-
-  /**
-   * Implements the submit handler for the ajax call.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Array of ajax commands to execute on submit of the modal form.
-   */
-  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-    if ($form_state->getErrors()) {
-      unset($form['#prefix']);
-      unset($form['#suffix']);
-      $form['status_messages'] = [
-        '#type' => 'status_messages',
-        '#weight' => -10,
-      ];
-      $response->addCommand(new HtmlCommand('#' . $this->getFormId(), $form));
-    }
-    else {
-      $response->addCommand(new CloseModalDialogCommand());
-
-      // Adding redirect command.
-      if (!empty($this->meeting)) {
-        $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
-      }
-    }
-
-    return $response;
   }
 
   /**
@@ -205,8 +133,8 @@ class BulletPointAttachmentsAddForm extends FormBase {
    *
    * @param array $form
    *   The Form API form.
-   * @param FormStateInterface $form_state
-   *   The FormState object.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
    *
    * @return array
    *   The Form API form.
@@ -222,8 +150,8 @@ class BulletPointAttachmentsAddForm extends FormBase {
    *
    * @param array $form
    *   The Form API form.
-   * @param FormStateInterface $form_state
-   *   The FormState object.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
    *
    * @return array
    *   The Form API form.
@@ -244,8 +172,8 @@ class BulletPointAttachmentsAddForm extends FormBase {
    *
    * @param array $form
    *   Form API form.
-   * @param FormStateInterface $form_state
-   *   Form API form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
    *
    * @return array
    *   Form array.

@@ -2,17 +2,9 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
-/**
- * @file
- * Contains \Drupal\decreto_content_modify\Form\MeetingsEditForm.
- */
-
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -23,14 +15,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Meeting create or edit form.
+ *
+ * @see \Drupal\Core\Form\FormBase
  */
-class MeetingsEditForm extends FormBase {
-  protected $meeting;
+class MeetingsEditForm extends AjaxFormBase {
 
   /**
-   * Returns the title for the form
+   * Returns the title for the form.
    *
-   * @param NodeInterface $meeting
+   * @param \Drupal\node\NodeInterface $meeting
    *   Meeting node, can be null.
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
@@ -60,7 +53,9 @@ class MeetingsEditForm extends FormBase {
       if ($meeting->getType() != 'decreto_meeting') {
         throw new NotFoundHttpException();
       }
-      $this->meeting = $meeting;
+      $this->node = $meeting;
+      // Setting parent the as meeting, so that redirect happens to meetings page.
+      $this->parent = $meeting;
     }
 
     $useDepartmentMembers = $form_state->get('use_department_members');
@@ -83,9 +78,6 @@ class MeetingsEditForm extends FormBase {
       $form_state->set('active_page', $activePage);
     }
 
-    $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
-    $form['#suffix'] = '</div>';
-
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('meetings_create_edit_form');
 
@@ -100,7 +92,7 @@ class MeetingsEditForm extends FormBase {
       '#type' => 'html_tag',
       '#tag' => 'span',
       '#value' => $this
-          ->t('Step 1'),
+        ->t('Step 1'),
       '#attributes' => [
         'class' => [($activePage === 1) ? 'bg-primary' : ''],
       ],
@@ -109,7 +101,7 @@ class MeetingsEditForm extends FormBase {
       '#type' => 'html_tag',
       '#tag' => 'span',
       '#value' => $this
-          ->t('Step 2'),
+        ->t('Step 2'),
       '#attributes' => [
         'class' => [($activePage === 2) ? 'bg-primary' : ''],
       ],
@@ -126,20 +118,11 @@ class MeetingsEditForm extends FormBase {
       $form = $this->populateFormData($form, $form_state, $meeting);
     }
 
-    // Form actions START.
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-    $form['actions']['cancel'] = [
-      '#type' => 'button',
-      '#value' => $this->t('Cancel'),
-      '#name' => 'cancel',
-      '#ajax' => [
-        'callback' => '::ajaxCloseForm',
-        'event' => 'click',
-      ],
-      '#limit_validation_errors' => [],
-    ];
+    $form = parent::buildForm($form, $form_state);
+
+    // Adding button before submit button START.
+    $submitButton = $form['actions']['submit'];
+    unset($form['actions']['submit']);
     $form['actions']['switch-page'] = [
       '#type' => 'submit',
       '#value' => ($activePage === 1) ? $this->t('Go further') : $this->t('Go back'),
@@ -152,20 +135,16 @@ class MeetingsEditForm extends FormBase {
         'class' => [($useDepartmentMembers) ? 'hidden' : '']
       ]
     ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
-      '#ajax' => [
-        'callback' => '::ajaxSubmitForm',
-        'event' => 'click',
-      ],
-      '#attributes' => [
-        // Show button only if we use department members, or if we are on the
-        // second page of the form.
-        'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : '']
-      ]
+    $form['actions']['submit'] = $submitButton;
+    // Adding button before submit button END.
+
+    // Submit button custom behavior.
+    $form['actions']['submit']['#attributes'] = [
+      // Show button only if we use department members, or if we are on the
+      // second page of the form.
+      'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
     ];
-    // Form actions END.
+
 
     return $form;
   }
@@ -189,7 +168,7 @@ class MeetingsEditForm extends FormBase {
     $form['pages-page-1'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => [($activePage !== 1)? 'hidden' : ''],
+        'class' => [($activePage !== 1) ? 'hidden' : ''],
       ],
     ];
 
@@ -295,7 +274,7 @@ class MeetingsEditForm extends FormBase {
       '#upload_location' => 'public://',
       '#upload_validators' => [
         'file_validate_extensions' => ['txt pdf doc docx'],
-      ]
+      ],
     ];
     $form['pages-page-1']['full_doc_closed'] = [
       '#title' => $this->t('Closed description'),
@@ -303,7 +282,7 @@ class MeetingsEditForm extends FormBase {
       '#upload_location' => 'private://',
       '#upload_validators' => [
         'file_validate_extensions' => ['txt pdf doc docx'],
-      ]
+      ],
     ];
 
     return $form;
@@ -395,12 +374,12 @@ class MeetingsEditForm extends FormBase {
         $form['pages-page-2']['participants-container']['participants'][$user_id]['internal'] = [
           '#type' => 'checkbox',
           '#prefix' => '<div class="col-xs-3">',
-          '#suffix' => '</div>'
+          '#suffix' => '</div>',
         ];
         $form['pages-page-2']['participants-container']['participants'][$user_id]['external'] = [
           '#type' => 'checkbox',
           '#prefix' => '<div class="col-xs-3">',
-          '#suffix' => '</div>'
+          '#suffix' => '</div>',
         ];
       }
     }
@@ -414,9 +393,9 @@ class MeetingsEditForm extends FormBase {
    *
    * @param array $form
    *   Render array representing from.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Current form state.
-   * @param NodeInterface $meeting
+   * @param \Drupal\node\NodeInterface $meeting
    *   Meeting node.
    *
    * @return array
@@ -463,12 +442,6 @@ class MeetingsEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
     $type = $form_state->getValue('type');
@@ -497,8 +470,8 @@ class MeetingsEditForm extends FormBase {
         }
       }
     }
-    if (!$this->meeting) {
-      $this->meeting = Node::create([
+    if (!$this->node) {
+      $this->node = Node::create([
         'type' => 'decreto_meeting',
         'status' => 1,
         'title' => $title,
@@ -515,20 +488,20 @@ class MeetingsEditForm extends FormBase {
       ]);
     }
     else {
-      $this->meeting->title = $title;
-      $this->meeting->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
-      $this->meeting->field_decreto_meet_type = $type;
-      $this->meeting->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
-      $this->meeting->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
-      $this->meeting->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
-      $this->meeting->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
-      $this->meeting->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
-      $this->meeting->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
-      $this->meeting->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
-      $this->meeting->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
+      $this->node->title = $title;
+      $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
+      $this->node->field_decreto_meet_type = $type;
+      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
+      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
+      $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
+      $this->node->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
+      $this->node->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
+      $this->node->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
+      $this->node->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
+      $this->node->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
     }
 
-    $this->meeting->save();
+    $this->node->save();
   }
 
   /**
@@ -571,55 +544,6 @@ class MeetingsEditForm extends FormBase {
     }
 
     $form_state->setRebuild();
-  }
-
-  /**
-   * Closing modal form.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Array of ajax commands to execute on submit of the modal form.
-   */
-  public function ajaxCloseForm(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-    $response->addCommand(new CloseModalDialogCommand());
-
-    return $response;
-  }
-
-  /**
-   * Implements the submit handler for the ajax call.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Array of ajax commands to execute on submit of the modal form.
-   */
-  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-
-    if ($form_state->getErrors()) {
-      // Replacing form to show errors.
-      $form['status_messages'] = [
-        '#type' => 'status_messages',
-        '#weight' => -10,
-      ];
-      $response->addCommand(new ReplaceCommand('#' . $this->getFormId(), $form));
-    }
-    else {
-      // Closing modal and Redirecting to created / updated meeting.
-      $response->addCommand(new CloseModalDialogCommand());
-      $response->addCommand(new RedirectCommand($this->meeting->toUrl()->toString()));
-    }
-
-    return $response;
   }
 
   /**

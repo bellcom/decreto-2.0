@@ -7,7 +7,7 @@ use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Form\FormStateInterface;
 
-class MemoDeleteForm extends AjaxConfirmFormBase {
+class MemoDeleteForm extends AjaxDeleteFormBase {
   /**
    * {@inheritdoc}
    */
