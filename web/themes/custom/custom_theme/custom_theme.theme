@@ -247,11 +247,3 @@ function custom_theme_preprocess_user(&$variables) {
     $variables['user_initials'] = (new Initials())->name($name)->generate();
   }
 }
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function custom_theme_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-  // That is needed in order to make form  opened via popup to see the template.
-  $suggestions[] = 'form__' . str_replace('-','_',$variables['element']['#form_id']);
-}

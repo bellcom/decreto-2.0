@@ -1,0 +1,27 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+{{ form|without('custom_text', 'upload_file') }}
+
+<ul class="nav nav-tabs">
+  <li role="select_type" class="{{ form['#custom_text_tab_active'] }}">
+    <a href="#custom_text" aria-controls="custom_text" role="tab" data-toggle="tab">
+      {% trans %}Custom text{% endtrans %}
+    </a>
+  </li>
+  <li role="select_type" class="{{ form['#upload_file_tab_active'] }}">
+    <a href="#upload_file" aria-controls="upload_file" role="tab" data-toggle="tab">
+      {% trans %}Upload file{% endtrans %}
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane {{ form['#custom_text_tab_active'] }}" id="custom_text">
+    {{ form.custom_text }}
+  </div>
+  <div role="tabpanel" class="tab-pane {{ form['#upload_file_tab_active'] }}" id="upload_file">
+    {{ form.upload_file }}
+  </div>
+</div>

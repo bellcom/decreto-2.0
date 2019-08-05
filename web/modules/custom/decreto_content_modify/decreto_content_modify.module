@@ -215,6 +215,15 @@ function decreto_content_modify_decreto_help_messages() {
   return [
     'meetings_create_edit_form' => 'Meeting create/edit form',
     'meetings_search_in_meeting_form' => 'Search in meeting form',
+    'bpa_edit_form' => 'Bullet point attachment edit form',
+  ];
+}
+
+function decreto_content_modify_theme() {
+  return [
+    'decreto_content_modify_bpa_edit_form' => [
+      'render element' => 'form',
+    ],
   ];
 }
 
