@@ -12,8 +12,8 @@ decreto_content_modify.meetings_add:
       meeting:
         type: entity:node
   defaults:
-    _title_callback: '\Drupal\decreto_content_modify\Form\MeetingsEditForm::getTitle'
-    _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
+    _title_callback: '\Drupal\decreto_content_modify\Form\MeetingEditForm::getTitle'
+    _form: '\Drupal\decreto_content_modify\Form\MeetingEditForm'
     meeting: null
   requirements:
     _permission: 'create decreto_meeting content'
@@ -24,8 +24,8 @@ decreto_content_modify.meetings_edit:
       meeting:
         type: entity:node
   defaults:
-    _title_callback: '\Drupal\decreto_content_modify\Form\MeetingsEditForm::getTitle'
-    _form: '\Drupal\decreto_content_modify\Form\MeetingsEditForm'
+    _title_callback: '\Drupal\decreto_content_modify\Form\MeetingEditForm::getTitle'
+    _form: '\Drupal\decreto_content_modify\Form\MeetingEditForm'
   requirements:
     _permission: 'edit any decreto_meeting content'
     meeting: \d+

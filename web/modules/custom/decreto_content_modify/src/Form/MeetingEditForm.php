@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @see \Drupal\Core\Form\FormBase
  */
-class MeetingsEditForm extends AjaxFormBase {
+class MeetingEditForm extends AjaxFormBase {
 
   /**
    * Returns the title for the form.
