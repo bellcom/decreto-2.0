@@ -28,14 +28,15 @@ content:
     type: decreto_pdf2htmlex_rendered_html
     weight: 1
     label: hidden
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
     region: content
   flag_subscribe_node:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_decreto_bpa_file: true
   langcode: true

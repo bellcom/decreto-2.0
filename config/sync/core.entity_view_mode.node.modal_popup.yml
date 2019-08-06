@@ -1,10 +1,10 @@
-uuid: 84d3cc13-d99b-4fde-9cfd-398781faeda4
+uuid: 8c2d63da-f7cf-4621-8ed4-6775610a3e78
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.teaser_ajax
-label: 'Teaser ajax'
+id: node.modal_popup
+label: 'Modal Popup'
 targetEntityType: node
 cache: true

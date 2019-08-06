@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
     - node.type.decreto_bullet_point_attachment
   module:
-    - decreto_pdf2htmlex
     - text
     - user
 id: node.decreto_bullet_point_attachment.teaser
@@ -25,19 +24,9 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  field_decreto_bpa_html:
-    weight: 2
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: decreto_pdf2htmlex_rendered_html_first_page
-    region: content
-  flag_subscribe_node:
-    weight: 10
-    settings: {  }
-    third_party_settings: {  }
-    region: content
 hidden:
   field_decreto_bpa_file: true
+  field_decreto_bpa_html: true
+  flag_subscribe_node: true
   langcode: true
   links: true

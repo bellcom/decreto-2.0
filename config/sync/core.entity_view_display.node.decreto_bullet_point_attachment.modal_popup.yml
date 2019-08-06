@@ -1,9 +1,9 @@
-uuid: d6c77185-8b6a-499f-86eb-4c11b6259811
+uuid: 64b87154-c9f7-4ac0-b3c3-0752a5fca72c
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser_ajax
+    - core.entity_view_mode.node.modal_popup
     - field.field.node.decreto_bullet_point_attachment.body
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
@@ -12,10 +12,10 @@ dependencies:
     - decreto_pdf2htmlex
     - text
     - user
-id: node.decreto_bullet_point_attachment.teaser_ajax
+id: node.decreto_bullet_point_attachment.modal_popup
 targetEntityType: node
 bundle: decreto_bullet_point_attachment
-mode: teaser_ajax
+mode: modal_popup
 content:
   body:
     label: hidden
@@ -26,18 +26,15 @@ content:
     third_party_settings: {  }
     region: content
   field_decreto_bpa_html:
-    type: decreto_pdf2htmlex_rendered_html_first_page
+    type: decreto_pdf2htmlex_rendered_html
     weight: 1
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  flag_subscribe_node:
-    weight: 10
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
     region: content
 hidden:
   field_decreto_bpa_file: true
+  flag_subscribe_node: true
   langcode: true
   links: true

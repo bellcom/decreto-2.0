@@ -82,6 +82,19 @@ decreto_content_modify.bps_delete:
     _permission: 'delete any decreto_bullet_point content'
     node: \d+
 
+decreto_content_modify.bpas_modal:
+  path: '/bullet-point-attachments/{bullet_point_attachment}/modal'
+  options:
+    parameters:
+      bullet_point_attachment:
+        type: entity:node
+  defaults:
+    _title: 'Decreto bullet point attachment modal'
+    _controller: '\Drupal\decreto_content_modify\Controller\BulletPointAttachmentController::modalContentRender'
+  requirements:
+    _permission: 'access content'
+    bullet_point_attachment: \d+
+
 decreto_content_modify.bpas_add:
   path: '/bullet-points/{bullet_point}/add-bpa'
   options:
@@ -91,7 +104,6 @@ decreto_content_modify.bpas_add:
   defaults:
     _title: 'Decreto add bullet point attachment'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentsAddForm'
-    node: null
   requirements:
     _permission: 'create decreto_bullet_attachment content'
     bullet_point: \d+

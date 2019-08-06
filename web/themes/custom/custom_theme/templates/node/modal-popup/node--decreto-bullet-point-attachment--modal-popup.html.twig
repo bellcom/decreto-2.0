@@ -11,15 +11,9 @@
 %}
 <article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  <div class="boxy__heading">
-    <h2{{ title_attributes.addClass('boxy__heading__title') }}>
-      {{ label }}
-    </h2>
-  </div>
-  {{ title_suffix }}
-
-  <div {{ content_attributes.addClass('boxy__body') }}>
-    {{ content }}
+  <div{{ content_attributes.addClass('content','boxy__body').setAttribute('id', 'bpa-content-' ~ node.id) }}>
+    <div class="annotate-content">
+      {{ content }}
+    </div>
   </div>
 </article>

@@ -65,7 +65,6 @@
  *   in different view modes.
  */
 #}
-{{ attach_library('decreto_annotator/decreto-annotator') }}
 {%
   set classes = [
   node.bundle|clean_class,
@@ -105,11 +104,13 @@
     </div>
   </div>
 
-  <div{{ content_attributes.addClass('content', 'collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
-    {% if content.field_decreto_bpa_html|render|trim is not empty %}
-      {{ content|without('body') }}
+  <div{{ content_attributes.addClass('content','collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
+    {% if node.field_decreto_bpa_html.entity.uri.value %}
+      <a href="{{ path('decreto_content_modify.bpas_modal', {'bullet_point_attachment': node.id()}) }}" title="{{ "Open in popup" | trans }}" class="use-ajax" data-dialog-type="modal">Open in popup</a>
     {% else %}
-      {{ content }}
+      <div class="annotate-content">
+        {{ content }}
+      </div>
     {% endif %}
   </div>
 

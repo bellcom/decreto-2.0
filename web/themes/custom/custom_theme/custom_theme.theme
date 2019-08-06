@@ -211,6 +211,11 @@ function custom_theme_preprocess_node__decreto_bullet_point_attachment(&$variabl
 
   $decretoBPA = new DecretoBulletPointAttachment($node);
   $variables['content']['#bullet_point_id'] = $decretoBPA->getBulletPoint(FALSE);
+
+  // Attaching annotator behaviour.
+  if ($variables['view_mode'] == 'teaser' || $variables['view_mode'] == 'modal_popup') {
+    $variables['#attached']['library'][] = 'decreto_annotator/decreto-annotator';
+  }
 }
 
 /**

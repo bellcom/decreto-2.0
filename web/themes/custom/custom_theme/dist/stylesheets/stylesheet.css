@@ -226,7 +226,7 @@ th {
   .heading-h3 {
     orphans: 3;
     widows: 3; }
-  
+
   h2,
   .heading-h2,
   h3,
@@ -8354,11 +8354,11 @@ p {
 @media screen and (max-width: 767px) {
   h1, .heading-h1, .h1, .heading-h1 {
     font-size: 28px; }
-  
+
   h2,
   .heading-h2, .h2, .heading-h2 {
     font-size: 19px; }
-  
+
   h3,
   .heading-h3, .h3, .heading-h3 {
     font-size: 17px; }
@@ -8372,11 +8372,11 @@ p {
 @media screen and (min-width: 768px) and (max-width: 991px) {
   h1, .heading-h1, .h1, .heading-h1 {
     font-size: 30px; }
-  
+
   h2,
   .heading-h2, .h2, .heading-h2 {
     font-size: 20px; }
-  
+
   h3,
   .heading-h3, .h3, .heading-h3 {
     font-size: 18px; }
@@ -8390,11 +8390,11 @@ p {
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   h1, .heading-h1, .h1, .heading-h1 {
     font-size: 36px; }
-  
+
   h2,
   .heading-h2, .h2, .heading-h2 {
     font-size: 24px; }
-  
+
   h3,
   .heading-h3, .h3, .heading-h3 {
     font-size: 22px; }
@@ -8408,11 +8408,11 @@ p {
 @media screen and (min-width: 1200px) {
   h1, .heading-h1, .h1, .heading-h1 {
     font-size: 36px; }
-  
+
   h2,
   .heading-h2, .h2, .heading-h2 {
     font-size: 24px; }
-  
+
   h3,
   .heading-h3, .h3, .heading-h3 {
     font-size: 22px; }
@@ -9197,6 +9197,9 @@ body,
   position: relative;
   height: 100%;
   background: #ffffff; }
+
+.annotator-wrapper #page-container {
+  position: relative; }
 
 .annotator-wrapper .field p {
   background: #fbfbfb;
