@@ -107,6 +107,8 @@
   <div{{ content_attributes.addClass('content','collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
     {% if node.field_decreto_bpa_html.entity.uri.value %}
       <a href="{{ path('decreto_content_modify.bpas_modal', {'bullet_point_attachment': node.id()}) }}" title="{{ "Open in popup" | trans }}" class="use-ajax" data-dialog-type="modal">Open in popup</a>
+    {% elseif node.field_decreto_bpa_file.entity.uri.value %}
+      Download file: {{ content.field_decreto_bpa_file }}
     {% else %}
       <div class="annotate-content">
         {{ content }}
