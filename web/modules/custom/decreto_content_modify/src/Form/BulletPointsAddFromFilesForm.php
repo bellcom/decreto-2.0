@@ -211,7 +211,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
   }
 
   /**
-   * Ajax callback that increase amount of bullet points.
+   * Ajax callback that increase amount of files.
    *
    * @param array $form
    *   The Form API form.
@@ -261,7 +261,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
   }
 
   /**
-   * Ajax bullet point update function.
+   * Ajax files container update function.
    *
    * @param array $form
    *   Form API form.

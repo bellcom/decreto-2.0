@@ -134,21 +134,20 @@ decreto_content_modify.bpas_delete:
     _permission: 'delete any decreto_bullet_point_attachment content'
     node: \d+
 
-### left overfrom old version, will be put above as the project proceeds
-
-decreto_content_modify.memo_add:
-  path: '/memo/add/{bullet_point}'
+decreto_content_modify.memos_add_edit:
+  path: '/bullet-points/{bullet_point}/add-edit-memo'
   options:
     parameters:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto add memo'
-    _form: '\Drupal\decreto_content_modify\Form\MemoEditForm'
-    bullet_point: null
+    _title: 'Decreto add/edit memo'
+    _form: '\Drupal\decreto_content_modify\Form\MemosEditForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'create decreto_memo content'
     bullet_point: \d+
+
+### left overfrom old version, will be put above as the project proceeds
 
 decreto_content_modify.memo_edit:
   path: '/memo/edit/{node}'
