@@ -4,9 +4,6 @@ namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
-use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
-use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
-use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
@@ -42,8 +39,10 @@ class MemosEditForm extends AjaxFormBase {
     $meeting = $decretoBP->getMeeting();
     $this->parent = $meeting;
 
-    // Getting list of existing memos.
-    $this->memos = $decretoBP->getMemos();
+    // Getting list of existing memos on first load.
+    if (!isset($this->memos)) {
+      $this->memos = $decretoBP->getMemos();
+    }
 
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('memos_add_edit_form');
@@ -57,16 +56,15 @@ class MemosEditForm extends AjaxFormBase {
     ];
 
     $counter = $form_state->get('counter');
-    if (empty($counter) || $counter < 1) {
-      // This is a first load of form, we load all memos if present.
-      // If no memos present, we start from 1.
-      if (!empty($this->memos)) {
-        $counter = count($this->memos);
-      }
-      else {
+    if (!isset($counter)) {
+      // If counter is not set yet (first form load), add as many as the
+      // existing memos count.
+      $counter = count($this->memos);
+
+      // If we have no memos yet, set counter to 1 to render blank fieldset.
+      if (!$counter) {
         $counter = 1;
       }
-
       $form_state->set('counter', $counter);
     }
 
@@ -91,21 +89,19 @@ class MemosEditForm extends AjaxFormBase {
         '#allowed_formats' => ['basic_html'],
       ];
 
-      if ($counter > 1) {
-        $memos_container['delete'] = [
-          '#name' => 'edit-memo-index-delete-' . $i,
-          '#value' => t('Delete'),
-          '#memo_index' => $i,
-          '#ajax' => [
-            'wrapper' => 'js-memos-container-wrapper',
-            'callback' => '::ajaxMemos',
-            'event' => 'click',
-          ],
-          '#submit' => ['::submitDelete'],
-          '#type' => 'submit',
-          '#limit_validation_errors' => [],
-        ];
-      }
+      $memos_container['delete'] = [
+        '#name' => 'edit-memo-index-delete-' . $i,
+        '#value' => t('Delete'),
+        '#memo_index' => $i,
+        '#ajax' => [
+          'wrapper' => 'js-memos-container-wrapper',
+          'callback' => '::ajaxMemos',
+          'event' => 'click',
+        ],
+        '#submit' => ['::submitDelete'],
+        '#type' => 'submit',
+        '#limit_validation_errors' => [],
+      ];
       $form['memos_container'][] = $memos_container;
     }
 
@@ -149,6 +145,7 @@ class MemosEditForm extends AjaxFormBase {
         $form['memos_container'][$i]['body']['#default_value'] = $memo->body->value;
         // Adding back reference to the node.
         $form['memos_container'][$i]['#memo_nid'] = $memo->id();
+        $form['memos_container'][$i]['delete']['#memo_nid'] = $memo->id();
         $i++;
       }
     }
@@ -163,6 +160,10 @@ class MemosEditForm extends AjaxFormBase {
     // Getting values.
     $memos_container = $form_state->getValue('memos_container');
 
+    // Getting existing memos.
+    $decretoBP = new DecretoBulletPoint($this->bulletPoint);
+    $existingMemos = $decretoBP->getMemos();
+
     // Processing memos.
     foreach ($memos_container as $delta => $memo_container) {
       $title = $memo_container['title'];
@@ -174,8 +175,8 @@ class MemosEditForm extends AjaxFormBase {
         $memo->title = $title;
         $memo->body = $body;
 
-        // Unsetting the memo from list.
-        unset($this->memos[$memo_nid]);
+        // Unsetting the memo from list of existing memos.
+        unset($existingMemos[$memo_nid]);
       }
       // Creating new memo.
       else {
@@ -193,9 +194,9 @@ class MemosEditForm extends AjaxFormBase {
       $memo->save();
     }
 
-    // If we have some memos left in the list, this means they were removed.
-    // Delete those nodes.
-    foreach ($this->memos as $memo) {
+    // If we have some memos left in the list of existing memos, this means they
+    // were removed. Delete those nodes.
+    foreach ($existingMemos as $memo) {
       $memo->delete();
     }
   }
@@ -238,6 +239,10 @@ class MemosEditForm extends AjaxFormBase {
     // Unsetting memo that is deleted.
     unset($user_input['memos_container'][$triggering_element['#memo_index']]);
     $user_input['memos_container'] = array_values($user_input['memos_container']);
+    // Also unset the existing memo, if memo_nid is filled.
+    if ($nid = $triggering_element['#memo_nid']) {
+      unset($this->memos[$nid]);
+    }
 
     // Reusing saved user input for future.
     $form_state->setUserInput($user_input);
