@@ -45,6 +45,9 @@ class MemosEditForm extends AjaxFormBase {
     // Getting list of existing memos.
     $this->memos = $decretoBP->getMemos();
 
+    // Adding help message.
+    $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('memos_add_edit_form');
+
     // Memos container.
     $form['memos_container'] = [
       '#type' => 'container',

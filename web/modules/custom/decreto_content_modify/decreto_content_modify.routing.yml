@@ -147,35 +147,20 @@ decreto_content_modify.memos_add_edit:
     _permission: 'create decreto_memo content'
     bullet_point: \d+
 
+decreto_content_modify.bp_memos:
+  path: '/bullet-points/{bullet_point}/memos'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+  defaults:
+    _title: 'Decreto read memos'
+    _controller: '\Drupal\decreto_content_modify\Controller\MemoController::bulletPointMemosContent'
+  requirements:
+    _permission: 'access content'
+    bullet_point: \d+
+
 ### left overfrom old version, will be put above as the project proceeds
-
-decreto_content_modify.memo_edit:
-  path: '/memo/edit/{node}'
-  options:
-    parameters:
-      node:
-        type: entity:node
-  defaults:
-    _title: 'Decreto edit memo'
-    _form: '\Drupal\decreto_content_modify\Form\MemoEditForm'
-    node: null
-  requirements:
-    _permission: 'access content'
-    node: \d+
-
-decreto_content_modify.memo_delete:
-  path: '/memo/delete/{node}'
-  options:
-    parameters:
-      node:
-        type: entity:node
-  defaults:
-    _title: 'Decreto delete memo'
-    _form: '\Drupal\decreto_content_modify\Form\MemoDeleteForm'
-    node: null
-  requirements:
-    _permission: 'access content'
-    node: \d+
 
 decreto_content_modify.user_edit:
   path: '/user/edit'

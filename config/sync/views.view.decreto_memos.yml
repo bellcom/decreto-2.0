@@ -3,9 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.list_advanced
+    - core.entity_view_mode.node.full
     - node.type.decreto_memo
   module:
+    - decreto_help
     - node
     - user
 id: decreto_memos
@@ -64,7 +65,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: list_advanced
+          view_mode: full
       fields:
         title:
           id: title
@@ -224,14 +225,111 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  decreto_bullet_point_memos_embed:
+    display_plugin: embed
+    id: decreto_bullet_point_memos_embed
+    display_title: 'Bullet point memos Embed'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        relationships: false
+        arguments: false
+        header: false
+      relationships:
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: author
+          required: false
+          entity_type: node
+          entity_field: uid
+          plugin_id: standard
+        field_decreto_memo_bp:
+          id: field_decreto_memo_bp
+          table: node__field_decreto_memo_bp
+          field: field_decreto_memo_bp
+          relationship: none
+          group_type: group
+          admin_label: 'Bullet point'
+          required: true
+          plugin_id: standard
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: field_decreto_memo_bp
+          group_type: group
+          admin_label: ''
+          default_action: empty
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
+      display_description: ''
+      header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: 'Help message'
+          empty: true
+          message_key: memos_read_popup
+          plugin_id: decreto_help_message_popup
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   decreto_memo_page:
     display_plugin: page
     id: decreto_memo_page
-    display_title: Page
+    display_title: 'Memos page'
     position: 2
     display_options:
       display_extenders: {  }
-      path: Memos
+      path: memos
       pager:
         type: mini
         options:
@@ -254,6 +352,7 @@ display:
         pager: false
         title: false
       title: Memos
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -267,10 +366,11 @@ display:
   decreto_memo_popup_embed:
     display_plugin: embed
     id: decreto_memo_popup_embed
-    display_title: Embed
+    display_title: 'Memos popup Embed'
     position: 1
     display_options:
       display_extenders: {  }
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
