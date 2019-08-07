@@ -284,13 +284,17 @@ class DecretoMeeting extends DecretoNode {
       $user = \Drupal::currentUser();
     }
 
+    $count = 0;
     $bpIds = $this->getBulletPoints(FALSE);
-    $count = \Drupal::entityQuery('node')
-      ->condition('uid', $user->id())
-      ->condition('type', 'decreto_memo')
-      ->condition('field_decreto_memo_bp', $bpIds, 'IN')
-      ->count()
-      ->execute();
+
+    if (!empty($bpIds)) {
+      $count = \Drupal::entityQuery('node')
+        ->condition('uid', $user->id())
+        ->condition('type', 'decreto_memo')
+        ->condition('field_decreto_memo_bp', $bpIds, 'IN')
+        ->count()
+        ->execute();
+    }
 
     return intval($count) > 0;
   }
