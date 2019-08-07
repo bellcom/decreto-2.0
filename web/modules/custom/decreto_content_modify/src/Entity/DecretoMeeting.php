@@ -2,9 +2,8 @@
 
 namespace Drupal\decreto_content_modify\Entity;
 
-use Drupal\Core\Render\Element\Page;
-use Drupal\decreto_annotator\Entity\Note;
 use Drupal\message\Entity\Message;
+use Drupal\user\UserInterface;
 
 /**
  * Wrapper for Decreto Meeting.
@@ -246,6 +245,54 @@ class DecretoMeeting extends DecretoNode {
     }
 
     return $results;
+  }
+
+  /**
+   * Check whether a given meeting has notes authored by user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The note author.
+   *
+   * @return bool
+   *   TRUE or FALSE.
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
+   */
+  public function hasUserNotes(UserInterface $user = NULL) {
+    $bps = $this->getBulletPoints();
+    foreach ($bps as $bp) {
+      $decretoBP = new DecretoBulletPoint($bp);
+      if ($decretoBP->hasUserNotes($user)) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Check whether a given meeting has memos authored by user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The note author.
+   *
+   * @return bool
+   *   TRUE or FALSE.
+   */
+  public function hasUserMemos(UserInterface $user = NULL) {
+    if (empty($user)) {
+      $user = \Drupal::currentUser();
+    }
+
+    $bpIds = $this->getBulletPoints(FALSE);
+    $count = \Drupal::entityQuery('node')
+      ->condition('uid', $user->id())
+      ->condition('type', 'decreto_memo')
+      ->condition('field_decreto_memo_bp', $bpIds, 'IN')
+      ->count()
+      ->execute();
+
+    return intval($count) > 0;
   }
 
 }

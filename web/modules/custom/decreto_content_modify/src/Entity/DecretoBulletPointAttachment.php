@@ -4,6 +4,7 @@ namespace Drupal\decreto_content_modify\Entity;
 
 use Drupal\decreto_annotator\Entity\Note;
 use Drupal\node\Entity\Node;
+use Drupal\user\UserInterface;
 
 /**
  * Wrapper for Decreto Bullet point attachment.
@@ -113,6 +114,29 @@ class DecretoBulletPointAttachment extends DecretoNode {
     }
 
     return array();
+  }
+
+  /**
+   * Check whether a given bullet_point_attachment has notes authored by user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The note author.
+   *
+   * @return bool
+   *   TRUE or FALSE.
+   */
+  public function hasUserNotes(UserInterface $user = NULL) {
+    if (empty($user)) {
+      $user = \Drupal::currentUser();
+    }
+
+    $count = $query = \Drupal::entityQuery('decreto_annotator_note')
+      ->condition('bpa_id', $this->getEntity()->id())
+      ->condition('uid', $user->id())
+      ->count()
+      ->execute();
+
+    return intval($count) > 0;
   }
 
 }

@@ -7,8 +7,6 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\node\NodeInterface;
-use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 
 /**
@@ -125,40 +123,6 @@ class ContentService {
       'my_org' => $count,
       'total' => $count
     ];
-  }
-
-  /**
-   * Check whether a given meeting has any memos attached to its children bullet points.
-   *
-   * @param NodeInterface $meeting
-   *   Meeting in inspect.
-   * @param UserInterface $user
-   *   Notes author.
-   *
-   * @return boolean
-   *   TRUE or FALSE.
-   */
-  public function getMeetingHasMemo(NodeInterface $meeting, UserInterface $user = NULL) {
-    $uid = $this->currentUser->id();
-    if (!empty($user)) {
-      $uid = $user->id();
-    }
-
-    $count = 0;
-
-    $referencedBps = $meeting->field_decreto_meet_bps->getValue();
-    if (!empty($referencedBps)) {
-      $referencedBpIds = array_column($referencedBps, 'target_id');
-
-      $count = $this->nodeStorage->getQuery()
-        ->condition('uid', $uid)
-        ->condition('type', 'decreto_memo')
-        ->condition('field_decreto_memo_bp', $referencedBpIds, 'IN')
-        ->count()
-        ->execute();
-    }
-
-    return intval($count) > 0;
   }
 
 }

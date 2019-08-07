@@ -3,6 +3,7 @@
 namespace Drupal\decreto_content_modify\Entity;
 
 use Drupal\node\Entity\Node;
+use Drupal\user\UserInterface;
 
 /**
  * Wrapper for Decreto Bullet point.
@@ -133,6 +134,58 @@ class DecretoBulletPoint extends DecretoNode {
     }
 
     return array();
+  }
+
+  /**
+   * Check whether a given bullet_point has memos authored by user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The note author.
+   *
+   * @return bool
+   *   TRUE or FALSE.
+   */
+  public function hasUserMemos(UserInterface $user = NULL) {
+    if (empty($user)) {
+      $user = \Drupal::currentUser();
+    }
+
+    $count = \Drupal::entityQuery('node')
+      ->condition('uid', $user->id())
+      ->condition('type', 'decreto_memo')
+      ->condition('field_decreto_memo_bp', $this->getEntity()->id())
+      ->count()
+      ->execute();
+
+    return intval($count) > 0;
+  }
+
+  /**
+   * Check whether a given bullet_point has notes authored by user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The note author.
+   *
+   * @return bool
+   *   TRUE or FALSE.
+   */
+  public function hasUserNotes(UserInterface $user = NULL) {
+    if (empty($user)) {
+      $user = \Drupal::currentUser();
+    }
+
+    $count = 0;
+    $bpaIds = $this->getBulletPointAttachments(FALSE);
+
+    if (!empty($bpaIds)) {
+      $count = $query = \Drupal::entityQuery('decreto_annotator_note')
+        ->condition('uid', $user->id())
+        ->condition('bpa_id', $bpaIds, 'IN')
+        ->count()
+        ->execute();
+    }
+
+    return intval($count) > 0;
   }
 
 }
