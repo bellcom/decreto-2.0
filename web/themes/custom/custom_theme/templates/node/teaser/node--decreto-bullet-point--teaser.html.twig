@@ -85,7 +85,7 @@
     <div class="panel-body">
       {{ title_prefix }}
       <span{{ title_attributes }}>
-        {{ label }}{{ content.field_decreto_bp_closed }}
+        {{ label }}
         {# Begin - notes #}
         {% if content['#contains_notes'] %}
           <span class="material-icons" title="{{ 'This bullet point has notes' | trans }}" data-toggle="tooltip">chat</span>
@@ -100,6 +100,20 @@
           </a>
         {% endif %}
         {# End - notes #}
+        {# Start - closed #}
+        {% if node.field_decreto_bp_closed.value %}
+          <span class="material-icons" title="{{ 'Closed bullet point' | trans }}" data-toggle="tooltip">
+            lock
+          </span>
+        {% endif %}
+        {# End - closed #}
+        {# Start - personal #}
+        {% if node.field_decreto_bp_personal.value %}
+          <span class="material-icons" title="{{ 'Personal bullet point' | trans }}" data-toggle="tooltip">
+            person
+          </span>
+        {% endif %}
+        {# End - personal #}
 
         {# Begin - actions #}
         <span class="boxy__bp_actions boxy__actions boxy pull-right">

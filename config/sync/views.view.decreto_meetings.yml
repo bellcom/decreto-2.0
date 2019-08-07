@@ -233,6 +233,7 @@ display:
         title: false
         header: false
         arguments: false
+        footer: false
       filters:
         status:
           value: '1'
@@ -311,6 +312,18 @@ display:
           break_phrase: false
           not: false
           plugin_id: numeric
+      footer:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/meetings\" class=\"btn btn-secondary\">\r\n    Vis møder\r\n  </a>\r\n  <a href=\"/meetings/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret et møde\r\n  </a>\r\n</div>"
+          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:

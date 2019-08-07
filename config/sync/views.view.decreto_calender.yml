@@ -76,7 +76,7 @@ display:
             day: view.decreto_calender.page_day
             week: view.decreto_calender.page_week
           granularity_links_custom_path:
-            day: '/search/[decreto_calendar_date:custom:Ymd]'
+            day: '/meetings?from=[decreto_calendar_date:custom:Y-m-d]&to=[decreto_calendar_date:custom:Y-m-d]'
       row:
         type: calendar_row
         options:
