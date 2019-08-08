@@ -80,7 +80,6 @@ class SearchInMeetingForm extends FormBase {
     ];
     // Form actions END.
 
-    //TODO: filter is not applied after attaching library.
     if ($searchParam) {
       $form['#attached']['library'][] = 'decreto_content_modify/search-in-meeting-init';
     }
