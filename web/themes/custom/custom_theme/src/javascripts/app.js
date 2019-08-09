@@ -101,4 +101,5 @@ jQuery(function($) {
       $('form.decreto-content-modify-search-in-meeting-form input').removeAttr('disabled');
     }
     event.preventDefault();
+  });
 });
