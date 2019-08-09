@@ -224,6 +224,36 @@ class DecretoMeeting extends DecretoNode {
   }
 
   /**
+   * Set the new order of the bullet points in this meeting.
+   *
+   * The meeting will only be updated if all the existing bullet points are
+   * present in the provided order list.
+   *
+   * @param array $bulletPointsOrder
+   *   Array structured like:
+   *     array(
+   *      'weight' => 'nid',
+   *     ).
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function reorderBulletPoints(array $bulletPointsOrder) {
+    // Filtering the provided array, so that only existing bullet points
+    // are to be added.
+    $existingBpIds = $this->getBulletPoints(FALSE);
+    $bulletPointsOrder = array_intersect($bulletPointsOrder, $existingBpIds);
+
+    if (count($bulletPointsOrder) == count($existingBpIds)) {
+      // Resetting keys.
+      $bulletPointsOrder = array_values($bulletPointsOrder);
+
+      // Updating value.
+      $this->getEntity()->set('field_decreto_meet_bps', $bulletPointsOrder);
+      $this->save();
+    }
+  }
+
+  /**
    * Returns related messages.
    *
    * @param bool $load

@@ -159,12 +159,3 @@ decreto_content_modify.bp_memos:
   requirements:
     _permission: 'access content'
     bullet_point: \d+
-
-### left overfrom old version, will be put above as the project proceeds
-
-decreto_content_modify.user_edit:
-  path: '/user/edit'
-  defaults:
-    _controller: '\Drupal\decreto_content_modify\Controller\UserController::redirectToEditPage'
-  requirements:
-    _permission: 'access content'

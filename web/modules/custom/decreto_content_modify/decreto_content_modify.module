@@ -4,6 +4,7 @@ use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_content_modify\Entity\DecretoMemo;
+use Drupal\decreto_content_modify\Form\MeetingItemsReorderForm;
 use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
@@ -16,10 +17,12 @@ function decreto_content_modify_preprocess_node(&$variables) {
   $node = $variables['node'];
   $view_mode = $variables['elements']['#view_mode'];
 
-  // Adding search in meeting form.
   if ($node->getType() == 'decreto_meeting') {
     if ($view_mode == 'full') {
+      // Adding search in meeting form.
       $variables['search_in_meeting_form'] = \Drupal::formBuilder()->getForm(SearchInMeetingForm::class, $node);
+      // Adding items reorder form.
+      $variables['items_reorder_form'] = \Drupal::formBuilder()->getForm(MeetingItemsReorderForm::class, $node);
     }
   }
 

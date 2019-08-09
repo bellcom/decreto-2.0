@@ -83,4 +83,22 @@ jQuery(function($) {
         }
         event.preventDefault();
     });
+
+  // Switch mode toggle callback.
+  $('#meeting-agenda-switch-mode-toggle').on('click', function (event) {
+    $('#agenda-overview').toggleClass('hidden');
+    $('#agenda-item-reorder').toggleClass('hidden');
+
+    // Resetting search.
+    $('.decreto-bullet-point.teaser, .decreto-bullet-point-attachment.teaser').removeClass('hidden');
+    $('form.decreto-content-modify-search-in-meeting-form input').val('');
+
+    // Toggle search enabled.
+    if ($('#agenda-overview').hasClass('hidden')) {
+      $('form.decreto-content-modify-search-in-meeting-form input').attr('disabled', 'disabled')
+    }
+    else {
+      $('form.decreto-content-modify-search-in-meeting-form input').removeAttr('disabled');
+    }
+    event.preventDefault();
 });

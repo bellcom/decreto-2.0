@@ -152,8 +152,13 @@ view_mode ? view_mode|clean_class,
                     {{ "Open/close all points" | trans }}
                 </a>
             </div>
-            <div id="agenda">
+            <div id="agenda-overview">
                 {{ content.field_decreto_meet_bps}}
+            </div>
+            <div id="agenda-item-reorder" class="hidden">
+              <div class="region region-action-box__primary">
+                {{ items_reorder_form }}
+              </div>
             </div>
         </div>
     </div>
