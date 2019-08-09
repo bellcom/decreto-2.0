@@ -33,7 +33,6 @@ module:
   editor: 0
   entity_reference: 0
   field: 0
-  field_group: 0
   field_ui: 0
   file: 0
   filter: 0
@@ -55,11 +54,9 @@ module:
   page_cache: 0
   path: 0
   rdf: 0
-  search: 0
   search_api: 0
   search_api_attachments: 0
   search_api_solr: 0
-  search_api_views_taxonomy: 0
   shortcut: 0
   simple_block: 0
   system: 0

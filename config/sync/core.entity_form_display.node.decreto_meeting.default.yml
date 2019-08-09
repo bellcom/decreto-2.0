@@ -19,46 +19,7 @@ dependencies:
     - node.type.decreto_meeting
   module:
     - datetime
-    - field_group
     - file
-third_party_settings:
-  field_group:
-    group_decreto_meet_dates:
-      children:
-        - field_decreto_meet_start_date
-        - field_decreto_meet_end_date
-      parent_name: ''
-      weight: 3
-      label: 'Meeting dates'
-      format_type: html_element
-      format_settings:
-        label: 'Meeting dates'
-        element: div
-        show_label: false
-        label_element: h3
-        attributes: ''
-        effect: none
-        speed: fast
-        id: ''
-        classes: 'container-inline form-group'
-    group_decreto_meet_docs:
-      children:
-        - field_decreto_meet_full_doc
-        - field_decreto_meet_full_doc_c
-      parent_name: ''
-      weight: 6
-      label: Descriptions
-      format_type: html_element
-      format_settings:
-        label: Descriptions
-        element: div
-        show_label: false
-        label_element: h3
-        attributes: ''
-        effect: none
-        speed: fast
-        id: ''
-        classes: 'form-inline form-group'
 id: node.decreto_meeting.default
 targetEntityType: node
 bundle: decreto_meeting
