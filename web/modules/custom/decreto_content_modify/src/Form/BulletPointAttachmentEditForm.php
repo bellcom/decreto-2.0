@@ -4,7 +4,6 @@ namespace Drupal\decreto_content_modify\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
-use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
 use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\file\Entity\File;
 use Drupal\node\NodeInterface;
@@ -166,8 +165,7 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
       $form['#custom_text_tab_active'] = '';
       $form['#upload_file_tab_active'] = 'active';
 
-      // TODO: redo after DecretoHTMLUtils is refactored.
-      if (DecretoHTMLUtils::isScheduled($bpa->field_decreto_bpa_file->entity, $bpa)) {
+      if (\Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->isFileScheduled($fid, $bpa->id())) {
         $form['upload_file']['convert_to_html']['#default_value'] = 1;
       }
 
@@ -227,7 +225,7 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     // Handle PDF > HTML conversion.
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
       if ($bpa_file && $convert_to_html && $bpa_file->getMimeType() == 'application/pdf') {
-        DecretoHTMLUtils::scheduleConversion($bpa_file, $this->node);
+        \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($bpa_file->id(), $this->node->id());
       }
     }
     // Handle * > PDF conversion.

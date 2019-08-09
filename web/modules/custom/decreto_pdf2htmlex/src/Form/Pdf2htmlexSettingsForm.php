@@ -1,13 +1,16 @@
 <?php
+
 namespace Drupal\decreto_pdf2htmlex\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * Configure example settings for this site.
  */
-class pdf2htmlexSettingsForm extends ConfigFormBase {
+class Pdf2htmlexSettingsForm extends ConfigFormBase {
+
   /**
    * {@inheritdoc}
    */
@@ -33,6 +36,7 @@ class pdf2htmlexSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Path to pdf2htmlEX'),
       '#default_value' => $config->get('decreto_pdf2htmlex_path'),
+      '#description' => $this->t('If left empty pdf2htmlEX will be used as generic command'),
     );
     $form['decreto_pdf2htmlex_zoom'] = array(
       '#type' => 'textfield',
@@ -52,5 +56,14 @@ class pdf2htmlexSettingsForm extends ConfigFormBase {
       ->set('decreto_pdf2htmlex_zoom', $form_state->getValue('decreto_pdf2htmlex_zoom'))
       ->save();
     parent::submitForm($form, $form_state);
+
+    $version = \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->getVersion();
+    if ($version) {
+      \Drupal::messenger()->addMessage($this->t('pdf2htmlEX is successfully initialized. Version %version', ['%version' => $version]), 'status');
+    }
+    else {
+      \Drupal::messenger()->addMessage($this->t('pdf2htmlEX is not found on the provided path', ['%version' => $version]), 'error');
+    }
   }
+
 }

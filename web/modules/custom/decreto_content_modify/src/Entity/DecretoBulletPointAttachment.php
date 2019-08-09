@@ -94,6 +94,23 @@ class DecretoBulletPointAttachment extends DecretoNode {
   }
 
   /**
+   * Sets HTML file.
+   *
+   * @param int $fid
+   *   Fid of the file.
+   * @param bool $save
+   *   If bullet point attachment needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function setHtmlFile($fid, $save = TRUE) {
+    $this->getEntity()->set('field_decreto_bpa_html', ['target_id' => $fid]);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
    * Returns related notes.
    *
    * @param bool $load

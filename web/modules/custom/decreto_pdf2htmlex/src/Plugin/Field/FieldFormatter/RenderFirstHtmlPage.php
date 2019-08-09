@@ -34,4 +34,5 @@ class RenderFirstHtmlPage extends GenericFileFormatter {
 
     return $elements;
   }
+
 }

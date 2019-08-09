@@ -34,4 +34,5 @@ class RenderHtml extends GenericFileFormatter {
 
     return $elements;
   }
+
 }

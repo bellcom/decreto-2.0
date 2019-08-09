@@ -45,3 +45,33 @@ function decreto_pdf2htmlex_schema() {
   );
   return $schema;
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function decreto_pdf2htmlex_requirements($phase) {
+  $requirements = array();
+
+  $version = \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->getVersion();
+
+  if (!$version) {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf2htmlex'] = array(
+        'title' => t('Decreto pdf2htmlEX version'),
+        'value' => 'pdf2htmlEX cannot be found!',
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  else {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf2htmlex'] = array(
+        'title' => t('Decreto pdf2htmlEX version'),
+        'value' => 'pdf2htmlEX version ' . $version,
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+  }
+
+  return $requirements;
+}

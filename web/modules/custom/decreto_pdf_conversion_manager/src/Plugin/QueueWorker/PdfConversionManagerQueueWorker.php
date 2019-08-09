@@ -2,7 +2,6 @@
 namespace Drupal\decreto_pdf_conversion_manager\Plugin\QueueWorker;
 
 use Drupal\Core\Queue\QueueWorkerBase;
-use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
 use Drupal\decreto_pdf_conversion_manager\lib\PDFConverter;
 use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\file\Entity\File;
@@ -72,7 +71,7 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
         DecretoPDFUtils::updateStatus($item->fid, 'Completed');
 
         if ($item->convert_to_html) {
-          DecretoHTMLUtils::scheduleConversion($pdfFile, $node);
+          \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($pdfFile->id(), $node->id());
         }
       }
     }

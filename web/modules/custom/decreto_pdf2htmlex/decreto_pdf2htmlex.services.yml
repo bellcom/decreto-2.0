@@ -1,0 +1,4 @@
+services:
+  decreto_pdf2htmlex.pdf2htmlex:
+    class: Drupal\decreto_pdf2htmlex\Services\Pdf2htmlexService
+    arguments: []

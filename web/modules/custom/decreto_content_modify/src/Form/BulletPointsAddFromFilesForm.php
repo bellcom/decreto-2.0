@@ -5,7 +5,6 @@ namespace Drupal\decreto_content_modify\Form;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
-use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
 use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
@@ -184,7 +183,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
       // Handle PDF > HTML conversion.
       if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
         if ($convert_to_html && $file->getMimeType() == 'application/pdf') {
-          DecretoHTMLUtils::scheduleConversion($file, $bpa_node);
+          \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($file->fid, $bpa_node->id());
         }
       }
       // Handle * > PDF conversion.

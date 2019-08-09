@@ -1,6 +1,6 @@
 <?php
 
-use Drupal\decreto_pdf2htmlex\Utils\DecretoPdf2htmlexUtils as DecretoHTMLUtils;
+use Drupal\decreto_pdf2htmlex\Plugin\Field\FieldFormatter\FieldFormatterUtility;
 use Drupal\file\Entity\File;
 
 /**
@@ -22,7 +22,7 @@ function decreto_pdf2htmlex_theme() {
  */
 function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) {
   template_preprocess_file_link($vars);
-  $vars['html'] = DecretoHTMLUtils::getAllPages($vars['file']);
+  $vars['html'] = FieldFormatterUtility::getAllPages($vars['file']);
 }
 
 /**
@@ -30,21 +30,17 @@ function template_preprocess_decreto_pdf2htmlex_rendered_html_formatter(&$vars) 
  */
 function template_preprocess_decreto_pdf2htmlex_rendered_html_first_page_formatter(&$vars) {
   template_preprocess_file_link($vars);
-  $vars['html'] = DecretoHTMLUtils::getFirstPage($vars['file']);
+  $vars['html'] = FieldFormatterUtility::getFirstPage($vars['file']);
 }
 
 /**
- * Implements hook_cron()
+ * Implements hook_cron().
  */
 function decreto_pdf2htmlex_cron() {
-  //TODO: is that needed?
-  // Clean up pdf2htmlEX garbage before converting
-  //shell_exec('find /tmp/pdf2htmlEX-* -mtime +1 -delete 2> /dev/null');
-
   $queue_factory = \Drupal::service('queue');
   $queue = $queue_factory->get('decreto_pdf2htmlex_queue');
 
-  $scheduled_files = DecretoHTMLUtils::getScheduledFiles();
+  $scheduled_files = \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->getScheduledFiles();
 
   foreach ($scheduled_files as $schedule_file) {
     $queue->createItem($schedule_file);
@@ -52,12 +48,10 @@ function decreto_pdf2htmlex_cron() {
 }
 
 /**
- * Implement hook_entity_delete()
- *
- * @param File $file
+ * Implements hook_entity_delete().
  */
 function decreto_pdf2htmlex_file_delete(File $file) {
-  if (DecretoHTMLUtils::isScheduled($file)) {
-    DecretoPDFUtils::deleteScheduledJob($file->id());
+  if (\Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->isFileScheduled($file->id())) {
+    \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->deleteScheduledFile($file->id());
   }
 }
