@@ -16,7 +16,7 @@
     <input class="form-control" type="text" id="user-search-input" name="user-name" value="">
   </div>
 
-  <div class="form-actions">
+  <div>
     <input class="btn btn-secondary" type="submit" value="{{ 'Find' | trans }}">
   </div>
 </form>
@@ -26,3 +26,34 @@
 <div id="user-list">
   {{ users_list }}
 </div>
+
+<script>
+  var form = document.getElementById('user-search');
+  var input = document.getElementById('user-search-input');
+  var userList = document.getElementById('user-list');
+
+  function filterUsers(e) {
+    e.preventDefault();
+
+    var searchQuery = input.value;
+    var users = userList.getElementsByClassName('entity-list--user');
+    var regex = new RegExp(searchQuery, 'gi');
+
+    // Run through collection of users.
+    for (var user of users) {
+      var name = user.dataset.fullName;
+
+      // Does not match search query.
+      if (name.match(regex)) {
+        user.classList.remove('hidden');
+      }
+      // Does not match.
+      else {
+        user.classList.add('hidden');
+      }
+    }
+  };
+
+  form.addEventListener('submit', filterUsers);
+  input.addEventListener('keyup', filterUsers);
+</script>

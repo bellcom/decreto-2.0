@@ -1,6 +1,6 @@
 /*!
  * modernizr v3.7.1
- * Build https://modernizr.com/download?-arrow-contains-dataset-flexbox-history-svg-target-template-texttrackapi_track-touchevents-addtest-fnbind-printshiv-setclasses-testprop-dontmin
+ * Build https://modernizr.com/download?-arrow-contains-flexbox-history-svg-target-template-texttrackapi_track-touchevents-addtest-fnbind-printshiv-setclasses-testprop-dontmin
  *
  * Copyright (c)
  *  Faruk Ates
@@ -1905,24 +1905,6 @@ Detects support for the ':target' CSS pseudo-class.
     } catch (e) {
       return false;
     }
-  });
-
-/*!
-{
-  "name": "dataset API",
-  "caniuse": "dataset",
-  "property": "dataset",
-  "tags": ["dom"],
-  "builderAliases": ["dom_dataset"],
-  "authors": ["@phiggins42"]
-}
-!*/
-
-  // dataset API for data-* attributes
-  Modernizr.addTest('dataset', function() {
-    var n = createElement('div');
-    n.setAttribute('data-a-b', 'c');
-    return !!(n.dataset && n.dataset.aB === 'c');
   });
 
 /*!
