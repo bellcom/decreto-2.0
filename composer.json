@@ -106,6 +106,9 @@
             },
             "drupal/message_notify": {
                 "2966213 - MessageNotifierBase calling assert(): Calling assert() with a string argument is deprecated" : "https://www.drupal.org/files/issues/2018-10-15/2966213-3.patch"
+            },
+            "drupal/flag": {
+                "2880521 - LogicException: An anonymous user must be identifed by session ID." : "https://www.drupal.org/files/issues/2019-07-28/LogicException-An-anonymous-user-must-be-identifed-by-session-ID-2880521-13.patch"
             }
         }
     }
