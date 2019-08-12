@@ -33,9 +33,13 @@ $button-spacing: $grid-gutter-width;
 
   border-radius: 20px;
 
-  color: #fff;
+  &, &:hover, &:focus {
+    text-decoration: none;
 
-  background-color: $brand-tertiary;
+    color: #fff;
+
+    background-color: $brand-tertiary;
+  }
 
   + .action-button {
     margin-left: 10px;

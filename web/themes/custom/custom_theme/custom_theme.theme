@@ -143,6 +143,15 @@ function custom_theme_preprocess_node(&$variables) {
   $node = $variables['node'];
   $user = $node->getOwner();
 
+  // Date.
+  $createdAt = $node->getCreatedTime();
+  if (time() - $createdAt < 24*60*60) { // today.
+    $variables['date'] = \Drupal::service('date.formatter')->format($createdAt, 'html_time', '');
+  }
+  else { // not today.
+    $variables['date'] = \Drupal::service('date.formatter')->format($createdAt, 'html_date', '');
+  }
+
   // Get initials of user.
   $name = '';
   $firstname = '';

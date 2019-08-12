@@ -27,6 +27,10 @@
 
   align-items: center;
 
+  &, &:hover, &:hover {
+    text-decoration: none;
+  }
+
   .list-inline {
     margin-bottom: 0;
   }

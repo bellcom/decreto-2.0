@@ -18,31 +18,32 @@
  * @see template_process()
  */
 #}
-<div class="entity-list-advanced entity-list-advanced--notification {{ content.unread ? 'unread' }}">
-  <a href=" {{ url }}">
-    <!-- Begin - content -->
-    <div class="entity-list-advanced__content">
-      <!-- Begin - heading -->
-      <div class="entity-list-advanced__heading">
-        <h4 class="entity-list-advanced__heading__title">
-          {{ content }}
-        </h4>
-      </div>
-      <!-- End - heading -->
+<a href="{{ url }}"
+   class="entity-list-advanced entity-list-advanced--notification {{ content.unread ? 'entity-list-advanced--unread' : 'entity-list-advanced--read' }}">
 
-      <!-- Begin - footer -->
-      <div class="entity-list-advanced__footer">
-        {{ department }}
-      </div>
-      <!-- End - footer -->
-
+  <!-- Begin - content -->
+  <div class="entity-list-advanced__content">
+    <!-- Begin - heading -->
+    <div class="entity-list-advanced__heading">
+      <h4 class="entity-list-advanced__heading__title">
+        {{ content }}
+      </h4>
     </div>
-    <!-- End - content -->
+    <!-- End - heading -->
 
-    <!-- Begin - published at -->
-    <div class="entity-list-advanced__published-at">
-      {{ date }}
+    <!-- Begin - footer -->
+    <div class="entity-list-advanced__footer">
+      {{ department }}
     </div>
-    <!-- End - published at -->
-  </a>
-</div>
+    <!-- End - footer -->
+
+  </div>
+  <!-- End - content -->
+
+  <!-- Begin - published at -->
+  <div class="entity-list-advanced__published-at">
+    {{ date }}
+  </div>
+  <!-- End - published at -->
+
+</a>
