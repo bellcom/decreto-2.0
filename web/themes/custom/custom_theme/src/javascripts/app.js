@@ -100,6 +100,37 @@ jQuery(function($) {
     else {
       $('form.decreto-content-modify-search-in-meeting-form input').removeAttr('disabled');
     }
+
     event.preventDefault();
   });
+
+  // User search.
+  const form = document.getElementById('user-search');
+  const input = document.getElementById('user-search-input');
+  const userList = document.getElementById('user-list');
+
+  const filterUsers = e => {
+    e.preventDefault();
+
+    const searchQuery = input.value;
+    const users = userList.getElementsByClassName('entity-list--user');
+    const regex = new RegExp(searchQuery, 'gi');
+
+    // Run through collection of users.
+    for (let user of users) {
+      let name = user.dataset.fullName;
+
+      // Does not match search query.
+      if (name.match(regex)) {
+        user.classList.remove('hidden');
+      }
+      // Does not match.
+      else {
+        user.classList.add('hidden');
+      }
+    }
+  };
+
+  form.addEventListener('submit', filterUsers);
+  input.addEventListener('keyup', filterUsers);
 });

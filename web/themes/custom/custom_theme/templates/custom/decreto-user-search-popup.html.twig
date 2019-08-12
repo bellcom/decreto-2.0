@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Template for user search popup.
+ */
+#}
+
+{{ help_message }}
+
+<form id="user-search">
+  <div class="form-group">
+    <label class="control-label" for="user-name">
+      {{ 'Type name' | trans }}
+    </label>
+
+    <input class="form-control" type="text" id="user-search-input" name="user-name" value="">
+  </div>
+
+  <div class="form-actions">
+    <input class="btn btn-secondary" type="submit" value="{{ 'Find' | trans }}">
+  </div>
+</form>
+
+<h2>{{ 'Search results' | trans }}</h2>
+
+<div id="user-list">
+  {{ users_list }}
+</div>
