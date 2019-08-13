@@ -41,15 +41,16 @@
 
     // Run through collection of users.
     for (var user of users) {
+      var parentNode = user.parentElement;
       var name = user.dataset.fullName;
 
       // Does not match search query.
       if (name.match(regex)) {
-        user.classList.remove('hidden');
+        parentNode.classList.remove('hidden');
       }
       // Does not match.
       else {
-        user.classList.add('hidden');
+        parentNode.classList.add('hidden');
       }
     }
   };
