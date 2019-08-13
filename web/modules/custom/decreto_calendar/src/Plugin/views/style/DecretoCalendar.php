@@ -24,7 +24,7 @@ use Drupal\Core\Form\FormStateInterface;
  * )
  */
 class DecretoCalendar extends Calendar {
-  
+
   /**
    * {@inheritdoc}
    */
@@ -37,7 +37,7 @@ class DecretoCalendar extends Calendar {
         'week' => '',
       ],
     ];
-    
+
     return $options;
   }
 
@@ -114,7 +114,7 @@ class DecretoCalendar extends Calendar {
       }
       return $content;
     }
-    
+
     return parent::calendarBuildDay();
   }
 
