@@ -1,9 +1,9 @@
 // |--------------------------------------------------------------------------
-// | List simple
+// | Steps
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .entity-list-simple
+// | - .steps
 // |
 
 // --------------------------------------------------
@@ -14,58 +14,88 @@
 // Mixins
 // --------------------------------------------------
 
-@mixin entity-list-simple-mixin() {}
+@mixin form-mixin() {}
 
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
 
-.entity-list-simple {
+.steps {
+  position: relative;
   display: flex;
 
-  padding: 8px 0;
+  justify-content: center;
 
+  &:before {
+    position: absolute;
+
+    content: "";
+
+    top: 50%;
+    left: 0;
+    right: 50%;
+
+    height: 1px;
+    width: 50%;
+
+    z-index: 0;
+
+    background-color: $headings-color;
+  }
+}
+
+.steps__item {
+  position: relative;
+  display: flex;
+
+  justify-content: center;
   align-items: center;
-}
 
-.entity-list-simple__heading {}
-.entity-list-simple__heading__title {
+  z-index: 50;
+
   padding: 0;
-  margin: 0;
 
-  font-weight: $headings-font-weight;
-  font-size: $font-size-h6;
+  width: 32px;
+  height: 32px;
 
-  color: $text-color;
-}
+  font-weight: $font-weight-bold;
 
-.entity-list-simple__icon {
-  flex-grow: 0;
+  color: $headings-color;
+  background-color: transparent;
+  border-radius: 100%;
+  border: 1px solid $headings-color;
 
-  + .entity-list-simple__content {
-    margin-left: 10px;
+  &:before {
+    position: absolute;
+
+    content: "";
+
+    top: 50%;
+    left: -15px;
+
+    height: 1px;
+    width: 15px;
+
+    z-index: 0;
+
+    background-color: $headings-color;
+  }
+
+  + .steps__item {
+    margin-left: 15px;
   }
 }
+.steps__item--active {
+  color: #fff;
 
-.entity-list-simple__content {
-  flex-grow: 1;
+  border-color: $brand-secondary;
+  background-color: $brand-secondary;
 }
 
-.view-decreto-organisation-list {
+.modal {
 
-  .views-row {
-    border-bottom: 1px solid $border-color;
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-}
-
-.view-user-search {
-
-  .entity-list {
-    border-bottom: 1px solid $border-color;
+  .steps {
+    margin-top: -15px;
   }
 }
 
@@ -84,7 +114,20 @@
 @media #{$breakpoint-mobile-only} {}
 
 // Tablet - and up
-@media #{$breakpoint-tablet-and-up} {}
+@media #{$breakpoint-tablet-and-up} {
+
+  .steps__item {
+    width: 44px;
+    height: 44px;
+  }
+
+  .modal {
+
+    .steps {
+      margin-top: -85px;
+    }
+  }
+}
 
 // Tablet - only
 @media #{$breakpoint-tablet-only} {}

@@ -85,25 +85,23 @@ class MeetingEditForm extends AjaxFormBase {
     $form['steps-container'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => [($useDepartmentMembers) ? 'hidden' : ''],
+        'class' => ['steps', ($useDepartmentMembers ? 'hidden' : '')],
       ],
     ];
     $form['steps-container']['steps-step-1'] = [
       '#type' => 'html_tag',
       '#tag' => 'span',
-      '#value' => $this
-        ->t('Step 1'),
+      '#value' => '1',
       '#attributes' => [
-        'class' => [($activePage === 1) ? 'bg-primary' : ''],
+        'class' => ['steps__item', ($activePage === 1 ? 'steps__item--active' : '')],
       ],
     ];
     $form['steps-container']['steps-step-2'] = [
       '#type' => 'html_tag',
       '#tag' => 'span',
-      '#value' => $this
-        ->t('Step 2'),
+      '#value' => '2',
       '#attributes' => [
-        'class' => [($activePage === 2) ? 'bg-primary' : ''],
+        'class' => ['steps__item', ($activePage === 2 ? 'steps__item--active' : '')],
       ],
     ];
     // Steps container END.
