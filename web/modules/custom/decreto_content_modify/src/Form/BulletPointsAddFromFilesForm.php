@@ -5,7 +5,6 @@ namespace Drupal\decreto_content_modify\Form;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
-use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -34,6 +33,10 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
 
     $this->parent = $meeting;
 
+    $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_bullet_point_attachment');
+    $field_definition = $bundle_fields['field_decreto_bpa_file'];
+    $availableExtensions = $field_definition->getSetting('file_extensions');
+
     // Title.
     $form['title'] = [
       '#type' => 'textfield',
@@ -57,19 +60,26 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
 
     // Convert to PDF.
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
-      $form['convert_to_pdf'] = [
+      $form['upload_file']['convert_to_pdf'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Convert to PDF'),
         '#default_value' => TRUE,
+        '#description' => $this->t('skipped if file is already PDF'),
       ];
     }
 
     // Convert to HTML.
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
-      $form['convert_to_html'] = [
+      $form['upload_file']['convert_to_html'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Convert to HTML'),
         '#default_value' => TRUE,
+        '#description' => $this->t('by conversion to HTML file becomes available for attaching notes'),
+        '#states' => array(
+          'invisible' => array(
+            ':input[name="convert_to_pdf"]' => array('checked' => FALSE),
+          ),
+        ),
       ];
     }
 
@@ -99,8 +109,9 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
         '#upload_location' => 'public://',
         '#default_value' => NULL,
         '#upload_validators' => array(
-          'file_validate_extensions' => array('txt pdf doc docx html'),
+          'file_validate_extensions' => array($availableExtensions),
         ),
+        '#description' => $this->t('Available extensions are: %extensions', ['%extensions' => $availableExtensions]),
       ];
 
       if ($counter > 1) {
@@ -180,16 +191,16 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
       ));
       $bpa_node->save();
 
-      // Handle PDF > HTML conversion.
-      if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
-        if ($convert_to_html && $file->getMimeType() == 'application/pdf') {
-          \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($file->fid, $bpa_node->id());
-        }
-      }
       // Handle * > PDF conversion.
       if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
-        if ($convert_to_pdf) {
-          DecretoPDFUtils::scheduleConversion($file, $bpa_node, $convert_to_html);
+        if ($file && $convert_to_pdf && $file->getMimeType() != 'application/pdf') {
+          \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->scheduleFile($file->id(), $bpa_node->id(), $convert_to_html);
+        }
+      }
+      // Handle PDF > HTML conversion.
+      if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
+        if ($file && $convert_to_html && $file->getMimeType() == 'application/pdf') {
+          \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($file->id(), $bpa_node->id());
         }
       }
 

@@ -1,15 +1,20 @@
 <?php
+
 namespace Drupal\decreto_pdf_conversion_manager\Plugin\QueueWorker;
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
+use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_pdf_conversion_manager\lib\PDFConverter;
-use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
+use Drupal\decreto_pdf_conversion_manager\Services\PdfConversionManagerService;
 use Drupal\file\Entity\File;
+use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
 use Exception;
 
 /**
- * Converts the file to PDF using pdf2htmlEX.
+ * Converts the file to PDF using various libs.
  *
  * @QueueWorker(
  *   id = "decreto_pdf_conversion_manager_queue",
@@ -18,123 +23,126 @@ use Exception;
  * )
  */
 class PdfConversionManagerQueueWorker extends QueueWorkerBase {
+
   /**
    * {@inheritdoc}
    */
   public function processItem($item) {
-    //check if the node still exist
+    // Check if the node still exists.
     $node = Node::load($item->did);
     if (!isset($node)) {
-      DecretoPDFUtils::deleteScheduledJob($item->fid, $item->did);
+      \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->deleteScheduledFile($item->fid, $item->did);
       return;
     }
 
+    // Check if file still exists.
     $file = File::load($item->fid);
-    if (isset($file)) {
-      $path = self::isFileConverted($file);
+    if (!$file) {
+      \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->updateFileStatus($item->fid, PdfConversionManagerService::STATUS_FILE_NOT_FOUND);
+      return;
+    }
 
-      //not converted, attempt a new conversion
-      if (!$path) {
-        $path = self::convertFile($file);
-      }
+    // Check if file is already converted.
+    $path = self::isFileConverted($file);
+    if (!$path) {
+      $path = self::convertFile($file);
+    }
 
-      if (file_exists($path)) {
-        $data = file_get_contents($path);
+    // Do have have path to a converted file?
+    if (!file_exists($path)) {
+      \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->updateFileStatus($item->fid, PdfConversionManagerService::STATUS_FAILED_CONVERSION);
+      return;
+    }
 
-        if (strpos($path, \Drupal::service('file_system')->realpath('private://')) === FALSE) {
-          $uri = str_replace(\Drupal::service('file_system')->realpath('public://'), 'public://', $path);
-        }
-        else {
-          $uri = str_replace(\Drupal::service('file_system')->realpath('private://'), 'private://', $path);
-        }
+    // Getting file data.
+    $data = file_get_contents($path);
 
-        $pdfFile = file_save_data($data, $uri, FILE_EXISTS_REPLACE);
-      }
-      else {
-        //still cannot be converted
-        DecretoPDFUtils::updateStatus($item->fid, 'Cannot be converted');
-      }
-
-      if ($pdfFile) {
-        //updating database entry
-        \Drupal::database()->update('decreto_pdf_conversion_manager_files')
-          ->fields(array(
-            'filename' => $file->getFilename(),
-            'created_filepath' => $path,
-            'status' => 'Converted',
-          ))
-          ->condition('fid', $item->fid, '=')
-          ->condition('did', $item->did, '=')
-          ->execute();
-
-        self::updateDestinationNode($node, $file, $pdfFile);
-        DecretoPDFUtils::updateStatus($item->fid, 'Completed');
-
-        if ($item->convert_to_html) {
-          \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($pdfFile->id(), $node->id());
-        }
-      }
+    // Changing realpath to drupal relative path.
+    if (strpos($path, \Drupal::service('file_system')->realpath('private://')) === FALSE) {
+      $uri = str_replace(\Drupal::service('file_system')->realpath('public://'), 'public://', $path);
     }
     else {
-      DecretoPDFUtils::updateStatus($item->fid, 'Source file is not found');
+      $uri = str_replace(\Drupal::service('file_system')->realpath('private://'), 'private://', $path);
+    }
+
+    $pdfFile = file_save_data($data, $uri, FileSystemInterface::EXISTS_REPLACE);
+
+    if ($pdfFile) {
+      // Updating database entry.
+      \Drupal::database()->update('decreto_pdf_conversion_manager_files')
+        ->fields(array(
+          'filename' => $file->getFilename(),
+          'created_filepath' => $path,
+          'status' => PdfConversionManagerService::STATUS_CONVERTED,
+        ))
+        ->condition('fid', $item->fid, '=')
+        ->condition('did', $item->did, '=')
+        ->execute();
+
+      // Setting the file to a node.
+      $decretoBPA = new DecretoBulletPointAttachment($node);
+      $decretoBPA->setFile($pdfFile->id());
+
+      // Update status.
+      \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->updateFileStatus($item->fid, PdfConversionManagerService::STATUS_COMPLETED);
+
+      // Schedule HTML conversion.
+      if ($item->convert_to_html) {
+        \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($pdfFile->id(), $node->id());
+      }
     }
   }
 
   /**
-   * Tells if the file is already has an HTMl version.
+   * Tells if the file is already has a PDF version.
    *
-   * @param File $file
+   * @param \Drupal\file\FileInterface $file
+   *   File to check.
+   *
    * @return null|string
+   *   Path to converted file or NULL is not found.
+   *
+   * @throws \Exception
    */
-  private function isFileConverted(File $file) {
+  private function isFileConverted(FileInterface $file) {
     $file_path_real = \Drupal::service('file_system')->realpath($file->getFileUri());
-    $dest_dir_real = pathinfo($file_path_real, PATHINFO_DIRNAME);
-    $file_name = pathinfo($file_path_real, PATHINFO_FILENAME);
+    $pdfConverterFile = new PDFConverter($file_path_real);
 
-    $path = $dest_dir_real . '/' . $file_name . '.pdf'; //filename.pdf
-
-    if (file_exists($path)) {
-      return $path;
+    if (file_exists($pdfConverterFile->getPdfPath())) {
+      return $pdfConverterFile->getPdfPath();
     }
     return NULL;
   }
 
   /**
-   * Does the actual conversion of the file by calling pdf2htmlEX as shell command.
+   * Does the actual conversion of the file.
    *
-   * @param File $file
+   * Calls right library to do the work.
+   *
+   * @param \Drupal\file\FileInterface $file
+   *   File to be converted.
+   *
+   * @return string
+   *   The path of the converted file.
+   *
+   * @throws \Exception
    */
-  private function convertFile(File $file) {
-    $pdfConverterFile = new PDFConverter(\Drupal::service('file_system')->realpath($file->getFileUri()));
+  private function convertFile(FileInterface $file) {
+    $file_path_real = \Drupal::service('file_system')->realpath($file->getFileUri());
+    $pdfConverterFile = new PDFConverter($file_path_real);
 
     try {
       if ($pdfConverterFile->convert()) {
-        return pathinfo($pdfConverterFile, PATHINFO_DIRNAME) . '/' . pathinfo($pdfConverterFile, PATHINFO_FILENAME) . '.pdf'; //filename.pdf
+        return $pdfConverterFile->getPdfPath();
       }
       else {
         return NULL;
       }
-    } catch (Exception $e) {
+    }
+    catch (Exception $e) {
       \Drupal::logger('decreto_pdf_conversion_manager')->error($e->getMessage());
-      DecretoPDFUtils::updateMessage($file->id(), 'Error: ' . $e->getMessage());
+      \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->updateFileMessage($file->id(), $e->getMessage());
     }
   }
 
-  /**
-   * Updates the field in destination node to reference the newly converted file.
-   *
-   * @param Node $node
-   * @param File $originalFile
-   * * @param File $convertedFile
-   */
-  private function updateDestinationNode(Node $node, File $originalFile, File $convertedFile) {
-    foreach (file_get_file_references($originalFile) as $field_name => $reference) {
-      $refNode = reset($reference['node']);
-      if ($refNode->id() == $node->id()) {
-        $node->{$field_name}->setValue(['target_id' => $convertedFile->id()]);
-        $node->save();
-        break;
-      }
-    }
-  }
 }

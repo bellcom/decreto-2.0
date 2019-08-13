@@ -1,0 +1,4 @@
+services:
+  decreto_pdf_conversion_manager.pdfConversionManagerService:
+    class: Drupal\decreto_pdf_conversion_manager\Services\PdfConversionManagerService
+    arguments: []

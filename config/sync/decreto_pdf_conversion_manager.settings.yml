@@ -1,1 +1,11 @@
 decreto_pdf_conversion_manager_max_attempts: '5'
+decreto_pdf_conversion_manager_unoconv: ''
+decreto_pdf_conversion_manager_imagemagick: ''
+decreto_pdf_conversion_manager_mapitool: ''
+decreto_pdf_conversion_manager_munpack: ''
+decreto_pdf_conversion_manager_iconv: ''
+submit: 'Save configuration'
+form_build_id: form-zC7IoGeW8KqtWA164G4fITTY7QD0IXctD3j7FKgksvg
+form_token: QjXd5VR-4wVqAf0wOKovpNJUuCJpbSwokvwgihQhbpA
+form_id: decreto_pdf_conversion_manager_settings
+op: 'Save configuration'
