@@ -4,10 +4,9 @@ namespace Drupal\decreto_pdf2htmlex\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 
 /**
- * Configure example settings for this site.
+ * Pdf2htmlex settings form.
  */
 class Pdf2htmlexSettingsForm extends ConfigFormBase {
 
