@@ -9,6 +9,7 @@ use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
 
 /**
  * Implements hook_preprocess_node().
@@ -121,7 +122,38 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_predelete().
  */
 function decreto_content_modify_node_predelete(EntityInterface $entity) {
-  if ($entity->bundle() == 'decreto_bullet_point') {
+  if ($entity->bundle() == 'decreto_meeting') {
+    // Getting related BPs.
+    $decretoMeeting = new DecretoMeeting($entity);
+    $bps = $decretoMeeting->getBulletPoints();
+
+    // Removing references to all BPs to avoid repetitive meeting update, see
+    // decreto_content_modify_node_delete() decreto_bullet_point delete.
+    // Skipping search index update about this change.
+    $decretoMeeting->getEntity()->search_api_skip_tracking = TRUE;
+    $decretoMeeting->setBulletPoints([]);
+
+    // Deleting related BPs.
+    if (!empty($bps)) {
+      foreach ($bps as $bp) {
+        $bp->delete();
+      }
+    }
+
+    // Deleting related messages (deleting message will also delete related
+    // notifications).
+    $messages = $decretoMeeting->getMessages();
+    if (!empty($messages)) {
+      foreach ($messages as $message) {
+        $message->delete();
+      }
+    }
+
+    // Since we skipped search API tracking, we have to force the item to be
+    // removed from all relevant search indices.
+    decreto_content_modify_track_item_deleted($entity);
+  }
+  elseif ($entity->bundle() == 'decreto_bullet_point') {
     // Deleting related memos.
     $decretoBP = new DecretoBulletPoint($entity);
     $memos = $decretoBP->getMemos();
@@ -131,13 +163,26 @@ function decreto_content_modify_node_predelete(EntityInterface $entity) {
       }
     }
 
-    // Deleting related BPA.
+    // Getting related BPAa.
     $bpas = $decretoBP->getBulletPointAttachments();
+
+    // Removing references to all BPAa to avoid repetitive BP update, see
+    // decreto_content_modify_node_delete() decreto_bullet_point_attachment
+    // delete.
+    // Skipping search index update about this change.
+    $decretoBP->getEntity()->search_api_skip_tracking = TRUE;
+    $decretoBP->setBulletPointAttachments([]);
+
+    // Deleting related BPAa.
     if (!empty($bpas)) {
       foreach ($bpas as $bpa) {
         $bpa->delete();
       }
     }
+
+    // Since we skipped search API tracking, we have to force the item to be
+    // removed from all relevant search indices.
+    decreto_content_modify_track_item_deleted($entity);
   }
   elseif ($entity->bundle() == 'decreto_bullet_point_attachment') {
     // Deleting related notes.
@@ -159,6 +204,7 @@ function decreto_content_modify_node_predelete(EntityInterface $entity) {
     }
   }
 }
+
 /**
  * Implements hook_ENTITY_TYPE_delete().
  *
@@ -181,24 +227,6 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
-
-    // Deleting related BP.
-    $decretoMeeting = new DecretoMeeting($entity);
-    $bps = $decretoMeeting->getBulletPoints();
-    if (!empty($bps)) {
-      foreach ($bps as $bp) {
-        $bp->delete();
-      }
-    }
-
-    // Deleting related messages (deleting message will also delete related
-    // notifications).
-    $messages = $decretoMeeting->getMessages();
-    if (!empty($messages)) {
-      foreach ($messages as $message) {
-        $message->delete();
-      }
-    }
   }
   elseif ($entity->bundle() == 'decreto_bullet_point') {
     // Deleting this BP from meeting.
@@ -218,7 +246,6 @@ function decreto_content_modify_node_delete(EntityInterface $entity) {
       $decretoBP->removeBulletPointAttachment($entity->id());
     }
   }
-
 }
 
 /**
@@ -234,10 +261,28 @@ function decreto_content_modify_decreto_help_messages() {
   ];
 }
 
+/**
+ * Implements hook_theme().
+ */
 function decreto_content_modify_theme() {
   return [
     'decreto_content_modify_bpa_edit_form' => [
       'render element' => 'form',
     ],
   ];
+}
+
+/**
+ * Helper function.
+ *
+ * Marks a single item as deleted for all interested search indices.
+ */
+function decreto_content_modify_track_item_deleted(EntityInterface $entity) {
+  $indexes = ContentEntity::getIndexesForEntity($entity);
+  $datasource_id = 'entity:' . $entity->getEntityTypeId();
+  $combined_id = $entity->id() . ':' . $entity->language()->getId();
+
+  foreach ($indexes as $index) {
+    $index->trackItemsDeleted($datasource_id, [$combined_id]);
+  }
 }

@@ -502,6 +502,9 @@ class MeetingEditForm extends AjaxFormBase {
     }
 
     $this->node->save();
+
+    // Setting parent the as meeting, so that redirect happens to meetings page.
+    $this->parent = $this->node;
   }
 
   /**
