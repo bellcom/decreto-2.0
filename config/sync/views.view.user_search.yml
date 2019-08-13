@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.user.list
   module:
-    - decreto_user
     - user
 id: user_search
 label: 'User search'
@@ -54,9 +53,9 @@ display:
       style:
         type: default
         options:
-          grouping: {  }
-          row_class: user-name
+          row_class: 'col-xs-12 col-sm-6'
           default_row_class: false
+          uses_fields: false
       row:
         type: 'entity:user'
         options:
@@ -96,10 +95,10 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      css_class: 'row row--equal-height-columns'
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
@@ -114,7 +113,6 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
