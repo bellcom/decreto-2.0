@@ -38,6 +38,12 @@ $lg-modal-inner-spacing: 60px;
 
 .modal-title {
   font-weight: $headings-font-weight-bold;
+
+  &.modal-header {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
 // --------------------------------------------------
