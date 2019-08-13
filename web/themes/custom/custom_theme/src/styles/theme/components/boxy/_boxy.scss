@@ -38,18 +38,13 @@
   background-color: inherit;
 }
 
-.boxy__helper {
-  position: absolute;
+.boxy {
 
-  top: 26px;
-  right: $boxy-spacing-left-right;
+  .helper {
+    position: absolute;
 
-  color: $text-color-light;
-
-  cursor: default;
-
-  .material-icons {
-    font-size: inherit;
+    top: 26px;
+    right: $boxy-spacing-left-right;
   }
 }
 

@@ -27,10 +27,31 @@ $lg-modal-inner-spacing: 60px;
 // Styling
 // --------------------------------------------------
 
-.modal {}
+.modal {
+
+  .helper {
+    position: absolute;
+  }
+}
 
 .modal-header {
   border-bottom: none;
+
+  .close {
+    display: none;
+  }
+}
+.modal-body {
+  overflow: initial !important;
+
+  .helper {
+    top: -55px;
+  }
+
+  .scroller {
+    max-height: 300px;
+    overflow: scroll;
+  }
 }
 .modal-footer {
   border-top: none;
@@ -73,6 +94,13 @@ $lg-modal-inner-spacing: 60px;
   .modal-footer {
     padding-bottom: $xs-modal-inner-spacing;
   }
+
+  .modal {
+
+    .helper {
+      right: $xs-modal-inner-spacing;
+    }
+  }
 }
 
 // Tablet - and up
@@ -93,6 +121,13 @@ $lg-modal-inner-spacing: 60px;
   }
   .modal-footer {
     padding-bottom: $sm-modal-inner-spacing;
+  }
+
+  .modal {
+
+    .helper {
+      right: $sm-modal-inner-spacing;
+    }
   }
 }
 
@@ -120,6 +155,13 @@ $lg-modal-inner-spacing: 60px;
   .modal-footer {
     padding-bottom: $md-modal-inner-spacing;
   }
+
+  .modal {
+
+    .helper {
+      right: $md-modal-inner-spacing;
+    }
+  }
 }
 
 // Large desktop - and up
@@ -137,6 +179,13 @@ $lg-modal-inner-spacing: 60px;
   }
   .modal-footer {
     padding-bottom: $lg-modal-inner-spacing;
+  }
+
+  .modal {
+
+    .helper {
+      right: $lg-modal-inner-spacing;
+    }
   }
 }
 
