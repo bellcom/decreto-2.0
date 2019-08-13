@@ -179,6 +179,28 @@ class DecretoMeeting extends DecretoNode {
   }
 
   /**
+   * Sets the BP list.
+   *
+   * @param array $bpList
+   *   The array of BP references, formatted like:
+   *   array(
+   *     0 => ['target_id' => bp_1_id],
+   *     1 => ['target_id' => bp_2_id]
+   *     ...
+   *   )
+   * @param bool $save
+   *   If meeting needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function setBulletPoints(array $bpList, $save = TRUE) {
+    $this->getEntity()->set('field_decreto_meet_bps', $bpList);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
    * Adds the bullet point nid to meeting.
    *
    * Only does so if the node is not already added.

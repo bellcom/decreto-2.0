@@ -10,7 +10,7 @@ class Pdf2htmlexService {
   const STATUS_FILE_NOT_FOUND = 'File not found';
   const STATUS_FAILED_CONVERSION = 'Conversion failed';
   const STATUS_CONVERTED = 'Converted';
-  const STATUS_COMLETED = 'Completed';
+  const STATUS_COMPLETED = 'Completed';
 
   /**
    * Gets the version of pdf2htmlEX utility.
@@ -19,18 +19,12 @@ class Pdf2htmlexService {
    *   Version number as string or NULL is not found.
    */
   public function getVersion() {
-    $config = \Drupal::service('config.factory')->getEditable('decreto_pdf2htmlex.settings');
-    $pdf_html_path = $config->get('decreto_pdf2htmlex_path');
-
-    if (empty($pdf_html_path)) {
-      $pdf_html_path = 'pdf2htmlEX';
-    }
-
     $version = NULL;
+    $pdf_html_path = $this->getPath();
 
     exec($pdf_html_path . ' -v 2>&1', $output);
     if (!empty($output)) {
-      preg_match('/^^pdf2htmlEX version ([\d.]*.\d*)$/i', $output[0], $matches);
+      preg_match('/^pdf2htmlEX version ([\d.]*.\d*)$/i', $output[0], $matches);
 
       if (isset($matches[1])) {
         $version = $matches[1];
@@ -38,6 +32,23 @@ class Pdf2htmlexService {
     }
 
     return $version;
+  }
+
+  /**
+   * Gets the executable path of pdf2htmlEX utility.
+   *
+   * @return string
+   *   Executable path of the utility.
+   */
+  public function getPath() {
+    $config = \Drupal::service('config.factory')->getEditable('decreto_pdf2htmlex.settings');
+    $pdf_html_path = $config->get('decreto_pdf2htmlex_path');
+
+    if (empty($pdf_html_path)) {
+      $pdf_html_path = 'pdf2htmlEX';
+    }
+
+    return $pdf_html_path;
   }
 
   /**
@@ -91,7 +102,7 @@ class Pdf2htmlexService {
       $query->condition('did', $did);
     }
 
-    $count = $query->countQuery()->execute();
+    $count = $query->countQuery()->execute()->fetchField();
     return $count > 1;
   }
 

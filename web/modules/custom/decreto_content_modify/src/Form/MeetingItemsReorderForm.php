@@ -85,7 +85,7 @@ class MeetingItemsReorderForm extends FormBase {
     // error. Ensure the form is rebuilt in the same order as the user
     // submitted.
     $user_input = $form_state->getUserInput();
-    if (!empty($user_input)) {
+    if (!empty($user_input) && isset($user_input['items'])) {
 
       $newItems = [];
       foreach ($user_input['items'] as $key => $userInputItem) {

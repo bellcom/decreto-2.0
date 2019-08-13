@@ -1,26 +1,15 @@
 <?php
 
-use Drupal\decreto_pdf_conversion_manager\Utils\DecretoPdfConversionManagerUtils as DecretoPDFUtils;
 use Drupal\file\Entity\File;
 
 /**
  * Implements hook_cron()
  */
 function decreto_pdf_conversion_manager_cron() {
-  //TODO: is that needed?
-  // Start unoconv if not started.
-  //if (!shell_exec('ps -ef | grep -v grep | grep "/unoconv -l"') && !shell_exec('ps -ef | grep -v grep | grep "/unoconv --listener"')) {
-  //  exec('unoconv -l >/dev/null 2>/dev/null &');
-  //}
-  // Clean up ImageMagick garbage before converting
-  //shell_exec('find /tmp/magick-* -mtime +1 -delete 2> /dev/null');
-  // Clean up temp files garbage before converting
-  //shell_exec('find /tmp/*.tmp -mtime +1 -delete 2> /dev/null');
-
   $queue_factory = \Drupal::service('queue');
   $queue = $queue_factory->get('decreto_pdf_conversion_manager_queue');
 
-  $scheduled_files = DecretoPDFUtils::getScheduledFiles();
+  $scheduled_files = \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->getScheduledFiles();
 
   foreach ($scheduled_files as $schedule_file) {
     $queue->createItem($schedule_file);
@@ -28,12 +17,10 @@ function decreto_pdf_conversion_manager_cron() {
 }
 
 /**
- * Implement hook_entity_delete()
- *
- * @param File $file
+ * Implements hook_entity_delete().
  */
 function decreto_pdf_conversion_manager_file_delete(File $file) {
-  if (DecretoPDFUtils::isScheduled($file)) {
-    DecretoPDFUtils::deleteScheduledJob($file->id());
+  if (\Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->isFileScheduled($file->id())) {
+    \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->deleteScheduledFile($file->id());
   }
 }

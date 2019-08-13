@@ -68,6 +68,28 @@ class DecretoBulletPoint extends DecretoNode {
   }
 
   /**
+   * Sets the BPA list.
+   *
+   * @param array $bpaList
+   *   The array of BPA references, formatted like:
+   *   array(
+   *     0 => ['target_id' => bpa_1_id],
+   *     1 => ['target_id' => bpa_2_id]
+   *     ...
+   *   )
+   * @param bool $save
+   *   If bullet point needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function setBulletPointAttachments(array $bpaList, $save = TRUE) {
+    $this->getEntity()->set('field_decreto_bp_bpas', $bpaList);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
    * Adds the bullet point attachment nid to bullet point.
    *
    * Only does so if the node is not already added.

@@ -59,3 +59,70 @@ function  decreto_pdf_conversion_manager_schema() {
   );
   return $schema;
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function decreto_pdf_conversion_manager_requirements($phase) {
+  $requirements = array();
+  $passed_requirements = array();
+
+  // Checking unoconv.
+  $unoconv_version = \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->getVersion('unoconv');
+  if (!$unoconv_version) {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf_conversion_manager_unoconv'] = array(
+        'title' => t('Decreto PDF converter manager'),
+        'value' => 'unoconv cannot be found, install it with `sudo apt install unoconv`',
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  else {
+    $passed_requirements['unoconv'] = 'unoconv: ' . $unoconv_version;
+  }
+
+  // Checking ImageMagick: convert.
+  $image_magick_version = \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->getVersion('imagemagick');
+  if (!$image_magick_version) {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf_conversion_manager_imagemagick'] = array(
+        'title' => t('Decreto PDF converter manager'),
+        'value' => 'imagemagick cannot be found, install it with `sudo apt install imagemagick`',
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  else {
+    $passed_requirements['imagemagick'] = 'imagemagick: ' . $image_magick_version;
+  }
+
+  // Checking iconv.
+  $iconv_version = \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->getVersion('iconv');
+  if (!$iconv_version) {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf_conversion_manager_iconv'] = array(
+        'title' => t('Decreto PDF converter manager'),
+        'value' => 'iconv cannot be found, install it with `sudo apt-get install libc6`',
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  else {
+    $passed_requirements['iconv'] = 'iconv: ' . $iconv_version;
+  }
+
+  // Listing requirements that passed.
+  if (!empty($passed_requirements)) {
+    if ($phase == 'runtime') {
+      $requirements['decreto_pdf_conversion_manager'] = array(
+        'title' => t('Decreto PDF converter manager'),
+        'value' => 'Successfully installed: ' . implode($passed_requirements, '; '),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+
+  }
+
+  return $requirements;
+}

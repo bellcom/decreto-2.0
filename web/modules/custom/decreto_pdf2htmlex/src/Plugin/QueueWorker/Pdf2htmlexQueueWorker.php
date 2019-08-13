@@ -11,7 +11,7 @@ use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
 
 /**
- * Converts the file to PDF using pdf2htmlEX.
+ * Converts the file to HTML using pdf2htmlEX.
  *
  * @QueueWorker(
  *   id = "decreto_pdf2htmlex_queue",
@@ -82,12 +82,12 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
       $decretoBPA->setHtmlFile($htmlFile->id());
 
       // Update status.
-      \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->updateFileStatus($item->fid, Pdf2htmlexService::STATUS_COMLETED);
+      \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->updateFileStatus($item->fid, Pdf2htmlexService::STATUS_COMPLETED);
     }
   }
 
   /**
-   * Tells if the file is already has an HTMl version.
+   * Tells if the file is already has a HTML version.
    *
    * @param \Drupal\file\FileInterface $file
    *   File to check.
@@ -123,14 +123,12 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
   private function convertFile(FileInterface $file) {
     $config = \Drupal::service('config.factory')->getEditable('decreto_pdf2htmlex.settings');
     $pdf_html_zoom = $config->get('decreto_pdf2htmlex_zoom');
-    $pdf_html_path = $config->get('decreto_pdf2htmlex_path');
 
-    if (empty($pdf_html_path)) {
-      $pdf_html_path = 'pdf2htmlEX';
-    }
     if (empty($pdf_html_zoom)) {
       $pdf_html_zoom = 1.25;
     }
+
+    $pdf_html_path = \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->getPath();
 
     $file_path_real = \Drupal::service('file_system')->realpath($file->getFileUri());
     $dest_dir_real = pathinfo($file_path_real, PATHINFO_DIRNAME);

@@ -1,7 +1,7 @@
 use_queue: false
 notify_own_actions: false
 flag_prefix: subscribe
-debug_mode: true
+debug_mode: false
 default_notifiers:
   - decreto_notifier
 _core:

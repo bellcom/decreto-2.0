@@ -34,7 +34,7 @@ function decreto_calendar_tokens($type, $tokens, array $data, array $options, Bu
   $decreto_calendar_date = $data['decreto_calendar_date'];
   $replacements = [];
   $token_service = \Drupal::token();
-  
+
   foreach ($tokens as $name => $original) {
     $replacements[$original] = $decreto_calendar_date;
   }
