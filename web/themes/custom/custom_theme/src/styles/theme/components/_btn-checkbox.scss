@@ -1,9 +1,9 @@
 // |--------------------------------------------------------------------------
-// | Form
+// | Button checkbox
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .form-inline
+// | - .btn-checkbox
 // |
 
 // --------------------------------------------------
@@ -20,34 +20,72 @@
 // Styling
 // --------------------------------------------------
 
-.form-inline {
+.btn-checkbox {
+  position: relative;
 
-  .form-group {
-    margin-bottom: 15px;
+  padding-left: 20px !important;
+  margin-bottom: $form-group-margin-bottom;
 
-    &:last-child {
-      margin-bottom: 0;
+  font-size: $font-size-small;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 0;
+    //margin-left: -20px;
+    border: 1px solid $input-border;
+    border-radius: 3px;
+    background-color: $input-bg;
+    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  }
+
+  &:after {
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 0;
+    //margin-left: -20px;
+    padding-left: 3px;
+    padding-top: 1px;
+    font-size: 11px;
+    color: #555555;
+  }
+}
+.btn-checkbox--active {
+
+  &:before {
+    border-color: $input-border-focus;
+  }
+
+  &:after {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+    color: $brand-tertiary;
+  }
+}
+
+.btn.btn-checkbox {
+
+  // Remove stylings inherited by .btn.
+  &.btn {
+    min-width: initial;
+    padding: 0;
+
+    border: 0 !important;
+
+    font-weight: initial;
+
+    &, &:hover, &:focus {
+      outline: 0;
+
+      color: $text-color-light !important;
+      background-color: transparent !important;
     }
-  }
-
-  .form-item {
-    margin-right: 20px;
-  }
-
-  .form-type-date {
-    vertical-align: top;
-  }
-
-  .form-time {
-    max-width: 105px;
-  }
-
-  .form-actions {
-    display: block;
-  }
-
-  .btn-info {
-    @extend .btn-primary;
   }
 }
 
@@ -72,18 +110,7 @@
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {
-
-  .form-inline {
-
-    .form-type-textfield {
-
-      .form-control {
-        min-width: 450px;
-      }
-    }
-  }
-}
+@media #{$breakpoint-desktop-and-up} {}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}

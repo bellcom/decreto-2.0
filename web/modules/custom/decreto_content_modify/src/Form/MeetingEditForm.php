@@ -243,7 +243,7 @@ class MeetingEditForm extends AjaxFormBase {
       '#attributes' => [
         // Example of altering button class depending on ;'use department
         // members' mode status.
-        'class' => [($useDepartmentMembers) ? 'btn-primary' : ''],
+        'class' => ['btn-checkbox', (($useDepartmentMembers) ? 'btn-checkbox--active' : '')],
       ],
       '#submit' => ['::submitToggleUseDepartmentMembers'],
       '#limit_validation_errors' => [],

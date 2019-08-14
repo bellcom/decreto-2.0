@@ -122,6 +122,17 @@ label {
     color: $text-color-light;
 }
 
+[class*="col-"] {
+
+  .form-group {
+
+    &,
+    &:last-child {
+      margin-bottom: $form-group-margin-bottom;
+    }
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
@@ -175,7 +186,7 @@ label {
 
         > [class*='col-'] {
             display: flex;
-        
+
             flex-direction: column;
         }
 
