@@ -311,35 +311,69 @@ class MeetingEditForm extends AjaxFormBase {
     // Participants START.
     $form['pages-page-2']['participants-container'] = [
       '#type' => 'container',
+      '#attributes' => [
+        'class' => ['div-table'],
+      ],
     ];
+
     $form['pages-page-2']['participants-container']['header'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['div-table__thead'],
+      ],
+    ];
+    $form['pages-page-2']['participants-container']['header']['row'] = [
       '#type' => 'container',
       '#attributes' => [
         'class' => ['row'],
       ],
     ];
-    $form['pages-page-2']['participants-container']['header'][] = [
+
+    // Name.
+    $form['pages-page-2']['participants-container']['header']['row']['name'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['col-xs-6']
+      ],
+    ];
+    $form['pages-page-2']['participants-container']['header']['row']['name'][] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#value' => $this->t('First and last name'),
       '#attributes' => [
-        'class' => ['col-xs-6'],
+        'class' => ['div-table__th'],
       ],
     ];
-    $form['pages-page-2']['participants-container']['header'][] = [
+
+    // Internal.
+    $form['pages-page-2']['participants-container']['header']['row']['internal'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['col-xs-3']
+      ],
+    ];
+    $form['pages-page-2']['participants-container']['header']['row']['internal'][] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#value' => $this->t('Internal'),
       '#attributes' => [
-        'class' => ['col-xs-3'],
+        'class' => ['div-table__th', 'text-center'],
       ],
     ];
-    $form['pages-page-2']['participants-container']['header'][] = [
+
+    // External.
+    $form['pages-page-2']['participants-container']['header']['row']['external'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['col-xs-3']
+      ],
+    ];
+    $form['pages-page-2']['participants-container']['header']['row']['external'][] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#value' => $this->t('External'),
       '#attributes' => [
-        'class' => ['col-xs-3'],
+        'class' => ['div-table__th', 'text-center'],
       ],
     ];
 
@@ -350,6 +384,9 @@ class MeetingEditForm extends AjaxFormBase {
       $form['pages-page-2']['participants-container']['participants'] = [
         '#type' => 'container',
         '#tree' => TRUE,
+        '#attributes' => [
+          'class' => ['div-table__tbody'],
+        ],
       ];
       $users = User::loadMultiple($users_ids);
 
@@ -358,25 +395,55 @@ class MeetingEditForm extends AjaxFormBase {
         $form['pages-page-2']['participants-container']['participants'][$user_id] = [
           '#type' => 'container',
           '#attributes' => [
+            'class' => ['div-table__tr'],
+          ],
+        ];
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row'] = [
+          '#type' => 'container',
+          '#attributes' => [
             'class' => ['row'],
           ],
         ];
-        $form['pages-page-2']['participants-container']['participants'][$user_id]['name'] = [
-          '#type' => 'html_tag',
-          '#tag' => 'div',
-          '#value' => $user->label(),
+
+        // Name.
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['name_column'] = [
+          '#type' => 'container',
           '#attributes' => [
             'class' => ['col-xs-6'],
           ],
         ];
-        $form['pages-page-2']['participants-container']['participants'][$user_id]['internal'] = [
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['name_column']['name'] = [
+          '#type' => 'html_tag',
+          '#tag' => 'div',
+          '#value' => $user->label(),
+          '#attributes' => [
+            'class' => ['div-table__td'],
+          ],
+        ];
+
+        // Internal.
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['internal_column'] = [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => ['col-xs-3'],
+          ],
+        ];
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['internal_column']['internal'] = [
           '#type' => 'checkbox',
-          '#prefix' => '<div class="col-xs-3">',
+          '#prefix' => '<div class="div-table__td text-center">',
           '#suffix' => '</div>',
         ];
-        $form['pages-page-2']['participants-container']['participants'][$user_id]['external'] = [
+
+        // External.
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['external_column'] = [
+          '#type' => 'container',
+          '#attributes' => [
+            'class' => ['col-xs-3'],
+          ],
+        ];
+        $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['external_column']['external'] = [
           '#type' => 'checkbox',
-          '#prefix' => '<div class="col-xs-3">',
+          '#prefix' => '<div class="div-table__td text-center">',
           '#suffix' => '</div>',
         ];
       }
@@ -424,13 +491,13 @@ class MeetingEditForm extends AjaxFormBase {
       // Internal participants.
       $internal_participants_ids = array_column($meeting->field_decreto_meet_partic_int->getValue(), 'target_id');
       foreach ($internal_participants_ids as $participant_id) {
-        $form['pages-page-2']['participants-container']['participants'][$participant_id]['internal']['#default_value'] = TRUE;
+        $form['pages-page-2']['participants-container']['participants'][$participant_id]['row']['internal_column']['internal']['#default_value'] = TRUE;
       }
 
       // External participants.
       $external_participants_ids = array_column($meeting->field_decreto_meet_partic_ext->getValue(), 'target_id');
       foreach ($external_participants_ids as $participant_id) {
-        $form['pages-page-2']['participants-container']['participants'][$participant_id]['external']['#default_value'] = TRUE;
+        $form['pages-page-2']['participants-container']['participants'][$participant_id]['row']['external_column']['external']['#default_value'] = TRUE;
       }
     }
 
@@ -460,10 +527,10 @@ class MeetingEditForm extends AjaxFormBase {
       $participants = $form_state->getValue('participants');
 
       foreach ($participants as $user_id => $participant) {
-        if ($participant['internal']) {
+        if ($participant['row']['internal_column']['internal']) {
           $field_decreto_meet_partic_int[]['target_id'] = $user_id;
         }
-        if ($participant['external']) {
+        if ($participant['row']['external_column']['external']) {
           $field_decreto_meet_partic_ext[]['target_id'] = $user_id;
         }
       }

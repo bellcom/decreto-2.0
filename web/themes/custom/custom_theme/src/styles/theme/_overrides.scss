@@ -133,6 +133,23 @@ label {
   }
 }
 
+.form-group {
+
+  // Drupal forms add's .form-group when creating a container element.
+  &.row,
+  &[class*="col-"],
+  .div-table__thead,
+  .div-table__tbody,
+  .div-table__tr,
+  .div-table__th,
+  .div-table__td {
+
+    &, &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
