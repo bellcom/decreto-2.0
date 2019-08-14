@@ -55,7 +55,9 @@
         border-radius: 100%;
         background-color: $brand-secondary;
 
-        color: #fff;
+        &, a {
+          color: #fff;
+        }
       }
     }
 
@@ -64,6 +66,10 @@
       .mini-day-on,
       .mini-day-off {
         position: relative;
+
+        a {
+          font-weight: $font-weight-bold;
+        }
 
         &:after {
           content: "";
