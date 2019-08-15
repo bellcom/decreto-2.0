@@ -40,7 +40,8 @@
         {# Begin - starting date #}
         {% if node.field_decreto_meet_start_date.value %}
           <div>
-            <i class="material-icons">access_time</i> {{ content.field_decreto_meet_start_date }}
+            <i
+              class="material-icons">access_time</i> {{ content.field_decreto_meet_start_date }}
           </div>
         {% endif %}
         {# End - starting date #}
@@ -63,21 +64,31 @@
     <div class="text-right">
 
       <!-- Begin - download full copy -->
-      {% if (node.field_decreto_meet_full_doc.entity.uri) %}
+      {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
         <a
           href="{{ file_url(node.field_decreto_meet_full_doc.entity.uri.value) }}"
           class="btn btn-default" target="_blank">
           {{ "Download full copy" | trans }}
         </a>
       {% endif %}
+
+      {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
+        <a
+          href="{{ file_url(node.field_decreto_meet_full_doc_c.entity.uri.value) }}"
+          class="btn btn-primary" target="_blank">
+          {{ "Download full copy (closed)" | trans }}
+        </a>
+      {% endif %}
       <!-- End - download full copy -->
 
       <!-- Begin - edit -->
-      <a
-        href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
-        class="btn btn-default use-ajax" data-dialog-type="modal">
-        {{ "Edit meeting" | trans }}
-      </a>
+      {% if user.hasPermission('edit any decreto_meeting content') %}
+        <a
+          href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
+          class="btn btn-default use-ajax" data-dialog-type="modal">
+          {{ "Edit meeting" | trans }}
+        </a>
+      {% endif %}
       <!-- End - edit -->
 
       <!-- Begin - own notes -->
@@ -99,45 +110,52 @@
     </div>
     <!-- End - search form -->
 
-    <!-- Begin - actions -->
-    <div class="text-right">
+    {% if user.hasPermission('create decreto_bullet_point content') %}
+      <!-- Begin - actions -->
+      <div class="text-right">
 
-      <!-- Begin - create from files -->
-      <a
-        href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
-        class="btn btn-primary use-ajax" data-dialog-type="modal">
-        {{ "Create point from files" | trans }}
-      </a>
-      <!-- End - create from files -->
+        {% if user.hasPermission('create decreto_bullet_point_attachment content') %}
+          <!-- Begin - create from files -->
+          <a
+            href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
+            class="btn btn-primary use-ajax" data-dialog-type="modal">
+            {{ "Create point from files" | trans }}
+          </a>
+          <!-- End - create from files -->
+        {% endif %}
 
-      <!-- Begin - create manually -->
-      <a
-        href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-        class="btn btn-primary use-ajax" data-dialog-type="modal">
-        {{ "Create point" | trans }}
-      </a>
-      <!-- End - create manually -->
+        <!-- Begin - create manually -->
+        <a
+          href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+          class="btn btn-primary use-ajax" data-dialog-type="modal">
+          {{ "Create point" | trans }}
+        </a>
+        <!-- End - create manually -->
 
-    </div>
-    <!-- End - actions -->
+      </div>
+      <!-- End - actions -->
+    {% endif %}
 
     <!-- Begin - information -->
     <div>
       <h4><strong>{{ content.field_decreto_meet_type }}</strong></h4>
 
       {{ content.body }}
-{#      {{ decreto_help_message.meeting_agenda }}#}
+      {#      {{ decreto_help_message.meeting_agenda }}#}
     </div>
     <!-- End - information -->
 
     <!-- Begin - actions -->
     <div class="text-right">
 
-      <!-- Begin - turn on/off switch mode -->
-      <a href="#" id="meeting-agenda-switch-mode-toggle">
-        <span class="material-icons">unfold_more</span> {{ "Turn on/off switch mode" | trans }}
-      </a>
-      <!-- End - turn on/off switch mode -->
+      {% if user.hasPermission('edit any decreto_meeting content') %}
+        <!-- Begin - turn on/off switch mode -->
+        <a href="#" id="meeting-agenda-switch-mode-toggle">
+        <span
+          class="material-icons">unfold_more</span> {{ "Turn on/off switch mode" | trans }}
+        </a>
+        <!-- End - turn on/off switch mode -->
+      {% endif %}
 
       <!-- Begin - open/close all -->
       <button class="js-bulletpoint-toggle-all">
@@ -153,11 +171,13 @@
       {{ content.field_decreto_meet_bps }}
     </div>
 
-    <div id="agenda-item-reorder" class="hidden">
-      <div class="region region-action-box__primary">
-        {{ items_reorder_form }}
+    {% if user.hasPermission('edit any decreto_meeting content') %}
+      <div id="agenda-item-reorder" class="hidden">
+        <div class="region region-action-box__primary">
+          {{ items_reorder_form }}
+        </div>
       </div>
-    </div>
+    {% endif %}
 
   </div>
 </article>
