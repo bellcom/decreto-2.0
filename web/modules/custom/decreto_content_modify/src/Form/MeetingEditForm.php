@@ -32,7 +32,7 @@ class MeetingEditForm extends AjaxFormBase {
    */
   public function getTitle(NodeInterface $meeting = NULL) {
     if ($meeting) {
-      return $this->t('Edit meeting @label', ['@label' => $meeting->label()]);
+      return $this->t('Edit meeting');
     }
     else {
       return $this->t('Create meeting');

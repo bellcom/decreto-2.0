@@ -21,6 +21,16 @@ class BulletPointAttachmentDeleteForm extends AjaxDeleteFormBase {
   }
 
   /**
+   * Returns the title for the form.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for the form.
+   */
+  public function getTitle() {
+    return $this->t('Delete bullet point attachment');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {

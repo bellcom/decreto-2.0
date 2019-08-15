@@ -23,6 +23,16 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
   }
 
   /**
+   * Returns the title for the form.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for the form.
+   */
+  public function getTitle() {
+    return $this->t('Create bullet point attachments');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
