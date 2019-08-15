@@ -120,6 +120,11 @@ class BulletPointsAddForm extends AjaxFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $bullet_points = $form_state->getValue('bullet_points');
     foreach ($bullet_points as $bullet_point) {
+      // Skipping those with empty titles.
+      if (!$bullet_point['title']) {
+        continue;
+      }
+
       $bullet_point_node = Node::create(array(
         'type' => 'decreto_bullet_point',
         'title' => $bullet_point['title'],

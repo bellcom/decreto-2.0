@@ -116,6 +116,11 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $bpas = $form_state->getValue('bullet_point_attachments');
     foreach ($bpas as $bpa) {
+      // Skipping those with empty titles.
+      if (!$bpa['title']) {
+        continue;
+      }
+
       $bpa_node = Node::create(array(
         'type' => 'decreto_bullet_point_attachment',
         'title' => $bpa['title'],
