@@ -26,4 +26,14 @@ class BulletPointAttachmentController extends ControllerBase {
     return $modal_output;
   }
 
+  /**
+   * Returns the title for the form.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for the form.
+   */
+  public function getTitle() {
+    return $this->t('Bullet point attachment');
+  }
+
 }

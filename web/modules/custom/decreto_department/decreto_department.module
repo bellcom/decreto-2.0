@@ -77,3 +77,33 @@ function decreto_department_taxonomy_term_delete(EntityInterface $entity) {
     }
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_department_theme() {
+  return [
+    'decreto_department_departments_view_context_links' => [
+      'variables' => [
+        'create_department' => NULL,
+        'edit_department' => NULL,
+        'department_id' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_department_views_data() {
+  $data['views']['decreto_department_departments_view_context_links'] = [
+    'title' => t('Decreto departments view links'),
+    'help' => t('Renders "Create" link to be used in department views.'),
+    'area' => [
+      'id' => 'decreto_department_departments_view_context_links',
+    ],
+  ];
+
+  return $data;
+}

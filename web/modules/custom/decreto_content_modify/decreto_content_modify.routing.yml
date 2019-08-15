@@ -37,7 +37,7 @@ decreto_content_modify.bps_add:
       meeting:
         type: entity:node
   defaults:
-    _title: 'Decreto add bullet point'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointsAddForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddForm'
   requirements:
     _permission: 'create decreto_bullet_point content'
@@ -50,7 +50,7 @@ decreto_content_modify.bps_add_from_files:
       meeting:
         type: entity:node
   defaults:
-    _title: 'Decreto add bullet point from files'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointsAddFromFilesForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointsAddFromFilesForm'
   requirements:
     _permission: 'create decreto_bullet_point content'
@@ -63,7 +63,7 @@ decreto_content_modify.bps_edit:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto edit bullet point'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
   requirements:
     _permission: 'edit any decreto_bullet_point content'
@@ -76,7 +76,7 @@ decreto_content_modify.bps_delete:
       node:
         type: entity:node
   defaults:
-    _title: 'Decreto delete bullet point'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
   requirements:
     _permission: 'delete any decreto_bullet_point content'
@@ -89,10 +89,10 @@ decreto_content_modify.bpas_modal:
       bullet_point_attachment:
         type: entity:node
   defaults:
-    _title: 'Decreto bullet point attachment modal'
+    _title_callback: '\Drupal\decreto_content_modify\Controller\BulletPointAttachmentController::getTitle'
     _controller: '\Drupal\decreto_content_modify\Controller\BulletPointAttachmentController::modalContentRender'
   requirements:
-    _permission: 'access content'
+    _entity_access: 'bullet_point_attachment.view'
     bullet_point_attachment: \d+
 
 decreto_content_modify.bpas_add:
@@ -102,7 +102,7 @@ decreto_content_modify.bpas_add:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto add bullet point attachment'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentsAddForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentsAddForm'
   requirements:
     _permission: 'create decreto_bullet_attachment content'
@@ -115,7 +115,7 @@ decreto_content_modify.bpas_edit:
       bullet_point_attachment:
         type: entity:node
   defaults:
-    _title: 'Decreto edit bullet point attachment'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm'
   requirements:
     _permission: 'edit any decreto_bullet_point_attachment content'
@@ -128,7 +128,7 @@ decreto_content_modify.bpas_delete:
       node:
         type: entity:node
   defaults:
-    _title: 'Decreto delete bullet point attachment'
+    _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm'
   requirements:
     _permission: 'delete any decreto_bullet_point_attachment content'
@@ -141,7 +141,7 @@ decreto_content_modify.memos_add_edit:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto add/edit memo'
+    _title_callback: '\Drupal\decreto_content_modify\Form\MemosEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\MemosEditForm'
   requirements:
     _permission: 'create decreto_memo content'
@@ -154,7 +154,7 @@ decreto_content_modify.bp_memos:
       bullet_point:
         type: entity:node
   defaults:
-    _title: 'Decreto read memos'
+    _title_callback: '\Drupal\decreto_content_modify\Controller\MemoController::getTitle'
     _controller: '\Drupal\decreto_content_modify\Controller\MemoController::bulletPointMemosContent'
   requirements:
     _permission: 'access content'

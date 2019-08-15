@@ -1,0 +1,12 @@
+<div class="boxy__actions">
+  {% if create_department and user.hasPermission('create terms in decreto_tax_department') %}
+    <a href="{{ path('decreto_department.departments_add') }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Create department"|trans }}
+    </a>
+  {% endif %}
+  {% if edit_department and department_id and user.hasPermission('edit terms in decreto_tax_department') %}
+    <a href="{{ path('decreto_department.departments_edit', {'department' : department_id}) }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Attach members"|trans }}
+    </a>
+  {% endif %}
+</div>

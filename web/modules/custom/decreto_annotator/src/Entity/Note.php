@@ -11,6 +11,8 @@ use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\node\Entity\Node;
+use Drupal\user\EntityOwnerInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Defines the Note entity.
@@ -31,11 +33,12 @@ use Drupal\node\Entity\Node;
  *   handlers = {
  *     "view_builder" = "Drupal\decreto_annotator\NoteViewBuilder",
  *     "views_data" = "Drupal\decreto_annotator\NoteViewsData",
+ *     "access" = "Drupal\decreto_annotator\NoteAccessControlHandler",
  *   },
  *   list_cache_tags = { "config:decreto_annotator_note" }
  * )
  */
-class Note extends ContentEntityBase {
+class Note extends ContentEntityBase implements EntityOwnerInterface {
 
   /**
    * {@inheritdoc}
@@ -125,8 +128,7 @@ class Note extends ContentEntityBase {
    *   Note text.
    */
   public function getText() {
-    $note_info = $this->get('note_info')->value;
-    $note_info_json = json_decode($note_info);
+    $note_info_json = $this->getNoteInfo();
 
     return $note_info_json->text;
   }
@@ -138,10 +140,52 @@ class Note extends ContentEntityBase {
    *   Note quote.
    */
   public function getQuote() {
+    $note_info_json = $this->getNoteInfo();
+
+    return $note_info_json->quote;
+  }
+
+  /**
+   * Gets note info as json object.
+   *
+   * @return mixed
+   *   Note info as json object.
+   */
+  public function getNoteInfo() {
     $note_info = $this->get('note_info')->value;
     $note_info_json = json_decode($note_info);
 
-    return $note_info_json->quote;
+    return $note_info_json;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwner() {
+    return $this->get('uid')->entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwner(UserInterface $account) {
+    $this->set('uid', $account->id());
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwnerId() {
+    return $this->get('uid')->target_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwnerId($uid) {
+    $this->set('uid', $uid);
+    return $this;
   }
 
   /**
@@ -155,6 +199,7 @@ class Note extends ContentEntityBase {
    *   NULL is nothing is found.
    *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   public function getDepartment($load = TRUE) {
     // Getting meeting first.
@@ -179,6 +224,7 @@ class Note extends ContentEntityBase {
    *   NULL is nothing is found.
    *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   public function getMeeting($load = TRUE) {
     // Getting BPA first.
@@ -203,6 +249,7 @@ class Note extends ContentEntityBase {
    *   NULL is nothing is found.
    *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   public function getBulletPoint($load = TRUE) {
     // Getting BPA first.

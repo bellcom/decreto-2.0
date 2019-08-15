@@ -19,6 +19,7 @@ dependencies:
     - node.type.decreto_meeting
   module:
     - datetime
+    - file
     - options
     - text
     - user
@@ -60,6 +61,22 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_decreto_meet_full_doc:
+    type: file_default
+    weight: 12
+    region: content
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+  field_decreto_meet_full_doc_c:
+    type: file_default
+    weight: 13
+    region: content
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
   field_decreto_meet_location:
     weight: 5
     label: hidden
@@ -122,6 +139,5 @@ content:
     third_party_settings: {  }
 hidden:
   field_decreto_meet_bpa_files: true
-  field_decreto_meet_full_doc: true
-  field_decreto_meet_full_doc_c: true
   langcode: true
+  search_api_excerpt: true

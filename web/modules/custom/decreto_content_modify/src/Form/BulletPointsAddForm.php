@@ -22,6 +22,16 @@ class BulletPointsAddForm extends AjaxFormBase {
   }
 
   /**
+   * Returns the title for the form.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for the form.
+   */
+  public function getTitle() {
+    return $this->t('Create bullet points');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
@@ -120,6 +130,11 @@ class BulletPointsAddForm extends AjaxFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $bullet_points = $form_state->getValue('bullet_points');
     foreach ($bullet_points as $bullet_point) {
+      // Skipping those with empty titles.
+      if (!$bullet_point['title']) {
+        continue;
+      }
+
       $bullet_point_node = Node::create(array(
         'type' => 'decreto_bullet_point',
         'title' => $bullet_point['title'],

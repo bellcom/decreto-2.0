@@ -71,21 +71,29 @@ function decreto_notification_user_presave(EntityInterface $user) {
 
   // Getting all departments, loaded.
   $vid = 'decreto_tax_department';
-  $allDeparments =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0, NULL, TRUE);
+  $allDeparments = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, 0, NULL, TRUE);
 
   foreach ($allDeparments as $department) {
     if (in_array($department->id(), $userDepartments)) {
       // Ensure flagging is present, if not = subscribe user.
-      $flagging = $flag_service->getFlagging($flag, $department, $user);
-      if (!$flagging) {
-        $flag_service->flag($flag, $department, $user);
+      $flagging = $flag_service->getEntityFlaggings($flag, $department, $user);
+
+      if (empty($flagging)) {
+        // TODO: one must explicitly provide session_id, otherwise the provided
+        // user will be swapped with current user. See:
+        // https://www.drupal.org/project/flag/issues/3075108
+        $flag_service->flag($flag, $department, $user, '123');
       }
     }
     else {
       // Ensure flagging is not present, if present = unsubscribe user.
-      $flagging = $flag_service->getFlagging($flag, $department, $user);
-      if ($flagging) {
-        $flag_service->unflag($flag, $department, $user);
+      $flagging = $flag_service->getEntityFlaggings($flag, $department, $user);
+
+      if (!empty($flagging)) {
+        // TODO: one must explicitly provide session_id, otherwise the provided
+        // user will be swapped with current user. See:
+        // https://www.drupal.org/project/flag/issues/3075108
+        $flag_service->unflag($flag, $department, $user, '123');
       }
     }
   }

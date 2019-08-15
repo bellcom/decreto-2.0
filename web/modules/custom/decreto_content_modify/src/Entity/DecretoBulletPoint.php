@@ -210,4 +210,28 @@ class DecretoBulletPoint extends DecretoNode {
     return intval($count) > 0;
   }
 
+  /**
+   * Returns whether this bullet point is closed.
+   *
+   * @return bool
+   *   TRUE if closed, FALSE otherwise.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function isClosed() {
+    return intval($this->getEntity()->get('field_decreto_bp_closed')->first()->getString()) == 1;
+  }
+
+  /**
+   * Returns whether this bullet point is personal.
+   *
+   * @return bool
+   *   TRUE if closed, FALSE otherwise.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function isPersonal() {
+    return intval($this->getEntity()->get('field_decreto_bp_personal')->first()->getString()) == 1;
+  }
+
 }

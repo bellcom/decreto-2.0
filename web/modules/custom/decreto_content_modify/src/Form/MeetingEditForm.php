@@ -7,6 +7,7 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -31,7 +32,7 @@ class MeetingEditForm extends AjaxFormBase {
    */
   public function getTitle(NodeInterface $meeting = NULL) {
     if ($meeting) {
-      return $this->t('Edit meeting @label', ['@label' => $meeting->label()]);
+      return $this->t('Edit meeting');
     }
     else {
       return $this->t('Create meeting');
@@ -488,14 +489,15 @@ class MeetingEditForm extends AjaxFormBase {
 
     // Populating participants checkboxes.
     if (!$form_state->get('use_department_members')) {
+      $decretoMeeting = new DecretoMeeting($meeting);
       // Internal participants.
-      $internal_participants_ids = array_column($meeting->field_decreto_meet_partic_int->getValue(), 'target_id');
+      $internal_participants_ids = $decretoMeeting->getInternalParticipants(FALSE);
       foreach ($internal_participants_ids as $participant_id) {
         $form['pages-page-2']['participants-container']['participants'][$participant_id]['row']['internal_column']['internal']['#default_value'] = TRUE;
       }
 
       // External participants.
-      $external_participants_ids = array_column($meeting->field_decreto_meet_partic_ext->getValue(), 'target_id');
+      $external_participants_ids = $decretoMeeting->getExternalParticipants(FALSE);
       foreach ($external_participants_ids as $participant_id) {
         $form['pages-page-2']['participants-container']['participants'][$participant_id]['row']['external_column']['external']['#default_value'] = TRUE;
       }

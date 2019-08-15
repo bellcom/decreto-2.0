@@ -180,7 +180,8 @@ class SearchInMeetingForm extends FormBase {
       // If type of the found item is decreto_bullet_point_attachment, add
       // related BP ID as well.
       $typeField = $item->getFields()['type'];
-      $type = reset($typeField->getValues());
+      $typeFieldValues = $typeField->getValues();
+      $type = reset($typeFieldValues);
       if ($type == 'decreto_bullet_point_attachment') {
         $bpNidField = $item->getFields()['bp_nid'];
         $bpNid = reset($bpNidField->getValues());
@@ -190,6 +191,9 @@ class SearchInMeetingForm extends FormBase {
 
     // Removing duplicates.
     $matchItemsIds = array_unique($matchItemsIds);
+
+    // Removing empty values.
+    $matchItemsIds = array_filter($matchItemsIds);
 
     return $matchItemsIds;
   }

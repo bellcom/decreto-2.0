@@ -24,6 +24,16 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
   }
 
   /**
+   * Returns the title for the form.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for the form.
+   */
+  public function getTitle() {
+    return $this->t('Create bullet point');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {

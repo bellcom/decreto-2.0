@@ -9,6 +9,5 @@ label: 'Anonymous user'
 weight: 0
 is_admin: false
 permissions:
-  0: 'access content'
-  2: 'access comments'
-  3: 'access site-wide contact form'
+  - 'access comments'
+  - 'access site-wide contact form'

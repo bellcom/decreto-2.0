@@ -1,5 +1,9 @@
 <?php
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
@@ -9,6 +13,7 @@ use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
 use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
 
 /**
@@ -269,13 +274,91 @@ function decreto_content_modify_theme() {
     'decreto_content_modify_bpa_edit_form' => [
       'render element' => 'form',
     ],
+    'decreto_content_modify_meetings_view_context_links' => [
+      'variables' => [],
+    ],
   ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_content_modify_views_data() {
+  $data['views']['decreto_content_modify_meetings_view_context_links'] = [
+    'title' => t('Decreto content modify meetings view links'),
+    'help' => t('Renders "View all" and "Create" links to be used in meeting views.'),
+    'area' => [
+      'id' => 'decreto_content_modify_meetings_view_context_links',
+    ],
+  ];
+
+  return $data;
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * Changes access to closed nodes: closed/personal bullet points and their child
+ * bullet point attachments.
+ */
+function decreto_content_modify_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  if ($op == 'view') {
+    if ($node->bundle() == 'decreto_bullet_point') {
+      $decretoBP = new DecretoBulletPoint($node);
+
+      if ($decretoBP->isClosed() || $decretoBP->isPersonal()) {
+        $meeting = $decretoBP->getMeeting();
+        $decretoMeeting = new DecretoMeeting($meeting);
+        $internal_participants_id = $decretoMeeting->getInternalParticipants(FALSE);
+
+        // If user is not an internal participant, forbid access.
+        if (!in_array($account->id(), $internal_participants_id)) {
+          return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access closed content');
+        }
+      }
+    }
+    if ($node->bundle() == 'decreto_bullet_point_attachment') {
+      $decretoBPA = new DecretoBulletPointAttachment($node);
+      $bp = $decretoBPA->getBulletPoint();
+      if (!$bp->access('view')) {
+        return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access closed content');
+      }
+    }
+  }
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_field_access().
+ *
+ * Changes access to close type fields: field_decreto_meet_full_doc_c.
+ */
+function decreto_content_modify_entity_field_access($op, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+  if ($op == 'view') {
+    $field_name = $field_definition->getName();
+    if ($field_name == 'field_decreto_meet_full_doc_c') {
+      $meeting = $items->getEntity();
+      $decretoMeeting = new DecretoMeeting($meeting);
+      $internal_participants_id = $decretoMeeting->getInternalParticipants(FALSE);
+
+      // If user is not an internal participant, forbid access.
+      if (!in_array($account->id(), $internal_participants_id)) {
+        return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access meeting closed content');
+      }
+    }
+  }
+
+  return AccessResult::neutral();
 }
 
 /**
  * Helper function.
  *
  * Marks a single item as deleted for all interested search indices.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   Entity to mark as deleted.
  */
 function decreto_content_modify_track_item_deleted(EntityInterface $entity) {
   $indexes = ContentEntity::getIndexesForEntity($entity);

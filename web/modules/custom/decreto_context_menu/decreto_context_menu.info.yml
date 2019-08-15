@@ -1,7 +1,0 @@
-type: module
-name: Decreto Context menu (TO BE DELETED)
-description: 'provides the nice contextual menu for nodes (such as edit, delete, print etc)'
-package: Decreto
-
-core: '8.x'
-project: 'decreto'

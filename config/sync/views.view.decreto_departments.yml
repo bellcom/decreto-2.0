@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.user.field_decreto_usr_departments
   module:
+    - decreto_department
     - decreto_help
     - user
 id: decreto_departments
@@ -25,7 +26,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access user profiles'
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -182,17 +183,17 @@ display:
           message_key: my_departments
           plugin_id: decreto_help_message_popup
       footer:
-        area_text_custom:
-          id: area_text_custom
+        decreto_department_departments_view_context_links:
+          id: decreto_department_departments_view_context_links
           table: views
-          field: area_text_custom
+          field: decreto_department_departments_view_context_links
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
-          tokenize: false
-          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/departments/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret afdeling\r\n  </a>\r\n</div>"
-          plugin_id: text_custom
+          empty: true
+          create_department: 1
+          edit_department: 0
+          plugin_id: decreto_department_departments_view_context_links
       empty:
         area_text_custom:
           id: area_text_custom

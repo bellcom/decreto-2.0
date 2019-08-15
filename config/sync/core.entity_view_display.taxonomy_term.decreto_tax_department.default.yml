@@ -18,10 +18,8 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  flag_subscribe_term:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  flag_subscribe_decreto_tax_department: true
+  flag_subscribe_term: true
   langcode: true
+  search_api_excerpt: true
