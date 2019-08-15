@@ -7,6 +7,7 @@ dependencies:
   module:
     - decreto_help
     - search_api
+    - user
 id: decreto_search_meetings
 label: 'Decreto search meeting'
 module: views
@@ -23,8 +24,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
         type: search_api_tag
         options: {  }
@@ -377,6 +379,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }
   decreto_page_meetings_search:
     display_plugin: page
@@ -395,4 +398,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }

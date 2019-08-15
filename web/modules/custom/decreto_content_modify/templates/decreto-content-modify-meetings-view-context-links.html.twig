@@ -1,0 +1,10 @@
+<div class="boxy__actions">
+  <a href="{{ path('view.decreto_search_meetings.decreto_page_meetings_search') }}" class="btn btn-secondary">
+    {{ "Show meetings"|trans }}
+  </a>
+  {% if user.hasPermission('create decreto_meeting content') %}
+    <a href="{{ path('decreto_content_modify.meetings_add') }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Create meeting"|trans }}
+    </a>
+  {% endif %}
+</div>

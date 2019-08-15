@@ -14,4 +14,4 @@ entity.decreto_notification.canonical:
       decreto_notification:
         type: entity:decreto_notification
   requirements:
-    _permission: 'access content'
+    _entity_access: 'decreto_notification.view'

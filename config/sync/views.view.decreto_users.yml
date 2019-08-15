@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.user.list
   module:
+    - decreto_department
     - decreto_help
     - user
 id: decreto_users
@@ -25,7 +26,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access user profiles'
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -132,17 +133,19 @@ display:
           message_key: department_members_list
           plugin_id: decreto_help_message_popup
       footer:
-        area_text_custom:
-          id: area_text_custom
+        decreto_department_departments_view_context_links:
+          id: decreto_department_departments_view_context_links
           table: views
-          field: area_text_custom
+          field: decreto_department_departments_view_context_links
           relationship: none
           group_type: group
           admin_label: ''
           empty: true
-          tokenize: true
-          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/departments/{{ raw_arguments.field_decreto_usr_departments_target_id }}/edit\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Tilknyt medlem\r\n  </a>\r\n</div>"
-          plugin_id: text_custom
+          tokenize: 1
+          create_department: 0
+          edit_department: 1
+          department_id: '{{ raw_arguments.field_decreto_usr_departments_target_id }}'
+          plugin_id: decreto_department_departments_view_context_links
       empty:
         area_text_custom:
           id: area_text_custom

@@ -351,4 +351,52 @@ class DecretoMeeting extends DecretoNode {
     return intval($count) > 0;
   }
 
+  /**
+   * Returns internal participants.
+   *
+   * @param bool $load
+   *   If the returned users shall be load. If FALSE, array of uids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of users is returned,
+   *   If load is FALSE array of uids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getInternalParticipants($load = TRUE) {
+    if ($fieldInternalParticipants = $this->getEntity()->get('field_decreto_meet_partic_int')) {
+      if ($load) {
+        return $fieldInternalParticipants->referencedEntities();
+      }
+      else {
+        return array_column($fieldInternalParticipants->getValue(), 'target_id');
+      }
+    }
+
+    return array();
+  }
+
+  /**
+   * Returns external participants.
+   *
+   * @param bool $load
+   *   If the returned users shall be load. If FALSE, array of uids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of users is returned,
+   *   If load is FALSE array of uids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getExternalParticipants($load = TRUE) {
+    if ($fieldExternalParticipants = $this->getEntity()->get('field_decreto_meet_partic_ext')) {
+      if ($load) {
+        return $fieldExternalParticipants->referencedEntities();
+      }
+      else {
+        return array_column($fieldExternalParticipants->getValue(), 'target_id');
+      }
+    }
+
+    return array();
+  }
+
 }

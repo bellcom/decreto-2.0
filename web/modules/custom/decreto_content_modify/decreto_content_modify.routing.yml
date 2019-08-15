@@ -92,7 +92,7 @@ decreto_content_modify.bpas_modal:
     _title: 'Decreto bullet point attachment modal'
     _controller: '\Drupal\decreto_content_modify\Controller\BulletPointAttachmentController::modalContentRender'
   requirements:
-    _permission: 'access content'
+    _entity_access: 'bullet_point_attachment.view'
     bullet_point_attachment: \d+
 
 decreto_content_modify.bpas_add:

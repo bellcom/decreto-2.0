@@ -1,0 +1,4 @@
+access decreto closed content:
+  title: 'Access Decreto closed content'
+  description: 'Access to meetings closed files, closed bullet points (and their bullet point attachments)'
+  restrict access: TRUE

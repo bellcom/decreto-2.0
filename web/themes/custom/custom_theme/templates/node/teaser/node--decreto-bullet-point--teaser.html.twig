@@ -118,10 +118,18 @@
         {# Begin - actions #}
         <span class="boxy__bp_actions boxy__actions boxy pull-right">
           <a href="#" class="bullet-point-toggle" data-bullet-point-id="{{ node.id() }}" title="{{ "Open/close bullet point attachment" | trans }}">open/close</a>
-          <a href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}" title="{{ "Add bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">+ADD</a>
-          <a href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}" title="{{ "Delete bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">-DEL</a>
-          <a href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}" title="{{ "Edit bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
-          <a href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}" title="{{ "Add/edit memos" | trans }}" class="use-ajax" data-dialog-type="modal">memos</a>
+          {% if user.hasPermission('create decreto_bullet_point_attachment content') %}
+            <a href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}" title="{{ "Add bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">+ADD</a>
+          {% endif %}
+          {% if user.hasPermission('delete any decreto_bullet_point content') %}
+            <a href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}" title="{{ "Delete bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">-DEL</a>
+          {% endif %}
+          {% if user.hasPermission('edit any decreto_bullet_point content') %}
+            <a href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}" title="{{ "Edit bullet point" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
+          {% endif %}
+          {% if user.hasPermission('create decreto_memo content') and user.hasPermission('edit own decreto_memo content') and user.hasPermission('delete own decreto_memo content')  %}
+            <a href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}" title="{{ "Add/edit memos" | trans }}" class="use-ajax" data-dialog-type="modal">memos</a>
+          {% endif %}
         </span>
         {# End - actions #}
       </span>

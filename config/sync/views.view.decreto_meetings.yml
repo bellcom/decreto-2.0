@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.table
     - node.type.decreto_meeting
   module:
+    - decreto_content_modify
     - decreto_help
     - node
     - taxonomy
@@ -165,17 +166,15 @@ display:
           message_key: upcoming_events
           plugin_id: decreto_help_message_popup
       footer:
-        area_text_custom:
-          id: area_text_custom
+        decreto_content_modify_meetings_view_context_links:
+          id: decreto_content_modify_meetings_view_context_links
           table: views
-          field: area_text_custom
+          field: decreto_content_modify_meetings_view_context_links
           relationship: none
           group_type: group
           admin_label: ''
           empty: true
-          tokenize: false
-          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/meetings\" class=\"btn btn-secondary\">\r\n    Vis møder\r\n  </a>\r\n  <a href=\"/meetings/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret et møde\r\n  </a>\r\n</div>"
-          plugin_id: text_custom
+          plugin_id: decreto_content_modify_meetings_view_context_links
       empty:
         area_text_custom:
           id: area_text_custom
@@ -233,7 +232,7 @@ display:
         title: false
         header: false
         arguments: false
-        footer: false
+        footer: true
       filters:
         status:
           value: '1'
@@ -312,18 +311,6 @@ display:
           break_phrase: false
           not: false
           plugin_id: numeric
-      footer:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content: "<div class=\"boxy__actions\">\r\n  <a href=\"/meetings\" class=\"btn btn-secondary\">\r\n    Vis møder\r\n  </a>\r\n  <a href=\"/meetings/add\" class=\"btn btn-primary use-ajax\"  data-dialog-type=\"modal\">\r\n    Opret et møde\r\n  </a>\r\n</div>"
-          plugin_id: text_custom
     cache_metadata:
       max-age: -1
       contexts:

@@ -17,36 +17,48 @@ decreto_annotator.annotator.search:
     _method: 'GET'
 
 decreto_annotator.annotator.update:
-  path: '/annotator/update/{id}'
+  path: '/annotator/update/{note}'
   defaults:
     _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorUpdate'
     _title: 'Update'
+  options:
+    parameters:
+      note:
+        type: entity:decreto_annotator_note
   requirements:
-    _permission: 'access content'
+    _entity_access: 'note.view'
     _method: 'PUT'
   methods:
     - PUT
     - POST
 
 decreto_annotator.annotator.delete:
-  path: '/annotator/delete/{id}'
+  path: '/annotator/delete/{note}'
   defaults:
     _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorDelete'
     _title: 'Delete'
+  options:
+    parameters:
+      note:
+        type: entity:decreto_annotator_note
   requirements:
-    _permission: 'access content'
+    _entity_access: 'note.delete'
     _method: 'DELETE'
   methods:
     - DELETE
     - POST
 
 decreto_annotator.annotator.read:
-  path: '/annotator/read/{id}'
+  path: '/annotator/read/{note}'
   defaults:
     _controller: '\Drupal\decreto_annotator\Controller\AnnotatorController::annotatorRead'
     _title: 'Read'
+  options:
+    parameters:
+      note:
+        type: entity:decreto_annotator_note
   requirements:
-    _permission: 'access content'
+    _entity_access: 'note.view'
     _method: 'GET'
 
 decreto_annotator.note_popup_content:
