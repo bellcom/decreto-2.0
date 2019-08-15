@@ -3,15 +3,11 @@
   <!-- Begin - bar -->
   <div class="bulletpoint__bar">
 
-    <!-- Begin - handle -->
-    <div class="bulletpoint__handle">
-      <a class="btn-expand-collapse collapsed" role="button"
-         data-toggle="collapse"
-         href="#bp-content-{{ node.id }}" aria-expanded="true"
-         aria-controls="bp-content-{{ node.id }}"></a>
-
-    </div>
-    <!-- End - handle -->
+    <!-- Begin - toggler -->
+    <button class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint">
+      +/-
+    </button>
+    <!-- End - toggler -->
 
     <!-- Begin - meta -->
     <div class="bulletpoint__meta">
@@ -67,7 +63,7 @@
     <div class="bulletpoint__actions">
 
       <!-- Begin - open/close -->
-      <button class="bulletpoint__action-button js-bulletpoint-toggle-parent"
+      <button class="bulletpoint__action-button js-bulletpoint-toggle-attachments"
          data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
          title="{{ "Open/close bullet point attachment" | trans }}">
         <span class="material-icons">unfold_more</span>

@@ -22,8 +22,6 @@
 
 .bulletpoint {
   margin-bottom: 2px;
-
-  border: 1px solid $body-bg;
 }
 
 .bulletpoint__bar {
@@ -31,7 +29,7 @@
 
   align-items: center;
 
-  min-height: 40px;
+  min-height: 50px;
 
   background-color: $body-bg;
 
@@ -89,8 +87,14 @@ button.bulletpoint__action-button {
 // --------------------------------------------------
 
 .bulletpoint--attachment {
+  border: 1px solid $body-bg;
 
-  .bulletpoint__bar {}
+  &.bulletpoint--open {
+
+    .bulletpoint__bar {
+      background-color: #D4EBE7;
+    }
+  }
 }
 
 // --------------------------------------------------

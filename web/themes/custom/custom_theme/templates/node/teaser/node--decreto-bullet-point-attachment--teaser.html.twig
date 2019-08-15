@@ -3,55 +3,77 @@
   <!-- Begin - bar -->
   <div class="bulletpoint__bar">
 
+    <!-- Begin - toggler -->
+    <button class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint">
+      +/-
+    </button>
+    <!-- End - toggler -->
+
+    <!-- Begin - meta -->
+    <div class="bulletpoint__meta">
+      {{ label }}
+
+      {# Begin - notes #}
+      {% if content['#contains_notes'] %}
+        <span class="material-icons"
+              title="{{ 'This meeting has notes' | trans }}"
+              data-toggle="tooltip">chat</span>
+      {% endif %}
+      {# End - notes #}
+
+    </div>
+    <!-- End - meta -->
+
+    <!-- Begin - actions -->
+    <div class="bulletpoint__actions">
+
+      <!-- Begin - delete -->
+      {% if user.hasPermission('delete any decreto_bullet_point_attachment content') %}
+        <a
+          href="{{ path('decreto_content_modify.bpas_delete', {'node': node.id()}) }}"
+          title="{{ "Delete bullet point attachment" | trans }}"
+          data-toggle="tooltip"
+          class="use-ajax" data-dialog-type="modal">
+          <span class="material-icons">remove_circle</span>
+        </a>
+      {% endif %}
+      <!-- End - delete -->
+
+      <!-- Begin - edit -->
+      {% if user.hasPermission('edit any decreto_bullet_point_attachment content') %}
+        <a
+          href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point_attachment': node.id()}) }}"
+          title="{{ "Edit bullet point attachment" | trans }}" class="use-ajax"
+          data-toggle="tooltip"
+          data-dialog-type="modal">
+          <span class="material-icons">edit</span>
+        </a>
+      {% endif %}
+      <!-- End - edit -->
+
+    </div>
+    <!-- End - actions -->
+
   </div>
   <!-- End - bar -->
 
+  <!-- Begin - content -->
+  <div class="bulletpoint__content">
 
-
-  <a class="btn-expand-collapse pull-left collapsed" role="button" data-toggle="collapse"
-     href="#bpa-content-{{ node.id }}" aria-expanded="false" aria-controls="bpa-content-{{ node.id }}">
-    <span class="glyphicon" aria-hidden="true"></span>
-  </a>
-
-  <div>
-    <div>
-      {{ title_prefix }}
-      <span{{ title_attributes }}>
-        {{ label }}
-
-        {# Begin - notes #}
-        {% if content['#contains_notes'] %}
-          <span class="material-icons" title="{{ 'This meeting has notes' | trans }}" data-toggle="tooltip">chat</span>
-        {% endif %}
-        {# End - notes #}
-
-        {# Begin - action #}
-        <span class="boxy__bpa_actions boxy__actions boxy pull-right">
-          {% if user.hasPermission('delete any decreto_bullet_point_attachment content') %}
-            <a href="{{ path('decreto_content_modify.bpas_delete', {'node': node.id()}) }}" title="{{ "Delete bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">-</a>
-          {% endif %}
-          {% if user.hasPermission('edit any decreto_bullet_point_attachment content') %}
-            <a href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point_attachment': node.id()}) }}" title="{{ "Edit bullet point attachment" | trans }}" class="use-ajax" data-dialog-type="modal">edit</a>
-          {% endif %}
-        </span>
-        {# End - action #}
-
-      </span>
-
-      {{ title_suffix }}
-    </div>
-  </div>
-
-  <div{{ content_attributes.addClass('content','collapse', 'area-expand-collapse').setAttribute('id', 'bpa-content-' ~ node.id) }}>
     {% if node.field_decreto_bpa_html.entity.uri.value %}
-      <a href="{{ path('decreto_content_modify.bpas_modal', {'bullet_point_attachment': node.id()}) }}" title="{{ "Open in popup" | trans }}" class="use-ajax" data-dialog-type="modal">Open in popup</a>
+      <a
+        href="{{ path('decreto_content_modify.bpas_modal', {'bullet_point_attachment': node.id()}) }}"
+        title="{{ "Open in popup" | trans }}" class="use-ajax"
+        data-dialog-type="modal">Open in popup</a>
     {% elseif node.field_decreto_bpa_file.entity.uri.value %}
-      Download file: {{ content.field_decreto_bpa_file }}
+      {{ 'Download file:' | trans }} {{ content.field_decreto_bpa_file }}
     {% else %}
-      <div class="annotate-content">
+      <div>
         {{ content }}
       </div>
     {% endif %}
+
   </div>
+  <!-- End - content -->
 
 </div>
