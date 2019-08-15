@@ -4,68 +4,81 @@
   <div class="bulletpoint__bar">
 
     <!-- Begin - toggler -->
-    <button class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint">
-      +/-
-    </button>
+    <button
+      class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint"></button>
     <!-- End - toggler -->
 
     <!-- Begin - meta -->
     <div class="bulletpoint__meta">
       {{ label }}
 
-      {# Begin - notes #}
-      {% if content['#contains_notes'] %}
-        <span class="material-icons"
-              title="{{ 'This bullet point has notes' | trans }}"
-              data-toggle="tooltip">chat</span>
-      {% endif %}
-      {# End - notes #}
+      <!-- Begin - icon list -->
+      <div class="bulletpoint__icon-list">
 
-      {# Begin - memos #}
-      {% if content['#contains_memos'] %}
-        <a
-          href="{{ path('decreto_content_modify.bp_memos', {'bullet_point': node.id}) }}"
-          title="{{ "Read memos" | trans }}" class="use-ajax"
-          data-dialog-type="modal">
+        {# Begin - notes #}
+        {% if content['#contains_notes'] %}
+          <button class="bulletpoint__info-button">
+          <span class="material-icons"
+                title="{{ 'This bullet point has notes' | trans }}"
+                data-toggle="tooltip">chat</span>
+          </button>
+        {% endif %}
+        {# End - notes #}
+
+        {# Begin - memos #}
+        {% if content['#contains_memos'] %}
+          <a
+            href="{{ path('decreto_content_modify.bp_memos', {'bullet_point': node.id}) }}"
+            title="{{ "Read memos" | trans }}"
+            class="bulletpoint__action-button use-ajax"
+            data-dialog-type="modal">
             <span class="material-icons"
                   title="{{ 'This bullet point has memos' | trans }}"
                   data-toggle="tooltip">
               mail
             </span>
-        </a>
-      {% endif %}
-      {# End - notes #}
+          </a>
+        {% endif %}
+        {# End - notes #}
 
-      {# Start - closed #}
-      {% if node.field_decreto_bp_closed.value %}
-        <span class="material-icons"
-              title="{{ 'Closed bullet point' | trans }}"
-              data-toggle="tooltip">
-            lock
-          </span>
-      {% endif %}
-      {# End - closed #}
+        {# Start - closed #}
+        {% if node.field_decreto_bp_closed.value %}
+          <button class="bulletpoint__info-button">
+            <span class="material-icons"
+                  title="{{ 'Closed bullet point' | trans }}"
+                  data-toggle="tooltip">
+              lock
+            </span>
+          </button>
+        {% endif %}
+        {# End - closed #}
 
-      {# Start - personal #}
-      {% if node.field_decreto_bp_personal.value %}
-        <span class="material-icons"
-              title="{{ 'Personal bullet point' | trans }}"
-              data-toggle="tooltip">
-            person
-          </span>
-      {% endif %}
-      {# End - personal #}
+        {# Start - personal #}
+        {% if node.field_decreto_bp_personal.value %}
+          <button class="bulletpoint__info-button">
+            <span class="material-icons"
+                  title="{{ 'Personal bullet point' | trans }}"
+                  data-toggle="tooltip">
+              person
+            </span>
+          </button>
+        {% endif %}
+        {# End - personal #}
+
+      </div>
+      <!-- End - icon list -->
 
     </div>
     <!-- End - meta -->
 
     <!-- Begin - actions -->
-    <div class="bulletpoint__actions">
+    <div class="bulletpoint__icon-list">
 
       <!-- Begin - open/close -->
-      <button class="bulletpoint__action-button js-bulletpoint-toggle-attachments"
-         data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
-         title="{{ "Open/close bullet point attachment" | trans }}">
+      <button
+        class="bulletpoint__action-button js-bulletpoint-toggle-attachments"
+        data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
+        title="{{ "Open/close bullet point attachment" | trans }}">
         <span class="material-icons">unfold_more</span>
       </button>
       <!-- End - open/close -->
@@ -74,7 +87,8 @@
       <a
         href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
         data-toggle="tooltip"
-        title="{{ "Add bullet point attachment" | trans }}" class="bulletpoint__action-button use-ajax"
+        title="{{ "Add bullet point attachment" | trans }}"
+        class="bulletpoint__action-button use-ajax"
         data-dialog-type="modal">
         <span class="material-icons">add_circle</span>
       </a>
@@ -93,7 +107,8 @@
       <a
         href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
         data-toggle="tooltip"
-        title="{{ "Edit bullet point" | trans }}" class="bulletpoint__action-button use-ajax"
+        title="{{ "Edit bullet point" | trans }}"
+        class="bulletpoint__action-button use-ajax"
         data-dialog-type="modal">
         <span class="material-icons">edit</span>
       </a>
@@ -103,7 +118,8 @@
       <a
         href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}"
         data-toggle="tooltip"
-        title="{{ "Add/edit memos" | trans }}" class="bulletpoint__action-button use-ajax"
+        title="{{ "Add/edit memos" | trans }}"
+        class="bulletpoint__action-button use-ajax"
         data-dialog-type="modal">
         <span class="material-icons">mail</span>
       </a>

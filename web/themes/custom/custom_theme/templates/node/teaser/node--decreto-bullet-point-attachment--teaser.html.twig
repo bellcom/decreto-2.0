@@ -4,28 +4,35 @@
   <div class="bulletpoint__bar">
 
     <!-- Begin - toggler -->
-    <button class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint">
-      +/-
-    </button>
+    <button
+      class="bulletpoint__toggler js-bulletpoint-toggle-bulletpoint"></button>
     <!-- End - toggler -->
 
     <!-- Begin - meta -->
     <div class="bulletpoint__meta">
       {{ label }}
 
-      {# Begin - notes #}
-      {% if content['#contains_notes'] %}
-        <span class="material-icons"
-              title="{{ 'This meeting has notes' | trans }}"
-              data-toggle="tooltip">chat</span>
-      {% endif %}
-      {# End - notes #}
+      <!-- Begin - icon list -->
+      <div class="bulletpoint__icon-list">
+
+        {# Begin - notes #}
+        {% if content['#contains_notes'] %}
+          <button class="bulletpoint__info-button">
+          <span class="material-icons"
+                title="{{ 'This meeting has notes' | trans }}"
+                data-toggle="tooltip">chat</span>
+          </button>
+        {% endif %}
+        {# End - notes #}
+
+      </div>
+      <!-- End - icon list -->
 
     </div>
     <!-- End - meta -->
 
     <!-- Begin - actions -->
-    <div class="bulletpoint__actions">
+    <div class="bulletpoint__icon-list">
 
       <!-- Begin - delete -->
       {% if user.hasPermission('delete any decreto_bullet_point_attachment content') %}
@@ -63,7 +70,7 @@
     {% if node.field_decreto_bpa_html.entity.uri.value %}
       <a
         href="{{ path('decreto_content_modify.bpas_modal', {'bullet_point_attachment': node.id()}) }}"
-        title="{{ "Open in popup" | trans }}" class="use-ajax"
+        title="{{ "Open in popup" | trans }}" class="btn btn-secondary use-ajax"
         data-dialog-type="modal">Open in popup</a>
     {% elseif node.field_decreto_bpa_file.entity.uri.value %}
       {{ 'Download file:' | trans }} {{ content.field_decreto_bpa_file }}

@@ -21,7 +21,6 @@
 // --------------------------------------------------
 
 .bulletpoint {
-  margin-bottom: 2px;
 }
 
 .bulletpoint__bar {
@@ -31,6 +30,9 @@
 
   min-height: 50px;
 
+  margin-bottom: 1px;
+
+  border: 1px solid $body-bg;
   background-color: $body-bg;
 
   .material-icons {
@@ -38,6 +40,7 @@
   }
 }
 
+.bulletpoint__info-button,
 .bulletpoint__action-button {
   position: relative;
 
@@ -48,6 +51,7 @@
   text-align: center;
 }
 
+button.bulletpoint__info-button,
 button.bulletpoint__action-button {
   padding: 0;
   margin: 0;
@@ -56,13 +60,66 @@ button.bulletpoint__action-button {
   background-color: transparent;
 }
 
-.bulletpoint__handle {}
+.bulletpoint__info-button {
+  cursor: default;
+}
+
+.bulletpoint__toggler {
+  height: 50px;
+  width: 50px;
+
+  transition: none;
+
+  margin-top: -1px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+
+  outline: 0;
+  border: 0;
+  background-color: #DFE1E3;
+  color: $text-color;
+
+  &:before {
+    @extend .material-icons;
+
+    font-size: 24px !important;
+
+    content: "add";
+
+    color: inherit;
+  }
+
+  + .bulletpoint__meta {
+    margin-left: 15px;
+  }
+}
+
+.bulletpoint--open {
+
+  > .bulletpoint__bar {
+
+    .bulletpoint__toggler {
+      color: #fff;
+      background-color: $brand-tertiary;
+
+      &:before {
+        content: "remove";
+      }
+    }
+  }
+}
 
 .bulletpoint__meta {
   flex-grow: 1;
+
+  .bulletpoint__icon-list {
+    display: inline-block;
+
+    margin-left: 10px;
+  }
 }
 
-.bulletpoint__actions {
+.bulletpoint__icon-list {
 
   a {
 
@@ -87,13 +144,43 @@ button.bulletpoint__action-button {
 // --------------------------------------------------
 
 .bulletpoint--attachment {
+  margin-bottom: 1px;
+
   border: 1px solid $body-bg;
+
+  .bulletpoint__meta {
+    font-size: $font-size-small;
+  }
+
+  .bulletpoint__bar {
+    margin-bottom: 0;
+
+    border: 0;
+    background-color: $body-bg-secondary;
+  }
+
+  .bulletpoint__toggler {
+    color: $headings-color;
+    background-color: $body-bg;
+  }
 
   &.bulletpoint--open {
 
     .bulletpoint__bar {
       background-color: #D4EBE7;
     }
+
+    .bulletpoint__toggler {
+      background-color: $brand-primary;
+    }
+  }
+
+  .bulletpoint__content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px + 15px;
+
+    font-size: $font-size-small;
   }
 }
 
