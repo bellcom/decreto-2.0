@@ -22,6 +22,7 @@
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/admin_toolbar": "^1.27",
         "drupal/bootstrap": "^3.19",
+        "drupal/bootstrap_datetime_picker": "^1.2",
         "drupal/calendar": "1.x-dev",
         "drupal/calendar_datetime": "1.x-dev",
         "drupal/config_ignore": "^2.1",
