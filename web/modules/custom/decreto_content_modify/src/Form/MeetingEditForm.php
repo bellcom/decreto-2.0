@@ -22,6 +22,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class MeetingEditForm extends AjaxFormBase {
 
   /**
+   * The format for bootstrap_date_time form element which shall be used for
+   * populating field.
+   *
+   * @var string
+   */
+  private $dateTimePickerPopulateFormat = 'Y-m-d H:i:s';
+
+  /**
+   * The format for bootstrap_date_time form element which is used when data is
+   * submitted.
+   *
+   * @var string
+   */
+  private $dateTimePickerSubmitFormat = 'Y-m-d  H:i';
+
+  /**
    * Returns the title for the form.
    *
    * @param \Drupal\node\NodeInterface $meeting
@@ -252,16 +268,26 @@ class MeetingEditForm extends AjaxFormBase {
 
     // Meeting dates.
     $form['pages-page-1']['start_date'] = [
-      '#type' => 'datetime',
       '#title' => $this->t('Start date - optional'),
-      '#default_value' => DrupalDateTime::createFromTimestamp(time()),
+      '#type' => 'bootstrap_date_time',
+      '#date_type' => 'datetime',
+      '#hour_format' => '24h',
+      '#allow_times' => '15',
+      '#disable_days' => [],
+      '#exclude_date' => '',
+      '#default_value' => DrupalDateTime::createFromTimestamp(time())->format($this->dateTimePickerPopulateFormat),
       '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
       '#suffix' => '</div>',
     ];
     $form['pages-page-1']['end_date'] = [
-      '#type' => 'datetime',
       '#title' => $this->t('End date - optional'),
-      '#default_value' => DrupalDateTime::createFromTimestamp(time()),
+      '#type' => 'bootstrap_date_time',
+      '#date_type' => 'datetime',
+      '#hour_format' => '24h',
+      '#allow_times' => '15',
+      '#disable_days' => [],
+      '#exclude_date' => '',
+      '#default_value' => DrupalDateTime::createFromTimestamp(time())->format($this->dateTimePickerPopulateFormat),
       '#prefix' => '<div class="col-xs-12 col-sm-6">',
       '#suffix' => '</div></div>',
     ];
@@ -474,10 +500,14 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
 
     if ($start_date = $meeting->field_decreto_meet_start_date->value) {
-      $form['pages-page-1']['start_date']['#default_value'] = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date);
+      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      $form['pages-page-1']['start_date']['#default_value'] = $date->format($this->dateTimePickerPopulateFormat, ['timezone' => drupal_get_user_timezone()]);
     }
     if ($end_date = $meeting->field_decreto_meet_end_date->value) {
-      $form['pages-page-1']['end_date']['#default_value'] = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date);
+      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      $form['pages-page-1']['end_date']['#default_value'] = $date->format($this->dateTimePickerPopulateFormat, ['timezone' => drupal_get_user_timezone()]);
     }
 
     if (!$meeting->field_decreto_meet_full_doc->isEmpty()) {
@@ -537,6 +567,14 @@ class MeetingEditForm extends AjaxFormBase {
         }
       }
     }
+
+    if ($start_date) {
+      $start_date = DrupalDateTime::createFromFormat($this->dateTimePickerSubmitFormat, $start_date, drupal_get_user_timezone());
+    }
+    if ($end_date) {
+      $end_date = DrupalDateTime::createFromFormat($this->dateTimePickerSubmitFormat, $end_date, drupal_get_user_timezone());
+    }
+
     if (!$this->node) {
       $this->node = Node::create([
         'type' => 'decreto_meeting',
@@ -545,8 +583,8 @@ class MeetingEditForm extends AjaxFormBase {
         'field_decreto_meet_type' => $type,
         'field_decreto_meet_department' => $department_tid,
         'field_decreto_meet_location' => $location_tid,
-        'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
-        'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL,
+        'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
+        'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
         'field_decreto_meet_partic_ext' => $field_decreto_meet_partic_ext,
         'field_decreto_meet_use_dep_mem' => $useDepartmentMembers,
@@ -558,8 +596,8 @@ class MeetingEditForm extends AjaxFormBase {
       $this->node->title = $title;
       $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
       $this->node->field_decreto_meet_type = $type;
-      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
-      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT) : NULL;
+      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
+      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
       $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
       $this->node->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
       $this->node->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;

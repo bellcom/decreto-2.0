@@ -22,6 +22,7 @@
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/admin_toolbar": "^1.27",
         "drupal/bootstrap": "^3.19",
+        "drupal/bootstrap_datetime_picker": "^1.2",
         "drupal/calendar": "1.x-dev",
         "drupal/calendar_datetime": "1.x-dev",
         "drupal/config_ignore": "^2.1",
@@ -106,9 +107,6 @@
             },
             "drupal/message_notify": {
                 "2966213 - MessageNotifierBase calling assert(): Calling assert() with a string argument is deprecated" : "https://www.drupal.org/files/issues/2018-10-15/2966213-3.patch"
-            },
-            "drupal/flag": {
-                "2880521 - LogicException: An anonymous user must be identifed by session ID." : "https://www.drupal.org/files/issues/2019-07-28/LogicException-An-anonymous-user-must-be-identifed-by-session-ID-2880521-13.patch"
             }
         }
     }

@@ -63,6 +63,11 @@ function decreto_notification_meeting_notify(EntityInterface $node) {
  * departments list.
  */
 function decreto_notification_user_presave(EntityInterface $user) {
+  // Only subscribing the existing users.
+  if ($user->isNew()) {
+    return;
+  }
+
   $flag_service = \Drupal::service('flag');
   $flag = $flag_service->getFlagById('subscribe_decreto_tax_department');
 
@@ -79,10 +84,7 @@ function decreto_notification_user_presave(EntityInterface $user) {
       $flagging = $flag_service->getEntityFlaggings($flag, $department, $user);
 
       if (empty($flagging)) {
-        // TODO: one must explicitly provide session_id, otherwise the provided
-        // user will be swapped with current user. See:
-        // https://www.drupal.org/project/flag/issues/3075108
-        $flag_service->flag($flag, $department, $user, '123');
+        $flag_service->flag($flag, $department, $user);
       }
     }
     else {
@@ -90,10 +92,7 @@ function decreto_notification_user_presave(EntityInterface $user) {
       $flagging = $flag_service->getEntityFlaggings($flag, $department, $user);
 
       if (!empty($flagging)) {
-        // TODO: one must explicitly provide session_id, otherwise the provided
-        // user will be swapped with current user. See:
-        // https://www.drupal.org/project/flag/issues/3075108
-        $flag_service->unflag($flag, $department, $user, '123');
+        $flag_service->unflag($flag, $department, $user);
       }
     }
   }
