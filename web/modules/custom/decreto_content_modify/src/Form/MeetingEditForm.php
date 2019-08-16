@@ -500,12 +500,12 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
 
     if ($start_date = $meeting->field_decreto_meet_start_date->value) {
-      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date, new \DateTimeZone('UTC'));
+      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
       $form['pages-page-1']['start_date']['#default_value'] = $date->format($this->dateTimePickerPopulateFormat, ['timezone' => drupal_get_user_timezone()]);
     }
     if ($end_date = $meeting->field_decreto_meet_end_date->value) {
-      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date, new \DateTimeZone('UTC'));
+      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
       $form['pages-page-1']['end_date']['#default_value'] = $date->format($this->dateTimePickerPopulateFormat, ['timezone' => drupal_get_user_timezone()]);
     }
@@ -583,8 +583,8 @@ class MeetingEditForm extends AjaxFormBase {
         'field_decreto_meet_type' => $type,
         'field_decreto_meet_department' => $department_tid,
         'field_decreto_meet_location' => $location_tid,
-        'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => 'UTC']) : NULL,
-        'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => 'UTC']) : NULL,
+        'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
+        'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
         'field_decreto_meet_partic_ext' => $field_decreto_meet_partic_ext,
         'field_decreto_meet_use_dep_mem' => $useDepartmentMembers,
@@ -596,8 +596,8 @@ class MeetingEditForm extends AjaxFormBase {
       $this->node->title = $title;
       $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
       $this->node->field_decreto_meet_type = $type;
-      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => 'UTC']) : NULL;
-      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => 'UTC']) : NULL;
+      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
+      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
       $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
       $this->node->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
       $this->node->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
