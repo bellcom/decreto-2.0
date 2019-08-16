@@ -38,6 +38,10 @@
   .material-icons {
     font-size: $font-size-large;
   }
+
+  > *:last-child {
+    padding-right: 20px;
+  }
 }
 
 .bulletpoint__info-button,
@@ -90,7 +94,7 @@ button.bulletpoint__action-button {
   }
 
   + .bulletpoint__meta {
-    margin-left: 15px;
+    margin-left: 20px;
   }
 }
 
@@ -128,6 +132,10 @@ button.bulletpoint__action-button {
 
       color: $headings-color;
     }
+  }
+
+  .material-icons {
+    color: inherit;
   }
 }
 
@@ -178,7 +186,7 @@ button.bulletpoint__action-button {
   .bulletpoint__content {
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 50px + 15px;
+    padding-left: 50px + 20px;
 
     font-size: $font-size-small;
   }

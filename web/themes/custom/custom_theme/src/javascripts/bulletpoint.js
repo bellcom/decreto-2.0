@@ -10,6 +10,8 @@ for (var toggleAllButton of toggleAllButtons) {
 function handleToggleAll(event) {
   event.preventDefault();
 
+  console.log('All');
+
   var bulletpoints = document.getElementsByClassName('bulletpoint');
   var currentState = toggleAllButton.dataset.currentState;
 
@@ -41,6 +43,21 @@ function handleToggleAttachments(event) {
   var parent = element.closest('.bulletpoint');
 
   parent.classList.toggle('bulletpoint--open');
+
+  // Run through attachments and toggle them.
+  var attachments = parent.querySelectorAll('.bulletpoint--attachment');
+  console.log('Attachments', attachments);
+
+  if (parent.classList.contains('bulletpoint--open')) {
+    for (var attachment of attachments) {
+      attachment.classList.add('bulletpoint--open');
+    }
+  }
+  else {
+    for (var attachment of attachments) {
+      attachment.classList.remove('bulletpoint--open');
+    }
+  }
 }
 
 // Toggle bulletpoint.
@@ -55,17 +72,4 @@ function handleToggleBulletpoint(event) {
   var parent = element.closest('.bulletpoint');
 
   parent.classList.toggle('bulletpoint--open');
-
-  // Run through attachments and toggle them.
-  var attachments = parent.getElementsByClassName('bulletpoint--attachment');
-  if (parent.classList.contains('bulletpoint--open')) {
-    for (var attachment of attachments) {
-      attachment.classList.remove('bulletpoint--open');
-    }
-  }
-  else {
-    for (var attachment of attachments) {
-      attachment.classList.add('bulletpoint--open');
-    }
-  }
 }
