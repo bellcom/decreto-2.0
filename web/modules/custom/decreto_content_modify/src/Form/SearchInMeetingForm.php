@@ -127,7 +127,7 @@ class SearchInMeetingForm extends FormBase {
     }
 
     // Hide all elements.
-    $response->addCommand(new InvokeCommand(".decreto-bullet-point.teaser, .decreto-bullet-point-attachment.teaser", 'addClass', array('hidden')));
+    $response->addCommand(new InvokeCommand(".bulletpoint", 'addClass', array('hidden')));
     // Show only those that were returned by search index.
     $response->addCommand(new InvokeCommand($jquerySelector, 'removeClass', array('hidden')));
 
