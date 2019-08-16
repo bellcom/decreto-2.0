@@ -86,12 +86,11 @@ class MeetingItemsReorderForm extends FormBase {
     // submitted.
     $user_input = $form_state->getUserInput();
     if (!empty($user_input) && isset($user_input['items'])) {
-
       $newItems = [];
       foreach ($user_input['items'] as $key => $userInputItem) {
         $items[$key]->parent = $userInputItem['node']['parent'];
         $items[$key]->depth = $userInputItem['node']['depth'];
-        $items[$key]->weight = $userInputItem['node']['weight'];
+        $items[$key]->weight = $userInputItem['weight'];
         $newItems[$key] = $items[$key];
       }
 
