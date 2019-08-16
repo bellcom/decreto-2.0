@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cd58206bde290e76c4687c7910561fe",
+    "content-hash": "c95a0a665d7a8e267e72dd0444b0601a",
     "packages": [
         {
             "name": "ajgl/breakpoint-twig-extension",
