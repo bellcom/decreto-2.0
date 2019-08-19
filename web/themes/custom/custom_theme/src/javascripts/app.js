@@ -60,7 +60,7 @@ jQuery(function ($) {
     $('#agenda-item-reorder').toggleClass('hidden');
 
     // Resetting search.
-    $('.decreto-bullet-point.teaser, .decreto-bullet-point-attachment.teaser').removeClass('hidden');
+    $('.bulletpoint').removeClass('hidden');
     $('form.decreto-content-modify-search-in-meeting-form input').val('');
 
     // Toggle search enabled.
