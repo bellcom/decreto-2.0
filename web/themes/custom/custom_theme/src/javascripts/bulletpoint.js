@@ -10,8 +10,6 @@ for (var toggleAllButton of toggleAllButtons) {
 function handleToggleAll(event) {
   event.preventDefault();
 
-  console.log('All');
-
   var bulletpoints = document.getElementsByClassName('bulletpoint');
   var currentState = toggleAllButton.dataset.currentState;
 
@@ -46,7 +44,6 @@ function handleToggleAttachments(event) {
 
   // Run through attachments and toggle them.
   var attachments = parent.querySelectorAll('.bulletpoint--attachment');
-  console.log('Attachments', attachments);
 
   if (parent.classList.contains('bulletpoint--open')) {
     for (var attachment of attachments) {

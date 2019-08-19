@@ -6,23 +6,22 @@
 (function ($) {
     Drupal.behaviors.decretoAnnotator = {
         attach: function (context, settings) {
-            jQuery('.decreto-bullet-point-attachment .content .annotate-content').once('decreto-annotator').each(function (index) {
+            jQuery('.bulletpoint--attachment .bulletpoint__content').once('decreto-annotator').each(function (index) {
                 //TODO: bug in touch plugin, submitted https://github.com/aron/annotator.touch.js/issues/13
 //               jQuery('#'+this.getAttribute('id')).annotator().annotator('addPlugin', 'Touch', {
 //                    force: 1,
 //                    useHighlighter: location.search.indexOf('highlighter') > -1,
 //                });
-                var parentId = jQuery(this).parent('.content').attr('id');
-                var bpa_id = parentId.replace('bpa-content-', '');
+                var id = jQuery(this).parents('.bulletpoint').data('decreto-node-id');
 
                 jQuery(this).annotator().annotator('addPlugin', 'Store', {
                     // The endpoint of the store on your server.
                     prefix: drupalSettings.path.baseUrl,
                     annotationData: {
-                        'bpa_id': bpa_id,
+                        'bpa_id': id,
                     },
                     loadFromSearch: {
-                        'bpa_id': bpa_id,
+                        'bpa_id': id,
                     },
                     urls: {
                         create: 'annotator/create',
