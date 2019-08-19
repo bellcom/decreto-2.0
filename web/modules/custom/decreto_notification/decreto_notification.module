@@ -163,7 +163,7 @@ function template_preprocess_decreto_notification(array &$variables) {
 
   // Helpful $content variable for templates.
   $variables += ['content' => [
-    'unread' => $variables['decreto_notification']->unread->value,
+    '#unread' => $variables['decreto_notification']->unread->value,
   ]];
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
