@@ -114,7 +114,7 @@ class DecretoBulletPoint extends DecretoNode {
   }
 
   /**
-   * Removes bullet point attachment nid from bullet point field_decreto_bp_bpas field..
+   * Removes bullet point attachment nid from bullet point field_decreto_bp_bpas field.
    *
    * Saves the bullet point as well.
    *

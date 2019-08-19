@@ -288,15 +288,14 @@ class DecretoMeeting extends DecretoNode {
    */
   public function getMessages($load = TRUE) {
     $query = \Drupal::entityQuery('message');
-    $results = $query
-      ->condition('field_decreto_notif_meeting', $this->getEntity()->id());
+    $query->condition('field_decreto_notif_meeting', $this->getEntity()->id());
 
     $ids = $query->execute();
     if (!empty($ids)) {
       return ($load) ? Message::loadMultiple($ids) : $ids;
     }
 
-    return $results;
+    return $ids;
   }
 
   /**
