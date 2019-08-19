@@ -129,6 +129,12 @@ function custom_theme_preprocess_block(&$variables) {
     $variables['content']['#current_organisation'] = $departmentCounter['my_org'];
     $variables['content']['#across_organisations'] = $departmentCounter['total'];
 
+    $url = Url::fromRoute('view.decreto_departments.decreto_page_my_departments');
+    $variables['content']['#current_organisation_popup_path'] = $url->toString();
+
+    // Same path as for current organisation. Will changed after introducing organisation.
+    $variables['content']['#across_organisations_popup_path'] = $url->toString();
+
     // Disable caching on block level, as we already cache the counters.
     $variables['#cache']['max-age'] = 0;
   }

@@ -221,10 +221,32 @@ display:
   decreto_block_my_departments:
     display_plugin: block
     id: decreto_block_my_departments
-    display_title: Block
+    display_title: 'BLOCK: My departments'
     position: 1
     display_options:
       display_extenders: {  }
+      display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user
+        - user.permissions
+      tags:
+        - 'config:field.storage.user.field_decreto_usr_departments'
+  decreto_page_my_departments:
+    display_plugin: page
+    id: decreto_page_my_departments
+    display_title: 'PAGE: My departments'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: my-departments
+      display_description: ''
+      footer: {  }
+      defaults:
+        footer: false
     cache_metadata:
       max-age: -1
       contexts:
