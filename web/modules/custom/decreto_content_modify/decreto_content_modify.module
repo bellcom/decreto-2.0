@@ -31,13 +31,6 @@ function decreto_content_modify_preprocess_node(&$variables) {
       $variables['items_reorder_form'] = \Drupal::formBuilder()->getForm(MeetingItemsReorderForm::class, $node);
     }
   }
-
-  // Adding node id as data element.
-  if ($node->getType() == 'decreto_bullet_point' || $node->getType() == 'decreto_bullet_point_attachment') {
-    if ($view_mode == 'teaser') {
-      $variables['attributes']['data-decreto-node-id'] = $node->id();
-    }
-  }
 }
 
 /*
