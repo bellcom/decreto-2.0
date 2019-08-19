@@ -35,7 +35,7 @@ class DecretoMemo extends DecretoNode {
 
     if ($bp) {
       $decretoBP = new DecretoBulletPoint($bp);
-      $decretoBP->getMeeting($load);
+      return $decretoBP->getMeeting($load);
     }
 
     return NULL;
