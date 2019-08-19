@@ -217,7 +217,7 @@ display:
   decreto_block_all_meetings:
     display_plugin: block
     id: decreto_block_all_meetings
-    display_title: 'All meetings'
+    display_title: 'BLOCK: All meetings'
     position: 1
     display_options:
       display_extenders: {  }
@@ -240,7 +240,7 @@ display:
   decreto_block_department_meetings:
     display_plugin: block
     id: decreto_block_department_meetings
-    display_title: 'Department meetings'
+    display_title: 'BLOCK: Department meetings'
     position: 2
     display_options:
       display_extenders: {  }
@@ -344,7 +344,7 @@ display:
   decreto_block_my_meetings:
     display_plugin: block
     id: decreto_block_my_meetings
-    display_title: 'My meetings'
+    display_title: 'BLOCK: My meetings'
     position: 2
     display_options:
       display_extenders: {  }
@@ -461,6 +461,31 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  decreto_page_all_meetings:
+    display_plugin: page
+    id: decreto_page_all_meetings
+    display_title: 'PAGE: All meetings'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        footer: false
+      path: coming-meetings
+      footer: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

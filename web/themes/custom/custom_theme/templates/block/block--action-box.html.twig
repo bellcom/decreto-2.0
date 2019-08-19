@@ -17,23 +17,25 @@
 
   {% block content %}
     <div class="action-box-counters">
-      <a href="#" class="action-box-counters__item element-wrapper-link">
+      <a href="{{ content['#current_organisation_popup_path'] }}" class="action-box-counters__item element-wrapper-link use-ajax" data-dialog-type="modal">
         <div class="action-box-counters__item__number">
-          {{ content['#current_organization'] }}
+          {{ content['#current_organisation'] }}
         </div>
         <div class="action-box-counters__item__description">
-          {{ 'This organization' | trans }}
+          {{ 'This organisation' | trans }}
         </div>
       </a>
 
-      <div class="action-box-counters__item">
-        <div class="action-box-counters__item__number">
-          {{ content['#across_organizations'] }}
+      <a href="{{ content['#across_organisations_popup_path'] }}" class="action-box-counters__item element-wrapper-link use-ajax" data-dialog-type="modal">
+        <div class="action-box-counters__item">
+          <div class="action-box-counters__item__number">
+            {{ content['#across_organisations'] }}
+          </div>
+          <div class="action-box-counters__item__description">
+            {{ 'Other organisations' | trans }}
+          </div>
         </div>
-        <div class="action-box-counters__item__description">
-          {{ 'Other organizations' | trans }}
-        </div>
-      </div>
+      </a>
     </div>
   {% endblock %}
 

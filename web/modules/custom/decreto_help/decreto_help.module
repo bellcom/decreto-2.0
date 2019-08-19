@@ -39,6 +39,6 @@ function decreto_help_decreto_help_messages() {
     'upcoming_events' => 'Upcoming events',
     'my_upcoming_events' => 'My upcoming events',
     'my_departments' => 'My departments',
-    'my_organizations' => 'My organizations'
+    'my_organisations' => 'My organisations'
   ];
 }

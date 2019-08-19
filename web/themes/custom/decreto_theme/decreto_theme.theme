@@ -43,8 +43,8 @@ function decreto_theme_preprocess_block(&$vars) {
     $departmentService = \Drupal::service('decreto_department.department');
     $departmentCounter = $departmentService->getCounters();
 
-    $variables['content']['#current_organization'] = $departmentCounter['my_org'];
-    $variables['content']['#across_organizations'] = $departmentCounter['total'];
+    $variables['content']['#current_organisation'] = $departmentCounter['my_org'];
+    $variables['content']['#across_organisations'] = $departmentCounter['total'];
   }
 }
 
