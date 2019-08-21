@@ -228,7 +228,7 @@ display:
   decreto_bullet_point_memos_embed:
     display_plugin: embed
     id: decreto_bullet_point_memos_embed
-    display_title: 'Bullet point memos Embed'
+    display_title: 'EMBED: Bullet point memos'
     position: 3
     display_options:
       display_extenders: {  }
@@ -325,7 +325,7 @@ display:
   decreto_memo_page:
     display_plugin: page
     id: decreto_memo_page
-    display_title: 'Memos page'
+    display_title: 'PAGE: Memos'
     position: 2
     display_options:
       display_extenders: {  }
@@ -366,7 +366,7 @@ display:
   decreto_memo_popup_embed:
     display_plugin: embed
     id: decreto_memo_popup_embed
-    display_title: 'Memos popup Embed'
+    display_title: 'EMBED: Memos popup'
     position: 1
     display_options:
       display_extenders: {  }
