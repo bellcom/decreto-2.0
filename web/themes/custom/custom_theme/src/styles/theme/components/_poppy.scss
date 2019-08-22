@@ -74,6 +74,44 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   }
 }
 
+// Form.
+.poppy-form {
+  position: absolute;
+  display: none;
+
+  z-index: $zindex-modal - 10;
+
+  top: 0;
+  left: 0;
+
+  .poppy-toggle {
+    position: absolute;
+
+    left: 0;
+
+    border: 0;
+  }
+
+  .poppy--open & {
+    display: initial;
+  }
+
+  input {
+    width: 300px;
+    height: 44px;
+
+    padding-left: 50px;
+
+    outline: 0;
+
+    color: $text-color;
+    background-color: $body-bg;
+    border-radius: 22px;
+    border: 1px solid $headings-color;
+  }
+}
+
+// Box.
 .poppy-box {
   position: absolute;
   display: none;
@@ -192,7 +230,16 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 @media #{$breakpoint-desktop-only} {}
 
 // Large desktop - and up
-@media #{$breakpoint-large-desktop-and-up} {}
+@media #{$breakpoint-large-desktop-and-up} {
+
+  // Form.
+  .poppy-form {
+
+    input {
+      width: 550px;
+    }
+  }
+}
 
 // Print
 @media print {}

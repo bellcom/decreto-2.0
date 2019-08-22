@@ -87,6 +87,26 @@
             </div>
             <!-- End - add -->
 
+            <!-- Begin - search -->
+            <div class="poppy hidden-xs hidden-sm">
+              <button class="poppy-toggle" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
+                <i class="poppy-toggle__icon material-icons">
+                  search
+                </i>
+              </button>
+
+              <form action="/meetings" method="get" class="poppy-form">
+                <button class="poppy-toggle" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
+                  <i class="poppy-toggle__icon material-icons">
+                    search
+                  </i>
+                </button>
+
+                <input type="search" name="s" placeholder="{{ 'Enter your search terms...' | trans }}">
+              </form>
+            </div>
+            <!-- End - search -->
+
             <div class="flexy-spacer"></div>
 
             <!-- Begin - notifications -->
@@ -256,7 +276,7 @@
         <!-- End - find member -->
 
         <!-- Begin - chat -->
-        <a class="action-button action-button--chat">
+        <a class="action-button action-button--chat hidden">
           {{ 'Chat' | trans }}
         </a>
         <!-- End - chat -->
