@@ -129,6 +129,26 @@ img {
   }
 }
 
+.ajax-throbber {
+  position: fixed;
+
+  top: 80px;
+  right: 80px;
+
+  z-index: 50;
+
+  padding: 10px;
+  border-radius: 100%;
+
+  background-color: $brand-primary;
+
+  &.glyphicon {
+    font-size: 30px;
+
+    color: $text-color;
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
