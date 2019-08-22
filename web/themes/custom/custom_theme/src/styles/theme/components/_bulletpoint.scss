@@ -152,6 +152,19 @@
   }
 }
 
+.bulletpoint:not(.bulletpoint--attachment) {
+
+  .bulletpoint__empty-text {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px + 20px;
+    margin-bottom: 1px;
+
+    font-size: $font-size-small;
+    border: 1px solid $body-bg;
+  }
+}
+
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------

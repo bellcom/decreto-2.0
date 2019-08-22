@@ -47,17 +47,12 @@ class SearchInMeetingForm extends FormBase {
     $searchParam = \Drupal::request()->query->get('s');
 
     //TODO: adding class .poppy only to have position relative - needed for proper help icon positioning.
-    $form['#prefix'] = '<div id="' . $this->getFormId() . '" class="poppy">';
+    $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')
       ->getMessageMarkup('meetings_search_in_meeting_form');
-
-    // Details.
-    $form[] = [
-      '#markup' => '<h4><strong>' . $this->t('Filter bullet points') . '</strong></h4>',
-    ];
 
     // Free text search field.
     $form['s'] = [

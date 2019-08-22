@@ -27,6 +27,13 @@
 
   background-color: $body-bg-secondary;
   border-radius: $border-radius-base;
+
+  .boxy {
+    margin-left: floor( ( 0 - $boxy-spacing-left-right ) );
+    margin-right: floor( ( 0 - $boxy-spacing-left-right ) );
+
+    border-radius: 0;
+  }
 }
 
 .boxy__heading {}
@@ -50,7 +57,7 @@
 
 .boxy {
 
-  // For the .boxy__helper element.
+  // For the .helper element.
   .contextual-region.view {
     position: initial;
   }
@@ -97,6 +104,10 @@
 
     .form-control {
       border-color: #A5B8B6;
+    }
+
+    .btn-success {
+      @extend .btn-primary;
     }
   }
 

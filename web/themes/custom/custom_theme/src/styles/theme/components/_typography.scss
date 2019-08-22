@@ -1,0 +1,129 @@
+// |--------------------------------------------------------------------------
+// | Typography
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .layout__content
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin typography-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+
+h1, h2, h3, h4, h5, h6 {
+
+  a {
+    color: $headings-color-highlighted;
+
+    &:hover {
+      color: darken($headings-color-highlighted, 5%);
+    }
+  }
+
+  .material-icons {
+    font-size: $font-size-large;
+
+    color: $text-color-light;
+  }
+}
+
+label {
+  font-size: $font-size-small;
+  text-transform: uppercase;
+
+  color: $headings-color-light;
+
+  .form-type-checkbox & {
+    text-transform: initial;
+  }
+}
+
+.help-block {
+  color: $text-color-light;
+}
+
+.text-with-icon {
+  display: flex;
+
+  align-items: center;
+
+  &,
+  a, a:hover, a:focus {
+    color: $headings-color;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .material-icons {
+    min-width: 20px;
+
+    font-size: inherit;
+
+    color: $text-color-light;
+  }
+
+  + .text-with-icon {
+    margin-top: 3px;
+  }
+}
+
+.text-primary {
+  color: $headings-color-highlighted;
+}
+.text-secondary {
+  color: $brand-secondary;
+}
+.text-tertiary {
+  color: $brand-tertiary;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

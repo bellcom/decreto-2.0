@@ -8,49 +8,42 @@
   'clearfix',
 ] %}
 <article{{ attributes.addClass(classes) }}>
-  <div class="boxy__body">
-
-    {{ title_prefix }}
-    {% if not page %}
-      <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-    {% endif %}
-    {{ title_suffix }}
-
+  <div class="boxy__heading">
 
     <!-- Begin - metadata -->
     <div class="row">
-      <div class="col-xs-12 col-sm-7">
+      <div class="col-xs-12 col-md-7">
 
-        <!-- Begin - heading -->
-        <h2>
-          {% if node.field_decreto_meet_department %}
-            <a
-              href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}</a>
-          {% endif %}
-          <span>></span>
-          {{ node.getTitle }}
+        <!-- Begin - title -->
+        <h2 class="boxy__heading__title">
+          <strong>
+            {% if node.field_decreto_meet_department %}
+              <a
+                href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}</a>
+            {% endif %}
+            <span class="material-icons">keyboard_arrow_right</span>
+            {{ node.getTitle }}
+          </strong>
         </h2>
-        <!-- End - heading -->
+        <!-- End - title -->
 
       </div>
-      <div class="col-xs-12 col-sm-5">
+      <div class="col-xs-12 col-md-5">
 
         {# Begin - starting date #}
         {% if node.field_decreto_meet_start_date.value %}
-          <div>
-            <i
-              class="material-icons">access_time</i> {{ content.field_decreto_meet_start_date }}
+          <div class="text-with-icon">
+            <span class="material-icons">access_time</span>
+            <strong>{{ content.field_decreto_meet_start_date }}</strong>
           </div>
         {% endif %}
         {# End - starting date #}
 
         {# Begin - location #}
         {% if node.field_decreto_meet_location.value %}
-          <div>
+          <div class="text-with-icon">
             <i class="material-icons">person_pin_circle</i>
-            {{ content.field_decreto_meet_location }}
+            <strong>{{ content.field_decreto_meet_location }}</strong>
           </div>
         {% endif %}
         {# End - location #}
@@ -59,6 +52,10 @@
       </div>
     </div>
     <!-- End - metadata -->
+
+  </div>
+  <div class="boxy__body">
+    <br>
 
     <!-- Begin - actions -->
     <div class="text-right">
@@ -102,13 +99,22 @@
     </div>
     <!-- End - actions -->
 
+    <br>
+
     <!-- Begin - search form -->
-    <div class="region region-action-box__primary">
-      <div class="action-box">
+    <div class="boxy boxy--background-color-primary">
+      <div class="boxy__heading">
+        <h4 class="boxy__heading__title">
+          {{ 'Filter bulletpoints' | trans }}
+        </h4>
+      </div>
+      <div class="boxy__body">
         {{ search_in_meeting_form }}
       </div>
     </div>
     <!-- End - search form -->
+
+    <br>
 
     {% if user.hasPermission('create decreto_bullet_point content') %}
       <!-- Begin - actions -->

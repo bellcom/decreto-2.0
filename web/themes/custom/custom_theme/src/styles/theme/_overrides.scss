@@ -51,16 +51,6 @@ img {
   min-width: 150px;
 }
 
-.text-primary {
-    color: $headings-color-highlighted;
-}
-.text-secondary {
-    color: $brand-secondary;
-}
-.text-tertiary {
-    color: $brand-tertiary;
-}
-
 .list-inline {
 
     li {
@@ -109,21 +99,6 @@ img {
         color: $headings-color;
         background-color: $btn-default-border;
     }
-}
-
-label {
-    font-size: $font-size-small;
-    text-transform: uppercase;
-
-    color: $headings-color-light;
-
-    .form-type-checkbox & {
-        text-transform: initial;
-    }
-}
-
-.help-block {
-    color: $text-color-light;
 }
 
 [class*="col-"] {
