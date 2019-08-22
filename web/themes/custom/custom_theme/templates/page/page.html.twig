@@ -95,15 +95,17 @@
                 </i>
               </button>
 
-              <form action="/meetings" method="get" class="poppy-form">
+              <div class="poppy-form">
                 <button class="poppy-toggle" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
                   <i class="poppy-toggle__icon material-icons">
                     search
                   </i>
                 </button>
 
-                <input type="search" name="s" placeholder="{{ 'Enter your search terms...' | trans }}">
-              </form>
+                <form action="/meetings" method="get">
+                  <input type="search" name="s" placeholder="{{ 'Enter your search terms...' | trans }}">
+                </form>
+              </div>
             </div>
             <!-- End - search -->
 
