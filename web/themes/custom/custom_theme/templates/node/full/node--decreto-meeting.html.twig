@@ -177,7 +177,19 @@
     <!-- End - actions -->
 
     <div id="agenda-overview">
-      {{ content.field_decreto_meet_bps }}
+      {% if not node.field_decreto_meet_bps.value %}
+        <div class="bulletpoint__empty-text">
+          {{ "No bullet points added. Would you like to" | trans}}
+          <a
+            href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+            class="use-ajax" data-dialog-type="modal">
+            {{ "create one" | trans }}
+          </a>
+          ?
+        </div>
+      {% else %}
+        {{ content.field_decreto_meet_bps }}
+      {% endif %}
     </div>
 
     {% if user.hasPermission('edit any decreto_meeting content') %}
