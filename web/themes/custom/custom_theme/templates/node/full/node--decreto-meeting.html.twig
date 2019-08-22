@@ -147,24 +147,27 @@
 
     <!-- Begin - actions -->
     <div class="text-right">
+      <div class="action-list action-list--increased-element-distance">
 
-      {% if user.hasPermission('edit any decreto_meeting content') %}
-        <!-- Begin - turn on/off switch mode -->
-        <a href="#" id="meeting-agenda-switch-mode-toggle">
+        {% if user.hasPermission('edit any decreto_meeting content') %}
+          <!-- Begin - turn on/off switch mode -->
+          <button class="action-list__button action-list__button--pale action-list__button--small" id="meeting-agenda-switch-mode-toggle">
         <span
           class="material-icons">unfold_more</span> {{ "Turn on/off switch mode" | trans }}
-        </a>
-        <!-- End - turn on/off switch mode -->
-      {% endif %}
+          </button>
+          <!-- End - turn on/off switch mode -->
+        {% endif %}
 
-      <!-- Begin - open/close all -->
-      <button class="js-bulletpoint-toggle-all">
-        <span class="material-icons">unfold_less</span>
-        {{ "Open/close all points" | trans }}
-      </button>
-      <!-- End - open/close all -->
+        <!-- Begin - open/close all -->
+        <button class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
+          <span class="material-icons">unfold_less</span>
+          {{ "Open/close all points" | trans }}
+        </button>
+        <!-- End - open/close all -->
 
+      </div>
     </div>
+    <br>
     <!-- End - actions -->
 
     <div id="agenda-overview">

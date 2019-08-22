@@ -13,11 +13,11 @@
       {{ label }}
 
       <!-- Begin - icon list -->
-      <div class="bulletpoint__icon-list">
+      <div class="action-list">
 
         {# Begin - notes #}
         {% if content['#contains_notes'] %}
-          <button class="bulletpoint__info-button">
+          <button class="action-list__button action-list__button--info">
           <span class="material-icons"
                 title="{{ 'This meeting has notes' | trans }}"
                 data-toggle="tooltip">chat</span>
@@ -32,7 +32,7 @@
     <!-- End - meta -->
 
     <!-- Begin - actions -->
-    <div class="bulletpoint__icon-list">
+    <div class="action-list">
 
       <!-- Begin - delete -->
       {% if user.hasPermission('delete any decreto_bullet_point_attachment content') %}
@@ -40,7 +40,7 @@
           href="{{ path('decreto_content_modify.bpas_delete', {'node': node.id()}) }}"
           title="{{ "Delete bullet point attachment" | trans }}"
           data-toggle="tooltip"
-          class="use-ajax" data-dialog-type="modal">
+          class="action-list__button use-ajax" data-dialog-type="modal">
           <span class="material-icons">remove_circle</span>
         </a>
       {% endif %}
@@ -50,7 +50,7 @@
       {% if user.hasPermission('edit any decreto_bullet_point_attachment content') %}
         <a
           href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point_attachment': node.id()}) }}"
-          title="{{ "Edit bullet point attachment" | trans }}" class="use-ajax"
+          title="{{ "Edit bullet point attachment" | trans }}" class="action-list__button use-ajax"
           data-toggle="tooltip"
           data-dialog-type="modal">
           <span class="material-icons">edit</span>

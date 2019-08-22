@@ -1,0 +1,129 @@
+// |--------------------------------------------------------------------------
+// | Action list
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .action-list
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin action-list-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.action-list {
+
+  .material-icons {
+    color: inherit;
+  }
+}
+
+.action-list__button {
+  position: relative;
+
+  margin: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+
+  cursor: pointer;
+  cursor: hand;
+
+  text-align: center;
+
+  &, &:hover, &:focus {
+    color: $headings-color;
+  }
+
+  + .action-list__button {
+    margin-left: 0;
+  }
+}
+
+a.action-list__button {
+
+  &, &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+button.action-list__button {
+  padding: 0;
+
+  border: 0;
+  background-color: transparent;
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// List.
+.action-list--increased-element-distance {
+
+  .action-list__button {
+
+    + .action-list__button {
+      margin-left: 15px;
+    }
+  }
+}
+
+// Button.
+.action-list__button--info {
+  cursor: default;
+}
+
+.action-list__button--pale {
+  text-decoration: underline;
+
+  &, &:hover, &:focus {
+    color: $text-color-light;
+  }
+}
+
+.action-list__button--small {
+  font-size: $font-size-small;
+}
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}

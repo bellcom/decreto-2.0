@@ -29,8 +29,10 @@ img {
     border: 0;
 }
 
-.icon {
-     @extend .fa; // Extend Font Awesome, so .icon can be used instead (or switched out)
+.icon {}
+
+.material-icons {
+  vertical-align: middle;
 }
 
 .form-control {

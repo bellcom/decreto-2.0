@@ -44,30 +44,6 @@
   }
 }
 
-.bulletpoint__info-button,
-.bulletpoint__action-button {
-  position: relative;
-
-  margin: 0;
-  padding-left: 2px;
-  padding-right: 2px;
-
-  text-align: center;
-}
-
-button.bulletpoint__info-button,
-button.bulletpoint__action-button {
-  padding: 0;
-  margin: 0;
-
-  border: 0;
-  background-color: transparent;
-}
-
-.bulletpoint__info-button {
-  cursor: default;
-}
-
 .bulletpoint__toggler {
   height: 50px;
   width: 50px;
@@ -116,26 +92,10 @@ button.bulletpoint__action-button {
 .bulletpoint__meta {
   flex-grow: 1;
 
-  .bulletpoint__icon-list {
+  .action-list {
     display: inline-block;
 
     margin-left: 10px;
-  }
-}
-
-.bulletpoint__icon-list {
-
-  a {
-
-    &, &:hover {
-      text-decoration: none;
-
-      color: $headings-color;
-    }
-  }
-
-  .material-icons {
-    color: inherit;
   }
 }
 
