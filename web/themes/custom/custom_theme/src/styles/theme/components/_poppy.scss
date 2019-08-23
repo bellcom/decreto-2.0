@@ -26,6 +26,7 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   position: relative;
 }
 
+// Toggle.
 .poppy-toggle {
   position: relative;
   display: flex;
@@ -72,6 +73,10 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
   + .poppy-toggle__description {
     margin-left: 10px;
   }
+}
+
+.poppy-toggle__description {
+  text-align: left;
 }
 
 // Form.
@@ -201,6 +206,13 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 }
 
 .poppy-toggle--user {
+  width: initial;
+  height: 44px;
+
+  border: 0;
+}
+
+.poppy-toggle--organisation-switcher {
   width: initial;
   height: 44px;
 

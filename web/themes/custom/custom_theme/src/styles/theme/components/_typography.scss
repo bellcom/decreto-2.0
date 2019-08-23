@@ -53,7 +53,7 @@ label {
   color: $text-color-light;
 }
 
-.text-with-icon {
+.text--with-icon {
   display: flex;
 
   align-items: center;
@@ -75,19 +75,26 @@ label {
     color: $text-color-light;
   }
 
-  + .text-with-icon {
+  + .text--with-icon {
     margin-top: 3px;
   }
 }
 
-.text-primary {
+.text--primary {
   color: $headings-color-highlighted;
 }
-.text-secondary {
+.text--secondary {
   color: $brand-secondary;
 }
-.text-tertiary {
+.text--tertiary {
   color: $brand-tertiary;
+}
+.text--light {
+  color: $text-color-light;
+}
+
+.text--size-extra-small {
+  font-size: $font-size-extra-small;
 }
 
 // --------------------------------------------------

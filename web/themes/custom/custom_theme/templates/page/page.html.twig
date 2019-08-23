@@ -109,6 +109,32 @@
             </div>
             <!-- End - search -->
 
+            <!-- Begin - organisation switcher -->
+            <div class="poppy hidden-xs hidden-sm">
+              <button class="poppy-toggle poppy-toggle--organisation-switcher" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_organisation_switcher" data-ajaxi-loading="{{ 'Loading...' | trans }}">
+
+                <!-- Begin - description -->
+                <div class="poppy-toggle__description">
+                  <small>
+                    <strong>{{ user_name }} <span class="caret"></span></strong>
+                    <br>
+                    <span class="text--light text--size-extra-small">
+                      {{ 'Change organisation' | trans }}
+                    </span>
+                  </small>
+                </div>
+                <!-- End - description -->
+
+              </button>
+
+              <div class="poppy-box poppy-box--narrow">
+                <div class="poppy-box__content" id="poppy_organisation_switcher">
+                  {{ page.flexy_navigation__user }}
+                </div>
+              </div>
+            </div>
+            <!-- End - organisation switcher -->
+
             <div class="flexy-spacer"></div>
 
             <!-- Begin - notifications -->
