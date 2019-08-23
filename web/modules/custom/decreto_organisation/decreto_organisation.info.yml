@@ -1,0 +1,5 @@
+name: 'Decreto organisation'
+type: module
+description: 'Decreto organisations functionality'
+core: 8.x
+package: 'Decreto'

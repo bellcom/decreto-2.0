@@ -1,0 +1,6 @@
+decreto_organisation.organisation_popup_content:
+  path: 'ajax/organisations-popup'
+  defaults:
+    _controller: '\Drupal\decreto_organisation\Controller\OrganisationController::popupContentRender'
+  requirements:
+    _permission: 'access content'

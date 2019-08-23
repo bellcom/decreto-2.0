@@ -25,6 +25,7 @@ module:
   decreto_department: 0
   decreto_help: 0
   decreto_notification: 0
+  decreto_organisation: 0
   decreto_pdf2htmlex: 0
   decreto_pdf_conversion_manager: 0
   decreto_search: 0
