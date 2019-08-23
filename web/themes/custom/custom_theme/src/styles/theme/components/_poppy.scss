@@ -76,6 +76,8 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 }
 
 .poppy-toggle__description {
+  line-height: 1.1;
+
   text-align: left;
 }
 
@@ -215,6 +217,8 @@ $poppy-box-spacing-left-right: floor( ($grid-gutter-width / 2) );
 .poppy-toggle--organisation-switcher {
   width: initial;
   height: 44px;
+
+  padding-left: 15px;
 
   border: 0;
 }
