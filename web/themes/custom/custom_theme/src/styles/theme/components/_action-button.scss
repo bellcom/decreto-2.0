@@ -44,6 +44,10 @@ $button-spacing: $grid-gutter-width;
   + .action-button {
     margin-left: 10px;
   }
+
+  .ajax-throbber {
+    display: none;
+  }
 }
 button.action-button {
   border: 0;
