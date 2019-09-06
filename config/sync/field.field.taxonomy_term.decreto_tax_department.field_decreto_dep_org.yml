@@ -1,0 +1,28 @@
+uuid: 020298a8-8a7e-45d6-94da-1da9b9f3d7e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_decreto_dep_org
+    - node.type.decreto_organisation
+    - taxonomy.vocabulary.decreto_tax_department
+id: taxonomy_term.decreto_tax_department.field_decreto_dep_org
+field_name: field_decreto_dep_org
+entity_type: taxonomy_term
+bundle: decreto_tax_department
+label: Organisation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      decreto_organisation: decreto_organisation
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

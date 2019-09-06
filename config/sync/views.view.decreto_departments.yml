@@ -7,6 +7,8 @@ dependencies:
   module:
     - decreto_department
     - decreto_help
+    - node
+    - taxonomy
     - user
 id: decreto_departments
 label: 'Decreto departments'
@@ -206,7 +208,25 @@ display:
           tokenize: false
           content: 'No departments found.'
           plugin_id: text_custom
-      relationships: {  }
+      relationships:
+        field_decreto_usr_departments:
+          id: field_decreto_usr_departments
+          table: user__field_decreto_usr_departments
+          field: field_decreto_usr_departments
+          relationship: none
+          group_type: group
+          admin_label: Department
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_usr_departments
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: false
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
     cache_metadata:

@@ -5,4 +5,32 @@
  * Contains decreto_organisation.module.
  */
 
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * Adds the organisation filter to the presented content.
+ */
+function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  switch ($view->id()) {
+    case 'decreto_meetings':
+    case 'decreto_departments':
+      switch ($view->current_display) {
+        case 'decreto_block_my_meetings':
+        case 'decreto_block_all_meetings':
+        case 'decreto_page_my_departments':
+        case 'decreto_block_my_departments':
+          $tempstore = \Drupal::service('user.private_tempstore')->get('decreto_organisation');
+          $org_id = $tempstore->get('selected_organisation');
+          if ($org_id) {
+            $query->addWhere('1', 'node_field_data_taxonomy_term__field_decreto_dep_org.nid', $org_id, '=');
+          }
+
+          break;
+      }
+  }
+}
+
 

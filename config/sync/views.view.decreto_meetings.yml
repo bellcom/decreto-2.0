@@ -229,6 +229,26 @@ display:
           offset: 0
       defaults:
         pager: false
+        relationships: false
+      relationships:
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: none
+          group_type: group
+          admin_label: 'Meeting department'
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -368,6 +388,15 @@ display:
           required: true
           entity_type: taxonomy_term
           plugin_id: entity_reverse
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: false
+          plugin_id: standard
       defaults:
         relationships: false
         filters: false

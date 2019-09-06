@@ -1,6 +1,17 @@
 decreto_organisation.organisation_popup_content:
-  path: 'ajax/organisations-popup'
+  path: '/ajax/organisations-popup'
   defaults:
     _controller: '\Drupal\decreto_organisation\Controller\OrganisationController::popupContentRender'
   requirements:
     _permission: 'access content'
+decreto_organisation.organisation_switch:
+  path: '/organisation-switch/{decreto_organisation}'
+  defaults:
+    _controller: '\Drupal\decreto_organisation\Controller\OrganisationController::switchOrganisation'
+  options:
+    parameters:
+      decreto_organisation:
+        type: entity:node
+  requirements:
+    _permission: 'access content'
+    decreto_organisation: \d+

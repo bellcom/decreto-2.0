@@ -1,0 +1,54 @@
+uuid: 097e1dd7-c5c9-4514-b104-a9e83ce6cc75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_org
+    - taxonomy.vocabulary.decreto_tax_department
+  module:
+    - path
+    - text
+id: taxonomy_term.decreto_tax_department.default
+targetEntityType: taxonomy_term
+bundle: decreto_tax_department
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_decreto_dep_org:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
