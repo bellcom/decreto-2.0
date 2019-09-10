@@ -23,7 +23,7 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
         case 'decreto_block_all_meetings':
         case 'decreto_page_my_departments':
         case 'decreto_block_my_departments':
-        case 'decreto_block_month_calendar':
+        case 'calendar_block':
           $org_id = $organisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
           if ($org_id) {
             $query->addWhere('1', 'node_field_data_taxonomy_term__field_decreto_dep_org.nid', $org_id, '=');

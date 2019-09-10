@@ -389,9 +389,9 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_decreto_meet_start_date'
-  decreto_block_month_calendar:
+  calendar_block:
     display_plugin: block
-    id: decreto_block_month_calendar
+    id: calendar_block
     display_title: Block
     position: 6
     display_options:
