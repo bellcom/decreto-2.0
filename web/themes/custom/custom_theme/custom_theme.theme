@@ -66,8 +66,11 @@ function custom_theme_preprocess_page(array &$variables) {
   // Getting user selected organisation.
   $tempstore = \Drupal::service('user.private_tempstore')->get('decreto_organisation');
   $org_id = $tempstore->get('selected_organisation');
-  $organisation = Node::load($org_id);
-  $variables['selected_organisation_name'] = $organisation->label();
+  if ($org_id) {
+    if ($organisation = Node::load($org_id)) {
+      $variables['selected_organisation_name'] = $organisation->label();
+    }
+  }
 }
 
 /*
