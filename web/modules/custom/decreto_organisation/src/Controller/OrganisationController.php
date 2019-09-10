@@ -41,8 +41,8 @@ class OrganisationController extends ControllerBase {
    *   Redirect to the front page.
    */
   public function switchOrganisation(NodeInterface $decreto_organisation) {
-    $tempstore = \Drupal::service('user.private_tempstore')->get('decreto_organisation');
-    $tempstore->set('selected_organisation', $decreto_organisation->id());
+    $organisationId = $decreto_organisation->id();
+    \Drupal::service('decreto_organisation.organisation')->setSelectedOrganisation($organisationId);
 
     // Invalidating user tags.
     Cache::invalidateTags(array('user:' . \Drupal::currentUser()->id()));
