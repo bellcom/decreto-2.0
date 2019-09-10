@@ -17,11 +17,13 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
   switch ($view->id()) {
     case 'decreto_meetings':
     case 'decreto_departments':
+    case 'decreto_calender':
       switch ($view->current_display) {
         case 'decreto_block_my_meetings':
         case 'decreto_block_all_meetings':
         case 'decreto_page_my_departments':
         case 'decreto_block_my_departments':
+        case 'decreto_block_month_calendar':
           $tempstore = \Drupal::service('user.private_tempstore')->get('decreto_organisation');
           $org_id = $tempstore->get('selected_organisation');
           if ($org_id) {

@@ -10,6 +10,7 @@ dependencies:
     - datetime
     - decreto_calendar
     - node
+    - taxonomy
     - user
 id: decreto_calender
 label: 'Decreto Calender'
@@ -321,7 +322,25 @@ display:
           plugin_id: calendar_header
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: none
+          group_type: group
+          admin_label: Department
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: false
+          plugin_id: standard
       arguments:
         field_decreto_meet_start_date_value_year_month:
           id: field_decreto_meet_start_date_value_year_month
@@ -370,9 +389,9 @@ display:
         - user.roles
       tags:
         - 'config:field.storage.node.field_decreto_meet_start_date'
-  calendar_block:
+  decreto_block_month_calendar:
     display_plugin: block
-    id: calendar_block
+    id: decreto_block_month_calendar
     display_title: Block
     position: 6
     display_options:
@@ -484,6 +503,7 @@ display:
           content: '{{ arguments.field_decreto_meet_start_date_value_full_date }}'
           pager_embed: 1
           plugin_id: calendar_header
+      enabled: false
     cache_metadata:
       max-age: 0
       contexts:
@@ -564,6 +584,7 @@ display:
               page: '#ffffff'
             taxonomy_field: ''
             calendar_colors_vocabulary: {  }
+      enabled: true
     cache_metadata:
       max-age: 0
       contexts:
@@ -682,6 +703,7 @@ display:
           content: ''
           pager_embed: 1
           plugin_id: calendar_header
+      enabled: false
     cache_metadata:
       max-age: 0
       contexts:
@@ -800,6 +822,7 @@ display:
         context: '0'
         menu_name: main
         enabled: true
+      enabled: false
     cache_metadata:
       max-age: 0
       contexts:
