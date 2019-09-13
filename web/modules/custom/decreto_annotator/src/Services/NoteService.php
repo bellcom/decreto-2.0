@@ -3,10 +3,8 @@
 namespace Drupal\decreto_annotator\Services;
 
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -21,26 +19,27 @@ class NoteService {
   /**
    * The current user.
    *
-   * @var AccountProxyInterface
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
 
   /**
    * The note storage manager.
    *
-   * @var EntityStorageInterface
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $noteManager;
 
   /**
    * Constructs a Note service object.
    *
-   * @param AccountProxyInterface $currentUser
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
    *   The current user.
-   * @param EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager interface.
    *
-   * @throws
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function __construct(
     AccountProxyInterface $currentUser,
@@ -55,33 +54,61 @@ class NoteService {
    *
    * If user not provided current user info will be returned.
    *
-   * @param UserInterface $user
+   * @param \Drupal\user\UserInterface $user
    *   User to calculate counters.
    *
    * @return array
-   *   array with data.
+   *   array(
+   *    'my_org' => current user organisation notes count
+   *    'total' => total notes count
+   *   )
    */
   public function getCounters(UserInterface $user = NULL) {
+    $selectOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+
     $uid = $this->currentUser->id();
     if (!empty($user)) {
       $uid = $user->id();
     }
 
-    $cid = self::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid;
-    $count = NULL;
+    $orgCountCid = self::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid . ':' . $selectOrganisationId;
+    $totalCountCid = self::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid;
+
+    $orgCount = NULL;
     if ($cache = \Drupal::cache()
-      ->get($cid)) {
-      $count = $cache->data;
+      ->get($orgCountCid)) {
+      $orgCount = $cache->data;
     }
     else {
-      $count = $this->noteManager->getQuery()
+      // Load the heavy calculation on the views API. We know the view
+      // calculates the amount correctly.
+      $orgCount = count(views_get_view_result('decreto_notes', 'decreto_note_page'));
+
+      \Drupal::cache()
+        ->set($orgCountCid, $orgCount, CacheBackendInterface::CACHE_PERMANENT, [
+          self::CACHE_ID_DECRETO_NOTE_COUNTERS,
+          $orgCountCid,
+          $totalCountCid,
+        ]);
+    }
+
+    $totalCount = NULL;
+    if ($cache = \Drupal::cache()
+      ->get($totalCountCid)) {
+      $totalCount = $cache->data;
+    }
+    else {
+      $totalCount = $this->noteManager->getQuery()
         ->condition('uid', $uid)
         ->count()
         ->execute();
       \Drupal::cache()
-        ->set($cid, $count, CacheBackendInterface::CACHE_PERMANENT, [$cid, self::CACHE_ID_DECRETO_NOTE_COUNTERS]);
+        ->set($totalCountCid, $totalCount, CacheBackendInterface::CACHE_PERMANENT, [$totalCountCid, self::CACHE_ID_DECRETO_NOTE_COUNTERS]);
     }
-    return ['total' => $count];
+    return [
+      'my_org' => $orgCount,
+      'total' => $totalCount,
+    ];
   }
 
 }

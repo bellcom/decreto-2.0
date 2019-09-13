@@ -5,6 +5,7 @@ dependencies:
   module:
     - decreto_annotator
     - node
+    - taxonomy
     - user
 id: decreto_notes
 label: 'Decreto notes'
@@ -181,6 +182,55 @@ display:
           entity_type: decreto_annotator_note
           entity_field: uid
           plugin_id: standard
+        bpa_id:
+          id: bpa_id
+          table: decreto_annotator_notes
+          field: bpa_id
+          relationship: none
+          group_type: group
+          admin_label: 'Bullet point attachment'
+          required: true
+          entity_type: decreto_annotator_note
+          entity_field: bpa_id
+          plugin_id: standard
+        reverse__node__field_decreto_bp_bpas:
+          id: reverse__node__field_decreto_bp_bpas
+          table: node_field_data
+          field: reverse__node__field_decreto_bp_bpas
+          relationship: bpa_id
+          group_type: group
+          admin_label: 'Bullet point'
+          required: true
+          entity_type: node
+          plugin_id: entity_reverse
+        reverse__node__field_decreto_meet_bps:
+          id: reverse__node__field_decreto_meet_bps
+          table: node_field_data
+          field: reverse__node__field_decreto_meet_bps
+          relationship: reverse__node__field_decreto_bp_bpas
+          group_type: group
+          admin_label: Meeting
+          required: true
+          entity_type: node
+          plugin_id: entity_reverse
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: reverse__node__field_decreto_meet_bps
+          group_type: group
+          admin_label: 'Meeting department'
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
@@ -327,30 +377,15 @@ display:
         title: false
         pager: false
       pager:
-        type: mini
+        type: none
         options:
-          items_per_page: 3
           offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
       path: notes
       display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
-        - url.query_args
         - user
         - user.permissions
       tags: {  }

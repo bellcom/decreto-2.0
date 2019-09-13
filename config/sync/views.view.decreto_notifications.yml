@@ -4,6 +4,9 @@ status: true
 dependencies:
   module:
     - decreto_notification
+    - message
+    - node
+    - taxonomy
     - user
 id: decreto_notifications
 label: 'Decreto notifications'
@@ -207,6 +210,44 @@ display:
           entity_type: decreto_notification
           entity_field: uid
           plugin_id: standard
+        mid:
+          id: mid
+          table: decreto_notification_notifications
+          field: mid
+          relationship: none
+          group_type: group
+          admin_label: Message
+          required: true
+          entity_type: decreto_notification
+          entity_field: mid
+          plugin_id: standard
+        field_decreto_notif_meeting:
+          id: field_decreto_notif_meeting
+          table: message__field_decreto_notif_meeting
+          field: field_decreto_notif_meeting
+          relationship: mid
+          group_type: group
+          admin_label: Meeting
+          required: true
+          plugin_id: standard
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: field_decreto_notif_meeting
+          group_type: group
+          admin_label: 'Meeting department'
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
@@ -225,23 +266,9 @@ display:
       display_extenders: {  }
       path: notifications
       pager:
-        type: mini
+        type: none
         options:
-          items_per_page: 3
           offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
       defaults:
         pager: false
         title: false
@@ -250,7 +277,6 @@ display:
       max-age: -1
       contexts:
         - 'languages:language_interface'
-        - url.query_args
         - user
       tags: {  }
   decreto_notification_popup_embed:

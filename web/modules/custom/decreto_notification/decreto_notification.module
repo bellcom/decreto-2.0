@@ -47,12 +47,14 @@ function decreto_notification_meeting_notify(EntityInterface $node) {
   $message->save();
 
   // Finding subscribers.
-  if ($field_decreto_meet_department =  $node->field_decreto_meet_department->first()) {
+  if ($field_decreto_meet_department = $node->field_decreto_meet_department->first()) {
     $department = $field_decreto_meet_department->entity;
     $subscribers = \Drupal::service('message_subscribe.subscribers');
 
-    // Notifying subscribers.
-    $subscribers->sendMessage($department, $message);
+    if ($department) {
+      // Notifying subscribers.
+      $subscribers->sendMessage($department, $message);
+    }
   }
 }
 
