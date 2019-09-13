@@ -7,7 +7,7 @@ dependencies:
 id: custom_theme_decretousercommitteesblock
 theme: custom_theme
 region: content__right_sidebar
-weight: -14
+weight: -12
 provider: null
 plugin: 'Decreto  User Committees Block'
 settings:

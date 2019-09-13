@@ -339,7 +339,7 @@ display:
           relationship: field_decreto_meet_department
           group_type: group
           admin_label: 'Department Organisation'
-          required: false
+          required: true
           plugin_id: standard
       arguments:
         field_decreto_meet_start_date_value_year_month:

@@ -5,6 +5,8 @@ namespace Drupal\decreto_organisation\Controller;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
+use Drupal\decreto_content_modify\Services\ContentService;
+use Drupal\decreto_department\Services\DepartmentService;
 use Drupal\node\NodeInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +48,15 @@ class OrganisationController extends ControllerBase {
 
     // Invalidating user tags.
     Cache::invalidateTags(array('user:' . \Drupal::currentUser()->id()));
+
+    // Invalidating meeting tags.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+
+    // Invalidating memo tags.
+    Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS]);
+
+    // Invalidating department tags.
+    Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
 
     $url = Url::fromRoute('<front>');
     $response = new RedirectResponse($url->toString());

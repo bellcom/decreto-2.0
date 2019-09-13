@@ -16,20 +16,36 @@ use Drupal\views\ViewExecutable;
 function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   switch ($view->id()) {
     case 'decreto_meetings':
-    case 'decreto_departments':
+    case 'decreto_user_departments':
     case 'decreto_calender':
+    case 'decreto_departments':
+    case 'decreto_memos':
       switch ($view->current_display) {
         case 'decreto_block_my_meetings':
         case 'decreto_block_all_meetings':
         case 'decreto_page_my_departments':
         case 'decreto_block_my_departments':
         case 'calendar_block':
-          $org_id = $organisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+        case 'decreto_page_meetings':
+        case 'decreto_page_departments':
+        case 'decreto_page_memos':
+          $org_id = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
           if ($org_id) {
             $query->addWhere('1', 'node_field_data_taxonomy_term__field_decreto_dep_org.nid', $org_id, '=');
           }
 
           break;
+
+        case 'decreto_page_other_organisations_meetings':
+        case 'decreto_page_other_organisations_departments':
+        case 'decreto_page_other_organisations_memos':
+          $org_id = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+          if ($org_id) {
+            $query->addWhere('1', 'node_field_data_taxonomy_term__field_decreto_dep_org.nid', $org_id, '!=');
+          }
+
+          break;
+
       }
   }
 }

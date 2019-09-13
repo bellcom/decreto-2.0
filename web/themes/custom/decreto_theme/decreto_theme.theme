@@ -44,7 +44,7 @@ function decreto_theme_preprocess_block(&$vars) {
     $departmentCounter = $departmentService->getCounters();
 
     $variables['content']['#current_organisation'] = $departmentCounter['my_org'];
-    $variables['content']['#across_organisations'] = $departmentCounter['total'];
+    $variables['content']['#other_organisations'] = $departmentCounter['total'];
   }
 }
 

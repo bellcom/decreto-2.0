@@ -76,11 +76,11 @@ function decreto_content_modify_search_api_solr_documents_alter(array &$document
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_insert().
  *
  * Invalidates caches related with the decreto_memo and decreto_meeting.
  */
-function decreto_content_modify_node_presave(EntityInterface $entity) {
+function decreto_content_modify_node_insert(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_memo') {
     // Invalidating memos count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS . ':' . $entity->getOwnerId()]);
@@ -97,8 +97,19 @@ function decreto_content_modify_node_presave(EntityInterface $entity) {
   elseif ($entity->bundle() == 'decreto_meeting') {
     // Invalidating meetings count.
     Cache::invalidateTags([ContentService::CACHE_ID_DECRETO_MEETING_COUNTERS]);
+  }
+}
 
-
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * Decreto_bullet_point_attachment: Handles removing/attaching of BPA file to
+ * the related meeting node.
+ */
+function decreto_content_modify_node_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_memo') {
+  }
+  elseif ($entity->bundle() == 'decreto_meeting') {
   }
   elseif ($entity->bundle() == 'decreto_bullet_point') {
   }

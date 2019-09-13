@@ -54,8 +54,10 @@ class OrganisationService {
   /**
    * Sets the selected organisation.
    *
-   * @param $organisationId
+   * @param int $organisationId
    *   New selected organisation nid.
+   *
+   * @throws \Drupal\Core\TempStore\TempStoreException
    */
   public function setSelectedOrganisation($organisationId) {
     $this->tempStore->set('selected_organisation', $organisationId);

@@ -12,7 +12,7 @@ dependencies:
 id: views_block__decreto_users_decreto_block_department_members
 theme: custom_theme
 region: content__right_sidebar
-weight: -16
+weight: -14
 provider: null
 plugin: 'views_block:decreto_users-decreto_block_department_members'
 settings:

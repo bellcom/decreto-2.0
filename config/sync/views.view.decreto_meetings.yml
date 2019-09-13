@@ -204,7 +204,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      title: 'Coming meetings'
+      title: 'This organisation coming meetings'
     cache_metadata:
       max-age: -1
       contexts:
@@ -247,7 +247,7 @@ display:
           relationship: field_decreto_meet_department
           group_type: group
           admin_label: 'Department Organisation'
-          required: false
+          required: true
           plugin_id: standard
     cache_metadata:
       max-age: -1
@@ -395,7 +395,7 @@ display:
           relationship: field_decreto_meet_department
           group_type: group
           admin_label: 'Department Organisation'
-          required: false
+          required: true
           plugin_id: standard
       defaults:
         relationships: false
@@ -493,10 +493,10 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  decreto_page_all_meetings:
+  decreto_page_meetings:
     display_plugin: page
-    id: decreto_page_all_meetings
-    display_title: 'PAGE: All meetings'
+    id: decreto_page_meetings
+    display_title: 'PAGE: Meetings'
     position: 1
     display_options:
       display_extenders: {  }
@@ -508,8 +508,79 @@ display:
       defaults:
         pager: false
         footer: false
+        relationships: false
+        arguments: false
       path: coming-meetings
       footer: {  }
+      relationships:
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: none
+          group_type: group
+          admin_label: Department
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: true
+          plugin_id: standard
+      arguments: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  decreto_page_other_organisations_meetings:
+    display_plugin: page
+    id: decreto_page_other_organisations_meetings
+    display_title: 'PAGE: Other organisations meetings'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        footer: false
+        relationships: false
+        arguments: false
+        title: false
+      path: other-org-coming-meetings
+      footer: {  }
+      relationships:
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: none
+          group_type: group
+          admin_label: Department
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: true
+          plugin_id: standard
+      arguments: {  }
+      title: 'Other organisations coming meetings'
     cache_metadata:
       max-age: -1
       contexts:

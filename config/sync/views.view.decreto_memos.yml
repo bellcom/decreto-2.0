@@ -8,6 +8,7 @@ dependencies:
   module:
     - decreto_help
     - node
+    - taxonomy
     - user
 id: decreto_memos
 label: 'Decreto memos'
@@ -214,6 +215,43 @@ display:
           entity_type: node
           entity_field: uid
           plugin_id: standard
+        field_decreto_memo_bp:
+          id: field_decreto_memo_bp
+          table: node__field_decreto_memo_bp
+          field: field_decreto_memo_bp
+          relationship: none
+          group_type: group
+          admin_label: 'Bullet point'
+          required: true
+          plugin_id: standard
+        reverse__node__field_decreto_meet_bps:
+          id: reverse__node__field_decreto_meet_bps
+          table: node_field_data
+          field: reverse__node__field_decreto_meet_bps
+          relationship: field_decreto_memo_bp
+          group_type: group
+          admin_label: Meeting
+          required: true
+          entity_type: node
+          plugin_id: entity_reverse
+        field_decreto_meet_department:
+          id: field_decreto_meet_department
+          table: node__field_decreto_meet_department
+          field: field_decreto_meet_department
+          relationship: reverse__node__field_decreto_meet_bps
+          group_type: group
+          admin_label: Department
+          required: true
+          plugin_id: standard
+        field_decreto_dep_org:
+          id: field_decreto_dep_org
+          table: taxonomy_term__field_decreto_dep_org
+          field: field_decreto_dep_org
+          relationship: field_decreto_meet_department
+          group_type: group
+          admin_label: 'Department Organisation'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
@@ -241,27 +279,6 @@ display:
         relationships: false
         arguments: false
         header: false
-      relationships:
-        uid:
-          id: uid
-          table: node_field_data
-          field: uid
-          relationship: none
-          group_type: group
-          admin_label: author
-          required: false
-          entity_type: node
-          entity_field: uid
-          plugin_id: standard
-        field_decreto_memo_bp:
-          id: field_decreto_memo_bp
-          table: node__field_decreto_memo_bp
-          field: field_decreto_memo_bp
-          relationship: none
-          group_type: group
-          admin_label: 'Bullet point'
-          required: true
-          plugin_id: standard
       arguments:
         nid:
           id: nid
@@ -312,6 +329,27 @@ display:
           empty: true
           message_key: memos_read_popup
           plugin_id: decreto_help_message_popup
+      relationships:
+        uid:
+          id: uid
+          table: node_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: author
+          required: false
+          entity_type: node
+          entity_field: uid
+          plugin_id: standard
+        field_decreto_memo_bp:
+          id: field_decreto_memo_bp
+          table: node__field_decreto_memo_bp
+          field: field_decreto_memo_bp
+          relationship: none
+          group_type: group
+          admin_label: 'Bullet point'
+          required: true
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -322,14 +360,57 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  decreto_memo_page:
+  decreto_memo_popup_embed:
+    display_plugin: embed
+    id: decreto_memo_popup_embed
+    display_title: 'EMBED: Memos popup'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  decreto_page_memos:
     display_plugin: page
-    id: decreto_memo_page
+    id: decreto_page_memos
     display_title: 'PAGE: Memos'
     position: 2
     display_options:
       display_extenders: {  }
       path: memos
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        title: false
+      title: Memos
+      display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  decreto_page_other_organisations_memos:
+    display_plugin: page
+    id: decreto_page_other_organisations_memos
+    display_title: 'PAGE: Other org memos'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      path: other-org-memos
       pager:
         type: mini
         options:
@@ -359,23 +440,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  decreto_memo_popup_embed:
-    display_plugin: embed
-    id: decreto_memo_popup_embed
-    display_title: 'EMBED: Memos popup'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
         - user
         - 'user.node_grants:view'
         - user.permissions

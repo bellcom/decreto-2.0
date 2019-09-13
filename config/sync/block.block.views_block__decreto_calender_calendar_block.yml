@@ -2,6 +2,10 @@ uuid: fe05e1a6-4fbf-4bea-9bf9-f60709011aef
 langcode: en
 status: true
 dependencies:
+  config:
+    - views.view.decreto_calender
+  module:
+    - views
   theme:
     - custom_theme
 id: views_block__decreto_calender_calendar_block
