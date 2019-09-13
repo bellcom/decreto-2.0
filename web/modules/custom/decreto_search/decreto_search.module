@@ -3,6 +3,7 @@
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
+use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
@@ -126,8 +127,14 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
  */
 function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
   if ($view->id() == 'decreto_search_meetings') {
-    $limitDepartments = \Drupal::request()->query->get('ld');
+    // Limiting to organisation departments.
+    $organisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
+    $decretoOrganisation = new DecretoOrganisation($organisation);
+    $orgDepartmentsIds = $decretoOrganisation->getDepartments(FALSE);
+    $query->addWhere('', 'department_tid', $orgDepartmentsIds, 'IN');
 
+    // Limiting to user departments.
+    $limitDepartments = \Drupal::request()->query->get('ld');
     if ($limitDepartments) {
       $user = User::load(\Drupal::currentUser()->id());
       $userDepartments = array_column($user->field_decreto_usr_departments->getValue(), 'target_id');
