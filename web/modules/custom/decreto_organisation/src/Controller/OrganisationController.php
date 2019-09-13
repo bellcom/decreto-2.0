@@ -58,8 +58,15 @@ class OrganisationController extends ControllerBase {
     // Invalidating department tags.
     Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
 
-    $url = Url::fromRoute('<front>');
-    $response = new RedirectResponse($url->toString());
+    // Getting the previous URL to use as redirect URL.
+    $redirectUrl = \Drupal::request()->server->get('HTTP_REFERER');
+
+    if (empty($redirectUrl)) {
+      $url = Url::fromRoute('<front>');
+      $redirectUrl = $url->toString();
+    }
+
+    $response = new RedirectResponse($redirectUrl);
 
     return $response;
   }
