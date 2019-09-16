@@ -83,4 +83,28 @@ class DecretoUser {
     }
   }
 
+  /**
+   * Returns user organisations.
+   *
+   * @param bool $load
+   *   If the returned nodes shall be load. If FALSE, array of nids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of nodes is returned,
+   *   If load is FALSE array of nids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getOrganisations($load = TRUE) {
+    if ($fieldOrgs = $this->getEntity()->get('field_decreto_usr_orgs')) {
+      if ($load) {
+        return $fieldOrgs->referencedEntities();
+      }
+      else {
+        return array_column($fieldOrgs->getValue(), 'target_id');
+      }
+    }
+
+    return array();
+  }
+
 }
