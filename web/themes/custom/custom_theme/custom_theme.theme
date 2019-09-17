@@ -167,6 +167,9 @@ function custom_theme_preprocess_block(&$variables) {
     // Making block aware of the counter tags.
     $variables['#cache']['tags'][] = ContentService::CACHE_ID_DECRETO_MEMO_COUNTERS;
   }
+  elseif ($id === 'custom_theme_views_block__decreto_meetings_decreto_block_all_meetings') {
+    $variables['#cache']['tags'][] = 'user:' . \Drupal::currentUser()->id();
+  }
 }
 
 /**
