@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.user.list
   module:
+    - node
     - user
 id: user_search
 label: 'User search'
@@ -92,7 +93,16 @@ display:
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        field_decreto_usr_orgs:
+          id: field_decreto_usr_orgs
+          table: user__field_decreto_usr_orgs
+          field: field_decreto_usr_orgs
+          relationship: none
+          group_type: group
+          admin_label: 'User organisation'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
       css_class: 'row row--equal-height-columns'
