@@ -13,6 +13,7 @@ use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
@@ -60,6 +61,9 @@ class DepartmentEditForm extends FormBase {
       }
       $this->department = $department;
     }
+
+    $currentOrganisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
+    $decretoOrganisation = new DecretoOrganisation($currentOrganisation);
 
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
@@ -110,15 +114,12 @@ class DepartmentEditForm extends FormBase {
       ],
     ];
 
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1);
-    $users_ids = $query->execute();
-    if (!empty($users_ids)) {
+    $users = $decretoOrganisation->getUsers();
+    if (!empty($users)) {
       $form['member-container']['members'] = [
         '#type' => 'container',
         '#tree' => TRUE,
       ];
-      $users = User::loadMultiple($users_ids);
 
       foreach ($users as $user) {
         $user_id = $user->id();
@@ -217,11 +218,13 @@ class DepartmentEditForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $name = $form_state->getValue('name');
+    $currentOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
 
     if (!$this->department) {
       $this->department = Term::create([
         'vid' => 'decreto_tax_department',
         'name' => $name,
+        'field_decreto_dep_org' => ['target_id' => $currentOrganisationId],
       ]);
     }
     else {

@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Implements hook_help().
@@ -44,4 +45,40 @@ function decreto_user_decreto_help_messages() {
   return [
     'user_search_popup' => 'User search popup',
   ];
+}
+
+/**
+ * Implements hook_user_format_name_alter().
+ *
+ * If user has both first and last names, they are used as the user display
+ * name.
+ */
+function decreto_user_user_format_name_alter(&$name, $account) {
+  if ($account instanceof UserInterface == FALSE) {
+    $user = User::load($account->id());
+  }
+  else {
+    $user = $account;
+  }
+
+  $firstName = '';
+  $lastName = '';
+
+  // Getting first name.
+  if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
+    if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
+      $firstName = $field_firstname[0]['value'];
+    }
+  }
+  // Getting last name.
+  if ($user->get('field_decreto_lastname') && !$user->field_decreto_lastname->isEmpty()) {
+    if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
+      $lastName = $field_lastname[0]['value'];
+    }
+  }
+
+  // Only making swap if both first and last names are present.
+  if ($firstName && $lastName) {
+    $name = $firstName . ' ' . $lastName;
+  }
 }
