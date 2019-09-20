@@ -8,6 +8,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
+use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -174,10 +175,15 @@ class MeetingEditForm extends AjaxFormBase {
    *
    * @return array
    *   Form array with appended page.
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    */
   private function appendFormPage1(array $form, FormStateInterface $form_state) {
     $useDepartmentMembers = $form_state->get('use_department_members');
     $activePage = $form_state->get('active_page');
+
+    $currentOrganisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
+    $decretoOrganisation = new DecretoOrganisation($currentOrganisation);
 
     // Page 1 container.
     $form['pages-page-1'] = [
@@ -213,12 +219,10 @@ class MeetingEditForm extends AjaxFormBase {
     ];
 
     // Department.
-    $department_terms = \Drupal::service('entity_type.manager')
-      ->getStorage('taxonomy_term')
-      ->loadTree('decreto_tax_department');
+    $department_terms = $decretoOrganisation->getDepartments();
     $department_options = [];
     foreach ($department_terms as $term) {
-      $department_options[$term->tid] = $term->name;
+      $department_options[$term->id()] = $term->label();
     }
     $form['pages-page-1']['department'] = [
       '#type' => 'select',
@@ -230,12 +234,10 @@ class MeetingEditForm extends AjaxFormBase {
     ];
 
     // Location.
-    $location_terms = \Drupal::service('entity_type.manager')
-      ->getStorage('taxonomy_term')
-      ->loadTree('decreto_tax_location');
+    $location_terms = $decretoOrganisation->getLocations();
     $location_options = [];
     foreach ($location_terms as $term) {
-      $location_options[$term->tid] = $term->name;
+      $location_options[$term->id()] = $term->label();
     }
     $form['pages-page-1']['location'] = [
       '#type' => 'select',
@@ -327,6 +329,9 @@ class MeetingEditForm extends AjaxFormBase {
   private function appendFormPage2(array $form, FormStateInterface $form_state) {
     $activePage = $form_state->get('active_page');
 
+    $currentOrganisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
+    $decretoOrganisation = new DecretoOrganisation($currentOrganisation);
+
     // Page 2 container.
     $form['pages-page-2'] = [
       '#type' => 'container',
@@ -404,10 +409,8 @@ class MeetingEditForm extends AjaxFormBase {
       ],
     ];
 
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1);
-    $users_ids = $query->execute();
-    if (!empty($users_ids)) {
+    $users = $decretoOrganisation->getUsers();
+    if (!empty($users)) {
       $form['pages-page-2']['participants-container']['participants'] = [
         '#type' => 'container',
         '#tree' => TRUE,
@@ -415,7 +418,6 @@ class MeetingEditForm extends AjaxFormBase {
           'class' => ['div-table__tbody'],
         ],
       ];
-      $users = User::loadMultiple($users_ids);
 
       foreach ($users as $user) {
         $user_id = $user->id();
