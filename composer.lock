@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40f63e238a816dff327d2bebbd172b77",
+    "content-hash": "f78981cd55f6d824b1bccae8451f1520",
     "packages": [
         {
             "name": "ajgl/breakpoint-twig-extension",
@@ -3076,6 +3076,9 @@
                     "recurse": false,
                     "replace": false,
                     "merge-extra": false
+                },
+                "patches_applied": {
+                    "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-05-02/2663316-70.patch"
                 }
             },
             "autoload": {
