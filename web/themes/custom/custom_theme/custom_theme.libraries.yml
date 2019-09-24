@@ -11,6 +11,7 @@ styles:
 javascripts:
   js:
     dist/javascripts/app.js: {}
+    dist/javascripts/modernizr.js: {}
   dependencies:
     - core/drupal
     - core/jquery
