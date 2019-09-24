@@ -1,0 +1,210 @@
+// |--------------------------------------------------------------------------
+// | Meetings search
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin meetings-search-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &:nth-child(1) {
+        display: block;
+
+        margin-right: 0;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      // From date.
+      &:nth-child(2) {
+        width: calc(50% - 30px);
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      // To date.
+      &:nth-child(3) {
+        width: 50%;
+
+        margin-right: 0;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &:nth-child(1) {
+        display: block;
+
+        margin-right: 0;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      // From date.
+      &:nth-child(2) {
+        width: calc(50% - 30px);
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      // To date.
+      &:nth-child(3) {
+        width: 50%;
+
+        margin-right: 0;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Custom
+@media screen and (min-width: #{$screen-lg-min}) and (max-width: #{$screen-lg-min + 200px}) {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &:nth-child(1) {
+        display: block;
+
+        .form-control {
+          min-width: 550px;
+        }
+      }
+
+      // From date.
+      &:nth-child(2) {
+        width: calc(50% - 30px);
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      // To date.
+      &:nth-child(3) {
+        width: 50%;
+
+        margin-right: 0;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Custom
+@media screen and (min-width: #{$screen-lg-min + 201px}) and (max-width: #{$screen-lg-min + 400px}) {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &:nth-child(1) {
+
+        .form-control {
+          width: 380px;
+        }
+      }
+    }
+  }
+}
+
+// Custom
+@media screen and (min-width: #{$screen-lg-min + 401px}) {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &:nth-child(1) {
+
+        .form-control {
+          width: 500px;
+        }
+      }
+    }
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
