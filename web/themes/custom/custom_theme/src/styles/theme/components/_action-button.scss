@@ -95,6 +95,7 @@ button.action-button {
   .action-button-list {
     right: 0;
     top: ($grid-gutter-width + $sm-flexy-header-static-row-height + $expected-list-height);
+    bottom: auto;
 
     transform-origin: right top;
     transform: rotate(90deg);
