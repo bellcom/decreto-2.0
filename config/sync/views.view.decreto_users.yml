@@ -7,6 +7,7 @@ dependencies:
   module:
     - decreto_department
     - decreto_help
+    - decreto_organisation
     - user
 id: decreto_users
 label: 'Decreto users'
@@ -216,6 +217,86 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags: {  }
+  decreto_block_organisation_members:
+    display_plugin: block
+    id: decreto_block_organisation_members
+    display_title: 'Organisation members'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      arguments:
+        field_decreto_usr_orgs_target_id:
+          id: field_decreto_usr_orgs_target_id
+          table: user__field_decreto_usr_orgs
+          field: field_decreto_usr_orgs_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: node
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          plugin_id: numeric
+      defaults:
+        arguments: false
+        footer: false
+        header: false
+      footer:
+        decreto_organisation_organisations_view_context_links:
+          id: decreto_organisation_organisations_view_context_links
+          table: views
+          field: decreto_organisation_organisations_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: 1
+          create_organisation: 0
+          edit_organisation: 1
+          organisation_id: '{{ raw_arguments.field_decreto_usr_orgs_target_id }}'
+          plugin_id: decreto_organisation_organisations_view_context_links
+      header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          message_key: organisation_members_list
+          plugin_id: decreto_help_message_popup
     cache_metadata:
       max-age: -1
       contexts:

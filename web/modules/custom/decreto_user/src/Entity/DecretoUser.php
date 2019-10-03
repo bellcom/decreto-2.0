@@ -107,4 +107,55 @@ class DecretoUser {
     return array();
   }
 
+  /**
+   * Adds organisation to the user.
+   *
+   * @param int $organisationId
+   *   Organisation ID.
+   * @param bool $save
+   *   If user object needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function addOrganisation($organisationId, $save = TRUE) {
+    $this->user->field_decreto_usr_orgs[] = ['target_id' => $organisationId];
+    if ($save) {
+      $this->user->save();
+    }
+  }
+
+  /**
+   * Removes organisation from the user.
+   *
+   * If organisation is not added to user, nothing is done.
+   *
+   * @param int $organisationId
+   *   Organisation ID.
+   * @param bool $save
+   *   If user object needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeOrganisation($organisationId, $save = TRUE) {
+    $organisationIsPresent = FALSE;
+
+    $userOrganisations = $this->user->field_decreto_usr_orgs->getValue();
+
+    foreach ($userOrganisations as $delta => $userOrganisation) {
+      if ($userOrganisation['target_id'] == $organisationId) {
+        $organisationIsPresent = TRUE;
+        unset($userOrganisations[$delta]);
+        break;
+      }
+    }
+
+    if ($organisationIsPresent) {
+      $this->user->field_decreto_usr_orgs = $userOrganisations;
+
+      if ($save) {
+        $this->user->save();
+      }
+    }
+  }
+
 }

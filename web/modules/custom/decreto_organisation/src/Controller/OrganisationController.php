@@ -36,14 +36,14 @@ class OrganisationController extends ControllerBase {
   /**
    * Switching user selected organisation.
    *
-   * @param \Drupal\node\NodeInterface $decreto_organisation
+   * @param \Drupal\node\NodeInterface $organisation
    *   New selected organisation.
    *
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    *   Redirect to the front page.
    */
-  public function switchOrganisation(NodeInterface $decreto_organisation) {
-    $organisationId = $decreto_organisation->id();
+  public function switchOrganisation(NodeInterface $organisation) {
+    $organisationId = $organisation->id();
     \Drupal::service('decreto_organisation.organisation')->setSelectedOrganisation($organisationId);
 
     // Invalidating user tags.

@@ -64,4 +64,45 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
   }
 }
 
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_organisation_decreto_help_messages() {
+  return [
+    'organisation_create_edit_form' => 'Department create/edit form',
+    'organisation_view_page' => 'Organisation view page',
+    'organisation_members_list' => 'Members of this organisation (block)',
+  ];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_organisation_theme() {
+  return [
+    'decreto_organisation_organisations_view_context_links' => [
+      'variables' => [
+        'create_organisation' => NULL,
+        'edit_organisation' => NULL,
+        'organisation_id' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_organisation_views_data() {
+  $data['views']['decreto_organisation_organisations_view_context_links'] = [
+    'title' => t('Decreto organisation view links'),
+    'help' => t('Renders "Create", "Edit" link to be used in organisation views.'),
+    'area' => [
+      'id' => 'decreto_organisation_organisations_view_context_links',
+    ],
+  ];
+
+  return $data;
+}
+
 

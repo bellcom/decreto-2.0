@@ -1,0 +1,33 @@
+uuid: 77222f82-d0cc-4992-88eb-8f1c9b64c7f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.decreto_users
+  module:
+    - node
+    - views
+  theme:
+    - custom_theme
+id: views_block__decreto_users_decreto_block_organisation_members
+theme: custom_theme
+region: content__right_sidebar
+weight: 0
+provider: null
+plugin: 'views_block:decreto_users-decreto_block_organisation_members'
+settings:
+  id: 'views_block:decreto_users-decreto_block_organisation_members'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      decreto_organisation: decreto_organisation
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

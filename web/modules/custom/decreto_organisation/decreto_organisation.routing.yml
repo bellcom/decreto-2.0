@@ -5,13 +5,33 @@ decreto_organisation.organisation_popup_content:
   requirements:
     _permission: 'access content'
 decreto_organisation.organisation_switch:
-  path: '/organisation-switch/{decreto_organisation}'
+  path: '/organisation-switch/{organisation}'
   defaults:
     _controller: '\Drupal\decreto_organisation\Controller\OrganisationController::switchOrganisation'
   options:
     parameters:
-      decreto_organisation:
+      organisation:
         type: entity:node
   requirements:
     _permission: 'access content'
-    decreto_organisation: \d+
+    organisation: \d+
+decreto_organisation.organisations_add:
+  path: '/organisations/add'
+  defaults:
+    _title_callback: '\Drupal\decreto_organisation\Form\OrganisationEditForm::getTitle'
+    _form: '\Drupal\decreto_organisation\Form\OrganisationEditForm'
+    organisation: null
+  requirements:
+    _permission: 'create decreto_organisation content'
+decreto_organisation.organisations_edit:
+  path: '/organisations/{organisation}/edit'
+  options:
+    parameters:
+      organisation:
+        type: entity:node
+  defaults:
+    _title_callback: '\Drupal\decreto_organisation\Form\OrganisationEditForm::getTitle'
+    _form: '\Drupal\decreto_organisation\Form\OrganisationEditForm'
+  requirements:
+    _permission: 'edit any decreto_organisation content'
+    organisation: \d+

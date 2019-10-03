@@ -177,6 +177,7 @@ function custom_theme_preprocess_block(&$variables) {
  */
 function custom_theme_preprocess_node(&$variables) {
   $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
   $user = $node->getOwner();
 
   // Date.
@@ -217,6 +218,12 @@ function custom_theme_preprocess_node(&$variables) {
   $title = $node->getTitle();
   $variables['label_raw'] = $title;
   $variables['label_initials'] = (new Initials())->name($title)->generate();
+
+  if ($node->getType() == 'decreto_organisation') {
+    if ($view_mode == 'full') {
+      $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('organisation_view_page');
+    }
+  }
 }
 
 /**

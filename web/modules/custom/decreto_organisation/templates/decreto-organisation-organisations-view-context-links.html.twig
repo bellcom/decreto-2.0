@@ -1,0 +1,12 @@
+<div class="boxy__actions">
+  {% if create_organisation and user.hasPermission('create decreto_organisation content') %}
+    <a href="{{ path('decreto_organisation.organisations_add') }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Create organisation"|trans }}
+    </a>
+  {% endif %}
+  {% if edit_organisation and organisation_id and user.hasPermission('edit any decreto_organisation content') %}
+    <a href="{{ path('decreto_organisation.organisations_edit', {'organisation' : organisation_id}) }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Attach members"|trans }}
+    </a>
+  {% endif %}
+</div>
