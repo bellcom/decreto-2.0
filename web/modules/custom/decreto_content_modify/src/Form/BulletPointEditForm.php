@@ -2,9 +2,9 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
-use Drupal\node\NodeInterface;
 
 /**
  * Implements the BulletPointsAdd form.
@@ -13,7 +13,7 @@ use Drupal\node\NodeInterface;
  */
 class BulletPointEditForm extends AjaxFormBase {
 
-  protected $node;
+  protected $entity;
 
   /**
    * {@inheritdoc}
@@ -35,13 +35,13 @@ class BulletPointEditForm extends AjaxFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $bullet_point = NULL) {
     if (empty($bullet_point) || $bullet_point->getType() != 'decreto_bullet_point') {
       return $form;
     }
 
-    $this->node = $bullet_point;
-    $decretoBP = new DecretoBulletPoint($this->node);
+    $this->entity = $bullet_point;
+    $decretoBP = new DecretoBulletPoint($this->entity);
     $this->parent = $decretoBP->getMeeting();
 
     // Title.
@@ -77,15 +77,15 @@ class BulletPointEditForm extends AjaxFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    if (!empty($this->node)) {
-      $this->node->title = $form_state->getValue('title');;
-      $this->node->field_decreto_bp_closed = [
+    if (!empty($this->entity)) {
+      $this->entity->title = $form_state->getValue('title');;
+      $this->entity->field_decreto_bp_closed = [
         'value' => $form_state->getValue('closed')
       ];
-      $this->node->field_decreto_bp_personal = [
+      $this->entity->field_decreto_bp_personal = [
         'value' => $form_state->getValue('personal')
       ];
-      $this->node->save();
+      $this->entity->save();
     }
   }
 

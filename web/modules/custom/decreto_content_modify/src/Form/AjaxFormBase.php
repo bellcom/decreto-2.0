@@ -6,6 +6,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
@@ -16,23 +17,23 @@ use Drupal\node\NodeInterface;
 abstract class AjaxFormBase extends FormBase {
 
   /**
-   * The node to be edited.
+   * The entity to be edited.
    *
-   * @var \Drupal\node\NodeInterface
+   * @var \Drupal\Core\Entity\ContentEntityInterface
    */
-  protected $node;
+  protected $entity;
 
   /**
    * The node to be redirected to after success.
    *
-   * @var \Drupal\node\NodeInterface
+   * @var \Drupal\Core\Entity\ContentEntityInterface
    */
   protected $parent;
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $node = NULL) {
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 

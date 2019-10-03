@@ -2,10 +2,10 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 
 /**
  * Implements the BulletPointAttachmentsAddForm form.
@@ -35,7 +35,7 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $bullet_point = NULL) {
     if (empty($bullet_point) || $bullet_point->getType() != 'decreto_bullet_point') {
       return $form;
     }

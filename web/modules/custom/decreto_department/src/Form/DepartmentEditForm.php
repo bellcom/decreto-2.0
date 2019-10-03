@@ -7,12 +7,9 @@ namespace Drupal\decreto_department\Form;
  * Contains \Drupal\decreto_department\Form\DepartmentEditForm.
  */
 
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\CloseModalDialogCommand;
-use Drupal\Core\Ajax\RedirectCommand;
-use Drupal\Core\Ajax\ReplaceCommand;
-use Drupal\Core\Form\FormBase;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Form\AjaxFormBase;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\taxonomy\Entity\Term;
@@ -23,8 +20,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Department create or edit form.
  */
-class DepartmentEditForm extends FormBase {
-  protected $department;
+class DepartmentEditForm extends AjaxFormBase {
 
   /**
    * Returns the title for the form.
@@ -54,19 +50,18 @@ class DepartmentEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $department = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $department = NULL) {
     if ($department) {
       if ($department->bundle() != 'decreto_tax_department') {
         throw new NotFoundHttpException();
       }
-      $this->department = $department;
+      $this->entity = $department;
+      // Setting parent the as department, so that redirect happens to department page.
+      $this->parent = $department;
     }
 
     $currentOrganisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
     $decretoOrganisation = new DecretoOrganisation($currentOrganisation);
-
-    $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
-    $form['#suffix'] = '</div>';
 
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('department_create_edit_form');
@@ -150,29 +145,7 @@ class DepartmentEditForm extends FormBase {
       $form = $this->populateFormData($form, $form_state, $department);
     }
 
-    // Form actions START.
-    $form['actions'] = [
-      '#type' => 'actions',
-    ];
-    $form['actions']['cancel'] = [
-      '#type' => 'button',
-      '#value' => $this->t('Cancel'),
-      '#name' => 'cancel',
-      '#ajax' => [
-        'callback' => '::ajaxCloseForm',
-        'event' => 'click',
-      ],
-      '#limit_validation_errors' => [],
-    ];
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
-      '#ajax' => [
-        'callback' => '::ajaxSubmitForm',
-        'event' => 'click',
-      ],
-    ];
-    // Form actions END.
+    $form = parent::buildForm($form, $form_state);
 
     return $form;
   }
@@ -182,9 +155,9 @@ class DepartmentEditForm extends FormBase {
    *
    * @param array $form
    *   Render array representing from.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   Current form state.
-   * @param TermInterface $department
+   * @param \Drupal\taxonomy\TermInterface $department
    *   Department term.
    *
    * @return array
@@ -196,7 +169,7 @@ class DepartmentEditForm extends FormBase {
     // Fill participants array based on user department attribute.
     $query = \Drupal::entityQuery('user')
       ->condition('status', 1)
-      ->condition('field_decreto_usr_departments', $this->department->id(), 'IN');
+      ->condition('field_decreto_usr_departments', $this->entity->id(), 'IN');
     $users_ids = $query->execute();
     if (!empty($users_ids)) {
       foreach ($users_ids as $user_id) {
@@ -210,28 +183,24 @@ class DepartmentEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $name = $form_state->getValue('name');
     $currentOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
 
-    if (!$this->department) {
-      $this->department = Term::create([
+    if (!$this->entity) {
+      $this->entity = Term::create([
         'vid' => 'decreto_tax_department',
         'name' => $name,
         'field_decreto_dep_org' => ['target_id' => $currentOrganisationId],
       ]);
     }
     else {
-      $this->department->name = $name;
+      $this->entity->name = $name;
     }
 
-    $this->department->save();
+    $this->entity->save();
+    // Setting parent the as department, so that redirect happens to department page.
+    $this->parent = $this->entity;
 
     $attached_users = [];
 
@@ -246,7 +215,7 @@ class DepartmentEditForm extends FormBase {
     // Find all members that are currently part of this department.
     $query = \Drupal::entityQuery('user')
       ->condition('status', 1)
-      ->condition('field_decreto_usr_departments', $this->department->id(), 'IN');
+      ->condition('field_decreto_usr_departments', $this->entity->id(), 'IN');
     $users_ids = $query->execute();
     if (!empty($users_ids)) {
       foreach ($users_ids as $user_id) {
@@ -258,7 +227,7 @@ class DepartmentEditForm extends FormBase {
           // User is no longer present in department, detach department.
           $user = User::load($user_id);
           $decretoUser = new DecretoUser($user);
-          $decretoUser->removeDepartment($this->department->id());
+          $decretoUser->removeDepartment($this->entity->id());
 
           // Remove from list.
           unset($attached_users[$user_id]);
@@ -271,58 +240,9 @@ class DepartmentEditForm extends FormBase {
       foreach ($attached_users as $attached_user) {
         $user = User::load($attached_user);
         $decretoUser = new DecretoUser($user);
-        $decretoUser->addDepartment($this->department->id());
+        $decretoUser->addDepartment($this->entity->id());
       }
     }
-  }
-
-  /**
-   * Closing modal form.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Array of ajax commands to execute on submit of the modal form.
-   */
-  public function ajaxCloseForm(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-    $response->addCommand(new CloseModalDialogCommand());
-
-    return $response;
-  }
-
-  /**
-   * Implements the submit handler for the ajax call.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Array of ajax commands to execute on submit of the modal form.
-   */
-  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-
-    if ($form_state->getErrors()) {
-      // Replacing form to show errors.
-      $form['status_messages'] = [
-        '#type' => 'status_messages',
-        '#weight' => -10,
-      ];
-      $response->addCommand(new ReplaceCommand('#' . $this->getFormId(), $form));
-    }
-    else {
-      // Closing modal and Redirecting to created / updated meeting.
-      $response->addCommand(new CloseModalDialogCommand());
-      $response->addCommand(new RedirectCommand($this->department->toUrl()->toString()));
-    }
-
-    return $response;
   }
 
 }

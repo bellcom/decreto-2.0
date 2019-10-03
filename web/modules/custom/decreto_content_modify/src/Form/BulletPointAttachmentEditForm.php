@@ -2,10 +2,10 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\file\Entity\File;
-use Drupal\node\NodeInterface;
 
 /**
  * Implements the BulletPointAttachmentEditForm form.
@@ -34,12 +34,12 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $bullet_point_attachment = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $bullet_point_attachment = NULL) {
     if (empty($bullet_point_attachment) || $bullet_point_attachment->getType() != 'decreto_bullet_point_attachment') {
       return $form;
     }
 
-    $this->node = $bullet_point_attachment;
+    $this->entity = $bullet_point_attachment;
 
     // Saving meeting for redirect purposes.
     $decretoBPA = new DecretoBulletPointAttachment($bullet_point_attachment);
@@ -171,7 +171,7 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   private function populateFormData(array $form, FormStateInterface $form_state) {
-    $bpa = $this->node;
+    $bpa = $this->entity;
     $form['title']['#default_value'] = $bpa->getTitle();
     $form['custom_text']['body']['#default_value'] = $bpa->body->value;
 
@@ -221,37 +221,37 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
       }
     }
 
-    $this->node->title = $title;
-    $this->node->body = $body;
+    $this->entity->title = $title;
+    $this->entity->body = $body;
     if ($bpa_file) {
-      $this->node->field_decreto_bpa_file->setValue(['target_id' => $bpa_file->id()]);
-      $this->node->field_decreto_bpa_html->setValue(NULL);
+      $this->entity->field_decreto_bpa_file->setValue(['target_id' => $bpa_file->id()]);
+      $this->entity->field_decreto_bpa_html->setValue(NULL);
     }
     else {
-      $this->node->field_decreto_bpa_file->setValue(NULL);
+      $this->entity->field_decreto_bpa_file->setValue(NULL);
     }
 
     if ($bpa_html) {
-      $this->node->field_decreto_bpa_html->setValue(['target_id' => $bpa_html->id()]);
-      $this->node->field_decreto_bpa_file->setValue(['target_id' => $bpa_html->id()]);
+      $this->entity->field_decreto_bpa_html->setValue(['target_id' => $bpa_html->id()]);
+      $this->entity->field_decreto_bpa_file->setValue(['target_id' => $bpa_html->id()]);
     }
     else {
-      $this->node->field_decreto_bpa_html->setValue(NULL);
+      $this->entity->field_decreto_bpa_html->setValue(NULL);
     }
 
     // Saving bullet point attachment.
-    $this->node->save();
+    $this->entity->save();
 
     // Handle * > PDF conversion.
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
       if ($bpa_file && $convert_to_pdf && $bpa_file->getMimeType() != 'application/pdf') {
-        \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->scheduleFile($bpa_file->id(), $this->node->id(), $convert_to_html);
+        \Drupal::service('decreto_pdf_conversion_manager.pdfConversionManagerService')->scheduleFile($bpa_file->id(), $this->entity->id(), $convert_to_html);
       }
     }
     // Handle PDF > HTML conversion.
     if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
       if ($bpa_file && $convert_to_html && $bpa_file->getMimeType() == 'application/pdf') {
-        \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($bpa_file->id(), $this->node->id());
+        \Drupal::service('decreto_pdf2htmlex.pdf2htmlex')->scheduleFile($bpa_file->id(), $this->entity->id());
       }
     }
   }

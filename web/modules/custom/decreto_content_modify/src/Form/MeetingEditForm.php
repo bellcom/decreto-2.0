@@ -5,6 +5,7 @@ namespace Drupal\decreto_content_modify\Form;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
@@ -12,7 +13,6 @@ use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -66,12 +66,12 @@ class MeetingEditForm extends AjaxFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $meeting = NULL) {
     if ($meeting) {
       if ($meeting->getType() != 'decreto_meeting') {
         throw new NotFoundHttpException();
       }
-      $this->node = $meeting;
+      $this->entity = $meeting;
       // Setting parent the as meeting, so that redirect happens to meetings page.
       $this->parent = $meeting;
     }
@@ -577,8 +577,8 @@ class MeetingEditForm extends AjaxFormBase {
       $end_date = DrupalDateTime::createFromFormat($this->dateTimePickerSubmitFormat, $end_date, drupal_get_user_timezone());
     }
 
-    if (!$this->node) {
-      $this->node = Node::create([
+    if (!$this->entity) {
+      $this->entity = Node::create([
         'type' => 'decreto_meeting',
         'status' => 1,
         'title' => $title,
@@ -595,23 +595,23 @@ class MeetingEditForm extends AjaxFormBase {
       ]);
     }
     else {
-      $this->node->title = $title;
-      $this->node->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
-      $this->node->field_decreto_meet_type = $type;
-      $this->node->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
-      $this->node->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
-      $this->node->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
-      $this->node->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
-      $this->node->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
-      $this->node->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
-      $this->node->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
-      $this->node->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
+      $this->entity->title = $title;
+      $this->entity->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
+      $this->entity->field_decreto_meet_type = $type;
+      $this->entity->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
+      $this->entity->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
+      $this->entity->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
+      $this->entity->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
+      $this->entity->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
+      $this->entity->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
+      $this->entity->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
+      $this->entity->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
     }
 
-    $this->node->save();
+    $this->entity->save();
 
     // Setting parent the as meeting, so that redirect happens to meetings page.
-    $this->parent = $this->node;
+    $this->parent = $this->entity;
   }
 
   /**

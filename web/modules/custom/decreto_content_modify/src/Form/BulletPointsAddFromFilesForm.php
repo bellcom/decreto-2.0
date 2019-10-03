@@ -2,12 +2,12 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 
 /**
  * Implements the BulletPointsAddFromFile form.
@@ -36,7 +36,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $meeting = NULL) {
     if (empty($meeting) || $meeting->getType() != 'decreto_meeting') {
       return $form;
     }
