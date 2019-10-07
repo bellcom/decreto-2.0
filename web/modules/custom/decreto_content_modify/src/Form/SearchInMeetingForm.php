@@ -114,7 +114,7 @@ class SearchInMeetingForm extends FormBase {
     // Create selector for jQuery.
     $jquerySelector = '';
     foreach ($ids as $id) {
-      $jquerySelector .= "article[data-decreto-node-id=$id],";
+      $jquerySelector .= "div[data-decreto-node-id=$id],";
     }
     if (!empty($jquerySelector)) {
       // Removing coma in the end of the string.
@@ -179,7 +179,8 @@ class SearchInMeetingForm extends FormBase {
       $type = reset($typeFieldValues);
       if ($type == 'decreto_bullet_point_attachment') {
         $bpNidField = $item->getFields()['bp_nid'];
-        $bpNid = reset($bpNidField->getValues());
+        $values = $bpNidField->getValues();
+        $bpNid = reset($values);
         $matchItemsIds[] = $bpNid;
       }
     }
