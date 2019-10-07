@@ -70,7 +70,7 @@
                 <div class="poppy-box__content">
 
                   <ul class="menu">
-                    {% if user.hasPermission('create decreto_meeting content') %}
+                    {% if content['#access']['decreto_meeting']['canCreate'] %}
                     <li>
                       <a href="{{ path('decreto_content_modify.meetings_add') }}" class="use-ajax" data-dialog-type="modal">
                         <i class="material-icons">

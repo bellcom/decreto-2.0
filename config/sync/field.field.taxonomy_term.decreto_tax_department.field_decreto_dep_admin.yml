@@ -1,0 +1,28 @@
+uuid: b18d3a77-06cc-450d-bd8d-e1e0765d3975
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_decreto_dep_admin
+    - taxonomy.vocabulary.decreto_tax_department
+id: taxonomy_term.decreto_tax_department.field_decreto_dep_admin
+field_name: field_decreto_dep_admin
+entity_type: taxonomy_term
+bundle: decreto_tax_department
+label: Admin
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

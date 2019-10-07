@@ -10,6 +10,7 @@ namespace Drupal\decreto_department\Form;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\decreto_content_modify\Form\AjaxFormBase;
+use Drupal\decreto_department\Entity\DecretoDepartment;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\taxonomy\Entity\Term;
@@ -62,6 +63,7 @@ class DepartmentEditForm extends AjaxFormBase {
 
     $currentOrganisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
     $decretoOrganisation = new DecretoOrganisation($currentOrganisation);
+    $users = $decretoOrganisation->getUsers();
 
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('department_create_edit_form');
@@ -77,6 +79,21 @@ class DepartmentEditForm extends AjaxFormBase {
       '#placeholder' => $this->t('Name'),
       '#title' => $this->t('Name'),
       '#required' => TRUE,
+    ];
+
+    // Department admin.
+    $selectUsers = [];
+    if (!empty($users)) {
+      foreach ($users as $user) {
+        $selectUsers[$user->id()] = $user->label();
+      }
+    }
+
+    $form['department_admin'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Department admin'),
+      '#options' => $selectUsers,
+      '#empty_value' => 0,
     ];
 
     // Members START.
@@ -117,7 +134,6 @@ class DepartmentEditForm extends AjaxFormBase {
       '#suffix' => '</div>',
     ];
 
-    $users = $decretoOrganisation->getUsers();
     if (!empty($users)) {
       $form['member-container']['members'] = [
         '#type' => 'container',
@@ -176,9 +192,13 @@ class DepartmentEditForm extends AjaxFormBase {
    *
    * @return array
    *   Form array with appended page.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   public function populateFormData(array $form, FormStateInterface $form_state, TermInterface $department) {
     $form['name']['#default_value'] = $department->getName();
+    $decretoDepartment = new DecretoDepartment($department);
+    $form['department_admin']['#default_value'] = $decretoDepartment->getDepartmentAdmin(FALSE);
 
     // Fill participants array based on user department attribute.
     $query = \Drupal::entityQuery('user')
@@ -199,6 +219,7 @@ class DepartmentEditForm extends AjaxFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $name = $form_state->getValue('name');
+    $departmentAdminId = $form_state->getValue('department_admin');
     $currentOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
 
     if (!$this->entity) {
@@ -206,10 +227,12 @@ class DepartmentEditForm extends AjaxFormBase {
         'vid' => 'decreto_tax_department',
         'name' => $name,
         'field_decreto_dep_org' => ['target_id' => $currentOrganisationId],
+        'field_decreto_dep_admin' => ['target_id' => $departmentAdminId],
       ]);
     }
     else {
       $this->entity->name = $name;
+      $this->entity->field_decreto_dep_admin = ['target_id' => $departmentAdminId];
     }
 
     $this->entity->save();

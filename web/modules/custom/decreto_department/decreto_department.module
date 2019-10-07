@@ -5,11 +5,15 @@
  * Contains decreto_departmnet.module.
  */
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\decreto_department\Controller\AccessController;
 use Drupal\decreto_department\Services\DepartmentService;
 use Drupal\decreto_user\Entity\DecretoUser;
+use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
 
 /**
@@ -88,6 +92,7 @@ function decreto_department_theme() {
         'create_department' => NULL,
         'edit_department' => NULL,
         'department_id' => NULL,
+        'access' => [],
       ],
     ],
   ];
@@ -106,4 +111,17 @@ function decreto_department_views_data() {
   ];
 
   return $data;
+}
+
+/**
+ * Implements hook_taxonomy_term_access().
+ */
+function decreto_department_taxonomy_term_access(TermInterface $term, $op, AccountInterface $account) {
+  if ($op == 'delete') {
+    if ($term->bundle() == 'decreto_tax_department') {
+      return AccessController::deleteDepartmentAccess($term, $account);
+    }
+  }
+
+  return AccessResult::neutral();
 }

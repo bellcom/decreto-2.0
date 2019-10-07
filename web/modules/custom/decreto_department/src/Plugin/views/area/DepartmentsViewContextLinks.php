@@ -3,6 +3,8 @@
 namespace Drupal\decreto_department\Plugin\views\area;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_department\Controller\AccessController;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Plugin\views\area\TokenizeAreaPluginBase;
 
 /**
@@ -58,14 +60,22 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
    */
   public function render($empty = FALSE) {
     $department_id = 0;
+    $department = NULL;
     if (isset($this->options['department_id'])) {
       $department_id = $this->tokenizeValue($this->options['department_id']);
+      $department = Term::load($department_id);
     }
+
     return [
       '#theme' => 'decreto_department_departments_view_context_links',
       '#create_department' => $this->options['create_department'],
       '#edit_department' => $this->options['edit_department'],
       '#department_id' => $department_id,
+      '#access' => [
+        'decreto_department' => [
+          'canEdit' => ($department) ? AccessController::editDepartmentAccess($department)->isAllowed() : NULL,
+        ],
+      ],
     ];
   }
 
