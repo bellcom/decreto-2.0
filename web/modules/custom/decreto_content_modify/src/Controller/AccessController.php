@@ -67,14 +67,15 @@ class AccessController {
 
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
-    $decretoDepartment = new DecretoDepartment($department);
+    if ($department) {
+      $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin(\Drupal::currentUser())) {
-      return AccessResult::allowed();
+      if ($decretoDepartment->isDepartmentAdmin(\Drupal::currentUser())) {
+        return AccessResult::allowed();
+      }
     }
-    else {
-      return AccessResult::neutral();
-    }
+
+    return AccessResult::neutral();
   }
 
   /**
@@ -100,10 +101,12 @@ class AccessController {
 
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
-    $decretoDepartment = new DecretoDepartment($department);
+    if ($department) {
+      $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin($user)) {
-      return AccessResult::allowed();
+      if ($decretoDepartment->isDepartmentAdmin($user)) {
+        return AccessResult::allowed();
+      }
     }
 
     return AccessResult::neutral();
@@ -137,9 +140,11 @@ class AccessController {
 
     // Checking is user is an admin of meeting department.
     $department = $decretoMeeting->getDepartment();
-    $decretoDepartment = new DecretoDepartment($department);
-    if ($decretoDepartment->isDepartmentAdmin($user)) {
-      return AccessResult::allowed();
+    if ($department) {
+      $decretoDepartment = new DecretoDepartment($department);
+      if ($decretoDepartment->isDepartmentAdmin($user)) {
+        return AccessResult::allowed();
+      }
     }
 
     // Checking if user is part of internal participants.
@@ -233,10 +238,12 @@ class AccessController {
 
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
-    $decretoDepartment = new DecretoDepartment($department);
+    if ($department) {
+      $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin($user)) {
-      return AccessResult::allowed();
+      if ($decretoDepartment->isDepartmentAdmin($user)) {
+        return AccessResult::allowed();
+      }
     }
 
     return AccessResult::neutral();
@@ -326,10 +333,12 @@ class AccessController {
 
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
-    $decretoDepartment = new DecretoDepartment($department);
+    if ($department) {
+      $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin($user)) {
-      return AccessResult::allowed();
+      if ($decretoDepartment->isDepartmentAdmin($user)) {
+        return AccessResult::allowed();
+      }
     }
 
     return AccessResult::neutral();
