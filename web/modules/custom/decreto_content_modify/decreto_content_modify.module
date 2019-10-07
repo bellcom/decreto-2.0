@@ -6,6 +6,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Drupal\decreto_content_modify\Controller\AccessController;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
@@ -317,7 +318,9 @@ function decreto_content_modify_theme() {
       'render element' => 'form',
     ],
     'decreto_content_modify_meetings_view_context_links' => [
-      'variables' => [],
+      'variables' => [
+        'access' => [],
+      ],
     ],
   ];
 }
@@ -350,21 +353,29 @@ function decreto_content_modify_node_access(NodeInterface $node, $op, AccountInt
 
       if ($decretoBP->isClosed() || $decretoBP->isPersonal()) {
         $meeting = $decretoBP->getMeeting();
-        $decretoMeeting = new DecretoMeeting($meeting);
-        $internal_participants_id = $decretoMeeting->getInternalParticipants(FALSE);
 
-        // If user is not an internal participant, forbid access.
-        if (!in_array($account->id(), $internal_participants_id)) {
-          return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access closed content');
-        }
+        return AccessController::viewMeetingClosedContentAccess($meeting, $account);
       }
     }
     if ($node->bundle() == 'decreto_bullet_point_attachment') {
       $decretoBPA = new DecretoBulletPointAttachment($node);
+
+      // User BP access permissions for deciding.
       $bp = $decretoBPA->getBulletPoint();
       if (!$bp->access('view')) {
-        return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access closed content');
+        return AccessResult::forbidden('Cannot access closed content');
       }
+    }
+  }
+  elseif ($op == 'delete') {
+    if ($node->bundle() == 'decreto_meeting') {
+      return AccessController::deleteMeetingAccess($node, $account);
+    }
+    elseif ($node->bundle() == 'decreto_bullet_point') {
+      return AccessController::deleteBulletPointAccess($node, $account);
+    }
+    elseif ($node->bundle() == 'decreto_bullet_point_attachment') {
+      return AccessController::deleteBulletPointAttachmentAccess($node, $account);
     }
   }
 
@@ -381,13 +392,7 @@ function decreto_content_modify_entity_field_access($op, FieldDefinitionInterfac
     $field_name = $field_definition->getName();
     if ($field_name == 'field_decreto_meet_full_doc_c') {
       $meeting = $items->getEntity();
-      $decretoMeeting = new DecretoMeeting($meeting);
-      $internal_participants_id = $decretoMeeting->getInternalParticipants(FALSE);
-
-      // If user is not an internal participant, forbid access.
-      if (!in_array($account->id(), $internal_participants_id)) {
-        return AccessResult::forbiddenIf(!$account->hasPermission('access decreto closed content'), 'Cannot access meeting closed content');
-      }
+      return AccessController::viewMeetingClosedContentAccess($meeting, $account);
     }
   }
 

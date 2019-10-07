@@ -2,6 +2,8 @@
 
 namespace Drupal\decreto_user\Entity;
 
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\user\UserInterface;
 
 /**
@@ -156,6 +158,31 @@ class DecretoUser {
         $this->user->save();
       }
     }
+  }
+
+  /**
+   * Returns departments, which user is admin of.
+   *
+   * @param bool $load
+   *   If the returned taxonomy terms shall be load. If FALSE, array of tids is
+   *   returned.
+   *
+   * @return array
+   *   If load is TRUE array of taxonomy terms is returned,
+   *   If load is FALSE array of tids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getAdminDepartments($load = TRUE) {
+    $query = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', 'decreto_tax_department')
+      ->condition('field_decreto_dep_admin', $this->getEntity()->id());
+
+    $tids = $query->execute();
+    if (!empty($tids)) {
+      return ($load) ? Term::loadMultiple($tids) : $tids;
+    }
+
+    return array();
   }
 
 }

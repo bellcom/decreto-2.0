@@ -10,9 +10,11 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
+use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -219,7 +221,17 @@ class MeetingEditForm extends AjaxFormBase {
     ];
 
     // Department.
-    $department_terms = $decretoOrganisation->getDepartments();
+    if (\Drupal::currentUser()->hasPermission('create decreto_meeting content')) {
+      // User has create meeting permission, can create any department meeting.
+      $department_terms = $decretoOrganisation->getDepartments();
+    }
+    else {
+      // User does not have a permission, allow creating only for departments he
+      // is admin of.
+      $decretoUser = new DecretoUser(User::load(\Drupal::currentUser()->id()));
+      $department_terms = $decretoUser->getAdminDepartments();
+    }
+
     $department_options = [];
     foreach ($department_terms as $term) {
       $department_options[$term->id()] = $term->label();

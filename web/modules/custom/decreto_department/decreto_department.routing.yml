@@ -20,5 +20,5 @@ decreto_department.departments_edit:
     _title_callback: '\Drupal\decreto_department\Form\DepartmentEditForm::getTitle'
     _form: '\Drupal\decreto_department\Form\DepartmentEditForm'
   requirements:
-    _permission: 'edit terms in decreto_tax_department'
+    _custom_access: '\Drupal\decreto_department\Controller\AccessController::editDepartmentAccess'
     department: \d+

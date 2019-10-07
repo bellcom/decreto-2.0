@@ -35,7 +35,7 @@
     <div class="action-list">
 
       <!-- Begin - delete -->
-      {% if user.hasPermission('delete any decreto_bullet_point_attachment content') %}
+      {% if content['#access']['canDelete'] %}
         <a
           href="{{ path('decreto_content_modify.bpas_delete', {'node': node.id()}) }}"
           title="{{ "Delete bullet point attachment" | trans }}"
@@ -47,7 +47,7 @@
       <!-- End - delete -->
 
       <!-- Begin - edit -->
-      {% if user.hasPermission('edit any decreto_bullet_point_attachment content') %}
+      {% if content['#access']['canEdit'] %}
         <a
           href="{{ path('decreto_content_modify.bpas_edit', {'bullet_point_attachment': node.id()}) }}"
           title="{{ "Edit bullet point attachment" | trans }}" class="action-list__button use-ajax"

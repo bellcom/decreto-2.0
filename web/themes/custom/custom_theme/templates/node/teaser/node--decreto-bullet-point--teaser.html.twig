@@ -83,36 +83,42 @@
       </button>
       <!-- End - open/close -->
 
-      <!-- Begin - add bulletpoint attachment -->
-      <a
-        href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
-        data-toggle="tooltip"
-        title="{{ "Add bullet point attachment" | trans }}"
-        class="action-list__button use-ajax"
-        data-dialog-type="modal">
-        <span class="material-icons">add_circle</span>
-      </a>
-      <!-- End - add bulletpoint attachment -->
+      {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+        <!-- Begin - add bulletpoint attachment -->
+        <a
+          href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
+          data-toggle="tooltip"
+          title="{{ "Add bullet point attachment" | trans }}"
+          class="action-list__button use-ajax"
+          data-dialog-type="modal">
+          <span class="material-icons">add_circle</span>
+        </a>
+        <!-- End - add bulletpoint attachment -->
+      {% endif %}
 
-      <!-- Begin - delete bulletpoint attachment -->
-      <a
-        href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}"
-        data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
-        class="action-list__button use-ajax" data-dialog-type="modal">
-        <span class="material-icons">remove_circle</span>
-      </a>
-      <!-- End - delete bulletpoint attachment -->
+      {% if content['#access']['canDelete'] %}
+        <!-- Begin - delete bulletpoint -->
+        <a
+          href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}"
+          data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
+          class="action-list__button use-ajax" data-dialog-type="modal">
+          <span class="material-icons">remove_circle</span>
+        </a>
+        <!-- End - delete bulletpoint -->
+      {% endif %}
 
-      <!-- Begin - edit -->
-      <a
-        href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
-        data-toggle="tooltip"
-        title="{{ "Edit bullet point" | trans }}"
-        class="action-list__button use-ajax"
-        data-dialog-type="modal">
-        <span class="material-icons">edit</span>
-      </a>
-      <!-- End - edit -->
+      {% if content['#access']['canEdit'] %}
+        <!-- Begin - edit -->
+        <a
+          href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
+          data-toggle="tooltip"
+          title="{{ "Edit bullet point" | trans }}"
+          class="action-list__button use-ajax"
+          data-dialog-type="modal">
+          <span class="material-icons">edit</span>
+        </a>
+        <!-- End - edit -->
+      {% endif %}
 
       <!-- Begin - memos -->
       <a

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_admin
     - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_org
     - taxonomy.vocabulary.decreto_tax_department
   module:
@@ -21,6 +22,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_decreto_dep_admin:
+    weight: 32
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_decreto_dep_org:
     weight: 31
     settings:

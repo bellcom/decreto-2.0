@@ -1,0 +1,20 @@
+uuid: 0624061b-be48-4dd2-86a7-f4233d923059
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - user
+id: taxonomy_term.field_decreto_dep_admin
+field_name: field_decreto_dep_admin
+entity_type: taxonomy_term
+type: entity_reference
+settings:
+  target_type: user
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

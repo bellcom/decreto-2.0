@@ -2,6 +2,7 @@
 
 namespace Drupal\decreto_content_modify\Plugin\views\area;
 
+use Drupal\decreto_content_modify\Controller\AccessController;
 use Drupal\views\Plugin\views\area\AreaPluginBase;
 
 /**
@@ -19,6 +20,11 @@ class MeetingsViewContextLinks extends AreaPluginBase {
   public function render($empty = FALSE) {
     return [
       '#theme' => 'decreto_content_modify_meetings_view_context_links',
+      '#access' => [
+        'decreto_meeting' => [
+          'canCreate' => AccessController::createMeetingAccess()->isAllowed(),
+        ],
+      ],
     ];
   }
 
