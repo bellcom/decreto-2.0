@@ -51,9 +51,74 @@
   }
 }
 
+.add-more-elements {
+  padding-top: $grid-gutter-width;
+  padding-bottom: $grid-gutter-width;
+
+  text-align: center;
+
+  .btn {
+    @extend .btn-link;
+
+    position: relative;
+
+    outline: 0;
+
+    padding: 0;
+    min-width: auto;
+
+    &, &:hover {
+      font-weight: $font-weight-bold;
+      font-size: $font-size-large;
+
+      color: $headings-color;
+
+      text-decoration: underline;
+    }
+
+    &:before {
+      position: absolute;
+
+      top: 0;
+      right: 100%;
+
+      margin-right: 5px;
+
+      font-size: $font-size-large;
+      font-family: "Material Icons";
+      content: "add_circle";
+
+      color: $headings-color;
+    }
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
+
+.form-group--highlighted {
+  margin-bottom: 1px;
+
+  padding-top: floor( ($grid-gutter-width / 2) );
+  padding-bottom: floor( ($grid-gutter-width / 2) );
+
+  background-color: #D4EBE7;
+
+  label {
+    color: $brand-tertiary;
+  }
+
+  .form-control {
+    border-color: #A5B8B6;
+  }
+
+  .btn-danger,
+  .btn-success {
+    @extend .btn-primary;
+    @extend .btn-sm;
+  }
+}
 
 // --------------------------------------------------
 // Responsive
@@ -63,33 +128,70 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+
+  .form-group--highlighted {
+
+    .modal & {
+      padding-left: $xs-modal-inner-spacing;
+      padding-right: $xs-modal-inner-spacing;
+
+      margin-left: 0 - $xs-modal-inner-spacing;
+      margin-right: 0 - $xs-modal-inner-spacing;
+    }
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {}
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {}
+@media #{$breakpoint-tablet-only} {
 
-// Desktop - and up
-@media #{$breakpoint-desktop-and-up} {
+  .form-group--highlighted {
 
-  //.form-inline {
-  //
-  //  .form-type-textfield {
-  //
-  //    .form-control {
-  //      min-width: 450px;
-  //    }
-  //  }
-  //}
+    .modal & {
+      padding-left: $sm-modal-inner-spacing;
+      padding-right: $sm-modal-inner-spacing;
+
+      margin-left: 0 - $sm-modal-inner-spacing;
+      margin-right: 0 - $sm-modal-inner-spacing;
+    }
+  }
 }
 
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
 // Desktop - only
-@media #{$breakpoint-desktop-only} {}
+@media #{$breakpoint-desktop-only} {
+
+  .form-group--highlighted {
+
+    .modal & {
+      padding-left: $md-modal-inner-spacing;
+      padding-right: $md-modal-inner-spacing;
+
+      margin-left: 0 - $md-modal-inner-spacing;
+      margin-right: 0 - $md-modal-inner-spacing;
+    }
+  }
+}
 
 // Large desktop - and up
-@media #{$breakpoint-large-desktop-and-up} {}
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .form-group--highlighted {
+
+    .modal & {
+      padding-left: $lg-modal-inner-spacing;
+      padding-right: $lg-modal-inner-spacing;
+
+      margin-left: 0 - $lg-modal-inner-spacing;
+      margin-right: 0 - $lg-modal-inner-spacing;
+    }
+  }
+}
 
 // Print
 @media print {}

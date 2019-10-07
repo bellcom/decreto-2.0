@@ -54,23 +54,26 @@ class BulletPointsAddForm extends AjaxFormBase {
 
     for ($i = 0; $i < $counter; $i++) {
       $bullet_point = [
-        '#prefix' => '<div class="form-group">',
+        '#prefix' => '<div class="form-group form-group--highlighted">',
         '#suffix' => '</div>',
       ];
       $bullet_point['title'] = [
         '#type' => 'textfield',
-        '#placeholder' => $this->t('Title'),
+        '#title' => $this->t('Title'),
       ];
 
+      if ($counter > 1) {
+
+      }
       $bullet_point['closed'] = [
-        '#prefix' => '<div class="form-inline form-item">',
+        '#prefix' => ($counter > 1) ? '<div class="row"><div class="col-xs-6"><div class="form-inline form-item">' : '<div class="form-inline form-item">',
         '#type' => 'checkbox',
         '#title' => $this->t('Closed'),
       ];
       $bullet_point['personal'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Personal'),
-        '#suffix' => '</div>',
+        '#suffix' => ($counter > 1) ? '</div></div>' : '</div>',
       ];
       if ($counter > 1) {
         $bullet_point['delete'] = [
@@ -84,6 +87,8 @@ class BulletPointsAddForm extends AjaxFormBase {
           ],
           '#submit' => ['::submitDelete'],
           '#type' => 'submit',
+          '#prefix' => '<div class="col-xs-6 text-right">',
+          '#suffix' => '</div></div>',
         ];
       }
       $form['bullet_points'][] = $bullet_point;
@@ -103,6 +108,8 @@ class BulletPointsAddForm extends AjaxFormBase {
       ],
       '#submit' => ['::submitAddMore'],
       '#type' => 'submit',
+      '#prefix' => '<div class="add-more-elements">',
+      '#suffix' => '</div>',
     ];
 
     $form = parent::buildForm($form, $form_state);
