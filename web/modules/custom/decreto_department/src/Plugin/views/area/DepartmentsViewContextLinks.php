@@ -60,10 +60,12 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
    */
   public function render($empty = FALSE) {
     $department_id = 0;
+    $department = NULL;
     if (isset($this->options['department_id'])) {
       $department_id = $this->tokenizeValue($this->options['department_id']);
+      $department = Term::load($department_id);
     }
-    $department = Term::load($department_id);
+
     return [
       '#theme' => 'decreto_department_departments_view_context_links',
       '#create_department' => $this->options['create_department'],
@@ -71,7 +73,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#department_id' => $department_id,
       '#access' => [
         'decreto_department' => [
-          'canEdit' => AccessController::editDepartmentAccess($department)->isAllowed(),
+          'canEdit' => ($department) ? AccessController::editDepartmentAccess($department)->isAllowed() : NULL,
         ],
       ],
     ];
