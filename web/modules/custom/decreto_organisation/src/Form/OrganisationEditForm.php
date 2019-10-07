@@ -84,28 +84,36 @@ class OrganisationEditForm extends AjaxFormBase {
     ];
     $form['member-container'] = [
       '#type' => 'container',
+      '#prefix' => '<div class="div-table">',
+      '#suffix' => '</div>',
     ];
     $form['member-container']['header'] = [
       '#type' => 'container',
       '#attributes' => [
         'class' => ['row'],
       ],
+      '#prefix' => '<div class="div-table__thead"><div class="div-table__tr">',
+      '#suffix' => '</div></div>',
     ];
     $form['member-container']['header'][] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#value' => $this->t('First and last name'),
       '#attributes' => [
-        'class' => ['col-xs-6'],
+        'class' => ['div-table__th'],
       ],
+      '#prefix' => '<div class="col-xs-8">',
+      '#suffix' => '</div>',
     ];
     $form['member-container']['header'][] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#value' => $this->t('Attached'),
       '#attributes' => [
-        'class' => ['col-xs-3'],
+        'class' => ['div-table__th'],
       ],
+      '#prefix' => '<div class="col-xs-4">',
+      '#suffix' => '</div>',
     ];
 
     $users = [];
@@ -120,6 +128,8 @@ class OrganisationEditForm extends AjaxFormBase {
       $form['member-container']['members'] = [
         '#type' => 'container',
         '#tree' => TRUE,
+        '#prefix' => '<div class="div-table__tbody">',
+        '#suffix' => '</div>',
       ];
 
       foreach ($users as $user) {
@@ -129,19 +139,23 @@ class OrganisationEditForm extends AjaxFormBase {
           '#attributes' => [
             'class' => ['row'],
           ],
+          '#prefix' => '<div class="div-table__tr">',
+          '#suffix' => '</div>',
         ];
         $form['member-container']['members'][$user_id]['name'] = [
           '#type' => 'html_tag',
           '#tag' => 'div',
           '#value' => $user->label(),
           '#attributes' => [
-            'class' => ['col-xs-6'],
+            'class' => ['div-table__td'],
           ],
+          '#prefix' => '<div class="col-xs-8">',
+          '#suffix' => '</div>',
         ];
         $form['member-container']['members'][$user_id]['attached'] = [
           '#type' => 'checkbox',
-          '#prefix' => '<div class="col-xs-3">',
-          '#suffix' => '</div>'
+          '#prefix' => '<div class="col-xs-4"><div class="div-table__td">',
+          '#suffix' => '</div></div>',
         ];
       }
     }
