@@ -51,6 +51,15 @@
   }
 }
 
+.text-format-wrapper {
+  margin-bottom: $form-group-margin-bottom;
+
+  // Filter choice on CKeditor.
+  .filter-wrapper {
+    display: none;
+  }
+}
+
 .add-more-elements {
   padding-top: $grid-gutter-width;
   padding-bottom: $grid-gutter-width;

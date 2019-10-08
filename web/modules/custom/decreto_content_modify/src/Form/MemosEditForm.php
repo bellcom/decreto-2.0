@@ -81,20 +81,21 @@ class MemosEditForm extends AjaxFormBase {
     for ($i = 0; $i < $counter; $i++) {
       $memos_container = [
         '#type' => 'container',
-        '#prefix' => '<div class="form-group">',
+        '#prefix' => '<div class="form-group form-group--highlighted">',
         '#suffix' => '</div>',
       ];
 
       // Title.
       $memos_container['title'] = [
         '#type' => 'textfield',
-        '#placeholder' => $this->t('Title'),
+        '#title' => $this->t('Title'),
         '#required' => TRUE,
       ];
 
       // Body.
       $memos_container['body'] = [
         '#type' => 'text_format',
+        '#title' => $this->t('Body'),
         '#format' => 'basic_html',
         '#allowed_formats' => ['basic_html'],
       ];
@@ -111,6 +112,8 @@ class MemosEditForm extends AjaxFormBase {
         '#submit' => ['::submitDelete'],
         '#type' => 'submit',
         '#limit_validation_errors' => [],
+        '#prefix' => '<div class="text-right">',
+        '#suffix' => '</div>',
       ];
       $form['memos_container'][] = $memos_container;
     }
@@ -126,6 +129,8 @@ class MemosEditForm extends AjaxFormBase {
       '#submit' => ['::submitAddMore'],
       '#type' => 'submit',
       '#limit_validation_errors' => [],
+      '#prefix' => '<div class="add-more-elements">',
+      '#suffix' => '</div>',
     ];
 
     // Populate values.
