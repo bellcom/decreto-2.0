@@ -12,13 +12,8 @@ jQuery(function ($) {
     source: '.sidr-source-provider'
   });
 
-  // Enable / disable Bootstrap tooltips, based upon touch events
-  if (Modernizr.touchevents) {
-    $('[data-toggle="tooltip"]').tooltip('hide');
-  }
-  else {
-    $('[data-toggle="tooltip"]').tooltip();
-  }
+  // Enable tooltips.
+  $('[data-toggle="tooltip"]').tooltip();
 
   // Poppy (popovers).
   $('.poppy-toggle').on('click', function (event) {
