@@ -60,7 +60,7 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
 
     for ($i = 0; $i < $counter; $i++) {
       $bullet_point_attachment = [
-        '#prefix' => '<div class="form-group">',
+        '#prefix' => '<div class="form-group form-group--highlighted">',
         '#suffix' => '</div>',
       ];
       $bullet_point_attachment['title'] = [
@@ -80,6 +80,8 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
           ],
           '#submit' => ['::submitDelete'],
           '#type' => 'submit',
+          '#prefix' => '<div class="text-right">',
+          '#suffix' => '</div>',
         ];
       }
       $form['bullet_point_attachments'][] = $bullet_point_attachment;
@@ -99,6 +101,8 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
       ],
       '#submit' => ['::submitAddMore'],
       '#type' => 'submit',
+      '#prefix' => '<div class="add-more-elements">',
+      '#suffix' => '</div>',
     ];
 
     $form = parent::buildForm($form, $form_state);
