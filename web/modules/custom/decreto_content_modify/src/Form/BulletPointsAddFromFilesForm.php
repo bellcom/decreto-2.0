@@ -50,7 +50,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
     // Title.
     $form['title'] = [
       '#type' => 'textfield',
-      '#placeholder' => $this->t('Title'),
+      '#title' => $this->t('Title'),
       '#required' => TRUE,
     ];
 
@@ -110,12 +110,13 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
     for ($i = 0; $i < $counter; $i++) {
       $file_container = [
         '#type' => 'container',
-        '#prefix' => '<div class="form-group">',
+        '#prefix' => '<div class="form-group form-group--highlighted">',
         '#suffix' => '</div>',
       ];
 
       $file_container['file'] = [
         '#type' => 'managed_file',
+        '#title' => $this->t('File'),
         '#upload_location' => 'public://',
         '#default_value' => NULL,
         '#upload_validators' => array(
@@ -137,13 +138,15 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
           '#submit' => ['::submitDelete'],
           '#type' => 'submit',
           '#limit_validation_errors' => [],
+          '#prefix' => '<div class="text-right">',
+          '#suffix' => '</div>',
         ];
       }
       $form['files_container'][] = $file_container;
     }
 
     $form['add-more'] = [
-      '#value' => t('Add'),
+      '#value' => t('Add another file'),
       '#name' => 'add more',
       '#ajax' => [
         'wrapper' => 'js-files-container-wrapper',
@@ -153,6 +156,8 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
       '#submit' => ['::submitAddMore'],
       '#type' => 'submit',
       '#limit_validation_errors' => [],
+      '#prefix' => '<div class="add-more-elements">',
+      '#suffix' => '</div>',
     ];
 
     $form = parent::buildForm($form, $form_state);
