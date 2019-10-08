@@ -13,9 +13,9 @@ dependencies:
     - field.storage.node.field_decreto_bp_bpas
     - field.storage.node.body
     - field.storage.node.field_decreto_meet_department
+    - field.storage.node.field_decreto_meet_end_date
     - field.storage.node.field_decreto_meet_start_date
     - field.storage.node.field_decreto_meet_location
-    - field.storage.node.field_decreto_meet_end_date
     - search_api.server.decreto_search_api_solr_server
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -225,7 +225,7 @@ processor_settings:
     number_indexed: 0
     number_first_bytes: '0'
     max_filesize: '0'
-    excluded_private: 1
+    excluded_private: 0
     excluded_mimes: 'audio/x-aiff image/x-jg video/x-msvideo image/x-ms-bmp image/gif image/vnd.microsoft.icon video/quicktime audio/ogg video/ogg image/png image/x-photoshop audio/x-realaudio audio/x-pn-realaudio image/x-rgb video/x-flv'
   html_filter:
     all_fields: true

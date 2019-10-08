@@ -310,7 +310,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['full_doc'] = [
       '#title' => $this->t('Open description'),
       '#type' => 'managed_file',
-      '#upload_location' => 'public://',
+      '#upload_location' => 'private://',
       '#upload_validators' => [
         'file_validate_extensions' => ['txt pdf doc docx'],
       ],

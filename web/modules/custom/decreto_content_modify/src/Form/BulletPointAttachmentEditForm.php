@@ -120,7 +120,7 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     // File field.
     $form['upload_file']['file'] = array(
       '#type' => 'managed_file',
-      '#upload_location' => 'public://',
+      '#upload_location' => 'private://',
       '#default_value' => NULL,
       '#upload_validators' => array(
         'file_validate_extensions' => array($availableExtensions),
