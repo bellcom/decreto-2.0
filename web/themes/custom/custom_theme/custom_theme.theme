@@ -183,7 +183,6 @@ function custom_theme_preprocess_block(&$variables) {
  */
 function custom_theme_preprocess_node(&$variables) {
   $node = $variables['node'];
-  $view_mode = $variables['view_mode'];
   $user = $node->getOwner();
 
   // Date.
@@ -196,39 +195,33 @@ function custom_theme_preprocess_node(&$variables) {
   }
 
   // Get initials of user.
-  $name = '';
-  $firstname = '';
-  $lastname = '';
-  if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
+  if ($user) {
+    $name = $user->label();
 
-    if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
-      $firstname = $field_firstname[0]['value'];
-    }
-  }
-  if ($user->field_decreto_lastname && !$user->field_decreto_lastname->isEmpty()) {
-
-    if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
-      $lastname = $field_lastname[0]['value'];
-    }
-  }
-  if ($firstname && $lastname) {
-    $name = $firstname . ' ' . $lastname;
-  } else {
-    $name = $user->getDisplayName();
+    $variables['user_name'] = $name;
+    $variables['user_initials'] = (new Initials())->name($name)->generate();
   }
 
-  $variables['user_name'] = $name;
-  $variables['user_initials'] = (new Initials())->name($name)->generate();
 
   // Initials of title.
   $title = $node->getTitle();
   $variables['label_raw'] = $title;
   $variables['label_initials'] = (new Initials())->name($title)->generate();
+}
 
-  if ($node->getType() == 'decreto_organisation') {
-    if ($view_mode == 'full') {
-      $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('organisation_view_page');
-    }
+/**
+ * Implements template_proprocess_node().
+ */
+function custom_theme_preprocess_node__decreto_organisation(&$variables) {
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+
+  if ($view_mode == 'full') {
+    // Access params.
+    $variables['content']['#access']['canEdit'] = $node->access('update');
+    $variables['content']['#access']['canDelete'] = $node->access('delete');
+
+    $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('organisation_view_page');
   }
 }
 

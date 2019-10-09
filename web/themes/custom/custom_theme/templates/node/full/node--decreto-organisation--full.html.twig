@@ -73,6 +73,34 @@ view_mode ? view_mode|clean_class,
 'boxy'
 ] %}
 
+<!-- Begin - actions -->
+<div class="text-right">
+
+  <!-- Begin - edit -->
+  {% if content['#access']['canEdit'] %}
+    <a
+      href="{{ path('decreto_organisation.organisations_edit', {'organisation': node.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Edit organisation" | trans }}
+    </a>
+  {% endif %}
+  <!-- End - edit -->
+
+  <!-- Begin - delete -->
+  {% if content['#access']['canDelete'] %}
+    <a
+      href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Delete organisation" | trans }}
+    </a>
+  {% endif %}
+  <!-- End - delete -->
+
+</div>
+<!-- End - actions -->
+
+<br>
+
 <article{{ attributes.addClass(classes) }}>
   <div class="boxy__heading">
     <h2 class="boxy__heading__title">
