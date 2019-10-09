@@ -79,6 +79,8 @@ function decreto_department_taxonomy_term_delete(EntityInterface $entity) {
         $decretoUser->removeDepartment($entity->id());
       }
     }
+
+    //TODO: what to do with a meeting? Shall it also be deleted?
   }
 }
 

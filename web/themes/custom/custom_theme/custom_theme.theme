@@ -97,6 +97,8 @@ function custom_theme_preprocess_taxonomy_term(&$variables) {
   if ($term->bundle() == 'decreto_tax_department') {
     if ($view_mode == 'full') {
       $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('department_view_page');
+      $variables['content']['#access']['canEdit'] = $term->access('update');
+      $variables['content']['#access']['canDelete'] = $term->access('delete');
     }
   }
 }
