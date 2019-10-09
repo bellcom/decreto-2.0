@@ -117,7 +117,12 @@ function decreto_department_views_data() {
  * Implements hook_taxonomy_term_access().
  */
 function decreto_department_taxonomy_term_access(TermInterface $term, $op, AccountInterface $account) {
-  if ($op == 'delete') {
+  if ($op == 'update') {
+    if ($term->bundle() == 'decreto_tax_department') {
+      return AccessController::editDepartmentAccess($term, $account);
+    }
+  }
+  elseif ($op == 'delete') {
     if ($term->bundle() == 'decreto_tax_department') {
       return AccessController::deleteDepartmentAccess($term, $account);
     }

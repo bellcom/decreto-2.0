@@ -51,6 +51,8 @@ class AccessController {
    *
    * @param \Drupal\node\NodeInterface $meeting
    *   Meeting node.
+   * @param \Drupal\Core\Session\AccountInterface|null $user
+   *   User to check against.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
@@ -58,13 +60,17 @@ class AccessController {
    * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public static function editMeetingAccess(NodeInterface $meeting) {
+  public static function editMeetingAccess(NodeInterface $meeting, AccountInterface $user = NULL) {
+    if (!$user) {
+      $user = \Drupal::currentUser();
+    }
+
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
     if ($department) {
       $decretoDepartment = new DecretoDepartment($department);
 
-      if ($decretoDepartment->isDepartmentAdmin(\Drupal::currentUser())) {
+      if ($decretoDepartment->isDepartmentAdmin($user)) {
         return AccessResult::allowed();
       }
     }
@@ -180,6 +186,8 @@ class AccessController {
    *
    * @param \Drupal\node\NodeInterface $bullet_point
    *   Bullet point node.
+   * @param \Drupal\Core\Session\AccountInterface|null $user
+   *   User to check against.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
@@ -189,11 +197,15 @@ class AccessController {
    * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public static function editBulletPointAccess(NodeInterface $bullet_point) {
+  public static function editBulletPointAccess(NodeInterface $bullet_point, AccountInterface $user = NULL) {
+    if (!$user) {
+      $user = \Drupal::currentUser();
+    }
+
     $decretoBulletPoint = new DecretoBulletPoint($bullet_point);
     $meeting = $decretoBulletPoint->getMeeting();
 
-    return AccessController::editMeetingAccess($meeting);
+    return AccessController::editMeetingAccess($meeting, $user);
   }
 
   /**
@@ -263,6 +275,8 @@ class AccessController {
    *
    * @param \Drupal\node\NodeInterface $bullet_point_attachment
    *   Bullet point attachment node.
+   * @param \Drupal\Core\Session\AccountInterface|null $user
+   *   User to check against.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
@@ -272,11 +286,15 @@ class AccessController {
    * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public static function editBulletPointAttachmentAccess(NodeInterface $bullet_point_attachment) {
+  public static function editBulletPointAttachmentAccess(NodeInterface $bullet_point_attachment, AccountInterface $user = NULL) {
+    if (!$user) {
+      $user = \Drupal::currentUser();
+    }
+
     $decretoBPA = new DecretoBulletPointAttachment($bullet_point_attachment);
     $meeting = $decretoBPA->getMeeting();
 
-    return AccessController::editMeetingAccess($meeting);
+    return AccessController::editMeetingAccess($meeting, $user);
   }
 
   /**

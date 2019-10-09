@@ -20,5 +20,5 @@ decreto_department.departments_edit:
     _title_callback: '\Drupal\decreto_department\Form\DepartmentEditForm::getTitle'
     _form: '\Drupal\decreto_department\Form\DepartmentEditForm'
   requirements:
-    _custom_access: '\Drupal\decreto_department\Controller\AccessController::editDepartmentAccess'
+    _entity_access: 'department.update'
     department: \d+

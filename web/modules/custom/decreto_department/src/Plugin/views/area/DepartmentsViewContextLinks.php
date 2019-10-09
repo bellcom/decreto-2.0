@@ -3,7 +3,6 @@
 namespace Drupal\decreto_department\Plugin\views\area;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\decreto_department\Controller\AccessController;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Plugin\views\area\TokenizeAreaPluginBase;
 
@@ -73,7 +72,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#department_id' => $department_id,
       '#access' => [
         'decreto_department' => [
-          'canEdit' => ($department) ? AccessController::editDepartmentAccess($department)->isAllowed() : NULL,
+          'canEdit' => ($department) ? $department->access('update') : NULL,
         ],
       ],
     ];

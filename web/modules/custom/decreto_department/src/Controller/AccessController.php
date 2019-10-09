@@ -17,24 +17,24 @@ class AccessController {
   /**
    * Returns if department can be edited.
    *
-   * Performs the permission check as first step.
-   *
    * @param \Drupal\taxonomy\TermInterface $department
    *   Department term.
+   * @param \Drupal\Core\Session\AccountInterface|null $user
+   *   User to check against.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    *
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
-  public static function editDepartmentAccess(TermInterface $department) {
-    if (\Drupal::currentUser()->hasPermission('edit terms in decreto_tax_department')) {
-      return AccessResult::allowed();
+  public static function editDepartmentAccess(TermInterface $department, AccountInterface $user = NULL) {
+    if (!$user) {
+      $user = \Drupal::currentUser();
     }
 
     $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin(\Drupal::currentUser())) {
+    if ($decretoDepartment->isDepartmentAdmin($user)) {
       return AccessResult::allowed();
     }
     else {
@@ -44,8 +44,6 @@ class AccessController {
 
   /**
    * Returns if department can be deleted.
-   *
-   * Performs the permission check as first step.
    *
    * @param \Drupal\taxonomy\TermInterface $department
    *   Department term.
@@ -62,13 +60,9 @@ class AccessController {
       $user = \Drupal::currentUser();
     }
 
-    if ($user->hasPermission('delete terms in decreto_tax_department')) {
-      return AccessResult::allowed();
-    }
-
     $decretoDepartment = new DecretoDepartment($department);
 
-    if ($decretoDepartment->isDepartmentAdmin(\Drupal::currentUser())) {
+    if ($decretoDepartment->isDepartmentAdmin($user)) {
       return AccessResult::allowed();
     }
     else {
