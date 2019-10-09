@@ -1,0 +1,44 @@
+uuid: 919e25d0-2480-4eaf-b656-7d4bee367866
+langcode: en
+status: true
+dependencies: {  }
+id: decreto_admin
+label: 'Decreto admin'
+weight: -8
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer taxonomy'
+  - 'administer users'
+  - 'create decreto_bullet_point content'
+  - 'create decreto_bullet_point_attachment content'
+  - 'create decreto_meeting content'
+  - 'create decreto_organisation content'
+  - 'create terms in decreto_tax_department'
+  - 'create terms in decreto_tax_location'
+  - 'delete any decreto_bullet_point content'
+  - 'delete any decreto_bullet_point_attachment content'
+  - 'delete any decreto_meeting content'
+  - 'delete any decreto_memo content'
+  - 'delete any decreto_organisation content'
+  - 'delete decreto_bullet_point revisions'
+  - 'delete decreto_bullet_point_attachment revisions'
+  - 'delete own decreto_bullet_point content'
+  - 'delete own decreto_bullet_point_attachment content'
+  - 'delete own decreto_meeting content'
+  - 'delete own decreto_organisation content'
+  - 'delete terms in decreto_tax_department'
+  - 'delete terms in decreto_tax_location'
+  - 'edit any decreto_bullet_point content'
+  - 'edit any decreto_bullet_point_attachment content'
+  - 'edit any decreto_meeting content'
+  - 'edit any decreto_memo content'
+  - 'edit any decreto_organisation content'
+  - 'edit own decreto_bullet_point content'
+  - 'edit own decreto_bullet_point_attachment content'
+  - 'edit own decreto_meeting content'
+  - 'edit own decreto_organisation content'
+  - 'edit terms in decreto_tax_department'
+  - 'edit terms in decreto_tax_location'

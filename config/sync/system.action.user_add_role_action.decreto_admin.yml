@@ -1,0 +1,14 @@
+uuid: bc31f89f-bf13-47f8-8112-3841ba20c453
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.decreto_admin
+  module:
+    - user
+id: user_add_role_action.decreto_admin
+label: 'Add the Decreto admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: decreto_admin

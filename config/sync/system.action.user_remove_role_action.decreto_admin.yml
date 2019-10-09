@@ -1,0 +1,14 @@
+uuid: c79d09c0-0a8d-4f9e-b075-eaddc205644e
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.decreto_admin
+  module:
+    - user
+id: user_remove_role_action.decreto_admin
+label: 'Remove the Decreto admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: decreto_admin
