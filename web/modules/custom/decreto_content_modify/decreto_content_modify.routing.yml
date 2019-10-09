@@ -27,7 +27,7 @@ decreto_content_modify.meetings_edit:
     _title_callback: '\Drupal\decreto_content_modify\Form\MeetingEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\MeetingEditForm'
   requirements:
-    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::editMeetingAccess'
+    _entity_access: 'meeting.update'
     meeting: \d+
 
 decreto_content_modify.bps_add:
@@ -66,7 +66,7 @@ decreto_content_modify.bps_edit:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointEditForm'
   requirements:
-    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::editBulletPointAccess'
+    _entity_access: 'bullet_point.update'
     bullet_point: \d+
 
 decreto_content_modify.bps_delete:
@@ -79,7 +79,7 @@ decreto_content_modify.bps_delete:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
   requirements:
-    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::deleteBulletPointAccess'
+    _entity_access: 'node.delete'
     node: \d+
 
 decreto_content_modify.bpas_modal:
@@ -118,7 +118,7 @@ decreto_content_modify.bpas_edit:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentEditForm'
   requirements:
-    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::editBulletPointAttachmentAccess'
+    _entity_access: 'bullet_point_attachment.update'
     bullet_point: \d+
 
 decreto_content_modify.bpas_delete:
@@ -131,7 +131,7 @@ decreto_content_modify.bpas_delete:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm'
   requirements:
-    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::deleteBulletPointAttachmentAccess'
+    _entity_access: 'node.delete'
     node: \d+
 
 decreto_content_modify.memos_add_edit:

@@ -367,6 +367,17 @@ function decreto_content_modify_node_access(NodeInterface $node, $op, AccountInt
       }
     }
   }
+  elseif ($op == 'update') {
+    if ($node->bundle() == 'decreto_meeting') {
+      return AccessController::editMeetingAccess($node);
+    }
+    elseif ($node->bundle() == 'decreto_bullet_point') {
+      return AccessController::editBulletPointAccess($node);
+    }
+    elseif ($node->bundle() == 'decreto_bullet_point_attachment') {
+      return AccessController::editBulletPointAttachmentAccess($node);
+    }
+  }
   elseif ($op == 'delete') {
     if ($node->bundle() == 'decreto_meeting') {
       return AccessController::deleteMeetingAccess($node, $account);

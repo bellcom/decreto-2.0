@@ -49,8 +49,6 @@ class AccessController {
   /**
    * Returns if meeting can be edited.
    *
-   * Performs the permission check as first step.
-   *
    * @param \Drupal\node\NodeInterface $meeting
    *   Meeting node.
    *
@@ -61,10 +59,6 @@ class AccessController {
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   public static function editMeetingAccess(NodeInterface $meeting) {
-    if (\Drupal::currentUser()->hasPermission('edit any decreto_meeting content')) {
-      return AccessResult::allowed();
-    }
-
     $decretoMeeting = new DecretoMeeting($meeting);
     $department = $decretoMeeting->getDepartment();
     if ($department) {
@@ -184,8 +178,6 @@ class AccessController {
   /**
    * Returns if bullet point can be edited.
    *
-   * Performs the permission check as first step.
-   *
    * @param \Drupal\node\NodeInterface $bullet_point
    *   Bullet point node.
    *
@@ -198,10 +190,6 @@ class AccessController {
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   public static function editBulletPointAccess(NodeInterface $bullet_point) {
-    if (\Drupal::currentUser()->hasPermission('edit any decreto_bullet_point content')) {
-      return AccessResult::allowed();
-    }
-
     $decretoBulletPoint = new DecretoBulletPoint($bullet_point);
     $meeting = $decretoBulletPoint->getMeeting();
 
@@ -210,8 +198,6 @@ class AccessController {
 
   /**
    * Returns if bullet point can be deleted.
-   *
-   * Performs the permission check as first step.
    *
    * @param \Drupal\node\NodeInterface $node
    *   Bullet point node.
@@ -227,10 +213,6 @@ class AccessController {
   public static function deleteBulletPointAccess(NodeInterface $node, AccountInterface $user = NULL) {
     if (!$user) {
       $user = \Drupal::currentUser();
-    }
-
-    if ($user->hasPermission('delete any decreto_bullet_point content')) {
-      return AccessResult::allowed();
     }
 
     $decretoBulletPoint = new DecretoBulletPoint($node);
@@ -279,8 +261,6 @@ class AccessController {
   /**
    * Returns if bullet point attachment can be edited.
    *
-   * Performs the permission check as first step.
-   *
    * @param \Drupal\node\NodeInterface $bullet_point_attachment
    *   Bullet point attachment node.
    *
@@ -293,10 +273,6 @@ class AccessController {
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
    */
   public static function editBulletPointAttachmentAccess(NodeInterface $bullet_point_attachment) {
-    if (\Drupal::currentUser()->hasPermission('edit any decreto_bullet_point_attachment content')) {
-      return AccessResult::allowed();
-    }
-
     $decretoBPA = new DecretoBulletPointAttachment($bullet_point_attachment);
     $meeting = $decretoBPA->getMeeting();
 
@@ -305,8 +281,6 @@ class AccessController {
 
   /**
    * Returns if bullet point attachment can be deleted.
-   *
-   * Performs the permission check as first step.
    *
    * @param \Drupal\node\NodeInterface $node
    *   Bullet point attachment node.
@@ -322,10 +296,6 @@ class AccessController {
   public static function deleteBulletPointAttachmentAccess(NodeInterface $node, AccountInterface $user = NULL) {
     if (!$user) {
       $user = \Drupal::currentUser();
-    }
-
-    if ($user->hasPermission('delete any decreto_bullet_point_attachment content')) {
-      return AccessResult::allowed();
     }
 
     $decretoBPA = new DecretoBulletPointAttachment($node);
