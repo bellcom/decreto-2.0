@@ -248,6 +248,7 @@ function custom_theme_preprocess_node__decreto_meeting(&$variables) {
   elseif ($variables['view_mode'] === 'full') {
     // Access params.
     $variables['content']['#access']['canEdit'] = AccessController::editMeetingAccess($node)->isAllowed();
+    $variables['content']['#access']['canDelete'] = $node->access('delete');
     $variables['content']['#access']['decreto_bullet_point']['canCreate'] = AccessController::createBulletPointAccess($node)->isAllowed();
     // We use meeting edit access here, because we don't have any specific
     // bullet point, which can be used in the function

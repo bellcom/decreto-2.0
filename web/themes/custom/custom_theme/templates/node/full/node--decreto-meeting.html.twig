@@ -88,6 +88,16 @@
       {% endif %}
       <!-- End - edit -->
 
+      <!-- Begin - delete -->
+      {% if content['#access']['canDelete'] %}
+        <a
+          href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
+          class="btn btn-default use-ajax" data-dialog-type="modal">
+          {{ "Delete meeting" | trans }}
+        </a>
+      {% endif %}
+      <!-- End - delete -->
+
       <!-- Begin - own notes -->
       <a
         href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
