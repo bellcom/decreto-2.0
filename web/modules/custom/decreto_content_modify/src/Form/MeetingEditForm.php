@@ -324,6 +324,8 @@ class MeetingEditForm extends AjaxFormBase {
       ],
     ];
 
+    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
+
     return $form;
   }
 
