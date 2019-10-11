@@ -1,0 +1,14 @@
+uuid: cbdf5fb4-4d94-4735-b645-b0ca21327902
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.agenda_manager
+  module:
+    - user
+id: user_add_role_action.agenda_manager
+label: 'Add the Agenda Manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: agenda_manager

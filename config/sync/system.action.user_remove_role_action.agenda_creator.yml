@@ -1,0 +1,14 @@
+uuid: 830edc92-e100-4642-9dcc-88981c38fefb
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.agenda_creator
+  module:
+    - user
+id: user_remove_role_action.agenda_creator
+label: 'Remove the Agenda Creator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: agenda_creator

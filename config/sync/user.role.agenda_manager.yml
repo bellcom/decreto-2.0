@@ -1,0 +1,25 @@
+uuid: fd5e5e0c-b7cc-4712-a41c-f5b5b9b12a79
+langcode: en
+status: true
+dependencies: {  }
+id: agenda_manager
+label: 'Agenda Manager'
+weight: -6
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access decreto closed content'
+  - 'delete decreto_bullet_point revisions'
+  - 'delete decreto_bullet_point_attachment revisions'
+  - 'delete decreto_meeting revisions'
+  - 'edit any decreto_bullet_point content'
+  - 'edit any decreto_bullet_point_attachment content'
+  - 'edit any decreto_meeting content'
+  - 'revert decreto_bullet_point revisions'
+  - 'revert decreto_bullet_point_attachment revisions'
+  - 'revert decreto_meeting revisions'
+  - 'view decreto_bullet_point revisions'
+  - 'view decreto_bullet_point_attachment revisions'
+  - 'view decreto_meeting revisions'
+  - 'view own unpublished content'

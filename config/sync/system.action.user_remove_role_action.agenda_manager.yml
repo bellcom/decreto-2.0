@@ -1,0 +1,14 @@
+uuid: 0fbd8084-e257-4a48-a44b-9482355b0022
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.agenda_manager
+  module:
+    - user
+id: user_remove_role_action.agenda_manager
+label: 'Remove the Agenda Manager role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: agenda_manager

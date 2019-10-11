@@ -1,0 +1,14 @@
+uuid: 3a62943f-6436-45bb-b4e3-0a7a242e0acb
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.agenda_creator
+  module:
+    - user
+id: user_add_role_action.agenda_creator
+label: 'Add the Agenda Creator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: agenda_creator

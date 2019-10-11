@@ -1,0 +1,27 @@
+uuid: 3da51046-ed81-41c5-ad88-fc8ab7503e0b
+langcode: en
+status: true
+dependencies: {  }
+id: agenda_creator
+label: 'Agenda Creator'
+weight: -5
+is_admin: null
+permissions:
+  - 'create decreto_bullet_point content'
+  - 'create decreto_bullet_point_attachment content'
+  - 'create decreto_meeting content'
+  - 'delete decreto_bullet_point revisions'
+  - 'delete decreto_bullet_point_attachment revisions'
+  - 'delete decreto_meeting revisions'
+  - 'delete own decreto_bullet_point content'
+  - 'delete own decreto_bullet_point_attachment content'
+  - 'delete own decreto_meeting content'
+  - 'edit own decreto_bullet_point content'
+  - 'edit own decreto_bullet_point_attachment content'
+  - 'edit own decreto_meeting content'
+  - 'revert decreto_bullet_point revisions'
+  - 'revert decreto_bullet_point_attachment revisions'
+  - 'revert decreto_meeting revisions'
+  - 'view decreto_bullet_point revisions'
+  - 'view decreto_bullet_point_attachment revisions'
+  - 'view decreto_meeting revisions'
