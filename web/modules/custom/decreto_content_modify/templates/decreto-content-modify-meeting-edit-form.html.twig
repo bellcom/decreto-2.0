@@ -1,0 +1,279 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8">
+
+    <!-- Begin - form -->
+    <div class="form-group">
+      <label class="control-label" for="meeting-member-filter-input">
+        {{ 'Search for a member' | trans }}
+      </label>
+
+      <input class="form-control" type="text" id="meeting-member-filter-input" name="user-name" value="">
+
+      <div class="help-block">
+        {{ 'Ex. Lars Petersen' | trans }}
+      </div>
+    </div>
+    <!-- End - form -->
+
+    <!-- Begin - list -->
+    <div id="meeting-member-list">
+      {{ form }}
+    </div>
+    <div class="js-member-list-no-result hidden">
+      <strong>{{ 'No members found containing these letters.' | trans }}</strong>
+    </div>
+    <!-- End - list -->
+
+  </div>
+  <div class="col-xs-12 col-sm-4">
+
+    <!-- Begin - chosen internal members -->
+    <div class="boxy boxy--members js-members-box" data-member-type="internal">
+      <div class="boxy__heading">
+        <h6 class="boxy__heading__title">
+          {{ 'Chosen internal members' | trans }}
+        </h6>
+      </div>
+      <div class="boxy__body">
+      <span class="js-no-result-text">
+        {{ 'No members added.' | trans }}
+      </span>
+        <div class="js-list-wrapper hidden"></div>
+      </div>
+      <div class="boxy__footer">
+        <button class="btn btn-sm btn-link js-truncate-internal-members">{{ 'Remove all internal members' | trans }}</button>
+      </div>
+    </div>
+    <!-- End - chosen internal members -->
+
+    <!-- Begin - chosen external members -->
+    <div class="boxy boxy--members js-members-box" data-member-type="external">
+      <div class="boxy__heading">
+        <h6 class="boxy__heading__title">
+          {{ 'Chosen external members' | trans }}
+        </h6>
+      </div>
+      <div class="boxy__body">
+      <span class="js-no-result-text">
+        {{ 'No members added.' | trans }}
+      </span>
+        <div class="js-list-wrapper hidden"></div>
+      </div>
+      <div class="boxy__footer">
+        <button class="btn btn-sm btn-link js-truncate-external-members">{{ 'Remove all external members' | trans }}</button>
+      </div>
+    </div>
+    <!-- End - chosen external members -->
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    var store = [];
+    var checkboxInputs = document.querySelectorAll('.js-checkbox input[type="checkbox"]');
+    var searchInput = document.getElementById('meeting-member-filter-input');
+    var truncateInternalMembers = document.querySelector('.js-truncate-internal-members');
+    var truncateExternalMembers = document.querySelector('.js-truncate-external-members');
+
+    function filterMembers(e) {
+      e.preventDefault();
+
+      var hasMatches = false;
+      var memberList = document.getElementById('meeting-member-list');
+      var noResult = document.querySelector('.js-member-list-no-result');
+      var searchQuery = e.target.value;
+      var members = memberList.getElementsByClassName('js-meeting-member');
+      var regex = new RegExp(searchQuery, 'gi');
+
+      for (i = 0; i < members.length; i++) {
+        var member = members[i];
+        var name = member.dataset.name;
+        var isMatch = (name.match(regex)) ? true : false;
+
+        toggleMember(member, isMatch);
+        highlightName(member, searchQuery, name);
+
+        if (isMatch) {
+          hasMatches = true;
+        }
+      }
+
+      if (hasMatches) {
+        memberList.classList.remove('hidden');
+        noResult.classList.add('hidden');
+      } else {
+        memberList.classList.add('hidden');
+        noResult.classList.remove('hidden');
+      }
+    }
+
+    function toggleMember(element, isMatch) {
+      if (isMatch) {
+        element.classList.remove('hidden');
+      }
+      else {
+        element.classList.add('hidden');
+      }
+    }
+
+    function highlightName(element, searchQuery, name) {
+      var wrapper = element.querySelector('.js-member-name-wrapper');
+      var regex = new RegExp(searchQuery, 'gi');
+      var highlightedName = name.replace(regex, function(str) {
+        return '<strong>' + str + '</strong>';
+      });
+
+      wrapper.innerHTML = '<div>' + highlightedName + '</div>';
+    }
+
+    function handleCheckboxChange(e) {
+      buildStore();
+      populateMemberBoxes();
+    }
+
+    function buildStore() {
+      var emptyStore = [];
+      var memberList = document.getElementById('meeting-member-list');
+      var members = memberList.getElementsByClassName('js-meeting-member');
+
+      for (i = 0; i < members.length; i++) {
+        var member = members[i];
+        var item = createMemberItem(member);
+
+        emptyStore.push(item);
+      }
+
+      mutateStore(emptyStore);
+    }
+
+    function createMemberItem(member) {
+      var internalCheckbox = member.querySelector('.js-checkbox[data-member-type="internal"] input[type="checkbox"]');
+      var externalCheckbox = member.querySelector('.js-checkbox[data-member-type="external"] input[type="checkbox"]');
+
+      return {
+        name: member.dataset.name,
+        internal: internalCheckbox.checked,
+        external: externalCheckbox.checked,
+      }
+    }
+
+    function mutateStore(mutatedStore) {
+      store = mutatedStore;
+    }
+
+    function populateMemberBoxes() {
+      var internalMembersBox = document.querySelector('.js-members-box[data-member-type="internal"] .boxy__body');
+      var externalMembersBox = document.querySelector('.js-members-box[data-member-type="external"] .boxy__body');
+
+      var internalMembersListItems = [];
+      var externalMembersListItems = [];
+
+      for (i = 0; i < store.length; i++) {
+        var member = store[i];
+
+        if (member.internal) {
+          internalMembersListItems.push(createMemberListItem(member));
+        }
+
+        if (member.external) {
+          externalMembersListItems.push(createMemberListItem(member));
+        }
+      }
+
+      injectMembersList(internalMembersBox, internalMembersListItems);
+      injectMembersList(externalMembersBox, externalMembersListItems);
+    }
+
+    function injectMembersList(box, listItems) {
+      var noResult = box.querySelector('.js-no-result-text');
+      var wrapper = box.querySelector('.js-list-wrapper');
+
+      if (listItems.length > 0) {
+        var list = createBoxList(listItems);
+
+        wrapper.innerHTML = '';
+        wrapper.appendChild(list);
+
+        // Hide no result text.
+        noResult.classList.add('hidden');
+        wrapper.classList.remove('hidden');
+      } else {
+
+        // Show no result text.
+        noResult.classList.remove('hidden');
+        wrapper.classList.add('hidden');
+      }
+    }
+
+    function createBoxList(items) {
+      var orderedList = document.createElement('OL');
+
+      for (i = 0; i < items.length; i++) {
+        var item = items[i];
+
+        orderedList.appendChild(item);
+      }
+
+      return orderedList;
+    }
+
+    function createMemberListItem(member) {
+      var listItem = document.createElement('li');
+      var itemText = document.createTextNode(member.name);
+
+      listItem.appendChild(itemText);
+
+      return listItem;
+    }
+
+    function handleTruncateInternalMembers(e) {
+      e.preventDefault();
+
+      var checkboxes = document.querySelectorAll('.js-checkbox[data-member-type="internal"] input[type="checkbox"]');
+
+      uncheckAllCheckboxes(checkboxes);
+
+      buildStore();
+      populateMemberBoxes();
+    }
+
+    function handleTruncateExternalMembers(e) {
+      e.preventDefault();
+
+      var checkboxes = document.querySelectorAll('.js-checkbox[data-member-type="external"] input[type="checkbox"]');
+
+      uncheckAllCheckboxes(checkboxes);
+
+      buildStore();
+      populateMemberBoxes();
+    }
+
+    function uncheckAllCheckboxes(checkboxes) {
+      for (i = 0; i < checkboxes.length; i++) {
+        var checkbox = checkboxes[i];
+
+        checkbox.checked = false;
+      }
+    }
+
+    // Add event listeners.
+    searchInput.addEventListener('keyup', filterMembers);
+    truncateInternalMembers.addEventListener('click', handleTruncateInternalMembers);
+    truncateExternalMembers.addEventListener('click', handleTruncateExternalMembers);
+
+    for (i = 0; i < checkboxInputs.length; i++) {
+      var checkboxInput = checkboxInputs[i];
+
+      checkboxInput.addEventListener('change', handleCheckboxChange);
+    }
+
+    // Set store on load.
+    buildStore();
+    populateMemberBoxes();
+  })();
+</script>

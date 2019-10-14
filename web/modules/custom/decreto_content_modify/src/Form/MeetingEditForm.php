@@ -163,6 +163,7 @@ class MeetingEditForm extends AjaxFormBase {
       'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
     ];
 
+    $form['#theme'] = 'decreto_content_modify_meeting_edit_form';
 
     return $form;
   }
@@ -438,7 +439,8 @@ class MeetingEditForm extends AjaxFormBase {
         $form['pages-page-2']['participants-container']['participants'][$user_id] = [
           '#type' => 'container',
           '#attributes' => [
-            'class' => ['div-table__tr'],
+            'class' => ['div-table__tr', 'js-meeting-member'],
+            'data-name' => $user->label(),
           ],
         ];
         $form['pages-page-2']['participants-container']['participants'][$user_id]['row'] = [
@@ -460,7 +462,7 @@ class MeetingEditForm extends AjaxFormBase {
           '#tag' => 'div',
           '#value' => $user->label(),
           '#attributes' => [
-            'class' => ['div-table__td'],
+            'class' => ['div-table__td', 'js-member-name-wrapper'],
           ],
         ];
 
@@ -473,7 +475,7 @@ class MeetingEditForm extends AjaxFormBase {
         ];
         $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['internal_column']['internal'] = [
           '#type' => 'checkbox',
-          '#prefix' => '<div class="div-table__td text-center">',
+          '#prefix' => '<div class="div-table__td text-center js-checkbox" data-member-type="internal">',
           '#suffix' => '</div>',
         ];
 
@@ -486,7 +488,7 @@ class MeetingEditForm extends AjaxFormBase {
         ];
         $form['pages-page-2']['participants-container']['participants'][$user_id]['row']['external_column']['external'] = [
           '#type' => 'checkbox',
-          '#prefix' => '<div class="div-table__td text-center">',
+          '#prefix' => '<div class="div-table__td text-center js-checkbox" data-member-type="external">',
           '#suffix' => '</div>',
         ];
       }

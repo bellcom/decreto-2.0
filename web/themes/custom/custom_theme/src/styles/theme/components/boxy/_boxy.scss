@@ -122,6 +122,58 @@
   &.boxy--background-color-quaternary {
     background-color: $brand-quaternary;
   }
+
+  &.boxy--members {
+    padding: 0;
+
+    background-color: transparent;
+
+    .boxy__heading {
+      padding-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .boxy__heading__title {
+      font-size: $font-size-small;
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+
+      color: $headings-color-light;
+    }
+
+    .boxy__body {
+      padding-top: floor( ($boxy-body-spacing-top-bottom * 1.5) );
+      padding-bottom: floor( ($boxy-body-spacing-top-bottom * 1.5) );
+
+      background-color: $brand-primary;
+
+      ol {
+        margin-bottom: 0;
+
+        li {
+          padding: 3px 0;
+        }
+      }
+    }
+
+    .boxy__footer {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+
+      text-align: center;
+
+      .btn-link {
+        padding: 0;
+
+        font-weight: $font-weight;
+        text-decoration: underline;
+
+        color: $text-color-light;
+      }
+    }
+  }
 }
 
 // --------------------------------------------------

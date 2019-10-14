@@ -2,23 +2,23 @@
   'use strict';
 
   Drupal.behaviors.decretoContentModifyRepositionBootstrapDatetime = {
-      attach: function (context, settings) {
+    attach: function (context, settings) {
 
-        // Bootstrap datetime.
-        // The module is applying annoying wrapper divs, which we cannot
-        // get rid off.
-        if ($('form.decreto-content-modify-meeting-edit-form').length > 0) {
-          var $form = $('form.decreto-content-modify-meeting-edit-form');
-          var $wrapper = $('<div />').addClass('bootstrap-date-time-wrapper');
-          var $inputs = $form.find('.form-type-bootstrap-date-time');
-          var $parents = $form.find('.form-type-bootstrap-date-time').parents('.container');
+      // Bootstrap datetime.
+      // The module is applying annoying wrapper divs, which we cannot
+      // get rid off.
+      if ($('form.decreto-content-modify-meeting-edit-form').length > 0) {
+        var $form = $('form.decreto-content-modify-meeting-edit-form');
+        var $wrapper = $('<div />').addClass('bootstrap-date-time-wrapper');
+        var $inputs = $form.find('.form-type-bootstrap-date-time');
+        var $parents = $form.find('.form-type-bootstrap-date-time').parents('.container').first();
 
-          $wrapper
-            .insertAfter($parents.last())
-            .prepend($inputs);
+        $wrapper
+          .insertAfter($parents.last())
+          .prepend($inputs);
 
-          $parents.remove();
-        }
+        $parents.remove();
       }
+    }
   };
 })(jQuery, Drupal);
