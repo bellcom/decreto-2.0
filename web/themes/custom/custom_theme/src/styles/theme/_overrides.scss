@@ -211,23 +211,27 @@ img {
 // Flexbox
 .flexbox {
 
-    .row--equal-height-columns {
+  .row--equal-height-columns {
+
+    &:not(.view),
+    > .view-content {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      > [class*='col-'] {
         display: flex;
 
-        flex-wrap: wrap;
+        flex-direction: column;
+      }
 
-        > [class*='col-'] {
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        // Fixes Safari issue (https://stackoverflow.com/questions/34250282/flexbox-safari-bug-flex-wrap)
-        &:after,
-        &:before {
-            content: normal; // IE doesn't support `initial`
-        }
+      // Fixes Safari issue (https://stackoverflow.com/questions/34250282/flexbox-safari-bug-flex-wrap)
+      &:after,
+      &:before {
+        content: normal; // IE doesn't support `initial`
+      }
     }
+  }
 }
 
 // No flexbox
