@@ -1,0 +1,143 @@
+// |--------------------------------------------------------------------------
+// | Anonymous page.
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .anonymous-page
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$anonymous-page-header-spacing-xs: 30px;
+$anonymous-page-header-spacing-sm: 50px;
+$anonymous-page-header-spacing-md: 70px;
+$anonymous-page-header-spacing-lg: 80px;
+
+$anonymous-page-content-spacing-xs: 30px;
+$anonymous-page-content-spacing-sm: 50px;
+$anonymous-page-content-spacing-md: 70px;
+$anonymous-page-content-spacing-lg: 80px;
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin anonymous-page-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.anonymous-page {}
+
+.anonymous-page__header {
+  padding-top: $anonymous-page-header-spacing-xs;
+  padding-bottom: $anonymous-page-header-spacing-xs;
+
+  text-align: center;
+
+  background-color: $body-bg-secondary;
+
+  img {
+    width: 300px;
+    max-width: 100%;
+  }
+}
+.anonymous-page__content {
+  padding-top: $anonymous-page-content-spacing-xs;
+  padding-bottom: $anonymous-page-content-spacing-xs;
+
+  background-color: $body-bg;
+
+  .container {
+    max-width: 400px;
+  }
+
+  .form-actions {
+
+    .btn {
+      display: block;
+
+      width: 100%;
+
+      @extend .btn-lg;
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// Sizes.
+
+// Colours.
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {
+
+  .anonymous-page__header {
+    padding-top: $anonymous-page-header-spacing-sm;
+    padding-bottom: $anonymous-page-header-spacing-sm;
+  }
+
+  .anonymous-page__content {
+    padding-top: $anonymous-page-content-spacing-sm;
+    padding-bottom: $anonymous-page-content-spacing-sm;
+  }
+}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {
+
+  .anonymous-page__header {
+    padding-top: $anonymous-page-header-spacing-md;
+    padding-bottom: $anonymous-page-header-spacing-md;
+  }
+
+  .anonymous-page__content {
+    padding-top: $anonymous-page-content-spacing-md;
+    padding-bottom: $anonymous-page-content-spacing-md;
+  }
+}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
+
+  .anonymous-page__header {
+    padding-top: $anonymous-page-header-spacing-lg;
+    padding-bottom: $anonymous-page-header-spacing-lg;
+  }
+
+  .anonymous-page__content {
+    padding-top: $anonymous-page-content-spacing-lg;
+    padding-bottom: $anonymous-page-content-spacing-lg;
+  }
+}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
