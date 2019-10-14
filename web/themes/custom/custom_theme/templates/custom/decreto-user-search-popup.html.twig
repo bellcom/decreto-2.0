@@ -37,33 +37,36 @@
 </div>
 
 <script>
-  var form = document.getElementById('user-search');
-  var input = document.getElementById('user-search-input');
-  var userList = document.getElementById('user-list');
+  (function() {
+    var form = document.getElementById('user-search');
+    var input = document.getElementById('user-search-input');
 
-  function filterUsers(e) {
-    e.preventDefault();
+    function filterUsers(e) {
+      e.preventDefault();
 
-    var searchQuery = input.value;
-    var users = userList.getElementsByClassName('entity-list--user');
-    var regex = new RegExp(searchQuery, 'gi');
+      var searchQuery = input.value;
+      var userList = document.getElementById('user-list');
+      var users = userList.getElementsByClassName('entity-list--user');
+      var regex = new RegExp(searchQuery, 'gi');
 
-    // Run through collection of users.
-    for (var user of users) {
-      var parentNode = user.parentElement;
-      var name = user.dataset.fullName;
+      // Run through collection of users.
+      for (i = 0; i < users.length; i++) {
+        var user = users[i];
+        var parentNode = user.parentElement;
+        var name = user.dataset.fullName;
 
-      // Does not match search query.
-      if (name.match(regex)) {
-        parentNode.classList.remove('hidden');
-      }
-      // Does not match.
-      else {
-        parentNode.classList.add('hidden');
+        // Does not match search query.
+        if (name.match(regex)) {
+          parentNode.classList.remove('hidden');
+        }
+        // Does not match.
+        else {
+          parentNode.classList.add('hidden');
+        }
       }
     }
-  }
 
-  form.addEventListener('submit', filterUsers);
-  input.addEventListener('keyup', filterUsers);
+    form.addEventListener('submit', filterUsers);
+    input.addEventListener('keyup', filterUsers);
+  })();
 </script>
