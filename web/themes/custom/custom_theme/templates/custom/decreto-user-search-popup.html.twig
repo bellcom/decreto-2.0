@@ -32,6 +32,10 @@
   <div id="user-list">
     {{ users_list }}
   </div>
+
+  <div class="js-user-search-no-results hidden">
+    {{ 'We found no users mathing the entered search criteria.' | trans }}
+  </div>
   <!-- End - results -->
 
 </div>
@@ -47,7 +51,9 @@
       var searchQuery = input.value;
       var userList = document.getElementById('user-list');
       var users = userList.getElementsByClassName('entity-list--user');
+      var noResult = document.querySelector('.js-user-search-no-results');
       var regex = new RegExp(searchQuery, 'gi');
+      var hasMatches = false;
 
       // Run through collection of users.
       for (i = 0; i < users.length; i++) {
@@ -55,14 +61,23 @@
         var parentNode = user.parentElement;
         var name = user.dataset.fullName;
 
-        // Does not match search query.
+        // Does match search query.
         if (name.match(regex)) {
           parentNode.classList.remove('hidden');
+          hasMatches = true;
         }
         // Does not match.
         else {
           parentNode.classList.add('hidden');
         }
+      }
+
+      if (hasMatches) {
+        userList.classList.remove('hidden');
+        noResult.classList.add('hidden');
+      } else {
+        userList.classList.add('hidden');
+        noResult.classList.remove('hidden');
       }
     }
 
