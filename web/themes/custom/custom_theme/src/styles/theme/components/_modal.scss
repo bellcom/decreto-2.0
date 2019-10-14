@@ -35,7 +35,9 @@ $lg-modal-inner-spacing: 60px;
     z-index: 500;
   }
 }
-
+.modal-content {
+  max-height: unset !important;
+}
 .modal-header {
   border-bottom: none;
 
@@ -44,15 +46,10 @@ $lg-modal-inner-spacing: 60px;
   }
 }
 .modal-body {
-  //overflow: initial !important;
+  overflow: initial !important;
 
   .helper {
     top: -55px;
-  }
-
-  .scroller {
-    max-height: 300px;
-    overflow: scroll;
   }
 }
 .modal-footer {

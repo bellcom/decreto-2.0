@@ -7,38 +7,34 @@
 
 {{ help_message }}
 
-<div class="scroller">
+<!-- Begin - form -->
+<form id="user-search">
+  <div class="form-group">
+    <label class="control-label" for="user-search-input">
+      {{ 'Type name' | trans }}
+    </label>
 
-  <!-- Begin - form -->
-  <form id="user-search">
-    <div class="form-group">
-      <label class="control-label" for="user-search-input">
-        {{ 'Type name' | trans }}
-      </label>
-
-      <input class="form-control" type="text" id="user-search-input" name="user-name" value="">
-    </div>
-
-    <div>
-      <input class="btn btn-secondary" type="submit" value="{{ 'Find' | trans }}">
-    </div>
-  </form>
-  <!-- End - form -->
-
-  <!-- Begin - results -->
-  <br><br>
-  <h4><strong>{{ 'Search results' | trans }}</strong></h4>
-
-  <div id="user-list">
-    {{ users_list }}
+    <input class="form-control" type="text" id="user-search-input" name="user-name" value="">
   </div>
 
-  <div class="js-user-search-no-results hidden">
-    {{ 'We found no users mathing the entered search criteria.' | trans }}
+  <div>
+    <input class="btn btn-secondary" type="submit" value="{{ 'Find' | trans }}">
   </div>
-  <!-- End - results -->
+</form>
+<!-- End - form -->
 
+<!-- Begin - results -->
+<br><br>
+<h4><strong>{{ 'Search results' | trans }}</strong></h4>
+
+<div id="user-list">
+  {{ users_list }}
 </div>
+
+<div class="js-user-search-no-results hidden">
+  {{ 'We found no users mathing the entered search criteria.' | trans }}
+</div>
+<!-- End - results -->
 
 <script>
   (function() {
