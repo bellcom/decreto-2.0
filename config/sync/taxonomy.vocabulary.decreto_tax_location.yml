@@ -5,5 +5,4 @@ dependencies: {  }
 name: Location
 vid: decreto_tax_location
 description: ''
-hierarchy: 0
 weight: 0

@@ -5,5 +5,4 @@ dependencies: {  }
 name: Department
 vid: decreto_tax_department
 description: ''
-hierarchy: 0
 weight: 0
