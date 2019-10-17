@@ -70,6 +70,17 @@
   }
 }
 
+.view-decreto-locations {
+
+  .views-row {
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
 .view-decreto-user-departments {
 
   .views-row {
