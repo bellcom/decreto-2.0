@@ -1,30 +1,31 @@
-uuid: 6a9af820-2c51-49bd-8626-addff5a45e63
+uuid: bb5d3191-8f00-4f59-abf6-66d3d69425be
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.decreto_user_departments
+    - views.view.decreto_organisations
   module:
     - system
     - views
   theme:
     - custom_theme
-id: views_block__decreto_us_departments_decreto_block_my_departments
+id: decreto_users_organisations
 theme: custom_theme
 region: content__right_sidebar
-weight: -18
+weight: -14
 provider: null
-plugin: 'views_block:decreto_user_departments-decreto_block_my_departments'
+plugin: 'views_block:decreto_organisations-decreto_block_users_organisations'
 settings:
-  id: 'views_block:decreto_user_departments-decreto_block_my_departments'
+  id: 'views_block:decreto_organisations-decreto_block_users_organisations'
   label: ''
   provider: views
   label_display: visible
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: '/user/*'
     negate: false
     context_mapping: {  }

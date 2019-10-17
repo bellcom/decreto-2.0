@@ -8,9 +8,7 @@ dependencies:
     - field.field.user.user.field_decreto_usr_departments
     - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
     - user
 _core:
   default_config_hash: L2mtwGWH_7wDRCMIR4r_Iu_jmvQ10DV1L8ht8iNZ5qY
@@ -18,57 +16,14 @@ id: user.user.default
 targetEntityType: user
 bundle: user
 mode: default
-content:
-  field_decreto_firstname:
-    weight: 11
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_decreto_lastname:
-    weight: 12
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_decreto_usr_departments:
-    weight: 10
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_decreto_usr_orgs:
-    weight: 9
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  flag_subscribe_user:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  member_for:
-    weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  user_picture:
-    type: image
-    weight: 0
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
-    label: hidden
-    region: content
+content: {  }
 hidden:
+  field_decreto_firstname: true
+  field_decreto_lastname: true
+  field_decreto_usr_departments: true
+  field_decreto_usr_orgs: true
+  flag_subscribe_user: true
   langcode: true
+  member_for: true
+  search_api_excerpt: true
+  user_picture: true

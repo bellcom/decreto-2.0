@@ -170,7 +170,7 @@ display:
           entity_type: user
           plugin_id: user_current
       sorts: {  }
-      title: 'My organizations'
+      title: 'My organisations'
       header: {  }
       footer:
         area_text_custom:
@@ -232,12 +232,105 @@ display:
           plugin_id: decreto_organisation_organisations_view_context_links
       defaults:
         footer: false
+        title: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - user
+        - user.permissions
+      tags:
+        - 'config:field.storage.user.field_decreto_usr_orgs'
+  decreto_block_users_organisations:
+    display_plugin: block
+    id: decreto_block_users_organisations
+    display_title: 'BLOCK: Users organisations'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      footer:
+        decreto_organisation_organisations_view_context_links:
+          id: decreto_organisation_organisations_view_context_links
+          table: views
+          field: decreto_organisation_organisations_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: 0
+          create_organisation: 1
+          edit_organisation: 0
+          organisation_id: ''
+          plugin_id: decreto_organisation_organisations_view_context_links
+      defaults:
+        footer: false
+        title: false
+        arguments: false
+        filters: false
+        filter_groups: false
+      title: Organisations
+      arguments:
+        uid:
+          id: uid
+          table: users_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: user
+          default_argument_options:
+            user: false
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: user
+          entity_field: uid
+          plugin_id: user_uid
+      filters:
+        status:
+          value: '1'
+          table: users_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: user
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
         - user.permissions
       tags:
         - 'config:field.storage.user.field_decreto_usr_orgs'
