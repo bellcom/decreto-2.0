@@ -27,7 +27,7 @@
 
       $('.bootstrap-date-time-wrapper .js-form-item-start-date input').on("dp.change", function (e) {
         $('.bootstrap-date-time-wrapper .js-form-item-end-date input').datetimepicker({
-          format: 'YYYY-MM-DD HH:mm',
+          format: 'YYYY-MM-DD  HH:mm',
           showTodayButton: true,
           showClose: true
         });
