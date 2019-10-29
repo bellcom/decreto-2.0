@@ -21,4 +21,22 @@
       }
     }
   };
+
+  Drupal.behaviors.decretoContentModifyLinkStartEndDates = {
+    attach: function (context, settings) {
+
+      console.log('decretoContentModifyLinkStartEndDates');
+      $('.bootstrap-date-time-wrapper .js-form-item-start-date input').on("dp.change", function (e) {
+        $('.bootstrap-date-time-wrapper .js-form-item-end-date input').datetimepicker({
+          format: 'YYYY-MM-DD HH:mm',
+          showTodayButton: true,
+          showClose: true
+        });
+        $('.bootstrap-date-time-wrapper .js-form-item-end-date input').data("DateTimePicker").date(moment(e.date).add(1, 'hours'));
+        console.log('changed');
+      });
+
+    }
+  };
+
 })(jQuery, Drupal);
