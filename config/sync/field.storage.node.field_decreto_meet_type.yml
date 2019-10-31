@@ -12,6 +12,9 @@ type: list_string
 settings:
   allowed_values:
     -
+      value: meeting
+      label: Meeting
+    -
       value: dagsorden
       label: Dagsorden
     -

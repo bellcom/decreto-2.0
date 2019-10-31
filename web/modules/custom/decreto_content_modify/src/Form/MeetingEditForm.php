@@ -11,6 +11,7 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -212,10 +213,13 @@ class MeetingEditForm extends AjaxFormBase {
 
     // Type.
     $type_options = options_allowed_values(FieldStorageConfig::loadByName('node', 'field_decreto_meet_type'));
+    $type_default_value = FieldConfig::loadByName('node', 'decreto_meeting', 'field_decreto_meet_type')->getDefaultValueLiteral();
+
     $form['pages-page-1']['type'] = [
       '#type' => 'select',
       '#title' => $this->t('Type'),
       '#options' => $type_options,
+      '#default_value' => ($type_default_value) ? $type_default_value[0]['value'] : NULL,
       '#required' => TRUE,
       '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-4">',
       '#suffix' => '</div>',
