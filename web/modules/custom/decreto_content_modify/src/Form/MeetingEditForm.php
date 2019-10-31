@@ -307,13 +307,17 @@ class MeetingEditForm extends AjaxFormBase {
       '#suffix' => '</div></div>',
     ];
 
+    $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_meeting');
+    $field_decreto_meet_full_doc_field_definition = $bundle_fields['field_decreto_meet_full_doc'];
+    $field_decreto_meet_full_doc_c_field_definition = $bundle_fields['field_decreto_meet_full_doc_c'];
+
     // Meeting description files.
     $form['pages-page-1']['full_doc'] = [
       '#title' => $this->t('Open description'),
       '#type' => 'managed_file',
       '#upload_location' => 'private://',
       '#upload_validators' => [
-        'file_validate_extensions' => ['txt pdf doc docx'],
+        'file_validate_extensions' => [$field_decreto_meet_full_doc_field_definition->getSetting('file_extensions')],
       ],
     ];
     $form['pages-page-1']['full_doc_closed'] = [
@@ -321,7 +325,7 @@ class MeetingEditForm extends AjaxFormBase {
       '#type' => 'managed_file',
       '#upload_location' => 'private://',
       '#upload_validators' => [
-        'file_validate_extensions' => ['txt pdf doc docx'],
+        'file_validate_extensions' => [$field_decreto_meet_full_doc_c_field_definition->getSetting('file_extensions')],
       ],
     ];
 
