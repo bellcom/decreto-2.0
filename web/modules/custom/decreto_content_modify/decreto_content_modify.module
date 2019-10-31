@@ -317,13 +317,16 @@ function decreto_content_modify_theme() {
     'decreto_content_modify_bpa_edit_form' => [
       'render element' => 'form',
     ],
-    'decreto_content_modify_meeting_edit_form' => [
-      'render element' => 'form',
-    ],
     'decreto_content_modify_meetings_view_context_links' => [
       'variables' => [
         'access' => [],
       ],
+    ],
+    'decreto_content_modify_meeting_edit_form_page_1' => [
+      'render element' => 'children',
+    ],
+    'decreto_content_modify_meeting_edit_form_page_2' => [
+      'render element' => 'children',
     ],
   ];
 }

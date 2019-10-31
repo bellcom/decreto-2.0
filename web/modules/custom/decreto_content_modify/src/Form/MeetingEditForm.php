@@ -164,8 +164,6 @@ class MeetingEditForm extends AjaxFormBase {
       'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
     ];
 
-    $form['#theme'] = 'decreto_content_modify_meeting_edit_form';
-
     return $form;
   }
 
@@ -195,6 +193,7 @@ class MeetingEditForm extends AjaxFormBase {
       '#attributes' => [
         'class' => [($activePage !== 1) ? 'hidden' : ''],
       ],
+      '#theme' => 'decreto_content_modify_meeting_edit_form_page_1',
     ];
 
     // Details.
@@ -361,6 +360,7 @@ class MeetingEditForm extends AjaxFormBase {
       '#attributes' => [
         'class' => [($activePage !== 2) ? 'hidden' : ''],
       ],
+      '#theme' => 'decreto_content_modify_meeting_edit_form_page_2',
     ];
 
     // Participants START.
