@@ -57,10 +57,10 @@ class Pdf2htmlexQueueWorker extends QueueWorkerBase {
 
     // Changing realpath to drupal relative path.
     if (strpos($path, \Drupal::service('file_system')->realpath('private://')) === FALSE) {
-      $uri = str_replace(\Drupal::service('file_system')->realpath('public://'), 'public://', $path);
+      $uri = str_replace(\Drupal::service('file_system')->realpath('public://') . '/', 'public://', $path);
     }
     else {
-      $uri = str_replace(\Drupal::service('file_system')->realpath('private://'), 'private://', $path);
+      $uri = str_replace(\Drupal::service('file_system')->realpath('private://') . '/', 'private://', $path);
     }
 
     $htmlFile = file_save_data($data, $uri, FileSystemInterface::EXISTS_REPLACE);
