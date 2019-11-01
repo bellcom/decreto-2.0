@@ -1,22 +1,22 @@
-uuid: 95d718b8-d26d-454f-81a9-ddc9353a67ff
+uuid: 61da11ce-dd52-4052-a26d-7acec726711a
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.decreto_organisations
+    - views.view.decreto_user_organisations
   module:
     - system
     - views
   theme:
     - custom_theme
-id: views_block__decreto_organisations_decreto_block_my_organisation
+id: views_block__decreto_user_organisations_my_organisations
 theme: custom_theme
 region: content__right_sidebar
-weight: -16
+weight: 0
 provider: null
-plugin: 'views_block:decreto_organisations-decreto_block_my_organisations'
+plugin: 'views_block:decreto_user_organisations-decreto_block_my_organisations'
 settings:
-  id: 'views_block:decreto_organisations-decreto_block_my_organisations'
+  id: 'views_block:decreto_user_organisations-decreto_block_my_organisations'
   label: 'Mine organisationer'
   provider: views
   label_display: visible

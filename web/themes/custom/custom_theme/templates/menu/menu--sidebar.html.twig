@@ -20,7 +20,11 @@
         {% endif %}
 
         <li{{ item.attributes.addClass(item_classes) }}>
-          <a href="{{ item.url }}">{{ item.title }}</a>
+          {% if(item.link_attributes.storage['modal'].__toString()) %}
+            <a href="{{ item.url }}" class="use-ajax" data-dialog-type="modal">{{ item.title }}</a>
+          {% else %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+          {% endif %}
 
           {% if item.below %}
             {{ _self.menu_links(item.below, attributes.removeClass(menu_level == 0 ? 'sidebar-navigation' : 'sidebar-navigation__item__dropdown-menu'), menu_level + 1, classes) }}

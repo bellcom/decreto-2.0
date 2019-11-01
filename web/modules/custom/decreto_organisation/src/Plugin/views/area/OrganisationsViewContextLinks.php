@@ -21,6 +21,7 @@ class OrganisationsViewContextLinks extends TokenizeAreaPluginBase {
     $options = parent::defineOptions();
 
     $options['create_organisation'] = ['default' => ''];
+    $options['create_organisation_use_ajax'] = ['default' => ''];
     $options['edit_organisation'] = ['default' => ''];
     $options['organisation_id'] = ['default' => ''];
 
@@ -37,6 +38,17 @@ class OrganisationsViewContextLinks extends TokenizeAreaPluginBase {
       '#title' => $this->t('Create organisation link'),
       '#type' => 'checkbox',
       '#default_value' => empty($this->options['create_organisation']) ? '' : $this->options['create_organisation'],
+    ];
+
+    $form['create_organisation_use_ajax'] = [
+      '#title' => $this->t('Use ajax for create organisation button'),
+      '#type' => 'checkbox',
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="create_organisation"]' => array('checked' => FALSE),
+        ),
+      ),
+      '#default_value' => empty($this->options['create_organisation_use_ajax']) ? '' : $this->options['create_organisation_use_ajax'],
     ];
 
     $form['edit_organisation'] = [
@@ -64,6 +76,7 @@ class OrganisationsViewContextLinks extends TokenizeAreaPluginBase {
     return [
       '#theme' => 'decreto_organisation_organisations_view_context_links',
       '#create_organisation' => $this->options['create_organisation'],
+      '#create_organisation_use_ajax' => $this->options['create_organisation_use_ajax'],
       '#edit_organisation' => $this->options['edit_organisation'],
       '#organisation_id' => $organisationId,
     ];

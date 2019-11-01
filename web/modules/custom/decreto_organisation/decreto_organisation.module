@@ -112,6 +112,7 @@ function decreto_organisation_theme() {
     'decreto_organisation_organisations_view_context_links' => [
       'variables' => [
         'create_organisation' => NULL,
+        'create_organisation_use_ajax' => NULL,
         'edit_organisation' => NULL,
         'organisation_id' => NULL,
       ],

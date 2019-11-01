@@ -19,14 +19,14 @@ class OrganisationController extends ControllerBase {
   /**
    * Renders view display.
    *
-   * Renders "decreto_organisation_popup_embed" display of
-   * "decreto_organisations" view and returns the result.
+   * Renders "decreto_user_organisations_popup_embed" display of
+   * "decreto_user_organisations" view and returns the result.
    *
    * @return \Symfony\Component\HttpFoundation\Response
    *   Rendered view result.
    */
   public function popupContentRender() {
-    $view_embed = views_embed_view('decreto_organisations', 'decreto_organisation_popup_embed');
+    $view_embed = views_embed_view('decreto_user_organisations', 'decreto_user_organisations_popup_embed');
     $markup = \Drupal::service('renderer')->render($view_embed);
 
     // This is the important part, because will render only the TWIG template.
