@@ -148,7 +148,7 @@ function custom_theme_preprocess_block(&$variables) {
     $variables['content']['#current_organisation'] = $departmentCounter['my_org'];
     $variables['content']['#other_organisations'] = $departmentCounter['total'] - $departmentCounter['my_org'];
 
-    $current_org_popup_url = Url::fromRoute('view.decreto_departments.decreto_page_departments');
+    $current_org_popup_url = Url::fromRoute('view.decreto_departments.decreto_page_organisation_departments');
     $variables['content']['#current_organisation_popup_path'] = $current_org_popup_url->toString();
 
     $other_org_popup_url = Url::fromRoute('view.decreto_departments.decreto_page_other_organisations_departments');

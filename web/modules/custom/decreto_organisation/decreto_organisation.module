@@ -32,7 +32,7 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
         case 'decreto_block_my_departments':
         case 'calendar_block':
         case 'decreto_page_meetings':
-        case 'decreto_page_departments':
+        case 'decreto_page_organisation_departments':
         case 'decreto_page_memos':
         case 'decreto_memo_popup_embed':
         case 'decreto_note_popup_embed':

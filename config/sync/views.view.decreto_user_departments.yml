@@ -193,8 +193,11 @@ display:
           group_type: group
           admin_label: ''
           empty: true
+          tokenize: 0
           create_department: 1
+          create_department_use_ajax: 1
           edit_department: 0
+          department_id: ''
           plugin_id: decreto_department_departments_view_context_links
       empty:
         area_text_custom:

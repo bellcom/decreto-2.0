@@ -5,7 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.list
     - taxonomy.vocabulary.decreto_tax_department
+    - user.role.decreto_admin
   module:
+    - decreto_department
     - node
     - taxonomy
     - user
@@ -190,15 +192,15 @@ display:
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
-  decreto_page_departments:
+  decreto_page_organisation_departments:
     display_plugin: page
-    id: decreto_page_departments
-    display_title: 'PAGE: Departments'
-    position: 1
+    id: decreto_page_organisation_departments
+    display_title: 'PAGE: Organisation Departments'
+    position: 2
     display_options:
       display_extenders: {  }
       display_description: ''
-      path: departments
+      path: org-departments
     cache_metadata:
       max-age: -1
       contexts:
@@ -211,7 +213,7 @@ display:
     display_plugin: page
     id: decreto_page_other_organisations_departments
     display_title: 'PAGE: Other organisations departments'
-    position: 1
+    position: 3
     display_options:
       display_extenders: {  }
       display_description: ''
@@ -225,5 +227,75 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - user.permissions
+      tags: {  }
+    deleted: false
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: 'PAGE: Departments'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: departments
+      access:
+        type: role
+        options:
+          role:
+            decreto_admin: decreto_admin
+      defaults:
+        access: false
+        relationships: false
+        filters: false
+        filter_groups: false
+        title: false
+        footer: false
+      relationships: {  }
+      filters:
+        status:
+          value: '1'
+          table: taxonomy_term_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: taxonomy_term
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      menu:
+        type: none
+        title: Departments
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
+      title: Departments
+      footer:
+        decreto_department_departments_view_context_links:
+          id: decreto_department_departments_view_context_links
+          table: views
+          field: decreto_department_departments_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: 0
+          create_department: 1
+          edit_department: 0
+          department_id: ''
+          plugin_id: decreto_department_departments_view_context_links
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.roles
       tags: {  }
     deleted: false

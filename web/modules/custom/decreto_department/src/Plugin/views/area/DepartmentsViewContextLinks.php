@@ -22,6 +22,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
     $options = parent::defineOptions();
 
     $options['create_department'] = ['default' => ''];
+    $options['create_department_use_ajax'] = ['default' => ''];
     $options['edit_department'] = ['default' => ''];
     $options['department_id'] = ['default' => ''];
 
@@ -38,6 +39,17 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#title' => $this->t('Create department link'),
       '#type' => 'checkbox',
       '#default_value' => empty($this->options['create_department']) ? '' : $this->options['create_department'],
+    ];
+
+    $form['create_department_use_ajax'] = [
+      '#title' => $this->t('Use ajax for create department button'),
+      '#type' => 'checkbox',
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="create_department"]' => array('checked' => FALSE),
+        ),
+      ),
+      '#default_value' => empty($this->options['create_department_use_ajax']) ? '' : $this->options['create_department_use_ajax'],
     ];
 
     $form['edit_department'] = [
@@ -68,6 +80,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
     return [
       '#theme' => 'decreto_department_departments_view_context_links',
       '#create_department' => $this->options['create_department'],
+      '#create_department_use_ajax' => $this->options['create_department_use_ajax'],
       '#edit_department' => $this->options['edit_department'],
       '#department_id' => $department_id,
       '#access' => [
