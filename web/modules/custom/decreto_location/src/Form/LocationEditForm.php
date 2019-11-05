@@ -92,7 +92,7 @@ class LocationEditForm extends AjaxFormBase {
 
     $form['organisation'] = [
       '#type' => 'select',
-      '#title' => $this->t('Name'),
+      '#title' => $this->t('Organisation'),
       '#required' => TRUE,
       '#options' => $organisationsList
     ];
