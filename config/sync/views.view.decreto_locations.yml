@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.list
     - taxonomy.vocabulary.decreto_tax_location
+    - user.role.decreto_admin
   module:
     - taxonomy
     - user
@@ -24,9 +25,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            decreto_admin: decreto_admin
       cache:
         type: tag
         options: {  }
@@ -144,7 +146,7 @@ display:
           entity_field: vid
           plugin_id: bundle
       sorts: {  }
-      title: 'All locations'
+      title: Locations
       header: {  }
       footer: {  }
       empty: {  }
@@ -157,11 +159,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags: {  }
-  decreto_page_all_locations:
+  decreto_page_locations:
     display_plugin: page
-    id: decreto_page_all_locations
+    id: decreto_page_locations
     display_title: 'PAGE: All locations'
     position: 1
     display_options:
@@ -174,5 +176,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags: {  }
