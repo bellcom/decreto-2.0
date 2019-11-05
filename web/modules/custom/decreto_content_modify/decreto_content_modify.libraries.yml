@@ -10,3 +10,10 @@ meeting-edit:
     js/meeting-edit.js: {preprocess: false}
   dependencies:
     - core/jquery
+quick-search-list:
+  version: 1.x
+  js:
+    js/quick-search-list.js: {preprocess: false}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

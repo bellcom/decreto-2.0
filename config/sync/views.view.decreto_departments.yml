@@ -192,46 +192,9 @@ display:
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
-  decreto_page_organisation_departments:
+  decreto_page_departments:
     display_plugin: page
-    id: decreto_page_organisation_departments
-    display_title: 'PAGE: Organisation Departments'
-    position: 2
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      path: org-departments
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user.permissions
-      tags: {  }
-    deleted: false
-  decreto_page_other_organisations_departments:
-    display_plugin: page
-    id: decreto_page_other_organisations_departments
-    display_title: 'PAGE: Other organisations departments'
-    position: 3
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      path: other-org-departments
-      title: 'Other organisations departments'
-      defaults:
-        title: false
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user.permissions
-      tags: {  }
-    deleted: false
-  page_1:
-    display_plugin: page
-    id: page_1
+    id: decreto_page_departments
     display_title: 'PAGE: Departments'
     position: 1
     display_options:
@@ -297,5 +260,42 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - user.roles
+      tags: {  }
+    deleted: false
+  decreto_page_organisation_departments:
+    display_plugin: page
+    id: decreto_page_organisation_departments
+    display_title: 'PAGE: Organisation Departments'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: org-departments
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.permissions
+      tags: {  }
+    deleted: false
+  decreto_page_other_organisations_departments:
+    display_plugin: page
+    id: decreto_page_other_organisations_departments
+    display_title: 'PAGE: Other organisations departments'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: other-org-departments
+      title: 'Other organisations departments'
+      defaults:
+        title: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.permissions
       tags: {  }
     deleted: false
