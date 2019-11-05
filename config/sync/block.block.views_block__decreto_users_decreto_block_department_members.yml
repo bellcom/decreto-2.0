@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_visibility_groups.block_visibility_group.decreto_taxonomy_department
     - views.view.decreto_users
   module:
+    - block_visibility_groups
     - system
     - views
   theme:
@@ -22,9 +24,15 @@ settings:
   label_display: visible
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
     pages: '/taxonomy/term/*'
     negate: false
+    context_mapping: {  }
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: decreto_taxonomy_department
     context_mapping: {  }

@@ -1,0 +1,19 @@
+uuid: 080ad9d8-bfbc-4acb-8b7c-3d5ca6261218
+langcode: en
+status: true
+dependencies:
+  module:
+    - vocabulary_condition
+id: decreto_taxonomy_location
+label: 'Decreto taxonomy location'
+logic: and
+conditions:
+  9b64fa02-dcac-4b35-ba9d-00eb51f3288e:
+    id: vocabulary
+    bundles:
+      decreto_tax_location: decreto_tax_location
+    negate: false
+    context_mapping:
+      taxonomy_term: '@custom_context_provider.taxonomy_term_context:taxonomy_term'
+    uuid: 9b64fa02-dcac-4b35-ba9d-00eb51f3288e
+allow_other_conditions: true

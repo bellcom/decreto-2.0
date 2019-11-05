@@ -1,0 +1,24 @@
+decreto_location.locations_add:
+  path: '/locations/add'
+  options:
+    parameters:
+      location:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_location\Form\LocationEditForm::getTitle'
+    _form: '\Drupal\decreto_location\Form\LocationEditForm'
+    location: null
+  requirements:
+    _permission: 'create terms in decreto_tax_location'
+decreto_location.locations_edit:
+  path: '/locations/{location}/edit'
+  options:
+    parameters:
+      location:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_location\Form\LocationEditForm::getTitle'
+    _form: '\Drupal\decreto_location\Form\LocationEditForm'
+  requirements:
+    _entity_access: 'location.update'
+    location: \d+

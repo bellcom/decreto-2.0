@@ -1,0 +1,5 @@
+name: 'Decreto location'
+type: module
+description: 'Decreto locations functionality'
+core: 8.x
+package: 'Decreto'

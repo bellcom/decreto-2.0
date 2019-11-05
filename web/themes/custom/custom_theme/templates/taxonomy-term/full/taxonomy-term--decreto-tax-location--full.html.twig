@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a taxonomy term.
+ *
+ * Available variables:
+ * - url: URL of the current term.
+ * - name: Name of the current term.
+ * - content: Items for the content of the term (fields and description).
+ *   Use 'content' to print them all, or print a subset such as
+ *   'content.description'. Use the following code to exclude the
+ *   printing of a given child element:
+ *   @code
+ *   {{ content|without('description') }}
+ *   @endcode
+ * - attributes: HTML attributes for the wrapper.
+ * - page: Flag for the full page state.
+ * - term: The taxonomy term entity, including:
+ *   - id: The ID of the taxonomy term.
+ *   - bundle: Machine name of the current vocabulary.
+ * - view_mode: View mode, e.g. 'full', 'teaser', etc.
+ * - help_message: Rendered help message
+ *
+ * @see template_preprocess_taxonomy_term()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{%
+  set classes = [
+  'boxy',
+]
+%}
+
+<!-- Begin - actions -->
+<div class="text-right">
+
+  <!-- Begin - edit -->
+  {% if content['#access']['canEdit'] %}
+    <a
+      href="{{ path('decreto_location.locations_edit', {'location': term.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Edit location" | trans }}
+    </a>
+  {% endif %}
+  <!-- End - edit -->
+
+  <!-- Begin - delete -->
+  {% if content['#access']['canDelete'] %}
+    <a
+      href="{{ path('entity.taxonomy_term.delete_form', {'taxonomy_term': term.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Delete location" | trans }}
+    </a>
+  {% endif %}
+  <!-- End - delete -->
+
+</div>
+<!-- End - actions -->
+
+<br>
+
+<article{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  <div class="boxy__heading">
+    <h2 class="boxy__heading__title">
+      {% trans %}
+        Details
+      {% endtrans %}
+    </h2>
+    {% trans %}
+      Short description
+    {% endtrans %}
+    {{ help_message }}
+  </div>
+  <div class="boxy__body">
+    <strong>
+      <div>
+        {% trans %}Name{% endtrans %}
+      </div>
+    </strong>
+    {{ title_prefix }}
+    <div>
+      {{ name }}
+    </div>
+    {{ title_suffix }}
+    {{ content }}
+  </div>
+</article>
+
+

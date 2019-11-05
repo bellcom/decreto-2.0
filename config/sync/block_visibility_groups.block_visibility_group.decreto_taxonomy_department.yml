@@ -1,0 +1,19 @@
+uuid: 530a2dde-a2ee-4717-89e4-493ba3387ad7
+langcode: en
+status: true
+dependencies:
+  module:
+    - vocabulary_condition
+id: decreto_taxonomy_department
+label: 'Decreto taxonomy department'
+logic: and
+conditions:
+  a875fea1-f6b9-40e7-b15f-d0a358b8001e:
+    id: vocabulary
+    bundles:
+      decreto_tax_department: decreto_tax_department
+    negate: false
+    context_mapping:
+      taxonomy_term: '@custom_context_provider.taxonomy_term_context:taxonomy_term'
+    uuid: a875fea1-f6b9-40e7-b15f-d0a358b8001e
+allow_other_conditions: true

@@ -7,6 +7,7 @@ dependencies:
     - taxonomy.vocabulary.decreto_tax_location
     - user.role.decreto_admin
   module:
+    - decreto_location
     - taxonomy
     - user
 id: decreto_locations
@@ -148,7 +149,21 @@ display:
       sorts: {  }
       title: Locations
       header: {  }
-      footer: {  }
+      footer:
+        decreto_location_locations_view_context_links:
+          id: decreto_location_locations_view_context_links
+          table: views
+          field: decreto_location_locations_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: 0
+          create_location: 1
+          create_location_use_ajax: 0
+          edit_location: 0
+          location_id: ''
+          plugin_id: decreto_location_locations_view_context_links
       empty: {  }
       relationships: {  }
       arguments: {  }

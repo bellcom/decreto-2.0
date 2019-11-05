@@ -5,6 +5,7 @@ module:
   automated_cron: 0
   block: 0
   block_content: 0
+  block_visibility_groups: 0
   bootstrap_datetime: 0
   breakpoint: 0
   calendar: 0
@@ -17,6 +18,7 @@ module:
   config_translation: 0
   contact: 0
   contextual: 0
+  custom_context_provider: 0
   datetime: 0
   dblog: 0
   decreto: 0
@@ -25,6 +27,7 @@ module:
   decreto_content_modify: 0
   decreto_department: 0
   decreto_help: 0
+  decreto_location: 0
   decreto_notification: 0
   decreto_organisation: 0
   decreto_pdf2htmlex: 0
@@ -71,6 +74,7 @@ module:
   user: 0
   views_templates: 0
   views_ui: 0
+  vocabulary_condition: 0
   menu_link_content: 1
   content_translation: 10
   views: 10

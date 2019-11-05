@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef23d5b0d15dd65b753b5cd41d2312f8",
+    "content-hash": "63f4383e0623c6abaeab699e4ec6f4e3",
     "packages": [
         {
             "name": "ajgl/breakpoint-twig-extension",
@@ -1214,6 +1214,28 @@
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
+            "name": "contrib/custom_context_provider",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LukasKlement/custom_context_provider.git",
+                "reference": "master"
+            },
+            "type": "drupal-module",
+            "time": "2018-09-28T15:38:49+00:00"
+        },
+        {
+            "name": "contrib/vocabulary_condition",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/md-systems/vocabulary_condition.git",
+                "reference": "8.x-1.x"
+            },
+            "type": "drupal-module",
+            "time": "2016-08-28T16:07:07+00:00"
+        },
+        {
             "name": "cweagans/composer-patches",
             "version": "1.6.6",
             "source": {
@@ -2289,6 +2311,65 @@
             "homepage": "https://www.drupal.org/project/anonymous_login",
             "support": {
                 "source": "https://git.drupalcode.org/project/anonymous_login"
+            }
+        },
+        {
+            "name": "drupal/block_visibility_groups",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/block_visibility_groups.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/block_visibility_groups-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "3c42377fcf6b849e8509b4b993a750cbc1a90a9b"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1536509886",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                },
+                {
+                    "name": "tedbow",
+                    "homepage": "https://www.drupal.org/user/240860"
+                }
+            ],
+            "description": "My Awesome Module",
+            "homepage": "http://drupal.org/project/block_visibility_groups",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/block_visibility_groups",
+                "issues": "http://drupal.org/project/issues/block_visibility_groups"
             }
         },
         {
@@ -10610,6 +10691,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "contrib/custom_context_provider": 20,
+        "contrib/vocabulary_condition": 20,
         "drupal/calendar": 20,
         "drupal/calendar_datetime": 20,
         "drupal/front_page": 10,

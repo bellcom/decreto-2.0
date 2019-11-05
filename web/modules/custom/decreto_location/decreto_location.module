@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Contains decreto_location.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function decreto_location_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the decreto_location module.
+    case 'help.page.decreto_location':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Decreto locations functionality') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_decreto_help_messages().
+ */
+function decreto_location_decreto_help_messages() {
+  return [
+    'location_create_edit_form' => 'Location create/edit form',
+    'location_view_page' => 'location view page',
+    'location_meetings_list' => 'Coming meetings in this location (block)',
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Invalidates caches related decreto_tax_location.
+ */
+function decreto_location_taxonomy_term_delete(EntityInterface $entity) {
+  if ($entity->bundle() == 'decreto_tax_location') {
+    //TODO:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_location_theme() {
+  return [
+    'decreto_location_locations_view_context_links' => [
+      'variables' => [
+        'create_location' => NULL,
+        'create_location_use_ajax' => NULL,
+        'edit_location' => NULL,
+        'location_id' => NULL,
+        'access' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_location_views_data() {
+  $data['views']['decreto_location_locations_view_context_links'] = [
+    'title' => t('Decreto locations view links'),
+    'help' => t('Renders "Create" link to be used in location views.'),
+    'area' => [
+      'id' => 'decreto_location_locations_view_context_links',
+    ],
+  ];
+
+  return $data;
+}

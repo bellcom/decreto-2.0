@@ -93,12 +93,20 @@ function custom_theme_preprocess_taxonomy_term(&$variables) {
   $variables['name_raw'] = $name;
   $variables['name_initials'] = (new Initials())->name($name)->generate();
 
+  if ($view_mode == 'full') {
+    $variables['content']['#access']['canEdit'] = $term->access('update');
+    $variables['content']['#access']['canDelete'] = $term->access('delete');
+  }
+
   // Term bundle specific variables.
   if ($term->bundle() == 'decreto_tax_department') {
     if ($view_mode == 'full') {
       $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('department_view_page');
-      $variables['content']['#access']['canEdit'] = $term->access('update');
-      $variables['content']['#access']['canDelete'] = $term->access('delete');
+    }
+  }
+  elseif ($term->bundle() == 'decreto_tax_location') {
+    if ($view_mode == 'full') {
+      $variables['help_message'] = \Drupal::service('decreto_help.message')->getMessageMarkup('location_view_page');
     }
   }
 }

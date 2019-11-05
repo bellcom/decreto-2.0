@@ -1,0 +1,18 @@
+<div class="boxy__actions">
+  {% if create_location and user.hasPermission('create terms in decreto_tax_location') %}
+    {% if create_location_use_ajax %}
+      <a href="{{ path('decreto_location.locations_add') }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+        {{ "Create location"|trans }}
+      </a>
+    {% else %}
+      <a href="{{ path('decreto_location.locations_add') }}" class="btn btn-primary">
+        {{ "Create location"|trans }}
+      </a>
+    {% endif %}
+  {% endif %}
+  {% if edit_location and location_id and access['decreto_location']['canEdit'] %}
+    <a href="{{ path('decreto_location.locations_edit', {'location' : location_id}) }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Edit location"|trans }}
+    </a>
+  {% endif %}
+</div>
