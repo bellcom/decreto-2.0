@@ -209,27 +209,11 @@ display:
       defaults:
         access: false
         relationships: false
-        filters: false
-        filter_groups: false
+        filters: true
+        filter_groups: true
         title: false
         footer: false
       relationships: {  }
-      filters:
-        status:
-          value: '1'
-          table: taxonomy_term_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: taxonomy_term
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-          group: 1
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
       menu:
         type: none
         title: Departments
