@@ -13,6 +13,7 @@ use Drupal\decreto_content_modify\Form\AjaxFormBase;
 use Drupal\decreto_department\Entity\DecretoDepartment;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
@@ -94,6 +95,24 @@ class DepartmentEditForm extends AjaxFormBase {
       '#title' => $this->t('Department admin'),
       '#options' => $selectUsers,
       '#empty_value' => 0,
+    ];
+
+    // Organisation.
+    $organisationNids = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'decreto_organisation')
+      ->execute();
+    $organisations = Node::loadMultiple($organisationNids);
+    $organisationsList = [];
+    foreach ($organisations as $organisation) {
+      $organisationsList[$organisation->id()] = $organisation->getTitle();
+    }
+
+    $form['organisation'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Organisation'),
+      '#required' => TRUE,
+      '#options' => $organisationsList
     ];
 
     // Members START.
@@ -199,6 +218,8 @@ class DepartmentEditForm extends AjaxFormBase {
     $form['name']['#default_value'] = $department->getName();
     $decretoDepartment = new DecretoDepartment($department);
     $form['department_admin']['#default_value'] = $decretoDepartment->getDepartmentAdmin(FALSE);
+    $form['organisation']['#default_value'] = $decretoDepartment->getOrganisation(FALSE);
+    $form['organisation']['#attributes'] = ['disabled' => 'disabled'];
 
     // Fill participants array based on user department attribute.
     $query = \Drupal::entityQuery('user')
