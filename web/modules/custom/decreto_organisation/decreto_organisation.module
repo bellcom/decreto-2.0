@@ -57,8 +57,8 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
           break;
 
       }
-    case 'user_search':
-      if ($view->current_display == 'users_list') {
+    case 'decreto_users':
+      if ($view->current_display == 'decreto_page_organisation_users') {
         $org_id = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
         if ($org_id) {
           $query->addWhere('1', 'node_field_data_user__field_decreto_usr_orgs.nid', $org_id, '=');
@@ -134,5 +134,3 @@ function decreto_organisation_views_data() {
 
   return $data;
 }
-
-

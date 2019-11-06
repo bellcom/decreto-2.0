@@ -1,10 +1,3 @@
-decreto_user.search_popup:
-  path: '/user/search_popup'
-  defaults:
-    _controller: '\Drupal\decreto_user\Controller\DecretoUserController::searchPopup'
-    _title: 'Find user'
-  requirements:
-    _permission: 'access user profiles'
 decreto_user.users_add:
   path: '/users/add'
   defaults:

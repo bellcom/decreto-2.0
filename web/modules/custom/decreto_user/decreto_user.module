@@ -25,20 +25,6 @@ function decreto_user_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_theme().
- */
-function decreto_user_theme() {
-  return [
-    'decreto_user_search_popup' => [
-      'variables' => [
-        'users_list' => '',
-        'help_message' => '',
-      ],
-    ],
-  ];
-}
-
-/**
  * Implements hook_decreto_help_messages().
  */
 function decreto_user_decreto_help_messages() {

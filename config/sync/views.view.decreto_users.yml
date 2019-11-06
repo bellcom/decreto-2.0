@@ -5,9 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.user.list
   module:
-    - decreto_department
     - decreto_help
     - decreto_organisation
+    - node
     - user
 id: decreto_users
 label: 'Decreto users'
@@ -27,7 +27,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access content'
+          perm: 'access user profiles'
       cache:
         type: tag
         options: {  }
@@ -56,6 +56,10 @@ display:
           offset: 0
       style:
         type: default
+        options:
+          row_class: 'col-xs-12 col-sm-6'
+          default_row_class: true
+          uses_fields: false
       row:
         type: 'entity:user'
         options:
@@ -133,20 +137,7 @@ display:
           empty: false
           message_key: department_members_list
           plugin_id: decreto_help_message_popup
-      footer:
-        decreto_department_departments_view_context_links:
-          id: decreto_department_departments_view_context_links
-          table: views
-          field: decreto_department_departments_view_context_links
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: 1
-          create_department: 0
-          edit_department: 1
-          department_id: '{{ raw_arguments.field_decreto_usr_departments_target_id }}'
-          plugin_id: decreto_department_departments_view_context_links
+      footer: {  }
       empty:
         area_text_custom:
           id: area_text_custom
@@ -212,7 +203,7 @@ display:
   decreto_block_department_members:
     display_plugin: block
     id: decreto_block_department_members
-    display_title: 'Department members'
+    display_title: 'BLOCK: Department members'
     position: 1
     display_options:
       display_extenders: {  }
@@ -228,7 +219,7 @@ display:
   decreto_block_organisation_members:
     display_plugin: block
     id: decreto_block_organisation_members
-    display_title: 'Organisation members'
+    display_title: 'BLOCK: Organisation members'
     position: 2
     display_options:
       display_extenders: {  }
@@ -303,5 +294,63 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - user.permissions
+      tags: {  }
+  decreto_page_organisation_users:
+    display_plugin: page
+    id: decreto_page_organisation_users
+    display_title: 'PAGE: Users'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      path: org-users
+      sorts:
+        field_decreto_firstname_value:
+          id: field_decreto_firstname_value
+          table: user__field_decreto_firstname
+          field: field_decreto_firstname_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
+      defaults:
+        sorts: false
+        title: false
+        header: false
+        arguments: false
+        relationships: false
+      title: 'Find user'
+      header:
+        decreto_help_message_popup:
+          id: decreto_help_message_popup
+          table: views
+          field: decreto_help_message_popup
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          message_key: user_search_popup
+          plugin_id: decreto_help_message_popup
+      arguments: {  }
+      relationships:
+        field_decreto_usr_orgs:
+          id: field_decreto_usr_orgs
+          table: user__field_decreto_usr_orgs
+          field: field_decreto_usr_orgs
+          relationship: none
+          group_type: group
+          admin_label: 'User organisation'
+          required: true
+          plugin_id: standard
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
         - user.permissions
       tags: {  }

@@ -1,0 +1,86 @@
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'view-display-id-' ~ display_id,
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if title %}
+    {{ title }}
+  {% endif %}
+  {{ title_suffix }}
+  {% if header %}
+    <div class="view-header">
+      {{ header }}
+    </div>
+  {% endif %}
+  {% if exposed %}
+    <div class="view-filters form-group">
+      {{ exposed }}
+    </div>
+  {% endif %}
+  {% if attachment_before %}
+    <div class="attachment attachment-before">
+      {{ attachment_before }}
+    </div>
+  {% endif %}
+
+  {% if rows %}
+    <!-- Begin - form -->
+    <form id="quick-search-elements-form">
+      <div class="form-group">
+        <label class="control-label" for="quick-search-element-input">
+          {{ 'Type text' | trans }}
+        </label>
+
+        <input class="form-control" type="text" id="quick-search-element-input" name="quick-search-text" value="">
+      </div>
+
+      <div>
+        <input class="btn btn-secondary" type="submit" value="{{ 'Find' | trans }}">
+      </div>
+    </form>
+    <!-- End - form -->
+
+    <div class="view-content">
+      <div id="quick-search-elements-list">
+        {{ rows }}
+      </div>
+
+      <div class="js-quick-search-no-results hidden">
+        {{ 'We found no elements mathing the entered search criteria.' | trans }}
+      </div>
+    </div>
+  {% elseif empty %}
+    <div class="view-empty">
+      {{ empty }}
+    </div>
+  {% endif %}
+
+  {% if pager %}
+    {{ pager }}
+  {% endif %}
+  {% if attachment_after %}
+    <div class="attachment attachment-after">
+      {{ attachment_after }}
+    </div>
+  {% endif %}
+  {% if more %}
+    {{ more }}
+  {% endif %}
+  {% if footer %}
+    <div class="view-footer">
+      {{ footer }}
+    </div>
+  {% endif %}
+</div>
+
+{% if feed_icons %}
+  <div class="feed-icons">
+    {{ feed_icons }}
+  </div>
+{% endif %}
