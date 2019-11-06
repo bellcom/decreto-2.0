@@ -251,21 +251,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      footer:
-        decreto_organisation_organisations_view_context_links:
-          id: decreto_organisation_organisations_view_context_links
-          table: views
-          field: decreto_organisation_organisations_view_context_links
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: 0
-          create_organisation: 1
-          create_organisation_use_ajax: 1
-          edit_organisation: 0
-          organisation_id: ''
-          plugin_id: decreto_organisation_organisations_view_context_links
+      footer: {  }
       defaults:
         footer: false
         title: false

@@ -44,6 +44,7 @@ function decreto_user_theme() {
 function decreto_user_decreto_help_messages() {
   return [
     'user_search_popup' => 'User search popup',
+    'user_view_page' => 'User view page',
     'user_create_edit_form' => 'User create/edit form',
   ];
 }

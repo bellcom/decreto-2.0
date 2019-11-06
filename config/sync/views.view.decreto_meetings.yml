@@ -677,6 +677,7 @@ display:
         header: false
         pager: false
         arguments: false
+        footer: false
       filters:
         status:
           value: '1'
@@ -801,6 +802,7 @@ display:
           entity_type: user
           entity_field: uid
           plugin_id: user_uid
+      footer: {  }
     cache_metadata:
       max-age: -1
       contexts:

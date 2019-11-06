@@ -1,0 +1,78 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{%
+  set classes = [
+  'boxy',
+]
+%}
+
+<!-- Begin - actions -->
+<div class="text-right">
+
+  <!-- Begin - edit -->
+  {% if content['#access']['canEdit'] %}
+    <a
+      href="{{ path('decreto_user.users_edit', {'user': user.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Edit user" | trans }}
+    </a>
+  {% endif %}
+  <!-- End - edit -->
+
+  <!-- Begin - delete -->
+  {% if content['#access']['canDelete'] %}
+{#    <a#}
+{#      href="{{ path('entity.user.delete_form', {'user': user.id}) }}"#}
+{#      class="btn btn-default use-ajax" data-dialog-type="modal">#}
+{#      {{ "Delete user" | trans }}#}
+{#    </a>#}
+  {% endif %}
+  <!-- End - delete -->
+
+</div>
+<!-- End - actions -->
+
+<br>
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="boxy__heading">
+    <h2 class="boxy__heading__title">
+      {% trans %}
+        Details
+      {% endtrans %}
+    </h2>
+    {{ help_message }}
+  </div>
+  <div class="boxy__body">
+    <strong>
+      <div>
+        {% trans %}Name{% endtrans %}
+      </div>
+    </strong>
+    <div>
+      {{ user.label }}
+    </div>
+    {% if content %}
+      {{- content -}}
+    {% endif %}
+  </div>
+</article>
