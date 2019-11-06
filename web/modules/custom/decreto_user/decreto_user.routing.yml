@@ -5,3 +5,30 @@ decreto_user.search_popup:
     _title: 'Find user'
   requirements:
     _permission: 'access user profiles'
+decreto_user.users_add:
+  path: '/users/add'
+  defaults:
+    _title_callback: '\Drupal\decreto_user\Form\UserEditForm::getTitle'
+    _form: '\Drupal\decreto_user\Form\UserEditForm'
+    user: null
+  requirements:
+    _permission: 'administer users'
+decreto_user.users_edit:
+  path: '/users/{user}/edit'
+  options:
+    parameters:
+      user:
+        type: entity:user
+  defaults:
+    _title_callback: '\Drupal\decreto_user\Form\UserEditForm::getTitle'
+    _form: '\Drupal\decreto_user\Form\UserEditForm'
+  requirements:
+    _entity_access: 'user.update'
+    user: \d+
+decreto_user.user_own_edit:
+  path: '/users/edit'
+  defaults:
+    _title_callback: '\Drupal\decreto_user\Form\UserOwnEditForm::getTitle'
+    _form: '\Drupal\decreto_user\Form\UserOwnEditForm'
+  requirements:
+    _permission: 'access user profiles'
