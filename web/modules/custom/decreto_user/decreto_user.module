@@ -70,3 +70,32 @@ function decreto_user_user_format_name_alter(&$name, $account) {
     $name = $firstName . ' ' . $lastName;
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function decreto_user_theme() {
+  return [
+    'decreto_user_users_view_context_links' => [
+      'variables' => [
+        'create_user' => NULL,
+        'create_user_use_ajax' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function decreto_user_views_data() {
+  $data['views']['decreto_user_users_view_context_links'] = [
+    'title' => t('Decreto user view links'),
+    'help' => t('Renders "Create" link to be used in department views.'),
+    'area' => [
+      'id' => 'decreto_user_users_view_context_links',
+    ],
+  ];
+
+  return $data;
+}

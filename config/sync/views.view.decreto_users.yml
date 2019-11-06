@@ -7,6 +7,7 @@ dependencies:
   module:
     - decreto_help
     - decreto_organisation
+    - decreto_user
     - node
     - user
 id: decreto_users
@@ -324,6 +325,7 @@ display:
         header: false
         arguments: false
         relationships: false
+        footer: false
       title: 'Find user'
       header:
         decreto_help_message_popup:
@@ -347,6 +349,19 @@ display:
           admin_label: 'User organisation'
           required: true
           plugin_id: standard
+      footer:
+        decreto_user_users_view_context_links:
+          id: decreto_user_users_view_context_links
+          table: views
+          field: decreto_user_users_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: 0
+          create_user: 1
+          create_user_use_ajax: 0
+          plugin_id: decreto_user_users_view_context_links
     cache_metadata:
       max-age: -1
       contexts:

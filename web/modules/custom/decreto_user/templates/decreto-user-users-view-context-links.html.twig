@@ -1,0 +1,13 @@
+<div class="boxy__actions">
+  {% if create_user and user.hasPermission('administer users') %}
+    {% if create_department_use_ajax %}
+      <a href="{{ path('decreto_user.users_add') }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+        {{ "Create user"|trans }}
+      </a>
+    {% else %}
+      <a href="{{ path('decreto_user.users_add') }}" class="btn btn-primary">
+        {{ "Create user"|trans }}
+      </a>
+    {% endif %}
+  {% endif %}
+</div>
