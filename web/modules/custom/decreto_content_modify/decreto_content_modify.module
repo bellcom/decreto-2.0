@@ -328,6 +328,9 @@ function decreto_content_modify_theme() {
     'decreto_content_modify_meeting_edit_form_page_2' => [
       'render element' => 'children',
     ],
+    'decreto_content_modify_delete_form' => [
+      'render element' => 'form',
+    ],
   ];
 }
 

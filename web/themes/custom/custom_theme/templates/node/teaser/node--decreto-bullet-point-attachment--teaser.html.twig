@@ -37,7 +37,7 @@
       <!-- Begin - delete -->
       {% if content['#access']['canDelete'] %}
         <a
-          href="{{ path('decreto_content_modify.bpas_delete', {'node': node.id()}) }}"
+          href="{{ path('decreto_content_modify.bpas_delete', {'bullet_point_attachment': node.id()}) }}"
           title="{{ "Delete bullet point attachment" | trans }}"
           data-toggle="tooltip"
           class="action-list__button use-ajax" data-dialog-type="modal">

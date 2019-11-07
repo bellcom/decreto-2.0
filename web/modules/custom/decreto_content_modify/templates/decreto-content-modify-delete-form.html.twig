@@ -1,0 +1,22 @@
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+
+{{ form|without('actions') }}
+
+{%  if form['#dependant_entities'] %}
+  <br/>
+  <br/>
+  <div>
+    {{ "The following dependant entities will be deleted:" | trans }}
+    {% for entity in form['#dependant_entities'] %}
+      <li>
+        <a href="{{ entity.url }}" target="_blank">
+          {{ entity.label }}
+        </a>
+      </li>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{{ form['actions'] }}

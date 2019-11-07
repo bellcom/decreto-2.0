@@ -70,17 +70,17 @@ decreto_content_modify.bps_edit:
     bullet_point: \d+
 
 decreto_content_modify.bps_delete:
-  path: '/bullet-points/{node}/delete'
+  path: '/bullet-points/{bullet_point}/delete'
   options:
     parameters:
-      node:
+      bullet_point:
         type: entity:node
   defaults:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointDeleteForm'
   requirements:
-    _entity_access: 'node.delete'
-    node: \d+
+    _entity_access: 'bullet_point.delete'
+    bullet_point: \d+
 
 decreto_content_modify.bpas_modal:
   path: '/bullet-point-attachments/{bullet_point_attachment}/modal'
@@ -122,17 +122,17 @@ decreto_content_modify.bpas_edit:
     bullet_point: \d+
 
 decreto_content_modify.bpas_delete:
-  path: '/bullet-point-attachments/{node}/delete'
+  path: '/bullet-point-attachments/{bullet_point_attachment}/delete'
   options:
     parameters:
-      node:
+      bullet_point_attachment:
         type: entity:node
   defaults:
     _title_callback: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm::getTitle'
     _form: '\Drupal\decreto_content_modify\Form\BulletPointAttachmentDeleteForm'
   requirements:
-    _entity_access: 'node.delete'
-    node: \d+
+    _entity_access: 'bullet_point_attachment.delete'
+    bullet_point_attachment: \d+
 
 decreto_content_modify.memos_add_edit:
   path: '/bullet-points/{bullet_point}/add-edit-memo'

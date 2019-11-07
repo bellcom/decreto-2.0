@@ -99,7 +99,7 @@
       {% if content['#access']['canDelete'] %}
         <!-- Begin - delete bulletpoint -->
         <a
-          href="{{ path('decreto_content_modify.bps_delete', {'node': node.id()}) }}"
+          href="{{ path('decreto_content_modify.bps_delete', {'bullet_point': node.id()}) }}"
           data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
           class="action-list__button use-ajax" data-dialog-type="modal">
           <span class="material-icons">remove_circle</span>
