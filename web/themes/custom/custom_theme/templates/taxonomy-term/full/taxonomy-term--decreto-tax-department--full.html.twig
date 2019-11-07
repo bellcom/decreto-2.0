@@ -49,7 +49,7 @@
   <!-- Begin - delete -->
   {% if content['#access']['canDelete'] %}
     <a
-      href="{{ path('entity.taxonomy_term.delete_form', {'taxonomy_term': term.id}) }}"
+      href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
       class="btn btn-default use-ajax" data-dialog-type="modal">
       {{ "Delete department" | trans }}
     </a>

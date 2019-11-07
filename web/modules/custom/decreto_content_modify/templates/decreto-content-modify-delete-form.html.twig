@@ -4,12 +4,12 @@
 
 {{ form|without('actions') }}
 
-{%  if form['#dependant_entities'] %}
+{%  if form['#dependent_entities'] %}
   <br/>
   <br/>
   <div>
-    {{ "The following dependant entities will be deleted:" | trans }}
-    {% for entity in form['#dependant_entities'] %}
+    {{ "The following dependent entities will be deleted:" | trans }}
+    {% for entity in form['#dependent_entities'] %}
       <li>
         <a href="{{ entity.url }}" target="_blank">
           {{ entity.label }}
