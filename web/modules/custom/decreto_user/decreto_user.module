@@ -49,25 +49,27 @@ function decreto_user_user_format_name_alter(&$name, $account) {
     $user = $account;
   }
 
-  $firstName = '';
-  $lastName = '';
+  if ($user) {
+    $firstName = '';
+    $lastName = '';
 
-  // Getting first name.
-  if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
-    if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
-      $firstName = $field_firstname[0]['value'];
+    // Getting first name.
+    if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
+      if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
+        $firstName = $field_firstname[0]['value'];
+      }
     }
-  }
-  // Getting last name.
-  if ($user->get('field_decreto_lastname') && !$user->field_decreto_lastname->isEmpty()) {
-    if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
-      $lastName = $field_lastname[0]['value'];
+    // Getting last name.
+    if ($user->get('field_decreto_lastname') && !$user->field_decreto_lastname->isEmpty()) {
+      if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
+        $lastName = $field_lastname[0]['value'];
+      }
     }
-  }
 
-  // Only making swap if both first and last names are present.
-  if ($firstName && $lastName) {
-    $name = $firstName . ' ' . $lastName;
+    // Only making swap if both first and last names are present.
+    if ($firstName && $lastName) {
+      $name = $firstName . ' ' . $lastName;
+    }
   }
 }
 
