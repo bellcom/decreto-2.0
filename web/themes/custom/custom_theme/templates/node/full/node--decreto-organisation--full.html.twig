@@ -89,7 +89,7 @@ view_mode ? view_mode|clean_class,
   <!-- Begin - delete -->
   {% if content['#access']['canDelete'] %}
     <a
-      href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
+      href="{{ path('decreto_organisation.organisations_delete', {'organisation': node.id}) }}"
       class="btn btn-default use-ajax" data-dialog-type="modal">
       {{ "Delete organisation" | trans }}
     </a>
