@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\decreto_location\Entity\DecretoLocation;
 
 /**
  * Implements hook_help().
@@ -42,7 +43,13 @@ function decreto_location_decreto_help_messages() {
  */
 function decreto_location_taxonomy_term_delete(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_tax_location') {
-    //TODO:
+    $decretoLocation = new DecretoLocation($entity);
+
+    // Deleting dependent meetings.
+    $departmentMeetings = $decretoLocation->getMeetings();
+    foreach ($departmentMeetings as $meeting) {
+      $meeting->delete();
+    }
   }
 }
 

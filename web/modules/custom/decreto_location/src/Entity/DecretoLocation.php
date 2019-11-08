@@ -2,6 +2,7 @@
 
 namespace Drupal\decreto_location\Entity;
 
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\TermInterface;
 
 /**
@@ -55,6 +56,28 @@ class DecretoLocation {
     }
 
     return NULL;
+  }
+
+  /**
+   * Returns related meetings.
+   *
+   * @param bool $load
+   *   If the returned nodes shall be load. If FALSE, array of ids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of nodes is returned,
+   *   If load is FALSE array of nids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getMeetings($load = TRUE) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('field_decreto_meet_location', $this->getEntity()->id());
+
+    $nids = $query->execute();
+    if (!empty($nids)) {
+      return ($load) ? Node::loadMultiple($nids) : $nids;
+    }
+    return [];
   }
 
 }
