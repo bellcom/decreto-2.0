@@ -2,6 +2,7 @@
 
 namespace Drupal\decreto_user\Entity;
 
+use Drupal\decreto_annotator\Entity\Note;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\user\UserInterface;
@@ -180,6 +181,77 @@ class DecretoUser {
     $tids = $query->execute();
     if (!empty($tids)) {
       return ($load) ? Term::loadMultiple($tids) : $tids;
+    }
+
+    return array();
+  }
+
+  /**
+   * Returns related notes.
+   *
+   * @param bool $load
+   *   If the returned note shall be load. If FALSE, array of ids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of notes is returned,
+   *   If load is FALSE array of ids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getNotes($load = TRUE) {
+    $query = \Drupal::entityQuery('decreto_annotator_note')
+      ->condition('uid', $this->getEntity()->id());
+
+    $ids = $query->execute();
+    if (!empty($ids)) {
+      return ($load) ? Note::loadMultiple($ids) : $ids;
+    }
+
+    return array();
+  }
+
+  /**
+   * Returns related internal meetings.
+   *
+   * @param bool $load
+   *   If the returned nodes shall be load. If FALSE, array of nids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of nodes is returned,
+   *   If load is FALSE array of nids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getInternalMeetings($load = TRUE) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'decreto_meeting')
+      ->condition('field_decreto_meet_partic_int', $this->getEntity()->id());
+
+    $nids = $query->execute();
+    if (!empty($nids)) {
+      return ($load) ? Node::loadMultiple($nids) : $nids;
+    }
+
+    return array();
+  }
+
+  /**
+   * Returns related external meetings.
+   *
+   * @param bool $load
+   *   If the returned nodes shall be load. If FALSE, array of nids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of nodes is returned,
+   *   If load is FALSE array of nids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getExternalMeetings($load = TRUE) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'decreto_meeting')
+      ->condition('field_decreto_meet_partic_ext', $this->getEntity()->id());
+
+    $nids = $query->execute();
+    if (!empty($nids)) {
+      return ($load) ? Node::loadMultiple($nids) : $nids;
     }
 
     return array();

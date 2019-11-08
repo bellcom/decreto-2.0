@@ -375,6 +375,27 @@ class DecretoMeeting extends DecretoNode {
   }
 
   /**
+   * Removes user uid from meeting field_decreto_meet_partic_int field.
+   *
+   * Saves the meeting as well.
+   *
+   * @param int $uid
+   *   Uid of the user.
+   * @param bool $save
+   *   If node needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeInternalParticipant($uid, $save = TRUE) {
+    $users = $this->getEntity()->get('field_decreto_meet_partic_int')->getValue();
+    $key = array_search($uid, array_column($users, 'target_id'));
+    $this->getEntity()->get('field_decreto_meet_partic_int')->removeItem($key);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
    * Returns external participants.
    *
    * @param bool $load
@@ -396,6 +417,27 @@ class DecretoMeeting extends DecretoNode {
     }
 
     return array();
+  }
+
+  /**
+   * Removes user uid from meeting field_decreto_meet_partic_ext field.
+   *
+   * Saves the meeting as well.
+   *
+   * @param int $uid
+   *   Uid of the user.
+   * @param bool $save
+   *   If node needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeExternalParticipant($uid, $save = TRUE) {
+    $users = $this->getEntity()->get('field_decreto_meet_partic_ext')->getValue();
+    $key = array_search($uid, array_column($users, 'target_id'));
+    $this->getEntity()->get('field_decreto_meet_partic_ext')->removeItem($key);
+    if ($save) {
+      $this->getEntity()->save();
+    }
   }
 
 }

@@ -140,17 +140,19 @@
   <!-- Begin - body -->
   <div class="bulletpoint__content">
     {% if not node.field_decreto_bp_bpas.value %}
-      <div class="bulletpoint__empty-text">
-        {{ "No bullet point attachment added. Would you like to" | trans}}
-        <a
-          href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
-          title="{{ "Add bullet point attachment" | trans }}"
-          class="use-ajax"
-          data-dialog-type="modal">
-          {{ "create one" | trans}}
-        </a>
-        ?
-      </div>
+      {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+        <div class="bulletpoint__empty-text">
+          {{ "No bullet point attachment added. Would you like to" | trans}}
+          <a
+            href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
+            title="{{ "Add bullet point attachment" | trans }}"
+            class="use-ajax"
+            data-dialog-type="modal">
+            {{ "create one" | trans}}
+          </a>
+          ?
+        </div>
+      {% endif %}
     {% else %}
       {{ content|without('field_decreto_bp_closed', 'field_decreto_bp_personal') }}
     {% endif %}

@@ -188,15 +188,17 @@
 
     <div id="agenda-overview">
       {% if not node.field_decreto_meet_bps.value %}
-        <div>
-          {{ "No bullet points added. Would you like to" | trans}}
-          <a
-            href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-            class="use-ajax" data-dialog-type="modal">
-            {{ "create one" | trans }}
-          </a>
-          ?
-        </div>
+          {% if content['#access']['decreto_bullet_point']['canCreate'] %}
+          <div>
+            {{ "No bullet points added. Would you like to" | trans}}
+            <a
+              href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+              class="use-ajax" data-dialog-type="modal">
+              {{ "create one" | trans }}
+            </a>
+            ?
+          </div>
+        {% endif %}
       {% else %}
         {{ content.field_decreto_meet_bps }}
       {% endif %}
