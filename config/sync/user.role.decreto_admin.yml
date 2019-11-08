@@ -7,10 +7,8 @@ label: 'Decreto admin'
 weight: -8
 is_admin: null
 permissions:
-  - 'access administration pages'
   - 'access decreto closed content'
   - 'access taxonomy overview'
-  - 'access toolbar'
   - 'administer taxonomy'
   - 'administer users'
   - 'create decreto_bullet_point content'
