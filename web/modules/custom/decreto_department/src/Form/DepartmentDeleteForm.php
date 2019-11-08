@@ -25,9 +25,6 @@ class DepartmentDeleteForm extends AjaxDeleteFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $department = NULL) {
-    // Setting parent the as department, so that redirect happens to main page.
-    $this->parent = NULL;
-
     $decretoDepartment = new DecretoDepartment($department);
     $meetings = $decretoDepartment->getMeetings();
 
