@@ -21,3 +21,7 @@ display:
         options:
           submit_button: Søg
           reset_button_label: Nulstil
+      title: Møder
+  decreto_page_meetings_search:
+    display_title: Møder
+label: Møder
