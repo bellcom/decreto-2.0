@@ -59,6 +59,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
         "drupal/devel": "^2.0",
+        "drupal/drush_language": "^1.0@RC",
         "drupal/front_page": "^1.0@beta",
         "drupal/kint": "^2.0",
         "drupal/menu_link_attributes": "1.x-dev",
