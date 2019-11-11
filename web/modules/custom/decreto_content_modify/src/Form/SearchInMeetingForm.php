@@ -46,7 +46,6 @@ class SearchInMeetingForm extends FormBase {
     // Attempting to get search param.
     $searchParam = \Drupal::request()->query->get('s');
 
-    //TODO: adding class .poppy only to have position relative - needed for proper help icon positioning.
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 

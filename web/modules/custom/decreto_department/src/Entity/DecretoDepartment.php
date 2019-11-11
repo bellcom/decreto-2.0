@@ -3,7 +3,9 @@
 namespace Drupal\decreto_department\Entity;
 
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\TermInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Wrapper for Department object.
@@ -103,6 +105,50 @@ class DecretoDepartment {
     }
 
     return NULL;
+  }
+
+  /**
+   * Returns users from this department.
+   *
+   * @param bool $load
+   *   If the returned users shall be load. If FALSE, array of ids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of users is returned,
+   *   If load is FALSE array of uids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getUsers($load = TRUE) {
+    $query = \Drupal::entityQuery('user')
+      ->condition('field_decreto_usr_departments', $this->getEntity()->id(), 'IN');
+
+    $uids = $query->execute();
+    if (!empty($uids)) {
+      return ($load) ? User::loadMultiple($uids) : $uids;
+    }
+    return [];
+  }
+
+  /**
+   * Returns related meetings.
+   *
+   * @param bool $load
+   *   If the returned nodes shall be load. If FALSE, array of ids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of nodes is returned,
+   *   If load is FALSE array of nids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getMeetings($load = TRUE) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('field_decreto_meet_department', $this->getEntity()->id());
+
+    $nids = $query->execute();
+    if (!empty($nids)) {
+      return ($load) ? Node::loadMultiple($nids) : $nids;
+    }
+    return [];
   }
 
 }

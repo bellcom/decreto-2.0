@@ -8,9 +8,11 @@
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\decreto_department\Controller\AccessController;
+use Drupal\decreto_department\Entity\DecretoDepartment;
 use Drupal\decreto_department\Services\DepartmentService;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\taxonomy\TermInterface;
@@ -64,23 +66,23 @@ function decreto_department_taxonomy_term_presave(EntityInterface $entity) {
  */
 function decreto_department_taxonomy_term_delete(EntityInterface $entity) {
   if ($entity->bundle() == 'decreto_tax_department') {
-    // Invalidating meetings count.
+    // Invalidating departments count.
     Cache::invalidateTags([DepartmentService::CACHE_ID_DECRETO_DEPARTMENT_COUNTERS]);
 
+    $decretoDepartment = new DecretoDepartment($entity);
+
     // Remove department from all users.
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1)
-      ->condition('field_decreto_usr_departments', $entity->id(), 'IN');
-    $users_ids = $query->execute();
-    if (!empty($users_ids)) {
-      foreach ($users_ids as $user_id) {
-        $user = User::load($user_id);
-        $decretoUser = new DecretoUser($user);
-        $decretoUser->removeDepartment($entity->id());
-      }
+    $departmentUsers = $decretoDepartment->getUsers();
+    foreach ($departmentUsers as $user) {
+      $decretoUser = new DecretoUser($user);
+      $decretoUser->removeDepartment($entity->id());
     }
 
-    //TODO: what to do with a meeting? Shall it also be deleted?
+    // Deleting dependent meetings.
+    $departmentMeetings = $decretoDepartment->getMeetings();
+    foreach ($departmentMeetings as $meeting) {
+      $meeting->delete();
+    }
   }
 }
 

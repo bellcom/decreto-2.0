@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
@@ -75,21 +76,26 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
 function decreto_organisation_node_delete(EntityInterface $entity) {
   if ($entity->getType() == 'decreto_organisation') {
 
-    // Remove department from all users.
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1)
-      ->condition('field_decreto_usr_orgs', $entity->id(), 'IN');
-    $users_ids = $query->execute();
-    if (!empty($users_ids)) {
-      foreach ($users_ids as $user_id) {
-        $user = User::load($user_id);
-        $decretoUser = new DecretoUser($user);
-        $decretoUser->removeOrganisation($entity->id());
-      }
+    $decretoOrganisation = new DecretoOrganisation($entity);
+
+    // Remove organisation from all users.
+    $users = $decretoOrganisation->getUsers();
+    foreach ($users as $user) {
+      $decretoUser = new DecretoUser($user);
+      $decretoUser->removeOrganisation($entity->id());
     }
 
-    //TODO: Think if this organisation needs to be removed from department and
-    // location terms.
+    // Remove dependent departments.
+    $departments = $decretoOrganisation->getDepartments();
+    foreach ($departments as $department) {
+      $department->delete();
+    }
+
+    // Remove dependent locations.
+    $locations = $decretoOrganisation->getLocations();
+    foreach ($locations as $location) {
+      $location->delete();
+    }
   }
 }
 

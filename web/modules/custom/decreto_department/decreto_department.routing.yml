@@ -22,3 +22,15 @@ decreto_department.departments_edit:
   requirements:
     _entity_access: 'department.update'
     department: \d+
+decreto_department.departments_delete:
+  path: '/departments/{department}/delete'
+  options:
+    parameters:
+      department:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_department\Form\DepartmentDeleteForm::getTitle'
+    _form: '\Drupal\decreto_department\Form\DepartmentDeleteForm'
+  requirements:
+    _entity_access: 'department.delete'
+    department: \d+

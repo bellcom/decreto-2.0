@@ -6,9 +6,10 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
 
 /**
  * {@inheritdoc}
@@ -18,14 +19,14 @@ abstract class AjaxDeleteFormBase extends ConfirmFormBase {
   /**
    * The node to be deleted.
    *
-   * @var \Drupal\node\NodeInterface
+   * @var \Drupal\Core\Entity\ContentEntityInterface
    */
-  protected $node;
+  protected $entity;
 
   /**
    * The node to be redirected to after success.
    *
-   * @var \Drupal\node\NodeInterface
+   * @var \Drupal\Core\Entity\ContentEntityInterface
    */
   protected $parent;
 
@@ -54,14 +55,19 @@ abstract class AjaxDeleteFormBase extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Delete @title?', ['@title' => $this->node->getTitle()]);
+    return $this->t('Delete @title?', ['@title' => $this->entity->label()]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
-    $this->node = $node;
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $entity = NULL) {
+    $this->entity = $entity;
+
+    if (!isset($form['#theme'])) {
+      $form['#theme'] = 'decreto_content_modify_delete_form';
+    }
+
     $form = parent::buildForm($form, $form_state);
 
     $form['actions']['submit']['#ajax'] = [
@@ -77,6 +83,7 @@ abstract class AjaxDeleteFormBase extends ConfirmFormBase {
         'event' => 'click',
       ],
     ];
+
     return $form;
   }
 
@@ -91,7 +98,7 @@ abstract class AjaxDeleteFormBase extends ConfirmFormBase {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->node->delete();
+    $this->entity->delete();
   }
 
   /**
@@ -145,8 +152,13 @@ abstract class AjaxDeleteFormBase extends ConfirmFormBase {
 
       // Adding redirect command.
       if (!empty($this->parent)) {
-        $response->addCommand(new RedirectCommand($this->parent->toUrl()->toString()));
+        $url = $this->parent->toUrl();
       }
+      else {
+        $url = Url::fromRoute('<front>');
+      }
+
+      $response->addCommand(new RedirectCommand($url->toString()));
     }
 
     return $response;

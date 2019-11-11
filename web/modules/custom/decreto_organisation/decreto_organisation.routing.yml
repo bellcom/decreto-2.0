@@ -35,3 +35,15 @@ decreto_organisation.organisations_edit:
   requirements:
     _permission: 'edit any decreto_organisation content'
     organisation: \d+
+decreto_organisation.organisations_delete:
+  path: '/organisations/{organisation}/delete'
+  options:
+    parameters:
+      organisation:
+        type: entity:node
+  defaults:
+    _title_callback: '\Drupal\decreto_organisation\Form\OrganisationDeleteForm::getTitle'
+    _form: '\Drupal\decreto_organisation\Form\OrganisationDeleteForm'
+  requirements:
+    _permission: 'delete any decreto_organisation content'
+    organisation: \d+

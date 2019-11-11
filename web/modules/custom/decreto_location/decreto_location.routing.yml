@@ -22,3 +22,15 @@ decreto_location.locations_edit:
   requirements:
     _entity_access: 'location.update'
     location: \d+
+decreto_location.locations_delete:
+  path: '/locations/{location}/delete'
+  options:
+    parameters:
+      location:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_location\Form\LocationDeleteForm::getTitle'
+    _form: '\Drupal\decreto_location\Form\LocationDeleteForm'
+  requirements:
+    _entity_access: 'location.delete'
+    location: \d+

@@ -25,3 +25,15 @@ decreto_user.user_own_edit:
     _form: '\Drupal\decreto_user\Form\UserOwnEditForm'
   requirements:
     _permission: 'access user profiles'
+decreto_user.users_delete:
+  path: '/users/{user}/delete'
+  options:
+    parameters:
+      user:
+        type: entity:user
+  defaults:
+    _title_callback: '\Drupal\decreto_user\Form\UserDeleteForm::getTitle'
+    _form: '\Drupal\decreto_user\Form\UserDeleteForm'
+  requirements:
+    _entity_access: 'user.delete'
+    user: \d+

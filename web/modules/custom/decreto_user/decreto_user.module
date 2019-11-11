@@ -5,7 +5,10 @@
  * Contains decreto_user.module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
+use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\user\Entity\User;
 
 /**
@@ -49,25 +52,27 @@ function decreto_user_user_format_name_alter(&$name, $account) {
     $user = $account;
   }
 
-  $firstName = '';
-  $lastName = '';
+  if ($user) {
+    $firstName = '';
+    $lastName = '';
 
-  // Getting first name.
-  if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
-    if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
-      $firstName = $field_firstname[0]['value'];
+    // Getting first name.
+    if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
+      if ($field_firstname = $user->get('field_decreto_firstname')->getValue()) {
+        $firstName = $field_firstname[0]['value'];
+      }
     }
-  }
-  // Getting last name.
-  if ($user->get('field_decreto_lastname') && !$user->field_decreto_lastname->isEmpty()) {
-    if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
-      $lastName = $field_lastname[0]['value'];
+    // Getting last name.
+    if ($user->get('field_decreto_lastname') && !$user->field_decreto_lastname->isEmpty()) {
+      if ($field_lastname = $user->get('field_decreto_lastname')->getValue()) {
+        $lastName = $field_lastname[0]['value'];
+      }
     }
-  }
 
-  // Only making swap if both first and last names are present.
-  if ($firstName && $lastName) {
-    $name = $firstName . ' ' . $lastName;
+    // Only making swap if both first and last names are present.
+    if ($firstName && $lastName) {
+      $name = $firstName . ' ' . $lastName;
+    }
   }
 }
 
@@ -98,4 +103,34 @@ function decreto_user_views_data() {
   ];
 
   return $data;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Deletes users notes.
+ */
+function decreto_user_user_delete(EntityInterface $entity) {
+  $decretoUser = new DecretoUser($entity);
+
+  // Deleting user notes.
+  $notes = $decretoUser->getNotes();
+  foreach ($notes as $note) {
+    $note->delete();
+  }
+
+  // Deleting user from internal meeting participants.
+  $internalMeetings = $decretoUser->getInternalMeetings();
+  foreach ($internalMeetings as $meeting) {
+    $decretoMeeting = new DecretoMeeting($meeting);
+    $decretoMeeting->removeInternalParticipant($entity->id());
+  }
+
+  // Deleting user from external meeting participants.
+  $externalMeetings = $decretoUser->getExternalMeetings();
+  foreach ($externalMeetings as $meeting) {
+    $decretoMeeting = new DecretoMeeting($meeting);
+    $decretoMeeting->removeExternalParticipant($entity->id());
+  }
+
 }

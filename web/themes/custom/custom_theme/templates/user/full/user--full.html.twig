@@ -40,11 +40,11 @@
 
   <!-- Begin - delete -->
   {% if content['#access']['canDelete'] %}
-{#    <a#}
-{#      href="{{ path('entity.user.delete_form', {'user': user.id}) }}"#}
-{#      class="btn btn-default use-ajax" data-dialog-type="modal">#}
-{#      {{ "Delete user" | trans }}#}
-{#    </a>#}
+    <a
+      href="{{ path('decreto_user.users_delete', {'user': user.id}) }}"
+      class="btn btn-default use-ajax" data-dialog-type="modal">
+      {{ "Delete user" | trans }}
+    </a>
   {% endif %}
   <!-- End - delete -->
 

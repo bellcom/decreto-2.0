@@ -9,7 +9,6 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeInterface;
 
 /**
  * {@inheritdoc}
@@ -33,7 +32,7 @@ abstract class AjaxFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $node = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ContentEntityInterface $entity = NULL) {
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 

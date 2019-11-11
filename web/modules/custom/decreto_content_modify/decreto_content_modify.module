@@ -16,11 +16,9 @@ use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Plugin\search_api\datasource\ContentEntity;
 use Drupal\user\UserInterface;
-use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -30,26 +28,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 function decreto_content_modify_user_login(UserInterface $account) {
   $url = Url::fromRoute('<front>');
-
-  // If user has no organisation selected, select the first one.
-  $organisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
-  if (!$organisation) {
-    $user = User::load($account->id());
-    $decretoUser = new DecretoUser($user);
-    $orgIds = $decretoUser->getOrganisations(FALSE);
-    $organisation_id = reset($orgIds);
-    if ($organisation_id) {
-      \Drupal::service('decreto_organisation.organisation')->setSelectedOrganisation($organisation_id);
-    }
-    else {
-      // TODO: make sure message is present.
-      $messenger = \Drupal::messenger();
-      $messenger
-        ->addMessage('This user has no organisation attached. Please contact the application administatator', MessengerInterface::TYPE_WARNING, TRUE);
-      user_logout();
-    }
-
-  }
 
   $response = new RedirectResponse($url->toString());
   $response->send();
@@ -327,6 +305,9 @@ function decreto_content_modify_theme() {
     ],
     'decreto_content_modify_meeting_edit_form_page_2' => [
       'render element' => 'children',
+    ],
+    'decreto_content_modify_delete_form' => [
+      'render element' => 'form',
     ],
   ];
 }
