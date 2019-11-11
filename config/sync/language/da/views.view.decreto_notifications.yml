@@ -1,0 +1,9 @@
+display:
+  default:
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'Ingen notifikationer blev fundet.'
+  decreto_notification_page:
+    display_options:
+      title: Notifikationer

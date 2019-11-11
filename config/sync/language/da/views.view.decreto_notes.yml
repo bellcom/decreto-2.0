@@ -1,0 +1,12 @@
+display:
+  default:
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'Ingen noter blev fundet.'
+  decreto_meeting_note_page:
+    display_options:
+      title: Noter
+  decreto_note_page:
+    display_options:
+      title: Noter

@@ -1,0 +1,7 @@
+display:
+  decreto_page_departments:
+    display_options:
+      title: Afdelinger
+  decreto_page_other_organisations_departments:
+    display_options:
+      title: 'Afdelinger i andre organisationer'

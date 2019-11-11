@@ -1,0 +1,12 @@
+display:
+  default:
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'Ingen memoer blev fundet.'
+  decreto_page_memos:
+    display_options:
+      title: Memoer
+  decreto_page_other_organisations_memos:
+    display_options:
+      title: Memoer

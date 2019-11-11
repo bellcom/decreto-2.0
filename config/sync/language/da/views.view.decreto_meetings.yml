@@ -11,3 +11,4 @@ display:
   decreto_block_my_meetings:
     display_options:
       title: 'Kommende møder'
+  decreto_block_all_meetings: {  }

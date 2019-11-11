@@ -22,15 +22,15 @@ negotiation:
       language-url-fallback: 1
   language_interface:
     enabled:
-      language-user: -20
-      language-browser: -19
-      language-selected: -15
+      language-browser: -20
+      language-user: -19
+      language-selected: -18
     method_weights:
-      language-user: -20
-      language-user-admin: -18
-      language-browser: -19
-      language-url: -17
-      language-session: -16
-      language-selected: -15
+      language-selected: -18
+      language-browser: -20
+      language-user: -19
+      language-user-admin: -17
+      language-url: -16
+      language-session: -15
 _core:
   default_config_hash: dqouFqVseNJNvEjsoYKxbinFOITuCxYhi4y2OTNQP_8
