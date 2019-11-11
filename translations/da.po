@@ -1,0 +1,1395 @@
+# Danish translation of Decreto
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2019-11-11 14:57+0000\n"
+"PO-Revision-Date: 2019-11-11 14:57+0000\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Open"
+msgstr "Åben"
+
+msgid "Show all columns"
+msgstr "Vis alle kolonner"
+
+msgid "Cancel"
+msgstr "Annullér"
+
+msgctxt "Long month name"
+msgid "January"
+msgstr "Januar"
+
+msgctxt "Long month name"
+msgid "January"
+msgstr "Januar"
+
+msgctxt "Long month name"
+msgid "February"
+msgstr "Februar"
+
+msgctxt "Long month name"
+msgid "February"
+msgstr "Februar"
+
+msgctxt "Long month name"
+msgid "March"
+msgstr "Marts"
+
+msgctxt "Long month name"
+msgid "March"
+msgstr "Marts"
+
+msgctxt "Long month name"
+msgid "May"
+msgstr "Maj"
+
+msgctxt "Long month name"
+msgid "June"
+msgstr "Juni"
+
+msgctxt "Long month name"
+msgid "July"
+msgstr "Juli"
+
+msgctxt "Long month name"
+msgid "October"
+msgstr "Oktober"
+
+msgid "May"
+msgstr "Maj"
+
+msgid "User account menu"
+msgstr "Brugerkontomenu"
+
+msgid "Breadcrumbs"
+msgstr "Brødkrummer"
+
+msgid "Main page content"
+msgstr "Primært sideindhold"
+
+msgid "Footer menu"
+msgstr "Footer-menu"
+
+msgid "Help"
+msgstr "Hjælp"
+
+msgid "Primary admin actions"
+msgstr "Primære adminsitratorhandlinger"
+
+msgid "Tabs"
+msgstr "Faner"
+
+msgid "Main navigation"
+msgstr "Main navigation"
+
+msgid "Status messages"
+msgstr "Statusmeddelelser"
+
+msgid "Page title"
+msgstr "Sidetitel"
+
+msgid "Powered by Drupal"
+msgstr "Drives af Drupal"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid "Tools"
+msgstr "Værktøjer"
+
+msgid "User login"
+msgstr "Log ind"
+
+msgid "Primary tabs"
+msgstr "Primære faneblade"
+
+msgid "Secondary tabs"
+msgstr "Sekundære faneblade"
+
+msgid "Basic block"
+msgstr "Simpel blok"
+
+msgid "A basic block contains a title and a body."
+msgstr "En simpel blok indeholder en titel og en brødtekst."
+
+msgid "Default comments"
+msgstr "Standardkommentarer"
+
+msgid "Allows commenting on content"
+msgstr "Tillader kommentarer på indhold"
+
+msgid "Website feedback"
+msgstr "Site feedback"
+
+msgid "Your message has been sent."
+msgstr "Din besked er blevet sendt."
+
+msgid "Body"
+msgstr "Brødtekst"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Picture"
+msgstr "Billede"
+
+msgid "Your virtual face or picture."
+msgstr "Dit virtuelle ansigt eller billede."
+
+msgid "Basic HTML"
+msgstr "Simpel HTML"
+
+msgid "Full HTML"
+msgstr "Fuld HTML"
+
+msgid "Restricted HTML"
+msgstr "Begrænset HTML"
+
+msgid "Full"
+msgstr "Fuld"
+
+msgid "Full comment"
+msgstr "Fuld kommentar"
+
+msgid "Publish comment"
+msgstr "Udgiv kommentar"
+
+msgid "Save comment"
+msgstr "Gem kommentar"
+
+msgid "Unpublish comment"
+msgstr "Skjul kommentarer"
+
+msgid "Personal contact form"
+msgstr "Personlig kontaktformular"
+
+msgid "Plain text"
+msgstr "Ren tekst"
+
+msgid "Large (480×480)"
+msgstr "Stor (480×480)"
+
+msgid "Medium (220×220)"
+msgstr "Mellem (220×220)"
+
+msgid "English"
+msgstr "Engelsk"
+
+msgid "Not specified"
+msgstr "Ikke angivet"
+
+msgid "Not applicable"
+msgstr "ikke relevant"
+
+msgid "Full content"
+msgstr "Fuldt indhold"
+
+msgid "Search index"
+msgstr "Søgeindex"
+
+msgid "Search result highlighting input"
+msgstr "Søgeresultat med fremhævelse af input"
+
+msgid "Teaser"
+msgstr "Smagsprøve"
+
+msgid "Delete content"
+msgstr "Slet indhold"
+
+msgid "Make content sticky"
+msgstr "Gør indhold klæbrigt"
+
+msgid "Make content unsticky"
+msgstr "Fjern klæbrighed"
+
+msgid "Promote content to front page"
+msgstr "Vis indhold på forsiden"
+
+msgid "Publish content"
+msgstr "Udgiv indhold"
+
+msgid "Save content"
+msgstr "Gem indhold"
+
+msgid "Remove content from front page"
+msgstr "Fjern indhold fra forsiden"
+
+msgid "Unpublish content"
+msgstr "Afpublicér indhold"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Fallback date format"
+msgstr "Reservedatoformat"
+
+msgid "Default long date"
+msgstr "Standard lang dato"
+
+msgid "Default medium date"
+msgstr "Standard mellem dato"
+
+msgid "Default short date"
+msgstr "Standard kort dato"
+
+msgid ""
+"@site is currently under maintenance. We should be back shortly. Thank "
+"you for your patience."
+msgstr ""
+"Vi er ved at opdatere @site. Vi er snart tilbage. Tak for din "
+"tålmodighed."
+
+msgid "Links related to the active user account"
+msgstr "Links relateret til den aktive brugerkonto"
+
+msgid "Administrative task links"
+msgstr "Links til administrative opgaver"
+
+msgid "Footer"
+msgstr "Sidefod"
+
+msgid "Site information links"
+msgstr "Links til informationen om sitet"
+
+msgid "Site section links"
+msgstr "Site section links"
+
+msgid "User tool links, often added by modules"
+msgstr "Bruger værktøjslinks, som typisk tilføjes af moduler"
+
+msgid "Taxonomy term page"
+msgstr "Termside"
+
+msgid "Register"
+msgstr "Opret konto"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "User account"
+msgstr "Brugerkonto"
+
+msgid "Block the selected user(s)"
+msgstr "Blokér de(n) valgte bruger(e)"
+
+msgid "Cancel the selected user account(s)"
+msgstr "Opsig de valgte brugerkonti"
+
+msgid "Unblock the selected user(s)"
+msgstr "Fjern blokering af de(n) valgte bruger(e)"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"A request to cancel your account has been "
+"made at [site:name].\n"
+"\n"
+"You may now cancel your account on "
+"[site:url-brief] by clicking this link or copying and pasting it into "
+"your browser:\n"
+"\n"
+"[user:cancel-url]\n"
+"\n"
+"NOTE: The cancellation of "
+"your account is not reversible.\n"
+"\n"
+"This link expires in one day and "
+"nothing will happen if it is not used.\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\n"
+"\n"
+"Vi har modtaget en forespørgsel om at lukke "
+"din konto på [site:name].\n"
+"\n"
+"Du kan lukke din konto på "
+"[site:url-brief] ved at klikke på linket eller ved at kopiere det og "
+"indsætte det i din browser:\n"
+"\n"
+"[user:cancel-url]\n"
+"\n"
+"BEMÆRK: Du "
+"kan ikke fortyde lukningen af din konto.\n"
+"\n"
+"Linket udløber om én "
+"dag og der sker ikke noget hvis det ikke bruges.\n"
+"\n"
+"--  Holdet bag "
+"[site:name]"
+
+msgid "Account cancellation request for [user:display-name] at [site:name]"
+msgstr ""
+"Anmodning om opsigelse af konto for [user:display-name] på "
+"[site:name]"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"A request to reset the password for your "
+"account has been made at [site:name].\n"
+"\n"
+"You may now log in by "
+"clicking this link or copying and pasting it into your "
+"browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"This link can only be "
+"used once to log in and will lead you to a page where you can set your "
+"password. It expires after one day and nothing will happen if it's not "
+"used.\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\n"
+"\n"
+"Der er lavet en forespørgsel om at "
+"nulstille adgangskoden til din konto på [site:name].\n"
+"\n"
+"Du kan "
+"logge ind nu ved at klikke på linket eller ved at kopiere og "
+"indsætte det i din browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"Dette "
+"link kan kun bruges til at logge ind én gang, og det sender dig til "
+"en side hvor du kan vælge en adgangskode. Linket udløber efter én "
+"dag og der sker ikke noget hvis det ikke bruges.\n"
+"\n"
+"-- Holdet bag "
+"[site:name]"
+
+msgid "Replacement login information for [user:display-name] at [site:name]"
+msgstr "Ny login-information for [user:display-name] på [site:name]"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"A site administrator at [site:name] has "
+"created an account for you. You may now log in by clicking this link "
+"or copying and pasting it into your "
+"browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"This link can only be "
+"used once to log in and will lead you to a page where you can set your "
+"password.\n"
+"\n"
+"After setting your password, you will be able to log in "
+"at [site:login-url] in the future using:\n"
+"\n"
+"username: "
+"[user:name]\n"
+"password: Your password\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\n"
+"\n"
+"En administrator på [site:name] har "
+"oprettet en konto til dig. Du kan logge ind ved at klikke på linket "
+"eller ved at kopiere og indsætte det i din "
+"browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"Dette link kan kun bruges "
+"til at logge ind, og det sender dig til en side hvor du kan vælge en "
+"adgangskode.\n"
+"\n"
+"Når du har valgt en adgangskode kan du logge ind "
+"på [site:login-url] med:\n"
+"\n"
+"Brugernavn: [user:name]\n"
+"Adgangskode: "
+"Din adgangskode\n"
+"\n"
+"--  Holdet bag [site:name]"
+
+msgid "An administrator created an account for you at [site:name]"
+msgstr "En administrator har oprettet en konto til dig på [site:name]"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"Thank you for registering at [site:name]. "
+"You may now log in by clicking this link or copying and pasting it "
+"into your browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"This link can "
+"only be used once to log in and will lead you to a page where you can "
+"set your password.\n"
+"\n"
+"After setting your password, you will be able "
+"to log in at [site:login-url] in the future using:\n"
+"\n"
+"username: "
+"[user:name]\n"
+"password: Your password\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\n"
+"\n"
+"Tak fordi du har oprettet dig som bruger på "
+"[site:name]. Du kan nu logge ind ved at klikke på linket eller ved at "
+"kopiere og indsætte det i din "
+"browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"Dette link kan kun bruges "
+"til at logge ind, og det sender dig til en side hvor du kan vælge en "
+"adgangskode.\n"
+"\n"
+"Når du har valgt en adgangskode kan du logge ind "
+"på [site:login-url] med:\n"
+"\n"
+"Brugernavn: [user:name]\n"
+"Adgangskode: "
+"Din adgangskode\n"
+"\n"
+"--  Holdet bag [site:name]"
+
+msgid "Account details for [user:display-name] at [site:name]"
+msgstr "Kontoinformationer for [user:display-name] på [site:name] (blokeret)"
+
+msgid ""
+"Account details for [user:display-name] at [site:name] (pending admin "
+"approval)"
+msgstr ""
+"Kontoinformation for [user:display-name] på [site:name] (afventer "
+"godkendelse af administrator)"
+
+msgid ""
+"[user:display-name] has applied for an account.\n"
+"\n"
+"[user:edit-url]"
+msgstr ""
+"[user:display-name] har anmodet om en konto.\n"
+"\n"
+"[user:edit-url]"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"Your account at [site:name] has been "
+"activated.\n"
+"\n"
+"You may now log in by clicking this link or copying "
+"and pasting it into your "
+"browser:\n"
+"\n"
+"[user:one-time-login-url]\n"
+"\n"
+"This link can only be "
+"used once to log in and will lead you to a page where you can set your "
+"password.\n"
+"\n"
+"After setting your password, you will be able to log in "
+"at [site:login-url] in the future using:\n"
+"\n"
+"username: "
+"[user:account-name]\n"
+"password: Your password\n"
+"\n"
+"--  [site:name] "
+"team"
+msgstr ""
+"[user:display-name],\r\n"
+"\r\n"
+"Din konto på [site:name] er blevet "
+"aktiveret.\r\n"
+"\r\n"
+"Du kan logge ind ved at klikke på følgende link "
+"eller ved at kopiere og indsætte det i din "
+"browser:\r\n"
+"\r\n"
+"[user:one-time-login-url]\r\n"
+"\r\n"
+"Linket kan kun "
+"bruges én gang, og det fører dig til en side, hvor du kan vælge din "
+"adgangskode.\r\n"
+"\r\n"
+"Når du har valgt en adgangskode kan du fremover "
+"logge ind på [site:login-url] med:\r\n"
+"\r\n"
+"Brugernavn: "
+"[user:account-name]\r\n"
+"Adgangskode: Din adgangskode\r\n"
+"\r\n"
+"--  "
+"Holdet bag [site:name]"
+
+msgid "Account details for [user:display-name] at [site:name] (approved)"
+msgstr "Kontoinformationer for [user:display-name] på [site:name] (godkendt)"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"Your account on [site:name] has been "
+"blocked.\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\r\n"
+"\r\n"
+"Din konto på [site:name] er blevet "
+"blokeret.\r\n"
+"\r\n"
+"--  [site:name] team"
+
+msgid "Account details for [user:display-name] at [site:name] (blocked)"
+msgstr "Kontoinformationer for [user:display-name] på [site:name] (blokeret)"
+
+msgid ""
+"[user:display-name],\n"
+"\n"
+"Your account on [site:name] has been "
+"canceled.\n"
+"\n"
+"--  [site:name] team"
+msgstr ""
+"[user:display-name],\n"
+"\n"
+"Din konto på [site:name] er blevet "
+"lukket.\n"
+"\n"
+"--  [site:name] holdet"
+
+msgid "Account details for [user:display-name] at [site:name] (canceled)"
+msgstr "Kontoinformationer for [user:display-name] på [site:name] (opsagt)"
+
+msgid "Anonymous user"
+msgstr "Anonym bruger"
+
+msgid "Authenticated user"
+msgstr "Godkendt bruger"
+
+msgid "Anonymous"
+msgstr "Anonym"
+
+msgid "Custom block library"
+msgstr "Brugerdefineret blokbibliotek"
+
+msgid "Find and manage custom blocks."
+msgstr "Find og håndtér brugerdefinerede blokke."
+
+msgid "Apply"
+msgstr "Udfør"
+
+msgid "Reset"
+msgstr "Gendan"
+
+msgid "Sort by"
+msgstr "Sortér efter"
+
+msgid "Asc"
+msgstr "Stigende"
+
+msgid "Desc"
+msgstr "Faldende"
+
+msgid "‹ Previous"
+msgstr "‹ Forrige"
+
+msgid "Next ›"
+msgstr "Næste ›"
+
+msgid "Items per page"
+msgstr "Antal elementer"
+
+msgid "- All -"
+msgstr "- Alle -"
+
+msgid "Offset"
+msgstr "Forskydning"
+
+msgid "Block description"
+msgstr "Beskrivelse"
+
+msgid "Block type"
+msgstr "Bloktype"
+
+msgid "Updated"
+msgstr "Opdateret"
+
+msgid "Operations"
+msgstr "Handlinger"
+
+msgid "There are no custom blocks available."
+msgstr "Der er ingen tilpassede blokke tilgængeligt."
+
+msgid "Page"
+msgstr "Side"
+
+msgid "Recent comments"
+msgstr "Seneste kommentarer"
+
+msgid "Recent comments."
+msgstr "Seneste kommentarer."
+
+msgid "No comments available."
+msgstr "Der er ingen kommentarer at vise."
+
+msgid "Block"
+msgstr "Blok"
+
+msgid "Lists (Views)"
+msgstr "Lister (Views)"
+
+msgid "Files"
+msgstr "Filer"
+
+msgid "Find and manage files."
+msgstr "Find og håndtér filer."
+
+msgid "Name"
+msgstr "Navn"
+
+msgid "Size"
+msgstr "Størrelse"
+
+msgid "Temporary"
+msgstr "Midlertidig"
+
+msgid "Upload date"
+msgstr "Upload-dato"
+
+msgid "Changed date"
+msgstr "Ændringsdato"
+
+msgid "Used in"
+msgstr "Brugt i"
+
+msgid "Filename"
+msgstr "Filnavn"
+
+msgid "No files available."
+msgstr "Ingen tilgængelige filer."
+
+msgid "Files overview"
+msgstr "Filoversigt"
+
+msgid "Entity type"
+msgstr "Entity-type"
+
+msgid "Registering module"
+msgstr "Registrerer modul"
+
+msgid "Use count"
+msgstr "Brug antal"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "File usage information for {{ arguments.fid }}"
+msgstr "Information om brug af filen {{ arguments.fid }}"
+
+msgid "Adding languages"
+msgstr "Tilføjelse af sprog"
+
+msgid ""
+"<p>This page provides the ability to add common languages to your "
+"site.</p><p>If the desired language is not available, you can add a "
+"custom language.</p>"
+msgstr ""
+"<p>På denne side kan du tilføje de fleste almindelige sprog til dit "
+"site.</p><p>Hvis det ønskede sprog ikke er tilgængeligt, kan du "
+"tilføje et brugerdefineret sprog.</p>"
+
+msgid "Select language"
+msgstr "Vælg sprog"
+
+msgid "Continuing on"
+msgstr "Fortsætter på"
+
+msgid "Editing languages"
+msgstr "Redigering af sprog"
+
+msgid ""
+"<p>This page provides the ability to edit a language on your site, "
+"including custom languages.</p>"
+msgstr ""
+"<p>På denne side kan du redigere sitets sprog, inklusive "
+"brugerdefinerede sprog.</p>"
+
+msgid "Language code"
+msgstr "Sprogkode"
+
+msgid ""
+"<p>You cannot change the code of a language on the site, since it is "
+"used by the system to keep track of the language.</p>"
+msgstr ""
+"<p>Du kan ikke ændre en sprogkode på sitet. Det skyldes at systemet "
+"bruger koden til at holde styr på sproget.</p>"
+
+msgid "Language name"
+msgstr "Sprognavn"
+
+msgid "Language direction"
+msgstr "Sprogretning"
+
+msgid "Language"
+msgstr "Sprog"
+
+msgid "Languages"
+msgstr "Sprog"
+
+msgid ""
+"<p>The \"Languages\" page allows you to add, edit, delete, and reorder "
+"languages for the site.</p>"
+msgstr ""
+"<p>På siden \"sprog\" kan du tilføje, redigere, slette og sortere "
+"sitets sprog.</p>"
+
+msgid ""
+"<p>To add more languages to your site, click the \"Add language\" "
+"button.</p><p>Added languages will be displayed in the language list "
+"and can then be edited or deleted.</p>"
+msgstr ""
+"<p>For at tilføje flere sprog til sitet skal du klikke på knappen "
+"\"Tilføj sprog\".</p><p>Tilføjede sprog vises på sproglisten og kan "
+"derefter redigeres eller slettes.</p>"
+
+msgid "Reordering languages"
+msgstr "Omorganisering af sprog"
+
+msgid "Set a language as default"
+msgstr "Vælg standardsprog"
+
+msgid "Modifying languages"
+msgstr "Tilpasning af sprog"
+
+msgid "Translation"
+msgstr "Oversættelse"
+
+msgid "User interface translation"
+msgstr "Oversættelse af brugergrænseflade"
+
+msgid "Translation language"
+msgstr "Sprog til oversættelse"
+
+msgid "Choose the language you want to translate."
+msgstr "Vælg det sprog, som du ønsker at oversætte."
+
+msgid ""
+"Enter the specific word or sentence you want to translate, you can "
+"also write just a part of a word."
+msgstr ""
+"Indtast det specifikke ord eller den specifikke sætning, som du "
+"ønsker at oversætte. Du kan også nøjes med at skrive en del af et "
+"ord."
+
+msgid "Filter the search"
+msgstr "Filtrér søgningen"
+
+msgid ""
+"You can search for untranslated strings if you want to translate "
+"something that isn't translated yet. If you want to modify an existing "
+"translation, you might want to search only for translated strings."
+msgstr ""
+"Du kan søge efter ikke-oversatte strenge, hvis du ønsker at "
+"oversætte noget, som ikke er oversat endnu."
+
+msgid "Apply your search criteria"
+msgstr "Anvend dine søgekriterier"
+
+msgid "To apply your search criteria, click on the <em>Filter</em> button."
+msgstr "Klik på <em>Filtrér</em>-knappen for at anvende dine søgekriterier."
+
+msgid "Translate"
+msgstr "Oversæt"
+
+msgid ""
+"You can write your own translation in the text fields of the right "
+"column. Try to figure out in which context the text will be used in "
+"order to translate it in the appropriate way."
+msgstr ""
+"Du kan skrive din egen oversættelse i tekstfelterne i højre spalte. "
+"Prøv at finde ud af i hvilken kontekst teksten vil blive brugt for at "
+"sikre at den bliver oversat korrekt."
+
+msgid "Validate the translation"
+msgstr "Kontrollér oversættelsen"
+
+msgid ""
+"When you have finished your translations, click on the <em>Save "
+"translations</em> button. You must save your translations, each time "
+"before changing the page or making a new search."
+msgstr ""
+"Når du er færdig med dine oversættelser skal du klikke på knappen "
+"<em>Gem oversættelser</em>. Du skal gemme dine oversættelser før du "
+"skifter side eller laver en ny søgning."
+
+msgid "Content"
+msgstr "Indhold"
+
+msgid "Archive"
+msgstr "Arkiv"
+
+msgid "All content, by month."
+msgstr "Alt indhold, efter måned."
+
+msgid "Monthly archive"
+msgstr "Månedsarkiv"
+
+msgid "Find and manage content."
+msgstr "Find og håndtér indhold."
+
+msgid "« First"
+msgstr "« Første"
+
+msgid "Last »"
+msgstr "Sidste »"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Content type"
+msgstr "Indholdstype"
+
+msgid "Author"
+msgstr "Forfatter"
+
+msgid "Published"
+msgstr "Udgivet"
+
+msgid "Unpublished"
+msgstr "Ikke udgivet"
+
+msgid "Published status"
+msgstr "Publiceringsstatus"
+
+msgid "No content available."
+msgstr "Der er intet indhold at vise."
+
+msgid "Find and manage content"
+msgstr "Find og håndtér indhold"
+
+msgid "Recent content"
+msgstr "Seneste indhold"
+
+msgid "Recent content."
+msgstr "Seneste indhold."
+
+msgid "More"
+msgstr "Mere"
+
+msgid "Frontpage"
+msgstr "Forside"
+
+msgid "All content promoted to the front page."
+msgstr "Alt indhold som vises på forsiden."
+
+msgid "Glossary"
+msgstr "Ordliste"
+
+msgid "All content, by letter."
+msgstr "Alt indhold efter forbogstav."
+
+msgid "Last update"
+msgstr "Seneste opdatering"
+
+msgid "Attachment"
+msgstr "Bilag"
+
+msgid "Taxonomy term"
+msgstr "Ord i ordforråd"
+
+msgid "Content belonging to a certain taxonomy term."
+msgstr "Indhold som er knyttet til en bestemt term."
+
+msgid "Users"
+msgstr "Brugere"
+
+msgid "People"
+msgstr "Personer"
+
+msgid "Find and manage people interacting with your site."
+msgstr "Find og håndtér personer som bruger dit site."
+
+msgid "Bulk update"
+msgstr "Masseopdatering"
+
+msgid "Username"
+msgstr "Brugernavn"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Blocked"
+msgstr "Blokeret"
+
+msgid "Roles"
+msgstr "Roller"
+
+msgid "Member for"
+msgstr "Medlem i"
+
+msgid "Last access"
+msgstr "Seneste tilgang"
+
+msgid "Name or email contains"
+msgstr "Navn eller e-mail indeholder"
+
+msgid "Role"
+msgstr "Rolle"
+
+msgid "Permission"
+msgstr "Tilladelse"
+
+msgid "No people available."
+msgstr "Ingen personer til rådighed."
+
+msgid "more"
+msgstr "mere"
+
+msgid "List"
+msgstr "Vis"
+
+msgid "Manage user accounts, roles, and permissions."
+msgstr "Håndtér brugerkonti, roller og tilladelser."
+
+msgid "Who's new"
+msgstr "Nye brugere"
+
+msgid "Shows a list of the newest user accounts on the site."
+msgstr "Viser en liste af de nyeste brugerkonti på sitet."
+
+msgid "A list of new users"
+msgstr "En liste af nye brugere"
+
+msgid "User"
+msgstr "Bruger"
+
+msgid "Who's online block"
+msgstr "Hvem er online"
+
+msgid ""
+"Shows the user names of the most recently active users, and the total "
+"number of active users."
+msgstr ""
+"Viser navnene på de brugere, der senste har været aktive, og det "
+"totale antal af aktive brugere."
+
+msgid ""
+"A user is considered online for this long after they have last viewed "
+"a page."
+msgstr ""
+"En bruger bliver opfattet som online i dette tidsrum efter hun sidst "
+"har set en side."
+
+msgid "Who's online"
+msgstr "Hvem er online"
+
+msgid "There are currently @total users online."
+msgstr "Der er i øjeblikket @total brugere online."
+
+msgid "There are currently 0 users online."
+msgstr "Der er i øjeblikket 0 brugere online."
+
+msgid "A list of users that are currently logged in."
+msgstr "En liste af indloggede brugere."
+
+msgid "View edit page"
+msgstr "Redigeringsside"
+
+msgid "Manage view settings"
+msgstr "Håndtér indstillinger for views"
+
+msgid "View or edit the configuration."
+msgstr "Vis eller redigér konfigurationen."
+
+msgid "Displays in this view"
+msgstr "Vises i dette view"
+
+msgid ""
+"A display is a way of outputting the results, e.g., as a page or a "
+"block. A view can contain multiple displays, which are listed here. "
+"The active display is highlighted."
+msgstr ""
+"Et display er en metode til at vise resultaterne, f.eks. som en side "
+"eller en blok. Et view kan indeholde flere displays, som vises her. "
+"Det aktive display er fremhævet."
+
+msgid "View administration"
+msgstr "Vis administration"
+
+msgid ""
+"Perform administrative tasks, including adding a description and "
+"creating a clone. Click the drop-down button to view the available "
+"options."
+msgstr ""
+"Udfør administrative opgaver, som f.eks. at tilføje en beskrivelse "
+"eller oprette en kopi. Klik på dropdown-menuen for at se de "
+"tilgængelige muligheder."
+
+msgid "Output format"
+msgstr "Output-format"
+
+msgid ""
+"Choose how to output results. E.g., choose <em>Content</em> to output "
+"each item completely, using your configured display settings. Or "
+"choose <em>Fields</em>, which allows you to output only specific "
+"fields for each result. Additional formats can be added by installing "
+"modules to <em>extend</em> Drupal's base functionality."
+msgstr ""
+"Vælg hvordan resultaterne skal vises. Vælg f.eks. <em>Indhold</em> "
+"for at vise en komplet version af hvert resultat baseret på dine "
+"præsentationsindstillinger. Eller vælg <em>Felter</em> som gør det "
+"muligt kun at vise specifikke felter for hvert resultat. Yderligere "
+"formater kan tilføjes ved installere moduler som <em>udvider</em> "
+"Drupals kernefunktionalitet."
+
+msgid "Fields"
+msgstr "Felter"
+
+msgid ""
+"If this view uses fields, they are listed here. You can click on a "
+"field to configure it."
+msgstr ""
+"Hvis denne visning bruger filtre er de opstillet her. Du kan klikke "
+"på et felt for at konfigurere det."
+
+msgid "Filter your view"
+msgstr "Filtrer din visning"
+
+msgid ""
+"Add filters to limit the results in the output. E.g., to only show "
+"content that is <em>published</em>, you would add a filter for "
+"<em>Published</em> and select <em>Yes</em>."
+msgstr ""
+"Tilføj filtre for at begrænse mængden af resultater i dit output. "
+"Hvis du f.eks. kun ønsker at vise indhold, der er <em>udgivet</em>, "
+"kan du tilføje filtret <em>Udgivet</em> og vælge <em>Ja</em>."
+
+msgid "Filter actions"
+msgstr "Filtrer handlinger"
+
+msgid "Add, rearrange or remove filters."
+msgstr "Tilføj, omarranger eller fjern filtre."
+
+msgid "Sort Criteria"
+msgstr "Kriterie"
+
+msgid ""
+"Control the order in which the results are output. Click on an active "
+"sort rule to configure it."
+msgstr ""
+"Tilpas rækkefølgen af resultaterne. Klik på den aktive "
+"sorteingsregel for at konfigurere den."
+
+msgid "Sort actions"
+msgstr "Sorteringshandlinger"
+
+msgid "Add, rearrange or remove sorting rules."
+msgstr "Tilføj, omfordel eller fjern sorteringsregler."
+
+msgid "Preview"
+msgstr "Gennemse"
+
+msgid "Show a preview of the view output."
+msgstr "Vis et preview."
+
+msgid "Message"
+msgstr "Meddelelse"
+
+msgid "‹ previous"
+msgstr "‹ forrige"
+
+msgid "next ›"
+msgstr "næste ›"
+
+msgid "« first"
+msgstr "« første"
+
+msgid "last »"
+msgstr "sidste »"
+
+msgid "With selection"
+msgstr "Handling"
+
+msgid "Message text"
+msgstr "Besked tekst"
+
+msgid "Published date"
+msgstr "Udgivelsesdato"
+
+msgid "Template"
+msgstr "Skabelon"
+
+msgid "No messages created yet"
+msgstr "Ingen meddelelser oprettet endnu"
+
+msgid "Subscribe"
+msgstr "Abonnér"
+
+msgid "Unsubscribe"
+msgstr "Opsig abonnement"
+
+msgid "Terms"
+msgstr "Ord"
+
+msgid "Save"
+msgstr "Gem"
+
+msgid "Settings"
+msgstr "Indstillinger"
+
+msgid "Calendar administration"
+msgstr "Kalenderadministration"
+
+msgid "Calendar"
+msgstr ""
+"Kalender\r\n"
+""
+
+msgid "Settings decreto help messages"
+msgstr "Indstillinger for Decreto hjælpebeskeder"
+
+msgid "Settings for * to PDF convertation"
+msgstr "Indstillinger for * til PDF konvertering"
+
+msgid "Settings for pdf to HTML convertation"
+msgstr "Indstillinger for PDF til HTML konvertering"
+
+msgid "My account"
+msgstr "Min konto"
+
+msgid "Log out"
+msgstr "Log ud"
+
+msgid "Enter your search terms..."
+msgstr "Søg"
+
+msgid "Change organisation"
+msgstr "Skift organisation"
+
+msgid "Notifications"
+msgstr "Notifikationer"
+
+msgid "Show all"
+msgstr "Vis alle"
+
+msgid "Notes"
+msgstr "Noter"
+
+msgid "Memos"
+msgstr "Memoer"
+
+msgid "Find member"
+msgstr "Find medlem"
+
+msgid "This organisation"
+msgstr "Denne organisaton"
+
+msgid "Other organisations"
+msgstr "Andre organisationer"
+
+msgid "Name and department"
+msgstr "Navn og afdeling"
+
+msgid "Date and location"
+msgstr "Dato og lokation"
+
+msgid "Show meetings"
+msgstr "Vis møde"
+
+msgid "Filter meetings"
+msgstr "Filtrér møder"
+
+msgid "Show only meetings from departments I am member of"
+msgstr "Vis kun møder i afdelinger jeg er medlem af"
+
+msgid "Save configuration"
+msgstr "Gem indstillinger"
+
+msgid "Save and add"
+msgstr "Gem og tilføj"
+
+msgid "Content Language Settings"
+msgstr "Indstillinger for indholdssprog"
+
+msgid "Meeting"
+msgstr "Møde"
+
+msgid "Create meeting"
+msgstr "Opret møde"
+
+msgid "Create department"
+msgstr "Opret afdeling"
+
+msgid "Create organisation"
+msgstr "Opret organisation"
+
+msgid "All caches cleared."
+msgstr "Alle caches blev ryddet"
+
+msgid "Type name"
+msgstr "Indtast navn"
+
+msgid "Search results"
+msgstr "Søgeresultater"
+
+msgid "Find user"
+msgstr "Find bruger"
+
+msgid "Details"
+msgstr "Detaljer"
+
+msgid "This meeting has memos"
+msgstr "Dette møde har et eller flere memoer"
+
+msgid "This meeting has notes"
+msgstr "Dette møder har en eller flere noter"
+
+msgid "Name and description"
+msgstr "Navn og beskrivelse"
+
+msgid "Edit meeting"
+msgstr "Rediger møde"
+
+msgid "Delete meeting"
+msgstr "Slet møde"
+
+msgid "Own notes"
+msgstr "Egne noter"
+
+msgid "Filter bulletpoints"
+msgstr "Filtrér mødepunkter"
+
+msgid "Free text"
+msgstr "Fritekst"
+
+msgid "Create point from files"
+msgstr "Opret punkt fra filer"
+
+msgid "Create point"
+msgstr "Opret punkt"
+
+msgid "Turn on/off switch mode"
+msgstr "Slå redigeringsmuligheder til eller fra"
+
+msgid "Open/close all points"
+msgstr "Åbn/Luk alle punkter"
+
+msgid "Open/close bullet point attachment"
+msgstr "Åbn/Luk fil på mødepunkt"
+
+msgid "No bullet point attachment added. Would you like to"
+msgstr "Der er ikke tilføjet nogen fil til mødepunktet, vil du"
+
+msgid "create one"
+msgstr "oprette en"
+
+msgid "Personal bullet point"
+msgstr "Personligt punkt"
+
+msgid "Search for a member"
+msgstr "Søg efter medlem"
+
+msgid "Ex. Lars Petersen"
+msgstr "F.eks Lars Petersen"
+
+msgid "Full title of the meeting"
+msgstr "Mødets fulde titel"
+
+msgid "Department"
+msgstr "Afdeling"
+
+msgid "Location"
+msgstr "Lokation"
+
+msgid "Use department members as meeting participants"
+msgstr "Brug afdelingens medlemmer som mødedeltagere"
+
+msgid "Start date - optional"
+msgstr "Startdato - valgfrit"
+
+msgid "End date - optional"
+msgstr "Slutdato - valgfrit"
+
+msgid "Open description"
+msgstr "Åben beskrivelse"
+
+msgid "Closed description"
+msgstr "Lukket beskrivelse"
+
+msgid "Chosen internal members"
+msgstr "TIlvalgte interne medlemmer"
+
+msgid "No members added."
+msgstr "Ingen medlemmer tilmeldt"
+
+msgid "Remove all internal members"
+msgstr "Fjern alle interne medlemmer"
+
+msgid "Chosen external members"
+msgstr "Tilvalgte eksterne medlemmer"
+
+msgid "Remove all external members"
+msgstr "Fjern alle eksterne medlemmer"
+
+msgid "Did you forget your password?"
+msgstr "Har du glemt din adgangskode?"
+
+msgid "Type text"
+msgstr "Skriv navn"
+
+msgid "Download full copy"
+msgstr "Download fuld kopi"
+
+msgid "Download full copy (closed)"
+msgstr "Download fuld kopi (lukkede punkter)"
+
+msgid "Edit user"
+msgstr "Ret bruger"
+
+msgid "First name"
+msgstr "Fornavn"
+
+msgid "Last name"
+msgstr "Efternavn"
+
+msgid "Create user"
+msgstr "Opret bruger"
+
+msgid "No bullet points added. Would you like to"
+msgstr "Der er ikke tilføjet nogle punkter. Vil du"
+
+msgid "No items available."
+msgstr "Ingen elementer tilgængelig."
+
+msgid "Delete user"
+msgstr "Slet bruger"
+
+msgid "Personal"
+msgstr "Personlig"
+
+msgid "Convert to PDF"
+msgstr "Konvertér til PDF"
+
+msgid "Convert to HTML"
+msgstr "Konvertér til HTML"
+
+msgid "Add another file"
+msgstr "Tilføj fil"
+
+msgid "Create bullet point"
+msgstr "Opret punkt"
+
+msgid "Create bullet points"
+msgstr "Opret ét eller flere punkter"
+
