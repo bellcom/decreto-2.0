@@ -20,6 +20,11 @@
           {% set link_title %}{{ link_title }} <span class="caret"></span>{% endset %}
           {% set link_attributes = link_attributes.addClass('dropdown-toggle').setAttribute('data-toggle', 'dropdown') %}
         {% endif %}
+
+        {% if(item.link_attributes.storage['modal'].__toString()) %}
+          {% set link_attributes = link_attributes.addClass('use-ajax').setAttribute('data-dialog-type', 'modal') %}
+        {% endif %}
+
         {# Must use link() here so it triggers hook_link_alter(). #}
         {{ link(link_title, item.url, link_attributes.addClass(item.in_active_trail ? 'active-trail')) }}
         {% if item.below %}
