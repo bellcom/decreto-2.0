@@ -1,0 +1,13 @@
+display:
+  decreto_page_other_organisations_meetings:
+    display_options:
+      title: 'Kommende møder i andre organisationer'
+  decreto_block_department_meetings:
+    display_options:
+      title: 'Kommende møder i denne afdeling'
+  decreto_block_location_meetings:
+    display_options:
+      title: 'Kommende møder på denne lokation'
+  decreto_block_my_meetings:
+    display_options:
+      title: 'Kommende møder'

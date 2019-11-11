@@ -58,7 +58,7 @@ display:
       style:
         type: default
         options:
-          row_class: 'col-xs-12 col-sm-6'
+          row_class: ''
           default_row_class: true
           uses_fields: false
       row:
@@ -326,6 +326,8 @@ display:
         arguments: false
         relationships: false
         footer: false
+        style: false
+        row: false
       title: 'Find user'
       header:
         decreto_help_message_popup:
@@ -362,6 +364,17 @@ display:
           create_user: 1
           create_user_use_ajax: 0
           plugin_id: decreto_user_users_view_context_links
+      style:
+        type: default
+        options:
+          row_class: 'col-xs-12 col-sm-6'
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: 'entity:user'
+        options:
+          relationship: none
+          view_mode: list
     cache_metadata:
       max-age: -1
       contexts:
