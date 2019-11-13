@@ -1,0 +1,7 @@
+display:
+  default:
+    display_options:
+      title: Medlemmer
+  decreto_page_organisation_users:
+    display_options:
+      title: 'Find bruger'

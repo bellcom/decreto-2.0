@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-11-11 15:25+0000\n"
-"PO-Revision-Date: 2019-11-11 15:25+0000\n"
+"POT-Creation-Date: 2019-11-13 09:43+0100\n"
+"PO-Revision-Date: 2019-11-13 09:43+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgid "Tabs"
 msgstr "Faner"
 
 msgid "Main navigation"
-msgstr "Main navigation"
+msgstr "Primær navigation"
 
 msgid "Status messages"
 msgstr "Statusmeddelelser"
@@ -258,7 +258,7 @@ msgid "Site information links"
 msgstr "Links til informationen om sitet"
 
 msgid "Site section links"
-msgstr "Site section links"
+msgstr "Links til sitets sektioner"
 
 msgid "User tool links, often added by modules"
 msgstr "Bruger værktøjslinks, som typisk tilføjes af moduler"
@@ -1246,8 +1246,20 @@ msgstr "Søgeresultater"
 msgid "Find user"
 msgstr "Find bruger"
 
+msgid "Edit department"
+msgstr "Rediger afdeling"
+
+msgid "Delete department"
+msgstr "Slet afdeling"
+
 msgid "Details"
 msgstr "Detaljer"
+
+msgid "Short description"
+msgstr "Kort beskrivelse"
+
+msgid "Attach members"
+msgstr "Tilknyt medlemmer"
 
 msgid "This meeting has memos"
 msgstr "Dette møde har et eller flere memoer"
@@ -1327,6 +1339,9 @@ msgstr "Åben beskrivelse"
 msgid "Closed description"
 msgstr "Lukket beskrivelse"
 
+msgid "First and last name"
+msgstr "For og efternavn"
+
 msgid "Chosen internal members"
 msgstr "TIlvalgte interne medlemmer"
 
@@ -1342,11 +1357,32 @@ msgstr "Tilvalgte eksterne medlemmer"
 msgid "Remove all external members"
 msgstr "Fjern alle eksterne medlemmer"
 
+msgid "Members"
+msgstr "Medlemmer"
+
+msgid "Attached"
+msgstr "Tilknyttet"
+
+msgid "Edit organisation link"
+msgstr "Rediger organisations link"
+
 msgid "Did you forget your password?"
 msgstr "Har du glemt din adgangskode?"
 
 msgid "Type text"
 msgstr "Skriv navn"
+
+msgid "Create location"
+msgstr "Opret lokation"
+
+msgid "Edit location"
+msgstr "Rediger lokation"
+
+msgid "Delete location"
+msgstr "Slet lokation"
+
+msgid "Edit location @label"
+msgstr "Rediger lokation @label"
 
 msgid "Download full copy"
 msgstr "Download fuld kopi"
@@ -1369,6 +1405,18 @@ msgstr "Ret konto"
 msgid "Create user"
 msgstr "Opret bruger"
 
+msgid "Department admin"
+msgstr "Afdelingsadministrator"
+
+msgid "Edit department @label"
+msgstr "Rediger afdeling @label"
+
+msgid "The following dependent entities will be deleted:"
+msgstr "Det følgende indhold vil blive slettet:"
+
+msgid "Delete @title?"
+msgstr "Slet @title?"
+
 msgid "No bullet points added. Would you like to"
 msgstr "Der er ikke tilføjet nogle punkter. Vil du"
 
@@ -1377,6 +1425,12 @@ msgstr "Ingen elementer tilgængelig."
 
 msgid "Delete user"
 msgstr "Slet bruger"
+
+msgid "Edit organisation"
+msgstr "Rediger organisation"
+
+msgid "Delete organisation"
+msgstr "Slet organisation"
 
 msgid "Personal"
 msgstr "Personlig"
@@ -1395,4 +1449,7 @@ msgstr "Opret punkt"
 
 msgid "Create bullet points"
 msgstr "Opret ét eller flere punkter"
+
+msgid "Edit organisation @label"
+msgstr "Rediger organisation @label"
 
