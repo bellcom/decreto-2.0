@@ -69,3 +69,17 @@ jQuery(function ($) {
     event.preventDefault();
   });
 });
+
+// Sidebar toggle.
+(function() {
+  const sidebar = document.querySelector('.layout__sidebar');
+  const toggles = document.querySelectorAll('.js-toggle-sidebar');
+
+  for (var i = 0; i < toggles.length; i++) {
+    let toggle = toggles[i];
+
+    toggle.addEventListener('click', e => {
+      sidebar.classList.toggle('layout__sidebar--narrow');
+    });
+  }
+})();
