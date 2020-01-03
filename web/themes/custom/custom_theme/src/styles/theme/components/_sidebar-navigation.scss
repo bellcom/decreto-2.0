@@ -38,6 +38,8 @@
 
     color: $text-color;
 
+    transition: none;
+
     &, &:hover, &:focus, &:active {
       text-decoration: none;
     }
@@ -84,6 +86,10 @@
       margin-right: 10px;
 
       color: $brand-tertiary;
+
+      .layout__sidebar--narrow & {
+        margin-right: 0;
+      }
     }
 
     &:hover, &:focus, &:active {

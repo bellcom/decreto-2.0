@@ -47,6 +47,37 @@ body {
   background-color: $body-bg-secondary;
 }
 
+
+.show-on-narrow {
+  display: none;
+}
+
+.layout__sidebar {
+
+  &.layout__sidebar--narrow {
+    flex-basis: initial;
+
+    .boxy--calendar {
+      display: none;
+    }
+
+    .show-on-narrow {
+      display: block;
+    }
+
+    .hide-on-narrow {
+      display: none;
+    }
+
+    .sidebar-navigation__item {
+
+      > a {
+        font-size: 0;
+      }
+    }
+  }
+}
+
 .layout__sidebar__logo {
   display: block;
 
@@ -55,6 +86,8 @@ body {
   text-align: center;
 
   img {
+    margin: auto;
+
     max-width: floor( ($layout-sidebar-width - $grid-gutter-width) );
   }
 
