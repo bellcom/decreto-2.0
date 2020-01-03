@@ -184,7 +184,22 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+
+  .boxy__heading {
+    padding: $boxy-heading-spacing-top-bottom 15px;
+  }
+  .boxy__body {
+    padding: $boxy-body-spacing-top-bottom 15px;
+  }
+  .boxy {
+
+    .boxy {
+      margin-left: floor( ( 0 - 15px ) );
+      margin-right: floor( ( 0 - 15px ) );
+    }
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {}

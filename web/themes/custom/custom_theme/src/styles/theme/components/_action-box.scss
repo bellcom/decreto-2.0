@@ -134,7 +134,12 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+
+  .action-box {
+    padding: 20px 15px;
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {}
