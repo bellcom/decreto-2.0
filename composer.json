@@ -62,6 +62,7 @@
         "drupal/drush_language": "^1.0@RC",
         "drupal/front_page": "^1.0@beta",
         "drupal/kint": "^2.0",
+        "drupal/mail_login": "^1.0",
         "drupal/menu_link_attributes": "1.x-dev",
         "drupal/message": "^1.0@RC",
         "drupal/message_notify": "^1.0@beta",
