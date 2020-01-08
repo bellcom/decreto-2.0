@@ -133,6 +133,9 @@
         },
         "enable-patching": true,
         "patches": {
+            "drupal/core": {
+                "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch"
+            },
             "drupal/calendar": {
                 "2789829 - Query returns no results": "https://www.drupal.org/files/issues/2019-05-22/2789829-2-long-query-name.patch"
             }
