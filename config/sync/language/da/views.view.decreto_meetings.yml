@@ -1,13 +1,18 @@
 display:
   decreto_page_other_organisations_meetings:
-    display_options:
-      title: 'Kommende møder i andre organisationer'
+    display_options: {  }
   decreto_block_department_meetings:
-    display_options:
-      title: 'Kommende møder i denne afdeling'
+    display_options: {  }
   decreto_block_location_meetings:
-    display_options:
-      title: 'Kommende møder på denne lokation'
+    display_options: {  }
   decreto_block_my_meetings:
+    display_options: {  }
+  default:
+    display_options:
+      empty:
+        area_text_custom:
+          content: 'Ingen møder blev fundet.'
+      title: 'Kommende møder i denne organisation'
+  decreto_block_users_meetings:
     display_options:
       title: 'Kommende møder'
