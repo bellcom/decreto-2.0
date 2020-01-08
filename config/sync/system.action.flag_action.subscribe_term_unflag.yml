@@ -2,12 +2,14 @@ uuid: 5a5e97b3-599e-42a4-a90c-5ca9171a2c72
 langcode: en
 status: true
 dependencies:
+  config:
+    - flag.flag.subscribe_term
   module:
     - flag
-id: flag_action.subscribe_term.unflag
+id: flag_action.subscribe_term_unflag
 label: Unsubscribe
 type: taxonomy_term
-plugin: 'flag_action:subscribe_term.unflag'
+plugin: 'flag_action:subscribe_term_unflag'
 configuration:
   flag_id: subscribe_term
   flag_action: unflag

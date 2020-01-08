@@ -2,12 +2,14 @@ uuid: d10ed5c1-03d8-43fd-b930-401dddf532d1
 langcode: en
 status: true
 dependencies:
+  config:
+    - flag.flag.subscribe_node
   module:
     - flag
-id: flag_action.subscribe_node.flag
+id: flag_action.subscribe_node_flag
 label: Subscribe
 type: node
-plugin: 'flag_action:subscribe_node.flag'
+plugin: 'flag_action:subscribe_node_flag'
 configuration:
   flag_id: subscribe_node
   flag_action: flag

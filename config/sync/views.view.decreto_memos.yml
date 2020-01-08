@@ -17,7 +17,6 @@ description: ''
 tag: ''
 base_table: node_field_data
 base_field: nid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -126,6 +125,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -136,6 +137,9 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         uid_current:
           id: uid_current
           table: users
@@ -159,6 +163,8 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -201,7 +207,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'No memos found.'
+          content: 'Ingen memoer blev fundet.'
           plugin_id: text_custom
       relationships:
         uid:
@@ -392,7 +398,7 @@ display:
       defaults:
         pager: false
         title: false
-      title: Memos
+      title: Memoer
       display_description: ''
     cache_metadata:
       max-age: -1
@@ -432,7 +438,7 @@ display:
       defaults:
         pager: false
         title: false
-      title: Memos
+      title: Memoer
       display_description: ''
     cache_metadata:
       max-age: -1

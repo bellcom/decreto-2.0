@@ -2,12 +2,14 @@ uuid: 9c0ee178-ff7d-4d80-8c3f-0cfe3d130b73
 langcode: en
 status: true
 dependencies:
+  config:
+    - flag.flag.subscribe_decreto_tax_department
   module:
     - flag
-id: flag_action.subscribe_decreto_tax_department.flag
+id: flag_action.subscribe_decreto_tax_department_flag
 label: 'Flag this item'
 type: taxonomy_term
-plugin: 'flag_action:subscribe_decreto_tax_department.flag'
+plugin: 'flag_action:subscribe_decreto_tax_department_flag'
 configuration:
   flag_id: subscribe_decreto_tax_department
   flag_action: flag

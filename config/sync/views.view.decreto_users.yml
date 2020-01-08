@@ -17,7 +17,6 @@ description: ''
 tag: ''
 base_table: users_field_data
 base_field: uid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -124,9 +123,11 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
       sorts: {  }
-      title: Members
+      title: Medlemmer
       header:
         decreto_help_message_popup:
           id: decreto_help_message_popup
@@ -328,7 +329,7 @@ display:
         footer: false
         style: false
         row: false
-      title: 'Find user'
+      title: 'Find bruger'
       header:
         decreto_help_message_popup:
           id: decreto_help_message_popup
