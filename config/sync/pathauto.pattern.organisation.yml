@@ -1,0 +1,22 @@
+uuid: 8e5d2a28-d1df-4d4a-9c55-541d46cc02dc
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: organisation
+label: Organisation
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  a6b9857c-7441-46a1-8e53-414d285e0f61:
+    id: node_type
+    bundles:
+      decreto_organisation: decreto_organisation
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a6b9857c-7441-46a1-8e53-414d285e0f61
+selection_logic: and
+weight: -5
+relationships: {  }

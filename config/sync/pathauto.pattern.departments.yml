@@ -1,0 +1,23 @@
+uuid: c1303175-53b3-4b6c-ba62-aaae4d4a9d06
+langcode: da
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: departments
+label: Departments
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:field_decreto_dep_org:entity:url:path]/[term:parent:url:path]/[term:name]'
+selection_criteria:
+  74238ad1-877d-49c1-abcd-3f8177f6606b:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      decreto_tax_department: decreto_tax_department
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 74238ad1-877d-49c1-abcd-3f8177f6606b
+selection_logic: and
+weight: -5
+relationships: {  }
