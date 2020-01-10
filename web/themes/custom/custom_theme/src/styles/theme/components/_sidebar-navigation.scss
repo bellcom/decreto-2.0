@@ -71,6 +71,9 @@
 // Icons.
 .sidebar-navigation__item--dashboard,
 .sidebar-navigation__item--meetings,
+.sidebar-navigation__item--departments,
+.sidebar-navigation__item--organisations,
+.sidebar-navigation__item--locations,
 .sidebar-navigation__item--settings {
 
   > a {
@@ -138,6 +141,33 @@
 
     &:before {
       content: "settings";
+    }
+  }
+}
+.sidebar-navigation__item--departments {
+
+  > a {
+
+    &:before {
+      content: "assignment";
+    }
+  }
+}
+.sidebar-navigation__item--locations {
+
+  > a {
+
+    &:before {
+      content: "near_me";
+    }
+  }
+}
+.sidebar-navigation__item--organisations {
+
+  > a {
+
+    &:before {
+      content: "location_city";
     }
   }
 }
