@@ -1,0 +1,23 @@
+uuid: 10557233-44b6-4869-a8a2-4267d2a05ead
+langcode: da
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: locations
+label: Locations
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:field_decreto_loc_org:entity:url:path]/[term:parent:url:path]/[term:name]'
+selection_criteria:
+  c51cc149-78f1-45f9-906b-c12596c32d53:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      decreto_tax_location: decreto_tax_location
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: c51cc149-78f1-45f9-906b-c12596c32d53
+selection_logic: and
+weight: -5
+relationships: {  }

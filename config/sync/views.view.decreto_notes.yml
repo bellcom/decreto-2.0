@@ -14,7 +14,6 @@ description: ''
 tag: ''
 base_table: decreto_annotator_notes
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -141,6 +140,8 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -168,7 +169,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'No notes found.'
+          content: 'Ingen noter blev fundet.'
           plugin_id: text_custom
       relationships:
         uid:
@@ -247,7 +248,7 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      title: Notes
+      title: Noter
       defaults:
         title: false
         pager: false
@@ -372,7 +373,7 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      title: Notes
+      title: Noter
       defaults:
         title: false
         pager: false

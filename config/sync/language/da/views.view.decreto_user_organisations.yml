@@ -1,0 +1,7 @@
+display:
+  decreto_block_users_organisations:
+    display_options:
+      title: Organisationer
+  default:
+    display_options:
+      title: 'Mine organisationer'

@@ -237,7 +237,16 @@ class UserEditForm extends AjaxFormBase {
       }
     }
 
+    $isNew = $this->entity->isNew();
+
     $this->entity->save();
+
+    // Notify user.
+    if ($isNew) {
+      _user_mail_notify('register_admin_created', $this->entity);
+      $this->messenger()->addStatus($this->t('A welcome message with further instructions has been emailed to the new user <a href=":url">%name</a>.', [':url' => $this->entity->toUrl()->toString(), '%name' => $this->entity->getAccountName()]));
+    }
+
     // Setting parent the as user, so that redirect happens to user page.
     $this->parent = $this->entity;
   }

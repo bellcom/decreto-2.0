@@ -1,0 +1,10 @@
+display:
+  decreto_block_users_departments:
+    display_options:
+      title: Afdelinger
+  default:
+    display_options:
+      title: 'Mine afdelinger'
+      empty:
+        area_text_custom:
+          content: 'Ingen afdelinger blev fundet.'

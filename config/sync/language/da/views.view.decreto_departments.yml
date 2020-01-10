@@ -1,7 +1,8 @@
 display:
   decreto_page_departments:
-    display_options:
-      title: Afdelinger
+    display_options: {  }
   decreto_page_other_organisations_departments:
+    display_options: {  }
+  default:
     display_options:
-      title: 'Afdelinger i andre organisationer'
+      title: 'Afdelinger i denne organisation'
