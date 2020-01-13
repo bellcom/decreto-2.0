@@ -91,6 +91,16 @@
                       </a>
                     </li>
                     {% endif %}
+                    {% if content['#access']['decreto_user']['canCreate'] %}
+                      <li>
+                        <a href="{{ path('decreto_user.users_add') }}" class="use-ajax" data-dialog-type="modal">
+                          <i class="material-icons">
+                            business_center
+                          </i>
+                          {{ 'User' | trans }}
+                        </a>
+                      </li>
+                    {% endif %}
                   </ul>
 
                 </div>

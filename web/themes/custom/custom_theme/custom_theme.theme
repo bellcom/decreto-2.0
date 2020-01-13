@@ -42,6 +42,7 @@ function custom_theme_preprocess_page(array &$variables) {
 
   // Access params.
   $variables['content']['#access']['decreto_meeting']['canCreate'] = AccessController::createMeetingAccess()->isAllowed();
+  $variables['content']['#access']['decreto_user']['canCreate'] = \Drupal::currentUser()->hasPermission('administer users');
 
   // Get initials of user.
   $user = User::load($account->id());
