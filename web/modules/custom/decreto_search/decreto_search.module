@@ -97,7 +97,7 @@ function decreto_search_theme_suggestions_form(array $variables) {
 }
 
 /**
- * Implements hook_form_alter()
+ * Implements hook_form_alter().
  *
  * @param $form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
@@ -115,8 +115,23 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
     ];
 
     // Changing type of date fields.
-    $form['from']['#type'] = 'date';
-    $form['to']['#type'] = 'date';
+    $form['from']['#type'] = 'bootstrap_date_time';
+    $form['from']['#date_type'] = 'date';
+    $form['from']['#disable_days'] = [];
+    $form['from']['#hour_format'] = '24h';
+    $form['from']['#allow_times'] = '15';
+    $form['from']['#datetime_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATE_JS_FORMAT;
+    $form['from']['#prefix'] = '';
+    $form['from']['#suffix'] = '';
+
+    $form['to']['#type'] = 'bootstrap_date_time';
+    $form['to']['#date_type'] = 'date';
+    $form['to']['#disable_days'] = [];
+    $form['to']['#hour_format'] = '24h';
+    $form['to']['#allow_times'] = '15';
+    $form['to']['#datetime_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATE_JS_FORMAT;
+    $form['to']['#prefix'] = '';
+    $form['to']['#suffix'] = '';
   }
 }
 
@@ -152,7 +167,7 @@ function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase 
           $end_date_timestamp = $condition[1];
 
           // Changing time to 23:59:59.
-          $end_date_timestamp_end_of_day   = strtotime("tomorrow", $end_date_timestamp) - 1;
+          $end_date_timestamp_end_of_day = strtotime("tomorrow", $end_date_timestamp) - 1;
 
           // Swapping value.
           $condition[1] = $end_date_timestamp_end_of_day;

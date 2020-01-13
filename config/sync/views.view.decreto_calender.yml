@@ -73,10 +73,10 @@ display:
           multiday_theme: '1'
           multiday_hidden: {  }
           granularity_links:
-            day: view.decreto_calender.page_day
-            week: view.decreto_calender.page_week
+            day: ''
+            week: ''
           granularity_links_custom_path:
-            day: '/meetings?from=[decreto_calendar_date:custom:Y-m-d]&to=[decreto_calendar_date:custom:Y-m-d]'
+            day: '/meetings?from=[decreto_calendar_date:custom:d.m.Y]&to=[decreto_calendar_date:custom:d.m.Y]'
       row:
         type: calendar_row
         options:

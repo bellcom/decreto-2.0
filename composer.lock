@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a04f8ee0c2bf51b1baa289dd03a696b5",
+    "content-hash": "17751a92530383db444e4ea70e303c91",
     "packages": [
         {
             "name": "ajgl/breakpoint-twig-extension",
@@ -2442,6 +2442,10 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "3106036 - Prefix and suffix are hardcoded": "https://www.drupal.org/files/issues/2020-01-13/bootstrap_datetime_picker-prefix_suffix_hardcoded-3106036.patch",
+                    "3106038 - Bootstrap Datetime picker custom format": "https://www.drupal.org/files/issues/2020-01-13/bootstrap_datetime_picker-custom-format-3106038.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -11442,7 +11446,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }

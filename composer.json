@@ -42,7 +42,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "composer/installers": "^1.2",
         "contrib/custom_context_provider": "dev-master",
         "contrib/vocabulary_condition": "dev-master",
@@ -135,6 +135,10 @@
         },
         "enable-patching": true,
         "patches": {
+            "drupal/bootstrap_datetime_picker": {
+                "3106036 - Prefix and suffix are hardcoded": "https://www.drupal.org/files/issues/2020-01-13/bootstrap_datetime_picker-prefix_suffix_hardcoded-3106036.patch",
+                "3106038 - Bootstrap Datetime picker custom format": "https://www.drupal.org/files/issues/2020-01-13/bootstrap_datetime_picker-custom-format-3106038.patch"
+            },
             "drupal/core": {
                 "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch"
             },
