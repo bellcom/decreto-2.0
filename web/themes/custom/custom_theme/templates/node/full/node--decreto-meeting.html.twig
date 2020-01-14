@@ -149,7 +149,7 @@
         <!-- End - create manually -->
 
       </div>
-      <!-- End - actions -->
+      <!-- End - actions   -->
     {% endif %}
 
     <!-- Begin - information -->
@@ -190,13 +190,8 @@
       {% if not node.field_decreto_meet_bps.value %}
           {% if content['#access']['decreto_bullet_point']['canCreate'] %}
           <div>
-            {{ "No bullet points added. Would you like to" | trans}}
-            <a
-              href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-              class="use-ajax" data-dialog-type="modal">
-              {{ "create one" | trans }}
-            </a>
-            ?
+            {{ 'No bullet points added. Would you like to <a href=":url" title="Add bullet point" class="use-ajax"
+            data-dialog-type="modal">create one</a>?' | trans({ ':url': path('decreto_content_modify.bps_add', {'meeting': node.id()}) }) }}
           </div>
         {% endif %}
       {% else %}
