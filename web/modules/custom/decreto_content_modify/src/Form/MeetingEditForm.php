@@ -512,15 +512,17 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['department']['#default_value'] = $meeting->field_decreto_meet_department->target_id;
     $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
 
-    if ($start_date = $meeting->field_decreto_meet_start_date->value) {
-      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+    $start_date = $end_date = NULL;
 
-      $form['pages-page-1']['start_date']['#default_value'] = $date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => drupal_get_user_timezone()]);
+    if ($start_date_str = $meeting->field_decreto_meet_start_date->value) {
+      $start_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date_str, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      $form['pages-page-1']['start_date']['#default_value'] = $start_date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => date_default_timezone_get()]);
     }
-    if ($end_date = $meeting->field_decreto_meet_end_date->value) {
-      $date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+    if ($end_date_str = $meeting->field_decreto_meet_end_date->value) {
+      $end_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date_str, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
-      $form['pages-page-1']['end_date']['#default_value'] = $date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => drupal_get_user_timezone()]);
+      $form['pages-page-1']['end_date']['#default_value'] = $end_date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => date_default_timezone_get()]);
     }
 
     if (!$meeting->field_decreto_meet_full_doc->isEmpty()) {
@@ -545,6 +547,8 @@ class MeetingEditForm extends AjaxFormBase {
         $form['pages-page-2']['participants-container']['participants'][$participant_id]['row']['external_column']['external']['#default_value'] = TRUE;
       }
     }
+
+    $form['pages-page-2']['meeting_summary']['#markup'] = $meeting->getTitle() . ', ' . $start_date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => date_default_timezone_get()]);
 
     return $form;
   }

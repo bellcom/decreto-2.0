@@ -31,6 +31,14 @@
 <div{{ attributes.addClass(classes) }}>
   <div class="col-xs-12 col-sm-8">
 
+    {% if children['meeting_summary']|length %}
+      <h4>
+        <strong>
+          {{ children['meeting_summary'] }}
+        </strong>
+      </h4>
+    {% endif %}
+
     <!-- Begin - form -->
     <div class="form-group">
       <label class="control-label" for="meeting-member-filter-input">
@@ -47,7 +55,7 @@
 
     <!-- Begin - list -->
     <div id="meeting-member-list">
-      {{ children }}
+      {{ children|without('meeting_summary') }}
     </div>
     <div class="js-member-list-no-result hidden">
       <strong>{{ 'No members found containing these letters.' | trans }}</strong>
