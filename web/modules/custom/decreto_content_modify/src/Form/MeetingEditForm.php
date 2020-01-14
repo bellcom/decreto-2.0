@@ -319,6 +319,7 @@ class MeetingEditForm extends AjaxFormBase {
     ];
 
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
+    $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;
 
     return $form;
   }
