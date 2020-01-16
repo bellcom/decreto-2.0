@@ -47,6 +47,14 @@ function custom_theme_preprocess_page(array &$variables) {
   // Access params.
   $variables['content']['#access']['decreto_meeting']['canCreate'] = AccessController::createMeetingAccess()->isAllowed();
   $variables['content']['#access']['decreto_user']['canCreate'] = \Drupal::currentUser()->hasPermission('administer users');
+  // Checking if user has permissions to create something at all.
+  $variables['content']['#access']['decreto_content']['canCreate'] = FALSE;
+  foreach ($variables['content']['#access'] as $entityPermission) {
+    if ($entityPermission['canCreate']) {
+      $variables['content']['#access']['decreto_content']['canCreate'] = TRUE;
+      break;
+    }
+  }
   $decretoUser = new DecretoUser($user);
   $variables['content']['#access']['decreto_organisation']['canSwitch'] = count($decretoUser->getOrganisations(FALSE)) > 1;
 
