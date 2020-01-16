@@ -48,6 +48,22 @@
         {% endif %}
         {# End - location #}
 
+        {# Begin - participants #}
+        {% if node.field_decreto_meet_location.value %}
+          <div class="text--with-icon">
+            <i class="material-icons">person</i>
+            {% if node.field_decreto_meet_use_dep_mem.value %}
+              <strong>{{ "All department members" | trans }}</strong>
+            {% else %}
+              <div>
+                {{ content.field_decreto_meet_partic_int }}
+                {{ content.field_decreto_meet_partic_ext }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        {# End - participants #}
+
         {{ decreto_context_menu }}
       </div>
     </div>
