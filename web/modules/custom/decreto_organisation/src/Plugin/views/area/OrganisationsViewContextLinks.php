@@ -45,7 +45,7 @@ class OrganisationsViewContextLinks extends TokenizeAreaPluginBase {
       '#type' => 'checkbox',
       '#states' => array(
         'invisible' => array(
-          ':input[name="create_organisation"]' => array('checked' => FALSE),
+          ':input[name="options[create_organisation]"]' => array('checked' => FALSE),
         ),
       ),
       '#default_value' => empty($this->options['create_organisation_use_ajax']) ? '' : $this->options['create_organisation_use_ajax'],

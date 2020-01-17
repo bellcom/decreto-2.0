@@ -46,7 +46,7 @@ class LocationsViewContextLinks extends TokenizeAreaPluginBase {
       '#type' => 'checkbox',
       '#states' => array(
         'invisible' => array(
-          ':input[name="create_location"]' => array('checked' => FALSE),
+          ':input[name="options[create_location]"]' => array('checked' => FALSE),
         ),
       ),
       '#default_value' => empty($this->options['create_location_use_ajax']) ? '' : $this->options['create_location_use_ajax'],

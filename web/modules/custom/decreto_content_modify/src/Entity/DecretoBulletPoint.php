@@ -105,7 +105,7 @@ class DecretoBulletPoint extends DecretoNode {
   public function addBulletPointAttachment($nid, $save = TRUE) {
     $bpas = $this->getEntity()->get('field_decreto_bp_bpas')->getValue();
     $key = array_search($nid, array_column($bpas, 'target_id'));
-    if (!$key) {
+    if ($key === FALSE) {
       $this->getEntity()->get('field_decreto_bp_bpas')->appendItem($nid);
       if ($save) {
         $this->getEntity()->save();
@@ -128,9 +128,11 @@ class DecretoBulletPoint extends DecretoNode {
   public function removeBulletPointAttachment($nid, $save = TRUE) {
     $bpas = $this->getEntity()->get('field_decreto_bp_bpas')->getValue();
     $key = array_search($nid, array_column($bpas, 'target_id'));
-    $this->getEntity()->get('field_decreto_bp_bpas')->removeItem($key);
-    if ($save) {
-      $this->getEntity()->save();
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_bp_bpas')->removeItem($key);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 

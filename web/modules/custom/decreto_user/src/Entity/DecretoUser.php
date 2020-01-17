@@ -38,6 +38,9 @@ class DecretoUser {
   /**
    * Adds department to the user.
    *
+   * Only does so if the department is not already added.
+   * Saves the user as well.
+   *
    * @param int $departmentId
    *   Department ID.
    * @param bool $save
@@ -46,9 +49,13 @@ class DecretoUser {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function addDepartment($departmentId, $save = TRUE) {
-    $this->user->field_decreto_usr_departments[] = ['target_id' => $departmentId];
-    if ($save) {
-      $this->user->save();
+    $userDepartments = $this->getEntity()->get('field_decreto_usr_departments')->getValue();
+    $key = array_search($departmentId, array_column($userDepartments, 'target_id'));
+    if ($key === FALSE) {
+      $this->getEntity()->get('field_decreto_usr_departments')->appendItem($departmentId);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
@@ -56,6 +63,7 @@ class DecretoUser {
    * Removes department from the user.
    *
    * If department is not added to user, nothing is done.
+   * Saves the user as well.
    *
    * @param int $departmentId
    *   Department ID.
@@ -65,23 +73,12 @@ class DecretoUser {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function removeDepartment($departmentId, $save = TRUE) {
-    $departmentIsPresent = FALSE;
-
-    $userDepartments = $this->user->field_decreto_usr_departments->getValue();
-
-    foreach ($userDepartments as $delta => $userDepartment) {
-      if ($userDepartment['target_id'] == $departmentId) {
-        $departmentIsPresent = TRUE;
-        unset($userDepartments[$delta]);
-        break;
-      }
-    }
-
-    if ($departmentIsPresent) {
-      $this->user->field_decreto_usr_departments = $userDepartments;
-
+    $userDepartments = $this->getEntity()->get('field_decreto_usr_departments')->getValue();
+    $key = array_search($departmentId, array_column($userDepartments, 'target_id'));
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_usr_departments')->removeItem($key);
       if ($save) {
-        $this->user->save();
+        $this->getEntity()->save();
       }
     }
   }
@@ -113,6 +110,9 @@ class DecretoUser {
   /**
    * Adds organisation to the user.
    *
+   * Only does so if the organisation is not already added.
+   * Saves the user as well.
+   *
    * @param int $organisationId
    *   Organisation ID.
    * @param bool $save
@@ -121,9 +121,13 @@ class DecretoUser {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function addOrganisation($organisationId, $save = TRUE) {
-    $this->user->field_decreto_usr_orgs[] = ['target_id' => $organisationId];
-    if ($save) {
-      $this->user->save();
+    $userOrganisations = $this->getEntity()->get('field_decreto_usr_orgs')->getValue();
+    $key = array_search($organisationId, array_column($userOrganisations, 'target_id'));
+    if ($key === FALSE) {
+      $this->getEntity()->get('field_decreto_usr_orgs')->appendItem($organisationId);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
@@ -131,6 +135,7 @@ class DecretoUser {
    * Removes organisation from the user.
    *
    * If organisation is not added to user, nothing is done.
+   * Saves the user as well.
    *
    * @param int $organisationId
    *   Organisation ID.

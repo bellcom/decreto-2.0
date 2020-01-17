@@ -46,7 +46,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#type' => 'checkbox',
       '#states' => array(
         'invisible' => array(
-          ':input[name="create_department"]' => array('checked' => FALSE),
+          ':input[name="options[create_department]"]' => array('checked' => FALSE),
         ),
       ),
       '#default_value' => empty($this->options['create_department_use_ajax']) ? '' : $this->options['create_department_use_ajax'],

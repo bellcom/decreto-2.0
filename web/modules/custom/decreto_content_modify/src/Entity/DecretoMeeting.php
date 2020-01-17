@@ -84,7 +84,7 @@ class DecretoMeeting extends DecretoNode {
   public function addBpaFile($fid, $save = TRUE) {
     $bpaFiles = $this->getEntity()->get('field_decreto_meet_bpa_files')->getValue();
     $key = array_search($fid, array_column($bpaFiles, 'target_id'));
-    if (!$key) {
+    if ($key === FALSE) {
       $this->getEntity()->get('field_decreto_meet_bpa_files')->appendItem($fid);
       if ($save) {
         $this->getEntity()->save();
@@ -107,9 +107,11 @@ class DecretoMeeting extends DecretoNode {
   public function removeBpaFile($fid, $save = TRUE) {
     $bpaFiles = $this->getEntity()->get('field_decreto_meet_bpa_files')->getValue();
     $key = array_search($fid, array_column($bpaFiles, 'target_id'));
-    $this->getEntity()->get('field_decreto_meet_bpa_files')->removeItem($key);
-    if ($save) {
-      $this->getEntity()->save();
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_meet_bpa_files')->removeItem($key);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
@@ -216,7 +218,7 @@ class DecretoMeeting extends DecretoNode {
   public function addBulletPoint($nid, $save = TRUE) {
     $bps = $this->getEntity()->get('field_decreto_meet_bps')->getValue();
     $key = array_search($nid, array_column($bps, 'target_id'));
-    if (!$key) {
+    if ($key === FALSE) {
       $this->getEntity()->get('field_decreto_meet_bps')->appendItem($nid);
       if ($save) {
         $this->getEntity()->save();
@@ -239,9 +241,11 @@ class DecretoMeeting extends DecretoNode {
   public function removeBulletPoint($nid, $save = TRUE) {
     $bps = $this->getEntity()->get('field_decreto_meet_bps')->getValue();
     $key = array_search($nid, array_column($bps, 'target_id'));
-    $this->getEntity()->get('field_decreto_meet_bps')->removeItem($key);
-    if ($save) {
-      $this->getEntity()->save();
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_meet_bps')->removeItem($key);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
@@ -389,9 +393,11 @@ class DecretoMeeting extends DecretoNode {
   public function removeInternalParticipant($uid, $save = TRUE) {
     $users = $this->getEntity()->get('field_decreto_meet_partic_int')->getValue();
     $key = array_search($uid, array_column($users, 'target_id'));
-    $this->getEntity()->get('field_decreto_meet_partic_int')->removeItem($key);
-    if ($save) {
-      $this->getEntity()->save();
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_meet_partic_int')->removeItem($key);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
@@ -434,9 +440,11 @@ class DecretoMeeting extends DecretoNode {
   public function removeExternalParticipant($uid, $save = TRUE) {
     $users = $this->getEntity()->get('field_decreto_meet_partic_ext')->getValue();
     $key = array_search($uid, array_column($users, 'target_id'));
-    $this->getEntity()->get('field_decreto_meet_partic_ext')->removeItem($key);
-    if ($save) {
-      $this->getEntity()->save();
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_meet_partic_ext')->removeItem($key);
+      if ($save) {
+        $this->getEntity()->save();
+      }
     }
   }
 
