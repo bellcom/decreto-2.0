@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.user.list
   module:
+    - decreto_department
     - decreto_help
     - decreto_organisation
     - decreto_user
@@ -210,6 +211,24 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
+      footer:
+        decreto_department_departments_view_context_links:
+          id: decreto_department_departments_view_context_links
+          table: views
+          field: decreto_department_departments_view_context_links
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: 1
+          create_department: 0
+          create_department_use_ajax: 0
+          edit_department: 0
+          department_user_create: 1
+          department_id: '{{ raw_arguments.field_decreto_usr_departments_target_id }}'
+          plugin_id: decreto_department_departments_view_context_links
+      defaults:
+        footer: false
     cache_metadata:
       max-age: -1
       contexts:
