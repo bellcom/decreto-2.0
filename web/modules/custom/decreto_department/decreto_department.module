@@ -96,6 +96,7 @@ function decreto_department_theme() {
         'create_department' => NULL,
         'create_department_use_ajax' => NULL,
         'edit_department' => NULL,
+        'department_user_create' => NULL,
         'department_id' => NULL,
         'access' => [],
       ],

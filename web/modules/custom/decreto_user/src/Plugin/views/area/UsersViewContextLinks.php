@@ -43,7 +43,7 @@ class UsersViewContextLinks extends TokenizeAreaPluginBase {
       '#type' => 'checkbox',
       '#states' => array(
         'invisible' => array(
-          ':input[name="create_user"]' => array('checked' => FALSE),
+          ':input[name="options[create_user]"]' => array('checked' => FALSE),
         ),
       ),
       '#default_value' => empty($this->options['create_user_use_ajax']) ? '' : $this->options['create_user_use_ajax'],

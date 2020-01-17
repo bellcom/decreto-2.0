@@ -34,3 +34,15 @@ decreto_department.departments_delete:
   requirements:
     _entity_access: 'department.delete'
     department: \d+
+decreto_department.users_add:
+  path: '/departments/{department}/add-user'
+  options:
+    parameters:
+      department:
+        type: entity:taxonomy_term
+  defaults:
+    _title_callback: '\Drupal\decreto_department\Form\DepartmentUserAddForm::getTitle'
+    _form: '\Drupal\decreto_department\Form\DepartmentUserAddForm'
+  requirements:
+    _entity_access: 'department.update'
+    department: \d+

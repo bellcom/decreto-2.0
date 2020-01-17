@@ -11,6 +11,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\decreto_content_modify\Form\AjaxFormBase;
+use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -99,10 +100,12 @@ class UserEditForm extends AjaxFormBase {
       '#required' => TRUE,
     ];
 
-    // Roles.
-    // Only visible for account with 'administer users' permission.
+    // This part is only visible for account with 'administer users' permission.
     if (\Drupal::currentUser()->hasPermission('administer users')) {
-      $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
+      // Roles.
+      $roles = \Drupal::entityTypeManager()
+        ->getStorage('user_role')
+        ->loadMultiple();
       $rolesSelect = [];
       foreach ($roles as $role) {
         // Skipping reserved roles.
@@ -119,6 +122,28 @@ class UserEditForm extends AjaxFormBase {
         '#options' => $rolesSelect,
         '#title' => $this->t('Roles'),
       );
+
+      // Department.
+      $vid = 'decreto_tax_department';
+      $departments = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadTree($vid, 0, NULL, TRUE);
+
+      $departmentsSelect = [];
+      foreach ($departments as $department) {
+        // Only those departments that user can edit.
+        if ($department->access('update')) {
+          $departmentsSelect[$department->id()] = $department->getName();
+        }
+      }
+
+      if (!empty($departmentsSelect)) {
+        $form['departments'] = [
+          '#type' => 'checkboxes',
+          '#options' => $departmentsSelect,
+          '#title' => $this->t('Department'),
+        ];
+      }
     }
 
     // Password + confirm password.
@@ -154,8 +179,16 @@ class UserEditForm extends AjaxFormBase {
     $form['lastName']['#default_value'] = $user->field_decreto_lastname->value;
     $form['email']['#default_value'] = $user->getEmail();
 
-    $roles = $user->getRoles(TRUE);
-    $form['roles']['#default_value'] = $roles;
+    if (isset($form['roles'])) {
+      $roles = $user->getRoles(TRUE);
+      $form['roles']['#default_value'] = $roles;
+    }
+
+    if (isset($form['departments'])) {
+      $decretoUser = new DecretoUser($user);
+      $departments = $decretoUser->getDepartments(FALSE);
+      $form['departments']['#default_value'] = $departments;
+    }
 
     return $form;
   }
@@ -237,9 +270,25 @@ class UserEditForm extends AjaxFormBase {
       }
     }
 
+    // Saving isNew for later usage.
     $isNew = $this->entity->isNew();
-
+    // Saving the entity.
     $this->entity->save();
+
+    // Departments, only visible for account with 'administer users' permission.
+    if (\Drupal::currentUser()->hasPermission('administer users')) {
+      $departments = $form_state->getValue('departments');
+      $decretoUser = new DecretoUser($this->entity);
+      foreach ($departments as $departmentId => $departmentValue) {
+        if ($departmentValue) {
+          $decretoUser->addDepartment($departmentId, FALSE);
+        }
+        else {
+          $decretoUser->removeDepartment($departmentId, FALSE);
+        }
+      }
+      $decretoUser->getEntity()->save();
+    }
 
     // Notify user.
     if ($isNew) {
@@ -248,7 +297,9 @@ class UserEditForm extends AjaxFormBase {
     }
 
     // Setting parent the as user, so that redirect happens to user page.
-    $this->parent = $this->entity;
+    if (!$this->parent) {
+      $this->parent = $this->entity;
+    }
   }
 
 }

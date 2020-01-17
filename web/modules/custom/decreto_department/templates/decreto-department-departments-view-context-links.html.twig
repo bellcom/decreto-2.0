@@ -15,4 +15,9 @@
       {{ "Attach members"|trans }}
     </a>
   {% endif %}
+  {% if department_user_create and department_id and access['decreto_department']['canEdit'] %}
+    <a href="{{ path('decreto_department.users_add', {'department' : department_id}) }}" class="btn btn-primary use-ajax"  data-dialog-type="modal">
+      {{ "Create user"|trans }}
+    </a>
+  {% endif %}
 </div>

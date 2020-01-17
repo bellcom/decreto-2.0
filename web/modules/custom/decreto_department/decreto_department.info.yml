@@ -3,3 +3,6 @@ type: module
 description: 'Decreto departments functionality'
 core: 8.x
 package: 'Decreto'
+
+dependencies:
+  - decreto_user

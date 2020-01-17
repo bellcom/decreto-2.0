@@ -145,25 +145,39 @@ class DecretoUser {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function removeOrganisation($organisationId, $save = TRUE) {
-    $organisationIsPresent = FALSE;
-
-    $userOrganisations = $this->user->field_decreto_usr_orgs->getValue();
-
-    foreach ($userOrganisations as $delta => $userOrganisation) {
-      if ($userOrganisation['target_id'] == $organisationId) {
-        $organisationIsPresent = TRUE;
-        unset($userOrganisations[$delta]);
-        break;
-      }
-    }
-
-    if ($organisationIsPresent) {
-      $this->user->field_decreto_usr_orgs = $userOrganisations;
-
+    $userOrganisations = $this->getEntity()->get('field_decreto_usr_orgs')->getValue();
+    $key = array_search($organisationId, array_column($userOrganisations, 'target_id'));
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_usr_orgs')->removeItem($key);
       if ($save) {
-        $this->user->save();
+        $this->getEntity()->save();
       }
     }
+  }
+
+  /**
+   * Returns user departments.
+   *
+   * @param bool $load
+   *   If the returned taxonomy terms shall be load. If FALSE, array of tids is
+   *   returned.
+   *
+   * @return array
+   *   If load is TRUE array of taxonomy terms is returned,
+   *   If load is FALSE array of tids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getDepartments($load = TRUE) {
+    if ($fieldUsrDepartments = $this->getEntity()->get('field_decreto_usr_departments')) {
+      if ($load) {
+        return $fieldUsrDepartments->referencedEntities();
+      }
+      else {
+        return array_column($fieldUsrDepartments->getValue(), 'target_id');
+      }
+    }
+
+    return array();
   }
 
   /**
