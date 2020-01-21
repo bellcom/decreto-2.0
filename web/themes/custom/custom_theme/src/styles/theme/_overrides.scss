@@ -46,59 +46,62 @@ img {
 }
 
 .tooltip-inner {
-    padding: 10px 20px;
+  padding: 10px 20px;
 
   min-width: 150px;
 }
 
 .list-inline {
 
-    li {
-        border-right: 1px solid $border-color;
+  li {
+    border-right: 1px solid $border-color;
 
-        &:last-child {
-            border-right: 0;
-        }
+    &:last-child {
+      border-right: 0;
     }
+  }
 }
 
 .btn {
-    min-width: 140px;
+  min-width: 140px;
 
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 
-    border-width: 0;
+  border-width: 0;
 
-    font-weight: $font-weight-bold;
+  font-weight: $font-weight-bold;
 
-    .icon {
-        display: none;
+  .icon {
+
+    &:not(.ajax-throbber) {
+      display: none;
     }
+  }
 
-    + .btn {
+  + .btn {
 
-        &,
-        .modal-footer & {
-            margin-left: floor( ($grid-gutter-width / 2) );
-        }
+    &,
+    .modal-footer & {
+      margin-left: floor( ($grid-gutter-width / 2) );
     }
+  }
 
-    &.btn-primary {
+  &.btn-primary {
 
-        &, &:focus {
-            color: $headings-color;
-        }
+    &, &:focus {
+      color: $headings-color;
     }
+  }
 }
 
 .btn-default:not(.btn-success) {
-    border: 1px solid $btn-default-border;
+  border: 1px solid $btn-default-border;
 
-    &:hover, &:focus {
-        color: $headings-color;
-        background-color: $btn-default-border;
-    }
+  &:hover, &:focus {
+    color: $headings-color;
+    background-color: $btn-default-border;
+  }
 }
 
 [class*="col-"] {
@@ -137,7 +140,7 @@ img {
   bottom: 15px;
   left: 15px;
 
-  z-index: 50;
+  z-index: 2000;
 
   padding: 5px;
   border-radius: 100%;
@@ -148,6 +151,34 @@ img {
     font-size: 24px;
 
     color: $text-color;
+  }
+}
+.glyphicon.glyphicon-spin {
+  -webkit-animation: glyphicon-spin-r 2s infinite linear;
+  animation: glyphicon-spin-r 2s infinite linear;
+}
+
+@-webkit-keyframes glyphicon-spin-r {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes glyphicon-spin-r {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
@@ -178,6 +209,10 @@ img {
 
     &.glyphicon {
       font-size: 30px;
+    }
+
+    .toolbar-fixed & {
+      top: (79px + 50px);
     }
   }
 }

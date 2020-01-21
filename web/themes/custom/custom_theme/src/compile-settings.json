@@ -1,10 +1,10 @@
 {
   "javascripts": [
+    "node_modules/pace-progress/pace.js",
     "node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
     "node_modules/flexy-header/javascripts/flexy-header.js",
     "node_modules/flexy-navigation/javascripts/flexy-navigation.js",
     "node_modules/sidr/dist/jquery.sidr.js",
-    "node_modules/pace-progress/pace.js",
     "src/javascripts/bulletpoint.js",
     "src/javascripts/sidebar.js",
     "src/javascripts/app.js"
