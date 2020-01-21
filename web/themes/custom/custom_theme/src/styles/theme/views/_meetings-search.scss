@@ -20,6 +20,37 @@
 // Styling
 // --------------------------------------------------
 
+.boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+  // Resets.
+  .container {
+    display: inline-block;
+
+    width: auto !important;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .row {
+    display: inline-block;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .col-sm-6 {
+    display: inline-block;
+
+    float: left !important;
+
+    width: auto !important;
+
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
@@ -35,129 +66,112 @@
 @media #{$breakpoint-mobile-only} {}
 
 // Tablet - and up
-@media #{$breakpoint-tablet-and-up} {}
+@media #{$breakpoint-tablet-and-up} {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &.form-item-s {
+        float: left;
+
+        &.form-group {
+          margin-bottom: 0;
+        }
+
+        .form-control {
+          width: 200px;
+        }
+      }
+
+      // From date.
+      &.form-item-from {
+        float: left;
+
+        &.form-group {
+          margin-bottom: 0;
+        }
+
+        .form-control {
+          width: 120px;
+        }
+      }
+
+      // To date.
+      &.form-item-to {
+        float: left;
+
+        &.form-group {
+          margin-bottom: 0;
+        }
+
+        .form-control {
+          width: 120px;
+        }
+      }
+
+      &.form-item-ld {
+        display: block;
+
+        margin-top: 5px;
+      }
+    }
+  }
+}
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {
-
-  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
-
-    .form-item {
-
-      // Free text.
-      &:nth-child(1) {
-        display: block;
-
-        margin-right: 0;
-
-        .form-control {
-          width: 100%;
-        }
-      }
-
-      // From date.
-      &:nth-child(2) {
-        width: calc(50% - 30px);
-
-        .form-control {
-          width: 100%;
-        }
-      }
-
-      // To date.
-      &:nth-child(3) {
-        width: 50%;
-
-        margin-right: 0;
-
-        .form-control {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
+@media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &.form-item-s {
+
+        .form-control {
+          width: 250px;
+        }
+      }
+    }
+  }
+}
 
 // Desktop - only
-@media #{$breakpoint-desktop-only} {
-
-  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
-
-    .form-item {
-
-      // Free text.
-      &:nth-child(1) {
-        display: block;
-
-        margin-right: 0;
-
-        .form-control {
-          width: 100%;
-        }
-      }
-
-      // From date.
-      &:nth-child(2) {
-        width: calc(50% - 30px);
-
-        .form-control {
-          width: 100%;
-        }
-      }
-
-      // To date.
-      &:nth-child(3) {
-        width: 50%;
-
-        margin-right: 0;
-
-        .form-control {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
+@media #{$breakpoint-desktop-only} {}
 
 // Large desktop - and up
-@media #{$breakpoint-large-desktop-and-up} {}
-
-// Custom
-@media screen and (min-width: #{$screen-lg-min}) and (max-width: #{$screen-lg-min + 200px}) {
+@media #{$breakpoint-large-desktop-and-up} {
 
   .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
 
     .form-item {
 
       // Free text.
-      &:nth-child(1) {
-        display: block;
+      &.form-item-s {
 
         .form-control {
-          min-width: 550px;
+          width: 370px;
         }
       }
 
       // From date.
-      &:nth-child(2) {
-        width: calc(50% - 30px);
+      &.form-item-from {
 
         .form-control {
-          width: 100%;
+          width: 150px;
         }
       }
 
       // To date.
-      &:nth-child(3) {
-        width: 50%;
-
-        margin-right: 0;
+      &.form-item-to {
 
         .form-control {
-          width: 100%;
+          width: 150px;
         }
       }
     }
@@ -165,35 +179,49 @@
 }
 
 // Custom
-@media screen and (min-width: #{$screen-lg-min + 201px}) and (max-width: #{$screen-lg-min + 400px}) {
+@media screen and (min-width: #{$screen-lg-min + 100px}) {
 
   .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
 
     .form-item {
 
       // Free text.
-      &:nth-child(1) {
-
-        .form-control {
-          width: 380px;
-        }
-      }
-    }
-  }
-}
-
-// Custom
-@media screen and (min-width: #{$screen-lg-min + 401px}) {
-
-  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
-
-    .form-item {
-
-      // Free text.
-      &:nth-child(1) {
+      &.form-item-s {
 
         .form-control {
           width: 500px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: #{$screen-lg-min + 200px}) {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &.form-item-s {
+
+        .form-control {
+          width: 530px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: #{$screen-lg-min + 300px}) {
+
+  .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
+
+    .form-item {
+
+      // Free text.
+      &.form-item-s {
+
+        .form-control {
+          width: 550px;
         }
       }
     }
