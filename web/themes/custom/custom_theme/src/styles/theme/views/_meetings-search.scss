@@ -22,6 +22,21 @@
 
 .boxy--views-exposed-filter-blockdecreto-search-meetings-decreto-page-meetings-search {
 
+  .form-item {
+
+    &.form-item-ld {
+      display: block;
+
+      label {
+        padding-top: 15px;
+      }
+
+      input {
+        margin-right: 5px;
+      }
+    }
+  }
+
   // Resets.
   .container {
     display: inline-block;
@@ -109,12 +124,6 @@
         .form-control {
           width: 120px;
         }
-      }
-
-      &.form-item-ld {
-        display: block;
-
-        margin-top: 5px;
       }
     }
   }
