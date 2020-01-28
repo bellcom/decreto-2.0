@@ -2,8 +2,12 @@
 
 namespace Drupal\decreto_content_modify\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CloseModalDialogCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\decreto_content_modify\Ajax\ReloadPageCommand;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\node\Entity\Node;
 
@@ -105,6 +109,7 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
       '#suffix' => '</div>',
     ];
 
+    $form['#attached']['library'][] = 'decreto_content_modify/reload-page';
     $form = parent::buildForm($form, $form_state);
 
     return $form;
@@ -199,6 +204,39 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
    */
   public function ajaxBulletPointAttachments(array $form, FormStateInterface $form_state) {
     return $form['bullet_point_attachments'];
+  }
+
+  /**
+   * Implements the submit handler for the ajax call.
+   *
+   * @param array $form
+   *   Render array representing from.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   Array of ajax commands to execute on submit of the modal form.
+   *
+   * @throws \Drupal\Core\Entity\EntityMalformedException
+   */
+  public function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
+    if ($form_state->getErrors()) {
+      // Replacing form to show errors.
+      $form['status_messages'] = [
+        '#type' => 'status_messages',
+        '#weight' => -10,
+      ];
+      $response->addCommand(new ReplaceCommand('#' . $this->getFormId(), $form));
+    }
+    else {
+      // Closing modal and refresh page.
+      $response->addCommand(new CloseModalDialogCommand());
+      $response->addCommand(new ReloadPageCommand());
+    }
+
+    return $response;
   }
 
 }
