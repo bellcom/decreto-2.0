@@ -1,7 +1,4 @@
 (function() {
-})();
-
-(function() {
   var toggleAllButtons = document.querySelectorAll('.js-bulletpoint-toggle-all');
   var toggleBulletpointButtons = document.querySelectorAll('.js-bulletpoint-toggle-bulletpoint');
   var toggleAttachmentsButtons = document.querySelectorAll('.js-bulletpoint-toggle-attachments');
@@ -74,18 +71,21 @@
     var parent = element.closest('.bulletpoint');
     var id = parent.dataset.decretoNodeId;
 
-    // Add selected bulletpoint param to URL.
-    window.history.pushState(null, null, '?bulletpoint=' + id);
+    // Add selected bulletpoint param to URL - only if it's a
+    // parent bulletpoint that has been opened.
+    if (!parent.classList.contains('bulletpoint--attachment')) {
+      window.history.pushState(null, null, '?bulletpoint=' + id);
+    }
 
     // Toggle visibility.
     parent.classList.toggle('bulletpoint--open');
   }
 
-  // Handle "add bulletpoint".
+  // Add bulletpoint attachment.
   for (var addBulletpointButton of addBulletpointButtons) {
     addBulletpointButton.addEventListener('click', handleAddBulletpoint);
   }
-  
+
   function handleAddBulletpoint() {
     var element = this;
     var parent = element.closest('.bulletpoint');
