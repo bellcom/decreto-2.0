@@ -1,4 +1,4 @@
-<div class="bulletpoint" data-decreto-node-id="{{ node.id }}">
+<div class="bulletpoint" id="bulletpoint--{{ node.id }}" data-decreto-node-id="{{ node.id }}">
 
   <!-- Begin - bar -->
   <div class="bulletpoint__bar">
@@ -89,7 +89,7 @@
           href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
           data-toggle="tooltip"
           title="{{ "Add bullet point attachment" | trans }}"
-          class="action-list__button use-ajax"
+          class="action-list__button use-ajax js-bulletpoint-add"
           data-dialog-type="modal">
           <span class="material-icons">add_circle</span>
         </a>

@@ -229,9 +229,9 @@ img {
 // Large desktop - and up
 @media #{$breakpoint-large-desktop-and-up} {
 
-    .container-fluid {
-        max-width: 1200px;
-    }
+  .container-fluid {
+    max-width: 1200px;
+  }
 }
 
 // Print
