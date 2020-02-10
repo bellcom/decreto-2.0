@@ -71,6 +71,16 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
         '#type' => 'textfield',
         '#placeholder' => $this->t('Title'),
       ];
+      $bullet_point_attachment['closed'] = [
+        '#prefix' => ($counter > 1) ? '<div class="row"><div class="col-xs-6"><div class="form-inline form-item">' : '<div class="form-inline form-item">',
+        '#type' => 'checkbox',
+        '#title' => $this->t('Closed'),
+      ];
+      $bullet_point_attachment['personal'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Personal'),
+        '#suffix' => ($counter > 1) ? '</div></div>' : '</div>',
+      ];
 
       if ($counter > 1) {
         $bullet_point_attachment['delete'] = [
@@ -144,6 +154,12 @@ class BulletPointAttachmentsAddForm extends AjaxFormBase {
         'type' => 'decreto_bullet_point_attachment',
         'title' => $bpa['title'],
         'status' => 1,
+        'field_decreto_bpa_closed' => [
+          'value' => $bpa['closed'],
+        ],
+        'field_decreto_bpa_personal' => [
+          'value' => $bpa['personal'],
+        ],
       ));
       $bpa_node->save();
 

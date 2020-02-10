@@ -56,6 +56,20 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
       '#required' => TRUE,
     ];
 
+    // Closed.
+    $form['closed'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Closed'),
+      '#prefix' => '<div class="form-inline form-item">',
+    ];
+
+    // Personal.
+    $form['personal'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Personal'),
+      '#suffix' => '</div>',
+    ];
+
     // Tab content START.
     $form = $this->appendFormCustomText($form, $form_state);
     $form = $this->appendFormUploadFile($form, $form_state);
@@ -173,6 +187,10 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
   private function populateFormData(array $form, FormStateInterface $form_state) {
     $bpa = $this->entity;
     $form['title']['#default_value'] = $bpa->getTitle();
+
+    $form['closed']['#default_value'] = $bpa->get('field_decreto_bpa_closed')->value;
+    $form['personal']['#default_value'] = $bpa->get('field_decreto_bpa_personal')->value;
+
     $form['custom_text']['body']['#default_value'] = $bpa->body->value;
 
     // Enabling custom text tab as active.
@@ -203,6 +221,8 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $title = $form_state->getValue('title');
+    $closed = $form_state->getValue('closed');
+    $personal = $form_state->getValue('personal');
     $body = $form_state->getValue('body');
     $file_field = $form_state->getValue('file');
     $convert_to_pdf = $form_state->getValue('convert_to_pdf');
@@ -222,6 +242,8 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     }
 
     $this->entity->title = $title;
+    $this->entity->field_decreto_bpa_closed = $closed;
+    $this->entity->field_decreto_bpa_personal = $personal;
     $this->entity->body = $body;
     if ($bpa_file) {
       $this->entity->field_decreto_bpa_file->setValue(['target_id' => $bpa_file->id()]);

@@ -62,9 +62,6 @@ class BulletPointsAddForm extends AjaxFormBase {
         '#title' => $this->t('Title'),
       ];
 
-      if ($counter > 1) {
-
-      }
       $bullet_point['closed'] = [
         '#prefix' => ($counter > 1) ? '<div class="row"><div class="col-xs-6"><div class="form-inline form-item">' : '<div class="form-inline form-item">',
         '#type' => 'checkbox',

@@ -1,0 +1,23 @@
+uuid: cf51fb1c-f9fd-4dd4-98f5-e773c612f805
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_decreto_bpa_personal
+    - node.type.decreto_bullet_point_attachment
+id: node.decreto_bullet_point_attachment.field_decreto_bpa_personal
+field_name: field_decreto_bpa_personal
+entity_type: node
+bundle: decreto_bullet_point_attachment
+label: Personal
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

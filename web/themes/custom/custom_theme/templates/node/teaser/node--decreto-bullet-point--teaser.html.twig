@@ -17,7 +17,7 @@
 
         {# Begin - notes #}
         {% if content['#contains_notes'] %}
-          <button class="action-list__button action-list__button--info">
+          <button class="action-list__button action-list__button--info" tabindex="-1">
           <span class="material-icons"
                 title="{{ 'This bullet point has notes' | trans }}"
                 data-toggle="tooltip">chat</span>

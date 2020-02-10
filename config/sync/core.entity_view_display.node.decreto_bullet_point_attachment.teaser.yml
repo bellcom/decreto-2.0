@@ -5,8 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.decreto_bullet_point_attachment.body
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_closed
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_personal
     - node.type.decreto_bullet_point_attachment
   module:
     - file
@@ -34,7 +36,9 @@ content:
       use_description_as_link_text: true
     third_party_settings: {  }
 hidden:
+  field_decreto_bpa_closed: true
   field_decreto_bpa_html: true
+  field_decreto_bpa_personal: true
   flag_subscribe_node: true
   langcode: true
   links: true

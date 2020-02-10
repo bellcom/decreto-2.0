@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.decreto_bullet_point_attachment.body
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_closed
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_file
     - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_html
+    - field.field.node.decreto_bullet_point_attachment.field_decreto_bpa_personal
     - node.type.decreto_bullet_point_attachment
   module:
     - file
@@ -32,6 +34,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_decreto_bpa_closed:
+    weight: 121
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_decreto_bpa_file:
     weight: 32
     settings:
@@ -45,6 +54,13 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
+  field_decreto_bpa_personal:
+    weight: 122
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   langcode:
     type: language_select

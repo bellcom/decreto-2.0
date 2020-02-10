@@ -368,7 +368,14 @@ function decreto_content_modify_node_access(NodeInterface $node, $op, AccountInt
     if ($node->bundle() == 'decreto_bullet_point_attachment') {
       $decretoBPA = new DecretoBulletPointAttachment($node);
 
-      // User BP access permissions for deciding.
+      // If BPA is Closed or Personal, use user permission.
+      if ($decretoBPA->isClosed() || $decretoBPA->isPersonal()) {
+        $meeting = $decretoBPA->getMeeting();
+
+        return AccessController::viewMeetingClosedContentAccess($meeting, $account);
+      }
+
+      // Else use BP access permissions for deciding.
       $bp = $decretoBPA->getBulletPoint();
       if (!$bp->access('view')) {
         return AccessResult::forbidden('Cannot access closed content');
