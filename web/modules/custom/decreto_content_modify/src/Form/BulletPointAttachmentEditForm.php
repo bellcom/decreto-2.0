@@ -12,7 +12,7 @@ use Drupal\file\Entity\File;
  *
  * @see \Drupal\Core\Form\FormBase
  */
-class BulletPointAttachmentEditForm extends AjaxFormBase {
+class BulletPointAttachmentEditForm extends BulletPointAttachmentBaseEditForm {
 
   /**
    * {@inheritdoc}
@@ -71,8 +71,8 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     ];
 
     // Tab content START.
-    $form = $this->appendFormCustomText($form, $form_state);
-    $form = $this->appendFormUploadFile($form, $form_state);
+    $form = parent::appendFormCustomText($form);
+    $form = parent::appendFormUploadFile($form);
     // Tab content END.
 
     // Populate values.
@@ -81,91 +81,6 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     $form = parent::buildForm($form, $form_state);
 
     $form['#theme'] = 'decreto_content_modify_bpa_edit_form';
-
-    return $form;
-  }
-
-  /**
-   * Appends custom text components to a form.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return array
-   *   Form array with appended page.
-   */
-  private function appendFormCustomText(array $form, FormStateInterface $form_state) {
-    $form['custom_text'] = array(
-      '#type' => 'container',
-    );
-
-    // Custom_text.
-    $form['custom_text']['body'] = array(
-      '#type' => 'text_format',
-      '#format' => 'basic_html',
-      '#allowed_formats' => ['basic_html'],
-    );
-
-    return $form;
-  }
-
-  /**
-   * Appends upload file components to a form.
-   *
-   * @param array $form
-   *   Render array representing from.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Current form state.
-   *
-   * @return array
-   *   Form array with appended page.
-   */
-  private function appendFormUploadFile(array $form, FormStateInterface $form_state) {
-    $form['upload_file'] = array(
-      '#type' => 'container',
-    );
-
-    $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_bullet_point_attachment');
-    $field_definition = $bundle_fields['field_decreto_bpa_file'];
-    $availableExtensions = $field_definition->getSetting('file_extensions');
-
-    // File field.
-    $form['upload_file']['file'] = array(
-      '#type' => 'managed_file',
-      '#upload_location' => 'private://',
-      '#default_value' => NULL,
-      '#upload_validators' => array(
-        'file_validate_extensions' => array($availableExtensions),
-      ),
-      '#description' => $this->t('Available extensions are: %extensions', ['%extensions' => $availableExtensions]),
-    );
-
-    // Convert to PDF.
-    if (\Drupal::moduleHandler()->moduleExists('decreto_pdf_conversion_manager')) {
-      $form['upload_file']['convert_to_pdf'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Convert to PDF'),
-        '#default_value' => TRUE,
-        '#description' => $this->t('skipped if file is already PDF'),
-      ];
-    }
-
-    // Convert to HTML.
-    if (\Drupal::moduleHandler()->moduleExists('decreto_pdf2htmlex')) {
-      $form['upload_file']['convert_to_html'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Convert to HTML'),
-        '#default_value' => TRUE,
-        '#description' => $this->t('by conversion to HTML file becomes available for attaching notes'),
-        '#states' => array(
-          'invisible' => array(
-            ':input[name="convert_to_pdf"]' => array('checked' => FALSE),
-          ),
-        ),
-      ];
-    }
 
     return $form;
   }
@@ -235,6 +150,7 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
 
       if ($file->getMimeType() == 'text/html') {
         $bpa_html = $file;
+        $bpa_file = $file;
       }
       else {
         $bpa_file = $file;
@@ -247,7 +163,6 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
     $this->entity->body = $body;
     if ($bpa_file) {
       $this->entity->field_decreto_bpa_file->setValue(['target_id' => $bpa_file->id()]);
-      $this->entity->field_decreto_bpa_html->setValue(NULL);
     }
     else {
       $this->entity->field_decreto_bpa_file->setValue(NULL);
@@ -255,7 +170,6 @@ class BulletPointAttachmentEditForm extends AjaxFormBase {
 
     if ($bpa_html) {
       $this->entity->field_decreto_bpa_html->setValue(['target_id' => $bpa_html->id()]);
-      $this->entity->field_decreto_bpa_file->setValue(['target_id' => $bpa_html->id()]);
     }
     else {
       $this->entity->field_decreto_bpa_html->setValue(NULL);

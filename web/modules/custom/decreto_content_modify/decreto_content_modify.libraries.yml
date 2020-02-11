@@ -17,9 +17,3 @@ quick-search-list:
   dependencies:
     - core/jquery
     - core/drupalSettings
-reload-page:
-  version: 1.x
-  js:
-    js/reload-page.js: {preprocess: false}
-  dependencies:
-    - core/drupal.ajax

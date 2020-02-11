@@ -330,6 +330,9 @@ function decreto_content_modify_theme() {
     'decreto_content_modify_delete_form' => [
       'render element' => 'form',
     ],
+    'decreto_content_modify_bpas_add_form_bpa_container' => [
+      'render element' => 'children',
+    ],
   ];
 }
 
