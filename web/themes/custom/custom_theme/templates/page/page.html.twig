@@ -169,7 +169,9 @@
             <!-- Begin - notifications -->
             <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/notifications-popup" data-ajaxi-target="#poppy_notifications" data-ajaxi-loading="{{ 'Loading...' | trans }}">
-                <span class="poppy-toggle__count">{{ counter.notification }}</span>
+                {% if counter.notification %}
+                  <span class="poppy-toggle__count">{{ counter.notification }}</span>
+                {% endif %}
 
                 <i class="poppy-toggle__icon material-icons">
                   notifications
@@ -195,7 +197,9 @@
             <!-- Begin - notes -->
             <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/notes-popup" data-ajaxi-target="#poppy_notes" data-ajaxi-loading="{{ 'Loading...' | trans }}">
-                <span class="poppy-toggle__count">{{ counter.note }}</span>
+                {% if counter.note %}
+                  <span class="poppy-toggle__count">{{ counter.note }}</span>
+                {% endif %}
 
                 <i class="poppy-toggle__icon material-icons">
                   chat
@@ -221,7 +225,9 @@
             <!-- Begin - memo -->
             <div class="poppy hidden-xs hidden-sm">
               <button class="poppy-toggle" data-ajaxi-source="/ajax/memos-popup" data-ajaxi-target="#poppy_memos" data-ajaxi-loading="{{ 'Loading...' | trans }}">
-                <span class="poppy-toggle__count">{{ counter.memo }}</span>
+                {% if counter.memo %}
+                  <span class="poppy-toggle__count">{{ counter.memo }}</span>
+                {% endif %}
 
                 <i class="poppy-toggle__icon material-icons">
                   mail

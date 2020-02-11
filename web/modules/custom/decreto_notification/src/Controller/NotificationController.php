@@ -20,7 +20,8 @@ class NotificationController extends ControllerBase {
    *   Rendered view.
    */
   public function popupContentRender() {
-    $markup = \Drupal::service('renderer')->render(views_embed_view('decreto_notifications', 'decreto_notification_popup_embed'));
+    $view = views_embed_view('decreto_notifications', 'decreto_notification_popup_embed');
+    $markup = \Drupal::service('renderer')->render($view);
 
     // This is the important part, because will render only the TWIG template.
     return new Response($markup);
@@ -44,7 +45,7 @@ class NotificationController extends ControllerBase {
       $decreto_notification->unread = 0;
       $decreto_notification->save();
     }
-    
+
     // Loading referenced entity.
     // Has to be improved to Notification::getReferencedEntity() method.
     $referenced_entity = $decreto_notification->getMeeting();

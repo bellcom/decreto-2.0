@@ -21,7 +21,8 @@ class MemoController extends ControllerBase {
    *   Rendered view.
    */
   public function popupContentRender() {
-    $markup = \Drupal::service('renderer')->render(views_embed_view('decreto_memos', 'decreto_memo_popup_embed'));
+    $view = views_embed_view('decreto_memos', 'decreto_memo_popup_embed');
+    $markup = \Drupal::service('renderer')->render($view);
 
     // This is the important part, because will render only the TWIG template.
     return new Response($markup);
