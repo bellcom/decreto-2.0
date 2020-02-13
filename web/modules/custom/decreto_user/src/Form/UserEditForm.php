@@ -9,10 +9,8 @@ namespace Drupal\decreto_user\Form;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\decreto_content_modify\Form\AjaxFormBase;
 use Drupal\decreto_user\Entity\DecretoUser;
-use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -62,95 +60,9 @@ class UserEditForm extends AjaxFormBase {
     // Adding help message.
     $form[] = \Drupal::service('decreto_help.message')->getMessageMarkup('user_create_edit_form');
 
-    // Details.
-    $form[] = [
-      '#markup' => '<h4><strong>' . $this->t('Details') . '</strong></h4>',
-    ];
-
-    // Current password.
-    // Only visible for account with no 'administer users' permission.
-    if (!\Drupal::currentUser()->hasPermission('administer users')) {
-      $form['currentPassword'] = [
-        '#type' => 'password',
-        '#title' => $this->t('Current password'),
-      ];
-    }
-
-    // First name.
-    $form['firstName'] = [
-      '#type' => 'textfield',
-      '#placeholder' => $this->t('First name'),
-      '#title' => $this->t('First name'),
-      '#required' => TRUE,
-    ];
-
-    // Last name.
-    $form['lastName'] = [
-      '#type' => 'textfield',
-      '#placeholder' => $this->t('Last name'),
-      '#title' => $this->t('Last name'),
-      '#required' => TRUE,
-    ];
-
-    // Email.
-    $form['email'] = [
-      '#type' => 'textfield',
-      '#placeholder' => $this->t('Email'),
-      '#title' => $this->t('Email'),
-      '#required' => TRUE,
-    ];
-
-    // This part is only visible for account with 'administer users' permission.
-    if (\Drupal::currentUser()->hasPermission('administer users')) {
-      // Roles.
-      $roles = \Drupal::entityTypeManager()
-        ->getStorage('user_role')
-        ->loadMultiple();
-      $rolesSelect = [];
-      foreach ($roles as $role) {
-        // Skipping reserved roles.
-        if ($role->id() == AccountInterface::ANONYMOUS_ROLE
-          || $role->id() == AccountInterface::AUTHENTICATED_ROLE
-          || $role->id() == 'administrator') {
-          continue;
-        }
-
-        $rolesSelect[$role->id()] = $role->label();
-      }
-      $form['roles'] = array(
-        '#type' => 'checkboxes',
-        '#options' => $rolesSelect,
-        '#title' => $this->t('Roles'),
-      );
-
-      // Department.
-      $vid = 'decreto_tax_department';
-      $departments = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadTree($vid, 0, NULL, TRUE);
-
-      $departmentsSelect = [];
-      foreach ($departments as $department) {
-        // Only those departments that user can edit.
-        if ($department->access('update')) {
-          $departmentsSelect[$department->id()] = $department->getName();
-        }
-      }
-
-      if (!empty($departmentsSelect)) {
-        $form['departments'] = [
-          '#type' => 'checkboxes',
-          '#options' => $departmentsSelect,
-          '#title' => $this->t('Department'),
-        ];
-      }
-    }
-
-    // Password + confirm password.
-    $form['password'] = [
-      '#type' => 'password_confirm',
-      '#required' => ($user) ? FALSE : TRUE,
-    ];
+    /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+    $userFormsService = \Drupal::service('decreto_user.user_forms');
+    $form[] = $userFormsService->getUserEditFormStructure($user);
 
     if ($user) {
       $form = $this->populateFormData($form, $form_state, $user);
@@ -197,104 +109,22 @@ class UserEditForm extends AjaxFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $currentPassword = $form_state->getValue('currentPassword');
-    $firstName = $form_state->getValue('firstName');
-    $lastName = $form_state->getValue('lastName');
-    $email = $form_state->getValue('email');
-    $password = $form_state->getValue('password');
+    /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+    $userFormsService = \Drupal::service('decreto_user.user_forms');
 
-    if (!$this->entity) {
-      // Getting the currently selected organisation, so that new user does not
-      // have empty organisation field.
-      $organisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
-
-      $this->entity = User::create([
-        'field_decreto_firstname' => $firstName,
-        'field_decreto_lastname' => $lastName,
-        'field_decreto_usr_orgs' => [
-          'target_id' => $organisationId,
-        ],
-      ]);
-
-      $this->entity->setPassword($password);
-      $this->entity->setUsername($email);
-      $this->entity->setEmail($email);
-      $this->entity->enforceIsNew();
-      $this->entity->activate();
-    }
-    else {
-      // Setting existing password if it is present.
-      if ($currentPassword) {
-        $this->entity->setExistingPassword($currentPassword);
-      }
-
-      // Updating username to new email value if username equals to the old
-      // email value.
-      if ($this->entity->getEmail() === $this->entity->getUsername()) {
-        $this->entity->setUsername($email);
-      }
-      $this->entity->field_decreto_firstname = $firstName;
-      $this->entity->field_decreto_lastname = $lastName;
-      $this->entity->setEmail($email);
-      if (!empty($password)) {
-        $this->entity->setPassword($password);
-      }
-    }
-
-    $violations = $this->entity->validate();
-
-    if ($violations->count()) {
-      foreach ($violations as $violation) {
-        $form_state->setErrorByName('', $violation->getMessage());
-      }
-    }
+    // Validating the input and creating new unsaved user entity.
+    $this->entity = $userFormsService->validateUserEditForm($form_state);
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Entity is already being filled with values in formValidate function,
-    // therefore we can just proceed by saving it.
+    /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+    $userFormsService = \Drupal::service('decreto_user.user_forms');
 
-    // Roles, only visible for account with 'administer users' permission.
-    if (\Drupal::currentUser()->hasPermission('administer users')) {
-      $roles = $form_state->getValue('roles');
-      foreach ($roles as $roleId => $roleValue) {
-        if ($roleValue) {
-          $this->entity->addRole($roleId);
-        }
-        else {
-          $this->entity->removeRole($roleId);
-        }
-      }
-    }
-
-    // Saving isNew for later usage.
-    $isNew = $this->entity->isNew();
-    // Saving the entity.
-    $this->entity->save();
-
-    // Departments, only visible for account with 'administer users' permission.
-    if (\Drupal::currentUser()->hasPermission('administer users')) {
-      $departments = $form_state->getValue('departments');
-      $decretoUser = new DecretoUser($this->entity);
-      foreach ($departments as $departmentId => $departmentValue) {
-        if ($departmentValue) {
-          $decretoUser->addDepartment($departmentId, FALSE);
-        }
-        else {
-          $decretoUser->removeDepartment($departmentId, FALSE);
-        }
-      }
-      $decretoUser->getEntity()->save();
-    }
-
-    // Notify user.
-    if ($isNew) {
-      _user_mail_notify('register_admin_created', $this->entity);
-      $this->messenger()->addStatus($this->t('A welcome message with further instructions has been emailed to the new user <a href=":url">%name</a>.', [':url' => $this->entity->toUrl()->toString(), '%name' => $this->entity->getAccountName()]));
-    }
+    // Submitting will actually save the user.
+    $this->entity = $userFormsService->submitUserEditForm($form_state, $this->entity);
 
     // Setting parent the as user, so that redirect happens to user page.
     if (!$this->parent) {

@@ -1,0 +1,4 @@
+services:
+  decreto_user.user_forms:
+    class: Drupal\decreto_user\Services\DecretoUserFormsService
+    arguments: []

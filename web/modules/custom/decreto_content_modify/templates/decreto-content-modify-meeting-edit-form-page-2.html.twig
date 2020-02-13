@@ -55,12 +55,18 @@
 
     <!-- Begin - list -->
     <div id="meeting-member-list">
-      {{ children|without('meeting_summary') }}
+      {{ children|without('meeting_summary', 'add-new-external-user') }}
     </div>
     <div class="js-member-list-no-result hidden">
       <strong>{{ 'No members found containing these letters.' | trans }}</strong>
     </div>
     <!-- End - list -->
+
+    <!-- Begin - Add new user button -->
+    <div class="text-right">
+      {{ children['add-new-external-user'] }}
+    </div>
+    <!-- Ens - Add new user button -->
 
   </div>
   <div class="col-xs-12 col-sm-4">

@@ -59,7 +59,8 @@ class MeetingEditForm extends AjaxFormBase {
         throw new NotFoundHttpException();
       }
       $this->entity = $meeting;
-      // Setting parent the as meeting, so that redirect happens to meetings page.
+      // Setting parent the as meeting, so that redirect happens to meetings
+      // page.
       $this->parent = $meeting;
     }
 
@@ -109,11 +110,22 @@ class MeetingEditForm extends AjaxFormBase {
         'class' => ['steps__item', ($activePage === 2 ? 'steps__item--active' : '')],
       ],
     ];
+    $form['steps-container']['steps-step-3'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => '3',
+      '#attributes' => [
+        'class' => ['steps__item', ($activePage === 3 ? 'steps__item--active' : 'hidden')],
+      ],
+    ];
     // Steps container END.
 
     // Adding pages START.
     $form = $this->appendFormPage1($form, $form_state);
     $form = $this->appendFormPage2($form, $form_state);
+    if ($activePage === 3) {
+      $form = $this->appendFormPage3($form, $form_state);
+    }
     // Adding pages END.
 
     // If it is meeting's edit page, populate values.
@@ -128,6 +140,7 @@ class MeetingEditForm extends AjaxFormBase {
     unset($form['actions']['submit']);
     $form['actions']['switch-page'] = [
       '#type' => 'submit',
+      '#name' => 'switch-page',
       '#value' => ($activePage === 1) ? $this->t('Go further') : $this->t('Go back'),
       '#ajax' => [
         'callback' => '::ajaxReloadForm',
@@ -135,9 +148,14 @@ class MeetingEditForm extends AjaxFormBase {
       ],
       '#submit' => ['::submitSwitchPage'],
       '#attributes' => [
-        'class' => [($useDepartmentMembers) ? 'hidden' : '']
-      ]
+        'class' => [($useDepartmentMembers) ? 'hidden' : ''],
+      ],
     ];
+    // On third page, don't validate fields when page switching back.
+    if ($activePage === 3) {
+      $form['actions']['switch-page']['#limit_validation_errors'] = [];
+    }
+
     $form['actions']['submit'] = $submitButton;
     // Adding button before submit button END.
 
@@ -214,8 +232,8 @@ class MeetingEditForm extends AjaxFormBase {
       $department_terms = $decretoOrganisation->getDepartments();
     }
     else {
-      // User does not have a permission, allow creating only for departments he
-      // is admin of.
+      // User does not have a permission, allow creating only for departments
+      // user is admin of.
       $decretoUser = new DecretoUser(User::load(\Drupal::currentUser()->id()));
       $department_terms = $decretoUser->getAdminDepartments();
     }
@@ -256,8 +274,8 @@ class MeetingEditForm extends AjaxFormBase {
       '#ajax' => [
         'callback' => '::ajaxReloadForm',
         'progress' => [
-          'type' => 'none'
-        ]
+          'type' => 'none',
+        ],
       ],
       '#attributes' => [
         // Example of altering button class depending on ;'use department
@@ -375,7 +393,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-2']['participants-container']['header']['row']['name'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['col-xs-6']
+        'class' => ['col-xs-6'],
       ],
     ];
     $form['pages-page-2']['participants-container']['header']['row']['name'][] = [
@@ -391,7 +409,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-2']['participants-container']['header']['row']['internal'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['col-xs-3']
+        'class' => ['col-xs-3'],
       ],
     ];
     $form['pages-page-2']['participants-container']['header']['row']['internal'][] = [
@@ -407,7 +425,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-2']['participants-container']['header']['row']['external'] = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['col-xs-3']
+        'class' => ['col-xs-3'],
       ],
     ];
     $form['pages-page-2']['participants-container']['header']['row']['external'][] = [
@@ -490,6 +508,61 @@ class MeetingEditForm extends AjaxFormBase {
     }
     // Participants END.
 
+    $form['pages-page-2']['add-new-external-user'] = [
+      '#type' => 'submit',
+      '#name' => 'add-new-external-user',
+      '#value' => $this->t('New external user'),
+      '#ajax' => [
+        'callback' => '::ajaxReloadForm',
+        'event' => 'click',
+      ],
+      '#submit' => ['::submitSwitchPage'],
+      '#limit_validation_errors' => [],
+    ];
+
+    return $form;
+  }
+
+  /**
+   * Appends third page components to a form.
+   *
+   * @param array $form
+   *   Render array representing from.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
+   *
+   * @return array
+   *   Form array with appended page.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function appendFormPage3(array $form, FormStateInterface $form_state) {
+    $activePage = $form_state->get('active_page');
+
+    // Page 2 container.
+    $form['pages-page-3'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [($activePage !== 3) ? 'hidden' : ''],
+      ],
+    ];
+
+    /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+    $userFormsService = \Drupal::service('decreto_user.user_forms');
+    $form['pages-page-3'][] = $userFormsService->getUserEditFormStructure();
+
+    $form['pages-page-3']['submit-create-new-user'] = [
+      '#type' => 'submit',
+      '#name' => 'submit-create-new-user',
+      '#value' => $this->t('Create user'),
+      '#ajax' => [
+        'callback' => '::ajaxReloadForm',
+        'event' => 'click',
+      ],
+      '#submit' => ['::submitCreateNewUser'],
+    ];
+
     return $form;
   }
 
@@ -551,6 +624,28 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-2']['meeting_summary']['#markup'] = $meeting->getTitle() . ', ' . $start_date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => date_default_timezone_get()]);
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    parent::validateForm($form, $form_state);
+
+    // Getting triggering element name.
+    $triggeringElement = $form_state->getTriggeringElement();
+    $triggerName = $triggeringElement['#name'];
+
+    // If trigger is 'submit-create-new-user', validate the user that is about
+    // to be created.
+    if ($triggerName == 'submit-create-new-user') {
+      /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+      $userFormsService = \Drupal::service('decreto_user.user_forms');
+
+      // Validating the input and creating new unsaved user entity.
+      $externalUser = $userFormsService->validateUserEditForm($form_state);
+      $form_state->set('externalUser', $externalUser);
+    }
   }
 
   /**
@@ -647,7 +742,7 @@ class MeetingEditForm extends AjaxFormBase {
   }
 
   /**
-   * Submit handler for 'swift-page' button.
+   * Submit handler for 'swift-page' and 'add-new-external-user' buttons.
    *
    * Switches between pages.
    *
@@ -660,15 +755,79 @@ class MeetingEditForm extends AjaxFormBase {
     // Getting current page.
     $active_page = $form_state->get('active_page');
 
+    // Getting triggering element name.
+    $triggeringElement = $form_state->getTriggeringElement();
+    $triggerName = $triggeringElement['#name'];
+
     // Switching page.
-    if ($active_page === 1) {
-      $form_state->set('active_page', 2);
+    if ($triggerName == 'switch-page') {
+      if ($active_page === 1) {
+        $form_state->set('active_page', 2);
+      }
+      elseif ($active_page === 2) {
+        $form_state->set('active_page', 1);
+      }
+      elseif ($active_page === 3) {
+        $form_state->set('active_page', 2);
+      }
     }
-    else {
-      $form_state->set('active_page', 1);
+    elseif ($triggerName == 'add-new-external-user') {
+      $form_state->set('active_page', 3);
     }
 
     $form_state->setRebuild();
+  }
+
+  /**
+   * Submit handler for 'submit-create-new-user' button.
+   *
+   * Submits the user, handles the user being added to the list, and does
+   * the page switching.
+   *
+   * @param array $form
+   *   Render array representing from.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Current form state.
+   *
+   * @throws \Drupal\Core\Entity\EntityMalformedException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function submitCreateNewUser(array &$form, FormStateInterface $form_state) {
+    // IF no errors, proceed with user saving.
+    if (!$form_state->getErrors()) {
+      $externalUser = $form_state->get('externalUser');
+
+      /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
+      $userFormsService = \Drupal::service('decreto_user.user_forms');
+
+      // Submitting will actually save the user.
+      $externalUser = $userFormsService->submitUserEditForm($form_state, $externalUser);
+      $form_state->set('messages', 1);
+
+      $userInput = $form_state->getUserInput();
+
+      // Adding participant to the list.
+      $userInput['participants'][$externalUser->id()]['row'] = [
+        'internal_column' => ['internal' => NULL],
+        'external_column' => ['external' => '1'],
+      ];
+
+      // Clearing user form input.
+      foreach ($form['pages-page-3'][0] as $key => $element) {
+        unset($userInput[$key]);
+      }
+
+      $form_state->setUserInput($userInput);
+
+      // Page switch.
+      $form_state->set('active_page', 2);
+
+      // Removing external user form form state.
+      $form_state->set('externalUser', NULL);
+
+      // Rebuilding form.
+      $form_state->setRebuild();
+    }
   }
 
   /**
@@ -685,13 +844,14 @@ class MeetingEditForm extends AjaxFormBase {
   public function ajaxReloadForm(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
 
-    if ($form_state->getErrors()) {
+    if ($form_state->getErrors() || $form_state->has('messages')) {
       // Replacing form to show errors.
       $form['status_messages'] = [
         '#type' => 'status_messages',
         '#weight' => -10,
       ];
     }
+    $form_state->set('messages', NULL);
 
     // Rebuilding form after ajax request.
     $response->addCommand(new ReplaceCommand('#' . $this->getFormId(), $form));
