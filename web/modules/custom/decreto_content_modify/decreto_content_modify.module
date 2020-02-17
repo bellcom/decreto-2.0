@@ -1,8 +1,10 @@
 <?php
 
+use Drupal\Component\Render\PlainTextOutput;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\decreto_content_modify\Controller\AccessController;
@@ -11,6 +13,7 @@ use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_content_modify\Entity\DecretoMemo;
 use Drupal\decreto_content_modify\Form\MeetingItemsReorderForm;
+use Drupal\decreto_content_modify\Form\MeetingNotificationsSettingsForm;
 use Drupal\decreto_content_modify\Form\SearchInMeetingForm;
 use Drupal\decreto_content_modify\Services\ContentService;
 use Drupal\Core\Cache\Cache;
@@ -443,5 +446,80 @@ function decreto_content_modify_track_item_deleted(EntityInterface $entity) {
 
   foreach ($indexes as $index) {
     $index->trackItemsDeleted($datasource_id, [$combined_id]);
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function decreto_content_modify_token_info() {
+  $info['types']['decreto_meeting'] = [
+    'name' => t('Decreto meeting'),
+    'description' => t('Tokens related to Decreto Meeting notification.'),
+    'needs-data' => 'decreto_meeting',
+  ];
+
+  $info['tokens']['decreto_meeting']['title'] = [
+    'name' => t('Title'),
+    'description' => t('Title of the meeting.'),
+  ];
+  $info['tokens']['decreto_meeting']['date'] = [
+    'name' => t('Date'),
+    'description' => t('The date of the meeting.'),
+  ];
+  $info['tokens']['decreto_meeting']['department'] = [
+    'name' => t('Department'),
+    'description' => t('Department of the meeting.'),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function decreto_content_modify_tokens($type, $tokens, array $data = [], array $options = [], BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  // Meeting tokens.
+  if ($type == 'decreto_meeting' && !empty($data['decreto_meeting'])) {
+    $decretoMeeting = new DecretoMeeting($data['decreto_meeting']);
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'title':
+          $replacements[$original] = $decretoMeeting->getEntity()->label();
+          break;
+
+        case 'date':
+          $replacements[$original] = $decretoMeeting->getStartDate();
+          break;
+
+        case 'department':
+          $replacements[$original] = $decretoMeeting->getDepartment()->label();
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function decreto_content_modify_mail($key, &$message, $params) {
+  $token_service = \Drupal::token();
+  $variables = ['user' => $params['account'], 'decreto_meeting' => $params['decreto_meeting']];
+
+  $mail_config = \Drupal::config(MeetingNotificationsSettingsForm::$configName);
+
+  if ($key == 'decreto_content_user_added_to_meeting') {
+    $message['subject'] .= PlainTextOutput::renderFromHtml($token_service->replace($mail_config->get('user_added_notification_subject'), $variables));
+    $message['body'][] = $token_service->replace($mail_config->get('user_added_notification_body'), $variables);
+  }
+  if ($key == 'decreto_content_user_removed_from_meeting') {
+    $message['subject'] .= PlainTextOutput::renderFromHtml($token_service->replace($mail_config->get('user_removed_notification_subject'), $variables));
+    $message['body'][] = $token_service->replace($mail_config->get('user_removed_notification_body'), $variables);
   }
 }

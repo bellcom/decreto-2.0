@@ -4,6 +4,7 @@ namespace Drupal\decreto_content_modify\Services;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
@@ -193,6 +194,46 @@ class ContentService {
       'my_org' => $orgCount,
       'total' => $totalCount,
     ];
+  }
+
+  public function notifyAddedToMeeting(UserInterface $user, ContentEntityInterface $meeting) {
+    $params['account'] = $user;
+    $params['decreto_meeting'] = $meeting;
+    $langcode = $user->getPreferredLangcode();
+
+    // Get the custom site notification email to use as the from email address
+    // if it has been set.
+    $site_mail = \Drupal::config('system.site')->get('mail_notification');
+    // If the custom site notification email has not been set, we use the site
+    // default for this.
+    if (empty($site_mail)) {
+      $site_mail = \Drupal::config('system.site')->get('mail');
+    }
+    if (empty($site_mail)) {
+      $site_mail = ini_get('sendmail_from');
+    }
+    $op = 'decreto_content_user_added_to_meeting';
+    $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
+  }
+
+  public function notifyRemovedFromMeeting(UserInterface $user, ContentEntityInterface $meeting) {
+    $params['account'] = $user;
+    $params['decreto_meeting'] = $meeting;
+    $langcode = $user->getPreferredLangcode();
+
+    // Get the custom site notification email to use as the from email address
+    // if it has been set.
+    $site_mail = \Drupal::config('system.site')->get('mail_notification');
+    // If the custom site notification email has not been set, we use the site
+    // default for this.
+    if (empty($site_mail)) {
+      $site_mail = \Drupal::config('system.site')->get('mail');
+    }
+    if (empty($site_mail)) {
+      $site_mail = ini_get('sendmail_from');
+    }
+    $op = 'decreto_content_user_removed_from_meeting';
+    $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
   }
 
 }

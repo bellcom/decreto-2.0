@@ -1,0 +1,4 @@
+user_added_notification_subject: 'ADDED: Hello [user:account-name]'
+user_added_notification_body: "Hello [user:account-name]\r\n\r\nyou have been added to a meeting [decreto_meeting:title] department: [decreto_meeting:department] happening [decreto_meeting:date]\r\n\r\nwelcome!"
+user_removed_notification_subject: 'REMOVED: Hello [user:account-name]'
+user_removed_notification_body: "Hello [user:account-name]\r\n\r\nyou have been removed from a meeting [decreto_meeting:title] department: [decreto_meeting:department] happening [decreto_meeting:date]\r\n\r\nwelcome!"

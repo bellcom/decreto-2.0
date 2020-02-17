@@ -666,6 +666,10 @@ class MeetingEditForm extends AjaxFormBase {
     $field_decreto_meet_partic_int = [];
     $field_decreto_meet_partic_ext = [];
 
+    // Keeping participants list for notifications.
+    $addedParticipantsIds = [];
+    $removedParticipantsIds = [];
+
     if (!$useDepartmentMembers) {
       // Not using department members, grab the selected participants.
       $participants = $form_state->getValue('participants');
@@ -703,8 +707,20 @@ class MeetingEditForm extends AjaxFormBase {
         'field_decreto_meet_full_doc' => !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL,
         'field_decreto_meet_full_doc_c' => !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL,
       ]);
+
+      // Getting new participants.
+      $decreto_meeting = new DecretoMeeting($this->entity);
+      $newInternalParticipantsIds = $decreto_meeting->getInternalParticipants(FALSE);
+      $newExternalParticipantsIds = $decreto_meeting->getExternalParticipants(FALSE);
+      $addedParticipantsIds = array_merge([], $newInternalParticipantsIds, $newExternalParticipantsIds);
     }
     else {
+      // Saving the participants.
+      $decreto_meeting = new DecretoMeeting($this->entity);
+      $oldInternalParticipantsIds = $decreto_meeting->getInternalParticipants(FALSE);
+      $oldExternalParticipantsIds = $decreto_meeting->getExternalParticipants(FALSE);
+      $oldParticipantsIds = array_merge([], $oldInternalParticipantsIds, $oldExternalParticipantsIds);
+
       $this->entity->title = $title;
       $this->entity->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
       $this->entity->field_decreto_meet_type = $type;
@@ -716,12 +732,49 @@ class MeetingEditForm extends AjaxFormBase {
       $this->entity->field_decreto_meet_use_dep_mem = $useDepartmentMembers;
       $this->entity->field_decreto_meet_full_doc = !empty($full_doc) ? ['target_id' => reset($full_doc)] : NULL;
       $this->entity->field_decreto_meet_full_doc_c = !empty($full_doc_closed) ? ['target_id' => reset($full_doc_closed)] : NULL;
+
+      // Getting new participants.
+      $decreto_meeting = new DecretoMeeting($this->entity);
+      $newInternalParticipantsIds = $decreto_meeting->getInternalParticipants(FALSE);
+      $newExternalParticipantsIds = $decreto_meeting->getExternalParticipants(FALSE);
+      $newParticipantsIds = array_merge([], $newInternalParticipantsIds, $newExternalParticipantsIds);
+
+      $addedParticipantsIds = array_diff($newParticipantsIds, $oldParticipantsIds);
+      $removedParticipantsIds = array_diff($oldParticipantsIds, $newParticipantsIds);
     }
 
     $this->entity->save();
 
     // Setting parent the as meeting, so that redirect happens to meetings page.
     $this->parent = $this->entity;
+
+    $this->handleMeetingNotifications($addedParticipantsIds, $removedParticipantsIds);
+  }
+
+  /**
+   * Handles the meeting participants notifications.
+   *
+   * Notifies each participants about being added or removed from a meeting.
+   *
+   * @param array $addedParticipantsIds
+   *   List of UID of the users added to a meeting (added participants).
+   * @param array $removedParticipantsIds
+   *   List of UID of the users removed from a meeting (removed participants).
+   */
+  private function handleMeetingNotifications(array $addedParticipantsIds, array $removedParticipantsIds) {
+    $addedParticipants = User::loadMultiple($addedParticipantsIds);
+    $removedParticipants = User::loadMultiple($removedParticipantsIds);
+
+    /** @var \Drupal\decreto_content_modify\Services\ContentService $contentService */
+    $contentService = \Drupal::service('decreto_content_modify.content');
+
+    foreach ($addedParticipants as $participant) {
+      $contentService->notifyAddedToMeeting($participant, $this->entity);
+    }
+
+    foreach ($removedParticipants as $participant) {
+      $contentService->notifyRemovedFromMeeting($participant, $this->entity);
+    }
   }
 
   /**

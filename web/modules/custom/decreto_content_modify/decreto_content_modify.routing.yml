@@ -1,3 +1,11 @@
+decreto_content_modify.meeting_notifications:
+  path: '/admin/config/decreto/meeting-notifications'
+  defaults:
+    _form: '\Drupal\decreto_content_modify\Form\MeetingNotificationsSettingsForm'
+    _title: 'Set up meeting notifications'
+  requirements:
+    _permission: 'administer site configuration'
+
 decreto_content_modify.memo_popup_content:
   path: 'ajax/memos-popup'
   defaults:

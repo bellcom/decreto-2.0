@@ -1,0 +1,5 @@
+decreto_content_modify.meeting_notification:
+  title: 'Meeting notification'
+  parent: decreto.admin_index
+  description: 'Set up meeting notifications'
+  route_name: decreto_content_modify.meeting_notifications

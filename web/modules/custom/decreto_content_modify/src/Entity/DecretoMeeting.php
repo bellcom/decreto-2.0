@@ -2,6 +2,8 @@
 
 namespace Drupal\decreto_content_modify\Entity;
 
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\message\Entity\Message;
 use Drupal\user\UserInterface;
 
@@ -17,6 +19,44 @@ class DecretoMeeting extends DecretoNode {
    */
   public function getEntityType() {
     return 'decreto_meeting';
+  }
+
+  /**
+   * Returns formatted meeting start date.
+   *
+   * @param string $format
+   *   (Optional) Drupal format.
+   *
+   * @return mixed
+   *   Formatted date.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getStartDate($format = 'short') {
+    if ($fieldStartDate = $this->getEntity()->get('field_decreto_meet_start_date')->first()) {
+      $start_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $fieldStartDate->value, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      return \Drupal::service('date.formatter')->format($start_date->getTimestamp(), $format);
+    }
+  }
+
+  /**
+   * Returns formatted meeting end date.
+   *
+   * @param string $format
+   *   (Optional) Drupal format.
+   *
+   * @return mixed
+   *   Formatted date.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getEndDate($format = 'short') {
+    if ($fieldEndDate = $this->getEntity()->get('field_decreto_meet_end_date')->first()) {
+      $end_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $fieldEndDate->value, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      return \Drupal::service('date.formatter')->format($end_date->getTimestamp(), $format);
+    }
   }
 
   /**
@@ -375,7 +415,7 @@ class DecretoMeeting extends DecretoNode {
       }
     }
 
-    return array();
+    return [];
   }
 
   /**
@@ -422,7 +462,7 @@ class DecretoMeeting extends DecretoNode {
       }
     }
 
-    return array();
+    return [];
   }
 
   /**
