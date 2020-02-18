@@ -1,0 +1,29 @@
+uuid: 112425dd-2e16-4b3a-97c3-168209519d7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_decreto_dur_role
+    - paragraphs.paragraphs_type.decreto_department_user_role
+    - taxonomy.vocabulary.decreto_tax_department_roles
+id: paragraph.decreto_department_user_role.field_decreto_dur_role
+field_name: field_decreto_dur_role
+entity_type: paragraph
+bundle: decreto_department_user_role
+label: Role
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_department_roles: decreto_tax_department_roles
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

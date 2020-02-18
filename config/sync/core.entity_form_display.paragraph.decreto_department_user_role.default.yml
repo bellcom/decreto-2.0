@@ -1,0 +1,36 @@
+uuid: 6cc0aa2a-157c-47a3-9623-126d2a806f7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.decreto_department_user_role.field_decreto_dur_role
+    - field.field.paragraph.decreto_department_user_role.field_decreto_dur_user
+    - paragraphs.paragraphs_type.decreto_department_user_role
+id: paragraph.decreto_department_user_role.default
+targetEntityType: paragraph
+bundle: decreto_department_user_role
+mode: default
+content:
+  field_decreto_dur_role:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_decreto_dur_user:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

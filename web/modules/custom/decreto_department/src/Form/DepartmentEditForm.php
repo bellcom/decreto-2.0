@@ -83,19 +83,43 @@ class DepartmentEditForm extends AjaxFormBase {
     ];
 
     // Department admin.
-    $selectUsers = [];
+    $allUsersSelect = [];
     if (!empty($users)) {
       foreach ($users as $user) {
-        $selectUsers[$user->id()] = $user->label();
+        $allUsersSelect[$user->id()] = $user->label();
       }
     }
 
     $form['department_admin'] = [
       '#type' => 'select',
       '#title' => $this->t('Department admin'),
-      '#options' => $selectUsers,
+      '#options' => $allUsersSelect,
       '#empty_value' => 0,
     ];
+
+
+    // Department user roles.
+    if ($this->entity) {
+      $decretoDepartment = new DecretoDepartment($this->entity);
+      $departmentUsers = $decretoDepartment->getUsers();
+      $departmentUsersSelect = [];
+      foreach ($departmentUsers as $user) {
+        $departmentUsersSelect[$user->id()] = $user->label();
+      }
+      $departmentRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_department_roles');
+      $form['department_roles'] = [
+        '#type' => 'container',
+        '#tree' => TRUE,
+      ];
+      foreach ($departmentRoles as $departmentRole) {
+        $form['department_roles'][$departmentRole->tid] = [
+          '#type' => 'select',
+          '#title' => $this->t('Department role: %rolename', ['%rolename' => $departmentRole->name]),
+          '#options' => $departmentUsersSelect,
+          '#empty_value' => 0,
+        ];
+      }
+    }
 
     // Organisation.
     $organisationNids = \Drupal::entityQuery('node')
@@ -221,13 +245,17 @@ class DepartmentEditForm extends AjaxFormBase {
     $form['organisation']['#default_value'] = $decretoDepartment->getOrganisation(FALSE);
     $form['organisation']['#attributes'] = ['disabled' => 'disabled'];
 
+    // Fill department roles.
+    $departmentRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_department_roles');
+    foreach ($departmentRoles as $departmentRole) {
+      $uid = $decretoDepartment->getRoleUser($departmentRole->tid, FALSE);
+      $form['department_roles'][$departmentRole->tid]['#default_value'] = $uid;
+    }
+
     // Fill participants array based on user department attribute.
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1)
-      ->condition('field_decreto_usr_departments', $this->entity->id(), 'IN');
-    $users_ids = $query->execute();
-    if (!empty($users_ids)) {
-      foreach ($users_ids as $user_id) {
+    $departmentUsers = $decretoDepartment->getUsers(FALSE);
+    if (!empty($departmentUsers)) {
+      foreach ($departmentUsers as $user_id) {
         $form['member-container']['members'][$user_id]['attached']['#default_value'] = TRUE;
       }
     }
@@ -242,6 +270,7 @@ class DepartmentEditForm extends AjaxFormBase {
     $name = $form_state->getValue('name');
     $departmentAdminId = $form_state->getValue('department_admin');
     $currentOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+    $departmentRoles = $form_state->getValue('department_roles');
 
     if (!$this->entity) {
       $this->entity = Term::create([
@@ -260,9 +289,22 @@ class DepartmentEditForm extends AjaxFormBase {
     // Setting parent the as department, so that redirect happens to department page.
     $this->parent = $this->entity;
 
-    $attached_users = [];
+    $decretoDepartment = new DecretoDepartment($this->entity);
+
+    // Department roles.
+    if (!empty($departmentRoles)) {
+      foreach ($departmentRoles as $roleTid => $userId) {
+        if ($userId) {
+          $decretoDepartment->addRole($roleTid, $userId);
+        }
+        else {
+          $decretoDepartment->removeRole($roleTid);
+        }
+      }
+    }
 
     // Grab the selected members.
+    $attached_users = [];
     $members = $form_state->getValue('members');
     foreach ($members as $user_id => $member) {
       if ($member['attached']) {
@@ -271,10 +313,7 @@ class DepartmentEditForm extends AjaxFormBase {
     }
 
     // Find all members that are currently part of this department.
-    $query = \Drupal::entityQuery('user')
-      ->condition('status', 1)
-      ->condition('field_decreto_usr_departments', $this->entity->id(), 'IN');
-    $users_ids = $query->execute();
+    $users_ids = $decretoDepartment->getUsers(FALSE);
     if (!empty($users_ids)) {
       foreach ($users_ids as $user_id) {
         if (in_array($user_id, $attached_users)) {

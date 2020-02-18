@@ -1,0 +1,10 @@
+uuid: 5c0ca5f0-1f3f-4f2c-a8b5-4bfd5011267b
+langcode: en
+status: true
+dependencies: {  }
+id: decreto_department_user_role
+label: 'Decreto Department User Role'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

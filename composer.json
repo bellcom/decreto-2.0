@@ -67,6 +67,7 @@
         "drupal/message": "^1.0@RC",
         "drupal/message_notify": "^1.0@beta",
         "drupal/message_subscribe": "^1.0@beta",
+        "drupal/paragraphs": "^1.11",
         "drupal/pathauto": "^1.6",
         "drupal/search_api": "^1.11",
         "drupal/search_api_attachments": "^1.0@beta",

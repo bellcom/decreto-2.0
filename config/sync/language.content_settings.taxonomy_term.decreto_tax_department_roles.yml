@@ -1,0 +1,11 @@
+uuid: 1c2e9d54-564c-4a20-ad50-d4781915c8c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.decreto_tax_department_roles
+id: taxonomy_term.decreto_tax_department_roles
+target_entity_type_id: taxonomy_term
+target_bundle: decreto_tax_department_roles
+default_langcode: site_default
+language_alterable: false

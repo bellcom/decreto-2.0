@@ -1,0 +1,8 @@
+uuid: fec2de15-794a-42b2-9f8c-1faab5466242
+langcode: en
+status: true
+dependencies: {  }
+name: 'Department Roles'
+vid: decreto_tax_department_roles
+description: ''
+weight: 0
