@@ -1,0 +1,8 @@
+uuid: f0917c3e-007f-4507-90ec-da48217d2b55
+langcode: en
+status: true
+dependencies: {  }
+name: 'Meeting roles'
+vid: decreto_tax_meeting_roles
+description: ''
+weight: 0

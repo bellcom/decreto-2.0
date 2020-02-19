@@ -314,6 +314,31 @@ class MeetingEditForm extends AjaxFormBase {
       '#suffix' => '</div></div>',
     ];
 
+    // Meeting user roles.
+    if ($this->entity) {
+      $decretoMeeting = new DecretoMeeting($this->entity);
+      $meetingUsers = $decretoMeeting->getParticipants();
+
+      $meetingUsersSelect = [];
+      foreach ($meetingUsers as $user) {
+        $meetingUsersSelect[$user->id()] = $user->label();
+      }
+
+      $meetingRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_meeting_roles');
+      $form['pages-page-1']['meeting_roles'] = [
+        '#type' => 'container',
+        '#tree' => TRUE,
+      ];
+      foreach ($meetingRoles as $meetingRole) {
+        $form['pages-page-1']['meeting_roles'][$meetingRole->tid] = [
+          '#type' => 'select',
+          '#title' => $this->t('Meeting role: %rolename', ['%rolename' => $meetingRole->name]),
+          '#options' => $meetingUsersSelect,
+          '#empty_value' => 0,
+        ];
+      }
+    }
+
     $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_meeting');
     $field_decreto_meet_full_doc_field_definition = $bundle_fields['field_decreto_meet_full_doc'];
     $field_decreto_meet_full_doc_c_field_definition = $bundle_fields['field_decreto_meet_full_doc_c'];
@@ -585,6 +610,8 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['department']['#default_value'] = $meeting->field_decreto_meet_department->target_id;
     $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
 
+    $decretoMeeting = new DecretoMeeting($meeting);
+
     $start_date = $end_date = NULL;
 
     if ($start_date_str = $meeting->field_decreto_meet_start_date->value) {
@@ -598,6 +625,13 @@ class MeetingEditForm extends AjaxFormBase {
       $form['pages-page-1']['end_date']['#default_value'] = $end_date->format(DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_FORMAT, ['timezone' => date_default_timezone_get()]);
     }
 
+    // Fill department roles.
+    $meetingRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_meeting_roles');
+    foreach ($meetingRoles as $meetingRole) {
+      $uid = $decretoMeeting->getRoleUser($meetingRole->tid, FALSE);
+      $form['pages-page-1']['meeting_roles'][$meetingRole->tid]['#default_value'] = $uid;
+    }
+
     if (!$meeting->field_decreto_meet_full_doc->isEmpty()) {
       $form['pages-page-1']['full_doc']['#default_value']['fid'] = $meeting->field_decreto_meet_full_doc->target_id;
     }
@@ -607,7 +641,7 @@ class MeetingEditForm extends AjaxFormBase {
 
     // Populating participants checkboxes.
     if (!$form_state->get('use_department_members')) {
-      $decretoMeeting = new DecretoMeeting($meeting);
+
       // Internal participants.
       $internal_participants_ids = $decretoMeeting->getInternalParticipants(FALSE);
       foreach ($internal_participants_ids as $participant_id) {
@@ -657,6 +691,7 @@ class MeetingEditForm extends AjaxFormBase {
     $department_tid = $form_state->getValue('department');
     $start_date = $form_state->getValue('start_date');
     $end_date = $form_state->getValue('end_date');
+    $meetingRoles = $form_state->getValue('meeting_roles');
     $location_tid = $form_state->getValue('location');
     $full_doc = $form_state->getValue('full_doc');
     $full_doc_closed = $form_state->getValue('full_doc_closed');
@@ -717,9 +752,7 @@ class MeetingEditForm extends AjaxFormBase {
     else {
       // Saving the participants.
       $decreto_meeting = new DecretoMeeting($this->entity);
-      $oldInternalParticipantsIds = $decreto_meeting->getInternalParticipants(FALSE);
-      $oldExternalParticipantsIds = $decreto_meeting->getExternalParticipants(FALSE);
-      $oldParticipantsIds = array_merge([], $oldInternalParticipantsIds, $oldExternalParticipantsIds);
+      $oldParticipantsIds = $decreto_meeting->getParticipants(FALSE);
 
       $this->entity->title = $title;
       $this->entity->field_decreto_meet_department = ($department_tid) ? $department_tid : NULL;
@@ -735,9 +768,7 @@ class MeetingEditForm extends AjaxFormBase {
 
       // Getting new participants.
       $decreto_meeting = new DecretoMeeting($this->entity);
-      $newInternalParticipantsIds = $decreto_meeting->getInternalParticipants(FALSE);
-      $newExternalParticipantsIds = $decreto_meeting->getExternalParticipants(FALSE);
-      $newParticipantsIds = array_merge([], $newInternalParticipantsIds, $newExternalParticipantsIds);
+      $newParticipantsIds = $decreto_meeting->getParticipants(FALSE);
 
       $addedParticipantsIds = array_diff($newParticipantsIds, $oldParticipantsIds);
       $removedParticipantsIds = array_diff($oldParticipantsIds, $newParticipantsIds);
@@ -747,6 +778,20 @@ class MeetingEditForm extends AjaxFormBase {
 
     // Setting parent the as meeting, so that redirect happens to meetings page.
     $this->parent = $this->entity;
+
+    $decretoMeeting = new DecretoMeeting($this->entity);
+
+    // Meeting roles.
+    if (!empty($meetingRoles)) {
+      foreach ($meetingRoles as $roleTid => $userId) {
+        if ($userId) {
+          $decretoMeeting->addRole($roleTid, $userId);
+        }
+        else {
+          $decretoMeeting->removeRole($roleTid);
+        }
+      }
+    }
 
     $this->handleMeetingNotifications($addedParticipantsIds, $removedParticipantsIds);
   }

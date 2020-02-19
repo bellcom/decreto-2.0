@@ -1,0 +1,28 @@
+uuid: 3c4ea0dc-ea4e-4bca-b957-ef4ae4323e75
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_decreto_mur_user
+    - paragraphs.paragraphs_type.decreto_meeting_user_role
+id: paragraph.decreto_meeting_user_role.field_decreto_mur_user
+field_name: field_decreto_mur_user
+entity_type: paragraph
+bundle: decreto_meeting_user_role
+label: User
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

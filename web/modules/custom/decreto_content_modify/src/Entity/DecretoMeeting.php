@@ -5,6 +5,8 @@ namespace Drupal\decreto_content_modify\Entity;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\message\Entity\Message;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 
 /**
@@ -484,6 +486,172 @@ class DecretoMeeting extends DecretoNode {
       $this->getEntity()->get('field_decreto_meet_partic_ext')->removeItem($key);
       if ($save) {
         $this->getEntity()->save();
+      }
+    }
+  }
+
+  /**
+   * Returns all participants (both internal and external).
+   *
+   * Does a union of both lists, so that only unique participants are returned.
+   *
+   * @param bool $load
+   *   If the returned users shall be load. If FALSE, array of uids is returned.
+   *
+   * @return array
+   *   If load is TRUE array of users is returned,
+   *   If load is FALSE array of uids is returned,
+   *   If field is empty, empty array is returned.
+   */
+  public function getParticipants($load = TRUE) {
+    $internalParticipants = $this->getInternalParticipants(FALSE);
+    $internalParticipants = array_combine($internalParticipants, $internalParticipants);
+
+    $externalParticipants = $this->getExternalParticipants(FALSE);
+    $externalParticipants = array_combine($externalParticipants, $externalParticipants);
+
+    $participants = $internalParticipants + $externalParticipants;
+    if ($load) {
+      return User::loadMultiple($participants);
+    }
+    else {
+      return $participants;
+    }
+  }
+
+  /**
+   * Gets the user that is related by the specified role.
+   *
+   * @param int $roleId
+   *   ID of the role.
+   * @param bool $load
+   *   If the returned user shall be load. If FALSE, id is returned.
+   *   TRUE is default value.
+   *
+   * @return \Drupal\user\UserInterface|int|null
+   *   If load is TRUE, User entity is returned,
+   *   If load if FALSE, User ID is returned.
+   *   If role has no user attached, null is returned.
+   */
+  public function getRoleUser($roleId, $load = TRUE) {
+    // Finding if paragraphs for that already exists.
+    $pids = \Drupal::entityQuery('paragraph')
+      ->condition('type', 'decreto_meeting_user_role')
+      ->condition('parent_id', $this->getEntity()->id())
+      ->condition('field_decreto_mur_role', $roleId)
+      ->execute();
+
+    if (!empty($pids)) {
+      $pid = reset($pids);
+      $userRoleParagraph = Paragraph::load($pid);
+
+      if ($fieldUser = $userRoleParagraph->get('field_decreto_mur_user')->first()) {
+        if ($load) {
+          return $fieldUser->get('entity')->getTarget()->getValue();
+        }
+        else {
+          return $fieldUser->getValue()['target_id'];
+        }
+      }
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Adds the role-user connection to this meeting.
+   *
+   * If an relation already exists, it will be updated with new values.
+   * If relation does not exist, it will be created first.
+   *
+   * @param int $roleId
+   *   ID of the role.
+   * @param int $userId
+   *   ID of the meeting.
+   * @param bool $save
+   *   If meeting needs to be saved right away. TRUE is default value.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function addRole($roleId, $userId, $save = TRUE) {
+    $userRoleParagraph = NULL;
+
+    // Finding if paragraphs for that already exists.
+    $pids = \Drupal::entityQuery('paragraph')
+      ->condition('type', 'decreto_meeting_user_role')
+      ->condition('parent_id', $this->getEntity()->id())
+      ->condition('field_decreto_mur_role', $roleId)
+      ->execute();
+
+    if (!empty($pids)) {
+      $pid = reset($pids);
+      $userRoleParagraph = Paragraph::load($pid);
+
+      $userRoleParagraph->set('field_decreto_mur_user', $userId);
+    }
+    else {
+      $userRoleParagraph = Paragraph::create([
+        'type' => 'decreto_meeting_user_role',
+        'field_decreto_mur_role' => $roleId,
+        'field_decreto_mur_user' => $userId,
+      ]);
+    }
+    $userRoleParagraph->save();
+
+    // Creating paragraph item.
+    $item = [
+      'target_id' => $userRoleParagraph->id(),
+      'target_revision_id' => $userRoleParagraph->getRevisionId(),
+    ];
+
+    // Updating or adding this item.
+    $userRoles = $this->getEntity()->get('field_decreto_meet_user_roles')->getValue();
+    $key = array_search($userRoleParagraph->id(), array_column($userRoles, 'target_id'));
+    if ($key !== FALSE) {
+      $this->getEntity()->get('field_decreto_meet_user_roles')->set($key, $item);
+    }
+    else {
+      $this->getEntity()->get('field_decreto_meet_user_roles')->appendItem($item);
+    }
+
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
+   * Removes the role from meeting.
+   *
+   * Will also delete the paragraph used internally for storing the relation.
+   *
+   * @param int $roleId
+   *   ID of the role.
+   * @param bool $save
+   *   If this meeting needs to be saved right away. TRUE is default value.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeRole($roleId, $save = TRUE) {
+    // Finding if paragraphs for that already exists.
+    $pids = \Drupal::entityQuery('paragraph')
+      ->condition('type', 'decreto_meeting_user_role')
+      ->condition('parent_id', $this->getEntity()->id())
+      ->condition('field_decreto_mur_role', $roleId)
+      ->execute();
+
+    if (!empty($pids)) {
+      $pid = reset($pids);
+
+      $userRoles = $this->getEntity()->get('field_decreto_meet_user_roles')->getValue();
+      $key = array_search($pid, array_column($userRoles, 'target_id'));
+      if ($key !== FALSE) {
+        $this->getEntity()->get('field_decreto_meet_user_roles')->removeItem($key);
+
+        Paragraph::load($pid)->delete();
+        if ($save) {
+          $this->getEntity()->save();
+        }
       }
     }
   }

@@ -1,0 +1,11 @@
+uuid: 23870511-e8fc-40fb-a3c8-2b48e13d6a15
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.decreto_tax_meeting_roles
+id: taxonomy_term.decreto_tax_meeting_roles
+target_entity_type_id: taxonomy_term
+target_bundle: decreto_tax_meeting_roles
+default_langcode: site_default
+language_alterable: false

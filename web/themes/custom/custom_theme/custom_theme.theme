@@ -382,3 +382,25 @@ function custom_theme_preprocess_views_view(&$variables) {
     $variables['#attached']['drupalSettings']['quickSearch']['viewDisplayId'] = $display_id;
   }
 }
+
+/**
+ * Implements template_preprocess_field().
+ */
+function custom_theme_preprocess_field(&$variables, $hook) {
+  if ($variables['field_name'] == 'field_decreto_meet_partic_int' || $variables['field_name'] == 'field_decreto_meet_partic_ext') {
+    $meeting = $variables['element']['#object'];
+
+    $decretoMeeting = new DecretoMeeting($meeting);
+
+    // Append each meeting role name next to a corresponding user.
+    $meetingRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_meeting_roles');
+    foreach ($meetingRoles as $meetingRole) {
+      $uid = $decretoMeeting->getRoleUser($meetingRole->tid, FALSE);
+      foreach ($variables['items'] as $delta => $item) {
+        if ($item['content']['#options']['entity']->id() == $uid) {
+          $variables['items'][$delta]['content']['#title'] .= ' (' . $meetingRole->name . ')';
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+uuid: a3f65490-99d2-4878-b0f2-a8456953c9f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_decreto_mur_role
+    - paragraphs.paragraphs_type.decreto_meeting_user_role
+    - taxonomy.vocabulary.decreto_tax_meeting_roles
+id: paragraph.decreto_meeting_user_role.field_decreto_mur_role
+field_name: field_decreto_mur_role
+entity_type: paragraph
+bundle: decreto_meeting_user_role
+label: Role
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      decreto_tax_meeting_roles: decreto_tax_meeting_roles
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

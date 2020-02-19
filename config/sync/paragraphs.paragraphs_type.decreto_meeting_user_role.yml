@@ -1,0 +1,10 @@
+uuid: 5e33882a-023d-4427-94f2-8b3ed78cd3db
+langcode: en
+status: true
+dependencies: {  }
+id: decreto_meeting_user_role
+label: 'Decreto Meeting User Role'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

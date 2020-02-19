@@ -1,0 +1,36 @@
+uuid: 321f2508-0216-4491-99e9-592295f57826
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.decreto_meeting_user_role.field_decreto_mur_role
+    - field.field.paragraph.decreto_meeting_user_role.field_decreto_mur_user
+    - paragraphs.paragraphs_type.decreto_meeting_user_role
+id: paragraph.decreto_meeting_user_role.default
+targetEntityType: paragraph
+bundle: decreto_meeting_user_role
+mode: default
+content:
+  field_decreto_mur_role:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_decreto_mur_user:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true
