@@ -86,6 +86,7 @@ module:
   views: 10
   paragraphs: 11
   twigsuggest: 100
+  login_redirect_per_role: 1000
   standard: 1000
 theme:
   stable: 0

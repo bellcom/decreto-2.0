@@ -3,9 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_visibility_groups.block_visibility_group.decreto_user_page
     - views.view.decreto_user_departments
   module:
-    - system
+    - block_visibility_groups
     - views
   theme:
     - custom_theme
@@ -24,8 +25,8 @@ settings:
   items_per_page: none
   context_mapping: {  }
 visibility:
-  request_path:
-    id: request_path
-    pages: '/user/*'
+  condition_group:
+    id: condition_group
     negate: false
+    block_visibility_group: decreto_user_page
     context_mapping: {  }

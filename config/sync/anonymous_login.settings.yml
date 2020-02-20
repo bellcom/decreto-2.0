@@ -1,5 +1,5 @@
 login_path: /user/login
 _core:
   default_config_hash: ZKVq7lpyGFQf-SCuj_Ng2yLPD24rKHxz-TzGQxBjLl4
-paths: "*\r\n~user/password"
+paths: "*\r\n~user/password\r\n~user/reset"
 message: ''

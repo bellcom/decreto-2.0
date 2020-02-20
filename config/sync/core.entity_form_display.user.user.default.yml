@@ -8,9 +8,7 @@ dependencies:
     - field.field.user.user.field_decreto_usr_departments
     - field.field.user.user.field_decreto_usr_orgs
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
     - user
 _core:
   default_config_hash: LLAieeozVsoZDb-2PbFxRJpQqnKmpR7-4OoRJnduz-U
@@ -24,64 +22,18 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  contact:
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_decreto_firstname:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_decreto_lastname:
-    weight: 7
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_decreto_usr_departments:
-    weight: 8
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-      match_limit: 10
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_decreto_usr_orgs:
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-      match_limit: 10
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  language:
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   timezone:
     weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
-  user_picture:
-    type: image_image
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
+  contact: true
+  field_decreto_firstname: true
+  field_decreto_lastname: true
+  field_decreto_usr_departments: true
+  field_decreto_usr_orgs: true
   langcode: true
+  language: true
+  path: true
+  user_picture: true

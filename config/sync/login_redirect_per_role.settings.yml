@@ -1,0 +1,42 @@
+login:
+  authenticated:
+    redirect_url: /
+    allow_destination: true
+    weight: 0
+  decreto_admin:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  administrator:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  agenda_manager:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  agenda_creator:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+logout:
+  authenticated:
+    redirect_url: /
+    allow_destination: true
+    weight: 0
+  decreto_admin:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  administrator:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  agenda_manager:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false
+  agenda_creator:
+    redirect_url: ''
+    weight: 0
+    allow_destination: false

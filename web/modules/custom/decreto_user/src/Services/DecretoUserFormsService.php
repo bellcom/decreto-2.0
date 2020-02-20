@@ -113,11 +113,36 @@ class DecretoUserFormsService {
       }
     }
 
-    // Password + confirm password.
-    $form['password'] = [
-      '#type' => 'password_confirm',
-      '#required' => ($user) ? FALSE : TRUE,
-    ];
+    // If no user, make password optional.
+    if (!$user) {
+      $form['use_password'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Provide user password'),
+        '#description' => t('User will get one time login link, using which password can be set. But you optionally can set the password for a user from the beginning.')
+      ];
+
+      // Password + confirm password.
+      $form['password_container'] = [
+        '#type' => 'container',
+        '#states' => [
+          'visible' => [
+            ':input[name="use_password"]' => [
+              'checked' => TRUE,
+            ],
+          ],
+        ],
+      ];
+      $form['password_container']['password'] = [
+        '#type' => 'password_confirm',
+      ];
+    }
+    // If user is present, just display password edit form.
+    else {
+      $form['password'] = [
+        '#type' => 'password_confirm',
+      ];
+    }
+
 
     return $form;
   }
@@ -156,9 +181,7 @@ class DecretoUserFormsService {
         ],
       ]);
 
-      $user->setPassword($password);
       $user->setUsername($email);
-      $user->setEmail($email);
       $user->enforceIsNew();
       $user->activate();
     }
@@ -170,15 +193,16 @@ class DecretoUserFormsService {
 
       // Updating username to new email value if username equals to the old
       // email value.
-      if ($user->getEmail() === $user->getUsername()) {
+      if ($user->getEmail() === $user->getAccountName()) {
         $user->setUsername($email);
       }
       $user->field_decreto_firstname = $firstName;
       $user->field_decreto_lastname = $lastName;
-      $user->setEmail($email);
-      if (!empty($password)) {
-        $user->setPassword($password);
-      }
+    }
+
+    $user->setEmail($email);
+    if (!empty($password)) {
+      $user->setPassword($password);
     }
 
     $violations = $user->validate();

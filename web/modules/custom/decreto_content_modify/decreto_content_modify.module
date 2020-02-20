@@ -46,18 +46,6 @@ const DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT = 'DD.MM.YYYY HH:mm';
 const DECRETO_BOOTSTRAP_DATETIMEPICKER_DATE_JS_FORMAT = 'DD.MM.YYYY';
 
 /**
- * Implements hook_user_login().
- *
- * Redirect to front page right after login.
- */
-function decreto_content_modify_user_login(UserInterface $account) {
-  $url = Url::fromRoute('<front>');
-
-  $response = new RedirectResponse($url->toString());
-  $response->send();
-}
-
-/**
  * Implements hook_preprocess_node().
  */
 function decreto_content_modify_preprocess_node(&$variables) {

@@ -1,0 +1,23 @@
+uuid: e8f1b80b-4ecc-4424-b200-a8b05ca3a0b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: decreto_user_page
+label: 'Decreto user page'
+logic: and
+conditions:
+  d977f7cb-d1c2-4f12-b975-bf8e45bb1316:
+    id: request_path
+    pages: '/user/*'
+    negate: false
+    context_mapping: {  }
+    uuid: d977f7cb-d1c2-4f12-b975-bf8e45bb1316
+  8ca29196-0360-4a4d-aa10-e126cdb4eb9e:
+    id: request_path
+    pages: '/user/*/edit'
+    negate: true
+    context_mapping: {  }
+    uuid: 8ca29196-0360-4a4d-aa10-e126cdb4eb9e
+allow_other_conditions: false
