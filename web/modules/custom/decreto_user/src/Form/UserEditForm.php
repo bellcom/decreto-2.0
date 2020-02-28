@@ -62,7 +62,7 @@ class UserEditForm extends AjaxFormBase {
 
     /** @var \Drupal\decreto_user\Services\DecretoUserFormsService $userFormsService */
     $userFormsService = \Drupal::service('decreto_user.user_forms');
-    $form[] = $userFormsService->getUserEditFormStructure($user);
+    $form += $userFormsService->getUserEditFormStructure($user);
 
     if ($user) {
       $form = $this->populateFormData($form, $form_state, $user);
@@ -113,7 +113,7 @@ class UserEditForm extends AjaxFormBase {
     $userFormsService = \Drupal::service('decreto_user.user_forms');
 
     // Validating the input and creating new unsaved user entity.
-    $this->entity = $userFormsService->validateUserEditForm($form_state);
+    $this->entity = $userFormsService->validateUserEditForm($form_state, $this->entity);
   }
 
   /**
