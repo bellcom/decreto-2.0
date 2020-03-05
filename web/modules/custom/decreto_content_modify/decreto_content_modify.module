@@ -516,7 +516,7 @@ function decreto_content_modify_mail($key, &$message, $params) {
   }
   if ($key == 'decreto_content_user_removed_from_meeting') {
     $message['subject'] .= PlainTextOutput::renderFromHtml($token_service->replace($mail_config->get('user_removed_notification_subject'), $variables));
-    $message['body'][] = PlainTextOutput::renderFromHtml($mail_config->get('user_removed_notification_body'), $variables));
+    $message['body'][] = PlainTextOutput::renderFromHtml($mail_config->get('user_removed_notification_body'), $variables);
   }
 }
 
