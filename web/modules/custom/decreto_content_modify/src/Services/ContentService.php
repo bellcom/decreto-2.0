@@ -196,6 +196,14 @@ class ContentService {
     ];
   }
 
+  /**
+   * Sends a removed from meeting notification to user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   User who shall be notified.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting - the subject of notification.
+   */
   public function notifyAddedToMeeting(UserInterface $user, ContentEntityInterface $meeting) {
     $params['account'] = $user;
     $params['decreto_meeting'] = $meeting;
@@ -216,6 +224,14 @@ class ContentService {
     $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
   }
 
+  /**
+   * Sends a removed from meeting notification to user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   User who shall be notified.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting - the subject of notification.
+   */
   public function notifyRemovedFromMeeting(UserInterface $user, ContentEntityInterface $meeting) {
     $params['account'] = $user;
     $params['decreto_meeting'] = $meeting;
