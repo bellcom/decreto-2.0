@@ -33,59 +33,54 @@
 ]
 %}
 
-<!-- Begin - actions -->
-<div class="text-right">
-
-  <!-- Begin - edit -->
-  {% if content['#access']['canEdit'] %}
-    <a
-      href="{{ path('decreto_department.departments_edit', {'department': term.id}) }}"
-      class="btn btn-default use-ajax" data-dialog-type="modal">
-      {{ "Edit department" | trans }}
-    </a>
-  {% endif %}
-  <!-- End - edit -->
-
-  <!-- Begin - delete -->
-  {% if content['#access']['canDelete'] %}
-    <a
-      href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
-      class="btn btn-default use-ajax" data-dialog-type="modal">
-      {{ "Delete department" | trans }}
-    </a>
-  {% endif %}
-  <!-- End - delete -->
-
-</div>
-<!-- End - actions -->
-
-<br>
-
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   <div class="boxy__heading">
     <h2 class="boxy__heading__title">
-      {% trans %}
-        Details
-      {% endtrans %}
+      {{ name }}
     </h2>
-    {% trans %}
-      Short description
-    {% endtrans %}
+    {{ content.description }}
     {{ help_message }}
+    
   </div>
   <div class="boxy__body">
-    <strong>
-      <div>
-        {% trans %}Name{% endtrans %}
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+        {{ content|without('description') }}
       </div>
-    </strong>
-    {{ title_prefix }}
-    <div>
-      {{ name }}
+
+      <!-- Begin - actions -->
+      <div class="col-xs-12 col-md-4">
+
+        <!-- Begin - edit -->
+        {% if content['#access']['canEdit'] %}
+          <div class="text--with-icon">
+            <i class="material-icons">settings</i>
+            <a
+              href="{{ path('decreto_department.departments_edit', {'department': term.id}) }}"
+              class="use-ajax" data-dialog-type="modal">
+              {{ "Edit department" | trans }}
+            </a>
+          </div>
+        {% endif %}
+        <!-- End - edit -->
+
+        <!-- Begin - delete -->
+        {% if content['#access']['canDelete'] %}
+        <div class="text--with-icon">
+          <i class="material-icons">delete</i>
+          <a
+            href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
+            class="use-ajax" data-dialog-type="modal">
+            {{ "Delete department" | trans }}
+          </a>
+        </div>
+        {% endif %}
+        <!-- End - delete -->
+
+      </div>
+      <!-- End - actions -->
     </div>
-    {{ title_suffix }}
-    {{ content }}
   </div>
 </article>
 

@@ -40,42 +40,22 @@
 #}
 {%
   set classes = [
-  'field',
-  'field--name-' ~ field_name|clean_class,
-  'field--type-' ~ field_type|clean_class,
-  'field--label-' ~ label_display,
-]
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
 %}
 {%
   set title_classes = [
-  'field--label',
-  label_display == 'visually_hidden' ? 'sr-only',
-]
+    'field--label',
+    label_display == 'visually_hidden' ? 'sr-only',
+  ]
 %}
 
-{% if label_hidden %}
-  {% if multiple %}
-    <div{{ attributes.addClass(classes, 'field--items') }}>
-      {% for item in items %}
-        <span{{ item.attributes.addClass('field--item') }}>{{ item.content }}
-          {% if not loop.last %},{% endif %}
-        </span>
-      {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field--item') }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
-{% else %}
-  <div{{ attributes.addClass(classes) }}>
-    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
-    {% if multiple %}
-    <div class="field--items">
-      {% endif %}
-
-      {% if multiple %}
-    </div>
-    {% endif %}
-  </div>
-{% endif %}
+<div class="text--with-icon">
+  <i class="material-icons">person</i>
+  {% for item in items %}
+    <div{{ attributes.addClass(classes, 'field--item') }}>{{ item.content }}</div>
+  {% endfor %}
+</div>
