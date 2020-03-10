@@ -35,18 +35,24 @@
 
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
-  <div class="boxy__heading">
+  <div class="boxy__heading boxy__department">
     <h2 class="boxy__heading__title">
-      {{ name }}
+      <div class="boxy__heading__title__text">
+        {{ name }}
+      </div>
+      <div class="boxy_heading__title__helptext">
+        {{ help_message }}
+      </div>
     </h2>
     {{ content.description }}
-    {{ help_message }}
     
   </div>
-  <div class="boxy__body">
+  <div class="boxy__body boxy__department">
     <div class="row">
       <div class="col-xs-12 col-md-8">
-        {{ content|without('description') }}
+        <div class="wrapper">
+          {{ content|without('description') }}
+        </div>
       </div>
 
       <!-- Begin - actions -->
@@ -55,10 +61,10 @@
         <!-- Begin - edit -->
         {% if content['#access']['canEdit'] %}
           <div class="text--with-icon">
-            <i class="material-icons">settings</i>
+            <i class="material-icons action--light">settings</i>
             <a
               href="{{ path('decreto_department.departments_edit', {'department': term.id}) }}"
-              class="use-ajax" data-dialog-type="modal">
+              class="use-ajax actions--small action--light" data-dialog-type="modal">
               {{ "Edit department" | trans }}
             </a>
           </div>
@@ -68,10 +74,10 @@
         <!-- Begin - delete -->
         {% if content['#access']['canDelete'] %}
         <div class="text--with-icon">
-          <i class="material-icons">delete</i>
+          <i class="material-icons action--light">delete</i>
           <a
             href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
-            class="use-ajax" data-dialog-type="modal">
+            class="use-ajax actions--small action--light" data-dialog-type="modal">
             {{ "Delete department" | trans }}
           </a>
         </div>
@@ -80,6 +86,7 @@
 
       </div>
       <!-- End - actions -->
+      <br>&nbsp;
     </div>
   </div>
 </article>
