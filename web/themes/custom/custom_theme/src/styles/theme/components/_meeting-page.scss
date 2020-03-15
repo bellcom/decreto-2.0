@@ -1,122 +1,94 @@
 // |--------------------------------------------------------------------------
-// | Typography
+// | Helper
 // |--------------------------------------------------------------------------
 // |
 // | This file contains styles for the following:
-// | - .layout__content
+// | - .helper
 // |
 
 // --------------------------------------------------
 // Variables
+// Tertiary
+$brand-secondary-pale: #FFA267;
+
 // --------------------------------------------------
 
 // --------------------------------------------------
 // Mixins
 // --------------------------------------------------
 
-@mixin typography-mixin() {}
+@mixin helper-mixin() {}
 
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
 
+.meeting-page {
+    
+  .meeting-page__datebox {
+    display: inline-block;
+    background: $link-color;
+    color: white;
+    padding: $padding-small-vertical $padding-small-horizontal;
+    border-radius: $border-radius-base;
+    text-align: center;
+    font-weight:$headings-font-weight-semibold;
+    line-height: 1;
 
-h1, h2, h3, h4, h5, h6 {
-
-  a {
-    color: $headings-color-highlighted;
-
-    &:hover {
-      color: darken($headings-color-highlighted, 5%);
+    .meeting-page__datebox__day {
+      font-size: ($font-size-large)+2;
+    }
+    .meeting-page__datebox__month{
+      font-size: $font-size-small;
     }
   }
-
-  .material-icons {
-    font-size: $font-size-large;
-
-    color: $text-color-light;
-  }
-}
-
-label {
-  font-size: $font-size-small;
-  text-transform: uppercase;
-
-  color: $headings-color-light;
-
-  .form-type-checkbox & {
-    text-transform: initial;
-  }
-}
-
-.help-block {
-  color: $text-color-light;
-}
-
-.text--with-icon {
-  display: flex;
-
-  align-items: center;
-  
-  line-height: 32px;
-
-  &,
-  a, a:focus {
-    color: $link-color;
-    text-decoration: none;
+  .mb {
+    margin-bottom: $line-height-computed;
   }
 
-  a:hover {
-    color: $link-hover-color;
+  .d-inline {
+    display: inline-block;
   }
 
-  .material-icons {
-    
-    font-size: 18px;
-
-    margin-right: 14px;
-
-    color: $brand-tertiary;
+  &.boxy__heading {
+    border-bottom: 2px solid $body-bg;
   }
 
-  + .text--with-icon {
-    margin-top: 3px;
-  }
-  .actions--small {
+  .btn {
     font-size: $font-size-small;
-    text-decoration: underline;
+
+    .material-icons{
+      font-size: $font-size-large;
+    }
+
+    &.btn-pale{
+      background: $brand-secondary-pale;
+      color: $headings-color;
+
+      &:hover, &:active {
+        background: darken($brand-secondary-pale, 8%);
+      }
+    }
+
   }
-  .action--light, .paletext {
-    color: $text-color-light;
+
+  .search-form__hidden{
+    background: $brand-secondary-pale;
+    border-radius: $border-radius-base;
+    border-top-left-radius: 0px;
+    padding: $padding-base-vertical $padding-large-horizontal;
   }
+
 }
 
-.description {
-  color: $text-color-light;
-  font-size: $font-size-small;
-  padding-top: 10px;
-}
-
-.text--primary {
-  color: $headings-color-highlighted;
-}
-.text--secondary {
-  color: $brand-secondary;
-}
-.text--tertiary {
-  color: $brand-tertiary;
-}
-.text--light {
-  color: $text-color-light;
-}
-
-.text--size-extra-small {
-  font-size: $font-size-extra-small;
-}
 
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
+
+// Sizes.
+
+// Colours.
 
 // --------------------------------------------------
 // Responsive
