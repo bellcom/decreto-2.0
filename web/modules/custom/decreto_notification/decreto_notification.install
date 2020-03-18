@@ -1,0 +1,45 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
+use Drupal\decreto_department\Entity\DecretoDepartment;
+use Drupal\decreto_notification\Entity\Notification;
+
+/**
+ * Implements hook_update_N().
+ *
+ * Adding organisation field.
+ */
+function decreto_notification_update_8001() {
+  // Adding the organisation field.
+  $storage_definition = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Organisation'))
+    ->setDescription(t('The organisation ID.'))
+    ->setSettings(array(
+      'target_type' => 'node',
+      'not null' => TRUE,
+    ))
+    ->setRequired(TRUE)
+    ->setReadOnly(TRUE);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('org_id', 'decreto_notification', 'decreto_notification', $storage_definition);
+
+  // Add values into newly added organisation field.
+  $notificationIds = Drupal::entityTypeManager()->getStorage('decreto_notification')->getQuery()->execute();
+  foreach ($notificationIds as $id) {
+    /** @var \Drupal\decreto_notification\Entity\Notification $notification */
+    $notification = Notification::load($id);
+
+    // Getting organisation id.
+    $meeting = $notification->getMeeting();
+    $decretoMeeting = new DecretoMeeting($meeting);
+    $department = $decretoMeeting->getDepartment();
+    $decretoDepartment = new DecretoDepartment($department);
+    $orgId = $decretoDepartment->getOrganisation(FALSE);
+
+    // Adding organisation to notification.
+    $notification->set('org_id', ['target_id' => $orgId]);
+    $notification->save();
+  }
+}

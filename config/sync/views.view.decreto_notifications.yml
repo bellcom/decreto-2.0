@@ -4,9 +4,6 @@ status: true
 dependencies:
   module:
     - decreto_notification
-    - message
-    - node
-    - taxonomy
     - user
 id: decreto_notifications
 label: 'Decreto notifications'
@@ -210,44 +207,6 @@ display:
           required: false
           entity_type: decreto_notification
           entity_field: uid
-          plugin_id: standard
-        mid:
-          id: mid
-          table: decreto_notification_notifications
-          field: mid
-          relationship: none
-          group_type: group
-          admin_label: Message
-          required: true
-          entity_type: decreto_notification
-          entity_field: mid
-          plugin_id: standard
-        field_decreto_notif_meeting:
-          id: field_decreto_notif_meeting
-          table: message__field_decreto_notif_meeting
-          field: field_decreto_notif_meeting
-          relationship: mid
-          group_type: group
-          admin_label: Meeting
-          required: true
-          plugin_id: standard
-        field_decreto_meet_department:
-          id: field_decreto_meet_department
-          table: node__field_decreto_meet_department
-          field: field_decreto_meet_department
-          relationship: field_decreto_notif_meeting
-          group_type: group
-          admin_label: 'Meeting department'
-          required: true
-          plugin_id: standard
-        field_decreto_dep_org:
-          id: field_decreto_dep_org
-          table: taxonomy_term__field_decreto_dep_org
-          field: field_decreto_dep_org
-          relationship: field_decreto_meet_department
-          group_type: group
-          admin_label: 'Department Organisation'
-          required: true
           plugin_id: standard
       arguments: {  }
       display_extenders: {  }
