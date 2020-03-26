@@ -79,6 +79,35 @@ $brand-secondary-pale: #FFA267;
     padding: $padding-base-vertical $padding-large-horizontal;
   }
 
+  .dropdown-menu {
+    border: none;
+    font-size: $font-size-small;
+    border-radius: $border-radius-base;
+    background-color: $body-bg-secondary;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    padding-left: $padding-base-horizontal;
+    padding-right: $padding-base-horizontal;
+    
+    
+    > li > a {
+      align-items: center;
+      padding: $padding-base-vertical 0;
+      
+      &:hover, &:focus {
+       background: none; 
+        color: $link-color;
+      }
+    }
+    li {
+      + li {
+
+        > a {
+          border-top: 1px solid #E2E2E2; 
+        }
+      } 
+    }
+    
+  }
 }
 
 

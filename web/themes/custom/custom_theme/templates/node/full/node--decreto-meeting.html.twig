@@ -110,48 +110,49 @@
             <!-- End - own notes -->
             
             <ul class="dropdown-menu">
-              <li>
-                <!-- Begin - download full copy -->
-                {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
+              
+              <!-- Begin - download full copy -->
+              {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
+                <li>
                   <a
                     href="{{ file_url(node.field_decreto_meet_full_doc.entity.uri.value) }}"
                     class=" " target="_blank">
                     {{ "Download full copy" | trans }}
                   </a>
-                {% endif %}
-              </li>
-              <li>
-                {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
+                </li>
+              {% endif %}
+              {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
+                <li>
                   <a
                     href="{{ file_url(node.field_decreto_meet_full_doc_c.entity.uri.value) }}"
                     class=" " target="_blank">
                     {{ "Download full copy (closed)" | trans }}
                   </a>
-                {% endif %}
                 <!-- End - download full copy -->
-              </li>
-              <li>
-                <!-- Begin - edit -->
-                {% if content['#access']['canEdit'] %}
+                </li>
+              {% endif %}
+              <!-- Begin - edit -->
+              {% if content['#access']['canEdit'] %}
+                <li>
                   <a
                     href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
                     class="use-ajax" data-dialog-type="modal">
                     {{ "Edit meeting" | trans }}
                   </a>
-                {% endif %}
                 <!-- End - edit -->
-              </li>
+                </li>
+              {% endif %}
+              <!-- Begin - delete -->
+              {% if content['#access']['canDelete'] %}
               <li>
-                <!-- Begin - delete -->
-                {% if content['#access']['canDelete'] %}
                   <a
                     href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
                     class="use-ajax" data-dialog-type="modal">
                     {{ "Delete meeting" | trans }}
                   </a>
-                {% endif %}
-                <!-- End - delete -->
               </li>
+            {% endif %}
+            <!-- End - delete -->
             </ul>
           </div>
 
