@@ -39,9 +39,9 @@ function decreto_notification_node_update(EntityInterface $node) {
  */
 function decreto_notification_meeting_notify(EntityInterface $node) {
   // Creating message.
-  $message = Message ::create([
+  $message = Message::create([
     'template' => 'decreto_meeting_modify',
-    'uid' => $node->get('uid')
+    'uid' => $node->get('uid'),
   ]);
   $message->set('field_decreto_notif_meeting', $node);
   $message->save();

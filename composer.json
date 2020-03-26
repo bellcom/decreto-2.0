@@ -57,7 +57,7 @@
         "drupal/calendar_datetime": "1.x-dev",
         "drupal/config_ignore": "^2.1",
         "drupal/console": "^1.0.2",
-        "drupal/core": "^8.6.0",
+        "drupal/core": "^8.8.4",
         "drupal/devel": "^2.0",
         "drupal/drush_language": "^1.0@RC",
         "drupal/front_page": "^1.0@beta",
@@ -86,7 +86,7 @@
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "webflo/drupal-core-require-dev": "^8.6.0"
+        "webflo/drupal-core-require-dev": "~8.8.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -143,9 +143,6 @@
             },
             "drupal/core": {
                 "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch"
-            },
-            "drupal/calendar": {
-                "2789829 - Query returns no results": "https://www.drupal.org/files/issues/2019-05-22/2789829-2-long-query-name.patch"
             }
         }
     }

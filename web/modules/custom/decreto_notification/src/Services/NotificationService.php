@@ -80,9 +80,12 @@ class NotificationService {
       $orgCount = $cache->data;
     }
     else {
-      // Load the heavy calculation on the views API. We know the view
-      // calculates the amount correctly.
-      $orgCount = count(views_get_view_result('decreto_notifications', 'decreto_notification_page'));
+      $orgCount = $this->notificationStorage->getQuery()
+        ->condition('uid', $uid)
+        ->condition('org_id', $selectOrganisationId)
+        ->condition('unread', TRUE)
+        ->count()
+        ->execute();
 
       \Drupal::cache()
         ->set($orgCountCid, $orgCount, CacheBackendInterface::CACHE_PERMANENT, [
