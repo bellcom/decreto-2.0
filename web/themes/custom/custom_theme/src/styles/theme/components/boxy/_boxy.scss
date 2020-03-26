@@ -175,9 +175,10 @@
     }
   }
   
-  .boxy__department {
+  .boxy__department, .boxy__location, .boxy__organisation, .boxy__user {
     .wrapper {
-      border-right: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+      padding-left: 30px;
     }
     .boxy__heading__title {
       font-size: $font-size-h1;
@@ -198,6 +199,7 @@
       }
     }
   }
+  
 }
 
 // --------------------------------------------------
@@ -226,6 +228,14 @@
     .helper {
       right: 15px;
     }
+    .boxy__department, .boxy__location, .boxy__organisation, .boxy__user {
+      .wrapper {
+        border-top: 1px solid $border-color;
+        border-left: 0px;
+        padding: 20px 0 0 0;
+        margin-top: 20px;
+      }
+    }
   }
 }
 
@@ -233,7 +243,20 @@
 @media #{$breakpoint-tablet-and-up} {}
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {}
+@media #{$breakpoint-tablet-only} {
+  
+    .boxy__department .col-xs-12, 
+    .boxy__location .col-xs-12, 
+    .boxy__organisation .col-xs-12,
+    .boxy__user .col-xs-12 {
+      .wrapper {
+        border-top: 1px solid $border-color;
+        border-left: 0px;
+        padding: 20px 0 0 0;
+        margin-top: 20px;
+      }
+    }
+}
 
 // Desktop - and up
 @media #{$breakpoint-desktop-and-up} {}

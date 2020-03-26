@@ -45,14 +45,13 @@
       </div>
     </h2>
     {{ content.description }}
+  {{ title_suffix }}
     
   </div>
   <div class="boxy__body boxy__department">
     <div class="row">
       <div class="col-xs-12 col-md-8">
-        <div class="wrapper">
-          {{ content|without('description') }}
-        </div>
+        {{ content|without('description') }}
       </div>
 
       <!-- Begin - actions -->
@@ -60,6 +59,7 @@
 
         <!-- Begin - edit -->
         {% if content['#access']['canEdit'] %}
+        <div class="wrapper">
           <div class="text--with-icon">
             <i class="material-icons action--light">settings</i>
             <a
@@ -68,22 +68,22 @@
               {{ "Edit department" | trans }}
             </a>
           </div>
-        {% endif %}
-        <!-- End - edit -->
+          {% endif %}
+          <!-- End - edit -->
 
-        <!-- Begin - delete -->
-        {% if content['#access']['canDelete'] %}
-        <div class="text--with-icon">
-          <i class="material-icons action--light">delete</i>
-          <a
-            href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
-            class="use-ajax actions--small action--light" data-dialog-type="modal">
-            {{ "Delete department" | trans }}
-          </a>
+          <!-- Begin - delete -->
+          {% if content['#access']['canDelete'] %}
+          <div class="text--with-icon">
+            <i class="material-icons action--light">delete</i>
+            <a
+              href="{{ path('decreto_department.departments_delete', {'department': term.id}) }}"
+              class="use-ajax actions--small action--light" data-dialog-type="modal">
+              {{ "Delete department" | trans }}
+            </a>
+          </div>
+          {% endif %}
+          <!-- End - delete -->
         </div>
-        {% endif %}
-        <!-- End - delete -->
-
       </div>
       <!-- End - actions -->
       <br>&nbsp;
