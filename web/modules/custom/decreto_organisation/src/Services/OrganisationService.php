@@ -32,8 +32,8 @@ class OrganisationService {
   /**
    * Gets the selected organisation.
    *
-   * IF it is not possible to get selected organisation, and user is not added
-   * to any organisations, session is terminated and user is logged out.
+   * IF it is not possible to get selected organisation, then next organisation
+   * is selected automatically.
    *
    * @param bool $load
    *   If organisation needs to be loaded.
@@ -68,15 +68,6 @@ class OrganisationService {
 
       return ($load) ? Node::load($organisationId) : $organisationId;
     }
-
-    // No organisation was found at this point, force user log out.
-    \Drupal::logger('Decreto')
-      ->notice(t('User %user has no available organisation. User is enforced to log out', [
-        '%user' => \Drupal::currentUser()
-          ->getDisplayName(),
-      ]));
-
-    user_logout();
   }
 
   /**
