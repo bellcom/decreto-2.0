@@ -30,10 +30,10 @@
 
   min-height: 50px;
 
-  margin-bottom: 1px;
+  //margin-bottom: 1px;
 
-  border: 1px solid $body-bg;
-  background-color: $body-bg;
+  //border: 1px solid $body-bg;
+  //background-color: $body-bg;
 
   .material-icons {
     font-size: $font-size-large;
@@ -45,26 +45,28 @@
 }
 
 .bulletpoint__toggler {
-  height: 50px;
-  width: 50px;
+  height: 36px;
+  width: 36px;
 
   transition: none;
 
-  margin-top: -1px;
-  margin-bottom: -1px;
-  margin-left: -1px;
+  //margin-top: -1px;
+  //margin-bottom: -1px;
+  //margin-left: -1px;
 
   outline: 0;
   border: 0;
-  background-color: #DFE1E3;
+  background-color: $brand-primary;
   color: $text-color;
+  
+  border-radius: 100%;
 
   &:before {
     @extend .material-icons;
 
     font-size: 24px !important;
 
-    content: "add";
+    content: "keyboard_arrow_right";
 
     color: inherit;
   }
@@ -80,10 +82,12 @@
 
     .bulletpoint__toggler {
       color: #fff;
-      background-color: $brand-tertiary;
+      background-color: $link-color;
 
       &:before {
-        content: "remove";
+        content: "keyboard_arrow_down";
+        margin-left: -1px;
+        margin-top: 2px;
       }
     }
   }
@@ -91,6 +95,10 @@
 
 .bulletpoint__meta {
   flex-grow: 1;
+  
+  span {
+   cursor: pointer; 
+  }
 
   .action-list {
     display: inline-block;
@@ -112,12 +120,16 @@
 // --------------------------------------------------
 
 .bulletpoint--attachment {
-  margin-bottom: 1px;
+  //margin-bottom: 1px;
 
-  border: 1px solid $body-bg;
+  //border: 1px solid $body-bg;
 
   .bulletpoint__meta {
     font-size: $font-size-small;
+    padding-left: 36px + 20px;
+    font-weight: $font-weight-semibold;
+    color: $gray;
+    cursor: pointer;
   }
 
   .bulletpoint__bar {
@@ -135,7 +147,7 @@
   &.bulletpoint--open {
 
     .bulletpoint__bar {
-      background-color: #D4EBE7;
+     // background-color: #D4EBE7;
     }
 
     .bulletpoint__toggler {
@@ -144,24 +156,28 @@
   }
 
   .bulletpoint__content {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 50px + 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 36px + 20px + 20px;
+    padding-right: 50px + 20px;
 
     font-size: $font-size-small;
+    
   }
 }
 
 .bulletpoint:not(.bulletpoint--attachment) {
 
   .bulletpoint__empty-text {
-    padding-top: 20px;
+    padding-top: 5px;
     padding-bottom: 20px;
-    padding-left: 50px + 20px;
-    margin-bottom: 1px;
+    padding-left: 36px + 20px;
+    padding-right: 50px + 20px;
+    //margin-bottom: 1px;
 
     font-size: $font-size-small;
-    border: 1px solid $body-bg;
+    color: $gray-light;
+    //border: 1px solid $body-bg;
   }
 }
 
