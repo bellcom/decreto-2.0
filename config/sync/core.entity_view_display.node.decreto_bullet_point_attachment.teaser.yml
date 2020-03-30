@@ -21,10 +21,9 @@ mode: teaser
 content:
   body:
     label: hidden
-    type: text_summary_or_trimmed
+    type: text_default
     weight: 0
-    settings:
-      trim_length: 600
+    settings: {  }
     third_party_settings: {  }
     region: content
   field_decreto_bpa_file:
