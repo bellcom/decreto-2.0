@@ -13,25 +13,22 @@
     <!-- Begin - metadata -->
     <div class="row">
       <div class="col-xs-12 col-md-8">
-        <!-- Begin - title -->
 
+        <!-- Begin - title -->
         <div class="row">
           <div class="col-xs-1 col-md-1">
 
-            <!-- Begin - date-box -->
-            {# Begin - starting date #}
             {% if node.field_decreto_meet_start_date.value %}
               <div class="meeting-page__datebox mb">
                 <div class="meeting-page__datebox__day">
-                  {{ node.field_decreto_meet_start_date.value|date("j") }}
+                  {{ node.field_decreto_meet_start_date.value | date("j") }}
                 </div>
                 <div class="meeting-page__datebox__month">
-                  {{ node.field_decreto_meet_start_date.value|date("M") }}
+                  {{ node.field_decreto_meet_start_date.value | date("M") }}
                 </div>
               </div>
             {% endif %}
-            {# End - starting date #}
-            <!-- End - date-box -->
+
           </div>
 
           <div class="col-xs-11 col-md-11">
@@ -41,14 +38,15 @@
           </div>
 
         </div>
+
         {# Begin - starting date #}
         {% if node.field_decreto_meet_start_date.value %}
           <div class="text--with-icon">
             <span class="material-icons">timer</span>
-            {{ node.field_decreto_meet_start_date.value|date("H:i") }}
+            {{ node.field_decreto_meet_start_date.value | date("H:i") }}
             –
-            {{ node.field_decreto_meet_end_date.value|date("H:i") }}
-            &nbsp;<span class="paletext">(duration)</span>
+            {{ node.field_decreto_meet_end_date.value | date("H:i") }}
+            <span class="paletext">(duration)</span>
           </div>
         {% endif %}
         {# End - starting date #}
@@ -98,7 +96,8 @@
 
           <div class="dropdown d-inline">
 
-            <button class="btn btn-primary" type="button" data-toggle="dropdown">Flere handlinger
+            <button class="btn btn-primary" type="button" data-toggle="dropdown">
+              {{ "More actions" | trans }}
               <i class="material-icons">keyboard_arrow_down</i></button>
 
             <!-- Begin - own notes -->
