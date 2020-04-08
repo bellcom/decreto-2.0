@@ -96,14 +96,14 @@
 
           <div class="dropdown d-inline">
 
-            <button class="btn btn-primary" type="button" data-toggle="dropdown">
+            <button class="btn btn-sm btn-primary" type="button" data-toggle="dropdown">
               {{ "More actions" | trans }}
               <i class="material-icons">keyboard_arrow_down</i></button>
 
             <!-- Begin - own notes -->
             <a
               href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
-              class="btn btn-pale">
+              class="btn btn-sm btn-pale">
               {{ "Own notes" | trans }}
             </a>
             <!-- End - own notes -->
@@ -184,7 +184,7 @@
       <!-- Begin - search button -->
       <a
         href="#search-form"
-        class="btn btn-secondary btn-pale"
+        class="btn btn-sm btn-secondary btn-pale js-toggle-search-form"
         data-toggle="collapse"
       >
         <i class="material-icons">search</i>
@@ -198,7 +198,7 @@
         <!-- Begin - create from files -->
         <a
           href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
-          class="btn btn-primary use-ajax" data-dialog-type="modal">
+          class="btn btn-sm btn-primary use-ajax" data-dialog-type="modal">
           {{ "Create point from files" | trans }}
         </a>
         <!-- End - create from files -->
@@ -207,14 +207,13 @@
       <!-- Begin - create manually -->
       <a
         href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-        class="btn btn-primary use-ajax" data-dialog-type="modal">
+        class="btn btn-sm btn-primary use-ajax" data-dialog-type="modal">
         {{ "Create point" | trans }}
       </a>
       <!-- End - create manually -->
       <!-- End - actions   -->
     </div>
     {% endif %}
-
 
     <!-- Begin - actions -->
     <div class="action-list action-list--increased-element-distance d-inline text-right">

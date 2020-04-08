@@ -42,10 +42,10 @@ class SearchInMeetingForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $meeting = NULL) {
     $this->meeting = $meeting;
+    $form['#attributes'] = array('class' => 'form-inline');
 
     // Attempting to get search param.
     $searchParam = \Drupal::request()->query->get('s');
-
     $form['#prefix'] = '<div id="' . $this->getFormId() . '">';
     $form['#suffix'] = '</div>';
 
@@ -56,8 +56,8 @@ class SearchInMeetingForm extends FormBase {
     // Free text search field.
     $form['s'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Free text'),
       '#default_value' => $searchParam,
+      '#placeholder' => $this->t('Enter text to filter'),
     ];
 
     // Form actions START.
