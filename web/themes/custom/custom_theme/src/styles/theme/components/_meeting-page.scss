@@ -24,7 +24,7 @@ $brand-secondary-pale: #FFA267;
 // --------------------------------------------------
 
 .meeting-page {
-    
+
   .meeting-page__datebox {
     display: inline-block;
     background: $link-color;
@@ -42,6 +42,7 @@ $brand-secondary-pale: #FFA267;
       font-size: $font-size-small;
     }
   }
+
   .mb {
     margin-bottom: $line-height-computed;
   }
@@ -69,7 +70,6 @@ $brand-secondary-pale: #FFA267;
         background: darken($brand-secondary-pale, 8%);
       }
     }
-
   }
 
   .search-form__hidden{
@@ -87,29 +87,29 @@ $brand-secondary-pale: #FFA267;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
     padding-left: $padding-base-horizontal;
     padding-right: $padding-base-horizontal;
-    
-    
+
+
     > li > a {
       align-items: center;
       padding: $padding-base-vertical 0;
-      
+
       &:hover, &:focus {
-       background: none; 
+       background: none;
         color: $link-color;
       }
     }
+
     li {
+
       + li {
 
         > a {
-          border-top: 1px solid #E2E2E2; 
+          border-top: 1px solid #E2E2E2;
         }
-      } 
+      }
     }
-    
   }
 }
-
 
 // --------------------------------------------------
 // Variants
