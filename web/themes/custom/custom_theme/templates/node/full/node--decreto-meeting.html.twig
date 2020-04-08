@@ -13,33 +13,33 @@
     <!-- Begin - metadata -->
     <div class="row">
       <div class="col-xs-12 col-md-8">
-        <!-- Begin - title -->   
-        
+        <!-- Begin - title -->
+
         <div class="row">
           <div class="col-xs-1 col-md-1">
 
             <!-- Begin - date-box -->
             {# Begin - starting date #}
             {% if node.field_decreto_meet_start_date.value %}
-            <div class="meeting-page__datebox mb">
-              <div class="meeting-page__datebox__day">
-                {{ node.field_decreto_meet_start_date.value|date("j") }}
+              <div class="meeting-page__datebox mb">
+                <div class="meeting-page__datebox__day">
+                  {{ node.field_decreto_meet_start_date.value|date("j") }}
+                </div>
+                <div class="meeting-page__datebox__month">
+                  {{ node.field_decreto_meet_start_date.value|date("M") }}
+                </div>
               </div>
-              <div class="meeting-page__datebox__month">
-                {{ node.field_decreto_meet_start_date.value|date("M") }}
-              </div>
-            </div>
             {% endif %}
             {# End - starting date #}
             <!-- End - date-box -->
           </div>
-          
+
           <div class="col-xs-11 col-md-11">
             <h2 class="boxy__heading__title mb">
-                {{ node.getTitle }}
+              {{ node.getTitle }}
             </h2>
           </div>
-          
+
         </div>
         {# Begin - starting date #}
         {% if node.field_decreto_meet_start_date.value %}
@@ -61,7 +61,7 @@
           </div>
         {% endif %}
         {# End - location #}
-        
+
         {# Begin - department #}
         {% if node.field_decreto_meet_department %}
           <div class="text--with-icon">
@@ -72,7 +72,7 @@
           </div>
         {% endif %}
         {# End - department #}
-        
+
         {# Begin - participants #}
         {% if node.field_decreto_meet_location.value %}
           <div class="text--with-icon">
@@ -91,16 +91,16 @@
         <!-- End - title -->
         <br>
       </div>
-      
+
       <div class="col-xs-12 col-md-4">
         <!-- Begin - actions -->
         <div class="text-right">
-          
+
           <div class="dropdown d-inline">
-            
+
             <button class="btn btn-primary" type="button" data-toggle="dropdown">Flere handlinger
-            <i class="material-icons">keyboard_arrow_down</i></button>
-            
+              <i class="material-icons">keyboard_arrow_down</i></button>
+
             <!-- Begin - own notes -->
             <a
               href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
@@ -108,9 +108,9 @@
               {{ "Own notes" | trans }}
             </a>
             <!-- End - own notes -->
-            
+
             <ul class="dropdown-menu">
-              
+
               <!-- Begin - download full copy -->
               {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
                 <li>
@@ -121,6 +121,7 @@
                   </a>
                 </li>
               {% endif %}
+
               {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
                 <li>
                   <a
@@ -128,9 +129,10 @@
                     class=" " target="_blank">
                     {{ "Download full copy (closed)" | trans }}
                   </a>
-                <!-- End - download full copy -->
+                  <!-- End - download full copy -->
                 </li>
               {% endif %}
+
               <!-- Begin - edit -->
               {% if content['#access']['canEdit'] %}
                 <li>
@@ -139,20 +141,22 @@
                     class="use-ajax" data-dialog-type="modal">
                     {{ "Edit meeting" | trans }}
                   </a>
-                <!-- End - edit -->
+                  <!-- End - edit -->
                 </li>
               {% endif %}
+
               <!-- Begin - delete -->
               {% if content['#access']['canDelete'] %}
-              <li>
+                <li>
                   <a
                     href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
                     class="use-ajax" data-dialog-type="modal">
                     {{ "Delete meeting" | trans }}
                   </a>
-              </li>
-            {% endif %}
-            <!-- End - delete -->
+                </li>
+              {% endif %}
+              <!-- End - delete -->
+
             </ul>
           </div>
 
@@ -166,7 +170,7 @@
 
   </div>
   <div class="boxy__body meeting-page">
-    
+
     <!-- Begin - information -->
     <div>
       <h4><strong>{{ content.field_decreto_meet_type }}</strong></h4>
@@ -176,42 +180,40 @@
     </div>
     <!-- End - information -->
 
-   
     <div class="d-inline">
-       
+
       <!-- Begin - search button -->
       <a
         href="#search-form"
         class="btn btn-secondary btn-pale"
         data-toggle="collapse"
-         >
-          <i class="material-icons">search</i>  
-          {{ 'Filter bulletpoints' | trans }}
+      >
+        <i class="material-icons">search</i>
+        {{ 'Filter bulletpoints' | trans }}
       </a>
       <!-- End - search button -->
-    
-    {% if content['#access']['decreto_bullet_point']['canCreate'] %}
+
+      {% if content['#access']['decreto_bullet_point']['canCreate'] %}
       <!-- Begin - actions -->
-
-        {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
-          <!-- Begin - create from files -->
-          <a
-            href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
-            class="btn btn-primary use-ajax" data-dialog-type="modal">
-            {{ "Create point from files" | trans }}
-          </a>
-          <!-- End - create from files -->
-        {% endif %}
-
-        <!-- Begin - create manually -->
+      {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+        <!-- Begin - create from files -->
         <a
-          href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+          href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
           class="btn btn-primary use-ajax" data-dialog-type="modal">
-          {{ "Create point" | trans }}
+          {{ "Create point from files" | trans }}
         </a>
-        <!-- End - create manually -->
-        <!-- End - actions   -->
-      </div>
+        <!-- End - create from files -->
+      {% endif %}
+
+      <!-- Begin - create manually -->
+      <a
+        href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+        class="btn btn-primary use-ajax" data-dialog-type="modal">
+        {{ "Create point" | trans }}
+      </a>
+      <!-- End - create manually -->
+      <!-- End - actions   -->
+    </div>
     {% endif %}
 
 
@@ -220,7 +222,8 @@
 
       {% if content['#access']['canEdit'] %}
         <!-- Begin - turn on/off switch mode -->
-        <button class="action-list__button action-list__button--pale action-list__button--small" id="meeting-agenda-switch-mode-toggle">
+        <button class="action-list__button action-list__button--pale action-list__button--small"
+                id="meeting-agenda-switch-mode-toggle">
       <span
         class="material-icons">unfold_more</span> {{ "Sort bullet points" | trans }}
         </button>
@@ -228,7 +231,8 @@
       {% endif %}
 
       <!-- Begin - open/close all -->
-      <button class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
+      <button
+        class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
         <span class="material-icons">unfold_less</span>
         {{ "Open/close all points" | trans }}
       </button>
@@ -236,17 +240,17 @@
 
     </div>
     <!-- End - actions -->
-    
+
     <!-- Begin - search form -->
     <div id="search-form" class="collapse search-form__hidden">
       {{ search_in_meeting_form }}
     </div>
     <!-- End - search form -->
-    
+
     <div id="agenda-overview">
       <br>
       {% if not node.field_decreto_meet_bps.value %}
-          {% if content['#access']['decreto_bullet_point']['canCreate'] %}
+        {% if content['#access']['decreto_bullet_point']['canCreate'] %}
           <div>
             {{ 'No bullet points added. Would you like to <a href=":url" title="Add bullet point" class="use-ajax"
             data-dialog-type="modal">create one</a>?' | trans({ ':url': path('decreto_content_modify.bps_add', {'meeting': node.id()}) }) }}
