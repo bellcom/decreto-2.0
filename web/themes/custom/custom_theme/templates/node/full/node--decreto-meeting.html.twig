@@ -15,27 +15,21 @@
       <div class="col-xs-12 col-md-8">
 
         <!-- Begin - title -->
-        <div class="row">
-          <div class="col-xs-1 col-md-1">
+        <div class="meeting-page__header">
 
-            {% if node.field_decreto_meet_start_date.value %}
-              <div class="meeting-page__datebox mb">
-                <div class="meeting-page__datebox__day">
-                  {{ node.field_decreto_meet_start_date.value | date("j") }}
-                </div>
-                <div class="meeting-page__datebox__month">
-                  {{ node.field_decreto_meet_start_date.value | date("M") }}
-                </div>
+          {% if node.field_decreto_meet_start_date.value %}
+            <div class="meeting-page__datebox">
+              <div class="meeting-page__datebox__day">
+                {{ node.field_decreto_meet_start_date.value | date("j") }}
               </div>
-            {% endif %}
-
-          </div>
-
-          <div class="col-xs-11 col-md-11">
-            <h2 class="boxy__heading__title mb">
-              {{ node.getTitle }}
-            </h2>
-          </div>
+              <div class="meeting-page__datebox__month">
+                {{ node.field_decreto_meet_start_date.value | date("M") }}
+              </div>
+            </div>
+          {% endif %}
+          <h2 class="boxy__heading__title">
+            {{ node.getTitle }}
+          </h2>
 
         </div>
 
@@ -46,7 +40,7 @@
             {{ node.field_decreto_meet_start_date.value | date("H:i") }}
             –
             {{ node.field_decreto_meet_end_date.value | date("H:i") }}
-            <span class="paletext">(duration)</span>
+            <span class="paletext"> (duration) </span>
           </div>
         {% endif %}
         {# End - starting date #}
@@ -245,7 +239,7 @@
     </div>
     <!-- End - search form -->
 
-    <div id="agenda-overview">
+    <div id="agenda-overview" class="meeting-page--agenda--wrapper">
       <br>
       {% if not node.field_decreto_meet_bps.value %}
         {% if content['#access']['decreto_bullet_point']['canCreate'] %}
@@ -255,6 +249,7 @@
           </div>
         {% endif %}
       {% else %}
+        <span class="meeting-page--agenda--line"></span>
         {{ content.field_decreto_meet_bps }}
       {% endif %}
     </div>

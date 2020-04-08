@@ -21,6 +21,12 @@
 // --------------------------------------------------
 
 .meeting-page {
+    
+  .meeting-page__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $line-height-computed;
+  }
 
   .meeting-page__datebox {
     display: inline-block;
@@ -31,6 +37,7 @@
     text-align: center;
     font-weight:$headings-font-weight-semibold;
     line-height: 1;
+    margin-right: 20px;
 
     .meeting-page__datebox__day {
       font-size: ($font-size-large)+2;
@@ -127,7 +134,7 @@
       &.btn {
 
         &, &:hover, &:focus {
-          background-color: $text-color;
+          background-color: $headings-color;
         }
       }
     }
@@ -162,6 +169,29 @@
 
   #search-form {
     margin-top: 10px;
+    
+    .form-inline {
+      width: 100%;
+    }
+    #decreto-content-modify-search-in-meeting-form .form-type-textfield {
+      width: calc(100% - 135px);
+      
+      > input.form-text {
+        width: 100%;
+      }
+    }
+  }
+  .meeting-page--agenda--wrapper {
+    position: relative;
+  }
+  .meeting-page--agenda--line {
+    background: $border-color;
+    position: absolute;
+    top: 30px;
+    bottom: 10px;
+    left: 17px;
+    width: 2px;
+    z-index: 10;
   }
 }
 

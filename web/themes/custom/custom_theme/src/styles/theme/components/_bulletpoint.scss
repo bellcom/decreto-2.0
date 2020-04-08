@@ -60,6 +60,8 @@
   color: $text-color;
   
   border-radius: 100%;
+  
+  z-index: 1000;
 
   &:before {
     @extend .material-icons;
