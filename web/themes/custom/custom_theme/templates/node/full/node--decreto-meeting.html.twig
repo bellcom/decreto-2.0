@@ -179,7 +179,8 @@
     </div>
     <!-- End - information -->
 
-    <div class="d-inline">
+    <!-- Begin - buttons -->
+    <div class="flexy-row">
 
       <!-- Begin - search button -->
       <a
@@ -193,51 +194,50 @@
       <!-- End - search button -->
 
       {% if content['#access']['decreto_bullet_point']['canCreate'] %}
-      <!-- Begin - actions -->
-      {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
-        <!-- Begin - create from files -->
+        {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+          <!-- Begin - create from files -->
+          <a
+            href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
+            class="btn btn-sm btn-primary use-ajax" data-dialog-type="modal">
+            {{ "Create point from files" | trans }}
+          </a>
+          <!-- End - create from files -->
+        {% endif %}
+
+        <!-- Begin - create manually -->
         <a
-          href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
+          href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
           class="btn btn-sm btn-primary use-ajax" data-dialog-type="modal">
-          {{ "Create point from files" | trans }}
+          {{ "Create point" | trans }}
         </a>
-        <!-- End - create from files -->
+        <!-- End - create manually -->
       {% endif %}
 
-      <!-- Begin - create manually -->
-      <a
-        href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-        class="btn btn-sm btn-primary use-ajax" data-dialog-type="modal">
-        {{ "Create point" | trans }}
-      </a>
-      <!-- End - create manually -->
-      <!-- End - actions   -->
-    </div>
-    {% endif %}
+      <div class="flexy-spacer"></div>
 
-    <!-- Begin - actions -->
-    <div class="action-list action-list--increased-element-distance d-inline text-right">
+      <div class="action-list action-list--increased-element-distance text-right">
 
-      {% if content['#access']['canEdit'] %}
-        <!-- Begin - turn on/off switch mode -->
-        <button class="action-list__button action-list__button--pale action-list__button--small"
-                id="meeting-agenda-switch-mode-toggle">
+        {% if content['#access']['canEdit'] %}
+          <!-- Begin - turn on/off switch mode -->
+          <button class="action-list__button action-list__button--pale action-list__button--small"
+                  id="meeting-agenda-switch-mode-toggle">
       <span
         class="material-icons">unfold_more</span> {{ "Sort bullet points" | trans }}
+          </button>
+          <!-- End - turn on/off switch mode -->
+        {% endif %}
+
+        <!-- Begin - open/close all -->
+        <button
+          class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
+          <span class="material-icons">unfold_less</span>
+          {{ "Open/close all points" | trans }}
         </button>
-        <!-- End - turn on/off switch mode -->
-      {% endif %}
+        <!-- End - open/close all -->
 
-      <!-- Begin - open/close all -->
-      <button
-        class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
-        <span class="material-icons">unfold_less</span>
-        {{ "Open/close all points" | trans }}
-      </button>
-      <!-- End - open/close all -->
-
+      </div>
     </div>
-    <!-- End - actions -->
+    <!-- End - buttons -->
 
     <!-- Begin - search form -->
     <div id="search-form" class="collapse search-form__hidden">
