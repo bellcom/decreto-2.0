@@ -63,7 +63,7 @@ display:
           mini: '1'
           month_name_size: '99'
           name_size: '1'
-          with_weekno: '0'
+          with_weekno: '1'
           max_items: '0'
           max_items_behavior: more
           groupby_times: hour
@@ -564,7 +564,7 @@ display:
           mini: '0'
           month_name_size: '99'
           name_size: '3'
-          with_weekno: '1'
+          with_weekno: '0'
           max_items: '0'
           max_items_behavior: more
           groupby_times: hour
