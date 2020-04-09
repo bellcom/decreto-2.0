@@ -166,6 +166,9 @@ class MeetingEditForm extends AjaxFormBase {
       'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
     ];
 
+    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
+    $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;
+
     return $form;
   }
 
@@ -360,9 +363,6 @@ class MeetingEditForm extends AjaxFormBase {
         'file_validate_extensions' => [$field_decreto_meet_full_doc_c_field_definition->getSetting('file_extensions')],
       ],
     ];
-
-    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
-    $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;
 
     return $form;
   }
