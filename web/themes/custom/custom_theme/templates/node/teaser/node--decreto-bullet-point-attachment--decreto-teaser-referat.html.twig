@@ -1,0 +1,42 @@
+<div class="bulletpoint bulletpoint--attachment" data-decreto-node-id="{{ node.id }}">
+
+  <!-- Begin - bar -->
+  <div class="bulletpoint__bar">
+
+    <!-- Begin - meta -->
+    <div class="bulletpoint__meta  js-bulletpoint-toggle-bulletpoint">
+      {{ label }}
+
+      <!-- Begin - icon list -->
+      <div class="action-list">
+
+        {# Begin - notes #}
+        {% if content['#contains_notes'] %}
+          <button class="action-list__button action-list__button--info" tabindex="-1">
+          <span class="material-icons"
+                title="{{ 'This bullet point attachment has notes' | trans }}"
+                data-toggle="tooltip">chat</span>
+          </button>
+        {% endif %}
+        {# End - notes #}
+
+      </div>
+      <!-- End - icon list -->
+
+    </div>
+    <!-- End - meta -->
+
+  </div>
+  <!-- End - bar -->
+
+  <!-- Begin - content -->
+  <div class="bulletpoint__content">
+
+    <div>
+      {{ content }}
+    </div>
+
+  </div>
+  <!-- End - content -->
+
+</div>

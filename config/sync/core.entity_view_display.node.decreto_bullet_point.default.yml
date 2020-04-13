@@ -28,7 +28,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      view_mode: teaser
+      view_mode: decreto_teaser_referat
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
