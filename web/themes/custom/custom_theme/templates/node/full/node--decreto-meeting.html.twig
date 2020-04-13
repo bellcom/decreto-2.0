@@ -37,10 +37,14 @@
         {% if node.field_decreto_meet_start_date.value %}
           <div class="text--with-icon">
             <span class="material-icons">timer</span>
-            {{ node.field_decreto_meet_start_date.value | date("H:i") }}
-            –
-            {{ node.field_decreto_meet_end_date.value | date("H:i") }}
-            <span class="paletext"> (duration) </span>
+            <div>
+              {{ content.field_decreto_meet_start_date }}
+              –
+              {{ content.field_decreto_meet_end_date }}
+              {% if content['#duration'] %}
+                <span class="paletext">({{ content['#duration'] }})</span>
+              {% endif %}
+            </div>
           </div>
         {% endif %}
         {# End - starting date #}
