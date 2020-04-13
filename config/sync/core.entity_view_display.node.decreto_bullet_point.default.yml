@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.decreto_bullet_point.field_decreto_bp_bpas
     - field.field.node.decreto_bullet_point.field_decreto_bp_closed
     - field.field.node.decreto_bullet_point.field_decreto_bp_personal
+    - field.field.node.decreto_bullet_point.field_decreto_bp_referat
     - node.type.decreto_bullet_point
   module:
     - user
@@ -23,9 +24,19 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
+  field_decreto_bp_referat:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
 hidden:
   field_decreto_bp_closed: true
   field_decreto_bp_personal: true
   flag_subscribe_node: true
   langcode: true
   links: true
+  search_api_excerpt: true

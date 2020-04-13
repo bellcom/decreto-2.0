@@ -118,6 +118,17 @@
           <span class="material-icons">edit</span>
         </a>
         <!-- End - edit -->
+
+        <!-- Begin - referat -->
+        <a
+          href="{{ path('decreto_content_modify.referat_add_edit', {'bullet_point': node.id()}) }}"
+          data-toggle="tooltip"
+          title="{{ "Add/edit referat" | trans }}"
+          class="action-list__button use-ajax"
+          data-dialog-type="modal">
+          <span class="material-icons">assignment</span>
+        </a>
+        <!-- End - referat -->
       {% endif %}
 
       <!-- Begin - memos -->

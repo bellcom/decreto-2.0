@@ -236,4 +236,46 @@ class DecretoBulletPoint extends DecretoNode {
     return intval($this->getEntity()->get('field_decreto_bp_personal')->first()->getString()) == 1;
   }
 
+  /**
+   * Sets referat bullet point.
+   *
+   * @param int $nid
+   *   Nid of the referat node.
+   * @param bool $save
+   *   If bullet point needs to be saved right away.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function setReferat($nid, $save = TRUE) {
+    $this->getEntity()->set('field_decreto_bp_referat', ['target_id' => $nid]);
+    if ($save) {
+      $this->getEntity()->save();
+    }
+  }
+
+  /**
+   * Returns referat bullet point.
+   *
+   * @param bool $load
+   *   If the returned node shall be load. If FALSE, nid is returned.
+   *
+   * @return \Drupal\node\NodeInterface|int|null
+   *   Bullet point attachment node, or node tid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getReferat($load = TRUE) {
+    if ($fieldReferat = $this->getEntity()->get('field_decreto_bp_referat')->first()) {
+      if ($load) {
+        return $fieldReferat->get('entity')->getTarget()->getValue();
+      }
+      else {
+        return $fieldReferat->getValue()['target_id'];
+      }
+    }
+
+    return NULL;
+  }
+
 }

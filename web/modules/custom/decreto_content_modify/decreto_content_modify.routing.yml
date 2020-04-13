@@ -167,3 +167,16 @@ decreto_content_modify.bp_memos:
   requirements:
     _permission: 'access content'
     bullet_point: \d+
+
+decreto_content_modify.referat_add_edit:
+  path: '/bullet-points/{bullet_point}/add-edit-referat'
+  options:
+    parameters:
+      bullet_point:
+        type: entity:node
+  defaults:
+    _title_callback: '\Drupal\decreto_content_modify\Form\ReferatEditForm::getTitle'
+    _form: '\Drupal\decreto_content_modify\Form\ReferatEditForm'
+  requirements:
+    _custom_access: '\Drupal\decreto_content_modify\Controller\AccessController::createBulletPointAttachmentAccess'
+    bullet_point: \d+
