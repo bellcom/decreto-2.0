@@ -47,6 +47,9 @@
   .meeting__search-form-wrapper--mobile {
     display: block;
   }
+  .meeting__search-form-wrapper--tablet {
+    display: none;
+  }
   .meeting__search-form-wrapper--desktop {
     display: none;
   }
@@ -204,11 +207,22 @@
   #decreto-content-modify-search-in-meeting-form {
     padding-top: 5px;
     padding-bottom: 5px;
+    width: 100%;
 
     .form-inline {
 
       .form-group {
         margin-bottom: 0;
+        
+        &.form-type-textfield {
+          width: calc(100% - 150px);
+          display: inline-block;
+        }
+        
+        input.form-text {
+          width: 100%;
+        }
+        
       }
 
       .form-actions {
@@ -271,7 +285,48 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+  .meeting-page {
+    
+    .btn {
+      min-width: auto; 
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    
+    .meeting__search-form-wrapper {
+      padding: 0px 12px 0px;
+      margin-top: 0px;
+      
+      #decreto-content-modify-search-in-meeting-form {
+      
+        .form-inline {
+
+          .form-group {
+
+            &.form-type-textfield {
+              width: calc(100% - 70px);
+              margin-right: 10px;
+              
+              input.form-control {
+                height: 31px;
+                font-size: $font-size-small;
+              }
+            }
+          }
+
+          .btn {
+            min-width: auto;
+            font-size: $font-size-small;
+            padding: 5px 10px;
+          }
+
+        }
+
+      }
+    }
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
@@ -286,14 +341,32 @@
       }
     }
   }
+  
+  .meeting__search-form--visible {
+
+    .meeting__search-form-wrapper--mobile {
+      display: none;
+    }
+    .meeting__search-form-wrapper--tablet {
+      display: block;
+    }
+    .meeting__search-form-wrapper--desktop {
+      display: none;
+    }
+  }
 }
 
 // Tablet - only
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {
+@media #{$breakpoint-desktop-and-up} {}
 
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {
   .meeting-page__action-buttons {
     display: flex;
   }
@@ -318,6 +391,9 @@
     .meeting__search-form-wrapper--mobile {
       display: none;
     }
+    .meeting__search-form-wrapper--tablet {
+      display: none;
+    }
     .meeting__search-form-wrapper--desktop {
       display: block;
     }
@@ -327,12 +403,6 @@
     text-align: right;
   }
 }
-
-// Desktop - only
-@media #{$breakpoint-desktop-only} {}
-
-// Large desktop - and up
-@media #{$breakpoint-large-desktop-and-up} {}
 
 // Print
 @media print {}

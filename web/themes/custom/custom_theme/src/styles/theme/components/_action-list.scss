@@ -113,14 +113,7 @@ button.action-list__button {
 @media #{$breakpoint-mobile-only} {}
 
 // Tablet - and up
-@media #{$breakpoint-tablet-and-up} {}
-
-// Tablet - only
-@media #{$breakpoint-tablet-only} {}
-
-// Desktop - and up
-@media #{$breakpoint-desktop-and-up} {
-
+@media #{$breakpoint-tablet-and-up} {
   .action-list__item {
     display: inline-block;
 
@@ -130,6 +123,11 @@ button.action-list__button {
     }
   }
 }
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}
