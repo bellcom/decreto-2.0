@@ -48,6 +48,14 @@
   }
 }
 
+.action-list__item {
+  display: block;
+
+  + .action-list__item {
+    margin-top: 5px;
+  }
+}
+
 a.action-list__button {
 
   &, &:hover, &:focus {
@@ -111,7 +119,17 @@ button.action-list__button {
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+
+  .action-list__item {
+    display: inline-block;
+
+    + .action-list__item {
+      margin-top: 0;
+      margin-left: 5px;
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}
