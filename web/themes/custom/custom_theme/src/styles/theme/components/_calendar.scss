@@ -147,8 +147,10 @@
   }
   
   .past-month, 
-  .future-month {
-    color: #8F979A;
+  .future-month  {
+    > .mini-day-off {
+      color: #8F979A;
+    }
   }
 }
 
