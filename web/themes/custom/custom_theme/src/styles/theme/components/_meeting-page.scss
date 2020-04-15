@@ -90,6 +90,11 @@
 
 .meeting-page {
 
+  .field--name-field-decreto-meet-end-date,
+  .field--name-field-decreto-meet-start-date {
+    display: inline-block;
+  }
+
   .meeting-page__action {
     .btn-primary {
       margin-bottom: 10px;
