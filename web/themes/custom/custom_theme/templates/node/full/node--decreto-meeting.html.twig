@@ -11,8 +11,8 @@
   <div class="boxy__heading meeting-page">
 
     <!-- Begin - metadata -->
-    <div class="row">
-      <div class="col-xs-12 col-md-8 meeting-page__info">
+    <div class="meeting-page__heading-row">
+      <div class="meeting-page__info">
 
         <!-- Begin - title -->
         <div class="meeting-page__header">
@@ -88,7 +88,7 @@
         <br>
       </div>
 
-      <div class="col-xs-12 col-md-4 meeting-page__action">
+      <div class="meeting-page__action">
         <!-- Begin - actions -->
         <div class="meeting-page__action__align">
 
@@ -97,15 +97,6 @@
             <button class="btn btn-sm btn-primary" type="button" data-toggle="dropdown">
               {{ "More actions" | trans }}
               <i class="material-icons">keyboard_arrow_down</i></button>
-
-            <!-- Begin - own notes -->
-            <a
-              href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
-              class="btn btn-sm btn-pale">
-              {{ "Own notes" | trans }}
-            </a>
-            <!-- End - own notes -->
-
             <ul class="dropdown-menu">
 
               <!-- Begin - download full copy -->
@@ -156,6 +147,13 @@
 
             </ul>
           </div>
+          <!-- Begin - own notes -->
+          <a
+            href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
+            class="btn btn-sm btn-pale">
+            {{ "Own notes" | trans }}
+          </a>
+          <!-- End - own notes -->
 
         </div>
         <!-- End - actions -->
