@@ -139,6 +139,18 @@
                   </a>
                   <!-- End - edit -->
                 </li>
+
+              {% endif %}
+
+
+              {% if content['#access']['canConvertToReferat'] %}
+                <li>
+                  <a
+                    href="{{ path('decreto_content_modify.meetings_update_type', {'meeting': node.id, 'type': 'referat'}) }}">
+                    {{ "Convert to minutes" | trans }}
+                  </a>
+                  <!-- End - edit -->
+                </li>
               {% endif %}
 
               <!-- Begin - delete -->

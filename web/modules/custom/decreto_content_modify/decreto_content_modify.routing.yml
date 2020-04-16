@@ -37,6 +37,19 @@ decreto_content_modify.meetings_edit:
   requirements:
     _entity_access: 'meeting.update'
     meeting: \d+
+decreto_content_modify.meetings_update_type:
+  path: '/meetings/{meeting}/update-type/{type}'
+  options:
+    parameters:
+      meeting:
+        type: entity:node
+      type:
+        type: string
+  defaults:
+    _controller: '\Drupal\decreto_content_modify\Controller\MeetingController::updateType'
+  requirements:
+    _entity_access: 'meeting.update'
+    meeting: \d+
 
 decreto_content_modify.bps_add:
   path: '/meetings/{meeting}/add-bp'
