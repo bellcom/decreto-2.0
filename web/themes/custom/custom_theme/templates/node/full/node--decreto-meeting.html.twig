@@ -94,6 +94,14 @@
 
           <div class="dropdown d-inline">
 
+            <!-- Begin - meeting video link -->
+            {% if (content.field_decreto_meet_video_link['#items'].getValue()) %}
+              <a href="{{ node.field_decreto_meet_video_link.value }}" target="_blank" class="btn btn-sm btn-primary">
+                {{ "Meeting video" | trans }}
+              </a>
+            {% endif %}
+            <!-- End - meeting video link -->
+
             <button class="btn btn-sm btn-primary" type="button" data-toggle="dropdown">
               {{ "More actions" | trans }}
               <i class="material-icons">keyboard_arrow_down</i></button>
@@ -128,6 +136,18 @@
                     href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
                     class="use-ajax" data-dialog-type="modal">
                     {{ "Edit meeting" | trans }}
+                  </a>
+                  <!-- End - edit -->
+                </li>
+
+              {% endif %}
+
+
+              {% if content['#access']['canConvertToReferat'] %}
+                <li>
+                  <a
+                    href="{{ path('decreto_content_modify.meetings_update_type', {'meeting': node.id, 'type': 'referat'}) }}">
+                    {{ "Convert to minutes" | trans }}
                   </a>
                   <!-- End - edit -->
                 </li>

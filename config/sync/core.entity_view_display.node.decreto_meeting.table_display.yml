@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.decreto_meeting.field_decreto_meet_type
     - field.field.node.decreto_meeting.field_decreto_meet_use_dep_mem
     - field.field.node.decreto_meeting.field_decreto_meet_user_roles
+    - field.field.node.decreto_meeting.field_decreto_meet_video_link
     - node.type.decreto_meeting
   module:
     - datetime
@@ -69,6 +70,7 @@ hidden:
   field_decreto_meet_type: true
   field_decreto_meet_use_dep_mem: true
   field_decreto_meet_user_roles: true
+  field_decreto_meet_video_link: true
   langcode: true
   links: true
   search_api_excerpt: true
