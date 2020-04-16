@@ -177,39 +177,40 @@
       display: none;
     }
   }
+  .meeting-page__action__align {
+    .dropdown-menu {
+      border: none;
+      font-size: $font-size-small;
+      border-radius: $border-radius-base;
+      background-color: $body-bg-secondary;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+      padding-left: $padding-base-horizontal;
+      padding-right: $padding-base-horizontal;
+      margin-top: -10px;
 
-  .dropdown-menu {
-    border: none;
-    font-size: $font-size-small;
-    border-radius: $border-radius-base;
-    background-color: $body-bg-secondary;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-    padding-left: $padding-base-horizontal;
-    padding-right: $padding-base-horizontal;
-    margin-top: -10px;
 
+      > li > a {
+        align-items: center;
+        padding: $padding-base-vertical 0;
 
-    > li > a {
-      align-items: center;
-      padding: $padding-base-vertical 0;
-
-      &:hover, &:focus {
-       background: none;
-        color: $link-color;
+        &:hover, &:focus {
+         background: none;
+          color: $link-color;
+        }
       }
-    }
 
-    li {
+      li {
 
-      + li {
+        + li {
 
-        > a {
-          border-top: 1px solid #E2E2E2;
+          > a {
+            border-top: 1px solid #E2E2E2;
+          }
         }
       }
     }
   }
-
+  
   #decreto-content-modify-search-in-meeting-form {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -311,6 +312,49 @@
         margin-bottom: 10px;
       }
     }
+    
+    .meeting-page__action-buttons--left {
+      justify-content: space-between;
+      
+      .action-list__item{
+        display: inline-block;
+        
+        + .action-list__item {
+          margin-top: 8px;
+          
+          + .action-list__item {
+            margin-left: 4%;
+          }
+        }
+        
+        &:first-child {
+          display: block;
+          .btn {
+            width: 100%;
+          }
+        }
+        &:nth-child(2) {
+          width: 57%;
+          
+          a {
+            width: 100%;
+          }
+        }
+        &:nth-child(3) {
+          width: 37%;
+          
+          a {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .meeting-page__action-buttons--right {
+      .action-list__item{
+        display: inline-block;
+      }
+    }
+    
     
     .meeting__search-form-wrapper {
       padding: 0px 12px 0px;

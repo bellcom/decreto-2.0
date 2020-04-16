@@ -40,7 +40,7 @@
   text-align: center;
 
   &, &:hover, &:focus {
-    color: $headings-color;
+    color: $btn-default-color;
   }
 
   + .action-list__button {
