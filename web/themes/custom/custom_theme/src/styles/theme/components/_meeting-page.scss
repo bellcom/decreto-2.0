@@ -80,7 +80,7 @@
       left: 0;
       right: 0;
 
-      z-index: 1000;
+      z-index: 200;
 
       content: "";
 
@@ -283,8 +283,8 @@
   .meeting-page--agenda--line {
     background: $border-color;
     position: absolute;
-    top: 30px;
-    bottom: 10px;
+    top: 45px;
+    bottom: 25px;
     left: 17px;
     width: 2px;
     z-index: 10;

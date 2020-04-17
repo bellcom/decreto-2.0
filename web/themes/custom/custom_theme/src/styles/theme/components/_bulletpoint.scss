@@ -68,7 +68,7 @@
   
   border-radius: 100%;
   
-  z-index: 1000;
+  z-index: 200;
 
   &:before {
     @extend .material-icons;
@@ -204,7 +204,7 @@
 
 // Mobile - only
 @media #{$breakpoint-mobile-only} {
-  .action-list--wrapper--mobile{
+  .action-list__wrapper__mobile{
     display: block;
     
     .btn {
@@ -214,36 +214,70 @@
       background: none;
     }
     
+    .action-list__pointer__left {
+      display: inline-block;
+    }
+    .action-list__pointer__right {
+      display: none;
+    }
+    
     .open {
       .btn {
         background: $brand-primary;
         box-shadow: none;
         color: $btn-default-color;
       }
-    }
-    
-    .dropdown-menu {
-      top: 0;
-      right: 100%;
-      left: initial;
-      border: 0;
-      border-radius: 0px;
-      box-shadow: 0px 0px;
-      padding: 3px 4px 8px 35px;
-      background: linear-gradient(270deg, #FFFFFF 88.69%, rgba(255, 255, 255, 0) 100%);
+      .action-list__pointer__left {
+        display: none;
+      }
+      .action-list__pointer__right {
+        display: inline-block;
+      }
+      
+      .dropdown-menu {
+        top: -25%;
+        right: 100%;
+        left: initial;
+        min-height: 50px;
+        border: 0;
+        border-radius: 0px;
+        box-shadow: 0px 0px;
+        margin-top: 0px;
+        padding: 12px 8px 12px 35px;
+        background: linear-gradient(270deg, #FFFFFF 88.69%, rgba(255, 255, 255, 0) 100%);
+        
+        button.action-list__button,
+        a.action-list__button {
+          padding-left: 4px;
+          padding-right: 4px;
+        }
+      }
+      
+      //background overlay for dpopdown menu
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        //background: #666;
+      }
     }
   }
-  .action-list--wrapper--tablet{
+  .action-list__wrapper__tablet{
     display: none;
   }
 }
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
-  .action-list--wrapper--mobile{
+  .action-list__wrapper__mobile{
     display: none;
   }
-  .action-list--wrapper--tablet{
+  .action-list__wrapper__tablet{
     display: block;
   }
 }
