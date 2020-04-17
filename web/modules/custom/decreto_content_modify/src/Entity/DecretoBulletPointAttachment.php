@@ -36,6 +36,14 @@ class DecretoBulletPointAttachment extends DecretoNode {
       ->condition('field_decreto_bp_bpas', $this->getEntity()->id());
 
     $nids = $query->execute();
+    if (empty($nids)) {
+      // Check and see if it's Referat bullet point attachment.
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'decreto_bullet_point')
+        ->condition('field_decreto_bp_referat', $this->getEntity()->id());
+      $nids = $query->execute();
+    }
+
     if (!empty($nids)) {
       $nid = reset($nids);
       return ($load) ? Node::load($nid) : $nid;
