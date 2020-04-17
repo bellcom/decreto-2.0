@@ -30,61 +30,65 @@
           <h2 class="boxy__heading__title">
             {{ node.getTitle }}
           </h2>
-
         </div>
-
-        {# Begin - starting date #}
-        {% if node.field_decreto_meet_start_date.value %}
-          <div class="text--with-icon">
-            <span class="material-icons">timer</span>
-            <div>
-              {{ content.field_decreto_meet_start_date }}
-              –
-              {{ content.field_decreto_meet_end_date }}
-              {% if content['#duration'] %}
-                <span class="paletext">({{ content['#duration'] }})</span>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-        {# End - starting date #}
-
-        {# Begin - location #}
-        {% if node.field_decreto_meet_location.value %}
-          <div class="text--with-icon">
-            <i class="material-icons">place</i>
-            {{ content.field_decreto_meet_location }}
-          </div>
-        {% endif %}
-        {# End - location #}
-
-        {# Begin - department #}
-        {% if node.field_decreto_meet_department %}
-          <div class="text--with-icon">
-            <i class="material-icons">assignment</i>
-            <a
-              href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}
-            </a>
-          </div>
-        {% endif %}
-        {# End - department #}
-
-        {# Begin - participants #}
-        {% if node.field_decreto_meet_location.value %}
-          <div class="text--with-icon">
-            <i class="material-icons">people</i>
-            {% if node.field_decreto_meet_use_dep_mem.value %}
-              {{ "All department members" | trans }}
-            {% else %}
-              <div>
-                {{ content.field_decreto_meet_partic_int }}
-                {{ content.field_decreto_meet_partic_ext }}
+        <!-- End - title -->
+        
+        <div class="meeting-page__info-icons">
+          <div class="meeting-page__info-icons__col">
+            {# Begin - starting date #}
+            {% if node.field_decreto_meet_start_date.value %}
+              <div class="text--with-icon">
+                <span class="material-icons">timer</span>
+                <div>
+                  {{ content.field_decreto_meet_start_date }}
+                  –
+                  {{ content.field_decreto_meet_end_date }}
+                  {% if content['#duration'] %}
+                    <span class="paletext">({{ content['#duration'] }})</span>
+                  {% endif %}
+                </div>
               </div>
             {% endif %}
+            {# End - starting date #}
+
+            {# Begin - location #}
+            {% if node.field_decreto_meet_location.value %}
+              <div class="text--with-icon">
+                <i class="material-icons">place</i>
+                {{ content.field_decreto_meet_location }}
+              </div>
+            {% endif %}
+            {# End - location #}
           </div>
-        {% endif %}
-        {# End - participants #}
-        <!-- End - title -->
+          <div class="meeting-page__info-icons__col">
+            {# Begin - department #}
+            {% if node.field_decreto_meet_department %}
+              <div class="text--with-icon">
+                <i class="material-icons">assignment</i>
+                <a
+                  href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}
+                </a>
+              </div>
+            {% endif %}
+            {# End - department #}
+
+            {# Begin - participants #}
+            {% if node.field_decreto_meet_location.value %}
+              <div class="text--with-icon">
+                <i class="material-icons">people</i>
+                {% if node.field_decreto_meet_use_dep_mem.value %}
+                  {{ "All department members" | trans }}
+                {% else %}
+                  <div>
+                    {{ content.field_decreto_meet_partic_int }}
+                    {{ content.field_decreto_meet_partic_ext }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+            {# End - participants #}
+          </div>
+        </div>
         <br>
       </div>
 

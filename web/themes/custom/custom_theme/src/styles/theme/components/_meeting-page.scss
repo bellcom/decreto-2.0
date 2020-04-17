@@ -166,6 +166,21 @@
       }
     }
   }
+  
+  .meeting-page__info-icons {
+    display: flex;
+    justify-content: space-between;
+    
+    .text--with-icon {
+      font-size: $font-size-small;
+      color: $headings-color;
+      
+      > a {
+        color: $headings-color;
+      }
+      
+    }
+  }
 
   .meeting__search-form-wrapper {
     background: $brand-secondary-pale;
@@ -306,6 +321,10 @@
       
       .meeting-page__info {
         order: 2;
+        
+        .meeting-page__info-icons {
+          display: block;
+        }
       }
       .meeting-page__action {
         order: 1;
@@ -435,6 +454,10 @@
 
 // Large desktop - and up
 @media #{$breakpoint-large-desktop-and-up} {
+  .meeting-page__info-icons {
+    margin-left: 62px;
+  }
+  
   .meeting-page__action-buttons {
     display: flex;
   }
