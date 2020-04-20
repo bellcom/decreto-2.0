@@ -151,7 +151,6 @@
   }
 
   .btn {
-    // font-size: $font-size-small;
 
     .material-icons{
       font-size: $font-size-large;
@@ -201,7 +200,7 @@
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
       padding-left: $padding-base-horizontal;
       padding-right: $padding-base-horizontal;
-      margin-top: -10px;
+      margin-top: -6px;
 
 
       > li > a {
@@ -411,6 +410,13 @@
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
+  
+  .meeting-page__info-icons {
+    
+    .meeting-page__info-icons__col:first-child {
+      padding-right: 20px;
+    }
+  }
 
   .meeting-page__action-buttons {
 
@@ -465,7 +471,7 @@
     flex-grow: 1;
 
     + .meeting-page__action-buttons--right {
-      margin-top: 0;
+      margin-top: 10px;
     }
   }
 

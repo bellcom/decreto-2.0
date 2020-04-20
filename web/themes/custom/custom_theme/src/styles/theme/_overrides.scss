@@ -71,6 +71,8 @@ img {
   border-width: 0;
 
   font-weight: $font-weight-semibold;
+  font-size: $font-size-small;
+  line-height: 1.6;
 
   .icon {
 
@@ -92,6 +94,10 @@ img {
     &, &:focus {
       color: $headings-color;
     }
+  }
+  &:focus {
+    outline:solid $gray-lighter;
+    border-radius: $border-radius-base;
   }
 }
 

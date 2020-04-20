@@ -58,7 +58,8 @@ label {
 
   align-items: center;
   
-  line-height: 32px;
+  line-height: initial;
+  padding: 6px 0;
 
   &,
   a, a:focus {

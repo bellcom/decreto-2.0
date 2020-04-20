@@ -127,7 +127,13 @@ button.action-list__button {
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+  .action-list__item {
+    + .action-list__item {
+      margin-left: 15px;
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}
