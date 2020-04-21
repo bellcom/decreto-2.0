@@ -96,16 +96,7 @@
         <!-- Begin - actions -->
         <div class="meeting-page__action__align">
 
-          <div class="dropdown d-inline">
-
-            <!-- Begin - meeting video link -->
-            {% if (content.field_decreto_meet_video_link['#items'].getValue()) %}
-              <a href="{{ node.field_decreto_meet_video_link.value }}" target="_blank" class="btn btn-primary">
-                {{ "Meeting video" | trans }}
-              </a>
-            {% endif %}
-            <!-- End - meeting video link -->
-
+          <div class="dropdown meeting-page__settings">
             <button class="btn btn-primary" type="button" data-toggle="dropdown">
               {{ "More actions" | trans }}
               <i class="material-icons">keyboard_arrow_down</i></button>
@@ -171,6 +162,17 @@
 
             </ul>
           </div>
+          
+          <!-- Begin - meeting video link -->
+          {% if (content.field_decreto_meet_video_link['#items'].getValue()) %}
+            <a 
+               href="{{ node.field_decreto_meet_video_link.value }}" 
+               class="btn btn-primary" target="_blank">
+              {{ "Meeting video" | trans }}
+            </a>
+          {% endif %}
+          <!-- End - meeting video link -->
+          
           <!-- Begin - own notes -->
           <a
             href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"

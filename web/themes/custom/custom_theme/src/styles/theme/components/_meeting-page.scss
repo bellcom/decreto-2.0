@@ -109,7 +109,6 @@
     }
    .btn-pale{
       margin-bottom: 10px;
-      margin-left: 15px;
     }
   }
 
@@ -192,6 +191,15 @@
     }
   }
   .meeting-page__action__align {
+    
+    .meeting-page__settings {
+      display: inline-block;
+      
+      + a.btn {
+        margin-left: 15px;
+      }
+    }
+    
     .dropdown-menu {
       border: none;
       font-size: $font-size-small;
