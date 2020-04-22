@@ -165,6 +165,10 @@
     }
   }
   
+  .meeting-page__info {
+    min-width: 50%;
+  }
+  
   .meeting-page__info-icons {
     display: flex;
     justify-content: space-between;
@@ -202,18 +206,21 @@
     
     .dropdown-menu {
       border: none;
-      font-size: $font-size-small;
       border-radius: $border-radius-base;
       background-color: $body-bg-secondary;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+      
       padding-left: $padding-base-horizontal;
       padding-right: $padding-base-horizontal;
       margin-top: -6px;
-
+      
+      min-width: 136px;
+      
+      font-size: $font-size-small;
 
       > li > a {
         align-items: center;
-        padding: $padding-base-vertical 0;
+        padding: $padding-base-vertical ($padding-base-horizontal/2);
 
         &:hover, &:focus {
          background: none;
