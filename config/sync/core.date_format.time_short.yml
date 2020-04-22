@@ -1,0 +1,8 @@
+uuid: 45765cdd-7cd2-4a92-bc9c-02d9ef64f988
+langcode: zxx
+status: true
+dependencies: {  }
+id: time_short
+label: 'Time short'
+locked: false
+pattern: 'H:i'

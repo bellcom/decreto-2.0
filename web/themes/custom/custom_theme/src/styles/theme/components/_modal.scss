@@ -75,6 +75,17 @@ $lg-modal-inner-spacing: 60px;
   }
 }
 
+.modal {
+
+  .steps {
+    position: absolute;
+
+    top: 0;
+
+    margin-top: -45px;
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
@@ -108,6 +119,11 @@ $lg-modal-inner-spacing: 60px;
     .helper {
       right: $xs-modal-inner-spacing;
     }
+
+    .steps {
+      left: $xs-modal-inner-spacing;
+      right: $xs-modal-inner-spacing;
+    }
   }
 }
 
@@ -135,6 +151,13 @@ $lg-modal-inner-spacing: 60px;
 
     .helper {
       right: $sm-modal-inner-spacing;
+    }
+
+    .steps {
+      left: $sm-modal-inner-spacing;
+      right: $sm-modal-inner-spacing;
+
+      margin-top: -50px;
     }
   }
 }
@@ -169,6 +192,13 @@ $lg-modal-inner-spacing: 60px;
     .helper {
       right: $md-modal-inner-spacing;
     }
+
+    .steps {
+      left: $md-modal-inner-spacing;
+      right: $md-modal-inner-spacing;
+
+      margin-top: -55px;
+    }
   }
 }
 
@@ -193,6 +223,13 @@ $lg-modal-inner-spacing: 60px;
 
     .helper {
       right: $lg-modal-inner-spacing;
+    }
+
+    .steps {
+      left: $lg-modal-inner-spacing;
+      right: $lg-modal-inner-spacing;
+
+      margin-top: -55px;
     }
   }
 }

@@ -73,9 +73,7 @@
     {% if multiple %}
     <div class="field--items">
       {% endif %}
-      {% for item in items %}
-        <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
-      {% endfor %}
+
       {% if multiple %}
     </div>
     {% endif %}

@@ -6,8 +6,4 @@
         jQuery('form.decreto-content-modify-search-in-meeting-form #edit-submit').click();
       }
   };
-
-
-
-
 })(jQuery, Drupal);

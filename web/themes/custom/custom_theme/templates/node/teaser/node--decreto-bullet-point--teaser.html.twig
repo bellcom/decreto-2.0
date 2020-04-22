@@ -10,7 +10,7 @@
 
     <!-- Begin - meta -->
     <div class="bulletpoint__meta">
-      {{ label }}
+      <span class="js-bulletpoint-toggle-bulletpoint" >{{ label }}</span>
 
       <!-- Begin - icon list -->
       <div class="action-list">
@@ -20,7 +20,7 @@
           <button class="action-list__button action-list__button--info" tabindex="-1">
           <span class="material-icons"
                 title="{{ 'This bullet point has notes' | trans }}"
-                data-toggle="tooltip">chat</span>
+                data-toggle="tooltip">chat_bubble</span>
           </button>
         {% endif %}
         {# End - notes #}
@@ -70,67 +70,164 @@
 
     </div>
     <!-- End - meta -->
+    
+    <!--Begin - actions-for-mobile -->
+    <div class="action-list__wrapper__mobile">
+      <div class="btn-group dropleft">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="material-icons action-list__pointer__left">keyboard_arrow_left</span>
+          <span class="material-icons action-list__pointer__right">keyboard_arrow_right</span>
+          <span class="material-icons">settings</span>
+        </button>
+        <div class="dropdown-menu " x-placement="right-start">
+          <div class="action-list dropdown-item">
+            <!-- Begin - open/close -->
+            <button
+              class="action-list__button js-bulletpoint-toggle-attachments"
+              data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
+              title="{{ "Open/close bullet point attachment" | trans }}">
+              <span class="material-icons">unfold_more</span>
+            </button>
+            <!-- End - open/close -->
 
+            {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+              <!-- Begin - add bulletpoint attachment -->
+              <a
+                href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
+                data-toggle="tooltip"
+                title="{{ "Add bullet point attachment" | trans }}"
+                class="action-list__button use-ajax js-bulletpoint-add"
+                data-dialog-type="modal">
+                <span class="material-icons">add_circle_outline</span>
+              </a>
+              <!-- End - add bulletpoint attachment -->
+            {% endif %}
+
+            {% if content['#access']['canDelete'] %}
+              <!-- Begin - delete bulletpoint -->
+              <a
+                href="{{ path('decreto_content_modify.bps_delete', {'bullet_point': node.id()}) }}"
+                data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
+                class="action-list__button use-ajax" data-dialog-type="modal">
+                <span class="material-icons">remove_circle_outline</span>
+              </a>
+              <!-- End - delete bulletpoint -->
+            {% endif %}
+
+            {% if content['#access']['canEdit'] %}
+              <!-- Begin - edit -->
+              <a
+                href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
+                data-toggle="tooltip"
+                title="{{ "Edit bullet point" | trans }}"
+                class="action-list__button use-ajax"
+                data-dialog-type="modal">
+                <span class="material-icons">edit</span>
+              </a>
+              <!-- End - edit -->
+
+              <!-- Begin - referat -->
+              <a
+                href="{{ path('decreto_content_modify.referat_add_edit', {'bullet_point': node.id()}) }}"
+                data-toggle="tooltip"
+                title="{{ "Add/edit referat" | trans }}"
+                class="action-list__button use-ajax"
+                data-dialog-type="modal">
+                <span class="material-icons">subject</span>
+              </a>
+              <!-- End - referat -->
+            {% endif %}
+
+            <!-- Begin - memos -->
+            <a
+              href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}"
+              data-toggle="tooltip"
+              title="{{ "Add/edit memos" | trans }}"
+              class="action-list__button use-ajax"
+              data-dialog-type="modal">
+              <span class="material-icons">mail_outline</span>
+            </a>
+            <!-- End - memos -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End - actions-for-mobile -->
+    
     <!-- Begin - actions -->
-    <div class="action-list">
+    <div class="action-list__wrapper__tablet">
+      <div class="action-list">
 
-      <!-- Begin - open/close -->
-      <button
-        class="action-list__button js-bulletpoint-toggle-attachments"
-        data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
-        title="{{ "Open/close bullet point attachment" | trans }}">
-        <span class="material-icons">unfold_more</span>
-      </button>
-      <!-- End - open/close -->
+        <!-- Begin - open/close -->
+        <button
+          class="action-list__button js-bulletpoint-toggle-attachments"
+          data-bullet-point-id="{{ node.id() }}" data-toggle="tooltip"
+          title="{{ "Open/close bullet point attachment" | trans }}">
+          <span class="material-icons">unfold_more</span>
+        </button>
+        <!-- End - open/close -->
 
-      {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
-        <!-- Begin - add bulletpoint attachment -->
+        {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+          <!-- Begin - add bulletpoint attachment -->
+          <a
+            href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
+            data-toggle="tooltip"
+            title="{{ "Add bullet point attachment" | trans }}"
+            class="action-list__button use-ajax js-bulletpoint-add"
+            data-dialog-type="modal">
+            <span class="material-icons">add_circle_outline</span>
+          </a>
+          <!-- End - add bulletpoint attachment -->
+        {% endif %}
+
+        {% if content['#access']['canDelete'] %}
+          <!-- Begin - delete bulletpoint -->
+          <a
+            href="{{ path('decreto_content_modify.bps_delete', {'bullet_point': node.id()}) }}"
+            data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
+            class="action-list__button use-ajax" data-dialog-type="modal">
+            <span class="material-icons">remove_circle_outline</span>
+          </a>
+          <!-- End - delete bulletpoint -->
+        {% endif %}
+
+        {% if content['#access']['canEdit'] %}
+          <!-- Begin - edit -->
+          <a
+            href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
+            data-toggle="tooltip"
+            title="{{ "Edit bullet point" | trans }}"
+            class="action-list__button use-ajax"
+            data-dialog-type="modal">
+            <span class="material-icons">edit</span>
+          </a>
+          <!-- End - edit -->
+
+          <!-- Begin - referat -->
+          <a
+            href="{{ path('decreto_content_modify.referat_add_edit', {'bullet_point': node.id()}) }}"
+            data-toggle="tooltip"
+            title="{{ "Add/edit referat" | trans }}"
+            class="action-list__button use-ajax"
+            data-dialog-type="modal">
+            <span class="material-icons">subject</span>
+          </a>
+          <!-- End - referat -->
+        {% endif %}
+
+        <!-- Begin - memos -->
         <a
-          href="{{ path('decreto_content_modify.bpas_add', {'bullet_point': node.id()}) }}"
+          href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}"
           data-toggle="tooltip"
-          title="{{ "Add bullet point attachment" | trans }}"
-          class="action-list__button use-ajax js-bulletpoint-add"
-          data-dialog-type="modal">
-          <span class="material-icons">add_circle</span>
-        </a>
-        <!-- End - add bulletpoint attachment -->
-      {% endif %}
-
-      {% if content['#access']['canDelete'] %}
-        <!-- Begin - delete bulletpoint -->
-        <a
-          href="{{ path('decreto_content_modify.bps_delete', {'bullet_point': node.id()}) }}"
-          data-toggle="tooltip" title="{{ "Delete bullet point" | trans }}"
-          class="action-list__button use-ajax" data-dialog-type="modal">
-          <span class="material-icons">remove_circle</span>
-        </a>
-        <!-- End - delete bulletpoint -->
-      {% endif %}
-
-      {% if content['#access']['canEdit'] %}
-        <!-- Begin - edit -->
-        <a
-          href="{{ path('decreto_content_modify.bps_edit', {'bullet_point': node.id()}) }}"
-          data-toggle="tooltip"
-          title="{{ "Edit bullet point" | trans }}"
+          title="{{ "Add/edit memos" | trans }}"
           class="action-list__button use-ajax"
           data-dialog-type="modal">
-          <span class="material-icons">edit</span>
+          <span class="material-icons">mail_outline</span>
         </a>
-        <!-- End - edit -->
-      {% endif %}
+        <!-- End - memos -->
 
-      <!-- Begin - memos -->
-      <a
-        href="{{ path('decreto_content_modify.memos_add_edit', {'bullet_point': node.id()}) }}"
-        data-toggle="tooltip"
-        title="{{ "Add/edit memos" | trans }}"
-        class="action-list__button use-ajax"
-        data-dialog-type="modal">
-        <span class="material-icons">mail</span>
-      </a>
-      <!-- End - memos -->
-
+      </div>
     </div>
     <!-- End - actions -->
 

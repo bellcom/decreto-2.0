@@ -1,0 +1,10 @@
+uuid: a6efd14d-0313-40a9-871c-2cca23da3eec
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.decreto_teaser_referat
+label: 'Teaser Referat'
+targetEntityType: node
+cache: true

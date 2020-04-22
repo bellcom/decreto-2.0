@@ -40,11 +40,19 @@
   text-align: center;
 
   &, &:hover, &:focus {
-    color: $headings-color;
+    color: $btn-default-color;
   }
 
   + .action-list__button {
     margin-left: 0;
+  }
+}
+
+.action-list__item {
+  display: block;
+
+  + .action-list__item {
+    margin-top: 5px;
   }
 }
 
@@ -105,13 +113,27 @@ button.action-list__button {
 @media #{$breakpoint-mobile-only} {}
 
 // Tablet - and up
-@media #{$breakpoint-tablet-and-up} {}
+@media #{$breakpoint-tablet-and-up} {
+  .action-list__item {
+    display: inline-block;
 
+    + .action-list__item {
+      margin-top: 0;
+      margin-left: 5px;
+    }
+  }
+}
 // Tablet - only
 @media #{$breakpoint-tablet-only} {}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+  .action-list__item {
+    + .action-list__item {
+      margin-left: 15px;
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}

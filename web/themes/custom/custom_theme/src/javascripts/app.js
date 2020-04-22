@@ -68,4 +68,11 @@ jQuery(function ($) {
 
     event.preventDefault();
   });
+
+  // Toggle search form.
+  $('.js-toggle-search-form').on('click', function(e) {
+    var $body = $('body');
+
+    $body.toggleClass('meeting__search-form--visible');
+  });
 });

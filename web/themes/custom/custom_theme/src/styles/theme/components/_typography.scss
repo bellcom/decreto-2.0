@@ -57,27 +57,45 @@ label {
   display: flex;
 
   align-items: center;
+  
+  line-height: initial;
+  padding: 6px 0;
 
   &,
-  a, a:hover, a:focus {
-    color: $headings-color;
+  a, a:focus {
+    color: $text-color;
+    text-decoration: none;
   }
 
-  a {
-    text-decoration: underline;
+  a:hover {
+    color: $link-hover-color;
   }
 
   .material-icons {
-    min-width: 20px;
+    
+    font-size: 18px;
 
-    font-size: inherit;
+    margin-right: 14px;
 
-    color: $text-color-light;
+    color: $brand-tertiary;
   }
 
   + .text--with-icon {
     margin-top: 3px;
   }
+  .actions--small {
+    font-size: $font-size-small;
+    text-decoration: underline;
+  }
+  .action--light, .paletext {
+    color: $text-color-light;
+  }
+}
+
+.description {
+  color: $text-color-light;
+  font-size: $font-size-small;
+  padding-top: 10px;
 }
 
 .text--primary {

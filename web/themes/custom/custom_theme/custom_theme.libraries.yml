@@ -2,6 +2,7 @@ fonts:
   css:
     base:
       'https://fonts.googleapis.com/css?family=Roboto:400,700': { type: external }
+      'https://fonts.googleapis.com/css?family=Asap:400,500,600,700&display=swap': { type: external }
 
 styles:
   css:

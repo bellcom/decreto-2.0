@@ -1,0 +1,19 @@
+uuid: 0d0c68de-a952-4125-ba3a-f0bd00c2b0ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_decreto_bp_referat
+field_name: field_decreto_bp_referat
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -33,59 +33,61 @@
 ]
 %}
 
-<!-- Begin - actions -->
-<div class="text-right">
-
-  <!-- Begin - edit -->
-  {% if content['#access']['canEdit'] %}
-    <a
-      href="{{ path('decreto_location.locations_edit', {'location': term.id}) }}"
-      class="btn btn-default use-ajax" data-dialog-type="modal">
-      {{ "Edit location" | trans }}
-    </a>
-  {% endif %}
-  <!-- End - edit -->
-
-  <!-- Begin - delete -->
-  {% if content['#access']['canDelete'] %}
-    <a
-      href="{{ path('decreto_location.locations_delete', {'location': term.id}) }}"
-      class="btn btn-default use-ajax" data-dialog-type="modal">
-      {{ "Delete location" | trans }}
-    </a>
-  {% endif %}
-  <!-- End - delete -->
-
-</div>
-<!-- End - actions -->
-
-<br>
-
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
-  <div class="boxy__heading">
+  <div class="boxy__heading boxy__department">
     <h2 class="boxy__heading__title">
-      {% trans %}
-        Details
-      {% endtrans %}
-    </h2>
-    {% trans %}
-      Short description
-    {% endtrans %}
-    {{ help_message }}
-  </div>
-  <div class="boxy__body">
-    <strong>
-      <div>
-        {% trans %}Name{% endtrans %}
+      <div class="boxy__heading__title__text">
+        {{ name }}
       </div>
-    </strong>
-    {{ title_prefix }}
-    <div>
-      {{ name }}
+      <div class="boxy_heading__title__helptext">
+        {{ help_message }}
+      </div>
+    </h2>
+    {{ content.description }}
+  {{ title_suffix }}
+    
+  </div>
+  <div class="boxy__body boxy__location">
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+          {{ content|without('description') }}
+      </div>
+
+      <!-- Begin - actions -->
+      <div class="col-xs-12 col-md-4">
+
+        <!-- Begin - edit -->
+        {% if content['#access']['canEdit'] %}
+          <div class="wrapper">
+            <div class="text--with-icon">
+              <i class="material-icons action--light">settings</i>
+              <a
+                href="{{ path('decreto_location.locations_edit', {'location': term.id}) }}"
+                class="use-ajax actions--small action--light" data-dialog-type="modal">
+                {{ "Edit location" | trans }}
+              </a>
+            </div>
+            {% endif %}
+            <!-- End - edit -->
+
+            <!-- Begin - delete -->
+            {% if content['#access']['canDelete'] %}
+            <div class="text--with-icon">
+              <i class="material-icons action--light">delete</i>
+              <a
+                href="{{ path('decreto_location.locations_delete', {'location': term.id}) }}"
+                class="use-ajax actions--small action--light" data-dialog-type="modal">
+                {{ "Delete location" | trans }}
+              </a>
+            </div>
+            {% endif %}
+            <!-- End - delete -->
+          </div>
+      </div>
+      <!-- End - actions -->
+      <br>&nbsp;
     </div>
-    {{ title_suffix }}
-    {{ content }}
   </div>
 </article>
 

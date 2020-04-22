@@ -8,61 +8,181 @@
   'clearfix',
 ] %}
 <article{{ attributes.addClass(classes) }}>
-  <div class="boxy__heading">
+  <div class="boxy__heading meeting-page">
 
     <!-- Begin - metadata -->
-    <div class="row">
-      <div class="col-xs-12 col-md-7">
+    <div class="meeting-page__heading-row">
+      <div class="meeting-page__info">
 
         <!-- Begin - title -->
-        <h2 class="boxy__heading__title">
-          <strong>
-            {% if node.field_decreto_meet_department %}
-              <a
-                href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}</a>
-            {% endif %}
-            <span class="material-icons">keyboard_arrow_right</span>
+        <div class="meeting-page__header">
+
+          {% if node.field_decreto_meet_start_date.value %}
+            <div class="meeting-page__datebox">
+              <div class="meeting-page__datebox__day">
+                {{ node.field_decreto_meet_start_date.value | date("j") }}
+              </div>
+              <div class="meeting-page__datebox__month">
+                {{ node.field_decreto_meet_start_date.value | date("M") }}
+              </div>
+            </div>
+          {% endif %}
+          <h2 class="boxy__heading__title">
             {{ node.getTitle }}
-          </strong>
-        </h2>
+          </h2>
+        </div>
         <!-- End - title -->
-
-      </div>
-      <div class="col-xs-12 col-md-5">
-
-        {# Begin - starting date #}
-        {% if node.field_decreto_meet_start_date.value %}
-          <div class="text--with-icon">
-            <span class="material-icons">access_time</span>
-            <strong>{{ content.field_decreto_meet_start_date }}</strong>
-          </div>
-        {% endif %}
-        {# End - starting date #}
-
-        {# Begin - location #}
-        {% if node.field_decreto_meet_location.value %}
-          <div class="text--with-icon">
-            <i class="material-icons">person_pin_circle</i>
-            <strong>{{ content.field_decreto_meet_location }}</strong>
-          </div>
-        {% endif %}
-        {# End - location #}
-
-        {# Begin - participants #}
-        {% if node.field_decreto_meet_location.value %}
-          <div class="text--with-icon">
-            <i class="material-icons">person</i>
-            {% if node.field_decreto_meet_use_dep_mem.value %}
-              <strong>{{ "All department members" | trans }}</strong>
-            {% else %}
-              <div>
-                {{ content.field_decreto_meet_partic_int }}
-                {{ content.field_decreto_meet_partic_ext }}
+        
+        <div class="meeting-page__info-icons">
+          <div class="meeting-page__info-icons__col">
+            {# Begin - starting date #}
+            {% if node.field_decreto_meet_start_date.value %}
+              <div class="text--with-icon">
+                <span class="material-icons">timer</span>
+                <div>
+                  {{ content.field_decreto_meet_start_date }}
+                  –
+                  {{ content.field_decreto_meet_end_date }}
+                  {% if content['#duration'] %}
+                    <span class="paletext">({{ content['#duration'] }})</span>
+                  {% endif %}
+                </div>
               </div>
             {% endif %}
+            {# End - starting date #}
+
+            {# Begin - location #}
+            {% if node.field_decreto_meet_location.value %}
+              <div class="text--with-icon">
+                <i class="material-icons">place</i>
+                {{ content.field_decreto_meet_location }}
+              </div>
+            {% endif %}
+            {# End - location #}
           </div>
-        {% endif %}
-        {# End - participants #}
+          <div class="meeting-page__info-icons__col">
+            {# Begin - department #}
+            {% if node.field_decreto_meet_department %}
+              <div class="text--with-icon">
+                <i class="material-icons">assignment</i>
+                <a
+                  href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': node.field_decreto_meet_department.entity.id}) }}">{{ node.field_decreto_meet_department.entity.getName }}
+                </a>
+              </div>
+            {% endif %}
+            {# End - department #}
+
+            {# Begin - participants #}
+            {% if node.field_decreto_meet_location.value %}
+              <div class="text--with-icon">
+                <i class="material-icons">people</i>
+                {% if node.field_decreto_meet_use_dep_mem.value %}
+                  {{ "All department members" | trans }}
+                {% else %}
+                  <div>
+                    {{ content.field_decreto_meet_partic_int }}
+                    {{ content.field_decreto_meet_partic_ext }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+            {# End - participants #}
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="meeting-page__action">
+        <!-- Begin - actions -->
+        <div class="meeting-page__action__align">
+
+          <div class="dropdown meeting-page__settings">
+            <button class="btn btn-primary" type="button" data-toggle="dropdown">
+              {{ "More actions" | trans }}
+              <i class="material-icons">keyboard_arrow_down</i></button>
+            <ul class="dropdown-menu">
+
+              <!-- Begin - download full copy -->
+              {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
+                <li>
+                  <a
+                    href="{{ file_url(node.field_decreto_meet_full_doc.entity.uri.value) }}"
+                    class=" " target="_blank">
+                    {{ "Download full copy" | trans }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
+                <li>
+                  <a
+                    href="{{ file_url(node.field_decreto_meet_full_doc_c.entity.uri.value) }}"
+                    class=" " target="_blank">
+                    {{ "Download full copy (closed)" | trans }}
+                  </a>
+                  <!-- End - download full copy -->
+                </li>
+              {% endif %}
+
+              <!-- Begin - edit -->
+              {% if content['#access']['canEdit'] %}
+                <li>
+                  <a
+                    href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
+                    class="use-ajax" data-dialog-type="modal">
+                    {{ "Edit meeting" | trans }}
+                  </a>
+                  <!-- End - edit -->
+                </li>
+
+              {% endif %}
+
+
+              {% if content['#access']['canConvertToReferat'] %}
+                <li>
+                  <a
+                    href="{{ path('decreto_content_modify.meetings_update_type', {'meeting': node.id, 'type': 'referat'}) }}">
+                    {{ "Convert to minutes" | trans }}
+                  </a>
+                  <!-- End - edit -->
+                </li>
+              {% endif %}
+
+              <!-- Begin - delete -->
+              {% if content['#access']['canDelete'] %}
+                <li>
+                  <a
+                    href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
+                    class="use-ajax" data-dialog-type="modal">
+                    {{ "Delete meeting" | trans }}
+                  </a>
+                </li>
+              {% endif %}
+              <!-- End - delete -->
+
+            </ul>
+          </div>
+          
+          <!-- Begin - meeting video link -->
+          {% if (content.field_decreto_meet_video_link['#items'].getValue()) %}
+            <a 
+               href="{{ node.field_decreto_meet_video_link.value }}" 
+               class="btn btn-primary" target="_blank">
+              {{ "Meeting video" | trans }}
+            </a>
+          {% endif %}
+          <!-- End - meeting video link -->
+          
+          <!-- Begin - own notes -->
+          <a
+            href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
+            class="btn btn-pale">
+            {{ "Own notes" | trans }}
+          </a>
+          <!-- End - own notes -->
+
+        </div>
+        <!-- End - actions -->
 
         {{ decreto_context_menu }}
       </div>
@@ -70,103 +190,7 @@
     <!-- End - metadata -->
 
   </div>
-  <div class="boxy__body">
-    <br>
-
-    <!-- Begin - actions -->
-    <div class="text-right">
-
-      <!-- Begin - download full copy -->
-      {% if (content.field_decreto_meet_full_doc['#items'].getValue()) %}
-        <a
-          href="{{ file_url(node.field_decreto_meet_full_doc.entity.uri.value) }}"
-          class="btn btn-default" target="_blank">
-          {{ "Download full copy" | trans }}
-        </a>
-      {% endif %}
-
-      {% if (content.field_decreto_meet_full_doc_c['#items'].getValue()) %}
-        <a
-          href="{{ file_url(node.field_decreto_meet_full_doc_c.entity.uri.value) }}"
-          class="btn btn-primary" target="_blank">
-          {{ "Download full copy (closed)" | trans }}
-        </a>
-      {% endif %}
-      <!-- End - download full copy -->
-
-      <!-- Begin - edit -->
-      {% if content['#access']['canEdit'] %}
-        <a
-          href="{{ path('decreto_content_modify.meetings_edit', {'meeting': node.id}) }}"
-          class="btn btn-default use-ajax" data-dialog-type="modal">
-          {{ "Edit meeting" | trans }}
-        </a>
-      {% endif %}
-      <!-- End - edit -->
-
-      <!-- Begin - delete -->
-      {% if content['#access']['canDelete'] %}
-        <a
-          href="{{ path('entity.node.delete_form', {'node': node.id}) }}"
-          class="btn btn-default use-ajax" data-dialog-type="modal">
-          {{ "Delete meeting" | trans }}
-        </a>
-      {% endif %}
-      <!-- End - delete -->
-
-      <!-- Begin - own notes -->
-      <a
-        href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"
-        class="btn btn-default">
-        {{ "Own notes" | trans }}
-      </a>
-      <!-- End - own notes -->
-
-    </div>
-    <!-- End - actions -->
-
-    <br>
-
-    <!-- Begin - search form -->
-    <div class="boxy boxy--background-color-primary">
-      <div class="boxy__heading">
-        <h4 class="boxy__heading__title">
-          {{ 'Filter bulletpoints' | trans }}
-        </h4>
-      </div>
-      <div class="boxy__body">
-        {{ search_in_meeting_form }}
-      </div>
-    </div>
-    <!-- End - search form -->
-
-    <br>
-
-    {% if content['#access']['decreto_bullet_point']['canCreate'] %}
-      <!-- Begin - actions -->
-      <div class="text-right">
-
-        {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
-          <!-- Begin - create from files -->
-          <a
-            href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
-            class="btn btn-primary use-ajax" data-dialog-type="modal">
-            {{ "Create point from files" | trans }}
-          </a>
-          <!-- End - create from files -->
-        {% endif %}
-
-        <!-- Begin - create manually -->
-        <a
-          href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
-          class="btn btn-primary use-ajax" data-dialog-type="modal">
-          {{ "Create point" | trans }}
-        </a>
-        <!-- End - create manually -->
-
-      </div>
-      <!-- End - actions   -->
-    {% endif %}
+  <div class="boxy__body meeting-page">
 
     <!-- Begin - information -->
     <div>
@@ -177,46 +201,114 @@
     </div>
     <!-- End - information -->
 
-    <!-- Begin - actions -->
-    <div class="text-right">
-      <div class="action-list action-list--increased-element-distance">
+    <!-- Begin - buttons -->
+    <div class="meeting-page__action-buttons">
+      <div class="meeting-page__action-buttons--left">
+        <div class="action-list">
 
-        {% if content['#access']['canEdit'] %}
-          <!-- Begin - turn on/off switch mode -->
-          <button class="action-list__button action-list__button--pale action-list__button--small" id="meeting-agenda-switch-mode-toggle">
-        <span
-          class="material-icons">unfold_more</span> {{ "Sort bullet points" | trans }}
-          </button>
-          <!-- End - turn on/off switch mode -->
-        {% endif %}
+          <!-- Begin - search button -->
+          <div class="action-list__item">
+            <div class="meeting__search-form">
+              <button
+                class="btn btn-secondary btn-pale js-toggle-search-form"
+              >
+                <i class="material-icons">search</i>
+                {{ 'Filter bulletpoints' | trans }}
+              </button>
 
-        <!-- Begin - open/close all -->
-        <button class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
-          <span class="material-icons">unfold_less</span>
-          {{ "Open/close all points" | trans }}
-        </button>
-        <!-- End - open/close all -->
+              <div class="meeting__search-form-wrapper meeting__search-form-wrapper--mobile">
+                {{ search_in_meeting_form }}
+              </div>
+            </div>
+          </div>
+          <!-- End - search button -->
+
+          {% if content['#access']['decreto_bullet_point']['canCreate'] %}
+            {% if content['#access']['decreto_bullet_point_attachment']['canCreate'] %}
+              <!-- Begin - create from files -->
+              <div class="action-list__item">
+                <a
+                  href="{{ path('decreto_content_modify.bps_add_from_files', {'meeting': node.id()}) }}"
+                  class="btn btn-primary use-ajax" data-dialog-type="modal">
+                  {{ "Create point from files" | trans }}
+                </a>
+              </div>
+              <!-- End - create from files -->
+            {% endif %}
+
+            <!-- Begin - create manually -->
+            <div class="action-list__item">
+              <a
+                href="{{ path('decreto_content_modify.bps_add', {'meeting': node.id()}) }}"
+                class="btn btn-primary use-ajax" data-dialog-type="modal">
+                {{ "Create point" | trans }}
+              </a>
+            </div>
+            <!-- End - create manually -->
+          {% endif %}
+
+        </div>
+          <!-- Begin - search form -->
+        <div class="meeting__search-form-wrapper meeting__search-form-wrapper--tablet">
+          {{ search_in_meeting_form }}
+        </div>
+        <!-- End - search form -->
+      </div>
+      <div class="meeting-page__action-buttons--right">
+
+        <div class="action-list action-list--increased-element-distance">
+
+          {% if content['#access']['canEdit'] %}
+            <!-- Begin - turn on/off switch mode -->
+            <div class="action-list__item">
+              <button class="action-list__button action-list__button--pale action-list__button--small"
+                      id="meeting-agenda-switch-mode-toggle">
+                <span class="material-icons">unfold_more</span> {{ "Sort bullet points" | trans }}
+              </button>
+            </div>
+            <!-- End - turn on/off switch mode -->
+          {% endif %}
+
+          <!-- Begin - open/close all -->
+          <div class="action-list__item">
+            <button
+              class="action-list__button action-list__button--pale action-list__button--small js-bulletpoint-toggle-all">
+              <span class="material-icons">unfold_less</span>
+              {{ "Open/close all points" | trans }}
+            </button>
+          </div>
+          <!-- End - open/close all -->
+
+        </div>
 
       </div>
     </div>
-    <br>
-    <!-- End - actions -->
+    <!-- End - buttons -->
 
-    <div id="agenda-overview">
+    <!-- Begin - search form -->
+    <div class="meeting__search-form-wrapper meeting__search-form-wrapper--desktop">
+      {{ search_in_meeting_form }}
+    </div>
+    <!-- End - search form -->
+
+    <div id="agenda-overview" class="meeting-page--agenda--wrapper">
+      <br>
       {% if not node.field_decreto_meet_bps.value %}
-          {% if content['#access']['decreto_bullet_point']['canCreate'] %}
+        {% if content['#access']['decreto_bullet_point']['canCreate'] %}
           <div>
             {{ 'No bullet points added. Would you like to <a href=":url" title="Add bullet point" class="use-ajax"
             data-dialog-type="modal">create one</a>?' | trans({ ':url': path('decreto_content_modify.bps_add', {'meeting': node.id()}) }) }}
           </div>
         {% endif %}
       {% else %}
+        <span class="meeting-page--agenda--line"></span>
         {{ content.field_decreto_meet_bps }}
       {% endif %}
     </div>
 
     {% if content['#access']['canEdit'] %}
       <div id="agenda-item-reorder" class="hidden">
+        <br>
         <div class="region region-action-box__primary">
           {{ items_reorder_form }}
         </div>

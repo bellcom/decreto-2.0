@@ -8,6 +8,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\user\UserInterface;
 
@@ -196,6 +197,14 @@ class ContentService {
     ];
   }
 
+  /**
+   * Sends a removed from meeting notification to user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   User who shall be notified.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting - the subject of notification.
+   */
   public function notifyAddedToMeeting(UserInterface $user, ContentEntityInterface $meeting) {
     $params['account'] = $user;
     $params['decreto_meeting'] = $meeting;
@@ -216,6 +225,14 @@ class ContentService {
     $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
   }
 
+  /**
+   * Sends a removed from meeting notification to user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   User who shall be notified.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting - the subject of notification.
+   */
   public function notifyRemovedFromMeeting(UserInterface $user, ContentEntityInterface $meeting) {
     $params['account'] = $user;
     $params['decreto_meeting'] = $meeting;
@@ -234,6 +251,41 @@ class ContentService {
     }
     $op = 'decreto_content_user_removed_from_meeting';
     $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
+  }
+
+  /**
+   * Sends a meeting type update notification to all participants.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting - the subject of notification.
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
+   */
+  public function notifyMeetingStatusChanged(ContentEntityInterface $meeting) {
+    $params['decreto_meeting'] = $meeting;
+    // Get the custom site notification email to use as the from email address
+    // if it has been set.
+    $site_mail = \Drupal::config('system.site')->get('mail_notification');
+    // If the custom site notification email has not been set, we use the site
+    // default for this.
+    if (empty($site_mail)) {
+      $site_mail = \Drupal::config('system.site')->get('mail');
+    }
+    if (empty($site_mail)) {
+      $site_mail = ini_get('sendmail_from');
+    }
+
+    $op = 'decreto_content_meeting_type_updated';
+
+    $decretoMeeting = new DecretoMeeting($meeting);
+    $participants = $decretoMeeting->getParticipants();
+
+    foreach ($participants as $user) {
+      $params['account'] = $user;
+      $langcode = $user->getPreferredLangcode();
+
+      $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
+    }
   }
 
 }

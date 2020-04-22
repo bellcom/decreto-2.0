@@ -21,6 +21,8 @@
 // --------------------------------------------------
 
 .bulletpoint {
+  width: 100%;
+  padding: $padding-base-vertical 0;
 }
 
 .bulletpoint__bar {
@@ -30,41 +32,50 @@
 
   min-height: 50px;
 
-  margin-bottom: 1px;
+  //margin-bottom: 1px;
 
-  border: 1px solid $body-bg;
-  background-color: $body-bg;
+  //border: 1px solid $body-bg;
+  //background-color: $body-bg;
 
   .material-icons {
     font-size: $font-size-large;
   }
 
   > *:last-child {
-    padding-right: 20px;
+   // padding-right: 20px;
+  }
+  
+  .action-list {
+    width: min-content;
+    display: flex;
   }
 }
 
 .bulletpoint__toggler {
-  height: 50px;
-  width: 50px;
+  height: 36px;
+  width: 36px;
 
   transition: none;
 
-  margin-top: -1px;
-  margin-bottom: -1px;
-  margin-left: -1px;
+  //margin-top: -1px;
+  //margin-bottom: -1px;
+  //margin-left: -1px;
 
   outline: 0;
   border: 0;
-  background-color: #DFE1E3;
+  background-color: $brand-primary;
   color: $text-color;
+  
+  border-radius: 100%;
+  
+  z-index: 200;
 
   &:before {
     @extend .material-icons;
 
     font-size: 24px !important;
 
-    content: "add";
+    content: "keyboard_arrow_right";
 
     color: inherit;
   }
@@ -80,10 +91,12 @@
 
     .bulletpoint__toggler {
       color: #fff;
-      background-color: $brand-tertiary;
+      background-color: $link-color;
 
       &:before {
-        content: "remove";
+        content: "keyboard_arrow_down";
+        margin-left: -1px;
+        margin-top: 2px;
       }
     }
   }
@@ -91,11 +104,17 @@
 
 .bulletpoint__meta {
   flex-grow: 1;
+  
+  span {
+    cursor: pointer; 
+    font-weight: 600;
+  }
 
   .action-list {
-    display: inline-block;
+    //display: inline-block;
 
     margin-left: 10px;
+    display: inline-flex;
   }
 }
 
@@ -104,6 +123,10 @@
 
   .bulletpoint--open > & {
     display: block;
+      
+    .bulletpoint {
+      padding: 0px;
+    }
   }
 }
 
@@ -112,12 +135,16 @@
 // --------------------------------------------------
 
 .bulletpoint--attachment {
-  margin-bottom: 1px;
+  //margin-bottom: 1px;
 
-  border: 1px solid $body-bg;
+  //border: 1px solid $body-bg;
 
   .bulletpoint__meta {
     font-size: $font-size-small;
+    padding-left: 36px + 20px;
+    font-weight: $font-weight-semibold;
+    color: $gray;
+    cursor: pointer;
   }
 
   .bulletpoint__bar {
@@ -135,7 +162,7 @@
   &.bulletpoint--open {
 
     .bulletpoint__bar {
-      background-color: #D4EBE7;
+     // background-color: #D4EBE7;
     }
 
     .bulletpoint__toggler {
@@ -144,24 +171,28 @@
   }
 
   .bulletpoint__content {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 50px + 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 36px + 20px + 20px;
+    padding-right: 50px + 20px;
 
     font-size: $font-size-small;
+    
   }
 }
 
 .bulletpoint:not(.bulletpoint--attachment) {
 
   .bulletpoint__empty-text {
-    padding-top: 20px;
+    padding-top: 5px;
     padding-bottom: 20px;
-    padding-left: 50px + 20px;
-    margin-bottom: 1px;
+    padding-left: 36px + 20px;
+    padding-right: 50px + 20px;
+    //margin-bottom: 1px;
 
     font-size: $font-size-small;
-    border: 1px solid $body-bg;
+    color: $gray-light;
+    //border: 1px solid $body-bg;
   }
 }
 
@@ -173,10 +204,84 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+  .action-list__wrapper__mobile{
+    display: block;
+    
+    .btn {
+      box-shadow: none;
+      padding: 4px 0 8px 0;
+      border-radius: 0px;
+      background: none;
+    }
+    
+    .action-list__pointer__left {
+      display: inline-block;
+    }
+    .action-list__pointer__right {
+      display: none;
+    }
+    
+    .open {
+      .btn {
+        background: $brand-primary;
+        box-shadow: none;
+        color: $btn-default-color;
+      }
+      .action-list__pointer__left {
+        display: none;
+      }
+      .action-list__pointer__right {
+        display: inline-block;
+      }
+      
+      .dropdown-menu {
+        top: -25%;
+        right: 100%;
+        left: initial;
+        min-height: 50px;
+        border: 0;
+        border-radius: 0px;
+        box-shadow: 0px 0px;
+        margin-top: 0px;
+        padding: 12px 8px 12px 35px;
+        background: linear-gradient(270deg, #FFFFFF 88.69%, rgba(255, 255, 255, 0) 100%);
+        
+        button.action-list__button,
+        a.action-list__button {
+          padding-left: 4px;
+          padding-right: 4px;
+        }
+      }
+      
+      //background overlay for dpopdown menu
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        //background: #666;
+      }
+    }
+  }
+  .action-list__wrapper__tablet{
+    display: none;
+  }
+}
 
 // Tablet - and up
-@media #{$breakpoint-tablet-and-up} {}
+@media #{$breakpoint-tablet-and-up} {
+  .action-list__wrapper__mobile{
+    display: none;
+  }
+  .action-list__wrapper__tablet{
+    display: block;
+  }
+}
 
 // Tablet - only
 @media #{$breakpoint-tablet-only} {}

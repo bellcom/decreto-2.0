@@ -63,14 +63,16 @@ img {
 }
 
 .btn {
-  min-width: 140px;
+  min-width: 105px;
 
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   border-width: 0;
 
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-small;
+  line-height: 1.6;
 
   .icon {
 
@@ -92,6 +94,10 @@ img {
     &, &:focus {
       color: $headings-color;
     }
+  }
+  &:focus {
+    outline:solid $gray-lighter;
+    border-radius: $border-radius-base;
   }
 }
 

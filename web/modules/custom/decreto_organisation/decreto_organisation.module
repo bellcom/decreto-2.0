@@ -5,12 +5,72 @@
  * Contains decreto_organisation.module.
  */
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
 use Drupal\decreto_user\Entity\DecretoUser;
+use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_user_login().
+ */
+function decreto_organisation_user_login(UserInterface $account) {
+  // If user has no organisation selected, select the first one.
+  $currentOrgId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+
+  // Check if user is still part of that organisation.
+  $user = User::load($account->id());
+  $decretoUser = new DecretoUser($user);
+  $allUserOrgIds = $decretoUser->getOrganisations(FALSE);
+
+  // The current organisation is not part of user organisations, try fetching
+  // next one available.
+  if (!in_array($currentOrgId, $allUserOrgIds)) {
+    // Set selected organisation to NULL.
+    \Drupal::service('decreto_organisation.organisation')->setSelectedOrganisation(NULL);
+
+    // Force new organisation to be selected.
+    $currentOrgId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+  }
+
+  if (!$currentOrgId) {
+    // It's an admin user, allow user to log in by setting any available
+    // organisation.
+    if ($account->hasRole('administrator') || $account->hasRole('decreto_admin')) {
+      // Get the nodes.
+      $query = \Drupal::entityQuery('node')
+        ->condition('type', 'decreto_organisation')
+        ->condition('status', 1);
+
+      $nids = $query->execute();
+      $currentOrgId = reset($nids);
+
+      // No organisation was found at this point, force user log out.
+      \Drupal::logger('Decreto')
+        ->warning(t('Admin %user has no available organisation. First available organisation has been assigned to user', [
+          '%user' => \Drupal::currentUser()
+            ->getDisplayName(),
+        ]));
+
+      \Drupal::service('decreto_organisation.organisation')->setSelectedOrganisation($currentOrgId);
+    }
+    else {
+      // No organisation was found at this point, force user log out.
+      \Drupal::logger('Decreto')
+        ->notice(t('User %user has no available organisation. User is enforced to log out', [
+          '%user' => \Drupal::currentUser()
+            ->getDisplayName(),
+        ]));
+
+      user_logout();
+    }
+  }
+}
 
 /**
  * Implements hook_views_query_alter().
@@ -25,7 +85,6 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
     case 'decreto_departments':
     case 'decreto_memos':
     case 'decreto_notes':
-    case 'decreto_notifications':
       switch ($view->current_display) {
         case 'decreto_block_my_meetings':
         case 'decreto_block_all_meetings':
@@ -58,6 +117,9 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
           break;
 
       }
+
+      break;
+
     case 'decreto_users':
       if ($view->current_display == 'decreto_page_organisation_users') {
         $org_id = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
@@ -65,7 +127,40 @@ function decreto_organisation_views_query_alter(ViewExecutable $view, QueryPlugi
           $query->addWhere('1', 'node_field_data_user__field_decreto_usr_orgs.nid', $org_id, '=');
         }
       }
+
+      break;
+
+    case 'decreto_notifications':
+      $org_id = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
+      if ($org_id) {
+        $query->addWhere('1', 'decreto_notification_notifications.org_id', $org_id, '=');
+      }
+
+      break;
+
   }
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * Prevent deletion of the last organisation.
+ */
+function decreto_organisation_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  if ($op == 'delete' && $node->getType() == 'decreto_organisation') {
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'decreto_organisation')
+      ->condition('status', 1);
+
+    $nids = $query->execute();
+
+    // Prevent deletion if that is the last organisation remaining.
+    if (count($nids) == 2) {
+      return AccessResult::forbidden('This is the last organisation remaining. Cannot deleted it.');
+    }
+  }
+
+  return AccessResult::neutral();
 }
 
 /**

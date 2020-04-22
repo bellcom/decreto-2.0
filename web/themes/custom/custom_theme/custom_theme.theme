@@ -1,6 +1,8 @@
 <?php
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Url;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Controller\AccessController;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPoint;
 use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
@@ -264,9 +266,31 @@ function custom_theme_preprocess_node__decreto_meeting(&$variables) {
     $variables['content']['#contains_memos'] = $decretoMeeting->hasUserMemos();
   }
   elseif ($variables['view_mode'] === 'full') {
+    if ($start_date_str = $node->field_decreto_meet_start_date->value) {
+      $start_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $start_date_str, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+    }
+    if ($end_date_str = $node->field_decreto_meet_end_date->value) {
+      $end_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $end_date_str, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+      $duration = $end_date->diff($start_date);
+      $duration_str = '';
+
+      if ($duration->d) {
+        $duration_str .= $duration->format('%d d');
+      }
+      if ($duration->h) {
+        $duration_str .= $duration->format(' %h t');
+      }
+      if ($duration->i) {
+        $duration_str .= $duration->format(' %i min');
+      }
+      $variables['content']['#duration'] = trim($duration_str);
+    }
+
     // Access params.
     $variables['content']['#access']['canEdit'] = $node->access('update');
     $variables['content']['#access']['canDelete'] = $node->access('delete');
+    $variables['content']['#access']['canConvertToReferat'] = $node->access('update') && $node->field_decreto_meet_type->value !== 'referat';
     $variables['content']['#access']['decreto_bullet_point']['canCreate'] = AccessController::createBulletPointAccess($node)->isAllowed();
     // We use meeting edit access here, because we don't have any specific
     // bullet point, which can be used in the function

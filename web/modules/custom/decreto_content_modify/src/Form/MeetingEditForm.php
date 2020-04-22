@@ -166,6 +166,9 @@ class MeetingEditForm extends AjaxFormBase {
       'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
     ];
 
+    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
+    $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;
+
     return $form;
   }
 
@@ -339,6 +342,14 @@ class MeetingEditForm extends AjaxFormBase {
       }
     }
 
+    // Meeting video link.
+    $form['pages-page-1']['video_link'] = [
+      '#type' => 'textfield',
+      '#placeholder' => $this->t('Video link'),
+      '#title' => $this->t('Video link'),
+      '#description' => $this->t('URL to video link'),
+    ];
+
     $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_meeting');
     $field_decreto_meet_full_doc_field_definition = $bundle_fields['field_decreto_meet_full_doc'];
     $field_decreto_meet_full_doc_c_field_definition = $bundle_fields['field_decreto_meet_full_doc_c'];
@@ -360,9 +371,6 @@ class MeetingEditForm extends AjaxFormBase {
         'file_validate_extensions' => [$field_decreto_meet_full_doc_c_field_definition->getSetting('file_extensions')],
       ],
     ];
-
-    $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
-    $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;
 
     return $form;
   }
@@ -609,6 +617,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['type']['#default_value'] = $meeting->field_decreto_meet_type->value;
     $form['pages-page-1']['department']['#default_value'] = $meeting->field_decreto_meet_department->target_id;
     $form['pages-page-1']['location']['#default_value'] = $meeting->field_decreto_meet_location->target_id;
+    $form['pages-page-1']['video_link']['#default_value'] = $meeting->field_decreto_meet_video_link->value;
 
     $decretoMeeting = new DecretoMeeting($meeting);
 
@@ -693,6 +702,7 @@ class MeetingEditForm extends AjaxFormBase {
     $end_date = $form_state->getValue('end_date');
     $meetingRoles = $form_state->getValue('meeting_roles');
     $location_tid = $form_state->getValue('location');
+    $video_link = $form_state->getValue('video_link');
     $full_doc = $form_state->getValue('full_doc');
     $full_doc_closed = $form_state->getValue('full_doc_closed');
 
@@ -736,6 +746,7 @@ class MeetingEditForm extends AjaxFormBase {
         'field_decreto_meet_location' => $location_tid,
         'field_decreto_meet_start_date' => ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
         'field_decreto_meet_end_date' => ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL,
+        'field_decreto_meet_video_link' => $video_link,
         'field_decreto_meet_partic_int' => $field_decreto_meet_partic_int,
         'field_decreto_meet_partic_ext' => $field_decreto_meet_partic_ext,
         'field_decreto_meet_use_dep_mem' => $useDepartmentMembers,
@@ -760,6 +771,7 @@ class MeetingEditForm extends AjaxFormBase {
       $this->entity->field_decreto_meet_start_date = ($start_date) ? $start_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
       $this->entity->field_decreto_meet_end_date = ($end_date) ? $end_date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, ['timezone' => DateTimeItemInterface::STORAGE_TIMEZONE]) : NULL;
       $this->entity->field_decreto_meet_location = ($location_tid) ? $location_tid : NULL;
+      $this->entity->field_decreto_meet_video_link = $video_link;
       $this->entity->field_decreto_meet_partic_int = $field_decreto_meet_partic_int;
       $this->entity->field_decreto_meet_partic_ext = $field_decreto_meet_partic_ext;
       $this->entity->field_decreto_meet_use_dep_mem = $useDepartmentMembers;

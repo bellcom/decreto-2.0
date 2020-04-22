@@ -9,7 +9,6 @@ namespace Drupal\decreto_notification\Entity;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
@@ -90,6 +89,16 @@ class Notification extends ContentEntityBase implements EntityOwnerInterface {
         'target_type' => 'user',
         'not null' => TRUE,
       ));
+    // Organisation ID reference field.
+    $fields['org_id'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Organisation'))
+      ->setDescription(t('The organisation ID.'))
+      ->setSettings(array(
+        'target_type' => 'node',
+        'not null' => TRUE,
+      ))
+      ->setRequired(TRUE)
+      ->setReadOnly(TRUE);
     // The changed field type automatically updates the timestamp every time the
     // entity is saved.
     $fields['created'] = BaseFieldDefinition::create('created')

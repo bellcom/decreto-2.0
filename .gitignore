@@ -24,3 +24,6 @@
 /.env
 
 .DS_Store
+*.sql
+*.sql.gz
+php_errors.log

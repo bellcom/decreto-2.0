@@ -21,7 +21,13 @@
 // --------------------------------------------------
 
 .view-decreto-calender {
-
+  
+  .calendar-calendar .month-view table
+  {
+    width: 94%;
+    margin: 0 3%;
+  }
+  
   tr {
     background-color: transparent !important; // Reset.
   }
@@ -33,6 +39,8 @@
     text-align: center;
 
     border: 0;
+    
+    width: 13%;
   }
 
   td {
@@ -40,11 +48,10 @@
     &.days {
       height: 38px;
 
-      font-size: $font-size-small;
-      font-weight: $font-weight-bold;
+      font-size: $font-size-x-small;
       text-transform: uppercase;
 
-      color: #bcbcbc;
+      color: #8F979A;
     }
 
     &.today {
@@ -92,6 +99,15 @@
     }
 
     &.has-no-events {}
+    
+    &.week {
+      color: #606B70;
+      background: #F0F0F0;
+      font-size: 10px;
+      font-weight: $font-weight-bold;
+      width: 8%;
+      vertical-align: middle;
+    }
   }
 
   .mini-day-on {
@@ -109,24 +125,31 @@
     justify-content: center;
     align-items: center;
 
-    max-width: 30px;
-    min-height: 30px;
+    max-width: 24px;
+    min-height: 24px;
 
     margin: auto;
 
-    font-size: $font-size-small;
+    font-size: $font-size-x-small;;
 
     color: $text-color;
 
     a {
 
       &, &:hover, &:active {
-        font-size: $font-size-small;
+        font-size: $font-size-x-small;;
 
         text-decoration: none;
 
         color: $text-color;
       }
+    }
+  }
+  
+  .past-month, 
+  .future-month  {
+    > .mini-day-off {
+      color: #8F979A;
     }
   }
 }
@@ -143,9 +166,13 @@
 
     ul {
       display: flex;
+      flex-direction: row;
 
       padding-left: 0; // Reset.
       margin-bottom: 0; // Reset.
+      
+      width: 94%;
+      margin: 0 3%;
     }
 
     li {
@@ -157,7 +184,7 @@
         border-radius: 0; // Reset.
 
         &, &:hover {
-          color: #bcbcbc;
+          color: $btn-default-color;
         }
       }
     }
@@ -165,20 +192,31 @@
     // Current month.
     .pager__item--current {
       flex-grow: 1;
-
+      
+      order: 1;
+      
+      width: 74%;
+      
+      text-align: left;
       font-family: $headings-font-family;
       font-weight: $headings-font-weight-bold;
       font-size: $font-size-small;
+      text-transform: capitalize;
     }
 
     // Previous month.
     .pager__item--previous {
-      padding-left: floor( ($grid-gutter-width / 2) );
+      //padding-left: floor( ($grid-gutter-width / 2) );
+      order: 2;
+      width: 13%;
+      
     }
 
     // Next month.
     .pager__item--next {
-      padding-right: floor( ($grid-gutter-width / 2) );
+      //padding-right: floor( ($grid-gutter-width / 2) );
+      order: 2;
+      width: 13%;
     }
 
     // Hide the text inside the toggles.
@@ -194,7 +232,7 @@
 
       &:after {
         font-family: FontAwesome;
-        font-size: $font-size-small;
+        font-size: $font-size-x-small;
       }
     }
     .pager__item--previous span:nth-child(1) {
