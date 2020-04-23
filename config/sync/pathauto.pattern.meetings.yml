@@ -7,16 +7,16 @@ dependencies:
 id: meetings
 label: Meetings
 type: 'canonical_entities:node'
-pattern: '[node:field_decreto_meet_department:entity:url:path]/[node:field_decreto_meet_type:value]/[node:field_decreto_meet_start_date:date:html_year]/[node:field_decreto_meet_start_date:date:custom:m]/[node:field_decreto_meet_start_date:date:custom:d]/[node:title]'
+pattern: '[node:field_decreto_meet_department:entity:url:path]/[node:field_decreto_meet_start_date:date:html_year]/[node:field_decreto_meet_start_date:date:custom:m]/[node:field_decreto_meet_start_date:date:custom:d]/[node:title]'
 selection_criteria:
-  ff3325fa-82f0-4b57-86c1-6da099f909d7:
+  aa110a97-19c3-40a3-9717-65bbee2015fe:
     id: node_type
     bundles:
       decreto_meeting: decreto_meeting
     negate: false
     context_mapping:
       node: node
-    uuid: ff3325fa-82f0-4b57-86c1-6da099f909d7
+    uuid: aa110a97-19c3-40a3-9717-65bbee2015fe
 selection_logic: and
 weight: -5
 relationships: {  }
