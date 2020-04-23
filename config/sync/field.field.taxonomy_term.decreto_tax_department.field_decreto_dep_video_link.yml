@@ -1,0 +1,19 @@
+uuid: f117f21b-15dd-404a-af35-aa4366b1926e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_decreto_dep_video_link
+    - taxonomy.vocabulary.decreto_tax_department
+id: taxonomy_term.decreto_tax_department.field_decreto_dep_video_link
+field_name: field_decreto_dep_video_link
+entity_type: taxonomy_term
+bundle: decreto_tax_department
+label: 'Video link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

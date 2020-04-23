@@ -139,6 +139,14 @@ class DepartmentEditForm extends AjaxFormBase {
       '#options' => $organisationsList
     ];
 
+    // Meeting video link.
+    $form['video_link'] = [
+      '#type' => 'textfield',
+      '#placeholder' => $this->t('Video link'),
+      '#title' => $this->t('Video link'),
+      '#description' => $this->t('URL to video link'),
+    ];
+
     // Members START.
     $form[] = [
       '#markup' => '<h4><strong>' . $this->t('Members') . '</strong></h4>',
@@ -244,6 +252,7 @@ class DepartmentEditForm extends AjaxFormBase {
     $form['department_admin']['#default_value'] = $decretoDepartment->getDepartmentAdmin(FALSE);
     $form['organisation']['#default_value'] = $decretoDepartment->getOrganisation(FALSE);
     $form['organisation']['#attributes'] = ['disabled' => 'disabled'];
+    $form['video_link']['#default_value'] = $department->field_decreto_dep_video_link->value;
 
     // Fill department roles.
     $departmentRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_department_roles');
@@ -271,6 +280,7 @@ class DepartmentEditForm extends AjaxFormBase {
     $departmentAdminId = $form_state->getValue('department_admin');
     $currentOrganisationId = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation(FALSE);
     $departmentRoles = $form_state->getValue('department_roles');
+    $video_link = $form_state->getValue('video_link');
 
     if (!$this->entity) {
       $this->entity = Term::create([
@@ -278,11 +288,13 @@ class DepartmentEditForm extends AjaxFormBase {
         'name' => $name,
         'field_decreto_dep_org' => ['target_id' => $currentOrganisationId],
         'field_decreto_dep_admin' => ['target_id' => $departmentAdminId],
+        'field_decreto_dep_video_link' => $video_link,
       ]);
     }
     else {
       $this->entity->name = $name;
       $this->entity->field_decreto_dep_admin = ['target_id' => $departmentAdminId];
+      $this->entity->field_decreto_dep_video_link = $video_link;
     }
 
     $this->entity->save();

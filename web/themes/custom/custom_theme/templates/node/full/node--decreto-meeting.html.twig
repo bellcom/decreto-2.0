@@ -32,7 +32,7 @@
           </h2>
         </div>
         <!-- End - title -->
-        
+
         <div class="meeting-page__info-icons">
           <div class="meeting-page__info-icons__col">
             {# Begin - starting date #}
@@ -162,17 +162,18 @@
 
             </ul>
           </div>
-          
+
           <!-- Begin - meeting video link -->
-          {% if (content.field_decreto_meet_video_link['#items'].getValue()) %}
-            <a 
-               href="{{ node.field_decreto_meet_video_link.value }}" 
+          {% if (content['#video_link']) %}
+            <a
+               href="{{ content['#video_link'] }}"
                class="btn btn-primary" target="_blank">
+              <i class="material-icons">videocam</i>
               {{ "Meeting video" | trans }}
             </a>
           {% endif %}
           <!-- End - meeting video link -->
-          
+
           <!-- Begin - own notes -->
           <a
             href="{{ path('view.decreto_notes.decreto_meeting_note_page', {'meeting': node.id}) }}"

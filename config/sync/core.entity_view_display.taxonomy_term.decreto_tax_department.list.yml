@@ -7,6 +7,7 @@ dependencies:
     - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_admin
     - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_org
     - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_user_roles
+    - field.field.taxonomy_term.decreto_tax_department.field_decreto_dep_video_link
     - taxonomy.vocabulary.decreto_tax_department
 id: taxonomy_term.decreto_tax_department.list
 targetEntityType: taxonomy_term
@@ -18,6 +19,7 @@ hidden:
   field_decreto_dep_admin: true
   field_decreto_dep_org: true
   field_decreto_dep_user_roles: true
+  field_decreto_dep_video_link: true
   flag_subscribe_term: true
   langcode: true
   search_api_excerpt: true

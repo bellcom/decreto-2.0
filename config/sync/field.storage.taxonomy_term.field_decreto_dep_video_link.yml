@@ -1,0 +1,21 @@
+uuid: 70420b0e-f02c-4d0c-b6b8-6ee81943ecc9
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_decreto_dep_video_link
+field_name: field_decreto_dep_video_link
+entity_type: taxonomy_term
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

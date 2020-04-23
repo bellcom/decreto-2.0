@@ -256,9 +256,9 @@ function custom_theme_preprocess_node__decreto_organisation(&$variables) {
 function custom_theme_preprocess_node__decreto_meeting(&$variables) {
   $node = $variables['node'];
 
-  if ($variables['view_mode'] === 'table') {
-    $decretoMeeting = new DecretoMeeting($node);
+  $decretoMeeting = new DecretoMeeting($node);
 
+  if ($variables['view_mode'] === 'table') {
     // Note indicator.
     $variables['content']['#contains_notes'] = $decretoMeeting->hasUserNotes();
 
@@ -285,6 +285,14 @@ function custom_theme_preprocess_node__decreto_meeting(&$variables) {
         $duration_str .= $duration->format(' %i min');
       }
       $variables['content']['#duration'] = trim($duration_str);
+    }
+
+    // Video link.
+    $variables['content']['#video_link'] = $node->field_decreto_meet_video_link->value;
+    if (empty($variables['content']['#video_link'])) {
+      $department = $decretoMeeting->getDepartment();
+
+      $variables['content']['#video_link'] = $department->field_decreto_dep_video_link->value;
     }
 
     // Access params.
