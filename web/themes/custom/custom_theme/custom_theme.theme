@@ -9,6 +9,7 @@ use Drupal\decreto_content_modify\Entity\DecretoBulletPointAttachment;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
 use Drupal\decreto_content_modify\Entity\DecretoMemo;
 use Drupal\decreto_content_modify\Services\ContentService;
+use Drupal\decreto_department\Entity\DecretoDepartment;
 use Drupal\decreto_department\Services\DepartmentService;
 use Drupal\decreto_user\Entity\DecretoUser;
 use Drupal\user\Entity\User;
@@ -396,6 +397,25 @@ function custom_theme_preprocess_user(&$variables) {
   elseif ($view_mode === 'list') {
     $name = $user->getDisplayName();
     $variables['user_initials'] = (new Initials())->name($name)->generate();
+    $variables['#cache']['contexts'][] = 'url.path';
+
+    $taxonomy_term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+    if ($taxonomy_term && $taxonomy_term->bundle() == 'decreto_tax_department') {
+      $decretoDepartment = new DecretoDepartment($taxonomy_term);
+      $role = $decretoDepartment->getUserRole($user->id());
+      $variables['role'] = '';
+      if ($role) {
+        // Instantiate the transliteration class.
+        $trans = \Drupal::transliteration();
+
+        $variables['role'] = [
+          'name' => $role->label(),
+          'name_safe' => $trans->transliterate($role->label()),
+        ];
+      }
+
+      $variables['#cache']['tags'][] = 'taxonomy_term:' . $taxonomy_term->id();
+    }
   }
 }
 

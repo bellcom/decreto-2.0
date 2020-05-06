@@ -164,7 +164,7 @@ class DecretoDepartment {
    * @return \Drupal\user\UserInterface|int|null
    *   If load is TRUE, User entity is returned,
    *   If load if FALSE, User ID is returned.
-   *   If role has no user atached, null is returned.
+   *   If role has no user attached, null is returned.
    */
   public function getRoleUser($roleId, $load = TRUE) {
     // Finding if paragraphs for that already exists.
@@ -184,6 +184,45 @@ class DecretoDepartment {
         }
         else {
           return $fieldUser->getValue()['target_id'];
+        }
+      }
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Gets the role that is related by the specified user.
+   *
+   * @param int $userId
+   *   ID of the user.
+   * @param bool $load
+   *   If the returned user shall be load. If FALSE, id is returned.
+   *   TRUE is default value.
+   *
+   * @return \Drupal\taxonomy\TermInterface|int|null
+   *   If load is TRUE, Term entity is returned,
+   *   If load if FALSE, Term ID is returned.
+   *   If user has no role attached, null is returned.
+   */
+  public function getUserRole($userId, $load = TRUE) {
+    // Finding if paragraphs for that already exists.
+    $pids = \Drupal::entityQuery('paragraph')
+      ->condition('type', 'decreto_department_user_role')
+      ->condition('parent_id', $this->getEntity()->id())
+      ->condition('field_decreto_dur_user', $userId)
+      ->execute();
+
+    if (!empty($pids)) {
+      $pid = reset($pids);
+      $userRoleParagraph = Paragraph::load($pid);
+
+      if ($fieldRole = $userRoleParagraph->get('field_decreto_dur_role')->first()) {
+        if ($load) {
+          return $fieldRole->get('entity')->getTarget()->getValue();
+        }
+        else {
+          return $fieldRole->getValue()['target_id'];
         }
       }
     }

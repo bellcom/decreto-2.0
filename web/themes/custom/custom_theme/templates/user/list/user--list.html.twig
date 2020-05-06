@@ -15,7 +15,12 @@
 
     <div class="entity-list__heading">
       <h2
-        class="entity-list__heading__title heading-h4">{{ user.label }}</h2>
+        class="entity-list__heading__title heading-h4">
+        {% if role %}
+          <span class="role-{{ role.name_safe|lower }}">[{{ role.name }}]</span>
+        {% endif %}
+        {{ user.label }}
+      </h2>
     </div>
 
   </div>

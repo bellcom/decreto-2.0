@@ -26,6 +26,7 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
     $options['edit_department'] = ['default' => ''];
     $options['department_user_create'] = ['default' => ''];
     $options['department_id'] = ['default' => ''];
+    $options['show_roles_legend'] = ['default' => ''];
 
     return $options;
   }
@@ -71,6 +72,12 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#default_value' => empty($this->options['department_id']) ? '' : $this->options['department_id'],
       '#description' => $this->t('Use fixed or token value for providing Department ID'),
     ];
+
+    $form['show_roles_legend'] = [
+      '#title' => $this->t('Show roles legend'),
+      '#type' => 'checkbox',
+      '#default_value' => empty($this->options['show_roles_legend']) ? '' : $this->options['show_roles_legend'],
+    ];
   }
 
   /**
@@ -84,6 +91,21 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       $department = Term::load($department_id);
     }
 
+    $roles_legend = [];
+    if ($this->options['show_roles_legend']) {
+      // Instantiate the transliteration class.
+      $trans = \Drupal::transliteration();
+
+      $departmentRoles = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('decreto_tax_department_roles');
+      foreach ($departmentRoles as $departmentRole) {
+        $roles_legend[$departmentRole->tid] = [
+          'name' => $departmentRole->name,
+          'name_safe' => $trans
+            ->transliterate($departmentRole->name),
+        ];
+      }
+    }
+
     return [
       '#theme' => 'decreto_department_departments_view_context_links',
       '#create_department' => $this->options['create_department'],
@@ -91,6 +113,8 @@ class DepartmentsViewContextLinks extends TokenizeAreaPluginBase {
       '#edit_department' => $this->options['edit_department'],
       '#department_user_create' => $this->options['department_user_create'],
       '#department_id' => $department_id,
+      '#show_roles_legend' => $this->options['show_roles_legend'],
+      '#roles_legend' => $roles_legend,
       '#access' => [
         'decreto_department' => [
           'canEdit' => ($department) ? $department->access('update') : NULL,
