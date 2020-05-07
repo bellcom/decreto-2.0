@@ -144,7 +144,8 @@ class DepartmentEditForm extends AjaxFormBase {
       '#type' => 'textfield',
       '#placeholder' => $this->t('Video link'),
       '#title' => $this->t('Video link'),
-      '#description' => $this->t('URL to video link'),
+      '#description' => $this->t('URL to video link, e.g. https://youtu.be/...'),
+      '#pattern' => 'https?:\/\/.*',
     ];
 
     // Members START.

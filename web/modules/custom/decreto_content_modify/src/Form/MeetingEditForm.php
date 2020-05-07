@@ -347,7 +347,8 @@ class MeetingEditForm extends AjaxFormBase {
       '#type' => 'textfield',
       '#placeholder' => $this->t('Video link'),
       '#title' => $this->t('Video link'),
-      '#description' => $this->t('URL to video link'),
+      '#description' => $this->t('URL to video link, e.g. https://youtu.be/...'),
+      '#pattern' => 'https?:\/\/.*',
     ];
 
     $bundle_fields = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('node', 'decreto_meeting');
