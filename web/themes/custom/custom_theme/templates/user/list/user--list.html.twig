@@ -17,7 +17,7 @@
       <h2
         class="entity-list__heading__title heading-h4">
         {% if role %}
-          <span class="role-{{ role.name_safe|lower }}">[{{ role.name }}]</span>
+          <i class="role-icon role-{{ role.name_safe|lower }} material-icons">star</i>
         {% endif %}
         {{ user.label }}
       </h2>
