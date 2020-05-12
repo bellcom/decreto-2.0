@@ -111,6 +111,8 @@ button.action-button {
   .flexy-header {
     margin-right: 0 - $action-button-expected-height;
     padding-right: $action-button-expected-height;
+    margin-left: 0 - floor( ($grid-gutter-width / 2) );
+    padding-left: floor( ($grid-gutter-width / 2) );
   }
 }
 

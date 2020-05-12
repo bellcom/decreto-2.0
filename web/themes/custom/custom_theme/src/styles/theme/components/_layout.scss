@@ -81,14 +81,12 @@ body {
 .layout__sidebar__logo {
   display: block;
 
-  padding: 20px 0;
-
-  text-align: center;
+  padding: 10px 15px 20px;
 
   img {
     margin: auto;
 
-    max-width: floor( ($layout-sidebar-width - $grid-gutter-width) );
+    max-width: floor( ($layout-sidebar-width - ($grid-gutter-width*2)) );
   }
 
   + .region-sidebar {
@@ -146,6 +144,8 @@ body {
 
     flex-shrink: 0;
     flex-basis: $layout-sidebar-width;
+    
+    margin-right: floor( ($grid-gutter-width / 2) );
   }
 }
 

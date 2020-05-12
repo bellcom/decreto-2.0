@@ -34,9 +34,9 @@
 
     padding: 14px floor( ($grid-gutter-width / 2) );
 
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-semibold;
 
-    color: $text-color;
+    color: $headings-color;
 
     transition: none;
 
@@ -47,7 +47,8 @@
     &:hover {
       color: #fff;
 
-      background-color: $brand-tertiary;
+      background-color: lighten($brand-tertiary, 8%);
+      border-radius: 0 $border-radius-base $border-radius-base 0;
     }
   }
 }
@@ -60,6 +61,7 @@
       color: #fff;
 
       background-color: $brand-tertiary;
+      border-radius: 0 $border-radius-base $border-radius-base 0;
     }
   }
 }
@@ -98,7 +100,7 @@
     &:hover, &:focus, &:active {
 
       &:before {
-        color: $brand-secondary;
+        color: $brand-secondary-pale;
       }
     }
   }
@@ -110,7 +112,7 @@
       &, &:hover, &:focus, &:active {
 
         &:before {
-          color: $brand-secondary;
+          color: $brand-secondary-pale;
         }
       }
     }
