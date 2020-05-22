@@ -147,9 +147,6 @@ class MeetingEditForm extends AjaxFormBase {
         'event' => 'click',
       ],
       '#submit' => ['::submitSwitchPage'],
-      '#attributes' => [
-        'class' => [($useDepartmentMembers) ? 'hidden' : ''],
-      ],
     ];
     // On third page, don't validate fields when page switching back.
     if ($activePage === 3) {
@@ -159,12 +156,27 @@ class MeetingEditForm extends AjaxFormBase {
     $form['actions']['submit'] = $submitButton;
     // Adding button before submit button END.
 
-    // Submit button custom behavior.
-    $form['actions']['submit']['#attributes'] = [
-      // Show button only if we use department members, or if we are on the
-      // second page of the form.
-      'class' => [(!$useDepartmentMembers && $activePage !== 2) ? 'hidden' : ''],
-    ];
+    if ($useDepartmentMembers) {
+      // Hiding Switch page button, if using department members.
+      $form['actions']['switch-page']['#attributes']['class'] = ['hidden'];
+    }
+    else {
+      if ($activePage == 1) {
+        // Making Swift page button Enter clickable.
+        $form['actions']['switch-page']['#attributes']['class'] = ['click-on-enter'];
+
+        // Hiding Submit button on page 1, if not using department members.
+        $form['actions']['submit']['#attributes']['class'] = ['hidden'];
+      }
+
+      if ($activePage == 3) {
+        // Making Create user Enter clickable.
+        $form['pages-page-3']['submit-create-new-user']['#attributes']['class'] = ['click-on-enter'];
+
+        // Hiding Submit button on page 3.
+        $form['actions']['submit']['#attributes']['class'] = ['hidden'];
+      }
+    }
 
     $form['#attached']['library'][] = 'decreto_content_modify/meeting-edit';
     $form['#attached']['drupalSettings']['decreto_bootstrap_datetimepicker']['datetime_js_format'] = DECRETO_BOOTSTRAP_DATETIMEPICKER_DATETIME_JS_FORMAT;

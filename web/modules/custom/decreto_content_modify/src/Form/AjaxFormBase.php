@@ -57,8 +57,13 @@ abstract class AjaxFormBase extends FormBase {
         'callback' => '::ajaxSubmitForm',
         'event' => 'click',
       ],
+      '#attributes' => [
+        'class' => ['click-on-enter'],
+      ],
     ];
     // Form actions END.
+
+    $form['#attached']['library'][] = 'decreto_content_modify/decreto-ajax-dialog';
 
     return $form;
   }

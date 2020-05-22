@@ -17,3 +17,10 @@ quick-search-list:
   dependencies:
     - core/jquery
     - core/drupalSettings
+decreto-ajax-dialog:
+  version: 1.x
+  js:
+    js/ajax-dialog.js: {preprocess: false}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
