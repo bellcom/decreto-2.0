@@ -188,6 +188,29 @@ img {
   }
 }
 
+.modal-header .close {
+  display: block;
+  
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  
+  width: 32px;
+  height: 32px;
+  
+  color: $headings-color;
+  opacity: 100%;
+  text-shadow: none;
+  
+  &:hover {
+    color: darken($headings-color, 10%);
+  }
+  
+  & > span {
+    vertical-align: text-top;
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
@@ -224,10 +247,29 @@ img {
 }
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {}
+@media #{$breakpoint-tablet-only} {
+  .modal-dialog {
+    width: 750px;
+  }
+}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+  .modal-header .close {
+    top: -16px;
+    right: -16px;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 18px;
+    background: lighten($brand-primary, 10%);
+    
+    &:hover {
+      background: $brand-primary;
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}
