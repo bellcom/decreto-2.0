@@ -103,10 +103,11 @@ img {
 
 .btn-default:not(.btn-success) {
   border: 1px solid $btn-default-border;
+  line-height: 1.5;
 
   &:hover, &:focus {
     color: $headings-color;
-    background-color: $btn-default-border;
+    background-color: lighten($btn-default-border, 15%);
   }
 }
 
