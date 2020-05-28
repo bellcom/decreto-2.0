@@ -211,6 +211,8 @@
       border: 0px;
       width: 100%;
       text-align: left;
+      font-weight: $font-weight;
+      color: $text-color;
 
       &:hover, &:focus {
        background: none;
@@ -522,9 +524,11 @@
             background: none;
             border: 1px solid $brand-primary;
             line-height: 1.5;
+            color: $btn-default-color;
             
             &:hover {
               background: lighten($brand-primary, 15%);
+              
               color: $text-color;
             }
           }
