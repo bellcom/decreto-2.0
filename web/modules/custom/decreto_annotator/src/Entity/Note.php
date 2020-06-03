@@ -303,7 +303,7 @@ class Note extends ContentEntityBase implements EntityOwnerInterface {
    */
   private static function invalidateCaches($uid, $bpa_id) {
     // Invalidating notes count.
-    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid]);
+    Cache::invalidateTags([NoteService::CACHE_ID_DECRETO_NOTE_COUNTERS . ':' . $uid, "user:$uid"]);
 
     // Getting related bullet point attachment.
     $bpa = Node::load($bpa_id);

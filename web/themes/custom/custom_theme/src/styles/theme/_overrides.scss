@@ -103,10 +103,11 @@ img {
 
 .btn-default:not(.btn-success) {
   border: 1px solid $btn-default-border;
+  line-height: 1.5;
 
   &:hover, &:focus {
     color: $headings-color;
-    background-color: $btn-default-border;
+    background-color: lighten($btn-default-border, 15%);
   }
 }
 
@@ -143,8 +144,8 @@ img {
 
   right: auto;
   top: auto;
-  bottom: 15px;
-  left: 15px;
+  bottom: 50%;
+  left: 45%;
 
   z-index: 2000;
 
@@ -188,6 +189,29 @@ img {
   }
 }
 
+.modal-header .close {
+  display: block;
+  
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  
+  width: 32px;
+  height: 32px;
+  
+  color: $headings-color;
+  opacity: 100%;
+  text-shadow: none;
+  
+  &:hover {
+    color: darken($headings-color, 10%);
+  }
+  
+  & > span {
+    vertical-align: text-top;
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
@@ -206,9 +230,9 @@ img {
 @media #{$breakpoint-tablet-and-up} {
 
   .ajax-throbber {
-    top: 50px;
+    top: 50%;
     bottom: auto;
-    right: 50px;
+    right: 45%;
     left: auto;
 
     padding: 10px;
@@ -218,16 +242,35 @@ img {
     }
 
     .toolbar-fixed & {
-      top: (79px + 50px);
+      top: (79px + 250px);
     }
   }
 }
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {}
+@media #{$breakpoint-tablet-only} {
+  .modal-dialog {
+    width: 750px;
+  }
+}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+  .modal-header .close {
+    top: -16px;
+    right: -16px;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 18px;
+    background: lighten($brand-primary, 10%);
+    
+    &:hover {
+      background: $brand-primary;
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}

@@ -25,7 +25,8 @@
 
   .boxy__heading {
     padding: 14px floor( ($grid-gutter-width / 2) );
-    background-color: $brand-primary;
+    background-color: lighten($brand-primary, 10%);
+    border-radius: 0 $border-radius-base $border-radius-base 0;
   }
   .boxy__heading__title {
     display: flex;

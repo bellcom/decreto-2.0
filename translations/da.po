@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-11-13 09:43+0100\n"
-"PO-Revision-Date: 2019-11-13 09:43+0100\n"
+"POT-Creation-Date: 2020-05-07 12:50+0300\n"
+"PO-Revision-Date: 2020-05-07 12:50+0300\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -233,10 +233,18 @@ msgid "Default long date"
 msgstr "Standard lang dato"
 
 msgid "Default medium date"
-msgstr "Standard mellem dato"
+msgstr "Default medium date"
+
+msgctxt "PHP date format"
+msgid "D, m/d/Y - H:i"
+msgstr "D, d.m.Y - H:i"
 
 msgid "Default short date"
 msgstr "Standard kort dato"
+
+msgctxt "PHP date format"
+msgid "m/d/Y - H:i"
+msgstr "d.m.Y - H:i"
 
 msgid ""
 "@site is currently under maintenance. We should be back shortly. Thank "
@@ -1307,7 +1315,7 @@ msgid "create one"
 msgstr "oprette en"
 
 msgid "Personal bullet point"
-msgstr "Personligt punkt"
+msgstr "Personfølsom punkt"
 
 msgid "Search for a member"
 msgstr "Søg efter medlem"
@@ -1433,7 +1441,7 @@ msgid "Delete organisation"
 msgstr "Slet organisation"
 
 msgid "Personal"
-msgstr "Personlig"
+msgstr "Personfølsom"
 
 msgid "Convert to PDF"
 msgstr "Konvertér til PDF"
@@ -1452,4 +1460,60 @@ msgstr "Opret ét eller flere punkter"
 
 msgid "Edit organisation @label"
 msgstr "Rediger organisation @label"
+
+msgid "Add memos"
+msgstr "Opret noter"
+
+msgid "Sort bullet points"
+msgstr "Sortér punkter"
+
+msgid ""
+"No bullet point attachment added. Would you like to <a href=\":url\" "
+"title=\"Add bullet point attachment\" class=\"use-ajax\"\n"
+"            "
+"data-dialog-type=\"modal\">create one</a>?"
+msgstr ""
+"Der er ikke tilføjet afsnit eller bilag til punktet, vil du <a "
+"href=\":url\" title=\"Opret et afsnit eller et bilag\" "
+"class=\"use-ajax\" data-dialog-type=\"modal\">oprette et</a>?"
+
+msgid ""
+"No bullet points added. Would you like to <a href=\":url\" title=\"Add "
+"bullet point\" class=\"use-ajax\"\n"
+"            "
+"data-dialog-type=\"modal\">create one</a>?"
+msgstr ""
+"Der er ikke tilføjet nogle punkter. Vil du <a href=\":url\" "
+"title=\"Opret en punkt\" class=\"use-ajax\" "
+"data-dialog-type=\"modal\">oprette et</a>?"
+
+msgid "All department members"
+msgstr "Alle afdelingens medlemmer"
+
+msgid "Meeting roles"
+msgstr "Møde roller"
+
+msgid "Meeting role: %rolename"
+msgstr "Møde rolle: %rolename"
+
+msgid "More actions"
+msgstr "Indstillinger"
+
+msgid "Enter text to filter"
+msgstr "Indsæt tekst og filtrer"
+
+msgid "Add/edit referat"
+msgstr "Tilføj/redigér referat"
+
+msgid "Meeting video"
+msgstr "Online møde"
+
+msgid "Convert to minutes"
+msgstr "Dan referat"
+
+msgid "Meeting type is successfully updated."
+msgstr "Dine ændringer er gemt"
+
+msgid "URL to video link, e.g. https://youtu.be/..."
+msgstr "Link til video møde system, f.eks. https://youtu.be/..."
 

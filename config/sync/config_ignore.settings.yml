@@ -1,4 +1,5 @@
 ignored_config_entities:
   - decreto_help_messages.settings
+  - search_api.server.decreto_search_api_solr_server
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

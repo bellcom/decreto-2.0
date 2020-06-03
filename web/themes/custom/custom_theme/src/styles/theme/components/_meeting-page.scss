@@ -41,23 +41,28 @@
 .meeting__search-form {
   position: relative;
   display: block;
+  
+  .btn {
+
+    &.btn-pale {
+
+      &:active, &:focus {
+        background: $brand-secondary-pale;
+        border-radius: $btn-border-radius-base $btn-border-radius-base 0px 0px;
+      }
+    }
+  }
 }
 .meeting__search-form--visible {
 
-  .meeting__search-form-wrapper--mobile {
+  .meeting__search-form-wrapper {
     display: block;
-  }
-  .meeting__search-form-wrapper--tablet {
-    display: none;
-  }
-  .meeting__search-form-wrapper--desktop {
-    display: none;
   }
 }
 .meeting__search-form-wrapper {
   display: none;
 
-  margin-top: 10px;
+  margin-top: 9px;
 }
 
 .meeting__search-form--visible {
@@ -184,6 +189,49 @@
     }
   }
 
+  .dropdown-menu {
+    border: none;
+    border-radius: $border-radius-base;
+    background-color: $body-bg-secondary;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+
+    padding-left: $padding-base-horizontal;
+    padding-right: $padding-base-horizontal;
+    margin-top: 0px;
+
+    min-width: 136px;
+
+    font-size: $font-size-small;
+
+    > li > a,
+    > li > button {
+      align-items: center;
+      padding: $padding-base-vertical ($padding-base-horizontal/2);
+      background: none;
+      border: 0px;
+      width: 100%;
+      text-align: left;
+      font-weight: $font-weight;
+      color: $text-color;
+
+      &:hover, &:focus {
+       background: none;
+        color: $link-color;
+      }
+    }
+
+    li {
+
+      + li {
+
+        > a,
+        > button {
+          border-top: 1px solid #E2E2E2;
+        }
+      }
+    }
+  }
+  
   .meeting__search-form-wrapper {
     background: $brand-secondary-pale;
     border-radius: $border-radius-base;
@@ -199,43 +247,12 @@
     .meeting-page__settings {
       display: inline-block;
       
+      .dropdown-menu {
+        margin-top: -10px;
+      }
+      
       + a.btn {
         margin-left: 15px;
-      }
-    }
-    
-    .dropdown-menu {
-      border: none;
-      border-radius: $border-radius-base;
-      background-color: $body-bg-secondary;
-      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-      
-      padding-left: $padding-base-horizontal;
-      padding-right: $padding-base-horizontal;
-      margin-top: -6px;
-      
-      min-width: 136px;
-      
-      font-size: $font-size-small;
-
-      > li > a {
-        align-items: center;
-        padding: $padding-base-vertical ($padding-base-horizontal/2);
-
-        &:hover, &:focus {
-         background: none;
-          color: $link-color;
-        }
-      }
-
-      li {
-
-        + li {
-
-          > a {
-            border-top: 1px solid #E2E2E2;
-          }
-        }
       }
     }
   }
@@ -345,41 +362,28 @@
         margin-bottom: 10px;
       }
     }
-    
-    .meeting-page__action-buttons--left {
-      justify-content: space-between;
-      
-      .action-list__item{
+
+    .action-list__item {
         display: inline-block;
-        
-        + .action-list__item {
-          margin-top: 8px;
-          
-          + .action-list__item {
-            margin-left: 4%;
-          }
+      > button {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      + .action-list__item {
+        margin-left: 13px;
+      }
+      
+      .btn.btn-pale.js-toggle-search-form {
+        i{
+          display: none;
         }
-        
-        &:first-child {
-          display: block;
-          .btn {
-            width: 100%;
-          }
-        }
-        &:nth-child(2) {
-          width: 57%;
-          
-          a {
-            width: 100%;
-          }
-        }
-        &:nth-child(3) {
-          width: 37%;
-          
-          a {
-            width: 100%;
-          }
-        }
+      }
+    }
+
+    .meeting-page__buttons-wrapper {
+      .dropdown-menu {
+        right: 0;
+        left: auto;
       }
     }
     .meeting-page__action-buttons--right {
@@ -443,19 +447,6 @@
       }
     }
   }
-  
-  .meeting__search-form--visible {
-
-    .meeting__search-form-wrapper--mobile {
-      display: none;
-    }
-    .meeting__search-form-wrapper--tablet {
-      display: block;
-    }
-    .meeting__search-form-wrapper--desktop {
-      display: none;
-    }
-  }
   .meeting-page__action{
     padding-top: 5px;
     .meeting-page__action__align {
@@ -489,25 +480,72 @@
       margin-top: 10px;
     }
   }
-
+  .meeting-page__buttons-wrapper {
+    .meeting-page__drop-button {
+      display: none;
+    }
+    > ul.dropdown-menu {
+      display: block;
+      position: initial;
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      float: none;
+      
+      > li {
+        display: inline-block;
+        vertical-align: middle;
+        
+        + li {
+          margin-left: 14px;
+        }
+        
+        > a.btn,
+        > button.btn {
+          width: auto;
+          text-align: center;
+          line-height: 1.6;
+          font-weight: $font-weight-semibold;
+          line-height: 1.6;
+          
+          &.btn-primary {
+            padding: 8px 14px;
+            background: $brand-primary;
+            border: 0px;
+            
+            &:hover {
+              background: darken($brand-primary, 10%);
+              color: $text-color;
+            }
+          }
+          &.btn-default {
+            padding: 8px 13px;
+            background: none;
+            border: 1px solid $brand-primary;
+            line-height: 1.5;
+            color: $btn-default-color;
+            
+            &:hover {
+              background: lighten($brand-primary, 15%);
+              
+              color: $text-color;
+            }
+          }
+        }
+      }
+    }
+  }
   .meeting__search-form {
     display: inline-block;
 
     + .btn {
       margin-left: floor($grid-gutter-width / 2);
     }
-  }
-
-  .meeting__search-form--visible {
-
-    .meeting__search-form-wrapper--mobile {
-      display: none;
-    }
-    .meeting__search-form-wrapper--tablet {
-      display: none;
-    }
-    .meeting__search-form-wrapper--desktop {
-      display: block;
+    
+    .btn {
+      padding-left: 9px;
+      padding-right: 14px;
     }
   }
 }

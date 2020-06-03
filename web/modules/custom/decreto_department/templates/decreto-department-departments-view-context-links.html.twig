@@ -1,3 +1,11 @@
+{% if show_roles_legend and department_id %}
+  <ul>
+      {% for role in roles_legend %}
+      <li class="role-{{ role.name_safe|lower }}">{{ role.name }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <div class="boxy__actions">
   {% if create_department and user.hasPermission('create terms in decreto_tax_department') %}
     {% if create_department_use_ajax %}

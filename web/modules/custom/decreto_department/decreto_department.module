@@ -98,6 +98,8 @@ function decreto_department_theme() {
         'edit_department' => NULL,
         'department_user_create' => NULL,
         'department_id' => NULL,
+        'show_roles_legend' => NULL,
+        'roles_legend' => NULL,
         'access' => [],
       ],
     ],

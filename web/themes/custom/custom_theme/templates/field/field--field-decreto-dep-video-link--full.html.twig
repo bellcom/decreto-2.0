@@ -54,8 +54,10 @@
 %}
 
 <div class="text--with-icon">
-  <i class="material-icons">flag</i>
+  <i class="material-icons">videocam</i>
   {% for item in items %}
-    <div{{ attributes.addClass(classes, 'field--item') }}>{{ item.content }}</div>
+    <div{{ attributes.addClass(classes, 'field--item') }}>
+      <a href="{{ item.content }}" target="_blank">Video</a>
+    </div>
   {% endfor %}
 </div>

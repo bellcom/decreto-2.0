@@ -117,7 +117,7 @@ class Notification extends ContentEntityBase implements EntityOwnerInterface {
    */
   public static function create(array $values = []) {
     // Invalidating notifications count.
-    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS . ':' . $values['uid']]);
+    self::invalidateCaches($values['uid']);
 
     return parent::create($values);
   }
@@ -127,7 +127,7 @@ class Notification extends ContentEntityBase implements EntityOwnerInterface {
    */
   public function save() {
     // Invalidating notifications count.
-    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS . ':' . $this->get('uid')->target_id]);
+    self::invalidateCaches($this->get('uid')->target_id);
 
     return parent::save();
   }
@@ -137,7 +137,7 @@ class Notification extends ContentEntityBase implements EntityOwnerInterface {
    */
   public function delete() {
     // Invalidating notifications count.
-    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS . ':' . $this->get('uid')->target_id]);
+    self::invalidateCaches($this->get('uid')->target_id);
 
     return parent::delete();
   }
@@ -257,6 +257,19 @@ class Notification extends ContentEntityBase implements EntityOwnerInterface {
     }
 
     return NULL;
+  }
+
+  /**
+   * Invalidates caches of related entities.
+   *
+   * Invalidates notification counter.
+   *
+   * @param int $uid
+   *   Uid of the notification user.
+   */
+  private static function invalidateCaches($uid) {
+    // Invalidating notification count.
+    Cache::invalidateTags([NotificationService::CACHE_ID_DECRETO_NOTIFICATION_COUNTERS . ':' . $uid, "user:$uid"]);
   }
 
 }
