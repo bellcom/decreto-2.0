@@ -15,27 +15,33 @@
 // Styling
 // --------------------------------------------------
 .pager {
-    li>a,
-    li>span {
-        color: $headings-color;
-        background-color: $brand-primary;
-        border: 0px;
-        border-radius: $border-radius-base;
-        padding: 0px 20px;
-        border-width: 0;
-        font-weight: $font-weight-semibold;
-        font-size: $font-size-small;
-        line-height: 38px;
-        &:hover {
-            background-color: darken($brand-secondary, 5%);
+    text-align: left;
+    li {
+        +li {
+            margin-left: 15px;
         }
-    }
-    li.active>a,
-    li.active>span {
-        color: #fff;
-        background-color: $brand-secondary;
-        &:hover {
-            background-color: darken($brand-secondary, 8%);
+        &>a,
+        &>span {
+            color: $headings-color;
+            background-color: $brand-primary;
+            border: 0px;
+            border-radius: $border-radius-base;
+            padding: 0px 20px;
+            border-width: 0;
+            font-weight: $font-weight-semibold;
+            font-size: $font-size-small;
+            line-height: 38px;
+            &:hover {
+                background-color: darken($brand-secondary, 5%);
+            }
+        }
+        &.active>a,
+        &.active>span {
+            color: #fff;
+            background-color: $brand-secondary;
+            &:hover {
+                background-color: darken($brand-secondary, 8%);
+            }
         }
     }
 }
