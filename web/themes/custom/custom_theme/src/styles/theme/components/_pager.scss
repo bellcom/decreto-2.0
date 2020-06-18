@@ -21,7 +21,10 @@
             margin-left: 15px;
         }
         &>a,
-        &>span {
+        &>span,
+        &.next>a,
+        &.next>span {
+            float: none;
             color: $headings-color;
             background-color: $brand-primary;
             border: 0px;
@@ -32,7 +35,7 @@
             font-size: $font-size-small;
             line-height: 38px;
             &:hover {
-                background-color: darken($brand-secondary, 5%);
+                background-color: darken($brand-primary, 5%);
             }
         }
         &.active>a,
