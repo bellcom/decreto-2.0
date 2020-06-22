@@ -112,6 +112,7 @@ function decreto_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
     $form['ld'] = [
       '#type' => 'checkbox',
       '#title' => t('Show only meetings from departments I am member of'),
+      '#value' => $limitDepartments = \Drupal::request()->query->get('ld'),
     ];
 
     // Changing type of date fields.
