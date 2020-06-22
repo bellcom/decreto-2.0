@@ -1,0 +1,86 @@
+// |--------------------------------------------------------------------------
+// | Pager
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .pager
+// |
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+.pager {
+    text-align: left;
+    li {
+        +li {
+            margin-left: 15px;
+        }
+        &>a,
+        &>span,
+        &.next>a,
+        &.next>span {
+            float: none;
+            color: $headings-color;
+            background-color: $brand-primary;
+            border: 0px;
+            border-radius: $border-radius-base;
+            padding: 0px 20px;
+            border-width: 0;
+            font-weight: $font-weight-semibold;
+            font-size: $font-size-small;
+            line-height: 38px;
+            &:hover {
+                background-color: darken($brand-primary, 5%);
+            }
+        }
+        &.active>a,
+        &.active>span {
+            color: #fff;
+            background-color: $brand-secondary;
+            &:hover {
+                background-color: darken($brand-secondary, 8%);
+            }
+        }
+    }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
