@@ -53,8 +53,6 @@ function decreto_content_modify_preprocess_node(&$variables) {
     if ($view_mode == 'full') {
       // Adding search in meeting form.
       $variables['search_in_meeting_form'] = \Drupal::formBuilder()->getForm(SearchInMeetingForm::class, $node);
-      $variables['search_in_meeting_form_mobile'] = \Drupal::formBuilder()->getForm(SearchInMeetingForm::class, $node);
-      $variables['search_in_meeting_form_tablet'] = \Drupal::formBuilder()->getForm(SearchInMeetingForm::class, $node);
       // Adding items reorder form.
       $variables['items_reorder_form'] = \Drupal::formBuilder()->getForm(MeetingItemsReorderForm::class, $node);
     }
