@@ -337,7 +337,19 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: search_api_date
-      sorts: {  }
+      sorts:
+        field_decreto_meet_start_date:
+          id: field_decreto_meet_start_date
+          table: search_api_index_decreto_search_meeting_index
+          field: field_decreto_meet_start_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: Møder
       header:
         result:
