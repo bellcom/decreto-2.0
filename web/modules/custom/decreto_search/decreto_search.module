@@ -147,6 +147,12 @@ function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase 
     $organisation = \Drupal::service('decreto_organisation.organisation')->getSelectedOrganisation();
     $decretoOrganisation = new DecretoOrganisation($organisation);
     $orgDepartmentsIds = $decretoOrganisation->getDepartments(FALSE);
+
+    // If departments list is empty, we want search to return no results.
+    // Otherwise empty list will make query fail.
+    if (empty($orgDepartmentsIds)) {
+      $orgDepartmentsIds = [-1];
+    }
     $query->addWhere('', 'department_tid', $orgDepartmentsIds, 'IN');
 
     // Limiting to user departments.
@@ -155,6 +161,11 @@ function decreto_search_views_query_alter(ViewExecutable $view, QueryPluginBase 
       $user = User::load(\Drupal::currentUser()->id());
       $userDepartments = array_column($user->field_decreto_usr_departments->getValue(), 'target_id');
 
+      // If departments list is empty, we want search to return no results.
+      // Otherwise empty list will make query fail.
+      if (empty($userDepartments)) {
+        $userDepartments = [-1];
+      }
       $query->addWhere('', 'department_tid', $userDepartments, 'IN');
     }
 
