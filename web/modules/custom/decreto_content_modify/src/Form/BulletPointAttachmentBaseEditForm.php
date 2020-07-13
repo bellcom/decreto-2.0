@@ -56,7 +56,7 @@ abstract class BulletPointAttachmentBaseEditForm extends AjaxFormBase {
     // File field.
     $form['upload_file']['file'] = [
       '#type' => 'managed_file',
-      '#upload_location' => 'private://',
+      '#upload_location' => 'private://bpas',
       '#default_value' => NULL,
       '#upload_validators' => [
         'file_validate_extensions' => [$availableExtensions],
