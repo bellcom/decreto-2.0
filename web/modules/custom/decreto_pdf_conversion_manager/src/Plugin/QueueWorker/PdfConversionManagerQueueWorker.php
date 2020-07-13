@@ -106,11 +106,18 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
    */
   private function isFileConverted(FileInterface $file) {
     $file_path_real = \Drupal::service('file_system')->realpath($file->getFileUri());
-    $pdfConverterFile = new PDFConverter($file_path_real);
 
-    if (file_exists($pdfConverterFile->getPdfPath())) {
-      return $pdfConverterFile->getPdfPath();
+    try {
+      $pdfConverterFile = new PDFConverter($file_path_real);
+
+      if (file_exists($pdfConverterFile->getPdfPath())) {
+        return $pdfConverterFile->getPdfPath();
+      }
     }
+    catch (Exception $e) {
+      \Drupal::logger('decreto_pdf_conversion_manager')->error($e->getMessage());
+    }
+
     return NULL;
   }
 
@@ -129,9 +136,10 @@ class PdfConversionManagerQueueWorker extends QueueWorkerBase {
    */
   private function convertFile(FileInterface $file) {
     $file_path_real = \Drupal::service('file_system')->realpath($file->getFileUri());
-    $pdfConverterFile = new PDFConverter($file_path_real);
 
     try {
+      $pdfConverterFile = new PDFConverter($file_path_real);
+
       if ($pdfConverterFile->convert()) {
         return $pdfConverterFile->getPdfPath();
       }

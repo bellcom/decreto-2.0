@@ -371,7 +371,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['full_doc'] = [
       '#title' => $this->t('Open description'),
       '#type' => 'managed_file',
-      '#upload_location' => 'private://',
+      '#upload_location' => 'private://descr',
       '#upload_validators' => [
         'file_validate_extensions' => [$field_decreto_meet_full_doc_field_definition->getSetting('file_extensions')],
       ],
@@ -379,7 +379,7 @@ class MeetingEditForm extends AjaxFormBase {
     $form['pages-page-1']['full_doc_closed'] = [
       '#title' => $this->t('Closed description'),
       '#type' => 'managed_file',
-      '#upload_location' => 'private://',
+      '#upload_location' => 'private://descr',
       '#upload_validators' => [
         'file_validate_extensions' => [$field_decreto_meet_full_doc_c_field_definition->getSetting('file_extensions')],
       ],

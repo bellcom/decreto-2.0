@@ -117,7 +117,7 @@ class BulletPointsAddFromFilesForm extends AjaxFormBase {
       $file_container['file'] = [
         '#type' => 'managed_file',
         '#title' => $this->t('File'),
-        '#upload_location' => 'private://',
+        '#upload_location' => 'private://bpas',
         '#default_value' => NULL,
         '#upload_validators' => array(
           'file_validate_extensions' => array($availableExtensions),

@@ -27,7 +27,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -260,10 +260,12 @@ display:
           exposed: true
           expose:
             operator_id: field_decreto_meet_start_date_op
-            label: Fra
+            label: 'Dato fra'
             description: ''
             use_operator: false
             operator: field_decreto_meet_start_date_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: from
             required: false
             remember: false
@@ -271,12 +273,13 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              decreto_admin: '0'
               administrator: '0'
+              agenda_manager: '0'
+              agenda_creator: '0'
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -307,10 +310,12 @@ display:
           exposed: true
           expose:
             operator_id: field_decreto_meet_end_date_op
-            label: til
+            label: 'Dato til'
             description: ''
             use_operator: false
             operator: field_decreto_meet_end_date_op
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: to
             required: false
             remember: false
@@ -318,12 +323,13 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              decreto_admin: '0'
               administrator: '0'
+              agenda_manager: '0'
+              agenda_creator: '0'
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
