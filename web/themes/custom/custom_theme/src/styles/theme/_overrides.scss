@@ -48,7 +48,9 @@ img {
 .tooltip-inner {
   padding: 10px 20px;
 
-  min-width: 200px;
+  min-width: 280px;
+
+  font-size: $font-size-extra-small;
 }
 
 .list-inline {
