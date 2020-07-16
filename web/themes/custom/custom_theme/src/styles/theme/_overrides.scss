@@ -48,7 +48,7 @@ img {
 .tooltip-inner {
   padding: 10px 20px;
 
-  min-width: 150px;
+  min-width: 200px;
 }
 
 .list-inline {
@@ -191,22 +191,22 @@ img {
 
 .modal-header .close {
   display: block;
-  
+
   position: absolute;
   top: 2px;
   right: 2px;
-  
+
   width: 32px;
   height: 32px;
-  
+
   color: $headings-color;
   opacity: 100%;
   text-shadow: none;
-  
+
   &:hover {
     color: darken($headings-color, 10%);
   }
-  
+
   & > span {
     vertical-align: text-top;
   }
@@ -265,7 +265,7 @@ img {
 
     border-radius: 18px;
     background: lighten($brand-primary, 10%);
-    
+
     &:hover {
       background: $brand-primary;
     }
