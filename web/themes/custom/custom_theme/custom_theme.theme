@@ -61,7 +61,6 @@ function custom_theme_preprocess_page(array &$variables) {
   $decretoUser = new DecretoUser($user);
   $variables['content']['#access']['decreto_organisation']['canSwitch'] = count($decretoUser->getOrganisations(FALSE)) > 1;
 
-  $name = '';
   $firstname = '';
   $lastname = '';
   if ($user->field_decreto_firstname && !$user->field_decreto_firstname->isEmpty()) {
