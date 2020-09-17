@@ -57,11 +57,11 @@
         "drupal/calendar_datetime": "1.x-dev",
         "drupal/config_ignore": "^2.1",
         "drupal/console": "^1.0.2",
-        "drupal/core": "^8.8.4",
-        "drupal/devel": "^2.0",
+        "drupal/core": "^8.8",
+        "drupal/devel": "^2.1",
         "drupal/drush_language": "^1.0@RC",
         "drupal/front_page": "^1.0@beta",
-        "drupal/kint": "^2.0",
+        "drupal/kint": "^2.1",
         "drupal/login_redirect_per_role": "^1.6",
         "drupal/mail_login": "^1.0",
         "drupal/menu_link_attributes": "1.x-dev",
@@ -81,12 +81,12 @@
         "drush/drush": "^9.0.0",
         "lasserafn/php-initials": "^2.20",
         "vlucas/phpdotenv": "^2.4",
+        "webflo/drupal-core-require-dev": "^8.8",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "webflo/drupal-core-require-dev": "~8.8.0"
     },
     "conflict": {
         "drupal/drupal": "*"
