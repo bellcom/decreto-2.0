@@ -4,3 +4,4 @@ user_removed_notification_subject: 'REMOVED: Hello [user:account-name]'
 user_removed_notification_body: "Hello [user:account-name]\r\n\r\nyou have been removed from a meeting [decreto_meeting:title] department: [decreto_meeting:department] happening [decreto_meeting:date]\r\n\r\nwelcome!"
 meeting_type_updated_notification_subject: 'Type updated: Hello [user:account-name]'
 meeting_type_updated_notification_body: "Hello [user:account-name]\r\n\r\nmeeting type for meeting [decreto_meeting:title] department: [decreto_meeting:department] happening [decreto_meeting:date] has updated.\r\nNew type: [decreto_meeting:type]\r\n\r\nsee [decreto_meeting:url]\r\n\r\nwelcome!"
+user_added_notification_attach_ical: 1

@@ -9,8 +9,13 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\decreto_content_modify\Entity\DecretoMeeting;
+use Drupal\decreto_content_modify\Form\MeetingNotificationsSettingsForm;
 use Drupal\decreto_organisation\Entity\DecretoOrganisation;
+use Drupal\file\Entity\File;
 use Drupal\user\UserInterface;
+use Eluceo\iCal\Component\Calendar;
+use Eluceo\iCal\Component\Event;
+use Eluceo\iCal\Property\Event\Organizer;
 
 /**
  * Decreto content service service.
@@ -221,6 +226,15 @@ class ContentService {
     if (empty($site_mail)) {
       $site_mail = ini_get('sendmail_from');
     }
+
+    // Adding iCalendar file.
+    $mail_config = \Drupal::config(MeetingNotificationsSettingsForm::$configName);
+    $attachIcal = $mail_config->get('user_added_notification_attach_ical');
+    if ($attachIcal) {
+      $icalFile = $this->generateMeetingIcal($meeting);
+      $params['files'][] = $icalFile;
+    }
+
     $op = 'decreto_content_user_added_to_meeting';
     $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
   }
@@ -286,6 +300,74 @@ class ContentService {
 
       $mail = \Drupal::service('plugin.manager.mail')->mail('decreto_content_modify', $op, $user->getEmail(), $langcode, $params, $site_mail);
     }
+  }
+
+  /**
+   * Generates ical file.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting node.
+   *
+   * @return string
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+
+  /**
+   * Generates ical file.
+   *
+   * @param \Drupal\Core\Entity\ContentEntityInterface $meeting
+   *   Meeting node.
+   *
+   * @return object
+   *   File object as stdClass.
+   *
+   * @throws \Drupal\Core\Entity\Exception\UnsupportedEntityTypeDefinitionException
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function generateMeetingIcal(ContentEntityInterface $meeting) {
+    $decretoMeeting = new DecretoMeeting($meeting);
+    $site_name = \Drupal::config('system.site')->get('name');
+    $meeting_id = $meeting->id();
+
+    // Creating event.
+    $vEvent = new Event();
+    $vEvent->setSummary($meeting->label());
+    $vEvent->setLocation($decretoMeeting->getLocation()->getName());
+
+    $organiser = new Organizer($decretoMeeting->getDepartment()->getName());
+    $vEvent->setOrganizer($organiser);
+
+    // Start date.
+    if ($fieldStartDate = $meeting->get('field_decreto_meet_start_date')->first()) {
+      $start_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $fieldStartDate->value, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+      $vEvent->setDtStart($start_date->getPhpDateTime());
+    }
+
+    // End date.
+    if ($fieldEndDate = $meeting->get('field_decreto_meet_end_date')->first()) {
+      $end_date = DrupalDateTime::createFromFormat(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $fieldEndDate->value, new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+      $vEvent->setDtEnd($end_date->getPhpDateTime());
+    }
+
+    // Rendering event.
+    $vCalendar = new Calendar($site_name);
+    $vCalendar->addComponent($vEvent);
+    $iCalContent = $vCalendar->render();
+
+    // Saving event as a file.
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+
+    $uri = $file_system->saveData($iCalContent, "temporary://ical_$meeting_id.ics");
+
+    $file = new \stdClass();
+    $file->filename = "ical_$meeting_id.ics";
+    $file->uri = $uri;
+    $file->filemime = 'text/calendar';
+
+    return $file;
   }
 
 }

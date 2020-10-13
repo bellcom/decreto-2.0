@@ -65,7 +65,7 @@ class DecretoMeeting extends DecretoNode {
    * Returns related department.
    *
    * @param bool $load
-   *   If the returned node shall be load. If FALSE, nid is returned.
+   *   If the returned term shall be load. If FALSE, tid is returned.
    *
    * @return \Drupal\taxonomy\TermInterface|int|null
    *   Department term, or Department tid.
@@ -75,6 +75,31 @@ class DecretoMeeting extends DecretoNode {
    */
   public function getDepartment($load = TRUE) {
     if ($fieldDepartment = $this->getEntity()->get('field_decreto_meet_department')->first()) {
+      if ($load) {
+        return $fieldDepartment->get('entity')->getTarget()->getValue();
+      }
+      else {
+        return $fieldDepartment->getValue()['target_id'];
+      }
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Returns related location.
+   *
+   * @param bool $load
+   *   If the returned term shall be load. If FALSE, tid is returned.
+   *
+   * @return \Drupal\taxonomy\TermInterface|int|null
+   *   Location term, or Location tid.
+   *   NULL is nothing is found.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function getLocation($load = TRUE) {
+    if ($fieldDepartment = $this->getEntity()->get('field_decreto_meet_location')->first()) {
       if ($load) {
         return $fieldDepartment->get('entity')->getTarget()->getValue();
       }
