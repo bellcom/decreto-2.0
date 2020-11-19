@@ -23,6 +23,9 @@
 # Ignore .env files as they are personal
 /.env
 
+# Ignore temp folder
+/tmp
+
 .DS_Store
 *.sql
 *.sql.gz

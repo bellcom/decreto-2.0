@@ -55,6 +55,11 @@ class MeetingNotificationsSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('user_added_notification_body'),
       '#rows' => 3,
     ];
+    $form['meeting_notification_user_added']['user_added_notification_attach_ical'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Attach iCalendar file'),
+      '#default_value' => $config->get('user_added_notification_attach_ical'),
+    ];
     // Add the token tree UI.
     $form['meeting_notification_user_added']['token_tree'] = [
       '#theme' => 'token_tree_link',
@@ -130,6 +135,7 @@ class MeetingNotificationsSettingsForm extends ConfigFormBase {
     $this->config(self::$configName)
       ->set('user_added_notification_subject', $form_state->getValue('user_added_notification_subject'))
       ->set('user_added_notification_body', $form_state->getValue('user_added_notification_body'))
+      ->set('user_added_notification_attach_ical', $form_state->getValue('user_added_notification_attach_ical'))
       ->set('user_removed_notification_subject', $form_state->getValue('user_removed_notification_subject'))
       ->set('user_removed_notification_body', $form_state->getValue('user_removed_notification_body'))
       ->set('meeting_type_updated_notification_subject', $form_state->getValue('meeting_type_updated_notification_subject'))
