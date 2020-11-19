@@ -84,12 +84,12 @@
         "eluceo/ical": "^0.16.1",
         "lasserafn/php-initials": "^2.20",
         "vlucas/phpdotenv": "^2.4",
-        "webflo/drupal-core-require-dev": "^8.8",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
+        "drupal/core-dev": "^8.8"
     },
     "conflict": {
         "drupal/drupal": "*"
