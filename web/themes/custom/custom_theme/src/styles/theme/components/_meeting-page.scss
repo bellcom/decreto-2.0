@@ -41,7 +41,7 @@
 .meeting__search-form {
   position: relative;
   display: block;
-  
+
   .btn {
 
     &.btn-pale {
@@ -102,17 +102,15 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
   .field--name-field-decreto-meet-end-date,
   .field--name-field-decreto-meet-start-date {
     display: inline-block;
   }
 
   .meeting-page__action {
-    .btn-primary {
-      margin-bottom: 10px;
-    }
-   .btn-pale{
+
+    .btn {
       margin-bottom: 10px;
     }
   }
@@ -169,23 +167,23 @@
       }
     }
   }
-  
+
   .meeting-page__info {
     min-width: 50%;
   }
-  
+
   .meeting-page__info-icons {
     display: flex;
     justify-content: space-between;
-    
+
     .text--with-icon {
       font-size: $font-size-small;
       color: $headings-color;
-      
+
       > a {
         color: $headings-color;
       }
-      
+
     }
   }
 
@@ -231,7 +229,7 @@
       }
     }
   }
-  
+
   .meeting__search-form-wrapper {
     background: $brand-secondary-pale;
     border-radius: $border-radius-base;
@@ -243,20 +241,20 @@
     }
   }
   .meeting-page__action__align {
-    
+
     .meeting-page__settings {
       display: inline-block;
-      
+
       .dropdown-menu {
         margin-top: -10px;
       }
-      
+
       + a.btn {
         margin-left: 15px;
       }
     }
   }
-  
+
   #decreto-content-modify-search-in-meeting-form {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -266,16 +264,16 @@
 
       .form-group {
         margin-bottom: 0;
-        
+
         &.form-type-textfield {
           width: calc(100% - 150px);
           display: inline-block;
         }
-        
+
         input.form-text {
           width: 100%;
         }
-        
+
       }
 
       .form-actions {
@@ -340,19 +338,19 @@
 // Mobile - only
 @media #{$breakpoint-mobile-only} {
   .meeting-page {
-    
+
     .btn {
-      min-width: auto; 
+      min-width: auto;
       padding-left: 10px;
       padding-right: 10px;
     }
-    
+
     .meeting-page__heading-row {
       flex-direction: column;
-      
+
       .meeting-page__info {
         order: 2;
-        
+
         .meeting-page__info-icons {
           display: block;
         }
@@ -364,17 +362,17 @@
     }
 
     .action-list__item {
-        display: inline-block;
+      display: inline-block;
+      margin-right: 13px;
+
       > button {
         padding-left: 10px;
         padding-right: 10px;
       }
-      + .action-list__item {
-        margin-left: 13px;
-      }
-      
+
       .btn.btn-pale.js-toggle-search-form {
-        i{
+        
+        i {
           display: none;
         }
       }
@@ -391,14 +389,14 @@
         display: inline-block;
       }
     }
-    
-    
+
+
     .meeting__search-form-wrapper {
       padding: 0px 12px 0px;
       margin-top: 0px;
-      
+
       #decreto-content-modify-search-in-meeting-form {
-      
+
         .form-inline {
 
           .form-group {
@@ -406,7 +404,7 @@
             &.form-type-textfield {
               width: calc(100% - 70px);
               margin-right: 10px;
-              
+
               input.form-control {
                 height: 31px;
                 font-size: $font-size-small;
@@ -429,9 +427,9 @@
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
-  
+
   .meeting-page__info-icons {
-    
+
     .meeting-page__info-icons__col:first-child {
       padding-right: 20px;
     }
@@ -469,7 +467,7 @@
   .meeting-page__info-icons {
     margin-left: 62px;
   }
-  
+
   .meeting-page__action-buttons {
     display: flex;
   }
@@ -492,15 +490,15 @@
       padding: 0;
       margin: 0;
       float: none;
-      
+
       > li {
         display: inline-block;
         vertical-align: middle;
-        
+
         + li {
           margin-left: 14px;
         }
-        
+
         > a.btn,
         > button.btn {
           width: auto;
@@ -508,12 +506,12 @@
           line-height: 1.6;
           font-weight: $font-weight-semibold;
           line-height: 1.6;
-          
+
           &.btn-primary {
             padding: 8px 14px;
             background: $brand-primary;
             border: 0px;
-            
+
             &:hover {
               background: darken($brand-primary, 10%);
               color: $text-color;
@@ -525,10 +523,10 @@
             border: 1px solid $brand-primary;
             line-height: 1.5;
             color: $btn-default-color;
-            
+
             &:hover {
               background: lighten($brand-primary, 15%);
-              
+
               color: $text-color;
             }
           }
@@ -542,7 +540,7 @@
     + .btn {
       margin-left: floor($grid-gutter-width / 2);
     }
-    
+
     .btn {
       padding-left: 9px;
       padding-right: 14px;

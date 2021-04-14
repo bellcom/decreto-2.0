@@ -31,6 +31,11 @@
   .flexy-row {
     flex-wrap: wrap;
   }
+
+  .checkbox input[type="checkbox"] {
+    top: -10px;
+    margin-left: 0;
+  }
 }
 .div-table__thead {
   background-color: $body-bg;

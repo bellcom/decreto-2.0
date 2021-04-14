@@ -117,7 +117,7 @@ $lg-modal-inner-spacing: 60px;
   .modal {
 
     .helper {
-      right: $xs-modal-inner-spacing;
+      right: $xs-modal-inner-spacing + 20px;
     }
 
     .steps {

@@ -78,10 +78,7 @@ button.action-list__button {
 .action-list--increased-element-distance {
 
   .action-list__button {
-
-    + .action-list__button {
-      margin-left: 15px;
-    }
+    margin-right: 15px;
   }
 }
 
@@ -114,12 +111,13 @@ button.action-list__button {
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
+
   .action-list__item {
     display: inline-block;
+    margin-right: 5px;
 
     + .action-list__item {
       margin-top: 0;
-      margin-left: 5px;
     }
   }
 }
@@ -128,10 +126,9 @@ button.action-list__button {
 
 // Desktop - and up
 @media #{$breakpoint-desktop-and-up} {
+
   .action-list__item {
-    + .action-list__item {
-      margin-left: 15px;
-    }
+    margin-right: 15px;
   }
 }
 
