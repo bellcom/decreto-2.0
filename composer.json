@@ -145,7 +145,8 @@
                 "3106038 - Bootstrap Datetime picker custom format": "https://www.drupal.org/files/issues/2020-01-13/bootstrap_datetime_picker-custom-format-3106038.patch"
             },
             "drupal/core": {
-                "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch"
+                "2663316 - Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch",
+                "CKEditor update - SA Moderately critical - Third-party libraries - SA-CORE-2022-005" : "https://www.drupal.org/files/issues/2022-03-17/3270054-SA-CORE-2022-005_2.patch"
             }
         }
     }
